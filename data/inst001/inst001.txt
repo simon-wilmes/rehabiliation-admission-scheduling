@@ -1,0 +1,19 @@
+[INSTANCE]
+num_beds: 2
+
+[DATA: RESOURCE_GROUPS]: RGID, NAME
+0; therapists
+1; rooms
+
+[DATA: RESOURCES]:RID, RGID, NAME, UNAVAILABLE_TIME_SLOTS
+0;  0;  therapist0; None
+1;  0;  therapist1; None
+2;  0;  therapist2; None
+0;  1;  room0;  None
+1;  1;  room1;  None
+
+[DATA: TREATMENTS]: TID, NUM_PARTICIPANTS, NAME, DURATION, RESOURCES
+0; 10; music_therapy; 0:45; {0:(1,True), 1: (1, False)}
+
+[DATA: PATIENTS] # PID, NAME, TREATMENTS, ARRIVAL_DATE, ALREADY_ADMITTED, ALREADY_RESOURCE_LOYAL
+0; patient0; {0:2}; 0:00:0; 0; {(0,0):1}

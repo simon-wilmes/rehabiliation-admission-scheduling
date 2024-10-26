@@ -1,0 +1,90 @@
+class DayHour:
+    @staticmethod
+    def from_string(time_str):
+        try:
+            day, hour, minutes = map(int, time_str.split(":"))
+            return DayHour(day, hour + minutes / 60)
+        except ValueError:
+            raise ValueError("Invalid time format. Use 'day:hour:minutes'.")
+
+    def __init__(self, day: int, hour: float):
+        if not (0 <= hour < 24):
+            raise ValueError("Hour must be between 0 and 23.")
+        self.day: int = day
+        self.hour: float = hour
+
+    def __repr__(self):
+        return f"Day {self.day}, {self.hour}"
+
+    def to_tuple(self):
+        return (self.day, self.hour)
+
+    def __eq__(self, other):
+        if isinstance(other, DayHour):
+            return self.day == other.day and self.hour == other.hour
+        return False
+
+    def __lt__(self, other):
+        if isinstance(other, DayHour):
+            return (self.day, self.hour) < (other.day, other.hour)
+        return NotImplemented
+
+    def __le__(self, other):
+        if isinstance(other, DayHour):
+            return (self.day, self.hour) <= (other.day, other.hour)
+        return NotImplemented
+
+    def __sub__(self, other):
+        if isinstance(other, Duration):
+            total_hours = self.hour - other.hours
+            extra_days, new_hour = divmod(total_hours, 24)
+            new_day = self.day + extra_days
+            if new_hour < 0:
+                new_hour += 24
+                new_day -= 1
+            return DayHour(new_day, new_hour)
+        return NotImplemented
+
+    def __add__(self, other):
+        if isinstance(other, Duration):
+            total_hours = self.hour + other.hours
+            extra_days, new_hour = divmod(total_hours, 24)
+            new_day = self.day + extra_days
+            return DayHour(new_day, new_hour)
+        return NotImplemented
+
+
+class Duration:
+    @staticmethod
+    def from_string(duration_str):
+        try:
+            hours, minutes = map(int, duration_str.split(":"))
+            return Duration(hours + minutes / 60)
+        except ValueError:
+            raise ValueError("Invalid duration format. Use 'hours:minutes'.")
+
+    def __init__(self, hours: float):
+        if not (0 <= hours < 24):
+            raise ValueError("Hours must be between 0 and 23.")
+        self.hours: float = hours
+
+    def __repr__(self):
+        return f"Duration {self.hours} hours"
+
+    def __eq__(self, other):
+        if isinstance(other, Duration):
+            return self.hours == other.hours
+        return False
+
+    def __le__(self, other):
+        if isinstance(other, Duration):
+            return self.hours <= other.hours
+        return NotImplemented
+
+    def __add__(self, other):
+        if isinstance(other, DayHour):
+            total_hours = self.hours + other.hour
+            extra_days, new_hour = divmod(total_hours, 24)
+            new_day = other.day + extra_days
+            return DayHour(new_day, new_hour)
+        return NotImplemented
