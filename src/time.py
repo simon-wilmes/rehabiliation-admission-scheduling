@@ -63,13 +63,15 @@ class Duration:
         except ValueError:
             raise ValueError("Invalid duration format. Use 'hours:minutes'.")
 
-    def __init__(self, hours: float):
+    def __init__(self, hours: float, minutes: float = 0):
+        if not (0 <= minutes < 60):
+            raise ValueError("Minutes must be between 0 and 59.")
         if not (0 <= hours < 24):
             raise ValueError("Hours must be between 0 and 23.")
-        self.hours: float = hours
+        self.hours: float = hours + minutes / 60
 
     def __repr__(self):
-        return f"Duration {self.hours} hours"
+        return f"Dur{self.hours} hours"
 
     def __eq__(self, other):
         if isinstance(other, Duration):
@@ -87,4 +89,11 @@ class Duration:
             extra_days, new_hour = divmod(total_hours, 24)
             new_day = other.day + extra_days
             return DayHour(new_day, new_hour)
+        return NotImplemented
+
+    def __truediv__(self, other):
+        if isinstance(other, Duration):
+            other_time = other.hours
+            self_time = self.hours
+            return self_time / other_time
         return NotImplemented

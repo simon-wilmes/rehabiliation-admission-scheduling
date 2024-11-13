@@ -17,11 +17,15 @@ class Treatment:
         if resources is None:
             resources = {}
 
-        self.tid = tid
+        self.id = tid
         self.num_participants = num_participants
         self.duration = duration
         self.name = name
-        self.resources = resources
+        self.resources = {rg: n for rg, (n, _) in resources.items()}
+        self.loyalty = {rg: loyal for rg, (_, loyal) in resources.items()}
 
     def __str__(self):
-        return f"T{self.tid}"
+        return f"T({self.name})"
+
+    def __repr__(self):
+        return self.__str__()

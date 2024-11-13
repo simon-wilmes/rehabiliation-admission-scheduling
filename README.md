@@ -14,6 +14,3 @@ Ausführen kannst du das Projekt dann mit
 ```
 pipenv run python -m src
 ```
-
-
-
