@@ -8,16 +8,17 @@ from itertools import product
 from src.solution import Appointment, Solution
 from src.time import DayHour
 from src.patients import Patient
+from src.solvers.solvers import Solver
 
-
-class MIPSolver:
+class MIPSolver(Solver):
     def __init__(self, instance: Instance):
-        self.instance = instance
+        super().__init__(instance)
 
     def create_model(self):
         self._create_parameter_sets()
         # Create the model
         model = gp.Model("PatientAdmissionScheduling")
+        model.setParam("Threads", 12)
         vars = self._create_variables(model)
         self._create_constraints(model, *vars)
         self._set_optimization_goal(model, *vars)
@@ -25,7 +26,7 @@ class MIPSolver:
         self.vars = vars
         self.model = model
 
-    def solve_model(self):
+    def solve_model(self) -> Solution:
         self.model.optimize()
         if self.model.status == gp.GRB.OPTIMAL:
             logger.info("Optimal solution found.")

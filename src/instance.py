@@ -36,6 +36,7 @@ class Instance:
         self.resources = resources
         self.patients = patients
         self.ps: dict[str, list] = {}
+        self.week_length = 5
 
     def print_solution(self, solution):
         pass
