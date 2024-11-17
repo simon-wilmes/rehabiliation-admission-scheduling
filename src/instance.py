@@ -7,6 +7,7 @@ from src.types import TID, RID, RGID, PID
 from src.patients import Patient
 from src.logging import logger, print
 from typing import Any
+import re
 
 
 class Instance:
@@ -18,24 +19,49 @@ class Instance:
         resources: dict[RID, Resource],
         patients: dict[PID, Patient],
     ):
-        self.num_beds = instance_data["num_beds"]
-        self.workday_start = (
+        self.beds_capacity = instance_data["num_beds"]
+        self.conflict_groups: list[set[Treatment]] = instance_data.get(
+            "conflict_groups", []
+        )
+        # replace tid with treatment object
+        self.conflict_groups = [
+            set(treatments[tid] for tid in conflict_group)
+            for conflict_group in self.conflict_groups
+        ]
+
+        self.workday_start: DayHour = (
             instance_data["workday_start"]
             if "workday_start" in instance_data
-            else Duration("08:00")
+            else DayHour(hour=8, minute=0)
         )
         self.workday_end = (
             instance_data["workday_end"]
             if "workday_end" in instance_data
-            else Duration("18:00")
+            else DayHour(hour=17, minute=0)
         )
-        self.rolling_window_length = instance_data.get("rolling_window_length", 7)
-        self.time_slot_length = instance_data.get("time_slot_length", Duration(0, 15))
-        self.resource_groups = resource_groups
-        self.treatments = treatments
-        self.resources = resources
-        self.patients = patients
-        self.ps: dict[str, list] = {}
+        self.rolling_window_length: int = instance_data.get("rolling_window_length", 7)
+        self.rolling_window_days: list[int] = instance_data.get(
+            "rolling_windows_days", [(0, 5, 10, 15, 20)]
+        )
+        self.time_slot_length: Duration = instance_data.get(
+            "time_slot_length", Duration(0, 15)
+        )
+        self.resource_groups: dict[RGID, ResourceGroup] = resource_groups
+        self.treatments: dict[TID, Treatment] = treatments
+
+        for rid, resource in resources.items():
+            # make resources unavailable outside of work hours
+            resource.unavailable_time_slots.extend(
+                [
+                    (DayHour(0, 0), DayHour(0, self.workday_start.hour), 1),
+                    (DayHour(0, self.workday_end.hour), DayHour(0, 23, 59), 1),
+                ]
+            )
+
+        self.resources: dict[RID, Resource] = resources
+        self.patients: dict[PID, Patient] = patients
+
+        self.week_length = 5
 
     def print_solution(self, solution):
         pass
@@ -69,6 +95,8 @@ def create_instance_from_file(file_path: str) -> "Instance":
             line = line.strip()
             if not line or line.startswith("#"):
                 continue  # Skip empty lines and comments
+            if "#" in line:
+                line = line.split("#")[0].strip()
 
             if line.startswith("[") and "]" in line:
                 # Detect section headers
@@ -110,12 +138,12 @@ def create_instance_from_file(file_path: str) -> "Instance":
                 if line.startswith("num_beds:"):
                     instance_data["num_beds"] = int(line.split(":", 1)[1].strip())
                 if line.startswith("workday_start:"):
-                    instance_data["workday_start"] = Duration.from_string(
-                        line.split(":", 1)[1].strip()
+                    instance_data["workday_start"] = DayHour(
+                        hour=float(line.split(":", 1)[1].strip())
                     )
                 if line.startswith("workday_end:"):
-                    instance_data["workday_end"] = Duration.from_string(
-                        line.split(":", 1)[1].strip()
+                    instance_data["workday_end"] = DayHour(
+                        hour=float(line.split(":", 1)[1].strip())
                     )
 
             elif current_section and headers:
@@ -193,22 +221,8 @@ def create_instance_from_file(file_path: str) -> "Instance":
 
 
 def parsing_parameter(value):
-    if value == "None":
-        return None
-    elif value.isdigit():
-        return int(value)
-    else:
-        try:
-            parsed_value = ast.literal_eval(value)
-            if isinstance(parsed_value, dict):
-                return parsed_value
-            else:
-                raise ValueError
-        except (ValueError, SyntaxError):
-            try:
-                return DayHour.from_string(value)
-            except ValueError:
-                try:
-                    return Duration.from_string(value)
-                except ValueError:
-                    return value
+    try:
+        parsed_value = eval(value)
+        return parsed_value
+    except (NameError, ValueError):
+        return value

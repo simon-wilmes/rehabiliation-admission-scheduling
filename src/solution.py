@@ -4,6 +4,7 @@ from src.resource import ResourceGroup, Resource
 from src.patients import Patient
 from src.time import DayHour
 from src.logging import logger
+import math
 
 
 class Appointment:
@@ -18,27 +19,59 @@ class Appointment:
         self.start_date = start_date
         self.treatment = treatment
         self.resources = resources
-        assert self.is_valid_appointment()
+        self.is_valid_appointment()
 
     def is_valid_appointment(self):
+
         # Check that all resource groups required for the treatment are satisfied
         for required_group, amount in self.treatment.resources.items():
             if required_group not in self.resources:
-                return False
+                raise ValueError(
+                    f"Resource group {required_group.id} required for treatment {self.treatment.id} is missing "
+                    f"at day {self.start_date.day}, hour {self.start_date.hour}."
+                )
             if len(set(self.resources[required_group])) != amount:
-                return False
+                raise ValueError(
+                    f"Resource group {required_group.id} requires {amount} resources, "
+                    f"but {len(set(self.resources[required_group]))} were provided "
+                    f"at day {self.start_date.day}, hour {self.start_date.hour}."
+                )
 
-        return True
+        # Check that no more than the maximum number of patients take part in this treatment
+        if len(self.patients) > self.treatment.num_participants:
+            raise ValueError(
+                f"Appointment has {len(self.patients)} patients, but the maximum is {self.treatment.num_participants} "
+                f"at day {self.start_date.day}, hour {self.start_date.hour}."
+            )
+        # Check that this appointment is not empty
+        if not self.patients:
+            raise ValueError(
+                f"Appointment has no patients at day {self.start_date.day}, hour {self.start_date.hour}."
+            )
+
+    def __le__(self, other):
+        return self.start_date <= other.start_date
+
+    def __lt__(self, other):
+        return self.start_date < other.start_date
 
     def __repr__(self):
         return f"Appointment({self.start_date}, {self.patients},{self.treatment}, {self.resources})"
 
 
 class Solution:
-    def __init__(self, instance, schedule, patients_arrival):
+
+    def __init__(
+        self,
+        instance: Instance,
+        schedule: list[Appointment],
+        patients_arrival: dict[Patient, DayHour],
+        ignored_constraints: set[str] = set(),
+    ):
         self.instance = instance
         self.schedule = schedule  # List of Appointments
         self.patients_arrival = patients_arrival  # Dict[Patient, DayHour]
+        self.ignored_constraints = ignored_constraints
 
         # Perform the checks
         self._check_constraints()
@@ -50,9 +83,11 @@ class Solution:
         self._check_no_overlapping_appointments()
         self._check_resource_availability_and_uniqueness()
         self._check_resource_loyalty()
-        self._check_max_patients_per_treatment()
+        # self._check_max_patients_per_treatment()
         self._check_bed_capacity()
         self._check_total_treatments_scheduled()
+        self._check_even_scheduling()
+        self._check_conflict_groups()
 
     def _check_patient_admission(self):
         """
@@ -67,9 +102,9 @@ class Solution:
 
             admission_day = self.patients_arrival[patient].day
             earliest_admission = patient.earliest_admission_date.day
-            latest_admission = patient.latest_admission_date.day
+            latest_admission = patient.admitted_before_date.day
 
-            if not (earliest_admission <= admission_day <= latest_admission):
+            if not (earliest_admission <= admission_day < latest_admission):
                 raise ValueError(
                     f"Patient {patient.id} admission day {admission_day} is outside "
                     f"their admission window ({earliest_admission} to {latest_admission})."
@@ -100,9 +135,7 @@ class Solution:
         for appointment in self.schedule:
             start_day = appointment.start_date.day
             start_time = appointment.start_date.hour
-            duration = (
-                appointment.treatment.duration.hours
-            )  # Duration object has .hours
+            duration = appointment.treatment.duration.hours  # Duration object has .hour
             end_time = start_time + duration
             for patient in appointment.patients:
                 patient_appointments[patient].append(
@@ -159,7 +192,11 @@ class Solution:
                                 f"and {other_appointment.treatment.id}."
                             )
                         # Check resource availability
-                        if not resource.is_available(DayHour(day=start_day, hour=time)):
+                        if (
+                            not resource.is_available(DayHour(day=start_day, hour=time))
+                            or time > self.instance.workday_end.hour
+                            or time < self.instance.workday_start.hour
+                        ):
                             raise ValueError(
                                 f"Resource {resource.id} is not available at day {start_day}, time {time}."
                             )
@@ -219,35 +256,11 @@ class Solution:
                                     )
                         patient_resource_loyalty[key] = resource_ids
 
-    def _check_max_patients_per_treatment(self):
-        """
-        Ensure the maximum number of patients per treatment is not exceeded.
-        """
-        # For each treatment, day, time, count the number of patients
-        treatment_schedule = {}
-        for appointment in self.schedule:
-            treatment = appointment.treatment
-            start_day = appointment.start_date.day
-            start_time = appointment.start_date.hour
-            key = (treatment.id, start_day, start_time)
-            if key not in treatment_schedule:
-                treatment_schedule[key] = []
-            treatment_schedule[key].extend(appointment.patients)
-
-        for (treatment_id, day, time), patients in treatment_schedule.items():
-            treatment = self.instance.treatments[treatment_id]
-            max_patients = treatment.num_participants  # k_m
-            if len(patients) > max_patients:
-                raise ValueError(
-                    f"Treatment {treatment_id} at day {day}, time {time} has {len(patients)} patients "
-                    f"scheduled, which exceeds the maximum allowed ({max_patients})."
-                )
-
     def _check_bed_capacity(self):
         """
         Ensure the total number of admitted patients per day does not exceed the number of beds.
         """
-        bed_capacity = self.instance.num_beds  # b
+        bed_capacity = self.instance.beds_capacity  # b
         # For each day, count the number of patients admitted
         admitted_patients = {}  # Key: day, Value: set of patients
         for patient, arrival_dayhour in self.patients_arrival.items():
@@ -287,3 +300,85 @@ class Solution:
                         f"Patient {patient.id} has {scheduled_count} scheduled treatments for treatment {treatment.id}, "
                         f"but needs {r_pm} repetitions."
                     )
+
+    def _check_conflict_groups(self):
+        """
+        Ensure that for any patient, treatments that are in the same conflict group are not scheduled on the same day.
+        """
+        if "conflict_groups" in self.ignored_constraints:
+            return
+
+        # Build a mapping of patient to a dict of day to set of treatments
+        patient_day_treatments = {}  # patient -> day -> set(treatments)
+        for appointment in self.schedule:
+            day = appointment.start_date.day
+            for patient in appointment.patients:
+                if patient not in patient_day_treatments:
+                    patient_day_treatments[patient] = {}
+                if day not in patient_day_treatments[patient]:
+                    patient_day_treatments[patient][day] = set()
+                patient_day_treatments[patient][day].add(appointment.treatment)
+
+        # For each patient, day, check conflict groups
+        for patient, day_treatments in patient_day_treatments.items():
+            for day, treatments in day_treatments.items():
+                for conflict_group in self.instance.conflict_groups:
+                    treatments_in_group = treatments.intersection(conflict_group)
+                    if len(treatments_in_group) > 1:
+                        conflict_treatment_ids = [
+                            treatment.id for treatment in treatments_in_group
+                        ]
+                        raise ValueError(
+                            f"Patient {patient.id} has treatments {conflict_treatment_ids} from the same conflict group scheduled on day {day}."
+                        )
+
+    def _check_even_scheduling(self):
+        """
+        For every patient, ensure that in any rolling window, the number of scheduled treatments
+        is less than or equal to the average number of treatments that this patient should have received
+        during this time frame considering the total treatments and the patient's length of stay, rounded up.
+        """
+        if "even_scheduling" in self.ignored_constraints:
+            return
+
+        rolling_window_checks = zip(
+            self.instance.rolling_window_days,
+            [self.instance.rolling_window_length]
+            * len(self.instance.rolling_window_days),
+        )
+
+        # List[Tuple[int, int]]  # List of (start_day, window_length)
+        # For each patient
+
+        for patient in self.instance.patients.values():
+            for treatment, required_treatments in patient.treatments.items():
+
+                l_p = patient.length_of_stay  # Length of stay for patient p
+                average_per_day = (
+                    required_treatments / l_p
+                )  # Average number of treatments per day
+                # Build a list of appointment days for this patient
+                appointment_days = []
+                for appointment in self.schedule:
+                    if (
+                        patient in appointment.patients
+                        and appointment.treatment == treatment
+                    ):
+                        appointment_days.append(appointment.start_date.day)
+                appointment_days.sort()
+                # Now for each rolling window
+                for start_day, window_length in rolling_window_checks:
+                    window_end_day = start_day + window_length
+                    # Count number of appointments in this window
+                    scheduled_count = sum(
+                        1
+                        for day in appointment_days
+                        if start_day <= day < window_end_day
+                    )
+                    expected_treatments = math.ceil(average_per_day * window_length)
+                    if scheduled_count > expected_treatments:
+                        raise ValueError(
+                            f"Patient {patient.id} has {scheduled_count} treatments for treatment {treatment} scheduled "
+                            f"between day {start_day} and {window_end_day - 1}, which exceeds the expected "
+                            f"{expected_treatments} treatments."
+                        )
