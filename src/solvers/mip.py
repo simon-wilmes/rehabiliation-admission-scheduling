@@ -8,16 +8,18 @@ from itertools import product
 from src.solution import Appointment, Solution
 from src.time import DayHour
 from src.patients import Patient
+from src.solvers.solvers import Solver
 
 
-class MIPSolver:
+class MIPSolver(Solver):
     def __init__(self, instance: Instance):
-        self.instance = instance
+        super().__init__(instance)
 
     def create_model(self):
         self._create_parameter_sets()
         # Create the model
         model = gp.Model("PatientAdmissionScheduling")
+        model.setParam("Threads", 12)
         vars = self._create_variables(model)
         self._create_constraints(model, *vars)
         self._set_optimization_goal(model, *vars)
@@ -25,7 +27,7 @@ class MIPSolver:
         self.vars = vars
         self.model = model
 
-    def solve_model(self):
+    def solve_model(self) -> Solution:
         self.model.optimize()
         if self.model.status == gp.GRB.OPTIMAL:
             logger.info("Optimal solution found.")
@@ -46,69 +48,9 @@ class MIPSolver:
         model.setObjective(objective, gp.GRB.MINIMIZE)
 
     def _create_parameter_sets(self):
-        max_day = max(
-            p.latest_admission_date.day + p.length_of_stay + 1
-            for p in self.instance.patients.values()
-        )
-        self.D = range(max_day)
-        self.T = arange(
-            self.instance.workday_start.hours,
-            self.instance.workday_end.hours,
-            self.instance.time_slot_length.hours,
-        ).astype(float)
-        self.P = list(self.instance.patients.values())
-        self.M = list(self.instance.treatments.values())
-        self.F = list(self.instance.resources.values())
-        self.Fhat = list(self.instance.resource_groups.values())
-        self.Fhat_m = {
-            m: list(m.resources.keys()) for m in self.instance.treatments.values()
-        }
-        self.fhat = {
-            fhat: [f for f in self.F if f.resource_group == fhat] for fhat in self.Fhat
-        }
+        # Define any additional sets or mappings needed for the model
 
-        self.D_p = {
-            p: range(
-                p.earliest_admission_date.day,
-                p.latest_admission_date.day + 1 + p.length_of_stay,
-            )
-            for p in self.instance.patients.values()
-        }
-        self.M_p = {
-            p: list(p.treatments.keys()) for p in self.instance.patients.values()
-        }
-        self.k_m = {t: t.num_participants for t in self.instance.treatments.values()}
-        self.r_pm = {
-            (p, m): p.treatments[m]
-            for p in self.instance.patients.values()
-            for m in self.M_p[p]
-        }
-        self.l_p = {p: p.length_of_stay for p in self.instance.patients.values()}
-        self.du_m = {
-            m: ceil(m.duration / self.instance.time_slot_length)
-            for m in self.instance.treatments.values()
-        }
-
-        self.b = self.instance.num_beds
-        self.rw = self.instance.rolling_window_length
-
-        self.av_fdt = {
-            (f, d, t): int(f.is_available(d + t))
-            for f in self.instance.resources.values()
-            for d in self.D
-            for t in self.T
-        }
-        self.n_fhatm = {
-            (fhat, m): m.resources[fhat] for m in self.M for fhat in self.Fhat_m[m]
-        }
-        self.Lhat_m = {}
-        for m in self.M:
-            self.Lhat_m[m] = [fhat for fhat in self.Fhat_m[m] if m.loyalty[fhat]]
-
-        # Mapping from resource group to treatments requiring that group
-        self.M_fhat = {}
-        for fhat in self.Fhat:
-            self.M_fhat[fhat] = [m for m in self.M if fhat in self.Fhat_m[m]]
+        super()._create_parameter_sets()
 
     def _create_variables(self, model: gp.Model):
         #####################################
@@ -213,15 +155,6 @@ class MIPSolver:
                 expr += gp.quicksum(a_pd[p, delta] for delta in delta_set)
             model.addConstr(expr <= self.b, name=f"constraint_p4_d{d}")
 
-        # Constraint (p5): Stress limit per patient per day
-        """for p in self.P:
-            for d in self.D_p[p]:
-                expr = gp.LinExpr()
-                for m in self.M_p[p]:
-                    b_m_m = self.b_m[m]
-                    expr += b_m_m * gp.quicksum(x_pmdt[p, m, d, t] for t in self.T)
-                model.addConstr(expr <= self.s_p[p], name=f"constraint_p5_p{p.id}_d{d}")
-        """
         # Constraint (p6): Patient admitted exactly once within the specified time
         for p in self.P:
             D_p_early = [d for d in self.D_p[p] if d <= max(self.D_p[p]) - self.l_p[p]]
@@ -245,7 +178,13 @@ class MIPSolver:
                         expr = gp.LinExpr()
                         for m in self.M_fhat[fhat]:
                             du_m_m = self.du_m[m]
-                            tau_set = [tau for tau in self.T if t - du_m_m < tau <= t]
+                            tau_set = [
+                                tau
+                                for tau in self.T
+                                if t - du_m_m * self.instance.time_slot_length.hours
+                                < tau
+                                <= t
+                            ]
                             expr += gp.quicksum(
                                 u_mfdt[m, f, d, tau]
                                 for tau in tau_set
@@ -321,24 +260,8 @@ class MIPSolver:
                         name=f"constraint_a2_p{p.id}_m{m.id}_fhat{fhat.id}",
                     )
 
-        # Constraint (a3): Conflict groups (if applicable)
-        if hasattr(self, "M_c") and hasattr(self, "C"):
-            for p in self.P:
-                for d in self.D_p[p]:
-                    for c in self.C:
-                        model.addConstr(
-                            gp.quicksum(
-                                x_pmdt[p, m, d, t]
-                                for m in self.M_c[c]
-                                for t in self.T
-                                if (p, m, d, t) in x_pmdt
-                            )
-                            <= 1,
-                            name=f"constraint_a3_p{p.id}_d{d}_c{c}",
-                        )
-
         # Constraint (a4): Even distribution of treatments over rolling windows
-        if hasattr(self, "rw"):
+        for d in self.R:
             for p in self.P:
                 for m in self.M_p[p]:
                     num_windows = ceil(len(self.D_p[p]) / self.rw)
@@ -387,6 +310,27 @@ class MIPSolver:
         from collections import defaultdict
 
         x_pmdt, z_pmfdt, u_mfdt, v_pmf, a_pd = self.vars
+        # Print out all variables that are one
+
+        for key in x_pmdt:
+            if x_pmdt[key].X > 0.5:
+                print(f"x_pmdt{key} = {x_pmdt[key].X}")
+
+        for key in z_pmfdt:
+            if z_pmfdt[key].X > 0.5:
+                print(f"z_pmfdt{key} = {z_pmfdt[key].X}")
+
+        for key in u_mfdt:
+            if u_mfdt[key].X > 0.5:
+                print(f"u_mfdt{key} = {u_mfdt[key].X}")
+
+        for key in v_pmf:
+            if v_pmf[key].X > 0.5:
+                print(f"v_pmf{key} = {v_pmf[key].X}")
+
+        for key in a_pd:
+            if a_pd[key].X > 0.5:
+                print(f"a_pd{key} = {a_pd[key].X}")
 
         # appointments_dict: key=(m, d, t, frozenset of resource IDs), value=list of patients
         appointments_dict = defaultdict(list)
@@ -394,6 +338,9 @@ class MIPSolver:
         # Collect scheduled treatments and group patients based on resources used
         for (p, m, d, t), var in x_pmdt.items():
             if var.X > 0.5:
+                logger.debug(
+                    f"Patient {p.id} scheduled for treatment {m.id} at ({d}, {t})."
+                )
                 # Determine the resources used by patient p for treatment m at (d, t)
                 resources_used = defaultdict(
                     list
@@ -475,7 +422,7 @@ class MIPSolver:
             for d in self.D_p[p]:
                 if a_pd[p, d].X > 0.5:
                     patients_arrival[p] = DayHour(
-                        day=d, hour=self.instance.workday_start.hours
+                        day=d, hour=self.instance.workday_start.hour
                     )
         # Create the solution
         solution = Solution(

@@ -7,11 +7,13 @@ class DayHour:
         except ValueError:
             raise ValueError("Invalid time format. Use 'day:hour:minutes'.")
 
-    def __init__(self, day: int, hour: float):
-        if not (0 <= hour < 24):
-            raise ValueError("Hour must be between 0 and 23.")
+    def __init__(self, day: int = 0, hour: float = 0, minutes: float = 0):
+        if not (0 <= hour + minutes / 60 < 24):
+            raise ValueError("Time must be between 0 and 23:59.")
+        if not (0 <= minutes < 60):
+            raise ValueError("Minutes must be between 0 and 59.")
         self.day: int = day
-        self.hour: float = hour
+        self.hour: float = hour + minutes / 60
 
     def __repr__(self):
         return f"Day {self.day}, {self.hour}"
@@ -35,6 +37,11 @@ class DayHour:
         return NotImplemented
 
     def __sub__(self, other):
+        if isinstance(other, DayHour):
+            total_hours = self.day * 24 + self.hour - other.day * 24 - other.hour
+            new_day, new_hour = divmod(total_hours, 24)
+            return DayHour(new_day, new_hour)
+
         if isinstance(other, Duration):
             total_hours = self.hour - other.hours
             extra_days, new_hour = divmod(total_hours, 24)
