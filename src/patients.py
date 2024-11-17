@@ -4,15 +4,18 @@ from src.resource import Resource, ResourceGroup
 
 
 class Patient:
+
     def __init__(
         self,
         pid: int,
         treatments: dict[Treatment, int],
         length_of_stay: int,
         earliest_admission_date: DayHour,
-        latest_admission_date: DayHour,
+        admitted_before_date: DayHour,
         already_admitted: bool = False,
-        already_resource_loyal: dict[tuple[Treatment, ResourceGroup], list[Resource]] = None,
+        already_resource_loyal: dict[
+            tuple[Treatment, ResourceGroup], list[Resource]
+        ] = None,
         name: str = "",
         **kwargs,
     ):
@@ -22,7 +25,7 @@ class Patient:
 
         self.length_of_stay = length_of_stay
         self.earliest_admission_date = earliest_admission_date
-        self.latest_admission_date = latest_admission_date
+        self.admitted_before_date = admitted_before_date
         self.already_admitted = already_admitted
         self.already_resource_loyal = already_resource_loyal
         self.treatments = treatments

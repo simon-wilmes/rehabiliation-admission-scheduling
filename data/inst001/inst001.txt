@@ -4,7 +4,12 @@ workday_start: 8 # uhr
 workday_end: 17 # uhr
 day_start:0
 rolling_window_length: 7
+rolling_windows_days: [(0, 4)]
+# rolling_windows_days is a list of tuples where the first entry says the 
+# start day and the second entry says the interval of repetition of None if only once
 
+conflict_groups: [(0,)]
+# conflict groups is a list of sets where each set represents a single conflict group
 
 
 [DATA: RESOURCE_GROUPS]: rgid, name
@@ -14,16 +19,16 @@ rolling_window_length: 7
 1; rooms
 
 
-[DATA: RESOURCES]: rid, rgid, name, unavailable_time_slots_in_week
+[DATA: RESOURCES]: rid, rgid, name, unavailable_time_slots
 # "rid" is of type int (must be unique)
 # "rgid" is of type int: refers to the rgid of a resource_group
 # "name" is of type str
-# "unavailable_time_slots" is of type: list[tuple[DayHour, Duration, int | None]]
+# "unavailable_time_slots" is of type: list[tuple[DayHour, DayHour, int | None]]
 # where the syntax is the first entry says the start date, 
 # the second entry is the end date of the unavailability 
 # and the last entry is the interval of days of repetition, none if only once
 
-0;  0;  therapist0; [(DayHour(day=0,hour=8),DayHour(day=0, hour=8), 1)]
+0;  0;  therapist0; [(DayHour(day=0,hour=8),DayHour(day=0, hour=9), 1)]
 1;  0;  therapist1; None
 2;  0;  therapist2; None
 3;  1;  room0;  None
@@ -40,7 +45,7 @@ rolling_window_length: 7
 0; 10; music_therapy; Duration(hours=0, minutes=45); {0:(1,True), 1: (1, False)}
 
 
-[DATA: PATIENTS]: pid, name, treatments, length_of_stay, earliest_admission_date, admitted_before_date, already_admitted, already_resource_loyal, already_scheduled_treatments
+[DATA: PATIENTS]: pid, name, treatments, length_of_stay, earliest_admission_date, admitted_before_date, already_admitted_date, already_resource_loyal, already_scheduled_treatments
 
 # "pid" is of type int (must be unique)
 # "name" is of type string (patient's name)
@@ -48,7 +53,7 @@ rolling_window_length: 7
 # "length_of_stay" is of type int (total length of stay in days)
 # "earliest_admission_date" is of type DayHour (earliest possible admission date)
 # "admitted_before_date" is of type DayHour (latest possible admission date)
-# "already_admitted" is of type bool (whether the patient is already admitted)
+# "already_admitted" is of type DayHour and refers to the day when the patient was admitted is None if not admitted (most of the time <0, as in the past admitted)
 # "already_resource_loyal" is a dictionary where the keys are (tuples) of treatment TID and RGID and values is a the list of RID that are loyal, this means that the list must have length of required resources of RGID for treatment TID
 # "already_scheduled_treatments" is a list of tuples where each tuple contains a treatment ID (int) and the number of times it was already scheduled in the past
 

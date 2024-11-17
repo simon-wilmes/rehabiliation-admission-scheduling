@@ -6,9 +6,13 @@ from src.logging import logger
 
 def main():
     inst = create_instance_from_file("data/inst001/inst001.txt")
-    solver = CPSolver(inst)
-    solver.create_model()
-    solver.solve_model()
+    solver_mip = MIPSolver(inst)
+    solver_mip.create_model()
+    solver_mip.solve_model()
+
+    solver_cp = CPSolver(inst)
+    solver_cp.create_model()
+    solver_cp.solve_model()
     pass
     logger.debug("Successfully created instance from file.")
 

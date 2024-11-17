@@ -1,5 +1,6 @@
 from src.time import Duration, DayHour
 from src.types import RID, RGID
+from copy import deepcopy
 
 
 class ResourceGroup:
@@ -40,6 +41,15 @@ class Resource:
 
     def is_available(self, d: DayHour):
         for slot in self.unavailable_time_slots:
-            if slot[0] <= d <= slot[0] + slot[1]:
-                return False
+            if slot[2] is None:
+                if slot[0] <= d < slot[1]:
+                    return False
+            else:
+                if slot[0].day <= d.day:
+                    new_date = d - slot[0]
+                    new_end = slot[1] - slot[0]
+                    new_date.day = new_date.day % slot[2]
+                    if new_date < new_end:
+                        return False
+
         return True

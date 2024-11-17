@@ -5,21 +5,21 @@ from datetime import timedelta
 from math import ceil
 from collections import defaultdict
 import logging
+from src.instance import Instance
 
 logger = logging.getLogger(__name__)
 
 
 class CPSolver(Solver):
-    def __init__(self, instance):
+    def __init__(self, instance: Instance):
         self.instance = instance
         self.model = cp_model.CpModel()
 
     def create_model(self):
-        self._create_parameter_sets()
-        vars = self._create_variables()
-        self._create_constraints(*vars)
-        self._set_optimization_goal(*vars)
-        self.vars = vars
+
+        self._create_model()
+        treatment_vars, patient_vars = self.vars
+        self._set_optimization_goal(treatment_vars, patient_vars)
 
     def solve_model(self):
         solver = cp_model.CpSolver()
@@ -33,6 +33,20 @@ class CPSolver(Solver):
             logger.error("No solution found.")
             return None
 
+    def _create_model(self):
+        self._create_parameter_sets()
+
+        vars = self._create_variables()
+        self.vars = vars
+        self._create_constraints(*vars)
+
+    def _create_parameter_sets(self):
+        # Define any additional sets or mappings needed for the model besides the ones created in the parent class
+
+        super()._create_parameter_sets()
+
+        self.num_time_slots = len(self.T) + 1
+
     def _set_optimization_goal(self, treatment_vars, patient_vars):
         # Objective: Maximize the total number of scheduled treatments, possibly weighted
         total_treatments = []
@@ -41,75 +55,6 @@ class CPSolver(Solver):
                 total_treatments.append(var["interval"].PresenceLiteral())
         self.model.Maximize(cp_model.LinearExpr.Sum(total_treatments))
 
-    def _create_parameter_sets(self):
-        # Similar to the MIP model, create necessary sets and mappings
-        self.max_day = max(
-            p.latest_admission_date.day + p.length_of_stay + 1
-            for p in self.instance.patients.values()
-        )
-        self.D = range(self.max_day)
-        self.T = list(
-            range(
-                int(self.instance.workday_start.hours),
-                int(self.instance.workday_end.hours),
-            )
-        )
-        self.P = list(self.instance.patients.values())
-        self.M = list(self.instance.treatments.values())
-        self.F = list(self.instance.resources.values())
-        self.Fhat = list(self.instance.resource_groups.values())
-
-        self.Fhat_m = {
-            m: list(m.resources.keys()) for m in self.instance.treatments.values()
-        }
-        self.fhat = {
-            fhat: [f for f in self.F if f.resource_group == fhat] for fhat in self.Fhat
-        }
-
-        self.D_p = {
-            p: range(
-                p.earliest_admission_date.day,
-                p.latest_admission_date.day + 1 + p.length_of_stay,
-            )
-            for p in self.instance.patients.values()
-        }
-        self.M_p = {
-            p: list(p.treatments.keys()) for p in self.instance.patients.values()
-        }
-        self.k_m = {t: t.num_participants for t in self.instance.treatments.values()}
-        self.r_pm = {
-            (p, m): int(p.treatments[m] * p.length_of_stay / self.instance.week_length)
-            for p in self.instance.patients.values()
-            for m in self.M_p[p]
-        }
-        self.l_p = {p: p.length_of_stay for p in self.instance.patients.values()}
-        self.du_m = {
-            m: ceil(m.duration / self.instance.time_slot_length)
-            for m in self.instance.treatments.values()
-        }
-
-        self.b = self.instance.num_beds
-        self.rw = self.instance.rolling_window_length
-
-        # Resource availability
-        self.av_fdt = {
-            (f, d, t): int(f.is_available(d + t))
-            for f in self.instance.resources.values()
-            for d in self.D
-            for t in self.T
-        }
-        self.n_fhatm = {
-            (fhat, m): m.resources[fhat] for m in self.M for fhat in self.Fhat_m[m]
-        }
-        self.Lhat_m = {}
-        for m in self.M:
-            self.Lhat_m[m] = [fhat for fhat in self.Fhat_m[m] if m.loyalty[fhat]]
-
-        # Mapping from resource group to treatments requiring that group
-        self.M_fhat = {}
-        for fhat in self.Fhat:
-            self.M_fhat[fhat] = [m for m in self.M if fhat in self.Fhat_m[m]]
-
     def _create_variables(self):
         # Variables for patient admission dates
         patient_vars = {}
@@ -117,153 +62,125 @@ class CPSolver(Solver):
             # Admission date variable
             admission_day = self.model.new_int_var(
                 p.earliest_admission_date.day,
-                p.latest_admission_date.day,
+                p.admitted_before_date.day,
                 f"admission_day_p{p.id}",
             )
-            patient_vars[p] = {
-                "admission_day": admission_day,
-            }
+            patient_vars[p] = admission_day
 
         # Variables for treatments and resources
-        treatment_vars = {}
+        treatment_vars = defaultdict(list)
         for p in self.P:
             for m in self.M_p[p]:
                 num_reps = self.r_pm[(p, m)]
-                treatment_vars[(p, m)] = []
                 for r in range(num_reps):
-                    # Create interval variable for each treatment repetition
-                    start_day = self.model.new_int_var(
-                        p.earliest_admission_date.day,
-                        p.latest_admission_date.day + self.l_p[p] - 1,
-                        f"start_day_p{p.id}_m{m.id}_r{r}",
-                    )
-
-                    # Break symetry by enforcing order amongst repetitions
-
+                    # Create interger variable for admission
                     duration = self.du_m[m]
-                    # Assuming time slots are hours for simplicity
-                    start_time = self.model.new_int_var(
-                        int(self.instance.workday_start.hours),
-                        int(self.instance.workday_end.hours - duration),
+
+                    start_slot = self.model.new_int_var(
+                        0,
+                        self.num_time_slots * len(self.D),
                         f"start_time_p{p.id}_m{m.id}_r{r}",
                     )
 
                     # Create interval variable
                     interval = self.model.new_fixed_size_interval_var(
-                        start_day * 24 + start_time,
-                        duration,
-                        (start_day + duration // 24) * 24 + start_time + duration % 24,
-                        self.model.new_bool_var(f"is_scheduled_p{p.id}_m{m.id}_r{r}"),
-                        f"interval_p{p.id}_m{m.id}_r{r}",
+                        start=start_slot,
+                        size=duration,
+                        name=f"interval_p{p.id}_m{m.id}_r{r}",
                     )
                     # Resource variables
                     resource_vars = {}
                     for fhat in self.Fhat_m[m]:
-                        num_resources_needed = self.n_fhatm[(fhat, m)]
-                        resources = self.fhat[fhat]
-                        resource_assignments = []
-                        for n in range(num_resources_needed):
-                            resource_var = self.model.new_int_var(
-                                0,
-                                len(resources) - 1,
-                                f"resource_p{p.id}_m{m.id}_r{r}_fhat{fhat.id}_{n}",
+                        for f in self.fhat[fhat]:
+                            use_resource = self.model.new_bool_var(
+                                f"use_resource{p.id}_m{m.id}_r{r}_f{f.id}",
                             )
-                            resource_assignments.append(resource_var)
-                        resource_vars[fhat] = resource_assignments
+                            resource_vars[f] = use_resource
 
-                    treatment_vars[(p, m, r)].append(
-                        {
-                            "interval": interval,
-                            "start_day": start_day,
-                            "start_time": start_time,
-                            "resources": resource_vars,
-                        }
-                    )
+                    treatment_vars[(p, m, r)] = {
+                        "interval": interval,
+                        "start_slot": start_slot,
+                        "resources": resource_vars,
+                    }
 
         return treatment_vars, patient_vars
 
-    def _create_constraints(self, treatment_vars, patient_vars):
+    def _create_constraints(self, treatment_vars, patient_admission_vars):
         # Admission constraints
         for p in self.P:
-            admission_day = patient_vars[p]["admission_day"]
+            admission_day = patient_admission_vars[p]
             # If the patient is already admitted, fix the admission day
             if p.already_admitted:
-                self.model.Add(admission_day == p.earliest_admission_date.day)
+                self.model.add(admission_day == p.earliest_admission_date.day)
+
+        # Ensure that admssion is in the correct range
+        for p in self.P:
+            self.model.add(admission_day >= p.earliest_admission_date.day)
+            self.model.add(admission_day <= p.admitted_before_date.day)
 
         # Ensure treatments are scheduled within admission period
-        for p in self.P:
-            admission_day = patient_vars[p]["admission_day"]
-            for m in self.M_p[p]:
-                for rep in treatment_vars[(p, m)]:
-                    interval = rep["interval"]
-                    start_day = rep["start_day"]
-                    # Treatment can only start after admission
-                    self.model.Add(start_day >= admission_day).OnlyEnforceIf(
-                        interval.PresenceLiteral()
-                    )
-                    # Treatment must end before admission end
-                    self.model.Add(
-                        start_day <= admission_day + self.l_p[p] - 1
-                    ).OnlyEnforceIf(interval.PresenceLiteral())
+        for (p, m, r), vars in treatment_vars.items():
+            interval, start_slot, resources = vars.values()
+            admission_day = patient_admission_vars[p]
+
+            # Treatment can only start after admission
+            self.model.add(
+                start_slot >= admission_day * self.num_time_slots,
+            )
+
+            # Treatment must end before admission end
+            self.model.add(
+                start_slot <= (admission_day + self.l_p[p] - 1) * 37,
+            )
 
         # Patient can have only one treatment at a time
         for p in self.P:
             intervals = []
             for m in self.M_p[p]:
-                for rep in treatment_vars[(p, m)]:
-                    intervals.append(rep["interval"])
-            self.model.AddNoOverlap(intervals)
+                for r in range(self.r_pm[(p, m)]):
+                    intervals.append(treatment_vars[(p, m, r)]["interval"])
+            self.model.add_no_overlap(intervals)
 
-        # Bed capacity constraints
-        for d in self.D:
-            patients_present = []
-            for p in self.P:
-                admission_day = patient_vars[p]["admission_day"]
-                # Patient is present if admission_day <= d < admission_day + length_of_stay
-                is_present = self.model.NewBoolVar(f"is_present_p{p.id}_d{d}")
-                self.model.Add(admission_day <= d).OnlyEnforceIf(is_present)
-                self.model.Add(admission_day + self.l_p[p] > d).OnlyEnforceIf(
-                    is_present
-                )
-                self.model.AddBoolOr(
-                    [admission_day > d, admission_day + self.l_p[p] <= d]
-                ).OnlyEnforceIf(is_present.Not())
-                patients_present.append(is_present)
-            self.model.Add(cp_model.LinearExpr.Sum(patients_present) <= self.b)
+        # Bed capacity constraints via reservoir constraint
+        bed_changes_time = []
+        bed_changes_amount = []
+        for p in self.P:
+            admission_day = patient_admission_vars[p]
+            bed_changes_time.append(admission_day)
+            bed_changes_amount.append(1)
+
+            bed_changes_time.append(admission_day + self.l_p[p])
+            bed_changes_amount.append(-1)
+
+        self.model.add_reservoir_constraint(
+            times=bed_changes_time,
+            level_changes=bed_changes_amount,
+            min_level=0,
+            max_level=self.instance.beds_capacity,
+        )
 
         # Resource capacity constraints
         for f in self.F:
-            # Collect intervals that use resource f
+            # Collect intervals for f
             intervals_using_f = []
-            for p in self.P:
-                for m in self.M_p[p]:
-                    for rep in treatment_vars[(p, m)]:
-                        for fhat in self.Fhat_m[m]:
-                            resources = rep["resources"][fhat]
-                            resources_list = self.fhat[fhat]
-                            for resource_var in resources:
-                                # Add constraint to link resource assignment to resource f
-                                is_assigned_to_f = self.model.NewBoolVar(
-                                    f"is_assigned_p{p.id}_m{m.id}_f{f.id}"
-                                )
-                                self.model.Add(
-                                    resource_var == resources_list.index(f)
-                                ).OnlyEnforceIf(is_assigned_to_f)
-                                self.model.Add(
-                                    resource_var != resources_list.index(f)
-                                ).OnlyEnforceIf(is_assigned_to_f.Not())
-                                # If treatment is scheduled and resource is assigned to f, add interval
-                                interval = rep["interval"]
-                                interval_f = self.model.NewOptionalIntervalVar(
-                                    interval.StartExpr(),
-                                    interval.SizeExpr(),
-                                    interval.EndExpr(),
-                                    is_assigned_to_f,
-                                    f"interval_p{p.id}_m{m.id}_f{f.id}",
-                                )
-                                intervals_using_f.append(interval_f)
+
+            for (p, m, r), vars in treatment_vars.items():
+
+                # Skip treatments that do not use resource f
+                if f.resource_group not in self.Fhat_m[m]:
+                    continue
+
+                interval, start_slot, resources = vars.values()
+
+                interval_f = self.model.new_optional_fixed_size_interval_var(
+                    interval.start_expr(),
+                    self.du_m[m],
+                    resources[f],
+                    f"interval_p{p.id}_m{m.id}_f{f.id}_r{r}",
+                )
+                intervals_using_f.append(interval_f)
             # No overlap on resource f
-            self.model.AddNoOverlap(intervals_using_f)
+            self.model.add_no_overlap(intervals_using_f)
 
         # Resource availability constraints
         for f in self.F:
@@ -272,37 +189,12 @@ class CPSolver(Solver):
                 for t in self.T:
                     if self.av_fdt.get((f, d, t), 0):
                         availability.append((d * 24 + t, 1))
-            # Note: In this simplified model, we assume resources are always available when needed
-            # For a more detailed model, you can adjust the intervals to match resource availability
 
-        # Conflict group constraints
-        for p in self.P:
-            for d in self.D:
-                conflict_intervals = []
-                for c in self.C:
-                    treatments_in_c = self.M_c[c]
-                    for m in treatments_in_c:
-                        if m not in self.M_p[p]:
-                            continue
-                        for rep in treatment_vars[(p, m)]:
-                            interval = rep["interval"]
-                            start_day = rep["start_day"]
-                            is_on_day_d = self.model.NewBoolVar(
-                                f"is_on_day_p{p.id}_m{m.id}_d{d}"
-                            )
-                            self.model.Add(start_day == d).OnlyEnforceIf(is_on_day_d)
-                            self.model.Add(start_day != d).OnlyEnforceIf(
-                                is_on_day_d.Not()
-                            )
-                            self.model.AddImplication(
-                                is_on_day_d, interval.PresenceLiteral()
-                            )
-                            conflict_intervals.append(is_on_day_d)
-                self.model.Add(cp_model.LinearExpr.Sum(conflict_intervals) <= 1)
+        # Restric resources at the end of the day
 
         # Even distribution of treatments
         for p in self.P:
-            admission_day = patient_vars[p]["admission_day"]
+            admission_day = patient_admission_vars[p]
             length_of_stay = self.l_p[p]
             num_windows = ceil(length_of_stay / self.rw)
             for m in self.M_p[p]:
@@ -409,25 +301,3 @@ class CPSolver(Solver):
             patients_arrival=patients_arrival,
         )
         return solution
-
-
-# Auxiliary classes (Assuming these are defined elsewhere in your codebase)
-class DayHour:
-    def __init__(self, day, hour):
-        self.day = day
-        self.hour = hour
-
-
-class Appointment:
-    def __init__(self, patients, start_date, treatment, resources):
-        self.patients = patients
-        self.start_date = start_date
-        self.treatment = treatment
-        self.resources = resources
-
-
-class Solution:
-    def __init__(self, instance, schedule, patients_arrival):
-        self.instance = instance
-        self.schedule = schedule
-        self.patients_arrival = patients_arrival
