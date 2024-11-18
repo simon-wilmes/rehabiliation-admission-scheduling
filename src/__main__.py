@@ -1,6 +1,6 @@
 from src.instance import create_instance_from_file
 from src.solvers.mip import MIPSolver
-from src.solvers.cp import CPSolver
+from src.solvers.cp_or import CPSolver
 from src.logging import logger
 
 

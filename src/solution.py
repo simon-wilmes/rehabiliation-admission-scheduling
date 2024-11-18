@@ -6,6 +6,9 @@ from src.time import DayHour
 from src.logging import logger
 import math
 
+# Define the return code for the solver when no solution is found
+NO_SOLUTION_FOUND = 0
+
 
 class Appointment:
     def __init__(
@@ -72,6 +75,18 @@ class Solution:
         self.schedule = schedule  # List of Appointments
         self.patients_arrival = patients_arrival  # Dict[Patient, DayHour]
         self.ignored_constraints = ignored_constraints
+        # Log the schedule for all patients and treatments
+        for patients in self.patients_arrival:
+            logger.info(
+                f"Patient {patients.id} is admitted at day {self.patients_arrival[patients].day}."
+            )
+
+        for appointment in self.schedule:
+
+            logger.info(
+                f"Patients {list(patient.id for patient in appointment.patients)} has treatment {appointment.treatment.id} "
+                f"starting at day {appointment.start_date.day}, hour {appointment.start_date.hour}."
+            )
 
         # Perform the checks
         self._check_constraints()
@@ -289,16 +304,22 @@ class Solution:
                 if key not in scheduled_treatments:
                     scheduled_treatments[key] = 0
                 scheduled_treatments[key] += 1
-        # Now check against r_pm
+        # Now check against lr_pm which is the total repetitions left
         for patient in self.instance.patients.values():
             for treatment in patient.treatments.keys():
-                r_pm = patient.treatments[treatment]  # Total repetitions left
+                try:
+                    lr_pm = (
+                        patient.treatments[treatment]
+                        - patient.already_scheduled_treatments[treatment]
+                    )  # Total repetitions left
+                except KeyError:
+                    pass
                 key = (patient.id, treatment.id)
                 scheduled_count = scheduled_treatments.get(key, 0)
-                if scheduled_count != r_pm:
+                if scheduled_count != lr_pm:
                     raise ValueError(
                         f"Patient {patient.id} has {scheduled_count} scheduled treatments for treatment {treatment.id}, "
-                        f"but needs {r_pm} repetitions."
+                        f"but needs {lr_pm} out of the initial {patient.treatments[treatment]} repetitions."
                     )
 
     def _check_conflict_groups(self):

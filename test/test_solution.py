@@ -5,6 +5,7 @@ from src.patients import Patient
 from src.treatments import Treatment
 from src.resource import Resource, ResourceGroup
 from src.time import DayHour, Duration
+from collections import defaultdict
 
 
 @pytest.fixture
@@ -75,6 +76,66 @@ def setup_instance():
         rg_therapists,
         rg_rooms,
     )
+
+
+def test_already_scheduled_treatments(setup_instance):
+    (
+        instance,
+        patient0,
+        treatment0,
+        treatment1,
+        therapist0,
+        therapist1,
+        room0,
+        room1,
+        rg_therapists,
+        rg_rooms,
+    ) = setup_instance
+
+    patient0.treatments = {treatment0: 2}
+    # Assume patient0 already has one treatment scheduled
+    patient0.already_scheduled_treatments = {
+        treatment0: 1,
+    }
+
+    patients_arrival = {patient0: DayHour(day=0, hour=0)}
+    schedule = [
+        Appointment(
+            [patient0],
+            DayHour(day=1, hour=9),
+            treatment0,
+            {rg_therapists: [therapist0], rg_rooms: [room0]},
+        ),
+        Appointment(
+            [patient0],
+            DayHour(day=2, hour=9),
+            treatment0,
+            {rg_therapists: [therapist0], rg_rooms: [room0]},
+        ),
+    ]
+
+    # Should raise an error
+    with pytest.raises(ValueError, match="needs .* repetitions"):
+        Solution(instance, schedule, patients_arrival)
+
+    # Now remove one existing treatment
+    schedule = [
+        Appointment(
+            [patient0],
+            DayHour(day=1, hour=9),
+            treatment0,
+            {rg_therapists: [therapist0], rg_rooms: [room0]},
+        )
+    ]
+
+    solution = Solution(instance, schedule, patients_arrival)
+    assert solution is not None
+
+    # Now remove the already scheduled treatment
+    patient0.already_scheduled_treatments = defaultdict(int)
+    # Should raise an error
+    with pytest.raises(ValueError, match="needs .* repetitions"):
+        Solution(instance, schedule, patients_arrival)
 
 
 def test_patient_admission(setup_instance):

@@ -22,7 +22,7 @@ class Resource:
         rid: RID,
         resource_group: ResourceGroup,
         name: str = "",
-        unavailable_time_slots: list[tuple[DayHour, Duration]] = None,
+        unavailable_time_slots: list[tuple[DayHour, DayHour, int | None]] = list(),
         **kwargs,
     ):
         if unavailable_time_slots is None:
@@ -34,7 +34,7 @@ class Resource:
         self.unavailable_time_slots = unavailable_time_slots
 
     def __str__(self):
-        return f"R({self.resource_group.name}:{self.name})"
+        return f"R({self.name})"
 
     def __repr__(self):
         return self.__str__()

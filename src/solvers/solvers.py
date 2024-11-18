@@ -13,12 +13,26 @@ from pprint import pprint as pp
 
 
 class Solver(ABC):
-    def __init__(self, instance: Instance, constraints_ignore: list[str] = set()):
-        self.all_constraints = set("rest-time", "resource-loyalty", "even-distribution")
+    def __init__(
+        self, instance: Instance, constraints_ignore: set[str] = set(), **kwargs
+    ):
+        self.all_constraints = set(
+            ["conflict-groups", "resource-loyalty", "even-distribution"]
+        )
         assert constraints_ignore <= self.all_constraints
-        self.all_constraints = self.all_constraints - constraints_ignore
+        self.constraints_ignore = constraints_ignore
 
+        self.number_of_threads = kwargs.get("number_of_threads", 12)
         self.instance = instance
+
+    def add_resource_loyal(self):
+        return "resource-loyalty" not in self.constraints_ignore
+
+    def add_even_distribution(self):
+        return "even-distribution" not in self.constraints_ignore
+
+    def add_conflict_groups(self):
+        return "conflict-groups" not in self.constraints_ignore
 
     @abstractmethod
     def solve_model(self) -> Solution:
@@ -72,6 +86,12 @@ class Solver(ABC):
             for p in self.instance.patients.values()
             for m in self.M_p[p]
         }
+        self.lr_pm = {
+            (p, m): int(p.treatments[m]) - p.already_scheduled_treatments[m]
+            for p in self.instance.patients.values()
+            for m in self.M_p[p]
+        }
+
         self.l_p = {p: p.length_of_stay for p in self.instance.patients.values()}
         self.du_m = {
             m: ceil(m.duration / self.instance.time_slot_length)
@@ -106,5 +126,5 @@ class Solver(ABC):
         self.R = self.instance.rolling_window_days
 
         self.C = self.instance.conflict_groups
-        
+
         pass

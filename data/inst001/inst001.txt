@@ -1,14 +1,13 @@
 [INSTANCE]
 num_beds: 2
 workday_start: 8 # uhr
-workday_end: 17 # uhr
+workday_end: 18 # uhr
 day_start:0
 rolling_window_length: 7
-rolling_windows_days: [(0, 4)]
-# rolling_windows_days is a list of tuples where the first entry says the 
-# start day and the second entry says the interval of repetition of None if only once
+rolling_window_days: [0, 5, 10, 15, 20, 25]
+# rolling_windows_days is a list of days at which to start a rolling window check
 
-conflict_groups: [(0,)]
+conflict_groups: []
 # conflict groups is a list of sets where each set represents a single conflict group
 
 
@@ -28,7 +27,7 @@ conflict_groups: [(0,)]
 # the second entry is the end date of the unavailability 
 # and the last entry is the interval of days of repetition, none if only once
 
-0;  0;  therapist0; [(DayHour(day=0,hour=8),DayHour(day=0, hour=9), 1)]
+0;  0;  therapist0; [(DayHour(day=0,hour=8),DayHour(day=0, hour=9), 1), (DayHour(day=0,hour=10),DayHour(day=0, hour=10.25), None)]
 1;  0;  therapist1; None
 2;  0;  therapist2; None
 3;  1;  room0;  None
@@ -43,6 +42,8 @@ conflict_groups: [(0,)]
 # "resources" is of type dict[RGID, tuple[number_of_resources, requires_loyalty]]
 
 0; 10; music_therapy; Duration(hours=0, minutes=45); {0:(1,True), 1: (1, False)}
+1; 1; bath; Duration(hours=0, minutes=30); {1: (1, False)}
+
 
 
 [DATA: PATIENTS]: pid, name, treatments, length_of_stay, earliest_admission_date, admitted_before_date, already_admitted_date, already_resource_loyal, already_scheduled_treatments
@@ -57,4 +58,5 @@ conflict_groups: [(0,)]
 # "already_resource_loyal" is a dictionary where the keys are (tuples) of treatment TID and RGID and values is a the list of RID that are loyal, this means that the list must have length of required resources of RGID for treatment TID
 # "already_scheduled_treatments" is a list of tuples where each tuple contains a treatment ID (int) and the number of times it was already scheduled in the past
 
-0; patient0; {0:2}; 10; DayHour(day=0, hour=0, minutes=0); DayHour(day=10, hour=0, minutes=0); False; {(0,0):[1]}; [(0,1)]
+0; patient0; {0:2, 1:2}; 4; DayHour(day=0, hour=0, minutes=0); DayHour(day=2, hour=0, minutes=0); False; {(0,0):[1]}; [(0,1)]
+1; patient1; { 1:2}; 4; DayHour(day=0, hour=0, minutes=0); DayHour(day=2, hour=0, minutes=0); False; {}; []

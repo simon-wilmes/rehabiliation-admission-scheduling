@@ -16,7 +16,7 @@ class DayHour:
         self.hour: float = hour + minutes / 60
 
     def __repr__(self):
-        return f"Day {self.day}, {self.hour}"
+        return f"DayHour({self.day}, {self.hour})"
 
     def to_tuple(self):
         return (self.day, self.hour)
@@ -78,7 +78,7 @@ class Duration:
         self.hours: float = hours + minutes / 60
 
     def __repr__(self):
-        return f"Dur{self.hours} hours"
+        return f"Duration(hours={self.hours})"
 
     def __eq__(self, other):
         if isinstance(other, Duration):
@@ -90,11 +90,19 @@ class Duration:
             return self.hours <= other.hours
         return NotImplemented
 
+    def __mul__(self, other):
+        if isinstance(other, float) or isinstance(other, int):
+            return Duration(self.hours * other)
+        return NotImplemented
+
+    def __rmul__(self, other):
+        return self.__mul__(other)
+
     def __add__(self, other):
         if isinstance(other, DayHour):
             total_hours = self.hours + other.hour
             extra_days, new_hour = divmod(total_hours, 24)
-            new_day = other.day + extra_days
+            new_day = other.day + int(extra_days)
             return DayHour(new_day, new_hour)
         return NotImplemented
 
