@@ -1,0 +1,75 @@
+[INSTANCE]
+num_beds: 15
+workday_start: 8 # uhr
+workday_end: 18 # uhr
+day_start: 0
+rolling_window_length: 8
+rolling_windows_days: [(0, 4)]
+# rolling_windows_days is a list of tuples where the first entry says the 
+# start day and the second entry says the interval of repetition of None if only once
+# conflict groups is a list of sets where each set represents a single conflict group
+conflict_groups: [[0, 4], [0, 2, 4]]
+
+[DATA: RESOURCE_GROUPS]: rgid, name
+# 'rgid' is of type int (must be unique)
+# 'name' is of type str
+0; RG_1
+1; RG_2
+2; RG_3
+
+[DATA: RESOURCES]: rid, rgid, name, unavailable_time_slots
+# 'rid' is of type int (must be unique)
+# 'rgid' is of type int: refers to the rgid of a resource_group
+# 'name' is of type str
+# 'unavailable_time_slots' is of type: list[tuple[DayHour, Duration, int | None]]
+# where the syntax is the first entry says the start date,
+# the second entry is the end date of the unavailability
+# and the last entry is the interval of days of repetition, none if only once
+0; 2; R_0; [(DayHour(day=3, hour=16.75), Duration(hours=2.0)), (DayHour(day=2, hour=9.25), Duration(hours=1.0)), (DayHour(day=2, hour=16.5), Duration(hours=2.0))]
+1; 2; R_1; [(DayHour(day=0, hour=16.25), Duration(hours=3.0))]
+2; 0; R_2; [(DayHour(day=2, hour=14.25), Duration(hours=3.0)), (DayHour(day=3, hour=9.5), Duration(hours=1.0)), (DayHour(day=10, hour=10.25), Duration(hours=3.0))]
+3; 2; R_3; [(DayHour(day=10, hour=12.5), Duration(hours=3.0)), (DayHour(day=3, hour=12.5), Duration(hours=2.0)), (DayHour(day=3, hour=10.5), Duration(hours=2.0)), (DayHour(day=4, hour=16.75), Duration(hours=3.0)), (DayHour(day=2, hour=12.5), Duration(hours=2.0))]
+4; 1; R_4; [(DayHour(day=9, hour=14.0), Duration(hours=2.0)), (DayHour(day=0, hour=8.75), Duration(hours=3.0))]
+
+[DATA: TREATMENTS]: tid, num_participants, name, duration, resources
+# 'tid' is of type int (must be unique)
+# 'num_participants' is of type int
+# 'name' is of type str
+# 'duration' is of type Duration
+# 'resources' is of type dict[RGID, tuple[number_of_resources, requires_loyalty]]
+0; 3; T_0; Duration(hours=3.0); {RG(RG_1): 1}
+1; 2; T_1; Duration(hours=2.0); {RG(RG_2): 1}
+2; 1; T_2; Duration(hours=1.0); {RG(RG_3): 3}
+3; 3; T_3; Duration(hours=2.0); {RG(RG_2): 2}
+4; 4; T_4; Duration(hours=1.0); {RG(RG_1): 3}
+
+[DATA: PATIENTS]: pid, name, treatments, length_of_stay, earliest_admission_date, admitted_before_date, already_admitted_date, already_resource_loyal, already_scheduled_treatments
+# 'pid' is of type int (must be unique)
+# 'name' is of type string (patient's name)
+# 'treatments' is a dictionary where keys are treatment IDs (int) and values are number of treatments required
+# 'length_of_stay' is of type int (total length of stay in days)
+# 'earliest_admission_date' is of type DayHour (earliest possible admission date)
+# 'admitted_before_date' is of type DayHour (latest possible admission date)
+# 'already_admitted' is of type DayHour and refers to the day when the patient was admitted is None if not admitted (most of the time <0, as in the past admitted)
+# 'already_resource_loyal' is a dictionary where the keys are (tuples) of treatment TID and RGID and values is a the list of RID that are loyal, this means that the list must have length of required resources of RGID for treatment TID
+# 'already_scheduled_treatments' is a list of tuples where each tuple contains a treatment ID (int) and the number of times it was already scheduled in the past
+0; P_0; {T(T_2): 4, T(T_0): 3, T(T_4): 4, T(T_1): 4}; 3; DayHour(day=0,hour=8.0); DayHour(day=0,hour=8.0); True; {}
+1; P_1; {T(T_2): 1, T(T_1): 4}; 5; DayHour(day=1,hour=16.75); DayHour(day=7,hour=9.25); False; {}
+2; P_2; {T(T_1): 5, T(T_2): 1, T(T_4): 1, T(T_3): 3, T(T_0): 5}; 8; DayHour(day=0,hour=16.5); DayHour(day=5,hour=8.0); False; {}
+3; P_3; {T(T_1): 5, T(T_0): 3, T(T_4): 3}; 7; DayHour(day=0,hour=8.0); DayHour(day=0,hour=8.0); True; {}
+4; P_4; {T(T_3): 1, T(T_0): 1}; 6; DayHour(day=2,hour=11.25); DayHour(day=3,hour=14.25); False; {}
+5; P_5; {T(T_1): 4, T(T_4): 1}; 10; DayHour(day=6,hour=16.75); DayHour(day=7,hour=13.0); False; {}
+6; P_6; {T(T_4): 3, T(T_3): 2, T(T_1): 3, T(T_2): 3, T(T_0): 5}; 9; DayHour(day=1,hour=16.25); DayHour(day=5,hour=12.25); False; {}
+7; P_7; {T(T_2): 4, T(T_3): 2, T(T_0): 2}; 3; DayHour(day=0,hour=13.75); DayHour(day=5,hour=15.5); False; {}
+8; P_8; {T(T_0): 2, T(T_3): 2, T(T_1): 2, T(T_2): 2}; 8; DayHour(day=0,hour=8.0); DayHour(day=0,hour=8.0); True; {}
+9; P_9; {T(T_0): 3, T(T_1): 2, T(T_2): 3, T(T_3): 1, T(T_4): 3}; 7; DayHour(day=0,hour=8.0); DayHour(day=0,hour=8.0); True; {}
+10; P_10; {T(T_1): 4, T(T_4): 3, T(T_3): 5, T(T_0): 4}; 8; DayHour(day=3,hour=8.0); DayHour(day=8,hour=9.0); False; {}
+11; P_11; {T(T_1): 2, T(T_0): 3, T(T_3): 3, T(T_4): 3, T(T_2): 1}; 9; DayHour(day=0,hour=8.0); DayHour(day=0,hour=8.0); True; {}
+12; P_12; {T(T_2): 3, T(T_0): 1, T(T_3): 4, T(T_4): 2, T(T_1): 4}; 5; DayHour(day=3,hour=9.25); DayHour(day=9,hour=16.0); False; {}
+13; P_13; {T(T_3): 2, T(T_4): 1, T(T_1): 2, T(T_0): 1}; 9; DayHour(day=0,hour=8.0); DayHour(day=0,hour=8.0); True; {}
+14; P_14; {T(T_0): 5, T(T_2): 2, T(T_1): 4, T(T_4): 2, T(T_3): 5}; 5; DayHour(day=3,hour=10.5); DayHour(day=9,hour=10.5); False; {}
+15; P_15; {T(T_3): 3, T(T_1): 1, T(T_2): 5, T(T_0): 3}; 4; DayHour(day=0,hour=8.0); DayHour(day=0,hour=8.0); True; {}
+16; P_16; {T(T_1): 1, T(T_0): 4}; 4; DayHour(day=0,hour=8.0); DayHour(day=0,hour=8.0); True; {}
+17; P_17; {T(T_1): 4, T(T_2): 1, T(T_4): 3, T(T_0): 1, T(T_3): 4}; 7; DayHour(day=2,hour=11.25); DayHour(day=4,hour=13.5); False; {}
+18; P_18; {T(T_4): 5, T(T_1): 1, T(T_2): 3, T(T_0): 3}; 5; DayHour(day=1,hour=12.25); DayHour(day=5,hour=8.0); False; {}
+19; P_19; {T(T_4): 4, T(T_2): 2, T(T_0): 1, T(T_1): 1, T(T_3): 5}; 7; DayHour(day=0,hour=8.0); DayHour(day=0,hour=8.0); True; {}

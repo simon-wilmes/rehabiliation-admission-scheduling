@@ -3,6 +3,15 @@ from src.time import Duration, DayHour
 from src.resource import Resource, ResourceGroup
 from src.treatments import Treatment
 from src.patients import Patient
+import math
+
+
+def round_up_fraction(value, fraction):
+    return math.ceil(value / fraction) * fraction
+
+
+def round_down_fraction(value, fraction):
+    return math.floor(value / fraction) * fraction
 
 
 def generate_instance_file(
@@ -11,6 +20,7 @@ def generate_instance_file(
     workday_start: int,
     workday_end: int,
     day_start: int,
+    time_intervals: int,
     rolling_window_length: int,
     rolling_windows_days: List[Tuple[int, int]],
     conflict_groups: List[Set[int]],
@@ -62,8 +72,13 @@ def generate_instance_file(
         )
         for resource in resources:
             file.write(
-                f"{resource.id}; {resource.resource_group.id}; {resource.name}; {resource.unavailable_time_slots}\n"
+                f"{resource.id}; {resource.resource_group.id}; {resource.name}; ["
             )
+            slots = [
+                f"(DayHour(day={slot[0].to_tuple()[0]}, hour={round_up_fraction(slot[0].to_tuple()[1],time_intervals)}), Duration(hours={round_down_fraction(slot[1].hours,time_intervals)}))"
+                for slot in resource.unavailable_time_slots
+            ]
+            file.write(", ".join(slots) + "]\n")
         file.write("\n")
 
         # Writing Treatments data
@@ -79,7 +94,7 @@ def generate_instance_file(
         )
         for treatment in treatments:
             file.write(
-                f"{treatment.id}; {treatment.num_participants}; {treatment.name}; {treatment.duration}; {treatment.resources}\n"
+                f"{treatment.id}; {treatment.num_participants}; {treatment.name}; Duration(hours={round_down_fraction(treatment.duration.hours,time_intervals)}); {treatment.resources}\n"
             )
         file.write("\n")
 
@@ -112,8 +127,8 @@ def generate_instance_file(
         for patient in patients:
             file.write(
                 f"{patient.id}; {patient.name}; {patient.treatments}; {patient.length_of_stay}; "
-                f"{patient.earliest_admission_date}; {patient.admitted_before_date}; {patient.already_admitted_date}; "
-                f"{patient.already_resource_loyal}; {patient.already_scheduled_treatments}\n"
+                f"DayHour(day={patient.earliest_admission_date.to_tuple()[0]},hour={round_down_fraction(patient.earliest_admission_date.to_tuple()[1],time_intervals)}); DayHour(day={patient.admitted_before_date.to_tuple()[0]},hour={round_down_fraction(patient.admitted_before_date.to_tuple()[1],time_intervals)}); {patient.already_admitted}; "
+                f"{patient.already_resource_loyal}\n"
             )
 
 

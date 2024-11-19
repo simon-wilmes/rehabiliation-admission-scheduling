@@ -1,3 +1,4 @@
+import math
 import random
 from typing import Tuple
 from typing import List, Tuple, Set, Dict, Optional
@@ -23,7 +24,6 @@ def random_duration(
         hours_range = (hours_range, hours_range)
     if isinstance(minutes_range, int):
         minutes_range = (minutes_range, minutes_range)
-
     # Generate random values within the provided ranges
     hours = random.randint(*hours_range)
     minutes = random.randint(*minutes_range)
@@ -60,16 +60,16 @@ def random_patient(
     name: str,
     treatments: Dict[Treatment, int],
     length_of_stay: int,
-    earliest_admission: DayHour,
-    latest_admission: DayHour,
+    earliest_admission_date: DayHour,
+    admitted_before_date: DayHour,
     already_admitted: bool,
 ) -> Patient:
     return Patient(
         pid,
         treatments,
         length_of_stay,
-        earliest_admission,
-        latest_admission,
+        earliest_admission_date,
+        admitted_before_date,
         already_admitted,
         name=name,
     )
@@ -81,9 +81,11 @@ def generate_random_instance(
     workday_start_range: Tuple[int, int],
     workday_end_range: Tuple[int, int],
     day_start: int,
+    time_interval_length: int,
     rolling_window_length_range: Tuple[int, int],
     rolling_windows_days: List[Tuple[int, int]],
-    conflict_groups: List[Set[int]],
+    conflict_group_number_range: Tuple[int, int],
+    conflict_group_treatments_range: Tuple[int, int],
     resource_group_names: List[str],
     resource_names: List[str],
     treatment_names: List[str],
@@ -91,18 +93,31 @@ def generate_random_instance(
     num_resources: int,
     num_treatments: int,
     num_patients: int,
+    already_admitted_chance: float,
     resource_time_slot_range: Tuple[int, int],
     treatment_duration_range: Tuple[int, int],
+    treatment_capacity_range: Tuple[int, int],
     patient_length_of_stay_range: Tuple[int, int],
     admission_day_range: Tuple[int, int],
     admission_hour_range: Tuple[int, int],
+    needed_treatments_range: Tuple[int, int],
+    treatment_repetition_range: Tuple[int, int],
 ):
     # Generate general settings
     num_beds = random.randint(*num_beds_range)
     workday_start = random.randint(*workday_start_range)
     workday_end = random.randint(*workday_end_range)
     rolling_window_length = random.randint(*rolling_window_length_range)
+    time_intervals = time_interval_length / 60
 
+    # Generate Conflict Groups
+    conflict_groups = []
+    for i in range(random.randint(*conflict_group_number_range)):
+        conflict_groups.append(
+            random.sample(
+                range(num_treatments), random.randint(*conflict_group_treatments_range)
+            )
+        )
     # Generate Resource Groups
     resource_groups = [
         random_resource_group(i, name) for i, name in enumerate(resource_group_names)
@@ -135,13 +150,14 @@ def generate_random_instance(
     )[:num_treatments]
     for i, name in enumerate(treatment_name_cycle):
         duration = random_duration(*treatment_duration_range)
-        num_participants = random.randint(1, 5)
+        num_participants = random.randint(
+            treatment_capacity_range[0], treatment_capacity_range[1]
+        )
         resources_required = {
             random.choice(resource_groups): (
-                random.randint(1, 3),
+                random.randint(1, len(resource_group_names)),
                 bool(random.getrandbits(1)),
             )
-            for _ in range(random.randint(1, 3))
         }
         treatments.append(
             random_treatment(
@@ -159,22 +175,43 @@ def generate_random_instance(
         :num_patients
     ]
     for i, name in enumerate(patient_name_cycle):
+        treatment_list_temp = random.sample(
+            treatments,
+            random.randint(needed_treatments_range[0], needed_treatments_range[1]),
+        )
         treatments_needed = {
-            random.choice(treatments): random.randint(1, 3)
-            for _ in range(random.randint(1, 3))
+            treatment_list_temp[j]: random.randint(
+                treatment_repetition_range[0], treatment_repetition_range[1]
+            )
+            for j in range(len(treatment_list_temp))
         }
         length_of_stay = random.randint(*patient_length_of_stay_range)
-        earliest_admission = random_day_hour(admission_day_range, admission_hour_range)
-        latest_admission = random_day_hour(admission_day_range, admission_hour_range)
-        already_admitted = bool(random.getrandbits(1))
+        v1, v2 = random.sample(
+            range(list(admission_day_range)[0], list(admission_day_range)[1]), 2
+        )
+        earliest_admission_date_temp, admitted_before_date_temp = sorted([v1, v2])
+        earliest_admission_date = random_day_hour(
+            (earliest_admission_date_temp, earliest_admission_date_temp),
+            admission_hour_range,
+        )
+        admitted_before_date = random_day_hour(
+            (admitted_before_date_temp, admitted_before_date_temp), admission_hour_range
+        )
+        already_admitted = random.random() <= already_admitted_chance
+        if already_admitted == True:
+            earliest_admission_date = DayHour(day_start, workday_start, 0)
+            admitted_before_date = DayHour(day_start, workday_start, 0)
+            # already_admitted = random_day_hour(
+            #    (-length_of_stay, 0), (workday_start, workday_end)
+            # )
         patients.append(
             random_patient(
                 pid=i,
                 name=name,
                 treatments=treatments_needed,
                 length_of_stay=length_of_stay,
-                earliest_admission=earliest_admission,
-                latest_admission=latest_admission,
+                earliest_admission_date=earliest_admission_date,
+                admitted_before_date=admitted_before_date,
                 already_admitted=already_admitted,
             )
         )
@@ -186,6 +223,7 @@ def generate_random_instance(
         workday_start=workday_start,
         workday_end=workday_end,
         day_start=day_start,
+        time_intervals=time_intervals,
         rolling_window_length=rolling_window_length,
         rolling_windows_days=rolling_windows_days,
         conflict_groups=conflict_groups,
@@ -196,25 +234,86 @@ def generate_random_instance(
     )
 
 
-generate_random_instance(
-    file_path="data/inst001/instance_data.txt",
-    num_beds_range=(1, 5),
-    workday_start_range=(8, 10),
-    workday_end_range=(16, 18),
-    day_start=0,
-    rolling_window_length_range=(5, 10),
-    rolling_windows_days=[(0, 4)],
-    conflict_groups=[{0}],
-    resource_group_names=["Radiology", "ICU", "Lab"],
-    resource_names=["X-Ray", "CT Scanner", "Ultrasound", "Ventilator", "MRI"],
-    treatment_names=["Therapy A", "Therapy B", "Therapy C"],
-    patient_names=["Alice", "Bob", "Charlie", "Diana"],
-    num_resources=10,
-    num_treatments=5,
-    num_patients=20,
-    resource_time_slot_range=(1, 3),
-    treatment_duration_range=(1, 5),
-    patient_length_of_stay_range=(3, 10),
-    admission_day_range=(0, 10),
-    admission_hour_range=(8, 17),
-)
+instance_file_number = 3
+number_of_instances = 20
+num_patients = 20
+num_treatments = 5
+num_resources = 5
+for i in range(number_of_instances):
+    generate_random_instance(
+        file_path=f"data/inst{instance_file_number:03}/instance_data{i+1}.txt",
+        num_beds_range=(15, 15),
+        workday_start_range=(8, 8),
+        workday_end_range=(18, 18),
+        day_start=0,
+        time_interval_length=2,
+        rolling_window_length_range=(8, 8),
+        rolling_windows_days=[(0, 4)],
+        conflict_group_number_range=[0, 2],
+        conflict_group_treatments_range=[2, 3],
+        resource_group_names=["RG_1", "RG_2", "RG_3"],
+        resource_names=[f"R_{i}" for i in range(0, num_resources)],
+        treatment_names=[f"T_{i}" for i in range(0, num_treatments)],
+        patient_names=[f"P_{i}" for i in range(0, num_patients)],
+        num_resources=num_resources,
+        num_treatments=num_treatments,
+        num_patients=num_patients,
+        already_admitted_chance=1,
+        resource_time_slot_range=(1, 5),
+        treatment_duration_range=((1, 3), (0, 59)),
+        treatment_capacity_range=(1, 4),
+        patient_length_of_stay_range=(3, 10),
+        admission_day_range=(0, 10),
+        admission_hour_range=(8, 17),
+        needed_treatments_range=(2, 5),
+        treatment_repetition_range=(1, 5),
+    )
+
+'''
+def save_code_to_file(filepath: str):
+    code_text = """\
+instance_file_number = 2
+number_of_instances = 20
+num_patients = 10
+num_treatments = 5
+num_resources = 5
+for i in range(number_of_instances):
+    generate_random_instance(
+        file_path=f"data/inst{instance_file_number:03}/instance_data{i+1}.txt",
+        num_beds_range=(10, 10),
+        workday_start_range=(8, 8),
+        workday_end_range=(18, 18),
+        day_start=0,
+        time_interval_length=15,
+        rolling_window_length_range=(8, 8),
+        rolling_windows_days=[(0, 4)],
+        conflict_group_number_range=[0, 1],
+        conflict_group_treatments_range=[2, 3],
+        resource_group_names=["RG_1", "RG_2", "RG_3"],
+        resource_names=[f"R_{i}" for i in range(0, num_resources)],
+        treatment_names=[f"T_{i}" for i in range(0, num_treatments)],
+        patient_names=[f"P_{i}" for i in range(0, num_patients)],
+        num_resources=num_resources,
+        num_treatments=num_treatments,
+        num_patients=num_patients,
+        already_admitted_chance=1,
+        resource_time_slot_range=(1, 5),
+        treatment_duration_range=((1, 3), (0, 59)),
+        treatment_capacity_range=(1, 4),
+        patient_length_of_stay_range=(3, 10),
+        admission_day_range=(0, 10),
+        admission_hour_range=(8, 17),
+        needed_treatments_range=(2, 5),
+        treatment_repetition_range=(1, 5),
+    )
+"""
+
+    # Write the code_text to a file
+    with open("data/instance details/inst{instance_file_number:03}", "w") as file:
+        file.write(code_text)
+        # further details:
+        file.write(" ")
+
+
+save_code_to_file("parameters_reference.txt")
+'''
