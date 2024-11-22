@@ -11,6 +11,7 @@ from src.resource import Resource, ResourceGroup
 from src.time import DayHour
 from pprint import pprint as pp
 from collections import defaultdict
+from time import time
 
 
 class Solver(ABC):
@@ -55,12 +56,25 @@ class Solver(ABC):
     def add_conflict_groups(self):
         return self.use_conflict_groups  # type: ignore
 
-    @abstractmethod
     def solve_model(self) -> Solution:
+        self.time_solve_model = time()
+        solution = self._solve_model()
+        self.time_solve_model = time() - self.time_solve_model
+        logger.info("Time to solve model: %s", self.time_solve_model)
+        return solution
+
+    def create_model(self) -> None:
+        self.time_create_model = time()
+        self._create_model()
+        self.time_create_model = time() - self.time_create_model
+        logger.info("Time to create model: %s", self.time_create_model)
+
+    @abstractmethod
+    def _solve_model(self) -> Solution:
         pass
 
     @abstractmethod
-    def create_model(self) -> None:
+    def _create_model(self) -> None:
         pass
 
     def _create_parameter_sets(self):
@@ -154,11 +168,22 @@ class Solver(ABC):
             for m in self.M_p[p]:
                 self.treatment_count[m] += p.treatments[m]
 
+        max_treatment_people_specific = defaultdict(int)
+        for m in self.M:
+            for p in self.P:
+                if m in self.M_p[p]:
+
+                    max_treatment_people_specific[m] = max(
+                        p.treatments[m] - p.already_scheduled_treatments[m],
+                        max_treatment_people_specific[m],
+                    )
+
         self.number_treatments_offered = {
-            m: ceil(
-                sum(p.treatments[m] for p in self.P if m in self.M_p[p])
-                / self.k_m[m]
-                * self.extra_treatments_factor
+            m: max(
+                ceil(
+                    self.treatment_count[m] / self.k_m[m] * self.extra_treatments_factor
+                ),
+                max_treatment_people_specific[m],
             )
             for m in self.M
         }

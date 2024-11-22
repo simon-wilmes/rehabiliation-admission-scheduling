@@ -212,7 +212,7 @@ def create_instance_from_file(file_path: str) -> "Instance":
                     parsed_data["already_resource_loyal"] = parsed_resource_loyal
                     # Replace TID in already_scheduled_treatments
                     already_scheduled_treatments: list[tuple[TID, int]] = (
-                        parsed_data.get("already_scheduled_treatments")  # type: ignore
+                        parsed_data.get("already_scheduled_treatments", [])  # type: ignore
                     )
                     parsed_data["already_scheduled_treatments"] = [
                         (treatments[tid], count)

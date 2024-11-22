@@ -41,12 +41,7 @@ class CPSolver(Solver):
 
         super().__init__(instance, **kwargs)
 
-    def create_model(self):
-
-        self._create_model()
-        self._set_optimization_goal()
-
-    def solve_model(self):
+    def _solve_model(self):
         solver = cp_model.CpSolver()
         solver.parameters.num_search_workers = (
             self.number_of_threads
@@ -66,6 +61,7 @@ class CPSolver(Solver):
 
         self.model = cp_model.CpModel()
         self._create_constraints()
+        self._set_optimization_goal()
 
     def _create_parameter_sets(self):
         super()._create_parameter_sets()
@@ -256,6 +252,7 @@ class CPSolver(Solver):
         for p in self.P:
             for m in self.M_p[p]:
                 patient_vars = self.patient_vars[p][m]
+
                 self.model.add(
                     cp_model.LinearExpr.Sum(
                         [
@@ -298,12 +295,14 @@ class CPSolver(Solver):
             # If the patient is already admitted, fix the admission day
 
             if p.already_admitted:
+                """TESTED"""
                 self.model.add(admission_day == 0)
+                pass
 
         # Ensure that admission is in the correct range
         for p in self.P:
             admission_day = self.admission_vars[p]
-
+            """TESTED"""
             self.model.add(admission_day >= p.earliest_admission_date.day)
             self.model.add(admission_day < p.admitted_before_date.day)
 
@@ -314,6 +313,7 @@ class CPSolver(Solver):
                 patient_treatment_assignment = vars["patient_treatment_assignment"]
                 for rep in interval_var:
                     # Treatment must start after admission
+                    """TESTED"""
                     self.model.add(
                         interval_var[rep].start_expr()
                         >= admission_day * self.num_time_slots
@@ -335,7 +335,7 @@ class CPSolver(Solver):
 
             bed_changes_time.append(admission_day + self.l_p[p])
             bed_changes_amount.append(-1)
-
+        """ TESTED """
         self.model.add_reservoir_constraint(
             times=bed_changes_time,
             level_changes=bed_changes_amount,
@@ -420,12 +420,13 @@ class CPSolver(Solver):
             for p in self.P:
                 for conflict_group in self.instance.conflict_groups:
                     conflicting_vars = []
-                    for (p2, m, r), vars in self.patient_vars.items():
-                        if p2 is not p:
-                            continue
-                        if m in conflict_group:
-                            interval, start_slot, resources = vars.values()
-                            conflicting_vars.append(start_slot)
+                    for p2, vars in self.patient_vars.items():
+                        for m2, rep in vars.items():
+                            if p2 is not p:
+                                continue
+                            if m in conflict_group:
+                                interval, start_slot, resources = vars.values()
+                                conflicting_vars.append(start_slot)
 
                     all_diff_vars = []
                     for var in conflicting_vars:

@@ -54,7 +54,7 @@ conflict_groups: []
 # "length_of_stay" is of type int (total length of stay in days)
 # "earliest_admission_date" is of type DayHour (earliest possible admission date)
 # "admitted_before_date" is of type DayHour (latest possible admission date)
-# "already_admitted" is of type DayHour and refers to the day when the patient was admitted is None if not admitted (most of the time <0, as in the past admitted)
+# "already_admitted" is of type bool and is true if the patient has been admitted in the past and therefore should be admitted in the model on the first day
 # "already_resource_loyal" is a dictionary where the keys are (tuples) of treatment TID and RGID and values is a the list of RID that are loyal, this means that the list must have length of required resources of RGID for treatment TID
 # "already_scheduled_treatments" is a list of tuples where each tuple contains a treatment ID (int) and the number of times it was already scheduled in the past
 

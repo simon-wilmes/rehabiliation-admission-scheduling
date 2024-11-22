@@ -124,7 +124,7 @@ def test_infeasible_solution(solver: Type[Solver], setup_instance):
     )
 
     solver_instance = solver(instance)
-    solver_instance.create_model()
+    solver_instance._create_model()
     solution = solver_instance.solve_model()
     assert solution is NO_SOLUTION_FOUND
 
@@ -138,6 +138,6 @@ def test_infeasible_solution(solver: Type[Solver], setup_instance):
     )
 
     solver_instance = solver(instance)
-    solver_instance.create_model()
+    solver_instance._create_model()
     solution = solver_instance.solve_model()
     assert solution is not NO_SOLUTION_FOUND

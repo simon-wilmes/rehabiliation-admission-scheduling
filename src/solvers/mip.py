@@ -33,7 +33,7 @@ class MIPSolver(Solver):
                 )
         super().__init__(instance, **kwargs)
 
-    def create_model(self):
+    def _create_model(self):
         self._create_parameter_sets()
         # Create the model
         model = gp.Model("PatientAdmissionScheduling")
@@ -45,7 +45,7 @@ class MIPSolver(Solver):
         self.vars = vars
         self.model = model
 
-    def solve_model(self) -> Solution | int:
+    def _solve_model(self) -> Solution | int:
         self.model.optimize()
         if self.model.status == gp.GRB.OPTIMAL:
             logger.debug("Optimal solution found.")
@@ -53,6 +53,19 @@ class MIPSolver(Solver):
             return solution
         else:
             logger.error("No optimal solution found.")
+            # Compute IIS
+            self.model.computeIIS()
+
+            # Print IIS
+            logger.debug("\nIIS Constraints:")
+            for constr in self.model.getConstrs():
+                if constr.IISConstr:
+                    logger.debug(f"Constraint {constr.ConstrName} is in the IIS")
+
+            logger.debug("\nIIS Variables:")
+            for var in self.model.getVars():
+                if var.IISLB or var.IISUB:
+                    logger.debug(f"Variable {var.VarName} is in the IIS with bounds")
             return NO_SOLUTION_FOUND
 
     def _set_optimization_goal(
@@ -337,7 +350,8 @@ class MIPSolver(Solver):
                     for f1, f2 in product(self.fhat[fhat], self.fhat[fhat]):
                         if f1 == f2:
                             continue
-                        for d, t in product(self.D, self.T):
+                        D_p1p2 = set(self.D_p[p1]) & set(self.D_p[p2])
+                        for d, t in product(D_p1p2, self.T):
                             model.addConstr(
                                 z_pmfdt[p1, m, f1, d, t]
                                 >= z_pmfdt[p2, m, f1, d, t]
@@ -472,6 +486,9 @@ class MIPSolver(Solver):
             instance=self.instance,
             schedule=appointments,
             patients_arrival=patients_arrival,
+            test_even_distribution=self.add_even_distribution(),
+            test_conflict_groups=self.add_conflict_groups(),
+            test_resource_loyalty=self.add_resource_loyal(),
         )
 
         return solution
