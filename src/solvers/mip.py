@@ -5,21 +5,39 @@ from math import ceil
 from numpy import arange
 from src.logging import logger, print
 from itertools import product
-from src.solution import Appointment, Solution
+from src.solution import Appointment, Solution, NO_SOLUTION_FOUND
 from src.time import DayHour
 from src.patients import Patient
-from src.solvers.solvers import Solver
+from src.solvers.solver import Solver
+
+PRINT_VARIABLES = False
 
 
 class MIPSolver(Solver):
-    def __init__(self, instance: Instance):
-        super().__init__(instance)
+    SOLVER_OPTIONS = Solver.BASE_SOLVER_OPTIONS.copy()
+    SOLVER_OPTIONS.update([])  # Add any additional options here
+
+    SOLVER_DEFAULT_OPTIONS = {}
+
+    def __init__(self, instance: Instance, **kwargs):
+        logger.debug(f"Setting options: {self.__class__.__name__}")
+        for key in self.__class__.SOLVER_DEFAULT_OPTIONS:
+
+            if key in kwargs:
+                setattr(self, key, kwargs[key])
+                logger.debug(f" ---- {key} to {kwargs[key]}")
+            else:
+                setattr(self, key, self.__class__.SOLVER_DEFAULT_OPTIONS[key])
+                logger.debug(
+                    f" ---- {key} to { self.__class__.SOLVER_DEFAULT_OPTIONS[key]} (default)"
+                )
+        super().__init__(instance, **kwargs)
 
     def create_model(self):
         self._create_parameter_sets()
         # Create the model
         model = gp.Model("PatientAdmissionScheduling")
-        model.setParam("Threads", 12)
+        model.setParam("Threads", self.number_of_threads)
         vars = self._create_variables(model)
         self._create_constraints(model, *vars)
         self._set_optimization_goal(model, *vars)
@@ -27,25 +45,26 @@ class MIPSolver(Solver):
         self.vars = vars
         self.model = model
 
-    def solve_model(self) -> Solution:
+    def solve_model(self) -> Solution | int:
         self.model.optimize()
         if self.model.status == gp.GRB.OPTIMAL:
-            logger.info("Optimal solution found.")
+            logger.debug("Optimal solution found.")
             solution = self._extract_solution()
-
+            return solution
         else:
             logger.error("No optimal solution found.")
-            return
+            return NO_SOLUTION_FOUND
 
     def _set_optimization_goal(
         self, model: gp.Model, x_pmdt, z_pmfdt, u_mfdt, v_pmf, a_pd
     ):
         objective = gp.quicksum(
-            (d - p.earliest_admission_date.day) * a_pd[p, d]
+            self.w_d[d] * x_pmdt[p, m, d, t]
             for p in self.P
-            for d in self.D_p[p]
+            for m in self.M_p[p]
+            for d, t in product(self.D_p[p], self.T)
         )
-        model.setObjective(objective, gp.GRB.MINIMIZE)
+        model.setObjective(objective, gp.GRB.MAXIMIZE)
 
     def _create_parameter_sets(self):
         # Define any additional sets or mappings needed for the model
@@ -115,7 +134,7 @@ class MIPSolver(Solver):
             for m in self.M_p[p]:
                 model.addConstr(
                     gp.quicksum(x_pmdt[p, m, d, t] for d in self.D_p[p] for t in self.T)
-                    == self.r_pm[p, m],
+                    == self.lr_pm[p, m],
                     name=f"constraint_p1_p{p.id}_m{m.id}",
                 )
 
@@ -238,49 +257,56 @@ class MIPSolver(Solver):
                                 name=f"constraint_a1_m{m.id}_f{f.id}_d{d}_t{t}",
                             )
 
-        # Constraint (a2-help): Resource loyalty linking
-        for p in self.P:
-            for m in self.M_p[p]:
-                for fhat in self.Fhat_m[m]:
-                    for f in self.fhat[fhat]:
-                        for d in self.D_p[p]:
-                            for t in self.T:
-                                model.addConstr(
-                                    z_pmfdt[p, m, f, d, t] <= v_pmf[p, m, f],
-                                    name=f"constraint_a2_help_p{p.id}_m{m.id}_f{f.id}_d{d}_t{t}",
-                                )
-
-        # Constraint (a2): Resource loyalty constraint
-        for p in self.P:
-            for m in self.M_p[p]:
-                for fhat in self.Lhat_m[m]:
-                    model.addConstr(
-                        gp.quicksum(v_pmf[p, m, f] for f in self.fhat[fhat])
-                        <= self.n_fhatm[fhat, m],
-                        name=f"constraint_a2_p{p.id}_m{m.id}_fhat{fhat.id}",
-                    )
-
-        # Constraint (a4): Even distribution of treatments over rolling windows
-        for d in self.R:
+        if self.add_resource_loyal():
+            # Constraint (a2-help): Resource loyalty linking
             for p in self.P:
                 for m in self.M_p[p]:
-                    num_windows = ceil(len(self.D_p[p]) / self.rw)
-                    for w in range(num_windows):
-                        window_start = self.D_p[p][0] + w * self.rw
-                        window_end = min(window_start + self.rw - 1, self.D_p[p][-1])
-                        window_days = [
-                            d for d in self.D_p[p] if window_start <= d <= window_end
-                        ]
-                        expr = gp.quicksum(
-                            x_pmdt[p, m, d, t]
-                            for d in window_days
-                            for t in self.T
-                            if (p, m, d, t) in x_pmdt
-                        )
+                    for fhat in self.Fhat_m[m]:
+                        for f in self.fhat[fhat]:
+                            for d in self.D_p[p]:
+                                for t in self.T:
+                                    model.addConstr(
+                                        z_pmfdt[p, m, f, d, t] <= v_pmf[p, m, f],
+                                        name=f"constraint_a2_help_p{p.id}_m{m.id}_f{f.id}_d{d}_t{t}",
+                                    )
+
+        # Constraint (a2): Resource loyalty constraint
+        if self.add_resource_loyal():
+            for p in self.P:
+                for m in self.M_p[p]:
+                    for fhat in self.Lhat_m[m]:
                         model.addConstr(
-                            expr <= ceil(self.r_pm[p, m] / num_windows),
-                            name=f"constraint_a4_p{p.id}_m{m.id}_w{w}",
+                            gp.quicksum(v_pmf[p, m, f] for f in self.fhat[fhat])
+                            <= self.n_fhatm[fhat, m],
+                            name=f"constraint_a2_p{p.id}_m{m.id}_fhat{fhat.id}",
                         )
+
+        # Constraint (a4): Even distribution of treatments over rolling windows
+        if self.add_even_distribution():
+            for d in self.R:
+                for p in self.P:
+                    for m in self.M_p[p]:
+                        num_windows = ceil(len(self.D_p[p]) / self.rw)
+                        for w in range(num_windows):
+                            window_start = self.D_p[p][0] + w * self.rw
+                            window_end = min(
+                                window_start + self.rw - 1, self.D_p[p][-1]
+                            )
+                            window_days = [
+                                d
+                                for d in self.D_p[p]
+                                if window_start <= d <= window_end
+                            ]
+                            expr = gp.quicksum(
+                                x_pmdt[p, m, d, t]
+                                for d in window_days
+                                for t in self.T
+                                if (p, m, d, t) in x_pmdt
+                            )
+                            model.addConstr(
+                                expr <= ceil(self.r_pm[p, m] / num_windows),
+                                name=f"constraint_a4_p{p.id}_m{m.id}_w{w}",
+                            )
 
         # Constraint: Make sure that already admitted patients are admitted on the first day of the planning horizon
         for p in self.P:
@@ -291,14 +317,34 @@ class MIPSolver(Solver):
 
         # Constraint: Make sure that already_resource_loyal is respected
         # Constraint: Ensure already resource loyal assignments are set to 1
-        for p in self.P:
-            if hasattr(p, "already_resource_loyal"):
-                for (m, fhat), resources in p.already_resource_loyal.items():
-                    for f in resources:
-                        model.addConstr(
-                            v_pmf[p, m, f] == 1,
-                            name=f"constraint_loyal_resource_p{p.id}_m{m.id}_f{f.id}",
-                        )
+        if self.add_resource_loyal():
+            for p in self.P:
+                if hasattr(p, "already_resource_loyal"):
+                    for (m, fhat), resources in p.already_resource_loyal.items():
+                        for f in resources:
+                            model.addConstr(
+                                v_pmf[p, m, f] == 1,
+                                name=f"constraint_loyal_resource_p{p.id}_m{m.id}_f{f.id}",
+                            )
+
+        # Constraint: Group people into sessions, enforce transitive property amongs resource usage
+        for p1, p2 in product(self.P, self.P):
+            if p1 == p2:
+                continue
+            # Find iterate over common treatments
+            for m in set(self.M_p[p1]) & set(self.M_p[p2]):
+                for fhat in self.Fhat_m[m]:
+                    for f1, f2 in product(self.fhat[fhat], self.fhat[fhat]):
+                        if f1 == f2:
+                            continue
+                        for d, t in product(self.D, self.T):
+                            model.addConstr(
+                                z_pmfdt[p1, m, f1, d, t]
+                                >= z_pmfdt[p2, m, f1, d, t]
+                                + z_pmfdt[p1, m, f2, d, t]
+                                + z_pmfdt[p2, m, f2, d, t]
+                                - 2
+                            )
 
     def _extract_solution(self):
         """
@@ -311,36 +357,33 @@ class MIPSolver(Solver):
 
         x_pmdt, z_pmfdt, u_mfdt, v_pmf, a_pd = self.vars
         # Print out all variables that are one
+        if PRINT_VARIABLES:
+            for key in x_pmdt:
+                if x_pmdt[key].X > 0.5:  # type: ignore
+                    logger.debug(f"x_pmdt{key} = {x_pmdt[key].X}")  # type: ignore
 
-        for key in x_pmdt:
-            if x_pmdt[key].X > 0.5:
-                print(f"x_pmdt{key} = {x_pmdt[key].X}")
+            for key in z_pmfdt:
+                if z_pmfdt[key].X > 0.5:  # type: ignore
+                    logger.debug(f"z_pmfdt{key} = {z_pmfdt[key].X}")  # type: ignore
 
-        for key in z_pmfdt:
-            if z_pmfdt[key].X > 0.5:
-                print(f"z_pmfdt{key} = {z_pmfdt[key].X}")
+            for key in u_mfdt:
+                if u_mfdt[key].X > 0.5:  # type: ignore
+                    logger.debug(f"u_mfdt{key} = {u_mfdt[key].X}")  # type: ignore
 
-        for key in u_mfdt:
-            if u_mfdt[key].X > 0.5:
-                print(f"u_mfdt{key} = {u_mfdt[key].X}")
+            for key in v_pmf:
+                if v_pmf[key].X > 0.5:  # type: ignore
+                    logger.debug(f"v_pmf{key} = {v_pmf[key].X}")  # type: ignore
 
-        for key in v_pmf:
-            if v_pmf[key].X > 0.5:
-                print(f"v_pmf{key} = {v_pmf[key].X}")
-
-        for key in a_pd:
-            if a_pd[key].X > 0.5:
-                print(f"a_pd{key} = {a_pd[key].X}")
+            for key in a_pd:
+                if a_pd[key].X > 0.5:  # type: ignore
+                    logger.debug(f"a_pd{key} = {a_pd[key].X}")  # type: ignore
 
         # appointments_dict: key=(m, d, t, frozenset of resource IDs), value=list of patients
         appointments_dict = defaultdict(list)
 
         # Collect scheduled treatments and group patients based on resources used
-        for (p, m, d, t), var in x_pmdt.items():
+        for (p, m, d, t), var in x_pmdt.items():  # type: ignore
             if var.X > 0.5:
-                logger.debug(
-                    f"Patient {p.id} scheduled for treatment {m.id} at ({d}, {t})."
-                )
                 # Determine the resources used by patient p for treatment m at (d, t)
                 resources_used = defaultdict(
                     list
@@ -355,7 +398,7 @@ class MIPSolver(Solver):
                         if f.resource_group != fhat:
                             continue
                         z_key = (p, m, f, d, t)
-                        if z_key in z_pmfdt and z_pmfdt[z_key].X > 0.5:
+                        if z_key in z_pmfdt and z_pmfdt[z_key].X > 0.5:  # type: ignore
                             resources_in_group.append(f)
 
                     # Sort resources to ensure consistent ordering
@@ -375,7 +418,7 @@ class MIPSolver(Solver):
                 resource_ids = []
                 for res_list in resources_used.values():
                     resource_ids.extend([res.id for res in res_list])
-                resource_ids.sort()
+
                 appointment_key = (m, d, t, frozenset(resource_ids))
 
                 # Add patient to the appropriate appointment group
@@ -420,7 +463,7 @@ class MIPSolver(Solver):
         patients_arrival: dict[Patient, DayHour] = {}
         for p in self.P:
             for d in self.D_p[p]:
-                if a_pd[p, d].X > 0.5:
+                if a_pd[p, d].X > 0.5:  # type: ignore
                     patients_arrival[p] = DayHour(
                         day=d, hour=self.instance.workday_start.hour
                     )

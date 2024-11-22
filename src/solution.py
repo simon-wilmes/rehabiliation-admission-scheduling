@@ -6,6 +6,9 @@ from src.time import DayHour
 from src.logging import logger
 import math
 
+# Define the return code for the solver when no solution is found
+NO_SOLUTION_FOUND = 0
+
 
 class Appointment:
     def __init__(
@@ -66,28 +69,50 @@ class Solution:
         instance: Instance,
         schedule: list[Appointment],
         patients_arrival: dict[Patient, DayHour],
-        ignored_constraints: set[str] = set(),
+        test_even_distribution=True,
+        test_conflict_groups=True,
+        test_resource_loyalty=True,
     ):
         self.instance = instance
         self.schedule = schedule  # List of Appointments
         self.patients_arrival = patients_arrival  # Dict[Patient, DayHour]
-        self.ignored_constraints = ignored_constraints
+        self.test_even_distribution = test_even_distribution
+        self.test_conflict_groups = test_conflict_groups
+        self.test_resource_loyalty = test_resource_loyalty
+        # Log the schedule for all patients and treatments
+        for patients in self.patients_arrival:
+            logger.debug(
+                f"Patient {patients.id} is admitted at day {self.patients_arrival[patients].day}."
+            )
+
+        for appointment in self.schedule:
+            resources = []
+            for resource_group, resource_list in appointment.resources.items():
+                resources.extend(resource_list)
+            logger.debug(
+                f"Patients {list(patient.id for patient in appointment.patients)} have treatment {appointment.treatment.id} "
+                f"starting at day {appointment.start_date.day}, hour {appointment.start_date.hour} using resources {[f.id for f in resources]}."
+            )
 
         # Perform the checks
         self._check_constraints()
-        logger.info("Solution is valid.")
+        logger.debug("Solution is valid.")
 
     def _check_constraints(self):
         self._check_patient_admission()
         self._check_treatment_assignment()
         self._check_no_overlapping_appointments()
         self._check_resource_availability_and_uniqueness()
-        self._check_resource_loyalty()
+        if self.test_resource_loyalty:
+            self._check_resource_loyalty()
         # self._check_max_patients_per_treatment()
         self._check_bed_capacity()
         self._check_total_treatments_scheduled()
-        self._check_even_scheduling()
-        self._check_conflict_groups()
+
+        if self.test_even_distribution:
+            self._check_even_scheduling()
+        if self.test_conflict_groups:
+            self._check_conflict_groups()
 
     def _check_patient_admission(self):
         """
@@ -289,24 +314,28 @@ class Solution:
                 if key not in scheduled_treatments:
                     scheduled_treatments[key] = 0
                 scheduled_treatments[key] += 1
-        # Now check against r_pm
+        # Now check against lr_pm which is the total repetitions left
         for patient in self.instance.patients.values():
             for treatment in patient.treatments.keys():
-                r_pm = patient.treatments[treatment]  # Total repetitions left
+                try:
+                    lr_pm = (
+                        patient.treatments[treatment]
+                        - patient.already_scheduled_treatments[treatment]
+                    )  # Total repetitions left
+                except KeyError:
+                    pass
                 key = (patient.id, treatment.id)
                 scheduled_count = scheduled_treatments.get(key, 0)
-                if scheduled_count != r_pm:
+                if scheduled_count != lr_pm:
                     raise ValueError(
                         f"Patient {patient.id} has {scheduled_count} scheduled treatments for treatment {treatment.id}, "
-                        f"but needs {r_pm} repetitions."
+                        f"but needs {lr_pm} out of the initial {patient.treatments[treatment]} repetitions."
                     )
 
     def _check_conflict_groups(self):
         """
         Ensure that for any patient, treatments that are in the same conflict group are not scheduled on the same day.
         """
-        if "conflict_groups" in self.ignored_constraints:
-            return
 
         # Build a mapping of patient to a dict of day to set of treatments
         patient_day_treatments = {}  # patient -> day -> set(treatments)
@@ -338,8 +367,6 @@ class Solution:
         is less than or equal to the average number of treatments that this patient should have received
         during this time frame considering the total treatments and the patient's length of stay, rounded up.
         """
-        if "even_scheduling" in self.ignored_constraints:
-            return
 
         rolling_window_checks = zip(
             self.instance.rolling_window_days,
