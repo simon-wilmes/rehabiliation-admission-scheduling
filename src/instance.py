@@ -20,28 +20,26 @@ class Instance:
         patients: dict[PID, Patient],
     ):
         self.beds_capacity = instance_data["num_beds"]
-        self.conflict_groups: list[set[Treatment]] = instance_data.get(
-            "conflict_groups", []
-        )
+        conflict_groups: list[set[TID]] = instance_data.get("conflict_groups", [])
         # replace tid with treatment object
         self.conflict_groups = [
             set(treatments[tid] for tid in conflict_group)
-            for conflict_group in self.conflict_groups
+            for conflict_group in conflict_groups
         ]
 
         self.workday_start: DayHour = (
             instance_data["workday_start"]
             if "workday_start" in instance_data
-            else DayHour(hour=8, minute=0)
+            else DayHour(hour=8, minutes=0)
         )
         self.workday_end = (
             instance_data["workday_end"]
             if "workday_end" in instance_data
-            else DayHour(hour=17, minute=0)
+            else DayHour(hour=17, minutes=0)
         )
         self.rolling_window_length: int = instance_data.get("rolling_window_length", 7)
         self.rolling_window_days: list[int] = instance_data.get(
-            "rolling_windows_days", [(0, 5, 10, 15, 20)]
+            "rolling_windows_days", [0, 5, 10, 15, 20]
         )
         self.time_slot_length: Duration = instance_data.get(
             "time_slot_length", Duration(0, 15)
@@ -134,17 +132,29 @@ def create_instance_from_file(file_path: str) -> "Instance":
                     headers = []
             elif current_section == "INSTANCE" and current_section == section:
                 # Parse num_beds
+                key, value = line.split(":", 1)
+                value = value.strip()
+
                 logger.debug(f"ADD {current_section} DATA")
-                if line.startswith("num_beds:"):
-                    instance_data["num_beds"] = int(line.split(":", 1)[1].strip())
-                if line.startswith("workday_start:"):
-                    instance_data["workday_start"] = DayHour(
-                        hour=float(line.split(":", 1)[1].strip())
-                    )
-                if line.startswith("workday_end:"):
-                    instance_data["workday_end"] = DayHour(
-                        hour=float(line.split(":", 1)[1].strip())
-                    )
+                match key:
+                    case "num_beds":
+                        instance_data["num_beds"] = int(value)
+                    case "workday_start":
+                        instance_data["workday_start"] = DayHour(hour=float(value))
+                    case "workday_end":
+                        instance_data["workday_end"] = DayHour(hour=float(value))
+                    case "rolling_window_length":
+                        instance_data["rolling_window_length"] = int(value)
+                    case "rolling_window_days":
+                        instance_data["rolling_window_days"] = ast.literal_eval(value)
+                    case "time_slot_length":
+                        instance_data["time_slot_length"] = float(value)
+                    case "conflict_groups":
+                        instance_data["conflict_groups"] = ast.literal_eval(value)
+                    case "day_start":
+                        instance_data["day_start"] = int(value)
+                    case _:
+                        logger.warning(f"Unknown key {key} in INSTANCE section")
 
             elif current_section and headers:
                 values = [v.strip() for v in line.split(";")]
@@ -176,12 +186,13 @@ def create_instance_from_file(file_path: str) -> "Instance":
                     }
 
                     resources_required = parsed_data["resources"]
+                    assert type(resources_required) == dict
                     treatment_resources = {}
                     for rgid_key, (count, required) in resources_required.items():
                         rgid = int(rgid_key)
                         treatment_resources[resource_groups[rgid]] = (count, required)
                     parsed_data["resources"] = treatment_resources
-                    treatment = Treatment(**parsed_data)
+                    treatment = Treatment(**parsed_data)  # type: ignore
 
                     treatments[parsed_data["tid"]] = treatment
                 elif current_section == "PATIENTS" and current_section == section:
@@ -190,19 +201,31 @@ def create_instance_from_file(file_path: str) -> "Instance":
                         key: parsing_parameter(value) for key, value in data.items()
                     }
 
+                    # Replace TID in already_resource_loyal
                     resource_loyal_dict = parsed_data.get("already_resource_loyal")
                     parsed_resource_loyal = {}
-                    for (tid, rgid), rid_list in resource_loyal_dict.items():
+                    for (tid, rgid), rid_list in resource_loyal_dict.items():  # type: ignore
                         parsed_resource_loyal[
                             (treatments[tid], resource_groups[rgid])
                         ] = [resources[rid] for rid in rid_list]
 
                     parsed_data["already_resource_loyal"] = parsed_resource_loyal
+                    # Replace TID in already_scheduled_treatments
+                    already_scheduled_treatments: list[tuple[TID, int]] = (
+                        parsed_data.get("already_scheduled_treatments")  # type: ignore
+                    )
+                    parsed_data["already_scheduled_treatments"] = [
+                        (treatments[tid], count)
+                        for tid, count in already_scheduled_treatments
+                    ]
+
                     parsed_data["treatments"] = {
                         treatments[tid]: count
-                        for tid, count in parsed_data["treatments"].items()
+                        for tid, count in parsed_data[
+                            "treatments"
+                        ].items()  # type: ignore
                     }
-                    patient = Patient(**parsed_data)
+                    patient = Patient(**parsed_data)  # type: ignore
                     patients[parsed_data["pid"]] = patient
                 else:
                     # Not in the correct section

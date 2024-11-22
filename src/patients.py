@@ -1,6 +1,7 @@
 from src.treatments import Treatment
 from src.time import DayHour, Duration
 from src.resource import Resource, ResourceGroup
+from collections import defaultdict
 
 
 class Patient:
@@ -15,7 +16,8 @@ class Patient:
         already_admitted: bool = False,
         already_resource_loyal: dict[
             tuple[Treatment, ResourceGroup], list[Resource]
-        ] = None,
+        ] = dict(),
+        already_scheduled_treatments: list[tuple[Treatment, int]] = list(),
         name: str = "",
         **kwargs,
     ):
@@ -28,6 +30,9 @@ class Patient:
         self.admitted_before_date = admitted_before_date
         self.already_admitted = already_admitted
         self.already_resource_loyal = already_resource_loyal
+        self.already_scheduled_treatments = defaultdict(
+            int, {m: v for m, v in already_scheduled_treatments}
+        )
         self.treatments = treatments
         self.name = name
 
