@@ -8,17 +8,30 @@ from itertools import product
 from src.solution import Appointment, Solution, NO_SOLUTION_FOUND
 from src.time import DayHour
 from src.patients import Patient
-from src.solvers.solvers import Solver
+from src.solvers.solver import Solver
 
 PRINT_VARIABLES = False
 
 
 class MIPSolver(Solver):
+    SOLVER_OPTIONS = Solver.BASE_SOLVER_OPTIONS.copy()
+    SOLVER_OPTIONS.update([])  # Add any additional options here
 
-    def __init__(
-        self, instance: Instance, constraints_ignore: set[str] = set(), **kwargs
-    ):
-        super().__init__(instance, constraints_ignore, **kwargs)
+    SOLVER_DEFAULT_OPTIONS = {}
+
+    def __init__(self, instance: Instance, **kwargs):
+        logger.debug(f"Setting options: {self.__class__.__name__}")
+        for key in self.__class__.SOLVER_DEFAULT_OPTIONS:
+
+            if key in kwargs:
+                setattr(self, key, kwargs[key])
+                logger.debug(f" ---- {key} to {kwargs[key]}")
+            else:
+                setattr(self, key, self.__class__.SOLVER_DEFAULT_OPTIONS[key])
+                logger.debug(
+                    f" ---- {key} to { self.__class__.SOLVER_DEFAULT_OPTIONS[key]} (default)"
+                )
+        super().__init__(instance, **kwargs)
 
     def create_model(self):
         self._create_parameter_sets()
@@ -35,7 +48,7 @@ class MIPSolver(Solver):
     def solve_model(self) -> Solution | int:
         self.model.optimize()
         if self.model.status == gp.GRB.OPTIMAL:
-            logger.info("Optimal solution found.")
+            logger.debug("Optimal solution found.")
             solution = self._extract_solution()
             return solution
         else:
@@ -46,11 +59,12 @@ class MIPSolver(Solver):
         self, model: gp.Model, x_pmdt, z_pmfdt, u_mfdt, v_pmf, a_pd
     ):
         objective = gp.quicksum(
-            (d - p.earliest_admission_date.day) * a_pd[p, d]
+            self.w_d[d] * x_pmdt[p, m, d, t]
             for p in self.P
-            for d in self.D_p[p]
+            for m in self.M_p[p]
+            for d, t in product(self.D_p[p], self.T)
         )
-        model.setObjective(objective, gp.GRB.MINIMIZE)
+        model.setObjective(objective, gp.GRB.MAXIMIZE)
 
     def _create_parameter_sets(self):
         # Define any additional sets or mappings needed for the model

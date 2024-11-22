@@ -1,5 +1,5 @@
 import pytest
-from src.solvers.solvers import Solver
+from src.solvers.solver import Solver
 from src.solvers.mip import MIPSolver
 from src.solvers.cp_or import CPSolver
 from src.instance import Instance
@@ -9,6 +9,7 @@ from src.resource import Resource, ResourceGroup
 from src.time import DayHour, Duration
 from src.solution import NO_SOLUTION_FOUND
 from typing import Type
+
 
 @pytest.fixture
 def setup_instance():
@@ -37,7 +38,7 @@ def setup_instance():
     treatment0 = Treatment(
         tid=0,
         num_participants=2,
-        duration=Duration(hours=1),
+        duration=Duration(hours=0.25),
         name="therapy",
         resources={
             rg_therapists: (2, False),
@@ -79,7 +80,7 @@ def setup_instance():
     instance_data = {
         "num_beds": 3,
         "workday_start": DayHour(hour=8),
-        "workday_end": DayHour(hour=9),
+        "workday_end": DayHour(hour=8.25),
         "rolling_window_length": 7,
         "rolling_windows_days": [0, 5, 10],
         "conflict_groups": [],
@@ -126,3 +127,17 @@ def test_infeasible_solution(solver: Type[Solver], setup_instance):
     solver_instance.create_model()
     solution = solver_instance.solve_model()
     assert solution is NO_SOLUTION_FOUND
+
+    # Now relax the instance so that a solution can be found
+    instance = Instance(
+        instance_data=instance_data,
+        resource_groups={0: rg_therapists},
+        treatments={0: treatment0},
+        resources={0: therapist0, 1: therapist1, 2: therapist2},
+        patients={0: patient0, 1: patient1},  # , 2: patient2},
+    )
+
+    solver_instance = solver(instance)
+    solver_instance.create_model()
+    solution = solver_instance.solve_model()
+    assert solution is not NO_SOLUTION_FOUND

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from src.solution import Solution
 from src.instance import Instance
-from math import ceil
+from math import ceil, floor
 from numpy import arange
 from typing import Any
 from src.logging import logger
@@ -10,29 +10,50 @@ from src.treatments import Treatment
 from src.resource import Resource, ResourceGroup
 from src.time import DayHour
 from pprint import pprint as pp
+from collections import defaultdict
 
 
 class Solver(ABC):
-    def __init__(
-        self, instance: Instance, constraints_ignore: set[str] = set(), **kwargs
-    ):
-        self.all_constraints = set(
-            ["conflict-groups", "resource-loyalty", "even-distribution"]
-        )
-        assert constraints_ignore <= self.all_constraints
-        self.constraints_ignore = constraints_ignore
+    BASE_SOLVER_OPTIONS = {
+        "number_of_threads": (int, 1, 24),
+        "extra_treatments_factor": (float, 1.0, 2.0),
+        "use_conflict_groups": (bool,),
+        "use_resource_loyalty": (bool,),
+        "use_even_distribution": (bool,),
+    }
+    BASE_SOLVER_DEFAULT_OPTIONS = {
+        "number_of_threads": 12,
+        "extra_treatments_factor": 1.5,
+        "use_conflict_groups": True,
+        "use_resource_loyalty": True,
+        "use_even_distribution": True,
+    }
+
+    def __init__(self, instance: Instance, **kwargs):
+
+        logger.debug(f"Setting options: Solver")
+        for key in Solver.BASE_SOLVER_OPTIONS:
+            if key in kwargs:
+                setattr(self, key, kwargs[key])
+                logger.debug(f" ---- {key} to {kwargs[key]}")
+            else:
+                setattr(self, key, self.__class__.BASE_SOLVER_DEFAULT_OPTIONS[key])
+                logger.debug(
+                    f" ---- {key} to { self.__class__.BASE_SOLVER_DEFAULT_OPTIONS[key]} (default)"
+                )
 
         self.number_of_threads = kwargs.get("number_of_threads", 12)
+        self.extra_treatments_factor = kwargs.get("extra_treatments_factor", 1.5)
         self.instance = instance
 
     def add_resource_loyal(self):
-        return "resource-loyalty" not in self.constraints_ignore
+        return self.use_resource_loyalty  # type: ignore
 
     def add_even_distribution(self):
-        return "even-distribution" not in self.constraints_ignore
+        return self.use_even_distribution  # type: ignore
 
     def add_conflict_groups(self):
-        return "conflict-groups" not in self.constraints_ignore
+        return self.use_conflict_groups  # type: ignore
 
     @abstractmethod
     def solve_model(self) -> Solution:
@@ -127,4 +148,23 @@ class Solver(ABC):
 
         self.C = self.instance.conflict_groups
 
+        # Calculate the number of treatments needed intotal for all patients together
+        self.treatment_count = defaultdict(int)
+        for p in self.P:
+            for m in self.M_p[p]:
+                self.treatment_count[m] += p.treatments[m]
+
+        self.number_treatments_offered = {
+            m: ceil(
+                sum(p.treatments[m] for p in self.P if m in self.M_p[p])
+                / self.k_m[m]
+                * self.extra_treatments_factor
+            )
+            for m in self.M
+        }
+
+        week_values = [5, 3, 2, 1, 1, 1, 1, 1, 1]
+        self.w_d = {
+            d: week_values[floor(d // self.instance.week_length)] for d in self.D
+        }
         pass
