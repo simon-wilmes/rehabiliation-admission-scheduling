@@ -37,7 +37,8 @@ class MIPSolver(Solver):
         self._create_parameter_sets()
         # Create the model
         model = gp.Model("PatientAdmissionScheduling")
-        model.setParam("Threads", self.number_of_threads)
+        model.setParam("LogToConsole", int(self.log_to_console))  # type: ignore
+        model.setParam("Threads", self.number_of_threads)  # type: ignore
         vars = self._create_variables(model)
         self._create_constraints(model, *vars)
         self._set_optimization_goal(model, *vars)
@@ -71,18 +72,52 @@ class MIPSolver(Solver):
     def _set_optimization_goal(
         self, model: gp.Model, x_pmdt, z_pmfdt, u_mfdt, v_pmf, a_pd
     ):
-        objective = gp.quicksum(
-            self.w_d[d] * x_pmdt[p, m, d, t]
-            for p in self.P
-            for m in self.M_p[p]
-            for d, t in product(self.D_p[p], self.T)
+
+        o_pmdt_keys = []
+        for p in self.P:
+            o_pmdt_keys.extend(product([p], self.M_p[p], self.A_p[p], self.T))
+        o_pmdt = model.addVars(o_pmdt_keys, vtype=gp.GRB.BINARY, name="o_pmdt")
+
+        for p in self.P:
+            for m, d, t in product(self.M_p[p], self.A_p[p], self.T):
+                for fhat in self.Fhat_m[m]:
+                    for f in self.fhat[fhat]:
+                        model.addConstr(
+                            o_pmdt[p, m, d, t]
+                            >= z_pmfdt[p, m, f, d, t]
+                            - gp.quicksum(
+                                z_pmfdt[p_prime, m, f, d, t]
+                                for p_prime in self._get_smaller_patients(p)
+                                if (p_prime, m, f, d, t) in z_pmfdt
+                            )
+                        )
+                        pass
+
+        minimize_treatments = gp.quicksum(
+            o_pmdt[p, m, d, t] for p, m, d, t in o_pmdt_keys
         )
-        model.setObjective(objective, gp.GRB.MAXIMIZE)
+
+        minimize_delay = gp.quicksum(
+            (d - p.earliest_admission_date.day) * a_pd[p, d]
+            for p in self.P
+            for d in self.A_p[p]
+        )
+
+        # Set objective
+        objective = (
+            self.treatment_value * minimize_treatments  # type: ignore
+            + self.delay_value * minimize_delay  # type: ignore
+        )
+
+        model.setObjective(objective, gp.GRB.MINIMIZE)
 
     def _create_parameter_sets(self):
         # Define any additional sets or mappings needed for the model
-
         super()._create_parameter_sets()
+
+    def _get_smaller_patients(self, p: Patient) -> list[Patient]:
+        ind1 = self.P.index(p)
+        return self.P[:ind1]
 
     def _create_variables(self, model: gp.Model):
         #####################################
@@ -91,7 +126,7 @@ class MIPSolver(Solver):
         # Create x_pmdt
         x_pmdt_keys = []
         for p in self.P:
-            x_pmdt_keys.extend(product([p], self.M_p[p], self.D_p[p], self.T))
+            x_pmdt_keys.extend(product([p], self.M_p[p], self.A_p[p], self.T))
 
         x_pmdt = model.addVars(x_pmdt_keys, vtype=gp.GRB.BINARY, name="x_pmdt")
         # Create z_pmfdt
@@ -100,7 +135,7 @@ class MIPSolver(Solver):
             for m in self.M_p[p]:
                 for fhat in self.Fhat_m[m]:
                     z_pmfdt_keys.extend(
-                        product([p], [m], self.fhat[fhat], self.D_p[p], self.T)
+                        product([p], [m], self.fhat[fhat], self.A_p[p], self.T)
                     )
 
         z_pmfdt = model.addVars(z_pmfdt_keys, vtype=gp.GRB.BINARY, name="z_pmfdt")
@@ -123,7 +158,7 @@ class MIPSolver(Solver):
         # Create a_pd
         a_pd_keys = []
         for p in self.P:
-            a_pd_keys.extend(product([p], self.D_p[p]))
+            a_pd_keys.extend(product([p], self.A_p[p]))
         a_pd = model.addVars(a_pd_keys, vtype=gp.GRB.BINARY, name="a_pd")
 
         self.vars = {
@@ -146,7 +181,7 @@ class MIPSolver(Solver):
         for p in self.P:
             for m in self.M_p[p]:
                 model.addConstr(
-                    gp.quicksum(x_pmdt[p, m, d, t] for d in self.D_p[p] for t in self.T)
+                    gp.quicksum(x_pmdt[p, m, d, t] for d in self.A_p[p] for t in self.T)
                     == self.lr_pm[p, m],
                     name=f"constraint_p1_p{p.id}_m{m.id}",
                 )
@@ -154,11 +189,11 @@ class MIPSolver(Solver):
         # Constraint (p2): Patients not admitted have no treatments scheduled
         for p in self.P:
             for m in self.M_p[p]:
-                for d in self.D_p[p]:
+                for d in self.A_p[p]:
                     for t in self.T:
                         delta_set = [
                             delta
-                            for delta in self.D_p[p]
+                            for delta in self.A_p[p]
                             if d - self.l_p[p] < delta <= d
                         ]
                         model.addConstr(
@@ -169,7 +204,7 @@ class MIPSolver(Solver):
 
         # Constraint (p3): Only one treatment at a time per patient
         for p in self.P:
-            for d in self.D_p[p]:
+            for d in self.A_p[p]:
                 for t in self.T:
                     expr = gp.LinExpr()
                     for m in self.M_p[p]:
@@ -182,14 +217,14 @@ class MIPSolver(Solver):
             expr = gp.LinExpr()
             for p in self.P:
                 delta_set = [
-                    delta for delta in self.D_p[p] if d - self.l_p[p] < delta <= d
+                    delta for delta in self.A_p[p] if d - self.l_p[p] < delta <= d
                 ]
                 expr += gp.quicksum(a_pd[p, delta] for delta in delta_set)
             model.addConstr(expr <= self.b, name=f"constraint_p4_d{d}")
 
         # Constraint (p6): Patient admitted exactly once within the specified time
         for p in self.P:
-            D_p_early = [d for d in self.D_p[p] if d <= max(self.D_p[p]) - self.l_p[p]]
+            D_p_early = [d for d in self.A_p[p] if d <= max(self.A_p[p]) - self.l_p[p]]
             model.addConstr(
                 gp.quicksum(a_pd[p, d] for d in D_p_early) == 1,
                 name=f"constraint_p6_p{p.id}",
@@ -198,7 +233,7 @@ class MIPSolver(Solver):
         # Constraint (p7): Patient is admitted exactly once
         for p in self.P:
             model.addConstr(
-                gp.quicksum(a_pd[p, d] for d in self.D_p[p]) == 1,
+                gp.quicksum(a_pd[p, d] for d in self.A_p[p]) == 1,
                 name=f"constraint_p7_p{p.id}",
             )
 
@@ -232,7 +267,7 @@ class MIPSolver(Solver):
             for m in self.M_p[p]:
                 for fhat in self.Fhat_m[m]:
                     for f in self.fhat[fhat]:
-                        for d in self.D_p[p]:
+                        for d in self.A_p[p]:
                             for t in self.T:
                                 model.addConstr(
                                     z_pmfdt[p, m, f, d, t] <= u_mfdt[m, f, d, t],
@@ -243,7 +278,7 @@ class MIPSolver(Solver):
         for p in self.P:
             for m in self.M_p[p]:
                 for fhat in self.Fhat_m[m]:
-                    for d in self.D_p[p]:
+                    for d in self.A_p[p]:
                         for t in self.T:
                             lhs = gp.quicksum(
                                 z_pmfdt[p, m, f, d, t] for f in self.fhat[fhat]
@@ -276,7 +311,7 @@ class MIPSolver(Solver):
                 for m in self.M_p[p]:
                     for fhat in self.Fhat_m[m]:
                         for f in self.fhat[fhat]:
-                            for d in self.D_p[p]:
+                            for d in self.A_p[p]:
                                 for t in self.T:
                                     model.addConstr(
                                         z_pmfdt[p, m, f, d, t] <= v_pmf[p, m, f],
@@ -299,15 +334,15 @@ class MIPSolver(Solver):
             for d in self.R:
                 for p in self.P:
                     for m in self.M_p[p]:
-                        num_windows = ceil(len(self.D_p[p]) / self.rw)
+                        num_windows = ceil(len(self.A_p[p]) / self.rw)
                         for w in range(num_windows):
-                            window_start = self.D_p[p][0] + w * self.rw
+                            window_start = self.A_p[p][0] + w * self.rw
                             window_end = min(
-                                window_start + self.rw - 1, self.D_p[p][-1]
+                                window_start + self.rw - 1, self.A_p[p][-1]
                             )
                             window_days = [
                                 d
-                                for d in self.D_p[p]
+                                for d in self.A_p[p]
                                 if window_start <= d <= window_end
                             ]
                             expr = gp.quicksum(
@@ -346,19 +381,22 @@ class MIPSolver(Solver):
                 continue
             # Find iterate over common treatments
             for m in set(self.M_p[p1]) & set(self.M_p[p2]):
+                common_resources = set()
                 for fhat in self.Fhat_m[m]:
-                    for f1, f2 in product(self.fhat[fhat], self.fhat[fhat]):
-                        if f1 == f2:
-                            continue
-                        D_p1p2 = set(self.D_p[p1]) & set(self.D_p[p2])
-                        for d, t in product(D_p1p2, self.T):
-                            model.addConstr(
-                                z_pmfdt[p1, m, f1, d, t]
-                                >= z_pmfdt[p2, m, f1, d, t]
-                                + z_pmfdt[p1, m, f2, d, t]
-                                + z_pmfdt[p2, m, f2, d, t]
-                                - 2
-                            )
+                    common_resources |= set(self.fhat[fhat])
+
+                for f1, f2 in product(common_resources, common_resources):
+                    if f1 == f2:
+                        continue
+                    D_p1p2 = set(self.A_p[p1]) & set(self.A_p[p2])
+                    for d, t in product(D_p1p2, self.T):
+                        model.addConstr(
+                            z_pmfdt[p1, m, f1, d, t]
+                            >= z_pmfdt[p2, m, f1, d, t]
+                            + z_pmfdt[p1, m, f2, d, t]
+                            + z_pmfdt[p2, m, f2, d, t]
+                            - 2
+                        )
 
     def _extract_solution(self):
         """
@@ -476,19 +514,22 @@ class MIPSolver(Solver):
 
         patients_arrival: dict[Patient, DayHour] = {}
         for p in self.P:
-            for d in self.D_p[p]:
+            for d in self.A_p[p]:
                 if a_pd[p, d].X > 0.5:  # type: ignore
                     patients_arrival[p] = DayHour(
                         day=d, hour=self.instance.workday_start.hour
                     )
+
         # Create the solution
         solution = Solution(
             instance=self.instance,
             schedule=appointments,
             patients_arrival=patients_arrival,
+            solver=self,
             test_even_distribution=self.add_even_distribution(),
             test_conflict_groups=self.add_conflict_groups(),
             test_resource_loyalty=self.add_resource_loyal(),
+            solution_value=self.model.objVal,
         )
 
         return solution

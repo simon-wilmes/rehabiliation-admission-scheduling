@@ -1,6 +1,6 @@
 from src.instance import create_instance_from_file
-from src.solvers.mip import MIPSolver
-from src.solvers.cp_or import CPSolver
+from src.solvers import MIPSolver, MIPSolver2
+from src.solvers import CPSolver, CPSolver2
 from src.logging import logger
 from itertools import combinations
 import os
@@ -27,27 +27,36 @@ def main():
 
     largest_folder = max(inst_folders, key=lambda x: int(x[4:]))
 
-    logger.info(f"Running with instance folder: {largest_folder}/instance_1.txt")
-    inst = create_instance_from_file("data/" + str(largest_folder) + "/instance_1.txt")
+    # Assert Custom Instance
+    largest_folder = "comp_study_001"
+    file = "instance_1.txt"
+    logger.setLevel("DEBUG")
+
+    logger.info(f"Running with instance folder: {largest_folder}/{file}")
+    inst = create_instance_from_file("data/" + str(largest_folder) +"/" +file)
     logger.info("Successfully created instance from file.")
-    solver_mip = MIPSolver(
-        inst,
-        use_resource_loyalty=False,
-        use_even_distribution=False,
-        use_conflict_groups=False,
-    )
+    solvers = [
+        # (CPSolver2, {"break_symetry": False}),
+        # (MIPSolver2, {}),
+        # (MIPSolver, {}),
+        (MIPSolver, {}),
+        (CPSolver, {"break_symetry": True}),
+        (CPSolver2, {"break_symetry": True}),
+        # (CPSolver, {"break_symetry": False}),
+    ]
 
-    solver_mip.create_model()
-    solver_mip.solve_model()
+    for solver, kwargs in solvers:
+        logger.info(f"Running with solver: {solver.__name__} and kwargs: {kwargs}")
+        solver_cp = solver(
+            inst,
+            use_resource_loyalty=False,
+            use_even_distribution=False,
+            use_conflict_groups=False,
+            **kwargs,
+        )
+        solver_cp.create_model()
+        solver_cp.solve_model()
 
-    solver_cp = CPSolver(
-        inst,
-        use_resource_loyalty=False,
-        use_even_distribution=False,
-        use_conflict_groups=False,
-    )
-    solver_cp.create_model()
-    solver_cp.solve_model()
     pass
 
 

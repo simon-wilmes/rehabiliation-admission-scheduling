@@ -4,20 +4,20 @@ import os
 
 if __name__ == "__main__":
     params = {
-        "num_patients": 8,
-        "num_resource_groups": 3,
-        "num_treatments": 10,
+        "num_patients": 15,
+        "num_resource_groups": 6,
+        "num_treatments": 15,
         "workday_start": 8,
         "workday_end": 18,
-        "length_of_stay_range": (3, 12),
+        "length_of_stay_range": (15, 25),
         "treatments_per_patient_range": (1, 5),
         "treatment_duration_distribution": {"mean": 1, "std_dev": 0.25},
-        "resource_usage_target": 0.7,
-        "admitted_patient_percentage": 0.3,
+        "resource_usage_target": 1,
+        "admitted_patient_percentage": 0,
         "resource_group_loyalty_probability_range": (0.1, 0.9),
         "time_granularity_minutes": 15,
-        "num_beds": 4,
-        "max_admission_day": 30,
+        "num_beds": 9,
+        "max_admission_day": 15,
         "resource_group_unavailability_percentages": {
             0: 0,  # 10% unavailability for Resource Group 0
             1: 0,  # 20% unavailability for Resource Group 1

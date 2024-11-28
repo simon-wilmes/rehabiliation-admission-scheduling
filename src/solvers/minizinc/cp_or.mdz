@@ -1,0 +1,238 @@
+% MiniZinc Model for Scheduling Treatments and Patients
+
+% Include necessary libraries
+include "globals.mzn";
+include "interval.mzn";
+
+% ===========================
+% Sets and Parameters
+% ===========================
+
+% Sets
+set of int: M;          % Treatments (e.g., M = 1..num_treatments)
+set of int: P;          % Patients (e.g., P = 1..num_patients)
+set of int: R;          % Treatment repetitions (e.g., R = 1..max_repetitions)
+set of int: F;          % Resources (e.g., F = 1..num_resources)
+set of int: D;          % Days (e.g., D = 1..num_days)
+set of int: T;          % Time slots per day (e.g., T = 1..num_time_slots_per_day)
+
+% Parameters
+int: num_time_slots_per_day;        % Number of time slots per day
+int: num_days = card(D);            % Total number of days
+
+% Treatment durations
+array[M] of int: du_m;              % Duration of each treatment m in M
+
+% Length of stay for each patient
+array[P] of int: l_p;               % Length of stay for each patient p in P
+
+% Earliest and latest admission days for each patient
+array[P] of int: earliest_admission_day;
+array[P] of int: latest_admission_day;
+
+% Required number of treatments per patient per treatment type
+array[P, M] of int: lr_pm;          % Number of treatments of type m required by patient p
+
+% Resource availability
+array[F, D, T] of bool: av_fdt;     % Availability of resource f on day d at time slot t
+
+% Bed capacity
+int: beds_capacity;
+
+% Maximum patients per treatment
+array[M] of int: k_m;
+
+% Delay and treatment values for the objective function
+int: delay_value;
+int: treatment_value;
+
+% Resource groups (if applicable)
+% For each resource f, specify its group fhat (if using resource groups)
+% array[F] of int: resource_group;
+
+% Mapping of treatments to required resources
+% array[M] of set of F: required_resources_m;  % Resources required by treatment m
+
+% Patients already admitted (boolean array)
+array[P] of bool: already_admitted;
+
+% ===========================
+% Decision Variables
+% ===========================
+
+% Admission day for each patient
+array[P] of var earliest_admission_day[p]..latest_admission_day[p]: admission_day;
+
+% Treatment variables
+array[M, R] of var 0..(num_time_slots_per_day * num_days - 1): start_slot;
+array[M, R] of var bool: is_treatment_scheduled;
+
+% Interval variables for treatments
+array[M, R] of var interval(0..(num_time_slots_per_day * num_days)): treatment_intervals;
+
+% Day slot for treatments
+array[M, R] of var D: day_slot;
+
+% Resource usage variables
+array[M, R, F] of var bool: use_resource;
+
+% Patient treatment assignment variables
+array[P, M, R] of var bool: patient_treatment_assignment;
+
+% Interval variables for patient treatments
+array[P, M, R] of var interval(0..(num_time_slots_per_day * num_days)): patient_treatment_intervals;
+
+% ===========================
+% Constraints
+% ===========================
+
+% Link treatment intervals to start slots and durations
+constraint forall(m in M, r in R)(
+    start_slot[m, r] = start(treatment_intervals[m, r]) /\
+    length(treatment_intervals[m, r]) = du_m[m] /\
+    is_treatment_scheduled[m, r] <-> present(treatment_intervals[m, r])
+);
+
+% Compute day slot from start slot
+constraint forall(m in M, r in R)(
+    day_slot[m, r] = (start_slot[m, r] div num_time_slots_per_day) + 1
+);
+
+% Symmetry breaking constraints
+constraint forall(m in M, r in 2..card(R))(
+    start_slot[m, r] >= start_slot[m, r - 1] /\
+    (is_treatment_scheduled[m, r] -> is_treatment_scheduled[m, r - 1])
+);
+
+% Resource assignment constraints
+% Assuming required_resources_m[m] is a set of resources required by treatment m
+% You need to define required_resources_m based on your data
+% Example: required_resources_m = [ {1, 2}, {2, 3}, ... ];
+
+% For this example, let's assume every treatment requires all resources
+constraint forall(m in M, r in R, f in F)(
+    use_resource[m, r, f] -> is_treatment_scheduled[m, r]
+);
+
+% Ensure that required resources are assigned when treatment is scheduled
+% Modify this constraint according to your actual resource requirements
+constraint forall(m in M, r in R)(
+    is_treatment_scheduled[m, r] ->
+    forall(f in F)(
+        use_resource[m, r, f]
+    )
+);
+
+% Patient admission day constraints
+constraint forall(p in P)(
+    admission_day[p] >= earliest_admission_day[p] /\
+    admission_day[p] <= latest_admission_day[p]
+);
+
+% Fix admission day for already admitted patients
+constraint forall(p in P where already_admitted[p])(
+    admission_day[p] = earliest_admission_day[p]
+);
+
+% Patient treatment assignment constraints
+% Each patient receives the required number of treatments per treatment type
+constraint forall(p in P, m in M)(
+    sum(r in R)(bool2int(patient_treatment_assignment[p, m, r])) = lr_pm[p, m]
+);
+
+% Link patient treatment intervals to treatment intervals
+constraint forall(p in P, m in M, r in R)(
+    patient_treatment_assignment[p, m, r] -> (
+        start(patient_treatment_intervals[p, m, r]) = start_slot[m, r] /\
+        length(patient_treatment_intervals[p, m, r]) = du_m[m] /\
+        present(patient_treatment_intervals[p, m, r])
+    )
+);
+
+% Patients cannot have overlapping treatments
+constraint forall(p in P)(
+    nooverlap([patient_treatment_intervals[p, m, r] | m in M, r in R])
+);
+
+% Treatments have a maximum number of patients
+constraint forall(m in M, r in R)(
+    sum(p in P)(bool2int(patient_treatment_assignment[p, m, r])) <= k_m[m]
+);
+
+% Treatments cannot start before patient's admission and must end before discharge
+constraint forall(p in P, m in M, r in R)(
+    patient_treatment_assignment[p, m, r] -> (
+        start(patient_treatment_intervals[p, m, r]) >= (admission_day[p] - 1) * num_time_slots_per_day /\
+        end(patient_treatment_intervals[p, m, r]) <= (admission_day[p] + l_p[p] - 1) * num_time_slots_per_day
+    )
+);
+
+% Resource capacity constraints (no overlapping use of resources)
+constraint forall(f in F)(
+    nooverlap([treatment_intervals[m, r] |
+               m in M, r in R where use_resource[m, r, f]])
+);
+
+% Resource availability constraints
+constraint forall(f in F, m in M, r in R)(
+    use_resource[m, r, f] -> (
+        forall(t in start_slot[m, r]..start_slot[m, r] + du_m[m] - 1)(
+            let {
+                int: day = (t div num_time_slots_per_day) + 1;
+                int: time_slot = (t mod num_time_slots_per_day) + 1;
+            } in
+            av_fdt[f, day, time_slot]
+        )
+    )
+);
+
+% Bed capacity constraint using cumulative
+% Define tasks for patients' stays
+array[P] of var earliest_admission_day[p]..latest_admission_day[p]: task_start;
+array[P] of int: task_duration = [l_p[p] | p in P];
+array[P] of int: task_resource = [1 | p in P];
+
+% Link task_start to admission_day
+constraint forall(p in P)(
+    task_start[p] = admission_day[p]
+);
+
+% Bed capacity constraint
+constraint cumulative(task_start, task_duration, task_resource, beds_capacity);
+
+% ===========================
+% Objective Function
+% ===========================
+
+% Total delay
+var int: total_delay = sum(p in P)(
+    delay_value * (admission_day[p] - earliest_admission_day[p])
+);
+
+% Total treatments scheduled
+var int: total_treatments = sum(m in M, r in R)(
+    treatment_value * bool2int(is_treatment_scheduled[m, r])
+);
+
+% Objective: Minimize total delay and maximize treatments
+solve minimize total_delay - total_treatments;
+
+% ===========================
+% Output
+% ===========================
+
+output [
+    "Total Delay: ", show(total_delay), "\n",
+    "Total Treatments Scheduled: ", show(total_treatments), "\n",
+    "Patient Admissions:\n",
+    concat([ "Patient ", show(p), ": Admission Day ", show(admission_day[p]), "\n" | p in P ]),
+    "Treatment Schedules:\n",
+    concat([
+        if is_treatment_scheduled[m, r] then
+            "Treatment ", show(m), ", Repetition ", show(r), ": Start Slot ", show(start_slot[m, r]), "\n"
+        else
+            ""
+        endif
+        | m in M, r in R
+    ])
+];

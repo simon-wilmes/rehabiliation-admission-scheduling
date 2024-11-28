@@ -9,11 +9,20 @@
             "type": "debugpy",
             "request": "launch",
             "module": "src"
-        },{
+        },
+        {
             "name": "Python Debugger: Createinstance",
             "type": "debugpy",
             "request": "launch",
             "module": "src.instance_generation"
+        },
+        {
+            "name": "Python Debugger: Solvable Instances",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "src.instance_generation.create_solvable_instances"
         }
+
+        
     ]
 }

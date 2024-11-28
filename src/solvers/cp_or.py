@@ -9,6 +9,7 @@ from src.instance import Instance
 from src.time import DayHour, Duration
 from src.solution import Solution, Appointment
 from src.solution import NO_SOLUTION_FOUND
+from src.patients import Patient
 from copy import copy
 
 a = []
@@ -19,11 +20,15 @@ class CPSolver(Solver):
 
     SOLVER_OPTIONS = Solver.BASE_SOLVER_OPTIONS.copy()
     SOLVER_OPTIONS.update(
-        {"product_repr": ["only-if", "leq-constraints"]}
+        {
+            "product_repr": ["only-if", "leq-constraints"],
+            "break_symetry": [True, False],
+        }
     )  # Add any additional options here
 
     SOLVER_DEFAULT_OPTIONS = {
         "product_repr": "only-if",
+        "break_symetry": True,
     }
 
     def __init__(self, instance: Instance, **kwargs):
@@ -43,8 +48,9 @@ class CPSolver(Solver):
 
     def _solve_model(self):
         solver = cp_model.CpSolver()
+        solver.parameters.log_search_progress = self.log_to_console  # type: ignore
         solver.parameters.num_search_workers = (
-            self.number_of_threads
+            self.number_of_threads  # type: ignore
         )  # Set the number of threads
         status = solver.Solve(self.model)
         if status in [cp_model.OPTIMAL, cp_model.FEASIBLE]:
@@ -61,6 +67,8 @@ class CPSolver(Solver):
 
         self.model = cp_model.CpModel()
         self._create_constraints()
+        if self.break_symetry:  # type: ignore
+            self._break_symetry()
         self._set_optimization_goal()
 
     def _create_parameter_sets(self):
@@ -69,59 +77,32 @@ class CPSolver(Solver):
         # besides the ones created in the parent class
         self.num_time_slots = len(self.T)
 
+    def _break_symetry(self):
+        for m, rep_dict in self.treatment_vars.items():
+            for r, vars in rep_dict.items():
+                if r == 0:
+                    continue
+                self.model.add(vars["start_slot"] >= rep_dict[r - 1]["start_slot"])
+                self.model.add_implication(
+                    vars["is_present"], rep_dict[r - 1]["is_present"]
+                )
+
     def _set_optimization_goal(self):
         # Objective: Maximize the total number of scheduled treatments, possibly weighted
         # List to store the variables that encode the product w_d[day] * is_assigned_to_treatment
-        product_list = []
-        for p in self.P:
-            for m in self.M_p[p]:
-                vars = self.patient_vars[p][m]
-                pass
+        delay_list = []
 
-                for rep in range(self.number_treatments_offered[m]):
-                    patient_assigned_to_treatment = vars[
-                        "patient_treatment_assignment"
-                    ][rep]
-                    day_slot = self.treatment_vars[m][rep]["day_slot"]
+        for p, admission_day in self.admission_vars.items():
+            delay_list.append(self.delay_value * (admission_day - p.earliest_admission_date.day))  # type: ignore
 
-                    # make w_d into list by sorted keys
-                    list_w_d = list(self.w_d.items())
-                    list_w_d.sort(key=lambda x: x[0])
-                    list_w_d = [x[1] for x in list_w_d]
+        treatment_list = []
+        for m, rep_vars in self.treatment_vars.items():
+            for r, vars in rep_vars.items():
+                treatment_list.append(self.treatment_value * vars["is_present"])  # type: ignore
 
-                    # Define an auxiliary variable to represent w[d]
-                    w_d_var = self.model.new_int_var(
-                        min(list_w_d), max(list_w_d), f"w_d_m{m.id}_r{rep}"
-                    )
+        obj_list = delay_list + treatment_list
 
-                    self.model.add_element(day_slot, list_w_d, w_d_var)
-
-                    product = self.model.new_int_var(
-                        0, max(list_w_d), f"product_p{p.id}_m{m.id}_r{rep}"
-                    )
-
-                    if self.product_repr == "only-if":  # type: ignore
-
-                        self.model.add(product == w_d_var).only_enforce_if(
-                            patient_assigned_to_treatment
-                        )
-                        self.model.add(product == 0).only_enforce_if(
-                            patient_assigned_to_treatment.Not()
-                        )
-                    elif self.product_repr == "leq-constraints":  # type: ignore
-
-                        # This only works because we want to maximize the (sum over) product
-                        self.model.add(product <= w_d_var)
-                        self.model.add(
-                            product <= patient_assigned_to_treatment * max(list_w_d)
-                        )
-
-                    else:
-                        logger.error("Invalid product representation option.")
-                        raise ValueError
-                    product_list.append(product)
-
-        self.model.Maximize(cp_model.LinearExpr.Sum(product_list))
+        self.model.Minimize(cp_model.LinearExpr.Sum(obj_list))
 
     def slot2time(self, i: int) -> tuple[int, float]:
         return (
@@ -140,7 +121,7 @@ class CPSolver(Solver):
     def _create_constraints(self):
         self.treatment_vars = defaultdict(dict)
         # Add variables for all the treatments to schedule
-        for m, rt in self.number_treatments_offered.items():
+        for m, rt in self.n_m.items():
             for r in range(rt):
                 duration = self.du_m[m]
 
@@ -178,7 +159,7 @@ class CPSolver(Solver):
                         cp_model.LinearExpr.Sum(
                             [resource_vars[fhat][f] for f in self.fhat[fhat]]
                         )
-                        == self.n_fhatm[fhat, m]
+                        == self.n_fhatm[fhat, m] * is_treatment_scheduled
                     )
 
                 # Add variables that store the day of the treatment # TODO: ugly
@@ -269,7 +250,7 @@ class CPSolver(Solver):
         for m in self.M:
             # loop over all patients that could attend this treatment
 
-            for rep in range(self.number_treatments_offered[m]):
+            for rep in range(self.n_m[m]):
                 patients_list = []
                 for p in self.P:
                     if m not in self.M_p[p]:
@@ -295,25 +276,23 @@ class CPSolver(Solver):
             # If the patient is already admitted, fix the admission day
 
             if p.already_admitted:
-                """TESTED"""
                 self.model.add(admission_day == 0)
                 pass
 
         # Ensure that admission is in the correct range
         for p in self.P:
             admission_day = self.admission_vars[p]
-            """TESTED"""
             self.model.add(admission_day >= p.earliest_admission_date.day)
             self.model.add(admission_day < p.admitted_before_date.day)
 
         # Ensure treatments are scheduled within admission period
         for p, treatment_vars in self.patient_vars.items():
+            admission_day = self.admission_vars[p]
             for m, vars in treatment_vars.items():
                 interval_var = vars["intervals"]
                 patient_treatment_assignment = vars["patient_treatment_assignment"]
                 for rep in interval_var:
                     # Treatment must start after admission
-                    """TESTED"""
                     self.model.add(
                         interval_var[rep].start_expr()
                         >= admission_day * self.num_time_slots
@@ -446,7 +425,7 @@ class CPSolver(Solver):
 
         for m, var_dict in self.treatment_vars.items():
             for rep, vars in var_dict.items():
-                if solver.value(vars["is_present"]) is False:
+                if solver.value(vars["is_present"]) == 0:
                     continue
 
                 start_slot = solver.value(vars["start_slot"])
@@ -472,7 +451,7 @@ class CPSolver(Solver):
         for p in self.P:
             for m in self.M_p[p]:
                 vars = self.patient_vars[p][m]
-                for rep in range(self.number_treatments_offered[m]):
+                for rep in range(self.n_m[m]):
                     if solver.value(vars["patient_treatment_assignment"][rep]):
                         appointments_dict[(m, rep)]["patients"].append(p)
 
@@ -514,8 +493,18 @@ class CPSolver(Solver):
             instance=self.instance,
             schedule=appointments,
             patients_arrival=patients_arrival,
+            solver=self,
             test_even_distribution=self.add_even_distribution(),
             test_conflict_groups=self.add_conflict_groups(),
             test_resource_loyalty=self.add_resource_loyal(),
+            solution_value=solver.objective_value,
         )
         return solution
+
+    def _assert_patients_arrival_day(self, patient: Patient, day: int):
+        self.model.add(self.admission_vars[patient] == day)
+
+    def _assert_appointment(self, appointment: Appointment):
+
+        logger.error("Assert appointment not implemented")
+        raise NotImplementedError

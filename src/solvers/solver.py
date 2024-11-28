@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from src.solution import Solution
+from src.solution import Solution, Appointment
 from src.instance import Instance
 from math import ceil, floor
 from numpy import arange
@@ -17,21 +17,26 @@ from time import time
 class Solver(ABC):
     BASE_SOLVER_OPTIONS = {
         "number_of_threads": (int, 1, 24),
-        "extra_treatments_factor": (float, 1.0, 2.0),
-        "use_conflict_groups": (bool,),
-        "use_resource_loyalty": (bool,),
-        "use_even_distribution": (bool,),
+        "extra_treatments_factor": (float, 1.0, 10.0),
+        "treatment_value": (float, 0.0, 10.0),
+        "delay_value": (float, 0.0, 10.0),
+        "use_conflict_groups": [True, False],
+        "use_resource_loyalty": [True, False],
+        "use_even_distribution": [True, False],
+        "log_to_console": [True, False],
     }
     BASE_SOLVER_DEFAULT_OPTIONS = {
         "number_of_threads": 12,
-        "extra_treatments_factor": 1.5,
+        "extra_treatments_factor": 2,
+        "treatment_value": 3,
+        "delay_value": 1,
         "use_conflict_groups": True,
         "use_resource_loyalty": True,
         "use_even_distribution": True,
+        "log_to_console": True,
     }
 
     def __init__(self, instance: Instance, **kwargs):
-
         logger.debug(f"Setting options: Solver")
         for key in Solver.BASE_SOLVER_OPTIONS:
             if key in kwargs:
@@ -43,8 +48,6 @@ class Solver(ABC):
                     f" ---- {key} to { self.__class__.BASE_SOLVER_DEFAULT_OPTIONS[key]} (default)"
                 )
 
-        self.number_of_threads = kwargs.get("number_of_threads", 12)
-        self.extra_treatments_factor = kwargs.get("extra_treatments_factor", 1.5)
         self.instance = instance
 
     def add_resource_loyal(self):
@@ -57,6 +60,7 @@ class Solver(ABC):
         return self.use_conflict_groups  # type: ignore
 
     def solve_model(self) -> Solution:
+        logger.info("Solving model: %s", self.__class__.__name__)
         self.time_solve_model = time()
         solution = self._solve_model()
         self.time_solve_model = time() - self.time_solve_model
@@ -64,6 +68,7 @@ class Solver(ABC):
         return solution
 
     def create_model(self) -> None:
+        logger.info("Create model: %s", self.__class__.__name__)
         self.time_create_model = time()
         self._create_model()
         self.time_create_model = time() - self.time_create_model
@@ -105,13 +110,19 @@ class Solver(ABC):
             fhat: [f for f in self.F if f.resource_group == fhat] for fhat in self.Fhat
         }
 
-        self.D_p = {
+        self.A_p = {
             p: range(
                 p.earliest_admission_date.day,
                 p.admitted_before_date.day + p.length_of_stay,
             )
             for p in self.instance.patients.values()
         }
+
+        self.D_p = {
+            p: range(p.earliest_admission_date.day, p.admitted_before_date.day)
+            for p in self.instance.patients.values()
+        }
+
         self.M_p = {
             p: list(p.treatments.keys()) for p in self.instance.patients.values()
         }
@@ -178,18 +189,54 @@ class Solver(ABC):
                         max_treatment_people_specific[m],
                     )
 
-        self.number_treatments_offered = {
+        self.n_m = {
             m: max(
                 ceil(
-                    self.treatment_count[m] / self.k_m[m] * self.extra_treatments_factor
+                    self.treatment_count[m] / self.k_m[m] * self.extra_treatments_factor  # type: ignore
                 ),
                 max_treatment_people_specific[m],
             )
             for m in self.M
         }
 
-        week_values = [5, 3, 2, 1, 1, 1, 1, 1, 1]
-        self.w_d = {
-            d: week_values[floor(d // self.instance.week_length)] for d in self.D
+        self.I_m_calc = {
+            m: list(
+                range(
+                    max(
+                        ceil(
+                            self.treatment_count[m]
+                            / self.k_m[m]
+                            * self.extra_treatments_factor  # type: ignore
+                        ),
+                        max_treatment_people_specific[m],
+                    )
+                ),
+            )
+            for m in self.M
         }
+
+        self.I_m_max = {m: list(range(self.treatment_count[m])) for m in self.M}
+
+        self.I_m = self.I_m_max
+
+        day_values = [9, 8, 8, 7, 7, 7, 6, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4]
+        day_values.extend([4, 3, 3, 3, 3, 2, 2, 2, 2, 2])
+        self.w_d = {d: day_values[d] if d < len(day_values) else 1 for d in self.D}
         pass
+
+    def _assert_patients_arrival_day(self, patient: Patient, day: int):
+        logger.error("Assert patients_arrival_day not implemented")
+        raise NotImplementedError
+
+    def _assert_appointment(self, appointment: Appointment):
+        logger.error("Assert appointment not implemented")
+        raise NotImplementedError
+
+    def assert_solution(self, solution: Solution):
+        patients_arrival = solution.patients_arrival
+
+        for patient, day in patients_arrival.items():
+            self._assert_patients_arrival_day(patient, day.day)
+
+        for app in solution.schedule:
+            self._assert_appointment(app)

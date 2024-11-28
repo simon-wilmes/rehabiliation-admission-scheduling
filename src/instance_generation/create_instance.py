@@ -7,6 +7,8 @@ from src.resource import Resource, ResourceGroup
 from src.treatments import Treatment
 from src.patients import Patient
 from src.time import DayHour, Duration
+import os
+from src.instance_generation.write_instance import write_instance_to_file
 
 
 def generate_unavailability_slots(
@@ -40,66 +42,19 @@ def generate_unavailability_slots(
     )
     max_duration = max_duration - (max_duration % time_granularity_minutes)
 
-    # Distribute unavailability across days
-    for day in range(total_days):
-        daily_unavailability = 0
-        max_daily_unavailability = (
-            workday_end - workday_start
-        ) * 60  # Total minutes in a workday
-        while (
-            remaining_unavailability_time > 0
-            and daily_unavailability < max_daily_unavailability
-        ):
-            # Randomly select a duration
-            duration = random.randint(min_duration, max_duration)
-            duration = int(
-                round(duration / time_granularity_minutes) * time_granularity_minutes
-            )
-            duration = min(duration, remaining_unavailability_time)
-            duration = min(
-                duration, max_daily_unavailability - daily_unavailability
-            )  # Cannot exceed workday duration
-
-            # Randomly select a start time within workday
-            available_minutes = int(max_daily_unavailability - duration)
-            if available_minutes <= 0:
-                break
-            start_minutes = random.randint(0, available_minutes)
-            start_minutes = int(
-                round(start_minutes / time_granularity_minutes)
-                * time_granularity_minutes
-            )
-
-            # Create DayHour objects
-            start_hour = int(workday_start + start_minutes / 60)
-            start_minute = int(start_minutes % 60)
-            end_hour = int(workday_start + (start_minutes + duration) / 60)
-            end_minute = int((start_minutes + duration) % 60)
-
-            start_time = DayHour(day=day, hour=start_hour, minutes=start_minute)
-            end_time = DayHour(day=day, hour=end_hour, minutes=end_minute)
-
-            # Append the unavailability slot
-            unavailability_slots.append((start_time, end_time, None))
-
-            remaining_unavailability_time -= duration
-            daily_unavailability += duration
-
-            if remaining_unavailability_time <= 0:
-                break
-
-    return unavailability_slots
+    return []
 
 
 def generate_instance(params: dict[str, Any]) -> Instance:
+    random.seed(2)
     # Extract parameters
     num_patients = params.get("num_patients", 100)
     num_resource_groups = params.get("num_resource_groups", 3)
     num_treatments = params.get("num_treatments", 10)
     workday_start = params.get("workday_start", 8)  # Hour
     workday_end = params.get("workday_end", 18)  # Hour
-    length_of_stay_range = params.get("length_of_stay_range", (3, 7))
-    treatments_per_patient_range = params.get("treatments_per_patient_range", (1, 5))
+    length_of_stay_range = params.get("length_of_stay_range", (3, 10))
+    # Removed treatments_per_patient_range
     treatment_duration_distribution = params.get(
         "treatment_duration_distribution", {"mean": 1, "std_dev": 0.25}
     )  # Hours
@@ -119,6 +74,7 @@ def generate_instance(params: dict[str, Any]) -> Instance:
     unavailability_duration_range = params.get(
         "unavailability_duration_range", (30, 120)
     )  # In minutes
+    average_treatments_per_day = params.get("average_treatments_per_day", 3)
 
     # Ensure workday times are aligned with time granularity
     def align_time(value):
@@ -279,13 +235,27 @@ def generate_instance(params: dict[str, Any]) -> Instance:
         name = f"Patient_{pid}"
 
         treatments_required = {}
-        num_treatments_assigned = random.randint(*treatments_per_patient_range)
-        selected_treatments = random.sample(treatments_list, num_treatments_assigned)
         already_scheduled_treatments = []
         treatments_with_loyalty = set()
 
-        for treatment in selected_treatments:
-            num_sessions = random.randint(1, 5)
+        # Calculate total sessions based on length of stay and average treatments per day
+        total_sessions = max(1, int(average_treatments_per_day * length_of_stay))
+
+        # Select treatments to assign sessions to
+        selected_treatments = random.sample(
+            treatments_list, k=min(total_sessions, len(treatments_list))
+        )
+
+        # Distribute total sessions among selected treatments
+        sessions_per_treatment = [1] * len(selected_treatments)
+        remaining_sessions = total_sessions - len(selected_treatments)
+
+        while remaining_sessions > 0:
+            idx = random.randint(0, len(sessions_per_treatment) - 1)
+            sessions_per_treatment[idx] += 1
+            remaining_sessions -= 1
+
+        for treatment, num_sessions in zip(selected_treatments, sessions_per_treatment):
             if already_admitted:
                 sessions_completed = random.randint(1, num_sessions)
                 num_sessions_remaining = num_sessions - sessions_completed
@@ -296,12 +266,12 @@ def generate_instance(params: dict[str, Any]) -> Instance:
 
             num_sessions_remaining = max(0, num_sessions_remaining)
 
-            if num_sessions_remaining >= 0:
+            if num_sessions_remaining > 0:
                 treatments_required[treatment] = num_sessions
 
             # Update total resource demand based on remaining sessions
             duration_hours = treatment.duration.hours
-            for rg, (num_resources_needed) in treatment.resources.items():
+            for rg, num_resources_needed in treatment.resources.items():
                 demand = num_sessions_remaining * duration_hours * num_resources_needed
                 total_resource_demand[rg.id] += demand
             total_treatment_demand[treatment.id] += num_sessions_remaining
@@ -321,11 +291,11 @@ def generate_instance(params: dict[str, Any]) -> Instance:
             admitted_before_date=admitted_before_date,
             already_admitted=already_admitted,
             already_resource_loyal={},  # Will be updated later
-            already_scheduled_treatments=already_scheduled_treatments,  # Now a list of tuples
+            already_scheduled_treatments=already_scheduled_treatments,
             name=name,
         )
         # Store treatments with loyalty for later processing
-        patient.treatments_with_loyalty = treatments_with_loyalty  # type: ignore
+        patient.treatments_with_loyalty = treatments_with_loyalty
         patients_dict[pid] = patient
         next_pid += 1
 
@@ -406,7 +376,7 @@ def generate_instance(params: dict[str, Any]) -> Instance:
                 rid=rid,
                 resource_group=rg,
                 name=f"{rg.name}_{rid}",
-                unavailable_time_slots=[],  # unavailability_slots,
+                unavailable_time_slots=unavailability_slots,
             )
             resources_dict[rid] = resource
             next_rid += 1
@@ -454,3 +424,26 @@ def generate_instance(params: dict[str, Any]) -> Instance:
     )
 
     return instance
+
+
+def generate_instance_to_file(params):
+
+    # Find the biggest number of folder of form inst(number)
+    base_dir = "data"
+    folders = [
+        f for f in os.listdir(base_dir) if f.startswith("inst") and f[4:].isdigit()
+    ]
+    max_number = max([int(f[4:]) for f in folders], default=0)
+    new_folder_number = max_number + 1
+    new_folder_name = f"inst{new_folder_number:03}"
+    new_folder_path = os.path.join(base_dir, new_folder_name)
+
+    # Create the new folder
+    os.makedirs(new_folder_path, exist_ok=True)
+
+    # Generate (variable) many instances
+    num_instances = 1  # Set the number of instances you want to generate
+    for i in range(num_instances):
+        instance = generate_instance(params)
+        instance_filename = os.path.join(new_folder_path, f"instance_{i+1}.txt")
+        write_instance_to_file(instance_filename, instance)

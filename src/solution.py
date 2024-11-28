@@ -1,3 +1,4 @@
+from __future__ import annotations
 from src.instance import Instance
 from src.treatments import Treatment
 from src.resource import ResourceGroup, Resource
@@ -5,6 +6,7 @@ from src.patients import Patient
 from src.time import DayHour
 from src.logging import logger
 import math
+
 
 # Define the return code for the solver when no solution is found
 NO_SOLUTION_FOUND = 0
@@ -69,16 +71,20 @@ class Solution:
         instance: Instance,
         schedule: list[Appointment],
         patients_arrival: dict[Patient, DayHour],
+        solver,  # type: ignore
         test_even_distribution=True,
         test_conflict_groups=True,
         test_resource_loyalty=True,
+        solution_value: float = 0,
     ):
         self.instance = instance
         self.schedule = schedule  # List of Appointments
         self.patients_arrival = patients_arrival  # Dict[Patient, DayHour]
+        self.solver = solver
         self.test_even_distribution = test_even_distribution
         self.test_conflict_groups = test_conflict_groups
         self.test_resource_loyalty = test_resource_loyalty
+
         # Log the schedule for all patients and treatments
         for patients in self.patients_arrival:
             logger.debug(
@@ -96,11 +102,34 @@ class Solution:
 
         # Perform the checks
         self._check_constraints()
+
+        # Check
+        logger.debug("Checking solution value.")
+        logger.debug("Objective function value: %s", solution_value)
+        logger.debug("Calculated objective function value: %s", self.calc_objective())
+        assert (
+            solution_value == self.calc_objective()
+        ), "Solution value does not match calculated value."
+
         logger.debug("Solution is valid.")
+
+    def calc_objective(self):
+        """
+        Calculate the objective function value for this solution.
+        """
+        # Calculate the treatment value
+        treatment_obj = self.solver.treatment_value * len(self.schedule)
+        # Calculate the delay value
+        delay_obj = self.solver.delay_value * sum(
+            self.patients_arrival[p].day - p.earliest_admission_date.day
+            for p in self.instance.patients.values()
+        )
+
+        return treatment_obj + delay_obj
 
     def _check_constraints(self):
         self._check_patient_admission()
-        self._check_treatment_assignment()
+        self._check_treatment_assignment_during_stay()
         self._check_no_overlapping_appointments()
         self._check_resource_availability_and_uniqueness()
         if self.test_resource_loyalty:
@@ -135,17 +164,21 @@ class Solution:
                     f"their admission window ({earliest_admission} to {latest_admission})."
                 )
 
-    def _check_treatment_assignment(self):
+    def _check_treatment_assignment_during_stay(self):
         """
-        Ensure that patients not admitted have no treatments scheduled.
+        Ensure that for every treatment all schedules lie inside the patient's stay.
         """
         admitted_patients = set(self.patients_arrival.keys())
 
         for appointment in self.schedule:
             for patient in appointment.patients:
-                if patient not in admitted_patients:
+                if (
+                    self.patients_arrival[patient].day > appointment.start_date.day
+                    or self.patients_arrival[patient].day + patient.length_of_stay
+                    < appointment.start_date.day
+                ):
                     raise ValueError(
-                        f"Patient {patient.id} has treatments scheduled but is not admitted."
+                        f"Patient {patient.id} has treatments scheduled during day {appointment.start_date.day} but was admitted on day {self.patients_arrival[patient]} and has a length of stay of {patient.length_of_stay}."
                     )
 
     def _check_no_overlapping_appointments(self):

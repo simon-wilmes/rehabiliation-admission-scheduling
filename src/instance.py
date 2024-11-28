@@ -42,7 +42,7 @@ class Instance:
             "rolling_windows_days", [0, 5, 10, 15, 20]
         )
         self.time_slot_length: Duration = instance_data.get(
-            "time_slot_length", Duration(0, 15)
+            "time_slot_length", Duration(0, 30)
         )
         self.resource_groups: dict[RGID, ResourceGroup] = resource_groups
         self.treatments: dict[TID, Treatment] = treatments
