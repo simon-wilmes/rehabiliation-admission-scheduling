@@ -3,6 +3,7 @@ import gurobipy as gp
 from src.logging import logger, print
 
 from itertools import product
+
 from src.solution import Solution, NO_SOLUTION_FOUND, Appointment
 from src.solvers.solver import Solver
 from src.time import DayHour
@@ -117,7 +118,7 @@ class MIPSolver2(Solver):
             for m in self.M_p[p]:
                 self.model.addConstr(
                     gp.quicksum(self.y_pmi[p, m, i] for i in self.I_m[m])
-                    == self.lr_pm[p, m],
+                    <= self.lr_pm[p, m],
                     name=f"constraint_p1_b_p{p.id}_m{m.id}",
                 )
 
@@ -138,7 +139,13 @@ class MIPSolver2(Solver):
         # Constraint: Only one treatment every timeslot per patient
         for p in self.P:
             for d, t in product(self.A_p[p], self.T):
-                tau_set = [tau for tau in self.T if t - self.du_m[m] < tau <= t]
+                tau_set = [
+                    tau
+                    for tau in self.T
+                    if t - self.du_m[m] * self.instance.time_slot_length.hours
+                    < tau
+                    <= t
+                ]
 
                 self.model.addConstr(
                     gp.quicksum(
@@ -171,7 +178,9 @@ class MIPSolver2(Solver):
                             for m in self.M_fhat[fhat]
                             for i in self.I_m[m]
                             for tau in self.T
-                            if t - self.du_m[m] < tau <= t
+                            if t - self.du_m[m] * self.instance.time_slot_length.hours
+                            < tau
+                            <= t
                         )
                         <= int(f.is_available(DayHour(d, t))),
                         name=f"constraint_r2_b_f{f.id}_d{d}_t{t}",

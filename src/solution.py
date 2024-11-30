@@ -6,6 +6,7 @@ from src.patients import Patient
 from src.time import DayHour
 from src.logging import logger
 import math
+from typing import Type
 
 
 # Define the return code for the solver when no solution is found
@@ -107,11 +108,52 @@ class Solution:
         logger.debug("Checking solution value.")
         logger.debug("Objective function value: %s", solution_value)
         logger.debug("Calculated objective function value: %s", self.calc_objective())
+        self.value = self.calc_objective()
         assert (
-            solution_value == self.calc_objective()
+            solution_value == self.value
         ), "Solution value does not match calculated value."
 
         logger.debug("Solution is valid.")
+
+    def check_other_solvers(self):
+        from src.solvers import CPSolver, CPSolver2, MIPSolver, MIPSolver2, Solver
+        import logging
+
+        if logger.getEffectiveLevel() < logging.WARNING:
+            prev_level = logger.getEffectiveLevel()
+            logger.setLevel("WARNING")
+        solvers_cls: list[Type[Solver]] = [CPSolver2]
+        best_result = True
+
+        for solver_cls in solvers_cls:
+            solver = solver_cls(
+                self.instance,
+                use_resource_loyalty=self.test_resource_loyalty,
+                use_even_distribution=self.test_even_distribution,
+                use_conflict_groups=self.test_conflict_groups,
+                break_symetry=True,
+                log_to_console=False,
+            )
+
+            solver.create_model()
+            solver.assert_solution(self)
+            try:
+                solution = solver.solve_model(check_better_solution=False)
+                if solution is NO_SOLUTION_FOUND:
+                    logger.warning(
+                        "The Solver %s could not find the same solution as Solver %s",
+                        solver_cls.__name__,
+                        self.solver.__class__.__name__,
+                    )
+
+            except Exception as e:
+                logger.error(
+                    "There was an error during verifying the value of solution by solver %s",
+                    solver_cls.__name__,
+                )
+                logger.error(e)
+        logger.setLevel(prev_level)
+        logger.debug("All solvers accepted the solution.")
 
     def calc_objective(self):
         """
@@ -125,7 +167,29 @@ class Solution:
             for p in self.instance.patients.values()
         )
 
-        return treatment_obj + delay_obj
+        missing_obj = 0
+        # calculate the missing treatment value
+
+        scheduled_treatments = {}
+        for appointment in self.schedule:
+            treatment = appointment.treatment
+            for patient in appointment.patients:
+                key = (patient.id, treatment.id)
+                if key not in scheduled_treatments:
+                    scheduled_treatments[key] = 0
+                scheduled_treatments[key] += 1
+
+        for patient in self.instance.patients.values():
+            for treatment in self.instance.treatments.values():
+                lr_pm = self.solver.lr_pm[patient, treatment]
+                key = (patient.id, treatment.id)
+                scheduled_count = scheduled_treatments.get(key, 0)
+                missing_obj += (
+                    max(0, lr_pm - scheduled_count)
+                    * self.solver.missing_treatment_value
+                )
+
+        return treatment_obj + delay_obj + missing_obj
 
     def _check_constraints(self):
         self._check_patient_admission()
@@ -359,7 +423,7 @@ class Solution:
                     pass
                 key = (patient.id, treatment.id)
                 scheduled_count = scheduled_treatments.get(key, 0)
-                if scheduled_count != lr_pm:
+                if scheduled_count > lr_pm:
                     raise ValueError(
                         f"Patient {patient.id} has {scheduled_count} scheduled treatments for treatment {treatment.id}, "
                         f"but needs {lr_pm} out of the initial {patient.treatments[treatment]} repetitions."

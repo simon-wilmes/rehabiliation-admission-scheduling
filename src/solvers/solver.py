@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 from src.solution import Solution, Appointment
 from src.instance import Instance
 from math import ceil, floor
@@ -20,6 +21,7 @@ class Solver(ABC):
         "extra_treatments_factor": (float, 1.0, 10.0),
         "treatment_value": (float, 0.0, 10.0),
         "delay_value": (float, 0.0, 10.0),
+        "missing_treatment_value": (float, 0.0, 10.0),
         "use_conflict_groups": [True, False],
         "use_resource_loyalty": [True, False],
         "use_even_distribution": [True, False],
@@ -28,8 +30,9 @@ class Solver(ABC):
     BASE_SOLVER_DEFAULT_OPTIONS = {
         "number_of_threads": 12,
         "extra_treatments_factor": 2,
-        "treatment_value": 3,
+        "treatment_value": 2,
         "delay_value": 1,
+        "missing_treatment_value": 4,
         "use_conflict_groups": True,
         "use_resource_loyalty": True,
         "use_even_distribution": True,
@@ -37,6 +40,7 @@ class Solver(ABC):
     }
 
     def __init__(self, instance: Instance, **kwargs):
+
         logger.debug(f"Setting options: Solver")
         for key in Solver.BASE_SOLVER_OPTIONS:
             if key in kwargs:
@@ -59,12 +63,21 @@ class Solver(ABC):
     def add_conflict_groups(self):
         return self.use_conflict_groups  # type: ignore
 
-    def solve_model(self) -> Solution:
+    def solve_model(self, check_better_solution=True) -> Solution:
         logger.info("Solving model: %s", self.__class__.__name__)
         self.time_solve_model = time()
         solution = self._solve_model()
+        if check_better_solution and type(solution) is Solution:
+            solution.check_other_solvers()
         self.time_solve_model = time() - self.time_solve_model
-        logger.info("Time to solve model: %s", self.time_solve_model)
+        if type(solution) is Solution:
+            logger.info(
+                "Time to find solution: %s with value %f",
+                self.time_solve_model,
+                solution.value,
+            )
+        else:
+            logger.info("Time to show infeasibility: %s", self.time_solve_model)
         return solution
 
     def create_model(self) -> None:
@@ -75,7 +88,7 @@ class Solver(ABC):
         logger.info("Time to create model: %s", self.time_create_model)
 
     @abstractmethod
-    def _solve_model(self) -> Solution:
+    def _solve_model() -> Solution:
         pass
 
     @abstractmethod
@@ -132,11 +145,14 @@ class Solver(ABC):
             for p in self.instance.patients.values()
             for m in self.M_p[p]
         }
-        self.lr_pm = {
-            (p, m): int(p.treatments[m]) - p.already_scheduled_treatments[m]
-            for p in self.instance.patients.values()
-            for m in self.M_p[p]
-        }
+        self.lr_pm = defaultdict(
+            int,
+            {
+                (p, m): int(p.treatments[m]) - p.already_scheduled_treatments[m]
+                for p in self.instance.patients.values()
+                for m in self.M_p[p]
+            },
+        )
 
         self.l_p = {p: p.length_of_stay for p in self.instance.patients.values()}
         self.du_m = {
@@ -238,5 +254,8 @@ class Solver(ABC):
         for patient, day in patients_arrival.items():
             self._assert_patients_arrival_day(patient, day.day)
 
-        for app in solution.schedule:
+        self._assert_schedule(solution.schedule)
+
+    def _assert_schedule(self, schedule: list[Appointment]):
+        for app in schedule:
             self._assert_appointment(app)

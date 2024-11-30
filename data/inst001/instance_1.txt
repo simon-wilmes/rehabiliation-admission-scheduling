@@ -1,0 +1,28 @@
+[INSTANCE]
+num_beds: 6
+workday_start: 8.0
+workday_end: 18.0
+day_start: 0
+rolling_window_length: 7
+rolling_window_days: [0, 5, 10, 15, 20]
+
+conflict_groups: []
+[DATA: RESOURCE_GROUPS]: rgid, name
+0; RG_0
+1; RG_1
+2; RG_2
+3; RG_3
+
+[DATA: RESOURCES]: rid, rgid, name, unavailable_time_slots
+
+[DATA: TREATMENTS]: tid, num_participants, name, duration, resources
+0; 8; Treatment_0; Duration(hours=0.75); {0: (1, True), 3: (3, False)}
+1; 10; Treatment_1; Duration(hours=1.5); {1: (3, True), 3: (3, True)}
+2; 7; Treatment_2; Duration(hours=0.75); {0: (3, True), 2: (3, False), 3: (2, True)}
+3; 1; Treatment_3; Duration(hours=1.25); {2: (3, True)}
+4; 4; Treatment_4; Duration(hours=1.25); {1: (3, False), 2: (2, False)}
+5; 8; Treatment_5; Duration(hours=1.0); {0: (3, True), 1: (2, False)}
+6; 10; Treatment_6; Duration(hours=0.75); {0: (2, True), 1: (1, True), 2: (3, False), 3: (1, True)}
+7; 3; Treatment_7; Duration(hours=1.0); {}
+
+[DATA: PATIENTS]: pid, name, treatments, length_of_stay, earliest_admission_date, admitted_before_date, already_admitted, already_resource_loyal, already_scheduled_treatments

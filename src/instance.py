@@ -8,6 +8,7 @@ from src.patients import Patient
 from src.logging import logger, print
 from typing import Any
 import re
+from collections import defaultdict
 
 
 class Instance:
@@ -42,7 +43,7 @@ class Instance:
             "rolling_windows_days", [0, 5, 10, 15, 20]
         )
         self.time_slot_length: Duration = instance_data.get(
-            "time_slot_length", Duration(0, 30)
+            "time_slot_length", Duration(0, 15)
         )
         self.resource_groups: dict[RGID, ResourceGroup] = resource_groups
         self.treatments: dict[TID, Treatment] = treatments
@@ -61,8 +62,37 @@ class Instance:
 
         self.week_length = 5
 
-    def print_solution(self, solution):
-        pass
+        self.analyse_data()
+        # Print comprehensive instance data
+
+    def analyse_data(self):
+        logger.debug(f"Instance data:")
+        num_treatments = 0
+        num_days_stayed = 0
+        num_resources_needed = defaultdict(float)
+        for p in self.patients:
+            num_treatments += sum(val for val in self.patients[p].treatments.values())
+            num_days_stayed += self.patients[p].length_of_stay
+            for m in self.patients[p].treatments:
+                for fhat in m.resources:
+                    num_resources_needed[fhat] += m.resources[fhat] * m.duration.hours
+
+        logger.debug(f"Number of patients: {len(self.patients)}")
+        logger.debug(f"Number of beds: {self.beds_capacity}")
+        logger.debug(
+            f"Average number of treatments per patient: {num_treatments / len(self.patients)}"
+        )
+        logger.debug(
+            f"Average number of treatment per stayed day: {num_treatments / num_days_stayed}"
+        )
+        logger.debug(f"Number of treatments: {num_treatments}")
+        logger.debug(f"Number of resources: {len(self.resources)}")
+        logger.debug(f"Number of resource groups: {len(self.resource_groups)}")
+
+        for fhat in num_resources_needed:
+            logger.debug(
+                f"Number of resource units needed per treatment by {fhat}: {num_resources_needed[fhat]}"
+            )
 
 
 def create_instance_from_file(file_path: str) -> "Instance":

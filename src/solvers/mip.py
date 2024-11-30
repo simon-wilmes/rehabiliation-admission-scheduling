@@ -5,6 +5,7 @@ from math import ceil
 from numpy import arange
 from src.logging import logger, print
 from itertools import product
+
 from src.solution import Appointment, Solution, NO_SOLUTION_FOUND
 from src.time import DayHour
 from src.patients import Patient
@@ -39,6 +40,8 @@ class MIPSolver(Solver):
         model = gp.Model("PatientAdmissionScheduling")
         model.setParam("LogToConsole", int(self.log_to_console))  # type: ignore
         model.setParam("Threads", self.number_of_threads)  # type: ignore
+        model.setParam("Cuts", 0)
+        model.setParam("CutPasses", 3)
         vars = self._create_variables(model)
         self._create_constraints(model, *vars)
         self._set_optimization_goal(model, *vars)
@@ -48,7 +51,11 @@ class MIPSolver(Solver):
 
     def _solve_model(self) -> Solution | int:
         self.model.optimize()
-        if self.model.status == gp.GRB.OPTIMAL:
+        if (
+            self.model.status == gp.GRB.OPTIMAL
+            or self.model.status == gp.GRB.TIME_LIMIT
+            or self.model.status == gp.GRB.INTERRUPTED
+        ):
             logger.debug("Optimal solution found.")
             solution = self._extract_solution()
             return solution
@@ -92,7 +99,7 @@ class MIPSolver(Solver):
                             )
                         )
                         pass
-
+        logger.debug("Constraint (optimization) created.")
         minimize_treatments = gp.quicksum(
             o_pmdt[p, m, d, t] for p, m, d, t in o_pmdt_keys
         )
@@ -103,10 +110,18 @@ class MIPSolver(Solver):
             for d in self.A_p[p]
         )
 
+        minimize_missing_treatment = gp.quicksum(
+            self.lr_pm[p, m]
+            - gp.quicksum(x_pmdt[p, m, d, t] for d in self.A_p[p] for t in self.T)
+            for p in self.P
+            for m in self.M_p[p]
+        )
+
         # Set objective
         objective = (
             self.treatment_value * minimize_treatments  # type: ignore
             + self.delay_value * minimize_delay  # type: ignore
+            + self.missing_treatment_value * minimize_missing_treatment  # type: ignore
         )
 
         model.setObjective(objective, gp.GRB.MINIMIZE)
@@ -168,6 +183,7 @@ class MIPSolver(Solver):
             "v_pmf": v_pmf,
             "a_pd": a_pd,
         }
+        logger.debug("Variables created.")
         return x_pmdt, z_pmfdt, u_mfdt, v_pmf, a_pd
 
     def _create_constraints(
@@ -182,10 +198,10 @@ class MIPSolver(Solver):
             for m in self.M_p[p]:
                 model.addConstr(
                     gp.quicksum(x_pmdt[p, m, d, t] for d in self.A_p[p] for t in self.T)
-                    == self.lr_pm[p, m],
+                    <= self.lr_pm[p, m],
                     name=f"constraint_p1_p{p.id}_m{m.id}",
                 )
-
+        logger.debug("Constraint (p1) created.")
         # Constraint (p2): Patients not admitted have no treatments scheduled
         for p in self.P:
             for m in self.M_p[p]:
@@ -201,17 +217,17 @@ class MIPSolver(Solver):
                             <= gp.quicksum(a_pd[p, delta] for delta in delta_set),
                             name=f"constraint_p2_p{p.id}_m{m.id}_d{d}_t{t}",
                         )
-
+        logger.debug("Constraint (p2) created.")
         # Constraint (p3): Only one treatment at a time per patient
         for p in self.P:
             for d in self.A_p[p]:
                 for t in self.T:
                     expr = gp.LinExpr()
                     for m in self.M_p[p]:
-                        tau_set = [tau for tau in self.T if t - self.du_m[m] < tau <= t]
+                        tau_set = [tau for tau in self.T if t - self.du_m[m] * self.instance.time_slot_length.hours < tau <= t]
                         expr += gp.quicksum(x_pmdt[p, m, d, tau] for tau in tau_set)
                     model.addConstr(expr <= 1, name=f"constraint_p3_p{p.id}_d{d}_t{t}")
-
+        logger.debug("Constraint (p3) created.")
         # Constraint (p4): Total admitted patients cannot exceed total beds
         for d in self.D:
             expr = gp.LinExpr()
@@ -221,7 +237,7 @@ class MIPSolver(Solver):
                 ]
                 expr += gp.quicksum(a_pd[p, delta] for delta in delta_set)
             model.addConstr(expr <= self.b, name=f"constraint_p4_d{d}")
-
+        logger.debug("Constraint (p4) created.")
         # Constraint (p6): Patient admitted exactly once within the specified time
         for p in self.P:
             D_p_early = [d for d in self.A_p[p] if d <= max(self.A_p[p]) - self.l_p[p]]
@@ -229,14 +245,14 @@ class MIPSolver(Solver):
                 gp.quicksum(a_pd[p, d] for d in D_p_early) == 1,
                 name=f"constraint_p6_p{p.id}",
             )
-
+        logger.debug("Constraint (p6) created.")
         # Constraint (p7): Patient is admitted exactly once
         for p in self.P:
             model.addConstr(
                 gp.quicksum(a_pd[p, d] for d in self.A_p[p]) == 1,
                 name=f"constraint_p7_p{p.id}",
             )
-
+        logger.debug("Constraint (p7) created.")
         # Constraint (r2): Resource availability and utilization
         for fhat in self.Fhat:
             for f in self.fhat[fhat]:
@@ -261,7 +277,7 @@ class MIPSolver(Solver):
                             expr <= self.av_fdt[f, d, t],
                             name=f"constraint_r2_fhat{fhat.id}_f{f.id}_d{d}_t{t}",
                         )
-
+        logger.debug("Constraint (r2) created.")
         # Constraint (r3): Linking z and u variables
         for p in self.P:
             for m in self.M_p[p]:
@@ -273,7 +289,7 @@ class MIPSolver(Solver):
                                     z_pmfdt[p, m, f, d, t] <= u_mfdt[m, f, d, t],
                                     name=f"constraint_r3_p{p.id}_m{m.id}_f{f.id}_d{d}_t{t}",
                                 )
-
+        logger.debug("Constraint (r3) created.")
         # Constraint (r4): Assign required number of resources for each treatment
         for p in self.P:
             for m in self.M_p[p]:
@@ -288,7 +304,7 @@ class MIPSolver(Solver):
                                 lhs == rhs,
                                 name=f"constraint_r4_p{p.id}_m{m.id}_fhat{fhat.id}_d{d}_t{t}",
                             )
-
+        logger.debug("Constraint (r4) created.")
         # Constraint (a1): Limit the number of patients per treatment
         for m in self.M:
             for fhat in self.Fhat_m[m]:
@@ -304,7 +320,7 @@ class MIPSolver(Solver):
                                 lhs <= self.k_m[m],
                                 name=f"constraint_a1_m{m.id}_f{f.id}_d{d}_t{t}",
                             )
-
+        logger.debug("Constraint (a1) created.")
         if self.add_resource_loyal():
             # Constraint (a2-help): Resource loyalty linking
             for p in self.P:
@@ -362,7 +378,7 @@ class MIPSolver(Solver):
                 model.addConstr(
                     a_pd[p, 0] == 1, name=f"constraint_already_admitted_p{p.id}"
                 )
-
+        logger.debug("Constraint (already_admitted) created.")
         # Constraint: Make sure that already_resource_loyal is respected
         # Constraint: Ensure already resource loyal assignments are set to 1
         if self.add_resource_loyal():
@@ -376,8 +392,12 @@ class MIPSolver(Solver):
                             )
 
         # Constraint: Group people into sessions, enforce transitive property amongs resource usage
+        p1_index = 0
         for p1, p2 in product(self.P, self.P):
-            if p1 == p2:
+            if self.P.index(p1) > p1_index:
+                p1_index = self.P.index(p1)
+                logger.debug(f"New patient index seen: {p1_index}")
+            if self.P.index(p1) >= self.P.index(p2):
                 continue
             # Find iterate over common treatments
             for m in set(self.M_p[p1]) & set(self.M_p[p2]):
@@ -386,7 +406,7 @@ class MIPSolver(Solver):
                     common_resources |= set(self.fhat[fhat])
 
                 for f1, f2 in product(common_resources, common_resources):
-                    if f1 == f2:
+                    if self.F.index(f1) >= self.F.index(f2):
                         continue
                     D_p1p2 = set(self.A_p[p1]) & set(self.A_p[p2])
                     for d, t in product(D_p1p2, self.T):
@@ -397,6 +417,7 @@ class MIPSolver(Solver):
                             + z_pmfdt[p2, m, f2, d, t]
                             - 2
                         )
+        logger.debug("Constraint (transitive) created.")
 
     def _extract_solution(self):
         """

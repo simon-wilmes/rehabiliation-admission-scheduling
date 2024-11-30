@@ -28,7 +28,7 @@ conflict_groups: []
 # the second entry is the end date of the unavailability 
 # and the last entry is the interval of days of repetition, none if only once
 
-0;  0;  therapist0; [(DayHour(day=0,hour=8),DayHour(day=0, hour=9), None)]
+0;  0;  therapist0; None #[(DayHour(day=0,hour=8),DayHour(day=0, hour=9), None)]
 1;  0;  therapist1; None
 2;  0;  therapist2; None
 3;  1;  room3;  None
@@ -40,7 +40,7 @@ conflict_groups: []
 # "duration" is of type Duration
 # "resources" is of type dict[RGID, tuple[number_of_resources, requires_loyalty]]
 
-0; 5; music_therapy; Duration(hours=0, minutes=45); {0:(3,True), 1: (1, False)}
+0; 5; music_therapy; Duration(hours=0, minutes=45); {0:(1,False), 1: (1, False)}
 #1; 1; bath; Duration(hours=0, minutes=30); {1: (1, False)}
 #2; 2; trust_exercise; Duration(hours=0, minutes=30); {0: (1, False), 1: (1, False)}
 
@@ -59,7 +59,7 @@ conflict_groups: []
 # "already_resource_loyal" is a dictionary where the keys are (tuples) of treatment TID and RGID and values is a the list of RID that are loyal, this means that the list must have length of required resources of RGID for treatment TID
 # "already_scheduled_treatments" is a list of tuples where each tuple contains a treatment ID (int) and the number of times it was already scheduled in the past
 
-0; patient0; {0:1}; 1; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; {(0,0):[1]}; []
+0; patient0; {0:100}; 1; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; {(0,0):[1]}; []
 #1; patient1; { 1:4, 2: 1}; 4; DayHour(day=1, hour=0, minutes=0); DayHour(day=5, hour=0, minutes=0); False; {}; []
 #2; patient2; { 0:3, 2: 3}; 6; DayHour(day=2, hour=0, minutes=0); DayHour(day=4, hour=0, minutes=0); False; {}; []
 

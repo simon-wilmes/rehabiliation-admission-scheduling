@@ -52,6 +52,8 @@ class CPSolver(Solver):
         solver.parameters.num_search_workers = (
             self.number_of_threads  # type: ignore
         )  # Set the number of threads
+        self.solver = solver
+
         status = solver.Solve(self.model)
         if status in [cp_model.OPTIMAL, cp_model.FEASIBLE]:
             logger.debug(f"Solution found with status {solver.StatusName(status)}")
@@ -100,7 +102,29 @@ class CPSolver(Solver):
             for r, vars in rep_vars.items():
                 treatment_list.append(self.treatment_value * vars["is_present"])  # type: ignore
 
-        obj_list = delay_list + treatment_list
+        missing_treatment_list = []
+        for p in self.P:
+            for m in self.M_p[p]:
+                patient_vars = self.patient_vars[p][m]
+
+                missing_treatment_list.append(
+                    (
+                        (
+                            self.lr_pm[p, m]
+                            - cp_model.LinearExpr.Sum(
+                                [
+                                    var  # type: ignore
+                                    for rep, var in patient_vars[
+                                        "patient_treatment_assignment"
+                                    ].items()
+                                ]
+                            )
+                        )
+                        * self.missing_treatment_value  # type: ignore
+                    )
+                )
+
+        obj_list = delay_list + treatment_list + missing_treatment_list
 
         self.model.Minimize(cp_model.LinearExpr.Sum(obj_list))
 
@@ -111,7 +135,7 @@ class CPSolver(Solver):
             + self.instance.workday_start.hour,
         )
 
-    def time2slot(self, t: tuple[int, int]) -> float:
+    def time2slot(self, t: tuple[int, float]) -> float:
         return (
             t[0] * self.num_time_slots
             + (t[1] - self.instance.workday_start.hour)
@@ -243,7 +267,7 @@ class CPSolver(Solver):
                             ].items()
                         ]
                     )
-                    == self.lr_pm[p, m]
+                    <= self.lr_pm[p, m]
                 )
 
         # CONSTRAINT A1: A treatment is provided for at most k_m patients
@@ -504,7 +528,36 @@ class CPSolver(Solver):
     def _assert_patients_arrival_day(self, patient: Patient, day: int):
         self.model.add(self.admission_vars[patient] == day)
 
+    def _assert_schedule(self, schedule: list[Appointment]):
+        schedule.sort(key=lambda x: x.start_date)
+        for app in schedule:
+            self._assert_appointment(app)
+
     def _assert_appointment(self, appointment: Appointment):
 
-        logger.error("Assert appointment not implemented")
-        raise NotImplementedError
+        if not hasattr(self, "patient_rep"):
+            self.patient_rep = defaultdict(int)
+            self.treatment_rep = defaultdict(int)  #
+
+        m = appointment.treatment
+        resources = appointment.resources
+        d = appointment.start_date.day
+
+        r = self.treatment_rep[m]
+        self.treatment_rep[m] += 1
+
+        for p in appointment.patients:
+            pr = self.patient_rep[p, m]
+            self.patient_rep[p] += 1
+            self.model.add(
+                self.patient_vars[p][m]["patient_treatment_assignment"][r] == 1
+            )
+
+        self.model.add(
+            self.treatment_vars[m][r]["start_slot"]
+            == int(self.time2slot((d, appointment.start_date.hour)))
+        )
+
+        for fhat, fs in resources.items():
+            for f in fs:
+                self.model.add(self.treatment_vars[m][r]["resources"][fhat][f] == 1)

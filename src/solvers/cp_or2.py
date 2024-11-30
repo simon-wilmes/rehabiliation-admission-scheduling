@@ -7,6 +7,7 @@ from collections import defaultdict
 from src.logging import logger
 from src.instance import Instance
 from src.time import DayHour, Duration
+
 from src.solution import Solution, Appointment
 from src.solution import NO_SOLUTION_FOUND
 from copy import copy
@@ -29,7 +30,7 @@ class CPSolver2(Solver):
     SOLVER_DEFAULT_OPTIONS = {
         "product_repr": "only-if",
         "treatment-scheduling": "1d",
-        "break_symmetry": "2d-view",
+        "break_symmetry": "False",
     }
 
     def __init__(self, instance: Instance, **kwargs):
@@ -52,6 +53,7 @@ class CPSolver2(Solver):
         solver.parameters.num_search_workers = (
             self.number_of_threads  # type: ignore
         )  # Set the number of threads
+        self.solver = solver
         status = solver.Solve(self.model)
         if status in [cp_model.OPTIMAL, cp_model.FEASIBLE]:
             logger.debug(f"Solution found with status {solver.StatusName(status)}")
@@ -67,7 +69,7 @@ class CPSolver2(Solver):
 
         self.model = cp_model.CpModel()
         self._create_constraints()
-        if self.break_symmetry:  # type: ignore
+        if self.break_symmetry != "False":  # type: ignore
             self._break_symmetry()
         self._set_optimization_goal()
 
@@ -95,6 +97,7 @@ class CPSolver2(Solver):
     def _set_optimization_goal(self):
         # Objective: Maximize the total number of scheduled treatments, possibly weighted
         # List to store the variables that encode the product w_d[day] * is_assigned_to_treatment
+
         delay_list = []
 
         for p, admission_day in self.admission_vars.items():
@@ -104,7 +107,38 @@ class CPSolver2(Solver):
         for (m, r, d), vars in self.treat_rep_day_vars.items():
             treatment_list.append(self.treatment_value * vars["is_present"])  # type: ignore
 
-        obj_list = delay_list + treatment_list
+        missing_treatment_list = []
+        for p in self.P:
+            for m in self.M_p[p]:
+                patient_vars = self.patient_vars[p][m]
+
+                missing_treatment_list.append(
+                    (
+                        (
+                            self.lr_pm[p, m]
+                            - cp_model.LinearExpr.Sum(
+                                [
+                                    var  # type: ignore
+                                    for var in self.patient_treat_vars[p, m].values()
+                                ]
+                            )
+                        )
+                        * self.missing_treatment_value  # type: ignore
+                    )
+                )
+
+        obj_list = delay_list + treatment_list + missing_treatment_list
+
+        self.treat_var = self.model.new_int_var(-10000, 1000000, "t_var")
+        self.model.add(self.treat_var == cp_model.LinearExpr.Sum(treatment_list))
+
+        self.missing_var = self.model.new_int_var(-10000, 1000000, "missing_var")
+        self.model.add(
+            self.missing_var == cp_model.LinearExpr.Sum(missing_treatment_list)
+        )
+
+        self.delay_var = self.model.new_int_var(-10000, 1000000, "delay_var")
+        self.model.add(self.delay_var == cp_model.LinearExpr.Sum(delay_list))
 
         self.model.Minimize(cp_model.LinearExpr.Sum(obj_list))
 
@@ -157,6 +191,7 @@ class CPSolver2(Solver):
                             resource_vars[fhat][f] = use_resource_on_d
 
                             # CONSTRAINT: resources can only be assigned if is_present is true
+
                             self.model.add_implication(
                                 use_resource_on_d, is_treatment_scheduled_on_d
                             )
@@ -172,6 +207,7 @@ class CPSolver2(Solver):
                             intervals_using_f[f].append(interval_using_f)
 
                         # CONSTRAINT R4: Make sure that every treatment has the required resources
+
                         self.model.add(
                             cp_model.LinearExpr.Sum(
                                 [resource_vars[fhat][f] for f in self.fhat[fhat]]
@@ -217,11 +253,14 @@ class CPSolver2(Solver):
                     intervals_using_f[f].append(blocked_interval_f)
 
                 # CONSTRAINT R3: Resource availability constraints
+
                 self.model.add_no_overlap(intervals_using_f[f])
 
         # CONSTRAINT: Every treatment can only be scheduled once
         for (m, r), day_vars in self.treat_rep_vars.items():
+
             self.model.add_at_most_one(vars["is_present"] for vars in day_vars.values())
+
             pass
 
         # Variables for patient admission dates
@@ -255,6 +294,7 @@ class CPSolver2(Solver):
                         self.patient_treat_vars[(p, m)][r, d] = patient2treatment
 
                         # CONSTRAINT: treatment must be scheduled if patient is assigned to it
+
                         self.model.add_implication(
                             patient2treatment,
                             self.treatment_vars[m][r][d]["is_present"],
@@ -270,6 +310,7 @@ class CPSolver2(Solver):
                         intervals_per_day.append(interval)
 
                 # CONSTRAINT P2: no treatment overlaps for a patient on day d
+
                 self.model.add_no_overlap(intervals_per_day)
 
         # CONSTRAINT P1: Patient has lr_pm treatments scheduled
@@ -280,8 +321,9 @@ class CPSolver2(Solver):
                     cp_model.LinearExpr.Sum(
                         [var for var in self.patient_treat_vars[p, m].values()]
                     )
-                    == self.lr_pm[p, m]
+                    <= self.lr_pm[p, m]
                 )
+                pass
 
         # CONSTRAINT A1: A treatment is provided for at most k_m patients
         tmp_treat_rep_day_vars = defaultdict(list)
@@ -292,7 +334,7 @@ class CPSolver2(Solver):
         for (m, r, d), patient_vars in tmp_treat_rep_day_vars.items():
             self.model.add(cp_model.LinearExpr.Sum(patient_vars) <= self.k_m[m])
 
-            pass
+        pass
         # Admission constraints
         for p in self.P:
             admission_day = self.admission_vars[p]
@@ -305,11 +347,14 @@ class CPSolver2(Solver):
         # Ensure that admission is in the correct range
         for p in self.P:
             admission_day = self.admission_vars[p]
+
             self.model.add(admission_day >= p.earliest_admission_date.day)
+
             self.model.add(admission_day < p.admitted_before_date.day)
 
         # Ensure treatments are scheduled within admission period
         for (p, m, r), day_vars in self.patient_treat_rep_vars.items():
+
             admission_day = self.admission_vars[p]
             for d, var in day_vars.items():
                 new_bool_var = self.model.new_bool_var(
@@ -445,5 +490,3 @@ class CPSolver2(Solver):
         for fhat, fs in resources.items():
             for f in fs:
                 self.model.add(self.treatment_vars[m][r][d]["resources"][fhat][f] == 1)
-
-        # raise NotImplementedError

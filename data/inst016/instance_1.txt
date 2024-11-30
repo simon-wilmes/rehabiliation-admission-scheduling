@@ -1,0 +1,48 @@
+[INSTANCE]
+num_beds: 9
+workday_start: 8.0
+workday_end: 18.0
+day_start: 0
+rolling_window_length: 7
+rolling_window_days: [0, 5, 10, 15, 20]
+
+conflict_groups: []
+[DATA: RESOURCE_GROUPS]: rgid, name
+0; RG_0
+1; RG_1
+2; RG_2
+
+[DATA: RESOURCES]: rid, rgid, name, unavailable_time_slots
+0; 1; RG_1_0; [(DayHour(0, 0.0), DayHour(0, 8.0), 1),(DayHour(0, 8.25), DayHour(0, 9.0), 1), (DayHour(0, 18.0), DayHour(0, 23.983333333333334), 1)]
+1; 1; RG_1_1; [(DayHour(0, 0.0), DayHour(0, 8.0), 1), (DayHour(0, 18.0), DayHour(0, 23.983333333333334), 1)]
+2; 2; RG_2_2; [(DayHour(0, 0.0), DayHour(0, 8.0), 1), (DayHour(0, 18.0), DayHour(0, 23.983333333333334), 1)]
+3; 2; RG_2_3; [(DayHour(0, 0.0), DayHour(0, 8.0), 1), (DayHour(0, 18.0), DayHour(0, 23.983333333333334), 1)]
+4; 0; RG_0_4; [(DayHour(0, 0.0), DayHour(0, 8.0), 1), (DayHour(0, 18.0), DayHour(0, 23.983333333333334), 1)]
+5; 0; RG_0_5; [(DayHour(0, 0.0), DayHour(0, 8.0), 1), (DayHour(0, 18.0), DayHour(0, 23.983333333333334), 1)]
+6; 0; RG_0_6; [(DayHour(0, 0.0), DayHour(0, 8.0), 1), (DayHour(0, 18.0), DayHour(0, 23.983333333333334), 1)]
+
+[DATA: TREATMENTS]: tid, num_participants, name, duration, resources
+0; 2; Treatment_0; Duration(hours=1.0); {2: (1, False)}
+1; 10; Treatment_1; Duration(hours=1.0); {1: (1, False)}
+2; 9; Treatment_2; Duration(hours=1.25); {0: (2, False), 2: (2, False)}
+3; 7; Treatment_3; Duration(hours=1.0); {2: (1, False)}
+4; 4; Treatment_4; Duration(hours=1.0); {0: (3, True)}
+5; 3; Treatment_5; Duration(hours=1.25); {1: (2, True)}
+6; 6; Treatment_6; Duration(hours=1.0); {2: (2, False)}
+
+[DATA: PATIENTS]: pid, name, treatments, length_of_stay, earliest_admission_date, admitted_before_date, already_admitted, already_resource_loyal, already_scheduled_treatments
+0; Patient_0; {5: 1, 3: 1, 6: 3, 1: 2, 4: 1, 0: 1, 2: 3}; 4; DayHour(day=0, hour=0.0); DayHour(day=5, hour=0.0); False; {}; []
+1; Patient_1; {4: 2, 6: 1, 5: 3, 3: 1, 1: 3, 0: 2, 2: 3}; 5; DayHour(day=0, hour=0.0); DayHour(day=5, hour=0.0); False; {}; []
+2; Patient_2; {6: 2, 1: 3, 0: 1, 4: 1, 2: 3, 3: 2, 5: 3}; 5; DayHour(day=0, hour=0.0); DayHour(day=1, hour=0.0); False; {}; []
+3; Patient_3; {1: 1, 6: 1, 0: 3, 3: 1, 2: 1, 4: 1, 5: 1}; 3; DayHour(day=0, hour=0.0); DayHour(day=3, hour=0.0); False; {}; []
+4; Patient_4; {1: 3, 5: 1, 0: 3, 4: 1, 3: 1, 2: 2, 6: 1}; 4; DayHour(day=0, hour=0.0); DayHour(day=2, hour=0.0); False; {}; []
+5; Patient_5; {6: 3, 1: 2, 5: 2, 0: 1, 4: 2, 3: 1, 2: 1}; 4; DayHour(day=0, hour=0.0); DayHour(day=2, hour=0.0); False; {}; []
+6; Patient_6; {2: 1, 6: 1, 3: 2, 0: 2, 1: 2, 5: 1, 4: 3}; 4; DayHour(day=0, hour=0.0); DayHour(day=1, hour=0.0); False; {}; []
+7; Patient_7; {3: 1, 1: 2, 0: 1, 2: 3, 4: 3, 6: 1, 5: 4}; 5; DayHour(day=0, hour=0.0); DayHour(day=2, hour=0.0); False; {}; []
+8; Patient_8; {2: 3, 1: 3, 6: 2, 4: 1, 5: 2, 3: 3, 0: 1}; 5; DayHour(day=0, hour=0.0); DayHour(day=5, hour=0.0); False; {}; []
+9; Patient_9; {1: 2, 0: 2, 3: 2, 6: 2, 2: 1, 5: 2, 4: 1}; 4; DayHour(day=3, hour=0.0); DayHour(day=5, hour=0.0); False; {}; []
+10; Patient_10; {4: 3, 1: 3, 6: 1, 2: 3, 5: 2, 3: 1, 0: 2}; 5; DayHour(day=4, hour=0.0); DayHour(day=5, hour=0.0); False; {}; []
+11; Patient_11; {4: 2, 5: 4, 0: 1, 1: 1, 6: 1, 2: 1, 3: 2}; 4; DayHour(day=4, hour=0.0); DayHour(day=5, hour=0.0); False; {}; []
+12; Patient_12; {4: 1, 5: 2, 3: 1, 6: 1, 1: 1, 2: 3, 0: 3}; 4; DayHour(day=4, hour=0.0); DayHour(day=5, hour=0.0); False; {}; []
+13; Patient_13; {3: 2, 4: 1, 0: 2, 5: 2, 1: 1, 6: 2, 2: 2}; 4; DayHour(day=4, hour=0.0); DayHour(day=8, hour=0.0); False; {}; []
+14; Patient_14; {0: 4, 4: 2, 2: 2, 5: 2, 3: 1, 1: 2, 6: 2}; 5; DayHour(day=5, hour=0.0); DayHour(day=10, hour=0.0); False; {}; []
