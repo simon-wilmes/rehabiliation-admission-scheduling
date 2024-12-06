@@ -7,6 +7,9 @@ from src.time import DayHour
 from src.logging import logger
 import math
 from typing import Type
+from src.utils import slice_dict
+from collections import defaultdict
+from math import ceil, floor
 
 
 # Define the return code for the solver when no solution is found
@@ -72,7 +75,7 @@ class Solution:
         instance: Instance,
         schedule: list[Appointment],
         patients_arrival: dict[Patient, DayHour],
-        solver,  # type: ignore
+        solver=None,  # type: ignore
         test_even_distribution=True,
         test_conflict_groups=True,
         test_resource_loyalty=True,
@@ -105,15 +108,17 @@ class Solution:
         self._check_constraints()
 
         # Check
-        logger.debug("Checking solution value.")
-        logger.debug("Objective function value: %s", solution_value)
-        logger.debug("Calculated objective function value: %s", self.calc_objective())
-        self.value = self.calc_objective()
-        assert (
-            solution_value == self.value
-        ), "Solution value does not match calculated value."
+        if self.solver is not None:
+            logger.debug("Checking solution value.")
+            logger.debug("Solvers objective function value: %s", solution_value)
 
-        logger.debug("Solution is valid.")
+            self.value = self.calc_objective()
+            logger.debug("Correct objective function value: %s", self.value)
+            assert (
+                solution_value == self.value
+            ), "Solution value does not match calculated value."
+
+            logger.debug("Solution is valid.")
 
     def check_other_solvers(self):
         from src.solvers import CPSolver, CPSolver2, MIPSolver, MIPSolver2, Solver
@@ -122,7 +127,7 @@ class Solution:
         if logger.getEffectiveLevel() < logging.WARNING:
             prev_level = logger.getEffectiveLevel()
             logger.setLevel("WARNING")
-        solvers_cls: list[Type[Solver]] = [CPSolver2]
+        solvers_cls: list[Type[Solver]] = []
         best_result = True
 
         for solver_cls in solvers_cls:
@@ -145,6 +150,13 @@ class Solution:
                         solver_cls.__name__,
                         self.solver.__class__.__name__,
                     )
+                assert (
+                    solution.value == self.value
+                ), "The solution value %f is different for solver %s with %f " % (
+                    solver_cls.__name__,
+                    self.value,
+                    solution.value,
+                )
 
             except Exception as e:
                 logger.error(
@@ -159,6 +171,10 @@ class Solution:
         """
         Calculate the objective function value for this solution.
         """
+        from src.solvers import Solver
+
+        assert isinstance(self.solver, Solver), "Solver is not set."
+
         # Calculate the treatment value
         treatment_obj = self.solver.treatment_value * len(self.schedule)
         # Calculate the delay value
@@ -170,25 +186,30 @@ class Solution:
         missing_obj = 0
         # calculate the missing treatment value
 
-        scheduled_treatments = {}
+        scheduled_treatments = defaultdict(int)
         for appointment in self.schedule:
-            treatment = appointment.treatment
             for patient in appointment.patients:
-                key = (patient.id, treatment.id)
-                if key not in scheduled_treatments:
-                    scheduled_treatments[key] = 0
-                scheduled_treatments[key] += 1
+                scheduled_treatments[patient] += 1
 
+        horizon_length = self.instance.horizon_length
         for patient in self.instance.patients.values():
-            for treatment in self.instance.treatments.values():
-                lr_pm = self.solver.lr_pm[patient, treatment]
-                key = (patient.id, treatment.id)
-                scheduled_count = scheduled_treatments.get(key, 0)
-                missing_obj += (
-                    max(0, lr_pm - scheduled_count)
-                    * self.solver.missing_treatment_value
-                )
+            # calc how many treatments should be scheduled
 
+            num_treatments = sum(
+                value
+                for value in slice_dict(self.solver.lr_pm, (patient, None)).values()  # type: ignore
+            )
+
+            scheduled_count = scheduled_treatments.get(patient, 0)
+
+            missing_obj += (
+                max(0, num_treatments - scheduled_count)
+                * self.solver.missing_treatment_value
+            )
+
+        logger.debug("(VERIFIER):Treatment value: %s", treatment_obj)
+        logger.debug("(VERIFIER):Delay value: %s", delay_obj)
+        logger.debug("(VERIFIER):Missing treatment value: %s", missing_obj)
         return treatment_obj + delay_obj + missing_obj
 
     def _check_constraints(self):
@@ -198,12 +219,13 @@ class Solution:
         self._check_resource_availability_and_uniqueness()
         if self.test_resource_loyalty:
             self._check_resource_loyalty()
-        # self._check_max_patients_per_treatment()
         self._check_bed_capacity()
         self._check_total_treatments_scheduled()
+        self._check_no_treatments_outside_horizont()
 
         if self.test_even_distribution:
             self._check_even_scheduling()
+
         if self.test_conflict_groups:
             self._check_conflict_groups()
 
@@ -239,7 +261,7 @@ class Solution:
                 if (
                     self.patients_arrival[patient].day > appointment.start_date.day
                     or self.patients_arrival[patient].day + patient.length_of_stay
-                    < appointment.start_date.day
+                    <= appointment.start_date.day
                 ):
                     raise ValueError(
                         f"Patient {patient.id} has treatments scheduled during day {appointment.start_date.day} but was admitted on day {self.patients_arrival[patient]} and has a length of stay of {patient.length_of_stay}."
@@ -465,44 +487,61 @@ class Solution:
         during this time frame considering the total treatments and the patient's length of stay, rounded up.
         """
 
-        rolling_window_checks = zip(
-            self.instance.rolling_window_days,
-            [self.instance.rolling_window_length]
-            * len(self.instance.rolling_window_days),
-        )
-
         # List[Tuple[int, int]]  # List of (start_day, window_length)
         # For each patient
+        patient_days = defaultdict(int)
+
+        for app in self.schedule:
+            for patient in app.patients:
+                patient_days[patient, app.start_date.day] += 1
+
+        e_w = self.instance.even_scheduling_width
+        e_ub = self.instance.even_scheduling_upper
+        e_lb = self.instance.even_scheduling_lower
 
         for patient in self.instance.patients.values():
-            for treatment, required_treatments in patient.treatments.items():
+            avg_treatments = (
+                sum(n_m for n_m in patient.treatments.values())
+                * e_w
+                / patient.length_of_stay
+            )
 
-                l_p = patient.length_of_stay  # Length of stay for patient p
-                average_per_day = (
-                    required_treatments / l_p
-                )  # Average number of treatments per day
-                # Build a list of appointment days for this patient
-                appointment_days = []
-                for appointment in self.schedule:
-                    if (
-                        patient in appointment.patients
-                        and appointment.treatment == treatment
-                    ):
-                        appointment_days.append(appointment.start_date.day)
-                appointment_days.sort()
-                # Now for each rolling window
-                for start_day, window_length in rolling_window_checks:
-                    window_end_day = start_day + window_length
-                    # Count number of appointments in this window
-                    scheduled_count = sum(
-                        1
-                        for day in appointment_days
-                        if start_day <= day < window_end_day
+            for day in range(
+                patient.earliest_admission_date.day,
+                patient.admitted_before_date.day + patient.length_of_stay + 1,
+            ):
+                treatments_scheduled = sum(
+                    patient_days[patient, d] for d in range(day, day + e_w)
+                )
+
+                # Check upperbound
+                if treatments_scheduled > ceil(avg_treatments * e_ub):
+                    raise ValueError(
+                        f"Patient {patient.id} has {treatments_scheduled} treatments scheduled in the window "
+                        f"starting at day {day}, which exceeds the upper bound of {ceil(avg_treatments * e_ub)}."
                     )
-                    expected_treatments = math.ceil(average_per_day * window_length)
-                    if scheduled_count > expected_treatments:
+
+                # Check lowerbound if the day range is completely within the patient's stay
+                if (
+                    self.patients_arrival[patient].day <= day
+                    and day + e_w
+                    <= self.patients_arrival[patient].day + patient.length_of_stay
+                ):
+
+                    if treatments_scheduled < floor(avg_treatments * e_lb):
                         raise ValueError(
-                            f"Patient {patient.id} has {scheduled_count} treatments for treatment {treatment} scheduled "
-                            f"between day {start_day} and {window_end_day - 1}, which exceeds the expected "
-                            f"{expected_treatments} treatments."
+                            f"Patient {patient.id} has {treatments_scheduled} treatments scheduled in the window "
+                            f"starting at day {day}, which is below the lower bound of {floor(avg_treatments * e_lb)}."
                         )
+
+    def _check_no_treatments_outside_horizont(self):
+        """
+        Ensure that no treatment is scheduled outside the horizon length.
+        """
+        horizon_length = self.instance.horizon_length
+        for appointment in self.schedule:
+            start_day = appointment.start_date.day
+            if start_day >= horizon_length:
+                raise ValueError(
+                    f"Appointment for treatment {appointment.treatment.id} is scheduled outside the horizon length."
+                )

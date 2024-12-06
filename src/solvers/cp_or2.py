@@ -61,7 +61,7 @@ class CPSolver2(Solver):
             solution = self._extract_solution(solver)
             return solution
         else:
-            logger.error("No solution found.")
+            logger.info("No solution found.")
             return NO_SOLUTION_FOUND
 
     def _create_model(self):
@@ -92,7 +92,7 @@ class CPSolver2(Solver):
         # Define any additional sets or mappings needed for the model
         # besides the ones created in the parent class
         self.num_time_slots = len(self.T)
-        self.reps_left = {m: self.k_m[m] for m in self.M}
+
 
     def _set_optimization_goal(self):
         # Objective: Maximize the total number of scheduled treatments, possibly weighted

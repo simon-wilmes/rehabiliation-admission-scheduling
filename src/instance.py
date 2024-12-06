@@ -19,8 +19,11 @@ class Instance:
         treatments: dict[TID, Treatment],
         resources: dict[RID, Resource],
         patients: dict[PID, Patient],
+        name: str = "Instance",
     ):
+        self.name = name
         self.beds_capacity = instance_data["num_beds"]
+
         conflict_groups: list[set[TID]] = instance_data.get("conflict_groups", [])
         # replace tid with treatment object
         self.conflict_groups = [
@@ -28,20 +31,19 @@ class Instance:
             for conflict_group in conflict_groups
         ]
 
-        self.workday_start: DayHour = (
-            instance_data["workday_start"]
-            if "workday_start" in instance_data
-            else DayHour(hour=8, minutes=0)
+        self.horizon_length: int = instance_data.get("horizon_length", 20)
+
+        self.workday_start: DayHour = instance_data.get(
+            "workday_start", DayHour(hour=9, minutes=0)
         )
-        self.workday_end = (
-            instance_data["workday_end"]
-            if "workday_end" in instance_data
-            else DayHour(hour=17, minutes=0)
+        self.workday_end: DayHour = instance_data.get(
+            "workday_end", DayHour(hour=17, minutes=0)
         )
-        self.rolling_window_length: int = instance_data.get("rolling_window_length", 7)
-        self.rolling_window_days: list[int] = instance_data.get(
-            "rolling_windows_days", [0, 5, 10, 15, 20]
-        )
+
+        self.even_scheduling_width = instance_data.get("even_scheduling_width", 5)
+        self.even_scheduling_upper = instance_data.get("even_scheduling_upper", 1.2)
+        self.even_scheduling_lower = instance_data.get("even_scheduling_lower", 0.8)
+
         self.time_slot_length: Duration = instance_data.get(
             "time_slot_length", Duration(0, 15)
         )
@@ -173,16 +175,20 @@ def create_instance_from_file(file_path: str) -> "Instance":
                         instance_data["workday_start"] = DayHour(hour=float(value))
                     case "workday_end":
                         instance_data["workday_end"] = DayHour(hour=float(value))
-                    case "rolling_window_length":
-                        instance_data["rolling_window_length"] = int(value)
-                    case "rolling_window_days":
-                        instance_data["rolling_window_days"] = ast.literal_eval(value)
+                    case "even_scheduling_upper":
+                        instance_data["even_scheduling_upper"] = float(value)
+                    case "even_scheduling_lower":
+                        instance_data["even_scheduling_lower"] = float(value)
+                    case "even_scheduling_width":
+                        instance_data["even_scheduling_width"] = int(value)
                     case "time_slot_length":
-                        instance_data["time_slot_length"] = float(value)
+                        instance_data["time_slot_length"] = parsing_parameter(value)
                     case "conflict_groups":
                         instance_data["conflict_groups"] = ast.literal_eval(value)
                     case "day_start":
                         instance_data["day_start"] = int(value)
+                    case "horizon_length":
+                        instance_data["horizon_length"] = int(value)
                     case _:
                         logger.warning(f"Unknown key {key} in INSTANCE section")
 
@@ -270,6 +276,7 @@ def create_instance_from_file(file_path: str) -> "Instance":
         treatments=treatments,
         resources=resources,
         patients=patients,
+        name=file_path,
     )
 
 

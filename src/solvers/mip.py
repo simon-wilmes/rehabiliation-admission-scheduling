@@ -5,7 +5,8 @@ from math import ceil
 from numpy import arange
 from src.logging import logger, print
 from itertools import product
-
+from src.utils import slice_dict
+from math import floor, ceil
 from src.solution import Appointment, Solution, NO_SOLUTION_FOUND
 from src.time import DayHour
 from src.patients import Patient
@@ -41,7 +42,9 @@ class MIPSolver(Solver):
         model.setParam("LogToConsole", int(self.log_to_console))  # type: ignore
         model.setParam("Threads", self.number_of_threads)  # type: ignore
         model.setParam("Cuts", 0)
-        model.setParam("CutPasses", 3)
+
+        # model.setParam("CutPasses", 3)
+        model.setParam("NoRelHeurTime", self.no_rel_heur_time)  # type: ignore
         vars = self._create_variables(model)
         self._create_constraints(model, *vars)
         self._set_optimization_goal(model, *vars)
@@ -56,11 +59,16 @@ class MIPSolver(Solver):
             or self.model.status == gp.GRB.TIME_LIMIT
             or self.model.status == gp.GRB.INTERRUPTED
         ):
-            logger.debug("Optimal solution found.")
+            logger.info("Optimal solution found.")
+            logger.debug("Sub Objectives:")
+            logger.debug(f"(SOLVER):Minimize Treatments: {self.mt.X}")
+            logger.debug(f"(SOLVER):Minimize Delay: {self.md.X}")
+            logger.debug(f"(SOLVER):Minimize Missing Treatments: {self.mmt.X}")
+
             solution = self._extract_solution()
             return solution
         else:
-            logger.error("No optimal solution found.")
+            logger.info("No optimal solution found.")
             # Compute IIS
             self.model.computeIIS()
 
@@ -76,6 +84,7 @@ class MIPSolver(Solver):
                     logger.debug(f"Variable {var.VarName} is in the IIS with bounds")
             return NO_SOLUTION_FOUND
 
+    
     def _set_optimization_goal(
         self, model: gp.Model, x_pmdt, z_pmfdt, u_mfdt, v_pmf, a_pd
     ):
@@ -107,21 +116,35 @@ class MIPSolver(Solver):
         minimize_delay = gp.quicksum(
             (d - p.earliest_admission_date.day) * a_pd[p, d]
             for p in self.P
-            for d in self.A_p[p]
+            for d in self.D_p[p]
         )
 
-        minimize_missing_treatment = gp.quicksum(
-            self.lr_pm[p, m]
-            - gp.quicksum(x_pmdt[p, m, d, t] for d in self.A_p[p] for t in self.T)
-            for p in self.P
-            for m in self.M_p[p]
-        )
+        minimize_missing_treatment = gp.LinExpr()
+        for p in self.P:
+            # Sum up the number of all treatments for patient p
+            scheduled_treatments = gp.quicksum(
+                value for (p_prime, _, _, _), value in x_pmdt.items() if p_prime == p
+            )
+            total_treatments = sum(self.lr_pm[p, m] for m in self.M_p[p])
 
-        # Set objective
+            minimize_missing_treatment += total_treatments - scheduled_treatments
+
         objective = (
             self.treatment_value * minimize_treatments  # type: ignore
             + self.delay_value * minimize_delay  # type: ignore
             + self.missing_treatment_value * minimize_missing_treatment  # type: ignore
+        )
+        # Create variables for easier extraction of individual values
+        self.mt = model.addVar(name="minimize_treatments", vtype=gp.GRB.CONTINUOUS)
+        self.md = model.addVar(name="minimize_delay", vtype=gp.GRB.CONTINUOUS)
+        self.mmt = model.addVar(
+            name="minimize_missing_treatment", vtype=gp.GRB.CONTINUOUS
+        )
+
+        model.addConstr(self.mt == self.treatment_value * minimize_treatments)
+        model.addConstr(self.md == self.delay_value * minimize_delay)
+        model.addConstr(
+            self.mmt == self.missing_treatment_value * minimize_missing_treatment
         )
 
         model.setObjective(objective, gp.GRB.MINIMIZE)
@@ -173,7 +196,7 @@ class MIPSolver(Solver):
         # Create a_pd
         a_pd_keys = []
         for p in self.P:
-            a_pd_keys.extend(product([p], self.A_p[p]))
+            a_pd_keys.extend(product([p], self.D_p[p]))
         a_pd = model.addVars(a_pd_keys, vtype=gp.GRB.BINARY, name="a_pd")
 
         self.vars = {
@@ -206,12 +229,10 @@ class MIPSolver(Solver):
         for p in self.P:
             for m in self.M_p[p]:
                 for d in self.A_p[p]:
+                    delta_set = [
+                        delta for delta in self.D_p[p] if d - self.l_p[p] < delta <= d
+                    ]
                     for t in self.T:
-                        delta_set = [
-                            delta
-                            for delta in self.A_p[p]
-                            if d - self.l_p[p] < delta <= d
-                        ]
                         model.addConstr(
                             x_pmdt[p, m, d, t]
                             <= gp.quicksum(a_pd[p, delta] for delta in delta_set),
@@ -224,7 +245,13 @@ class MIPSolver(Solver):
                 for t in self.T:
                     expr = gp.LinExpr()
                     for m in self.M_p[p]:
-                        tau_set = [tau for tau in self.T if t - self.du_m[m] * self.instance.time_slot_length.hours < tau <= t]
+                        tau_set = [
+                            tau
+                            for tau in self.T
+                            if t - self.du_m[m] * self.instance.time_slot_length.hours
+                            < tau
+                            <= t
+                        ]
                         expr += gp.quicksum(x_pmdt[p, m, d, tau] for tau in tau_set)
                     model.addConstr(expr <= 1, name=f"constraint_p3_p{p.id}_d{d}_t{t}")
         logger.debug("Constraint (p3) created.")
@@ -233,23 +260,22 @@ class MIPSolver(Solver):
             expr = gp.LinExpr()
             for p in self.P:
                 delta_set = [
-                    delta for delta in self.A_p[p] if d - self.l_p[p] < delta <= d
+                    delta for delta in self.D_p[p] if d - self.l_p[p] < delta <= d
                 ]
                 expr += gp.quicksum(a_pd[p, delta] for delta in delta_set)
             model.addConstr(expr <= self.b, name=f"constraint_p4_d{d}")
         logger.debug("Constraint (p4) created.")
         # Constraint (p6): Patient admitted exactly once within the specified time
         for p in self.P:
-            D_p_early = [d for d in self.A_p[p] if d <= max(self.A_p[p]) - self.l_p[p]]
             model.addConstr(
-                gp.quicksum(a_pd[p, d] for d in D_p_early) == 1,
+                gp.quicksum(a_pd[p, d] for d in self.D_p[p]) == 1,
                 name=f"constraint_p6_p{p.id}",
             )
         logger.debug("Constraint (p6) created.")
         # Constraint (p7): Patient is admitted exactly once
         for p in self.P:
             model.addConstr(
-                gp.quicksum(a_pd[p, d] for d in self.A_p[p]) == 1,
+                gp.quicksum(a_pd[p, d] for d in self.D_p[p]) == 1,
                 name=f"constraint_p7_p{p.id}",
             )
         logger.debug("Constraint (p7) created.")
@@ -345,32 +371,65 @@ class MIPSolver(Solver):
                             name=f"constraint_a2_p{p.id}_m{m.id}_fhat{fhat.id}",
                         )
 
-        # Constraint (a4): Even distribution of treatments over rolling windows
         if self.add_even_distribution():
-            for d in self.R:
-                for p in self.P:
-                    for m in self.M_p[p]:
-                        num_windows = ceil(len(self.A_p[p]) / self.rw)
-                        for w in range(num_windows):
-                            window_start = self.A_p[p][0] + w * self.rw
-                            window_end = min(
-                                window_start + self.rw - 1, self.A_p[p][-1]
+            # Constraint (a4): Even distribution of treatments over rolling windows
+            for p in self.P:
+                # Skip patients that do not require even distribution as they stay fewer days than the
+                # length of the rolling window
+                if p.length_of_stay < self.e_w:
+                    continue
+
+                # Get average number of treatments during rolling window
+                avg_treatments = (
+                    sum(self.lr_pm[p, m] for m in self.M_p[p])
+                    * self.e_w
+                    / p.length_of_stay
+                )
+
+                # Get all possible days at which a rolling window could start for patient p
+                min_day = p.earliest_admission_date.day
+                max_day = (
+                    min(
+                        max(self.D) + 1,
+                        p.admitted_before_date.day + p.length_of_stay - 1,
+                    )
+                    - self.e_w
+                )
+
+                for d in range(min_day, max_day + 1):
+                    # Determine the range of days to consider
+                    days = range(d, d + self.e_w)
+                    # sum up all treatments for patient p within the rolling window
+                    total_treatments = gp.quicksum(
+                        x_pmdt[p, m, day, t]
+                        for m in self.M_p[p]
+                        for day in days
+                        for t in self.T
+                    )
+                    # get for each admission day the required number of treatments for this rolling window
+                    required_treatments_lb = floor(avg_treatments * self.e_lb)
+                    required_treatments_ub = ceil(avg_treatments * self.e_ub)
+                    for d_prime in self.D_p[p]:
+                        num_days_during_window = len(
+                            set(range(d_prime, d_prime + p.length_of_stay)) & set(days)
+                        )
+                        # if this rolling window is not fully contained in the admitted period
+                        # for a_pd[p, d_prime] = 1 then ignore the lb
+                        if num_days_during_window < self.e_w:
+                            # set required treatments lb to 0
+                            required_treatments_lb -= (
+                                floor(avg_treatments * self.e_lb) * a_pd[p, d_prime]
                             )
-                            window_days = [
-                                d
-                                for d in self.A_p[p]
-                                if window_start <= d <= window_end
-                            ]
-                            expr = gp.quicksum(
-                                x_pmdt[p, m, d, t]
-                                for d in window_days
-                                for t in self.T
-                                if (p, m, d, t) in x_pmdt
-                            )
-                            model.addConstr(
-                                expr <= ceil(self.r_pm[p, m] / num_windows),
-                                name=f"constraint_a4_p{p.id}_m{m.id}_w{w}",
-                            )
+
+                    model.addConstr(
+                        total_treatments >= required_treatments_lb,
+                        name=f"constraint_a4_lb_p{p.id}_d{d}",
+                    )
+                    model.addConstr(
+                        total_treatments <= required_treatments_ub,
+                        name=f"constraint_a4_ub_p{p.id}_d{d}",
+                    )
+            logger.debug("Constraint (a4) created.")
 
         # Constraint: Make sure that already admitted patients are admitted on the first day of the planning horizon
         for p in self.P:
@@ -415,7 +474,8 @@ class MIPSolver(Solver):
                             >= z_pmfdt[p2, m, f1, d, t]
                             + z_pmfdt[p1, m, f2, d, t]
                             + z_pmfdt[p2, m, f2, d, t]
-                            - 2
+                            - 2,
+                            name=f"constraint_transitive_p{p1.id}_p{p2.id}_m{m.id}_f{f.id}_{d}_{t}",
                         )
         logger.debug("Constraint (transitive) created.")
 
@@ -535,7 +595,7 @@ class MIPSolver(Solver):
 
         patients_arrival: dict[Patient, DayHour] = {}
         for p in self.P:
-            for d in self.A_p[p]:
+            for d in self.D_p[p]:
                 if a_pd[p, d].X > 0.5:  # type: ignore
                     patients_arrival[p] = DayHour(
                         day=d, hour=self.instance.workday_start.hour

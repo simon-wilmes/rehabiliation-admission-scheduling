@@ -13,12 +13,15 @@ from src.time import DayHour
 from pprint import pprint as pp
 from collections import defaultdict
 from time import time
+import contextlib
+from src.utils import MultiWriter
+import os
+from datetime import datetime
 
 
 class Solver(ABC):
     BASE_SOLVER_OPTIONS = {
         "number_of_threads": (int, 1, 24),
-        "extra_treatments_factor": (float, 1.0, 10.0),
         "treatment_value": (float, 0.0, 10.0),
         "delay_value": (float, 0.0, 10.0),
         "missing_treatment_value": (float, 0.0, 10.0),
@@ -28,21 +31,27 @@ class Solver(ABC):
         "log_to_console": [True, False],
     }
     BASE_SOLVER_DEFAULT_OPTIONS = {
-        "number_of_threads": 12,
-        "extra_treatments_factor": 2,
-        "treatment_value": 2,
-        "delay_value": 1,
-        "missing_treatment_value": 4,
+        "number_of_threads": 4,
+        "treatment_value": 4,
+        "delay_value": 2,
+        "missing_treatment_value": 8,
         "use_conflict_groups": True,
         "use_resource_loyalty": True,
         "use_even_distribution": True,
         "log_to_console": True,
+        "no_rel_heur_time": 3,
     }
 
     def __init__(self, instance: Instance, **kwargs):
 
+        # Set dummy values for weight parameters so that python does not complain that
+        # these attr dont exist, as they are set dynamically via the default options
+        self.treatment_value = 0.0
+        self.delay_value = 0.0
+        self.missing_treatment_value = 0.0
+
         logger.debug(f"Setting options: Solver")
-        for key in Solver.BASE_SOLVER_OPTIONS:
+        for key in Solver.BASE_SOLVER_DEFAULT_OPTIONS:
             if key in kwargs:
                 setattr(self, key, kwargs[key])
                 logger.debug(f" ---- {key} to {kwargs[key]}")
@@ -51,6 +60,7 @@ class Solver(ABC):
                 logger.debug(
                     f" ---- {key} to { self.__class__.BASE_SOLVER_DEFAULT_OPTIONS[key]} (default)"
                 )
+
 
         self.instance = instance
 
@@ -66,26 +76,36 @@ class Solver(ABC):
     def solve_model(self, check_better_solution=True) -> Solution:
         logger.info("Solving model: %s", self.__class__.__name__)
         self.time_solve_model = time()
+
+        
         solution = self._solve_model()
+
         if check_better_solution and type(solution) is Solution:
             solution.check_other_solvers()
+
         self.time_solve_model = time() - self.time_solve_model
         if type(solution) is Solution:
             logger.info(
-                "Time to find solution: %s with value %f",
-                self.time_solve_model,
+                "Time to find solution: %ss with value %f",
+                round(self.time_solve_model, 3),
                 solution.value,
             )
+            logger.info(
+                "Total Time: %ss", round(time() - self.time_create_model_start, 3)
+            )
         else:
-            logger.info("Time to show infeasibility: %s", self.time_solve_model)
+            logger.info(
+                "Time to show infeasibility: %ss", round(self.time_solve_model, 3)
+            )
         return solution
 
     def create_model(self) -> None:
+
         logger.info("Create model: %s", self.__class__.__name__)
-        self.time_create_model = time()
+        self.time_create_model_start = time()
         self._create_model()
-        self.time_create_model = time() - self.time_create_model
-        logger.info("Time to create model: %s", self.time_create_model)
+        time_create_model = time() - self.time_create_model_start
+        logger.info("Time to create model: %s", round(time_create_model, 3))
 
     @abstractmethod
     def _solve_model() -> Solution:
@@ -96,22 +116,35 @@ class Solver(ABC):
         pass
 
     def _create_parameter_sets(self):
+        self.P = list(self.instance.patients.values())
         # Similar to the MIP model, create necessary sets and mappings
+
         self.max_day = max(
-            p.admitted_before_date.day + p.length_of_stay
-            for p in self.instance.patients.values()
+            p.admitted_before_date.day for p in self.instance.patients.values()
         )
-        self.D = range(self.max_day)
+        horizon_length = self.instance.horizon_length
+        self.D_max = range(self.max_day)  # highest day that a patient could be admitted
+
+        self.h = horizon_length
+
+        self.D = range(
+            min(
+                horizon_length,
+                max(p.admitted_before_date.day + p.length_of_stay - 1 for p in self.P),
+            )
+        )
+
         # The time slots are the hours between the workday start and end + plus one, where we
         # set availability to 0, to force the model to stop every treatment before the end of
         # the workday
-        self.T = arange(
-            self.instance.workday_start.hour,
-            self.instance.workday_end.hour + self.instance.time_slot_length.hours,
-            self.instance.time_slot_length.hours,
-        ).astype(float)
+        self.T: list[float] = list(
+            arange(
+                self.instance.workday_start.hour,
+                self.instance.workday_end.hour + self.instance.time_slot_length.hours,
+                self.instance.time_slot_length.hours,
+            ).astype(float)
+        )
 
-        self.P = list(self.instance.patients.values())
         self.M = list(self.instance.treatments.values())
         self.F = list(self.instance.resources.values())
         self.Fhat = list(self.instance.resource_groups.values())
@@ -122,17 +155,27 @@ class Solver(ABC):
         self.fhat = {
             fhat: [f for f in self.F if f.resource_group == fhat] for fhat in self.Fhat
         }
-
-        self.A_p = {
-            p: range(
-                p.earliest_admission_date.day,
-                p.admitted_before_date.day + p.length_of_stay,
+        p2 = self.P[0]
+        self.A_p = {  # For a patient p the days at which a treatment might be scheduled
+            p: list(
+                range(
+                    p.earliest_admission_date.day,
+                    min(
+                        p.admitted_before_date.day + p.length_of_stay - 1,
+                        horizon_length,
+                    ),
+                ),
             )
             for p in self.instance.patients.values()
         }
 
-        self.D_p = {
-            p: range(p.earliest_admission_date.day, p.admitted_before_date.day)
+        self.D_p = {  # For a patient p the days at which they might be admitted
+            p: list(
+                range(
+                    p.earliest_admission_date.day,
+                    p.admitted_before_date.day,
+                )
+            )
             for p in self.instance.patients.values()
         }
 
@@ -161,7 +204,6 @@ class Solver(ABC):
         }
 
         self.b = self.instance.beds_capacity
-        self.rw = self.instance.rolling_window_length
 
         # Resource availability
         self.av_fdt = {
@@ -184,9 +226,6 @@ class Solver(ABC):
         for fhat in self.Fhat:
             self.M_fhat[fhat] = [m for m in self.M if fhat in self.Fhat_m[m]]
 
-        # Rolling window days
-        self.R = self.instance.rolling_window_days
-
         self.C = self.instance.conflict_groups
 
         # Calculate the number of treatments needed intotal for all patients together
@@ -207,9 +246,7 @@ class Solver(ABC):
 
         self.n_m = {
             m: max(
-                ceil(
-                    self.treatment_count[m] / self.k_m[m] * self.extra_treatments_factor  # type: ignore
-                ),
+                ceil(self.treatment_count[m] / self.k_m[m] * 2),  # type: ignore
                 max_treatment_people_specific[m],
             )
             for m in self.M
@@ -219,11 +256,7 @@ class Solver(ABC):
             m: list(
                 range(
                     max(
-                        ceil(
-                            self.treatment_count[m]
-                            / self.k_m[m]
-                            * self.extra_treatments_factor  # type: ignore
-                        ),
+                        ceil(self.treatment_count[m] / self.k_m[m] * 2),  # type: ignore
                         max_treatment_people_specific[m],
                     )
                 ),
@@ -235,10 +268,9 @@ class Solver(ABC):
 
         self.I_m = self.I_m_max
 
-        day_values = [9, 8, 8, 7, 7, 7, 6, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4]
-        day_values.extend([4, 3, 3, 3, 3, 2, 2, 2, 2, 2])
-        self.w_d = {d: day_values[d] if d < len(day_values) else 1 for d in self.D}
-        pass
+        self.e_w = self.instance.even_scheduling_width  # type: ignore
+        self.e_lb = self.instance.even_scheduling_lower  # type: ignore
+        self.e_ub = self.instance.even_scheduling_upper  # type: ignore
 
     def _assert_patients_arrival_day(self, patient: Patient, day: int):
         logger.error("Assert patients_arrival_day not implemented")

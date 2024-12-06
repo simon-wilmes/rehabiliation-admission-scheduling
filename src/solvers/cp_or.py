@@ -11,6 +11,7 @@ from src.solution import Solution, Appointment
 from src.solution import NO_SOLUTION_FOUND
 from src.patients import Patient
 from copy import copy
+from math import floor, gcd
 
 a = []
 b = []
@@ -61,7 +62,7 @@ class CPSolver(Solver):
             solution = self._extract_solution(solver)
             return solution
         else:
-            logger.error("No solution found.")
+            logger.info("No solution found.")
             return NO_SOLUTION_FOUND
 
     def _create_model(self):
@@ -92,36 +93,49 @@ class CPSolver(Solver):
     def _set_optimization_goal(self):
         # Objective: Maximize the total number of scheduled treatments, possibly weighted
         # List to store the variables that encode the product w_d[day] * is_assigned_to_treatment
-        delay_list = []
 
+        self.obj_factor = 1
+        for p in self.P:
+            if self.obj_factor % p.length_of_stay != 0:
+                self.obj_factor = gcd(self.obj_factor, p.length_of_stay)
+
+        delay_list = []
         for p, admission_day in self.admission_vars.items():
-            delay_list.append(self.delay_value * (admission_day - p.earliest_admission_date.day))  # type: ignore
+            delay_list.append(
+                self.obj_factor
+                * self.delay_value
+                * (admission_day - p.earliest_admission_date.day)
+            )
 
         treatment_list = []
         for m, rep_vars in self.treatment_vars.items():
             for r, vars in rep_vars.items():
-                treatment_list.append(self.treatment_value * vars["is_present"])  # type: ignore
+                treatment_list.append(
+                    self.treatment_value * self.obj_factor * vars["is_present"]
+                )
 
         missing_treatment_list = []
         for p in self.P:
             for m in self.M_p[p]:
+                # Get requested number of treatments for patient p if total stay was in the planning horizon
+                total_treatments = sum(self.lr_pm[p, m] for m in self.M_p[p])
                 patient_vars = self.patient_vars[p][m]
 
-                missing_treatment_list.append(
-                    (
-                        (
-                            self.lr_pm[p, m]
-                            - cp_model.LinearExpr.Sum(
-                                [
-                                    var  # type: ignore
-                                    for rep, var in patient_vars[
-                                        "patient_treatment_assignment"
-                                    ].items()
-                                ]
-                            )
-                        )
-                        * self.missing_treatment_value  # type: ignore
-                    )
+                min_var = self.model.new_int_var(
+                    0, 1000, f"min_equality_p{p.id}_m{m.id}"
+                )
+
+                self.model.add_min_equality(
+                    min_var,
+                    [
+                        p.length_of_stay,
+                        self.instance.horizon_length - self.admission_vars[p],
+                    ],
+                )
+
+                expected_treatments = floor(
+                    total_treatments
+                    * (1 - max(0, (admission_day + p.length_of_stay) - self.h))
                 )
 
         obj_list = delay_list + treatment_list + missing_treatment_list
@@ -145,8 +159,8 @@ class CPSolver(Solver):
     def _create_constraints(self):
         self.treatment_vars = defaultdict(dict)
         # Add variables for all the treatments to schedule
-        for m, rt in self.n_m.items():
-            for r in range(rt):
+        for m, rep_range in self.I_m.items():
+            for r in rep_range:
                 duration = self.du_m[m]
 
                 start_slot = self.model.new_int_var(
@@ -274,7 +288,7 @@ class CPSolver(Solver):
         for m in self.M:
             # loop over all patients that could attend this treatment
 
-            for rep in range(self.n_m[m]):
+            for rep in self.I_m[m]:
                 patients_list = []
                 for p in self.P:
                     if m not in self.M_p[p]:
@@ -418,31 +432,6 @@ class CPSolver(Solver):
                 "Even distribution constraint not implemented for CP solver."
             )
 
-        # Conflict groups
-        if self.add_conflict_groups():
-            for p in self.P:
-                for conflict_group in self.instance.conflict_groups:
-                    conflicting_vars = []
-                    for p2, vars in self.patient_vars.items():
-                        for m2, rep in vars.items():
-                            if p2 is not p:
-                                continue
-                            if m in conflict_group:
-                                interval, start_slot, resources = vars.values()
-                                conflicting_vars.append(start_slot)
-
-                    all_diff_vars = []
-                    for var in conflicting_vars:
-                        div_var = self.model.new_int_var(
-                            0, len(self.D), f"conflict_group{conflict_group}_{var}"
-                        )
-
-                        self.model.add_division_equality(
-                            div_var, var, self.num_time_slots
-                        )
-
-                        all_diff_vars.append(div_var)
-                    self.model.add_all_different(all_diff_vars)
 
     def _extract_solution(self, solver):
         appointments_dict = {}
@@ -475,7 +464,7 @@ class CPSolver(Solver):
         for p in self.P:
             for m in self.M_p[p]:
                 vars = self.patient_vars[p][m]
-                for rep in range(self.n_m[m]):
+                for rep in self.I_m[m]:
                     if solver.value(vars["patient_treatment_assignment"][rep]):
                         appointments_dict[(m, rep)]["patients"].append(p)
 
@@ -487,9 +476,9 @@ class CPSolver(Solver):
             # logger.debug(patients)
             # logger.debug(appointment_parameter)
             # logger.debug(key)
-            if len(patients) == 0:
-                logger.warning("Treatment scheduled without patients. ")
-                continue
+            # if len(patients) == 0:
+            #    logger.warning("Treatment scheduled without patients. ")
+            #    continue
             appointments.append(Appointment(patients=patients, **appointment_parameter))
         patients_arrival = {}
         for p in self.P:

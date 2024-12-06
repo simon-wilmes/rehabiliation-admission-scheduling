@@ -13,11 +13,19 @@ from collections import defaultdict
 from math import floor, ceil
 
 
-class MIPSolver2(Solver):
+class MIPSolver3(Solver):
     SOLVER_OPTIONS = Solver.BASE_SOLVER_OPTIONS.copy()
-    SOLVER_OPTIONS.update([])  # Add any additional options here
+    SOLVER_OPTIONS.update(
+        {
+            "break_symmetry": [True, False],
+            "break_symmetry_strong": [True, False],
+        }
+    )  # Add any additional options here
 
-    SOLVER_DEFAULT_OPTIONS = {}
+    SOLVER_DEFAULT_OPTIONS = {
+        "break_symmetry": True,
+        "break_symmetry_strong": True,
+    }
 
     def __init__(self, instance: Instance, **kwargs):
         logger.debug(f"Setting options: {self.__class__.__name__}")
@@ -50,7 +58,7 @@ class MIPSolver2(Solver):
             return solution
         else:
             logger.info("No optimal solution found.")
-            return NO_SOLUTION_FOUND
+            # return NO_SOLUTION_FOUND
             # Compute IIS
             self.model.computeIIS()
 
@@ -78,8 +86,43 @@ class MIPSolver2(Solver):
         self.model.setParam("NoRelHeurTime", self.no_rel_heur_time)  # type: ignore
         self._create_variables()
         self._create_constraints()
+        if self.break_symmetry:  # type: ignore
+            self._break_symmetry()
+
         self._set_optimization_goal()
         self.model = self.model
+
+    def _break_symmetry(self):
+        if self.break_symetry_strong:  # type: ignore
+            for m in self.M:
+                for i in self.I_m[m]:
+                    if i == 0:
+                        continue
+                    for d in self.D:
+                        prev = gp.quicksum(
+                            self.x_midt[m, i - 1, d_prime, t]
+                            for d_prime in range(d + 1)
+                            for t in self.T
+                        )
+                        succ = gp.quicksum(self.x_midt[m, i, d, t] for t in self.T)
+                        self.model.addConstr(prev >= succ)
+
+            logger.debug("Constraint (strong symmetry) created.")
+        else:
+            for m in self.M:
+                for i in self.I_m[m]:
+                    if i == 0:
+                        continue
+                    self.model.addConstr(
+                        gp.quicksum(
+                            self.x_midt[m, i, d, t] for d, t in product(self.D, self.T)
+                        )
+                        <= gp.quicksum(
+                            self.x_midt[m, i - 1, d, t]
+                            for d, t in product(self.D, self.T)
+                        )
+                    )
+            logger.debug("Constraint (symmetry) created.")
 
     def _create_variables(self):
         self.x_midt = self.model.addVars(
@@ -100,38 +143,33 @@ class MIPSolver2(Solver):
             name="a_pd",
         )
 
-        self.y_pmi = self.model.addVars(
-            ((p, m, i) for p in self.P for m in self.M_p[p] for i in self.I_m[m]),  # type: ignore
+        self.y_pmidt = self.model.addVars(
+            ((p, m, i, d, t) for p in self.P for m in self.M_p[p] for i in self.I_m[m] for d in self.A_p[p] for t in self.T),  # type: ignore
             vtype=gp.GRB.BINARY,
-            name="y_pmi",
+            name="y_pmidt",
         )
 
-        self.z_fmi = self.model.addVars(
-            ((f, m, i) for f in self.F for m in self.M for i in self.I_m[m]),  # type: ignore
+        self.z_fmidt = self.model.addVars(
+            ((f, m, i, d, t) for f in self.F for m in self.M for i in self.I_m[m] for d in self.D for t in self.T),  # type: ignore
             vtype=gp.GRB.BINARY,
-            name="z_fmi",
+            name="z_fmidt",
         )
 
-        self.v_pmf = self.model.addVars(
-            ((p, m, f) for p in self.P for m in self.M_p[p] for f in self.F),  # type: ignore
-            vtype=gp.GRB.BINARY,
-            name="v_pmf",
-        )
-
-        self.u_mi = self.model.addVars(
-            ((m, i) for m in self.M for i in self.I_m[m]),  # type: ignore
-            vtype=gp.GRB.BINARY,
-            name="u_mi",
-        )
         logger.debug("Variables created.")
 
     def _create_constraints(self):
         self.model.update()
-        # Constraint: Every patient is assigned to exactly the required number of treatments
+
+        # Constraint: Every patient is assigned to at most the required number of treatments
         for p in self.P:
             for m in self.M_p[p]:
                 self.model.addConstr(
-                    gp.quicksum(self.y_pmi[p, m, i] for i in self.I_m[m])
+                    gp.quicksum(
+                        self.y_pmidt[p, m, i, d, t]
+                        for i in self.I_m[m]
+                        for d in self.A_p[p]
+                        for t in self.T
+                    )
                     <= self.lr_pm[p, m],
                     name=f"constraint_p1_b_p{p.id}_m{m.id}",
                 )
@@ -140,15 +178,13 @@ class MIPSolver2(Solver):
         # Constraint: Only treatments scheduled if addmitted
         for p in self.P:
             for m in self.M_p[p]:
-                for d in self.D:
+                for d in self.A_p[p]:
                     delta_set = [
                         delta for delta in self.D_p[p] if d - self.l_p[p] < delta <= d
                     ]
-
                     for i, t in product(self.I_m[m], self.T):
-
                         self.model.addConstr(
-                            self.x_midt[m, i, d, t] * self.y_pmi[p, m, i]
+                            self.y_pmidt[p, m, i, d, t]
                             <= gp.quicksum(self.a_pd[p, delta] for delta in delta_set),
                             name=f"constraint_p2_b_p{p.id}_m{m.id}_i{i}_d{d}_t{t}",
                         )
@@ -168,7 +204,7 @@ class MIPSolver2(Solver):
                     ]
 
                     constr += gp.quicksum(
-                        self.x_midt[m, i, d, tau] * self.y_pmi[p, m, i]
+                        self.y_pmidt[p, m, i, d, tau]
                         for i in self.I_m[m]
                         for tau in tau_set
                     )
@@ -195,7 +231,7 @@ class MIPSolver2(Solver):
                 for d, t in product(self.D, self.T):
                     self.model.addConstr(
                         gp.quicksum(
-                            self.z_fmi[f, m, i] * self.x_midt[m, i, d, tau]
+                            self.z_fmidt[f, m, i, d, tau]
                             for m in self.M_fhat[fhat]
                             for i in self.I_m[m]
                             for tau in self.T
@@ -207,13 +243,16 @@ class MIPSolver2(Solver):
                         name=f"constraint_r2_b_f{f.id}_d{d}_t{t}",
                     )
         logger.debug("Constraint (r2) created.")
+
         # Constraint: Treatment has resources
         for m in self.M:
             for i in self.I_m[m]:
-                for fhat in self.Fhat_m[m]:
+                for d, t, fhat in product(self.D, self.T, self.Fhat_m[m]):
                     self.model.addConstr(
-                        gp.quicksum(self.z_fmi[f, m, i] for f in self.fhat[fhat])
-                        == self.n_fhatm[fhat, m],
+                        gp.quicksum(
+                            self.z_fmidt[f, m, i, d, t] for f in self.fhat[fhat]
+                        )
+                        == self.n_fhatm[fhat, m] * self.x_midt[m, i, d, t],
                         name=f"constraint_r3_b_m{m.id}_i{i}_fhat{fhat.id}",
                     )
         logger.debug("Constraint (r3) created.")
@@ -221,15 +260,13 @@ class MIPSolver2(Solver):
         # Constraint: Treatment must be scheduled if patient is assigned
         for p in self.P:
             for m in self.M_p[p]:
-                for i in self.I_m[m]:
+                for i, d, t in product(self.I_m[m], self.A_p[p], self.T):
                     self.model.addConstr(
-                        self.y_pmi[p, m, i]
-                        <= gp.quicksum(
-                            self.x_midt[m, i, d, t] for d in self.A_p[p] for t in self.T
-                        ),
+                        self.y_pmidt[p, m, i, d, t] <= self.x_midt[m, i, d, t],
                         name=f"constraint_r4_b_m{m.id}_i{i}",
                     )
         logger.debug("Constraint (r4) created.")
+
         # Constraint: every repetition is only scheduled once
         for m in self.M:
             for i in self.I_m[m]:
@@ -239,14 +276,19 @@ class MIPSolver2(Solver):
                     name=f"constraint_r5_b_m{m.id}_i{i}",
                 )
         logger.debug("Constraint (r5) created.")
-        # Constraint every resource has at most k_m patients assigned
+        # Constraint every session has at most k_m patients assigned
         for m in self.M:
             for i in self.I_m[m]:
-                self.model.addConstr(
-                    gp.quicksum(self.y_pmi[p, m, i] for p in self.P if m in self.M_p[p])
-                    <= self.k_m[m],
-                    name=f"constraint_r6_b_m{m.id}_i{i}",
-                )
+                for d, t in product(self.D, self.T):
+                    self.model.addConstr(
+                        gp.quicksum(
+                            self.y_pmidt[p, m, i, d, t]
+                            for p in self.P
+                            if m in self.M_p[p] and d in self.A_p[p]
+                        )
+                        <= self.k_m[m],
+                        name=f"constraint_r6_b_m{m.id}_i{i}",
+                    )
         logger.debug("Constraint (r6) created.")
         # Every patient must be admitted
         for p in self.P:
@@ -255,9 +297,6 @@ class MIPSolver2(Solver):
                 name=f"constraint_r7_b_p{p.id}",
             )
         logger.debug("Constraint (r7) created.")
-
-        if self.add_resource_loyal():
-            logger.warning("Resource loyalty not implemented for MIP2")
 
         if self.add_even_distribution():
             # Constraint (a4): Even distribution of treatments over rolling windows
@@ -289,7 +328,7 @@ class MIPSolver2(Solver):
                     days = range(d, d + self.e_w)
                     # sum up all treatments for patient p within the rolling window
                     total_treatments = gp.quicksum(
-                        self.y_pmi[p, m, i] * self.x_midt[m, i, day, t]
+                        self.y_pmidt[p, m, i, day, t]
                         for m in self.M_p[p]
                         for i in self.I_m[m]
                         for day in days
@@ -321,9 +360,6 @@ class MIPSolver2(Solver):
                     )
             logger.debug("Constraint (a4) created.")
 
-        if self.add_conflict_groups():
-            logger.warning("Conflict groups not implemented for MIP2")
-
     def _set_optimization_goal(self):
 
         minimize_treatments = gp.quicksum(
@@ -335,7 +371,7 @@ class MIPSolver2(Solver):
         )
 
         minimize_delay = gp.quicksum(
-            (d - min(self.A_p[p])) * self.a_pd[p, d]
+            (d - min(self.D_p[p])) * self.a_pd[p, d]
             for p in self.P
             for d in self.D_p[p]
         )
@@ -343,7 +379,9 @@ class MIPSolver2(Solver):
         for p in self.P:
             # Sum up the number of all treatments for patient p
             scheduled_treatments = gp.quicksum(
-                value for (p_prime, _, _), value in self.y_pmi.items() if p_prime == p
+                value
+                for (p_prime, _, _, _, _), value in self.y_pmidt.items()
+                if p == p_prime
             )
             # Get requested number of treatments for patient p if total stay was in the planning horizon
             total_treatments = sum(self.lr_pm[p, m] for m in self.M_p[p])
@@ -394,21 +432,25 @@ class MIPSolver2(Solver):
                             )
                             # Get patients
                             patients = []
-                            for p, _, _ in slice_dict(self.y_pmi, (None, m, i)):
+                            for p, _, _, _, _ in slice_dict(
+                                self.y_pmidt, (None, m, i, d, t)
+                            ):
                                 logger.debug(
-                                    f"y_{p.id}_{m.id}_{i} = {self.y_pmi[p, m, i].X}"
+                                    f"y_{p.id}_{m.id}_{i}_{d}_{t} = {self.y_pmidt[p, m, i,d,t].X}"
                                 )
-                                if self.y_pmi[p, m, i].X > 0.5:
+                                if self.y_pmidt[p, m, i, d, t].X > 0.5:
                                     patients.append(p)
 
                             # Get resources
                             resources = defaultdict(list)
 
-                            for f, _, _ in slice_dict(self.z_fmi, (None, m, i)):
-                                if self.z_fmi[f, m, i].X > 0.5:
+                            for f, _, _, _, _ in slice_dict(
+                                self.z_fmidt, (None, m, i, d, t)
+                            ):
+                                if self.z_fmidt[f, m, i, d, t].X > 0.5:
                                     resources[f.resource_group].append(f)
                                 logger.debug(
-                                    f"z_{f.id}_{m.id}_{i} = {self.z_fmi[f, m, i].X}"
+                                    f"z_{f.id}_{m.id}_{i}_{d}_{t} = {self.z_fmidt[f, m, i, d, t].X}"
                                 )
                             app = Appointment(
                                 start_date=DayHour(d, t),

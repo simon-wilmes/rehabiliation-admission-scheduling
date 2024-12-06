@@ -115,7 +115,7 @@ def test_already_scheduled_treatments(setup_instance):
     ]
 
     # Should raise an error
-    with pytest.raises(ValueError, match="needs .* repetitions"):
+    with pytest.raises(ValueError, match="out of the initial [0-9]* repetitions"):
         Solution(instance, schedule, patients_arrival)
 
     # Now remove one existing treatment
@@ -134,8 +134,9 @@ def test_already_scheduled_treatments(setup_instance):
     # Now remove the already scheduled treatment
     patient0.already_scheduled_treatments = defaultdict(int)
     # Should raise an error
-    with pytest.raises(ValueError, match="needs .* repetitions"):
-        Solution(instance, schedule, patients_arrival)
+
+    solution = Solution(instance, schedule, patients_arrival)
+    assert solution is not None
 
 
 def test_patient_admission(setup_instance):
@@ -359,6 +360,47 @@ def test_max_and_min_patients_per_treatment(setup_instance):
         Solution(instance, schedule, patients_arrival)
 
 
+def test_treatment_outside_patients_stay(setup_instance):
+    (
+        instance,
+        patient0,
+        treatment0,
+        treatment1,
+        therapist0,
+        therapist1,
+        room0,
+        room1,
+        rg_therapists,
+        rg_rooms,
+    ) = setup_instance
+    patients_arrival = {patient0: DayHour(day=0, hour=0)}
+    schedule = [
+        Appointment(
+            [patient0],
+            DayHour(day=9, hour=9),
+            treatment0,
+            {rg_therapists: [therapist0], rg_rooms: [room0]},
+        )
+    ]
+
+    solution = Solution(instance, schedule, patients_arrival)
+    assert solution is not None
+
+    # Test that appointment outside patient's stay is found
+
+    schedule.append(
+        Appointment(
+            [patient0],
+            DayHour(day=10, hour=9),
+            treatment0,
+            {rg_therapists: [therapist0], rg_rooms: [room0]},
+        )
+    )
+
+    with pytest.raises(ValueError, match="but was admitted on day"):
+        solution = Solution(instance, schedule, patients_arrival)
+
+
 def test_bed_capacity(setup_instance):
     (
         instance,
@@ -486,7 +528,29 @@ def test_total_treatments_scheduled(setup_instance):
             {rg_therapists: [therapist0], rg_rooms: [room0]},
         )
     ]
-    with pytest.raises(ValueError, match="needs .* repetitions"):
+    solution = Solution(instance, schedule, patients_arrival)
+    assert (
+        solution is not None
+    ), "Valid Solution with fewer than required treatments was not accepted."
+
+    schedule.extend(
+        [
+            Appointment(
+                [patient0],
+                DayHour(day=2, hour=9),
+                treatment0,
+                {rg_therapists: [therapist0], rg_rooms: [room0]},
+            ),
+            Appointment(
+                [patient0],
+                DayHour(day=3, hour=9),
+                treatment0,
+                {rg_therapists: [therapist0], rg_rooms: [room0]},
+            ),
+        ]
+    )
+
+    with pytest.raises(ValueError, match="out of the initial"):
         Solution(instance, schedule, patients_arrival)
 
 
@@ -520,6 +584,88 @@ def test_valid_solution(setup_instance):
     ]
     solution = Solution(instance, schedule, patients_arrival)
     assert solution is not None
+
+
+def test_even_scheduling_bounds(setup_instance):
+    (
+        instance,
+        patient0,
+        treatment0,
+        treatment1,
+        therapist0,
+        therapist1,
+        room0,
+        room1,
+        rg_therapists,
+        rg_rooms,
+    ) = setup_instance
+
+    # Set instance attributes related to even scheduling
+    instance.even_scheduling_width = 5  # Rolling window width of 5 days
+    instance.even_scheduling_upper = 1.2  # Allow up to 20% above the average
+    instance.even_scheduling_lower = 0.8  # Allow down to 20% below the average
+
+    # Adjust patient data
+    patient0.length_of_stay = 10  # Patient stays for 10 days
+    patient0.treatments = {treatment0: 10}  # Patient requires 10 treatments in total
+    patients_arrival = {patient0: DayHour(day=0, hour=0)}
+
+    # Test 1: Valid schedule (respects both upper and lower bounds)
+    valid_schedule = [
+        Appointment(
+            [patient0],
+            DayHour(day=i, hour=9),
+            treatment0,
+            {rg_therapists: [therapist0], rg_rooms: [room0]},
+        )
+        for i in [0, 1, 2, 3, 4, 6, 7, 8, 9]
+    ]  # 8 treatments distributed across 10 days (valid)
+
+    solution = Solution(instance, valid_schedule, patients_arrival)
+    assert solution is not None, "Valid schedule should not raise an error."
+
+    # Test 2: Schedule exceeding the upper bound
+    invalid_schedule_upper = [
+        Appointment(
+            [patient0],
+            DayHour(day=i, hour=9 + ind % 2),
+            treatment0,
+            {rg_therapists: [therapist0], rg_rooms: [room0]},
+        )
+        for ind, i in enumerate(
+            [
+                0,
+                1,
+                1,
+                2,
+                3,
+                3,
+                4,
+                5,
+                6,
+                7,
+            ]
+        )  # Too many treatments in first rolling window
+    ]
+
+    with pytest.raises(ValueError, match="exceeds the upper bound"):
+        Solution(instance, invalid_schedule_upper, patients_arrival)
+
+    # Test 3: Schedule below the lower bound
+    invalid_schedule_lower = [
+        Appointment(
+            [patient0],
+            DayHour(day=i, hour=9 + ind % 2),
+            treatment0,
+            {rg_therapists: [therapist0], rg_rooms: [room0]},
+        )
+        for ind, i in enumerate(
+            [0, 0, 2, 3, 4, 6, 7, 7, 8, 9]
+        )  # Not enough treatments within rolling windows
+    ]
+
+    with pytest.raises(ValueError, match="below the lower bound"):
+        Solution(instance, invalid_schedule_lower, patients_arrival)
 
 
 def test_conflict_groups_violation(setup_instance):
@@ -591,11 +737,7 @@ def test_conflict_groups_no_violation(setup_instance):
     ]
 
     # Should not raise any error
-    solution = Solution(
-        instance,
-        schedule,
-        patients_arrival,
-    )
+    solution = Solution(instance, schedule, patients_arrival)
     assert solution is not None
 
 
@@ -635,9 +777,7 @@ def test_conflict_groups_not_enforced(setup_instance):
         instance,
         schedule,
         patients_arrival,
-        ignored_constraints={
-            "conflict_groups",
-        },
+        test_conflict_groups=False,
     )
     assert solution is not None
 
@@ -829,7 +969,10 @@ def test_even_scheduling_not_enforced(setup_instance):
 
     # Should not raise an error because constraint not enforced
     solution = Solution(
-        instance, schedule, patients_arrival, ignored_constraints={"even_scheduling"}
+        instance,
+        schedule,
+        patients_arrival,
+        test_even_distribution=False,
     )
     assert solution is not None
 
