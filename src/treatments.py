@@ -11,7 +11,8 @@ class Treatment:
         num_participants: int,
         duration: Duration,
         name: str = "",
-        resources: dict[ResourceGroup, tuple[int, bool]] = None,
+        resources: dict[ResourceGroup, int] = dict(),
+        rest_time: Duration = Duration(hours=0),
         # resources: dict[ResourceGroup, tuple[num_of_resource_group, resource_loyal?]] = None,
     ):
         if resources is None:
@@ -21,8 +22,8 @@ class Treatment:
         self.num_participants = num_participants
         self.duration = duration
         self.name = name
-        self.resources = {rg: n for rg, (n, _) in resources.items()}
-        self.loyalty = {rg: loyal for rg, (_, loyal) in resources.items()}
+        self.resources = {rg: n for rg, n in resources.items()}
+        self.rest_time: Duration = rest_time
 
     def __str__(self):
         return f"T({self.name})"

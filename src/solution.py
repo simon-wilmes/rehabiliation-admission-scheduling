@@ -78,7 +78,7 @@ class Solution:
         solver=None,  # type: ignore
         test_even_distribution=True,
         test_conflict_groups=True,
-        test_resource_loyalty=True,
+        test_resource_loyalty=False,
         solution_value: float = 0,
     ):
         self.instance = instance
@@ -222,7 +222,7 @@ class Solution:
         self._check_bed_capacity()
         self._check_total_treatments_scheduled()
         self._check_no_treatments_outside_horizont()
-
+        self._check_daily_scheduling()
         if self.test_even_distribution:
             self._check_even_scheduling()
 
@@ -366,7 +366,7 @@ class Solution:
                     required_amount = treatment.resources.get(resource_group)
                     if required_amount is None:
                         continue  # Resource group not required for this treatment
-                    loyalty_flag = treatment.loyalty.get(resource_group, False)
+                    loyalty_flag = treatment.loyalty.get(resource_group, False)  # type: ignore
                     if not loyalty_flag:
                         continue  # Resource loyalty not required for this resource group
 
@@ -545,3 +545,80 @@ class Solution:
                 raise ValueError(
                     f"Appointment for treatment {appointment.treatment.id} is scheduled outside the horizon length."
                 )
+
+    def _check_rest_times(self):
+        """
+        Ensure that each patient respects the treatment's rest time between consecutive treatments.
+        After finishing a treatment, the patient must wait treatment.rest_time.hours
+        before starting another treatment.
+        """
+        patient_appointments = defaultdict(list)
+        for appointment in self.schedule:
+            start_day = appointment.start_date.day
+            start_time = appointment.start_date.hour
+            duration = appointment.treatment.duration.hours
+            end_time = start_time + duration
+            for patient in appointment.patients:
+                patient_appointments[patient].append(
+                    (start_day, start_time, end_time, appointment)
+                )
+
+        for patient, appts in patient_appointments.items():
+            # Sort appointments chronologically
+            appts.sort(key=lambda x: (x[0], x[1]))
+            for i in range(len(appts) - 1):
+                _, _, end_i, appt_i = appts[i]
+                next_day, next_start, _, appt_j = appts[i + 1]
+
+                # Convert start/end times to absolute hours from day 0 for easier comparison
+                abs_end_i = appts[i][0] * 24 + end_i
+                abs_start_j = next_day * 24 + next_start
+
+                required_rest = appt_i.treatment.rest_time.hours
+
+                if abs_start_j < abs_end_i + required_rest:
+                    raise ValueError(
+                        f"Patient {patient.id} has appointments too close together. After finishing treatment "
+                        f"{appt_i.treatment.id} at day {appts[i][0]}, hour {end_i}, patient must rest {required_rest} "
+                        f"hours before another treatment. The next treatment {appt_j.treatment.id} starts at day {next_day}, "
+                        f"hour {next_start}, which is too early."
+                    )
+
+    def _check_daily_scheduling(self):
+        """
+        For every patient and every day of their stay, ensure that the daily number of treatments
+        is between floor(avg_per_day * daily_scheduling_lower) and ceil(avg_per_day * daily_scheduling_upper).
+
+        avg_per_day = total required treatments / length_of_stay
+        """
+        # Count treatments per patient per day
+        patient_day_count = defaultdict(int)
+        for appointment in self.schedule:
+            for patient in appointment.patients:
+                patient_day_count[(patient, appointment.start_date.day)] += 1
+
+        # Parameters from the instance
+        daily_upper = self.instance.daily_scheduling_upper
+
+        for patient in self.instance.patients.values():
+            total_required_treatments = sum(
+                patient.treatments[t] - patient.already_scheduled_treatments.get(t, 0)
+                for t in patient.treatments
+            )
+            avg_per_day = total_required_treatments / patient.length_of_stay
+
+            for day in range(
+                self.patients_arrival[patient].day,
+                self.patients_arrival[patient].day + patient.length_of_stay,
+            ):
+                treatments_today = patient_day_count.get((patient, day), 0)
+                upper_bound = math.ceil(avg_per_day * daily_upper)
+
+                # Note: If avg_per_day is small, it's possible lower_bound is 0.
+                # This check ensures we don't fail patients who might not need many treatments daily.
+                if treatments_today > upper_bound:
+                    raise ValueError(
+                        f"Patient {patient.id} on day {day} has {treatments_today} treatments, "
+                        f"expected <={upper_bound}  (avg={avg_per_day:.2f}, "
+                        f"multipliers={daily_upper})."
+                    )

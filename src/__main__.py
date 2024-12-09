@@ -4,7 +4,7 @@ from src.solvers import CPSolver, CPSolver2
 from src.logging import logger
 from itertools import combinations
 import os
-from src.utils import get_file_writer_context
+from src.utils import get_file_writer_context, generate_combis
 import contextlib
 
 
@@ -24,7 +24,7 @@ def main():
     # Assert Custom Instance
     if True:
         largest_folder = "test_inst"
-        file = "instance_1.txt"
+        file = "instance_5.txt"
     else:
         largest_folder = "comp_study_001"
         file = "instance_1.txt"
@@ -32,6 +32,11 @@ def main():
     #####################################
     # Set Settings
     #####################################
+    default_settings = {
+        "use_resource_loyalty": False,
+        "use_conflict_groups": False,
+        "use_even_distribution": False,
+    }
 
     # Solver settings
     settings_dict = {
@@ -43,6 +48,7 @@ def main():
         },
         CPSolver: {
             "break_symmetry": True,
+            "max_repr": "cumulative",
         },
         CPSolver2: {
             "break_symmetry": True,
@@ -50,7 +56,8 @@ def main():
     }
 
     # Debug Settings
-    if True:
+    print_detailed_debug = True
+    if print_detailed_debug:
         debug_settings = {
             "log_to_console": True,
             "log_to_file": True,
@@ -67,29 +74,67 @@ def main():
     # Run Solver
     #####################################
 
-    logger.info(f"Runningwith instance folder: {largest_folder}/{file}")
+    logger.info(f"Running with instance: {largest_folder}/{file}")
     inst = create_instance_from_file("data/" + str(largest_folder) + "/" + file)
     logger.info("Successfully created instance from file.")
 
-    solvers = [
-        MIPSolver3,
-    ]
+    solver_cls = CPSolver
+    # Create kwargs for solver
+    kwargs = settings_dict[solver_cls]
+    kwargs.update(default_settings)
+    kwargs.update(debug_settings)
 
-    for solver in solvers:
-        context = get_file_writer_context(solver, inst, **debug_settings)
-
+    test_parameter_combinations = False
+    if test_parameter_combinations:
+        test_run(
+            solver_cls, inst, debug_settings, kwargs, ["max_repr", "break_symmetry"]
+        )
+    else:
+        logger.info("Running with: " + str(kwargs))
+        context = get_file_writer_context(solver_cls, inst, **debug_settings)
         with contextlib.redirect_stdout(context):  # type: ignore
-            # Build kwargs
-            kwargs = settings_dict[solver]
-            kwargs.update(debug_settings)
-
-            logger.info(f"Running with solver: {solver.__name__} and kwargs: {kwargs}")
-            solver_cp = solver(
+            logger.info(
+                f"Running with solver: {solver_cls.__name__} and kwargs: {kwargs}"
+            )
+            solver = solver_cls(
                 inst,
                 **kwargs,
             )
-            solver_cp.create_model()
-            solution = solver_cp.solve_model()
+            solver.create_model()
+            solution = solver.solve_model()
+
+
+def test_run(solver_cls, inst, debug_settings, kwargs, testing_keys):
+    # Build kwargs
+
+    testing_keys = sorted(testing_keys)
+    settings_comb = generate_combis(solver_cls, testing_keys)
+    time_values = {}
+    for settings in settings_comb:
+
+        logger.info("Running with Testing settings Combination: " + str(settings))
+        kwargs.update(settings)
+        context = get_file_writer_context(solver_cls, inst, **debug_settings)
+        with contextlib.redirect_stdout(context):  # type: ignore
+            # Build kwargs
+
+            logger.info(
+                f"Running with solver: {solver_cls.__name__} and kwargs: {kwargs}"
+            )
+            solver = solver_cls(
+                inst,
+                **kwargs,
+            )
+            solver.create_model()
+            solution = solver.solve_model()
+            sorted_comb = tuple(
+                x[1] for x in sorted(list(settings.items()), key=lambda x: x[0])
+            )
+            time_values[sorted_comb] = solver.total_time if solution else "N/A"
+
+    logger.info(f"Keys Tested: {testing_keys}")
+    for key, value in time_values.items():
+        logger.info(f"Settings: {key} - Time: {value}")
 
 
 if __name__ == "__main__":

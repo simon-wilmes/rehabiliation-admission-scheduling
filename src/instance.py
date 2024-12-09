@@ -44,6 +44,8 @@ class Instance:
         self.even_scheduling_upper = instance_data.get("even_scheduling_upper", 1.2)
         self.even_scheduling_lower = instance_data.get("even_scheduling_lower", 0.8)
 
+        self.daily_scheduling_upper = instance_data.get("daily_scheduling_upper", 1.3)
+
         self.time_slot_length: Duration = instance_data.get(
             "time_slot_length", Duration(0, 15)
         )
@@ -185,6 +187,10 @@ def create_instance_from_file(file_path: str) -> "Instance":
                         instance_data["time_slot_length"] = parsing_parameter(value)
                     case "conflict_groups":
                         instance_data["conflict_groups"] = ast.literal_eval(value)
+                    case "daily_scheduling_lower":
+                        instance_data["daily_scheduling_lower"] = float(value)
+                    case "daily_scheduling_upper":
+                        instance_data["daily_scheduling_upper"] = float(value)
                     case "day_start":
                         instance_data["day_start"] = int(value)
                     case "horizon_length":
@@ -224,9 +230,9 @@ def create_instance_from_file(file_path: str) -> "Instance":
                     resources_required = parsed_data["resources"]
                     assert type(resources_required) == dict
                     treatment_resources = {}
-                    for rgid_key, (count, required) in resources_required.items():
+                    for rgid_key, count in resources_required.items():
                         rgid = int(rgid_key)
-                        treatment_resources[resource_groups[rgid]] = (count, required)
+                        treatment_resources[resource_groups[rgid]] = count
                     parsed_data["resources"] = treatment_resources
                     treatment = Treatment(**parsed_data)  # type: ignore
 
@@ -237,15 +243,6 @@ def create_instance_from_file(file_path: str) -> "Instance":
                         key: parsing_parameter(value) for key, value in data.items()
                     }
 
-                    # Replace TID in already_resource_loyal
-                    resource_loyal_dict = parsed_data.get("already_resource_loyal")
-                    parsed_resource_loyal = {}
-                    for (tid, rgid), rid_list in resource_loyal_dict.items():  # type: ignore
-                        parsed_resource_loyal[
-                            (treatments[tid], resource_groups[rgid])
-                        ] = [resources[rid] for rid in rid_list]
-
-                    parsed_data["already_resource_loyal"] = parsed_resource_loyal
                     # Replace TID in already_scheduled_treatments
                     already_scheduled_treatments: list[tuple[TID, int]] = (
                         parsed_data.get("already_scheduled_treatments", [])  # type: ignore

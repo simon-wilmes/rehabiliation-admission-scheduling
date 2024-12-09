@@ -93,7 +93,6 @@ class CPSolver2(Solver):
         # besides the ones created in the parent class
         self.num_time_slots = len(self.T)
 
-
     def _set_optimization_goal(self):
         # Objective: Maximize the total number of scheduled treatments, possibly weighted
         # List to store the variables that encode the product w_d[day] * is_assigned_to_treatment

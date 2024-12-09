@@ -306,7 +306,7 @@ class MIPSolver3(Solver):
                 if p.length_of_stay < self.e_w:
                     continue
 
-                # Get average number of treatments during rolling window
+                # Get average  umber of treatments during rolling window
                 avg_treatments = (
                     sum(self.lr_pm[p, m] for m in self.M_p[p])
                     * self.e_w

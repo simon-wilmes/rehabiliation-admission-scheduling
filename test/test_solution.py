@@ -24,14 +24,14 @@ def setup_instance():
         num_participants=2,
         duration=Duration(hours=1),
         name="therapy",
-        resources={rg_therapists: (1, True), rg_rooms: (1, False)},
+        resources={rg_therapists: 1, rg_rooms: 1},
     )
     treatment1 = Treatment(
         tid=1,
         num_participants=1,
         duration=Duration(hours=1),
         name="counseling",
-        resources={rg_therapists: (1, True), rg_rooms: (1, False)},
+        resources={rg_therapists: 1, rg_rooms: 1},
     )
 
     # Create patients

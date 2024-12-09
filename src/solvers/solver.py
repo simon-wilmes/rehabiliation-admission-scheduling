@@ -61,23 +61,24 @@ class Solver(ABC):
                     f" ---- {key} to { self.__class__.BASE_SOLVER_DEFAULT_OPTIONS[key]} (default)"
                 )
 
-
         self.instance = instance
 
     def add_resource_loyal(self):
         return self.use_resource_loyalty  # type: ignore
 
     def add_even_distribution(self):
-        return self.use_even_distribution  # type: ignore
+        return True  # self.use_even_distribution  # type: ignore
 
     def add_conflict_groups(self):
         return self.use_conflict_groups  # type: ignore
+
+    def get_avg_treatments_per_e_w(self, p: Patient):
+        return sum(self.lr_pm[p, m] for m in self.M_p[p]) * self.e_w / p.length_of_stay
 
     def solve_model(self, check_better_solution=True) -> Solution:
         logger.info("Solving model: %s", self.__class__.__name__)
         self.time_solve_model = time()
 
-        
         solution = self._solve_model()
 
         if check_better_solution and type(solution) is Solution:
@@ -93,6 +94,7 @@ class Solver(ABC):
             logger.info(
                 "Total Time: %ss", round(time() - self.time_create_model_start, 3)
             )
+            self.total_time = round(time() - self.time_create_model_start, 3)
         else:
             logger.info(
                 "Time to show infeasibility: %ss", round(self.time_solve_model, 3)
@@ -217,9 +219,9 @@ class Solver(ABC):
         self.n_fhatm = {
             (fhat, m): m.resources[fhat] for m in self.M for fhat in self.Fhat_m[m]
         }
-        self.Lhat_m = {}
-        for m in self.M:
-            self.Lhat_m[m] = [fhat for fhat in self.Fhat_m[m] if m.loyalty[fhat]]
+        # self.Lhat_m = {}
+        # for m in self.M:
+        #    self.Lhat_m[m] = [fhat for fhat in self.Fhat_m[m] if m.loyalty[fhat]]
 
         # Mapping from resource group to treatments requiring that group
         self.M_fhat = {}
@@ -268,9 +270,24 @@ class Solver(ABC):
 
         self.I_m = self.I_m_max
 
-        self.e_w = self.instance.even_scheduling_width  # type: ignore
-        self.e_lb = self.instance.even_scheduling_lower  # type: ignore
-        self.e_ub = self.instance.even_scheduling_upper  # type: ignore
+        self.e_w: int = int(self.instance.even_scheduling_width)  # type: ignore
+        self.e_lb: float = self.instance.even_scheduling_lower  # type: ignore
+        self.e_ub: float = self.instance.even_scheduling_upper  # type: ignore
+
+        e_w_upper = {
+            p: ceil(self.get_avg_treatments_per_e_w(p) * self.e_ub) for p in self.P
+        }
+        e_w_lower = {
+            p: floor(self.get_avg_treatments_per_e_w(p) * self.e_lb) for p in self.P
+        }
+        daily_upper = {
+            p: ceil(
+                self.get_avg_treatments_per_e_w(p)
+                / self.e_w
+                * self.instance.daily_scheduling_upper
+            )
+            for p in self.P
+        }
 
     def _assert_patients_arrival_day(self, patient: Patient, day: int):
         logger.error("Assert patients_arrival_day not implemented")

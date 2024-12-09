@@ -1,6 +1,8 @@
 from typing import TypeVar, Dict, Any
 import os
 from datetime import datetime
+from itertools import product
+
 
 A = TypeVar("A")
 B = TypeVar("B")
@@ -55,3 +57,17 @@ def get_file_writer_context(
         streams.append(console_stream)
 
     return MultiWriter(streams)
+
+
+def generate_combis(solver, allowed_keys):
+    d = solver.SOLVER_OPTIONS
+    d = {key: value for key, value in d.items() if key in allowed_keys}
+    keys = list(d.keys())
+    value_lists = [d[k] for k in keys]
+    # Use itertools.product to create all combinations
+    combinations = []
+    for combo in product(*value_lists):
+        # zip the keys and chosen values to form a new dictionary
+        combination_dict = dict(zip(keys, combo))
+        combinations.append(combination_dict)
+    return combinations
