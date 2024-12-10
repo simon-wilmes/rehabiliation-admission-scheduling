@@ -1,14 +1,16 @@
 [INSTANCE]
 num_beds: 9
 workday_start: 8 # uhr
-workday_end: 18 # uhr
+workday_end: 12 # uhr
 day_start:0
 
 even_scheduling_upper: 1.2
 even_scheduling_lower: 0.8
-even_scheduling_width: 5
+even_scheduling_width: 3
+daily_scheduling_lower: 0.75
+time_slot_length: Duration(hours=1)
 
-horizon_length: 4
+horizon_length: 26
 
 conflict_groups: []
 
@@ -24,11 +26,10 @@ conflict_groups: []
 
 
 
-[DATA: TREATMENTS]: tid, num_participants, name, duration, resources
-0; 5; music_therapy; Duration(hours=1, minutes=0); {0:(1,False), 1: (1, False)}
+[DATA: TREATMENTS]: tid, num_participants, name, duration, resources, rest_time
+0; 2; music_therapy; Duration(hours=1, minutes=0); {0:1, 1:1}
 
 
 
-
-[DATA: PATIENTS]: pid, name, treatments, length_of_stay, earliest_admission_date, admitted_before_date, already_admitted_date, already_resource_loyal, already_scheduled_treatments
-0; patient0; {0:4}; 3; DayHour(day=2, hour=0, minutes=0); DayHour(day=3, hour=0, minutes=0); False; {}; []
+[DATA: PATIENTS]: pid, name, treatments, length_of_stay, earliest_admission_date, admitted_before_date, already_admitted_date, already_scheduled_treatments
+0; patient0; {0:4}; 2; DayHour(day=2, hour=0, minutes=0); DayHour(day=3, hour=0, minutes=0); False; []

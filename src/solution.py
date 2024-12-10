@@ -521,7 +521,11 @@ class Solution:
                         f"starting at day {day}, which exceeds the upper bound of {ceil(avg_treatments * e_ub)}."
                     )
 
+                """
+                MIN IS CURRENTLY NOT ENFORCED
+                
                 # Check lowerbound if the day range is completely within the patient's stay
+                # Currently not in use
                 if (
                     self.patients_arrival[patient].day <= day
                     and day + e_w
@@ -533,6 +537,7 @@ class Solution:
                             f"Patient {patient.id} has {treatments_scheduled} treatments scheduled in the window "
                             f"starting at day {day}, which is below the lower bound of {floor(avg_treatments * e_lb)}."
                         )
+                """
 
     def _check_no_treatments_outside_horizont(self):
         """

@@ -61,9 +61,11 @@ def get_file_writer_context(
 
 def generate_combis(solver, allowed_keys):
     d = solver.SOLVER_OPTIONS
-    d = {key: value for key, value in d.items() if key in allowed_keys}
-    keys = list(d.keys())
-    value_lists = [d[k] for k in keys]
+    restr_d = {key: value for key, value in d.items() if key in allowed_keys}
+    assert set(allowed_keys) <= set(d.keys()), "Not all keys are in the solver options"
+
+    keys = list(restr_d.keys())
+    value_lists = [restr_d[k] for k in keys]
     # Use itertools.product to create all combinations
     combinations = []
     for combo in product(*value_lists):

@@ -24,7 +24,7 @@ def main():
     # Assert Custom Instance
     if True:
         largest_folder = "test_inst"
-        file = "instance_5.txt"
+        file = "instance_1.txt"
     else:
         largest_folder = "comp_study_001"
         file = "instance_1.txt"
@@ -51,7 +51,8 @@ def main():
             "max_repr": "cumulative",
         },
         CPSolver2: {
-            "break_symmetry": True,
+            "break_symmetry": False,
+            "treatments_in_adm_period": "cumulative",
         },
     }
 
@@ -78,16 +79,20 @@ def main():
     inst = create_instance_from_file("data/" + str(largest_folder) + "/" + file)
     logger.info("Successfully created instance from file.")
 
-    solver_cls = CPSolver
+    solver_cls = MIPSolver
     # Create kwargs for solver
     kwargs = settings_dict[solver_cls]
     kwargs.update(default_settings)
     kwargs.update(debug_settings)
 
-    test_parameter_combinations = False
+    test_parameter_combinations = True
     if test_parameter_combinations:
         test_run(
-            solver_cls, inst, debug_settings, kwargs, ["max_repr", "break_symmetry"]
+            solver_cls,
+            inst,
+            debug_settings,
+            kwargs,
+            ["add_knowledge", "number_of_threads"],
         )
     else:
         logger.info("Running with: " + str(kwargs))
@@ -110,8 +115,10 @@ def test_run(solver_cls, inst, debug_settings, kwargs, testing_keys):
     testing_keys = sorted(testing_keys)
     settings_comb = generate_combis(solver_cls, testing_keys)
     time_values = {}
-    for settings in settings_comb:
 
+    logger.info(f"{len(settings_comb)} Combinations to test: " + str(settings_comb))
+
+    for settings in settings_comb:
         logger.info("Running with Testing settings Combination: " + str(settings))
         kwargs.update(settings)
         context = get_file_writer_context(solver_cls, inst, **debug_settings)

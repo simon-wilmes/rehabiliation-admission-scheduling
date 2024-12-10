@@ -20,15 +20,17 @@ class CPSolver(Solver):
     SOLVER_OPTIONS.update(
         {
             "break_symmetry": [True, False],
-            "min_repr": ["cumulative", "reservoir"],
+            "add_knowledge": [True, False],
+            # "min_repr": ["cumulative", "reservoir"],
             "max_repr": ["cumulative", "reservoir"],
         }
     )  # Add any additional options here
 
     SOLVER_DEFAULT_OPTIONS = {
-        "break_symetry": True,
-        "min_repr": "reservoir",
+        "break_symmetry": True,
+        # "min_repr": "reservoir",
         "max_repr": "cumulative",
+        "add_knowledge": True,
     }
 
     def __init__(self, instance: Instance, **kwargs):
@@ -75,8 +77,11 @@ class CPSolver(Solver):
 
         self.model = cp_model.CpModel()
         self._create_constraints()
-        if self.break_symetry:  # type: ignore
+        if self.break_symmetry:  # type: ignore
             self._break_symetry()
+
+        if self.add_knowledge:  # type:ignore
+            self._add_knowledge_num_needed_treatments()
         self._set_optimization_goal()
 
     def _create_parameter_sets(self):
@@ -86,6 +91,7 @@ class CPSolver(Solver):
         self.num_time_slots = len(self.T) * 2
 
     def _break_symetry(self):
+        logger.info("Symmetry is being broken")
         for m, rep_dict in self.treatment_vars.items():
             for r, vars in rep_dict.items():
                 if r == 0:
@@ -94,6 +100,13 @@ class CPSolver(Solver):
                 self.model.add_implication(
                     vars["is_present"], rep_dict[r - 1]["is_present"]
                 )
+
+    def _add_knowledge_num_needed_treatments(self):
+        # Calculate minimum number of repetitions needed for each treatment
+        for m in self.M:
+            min_reps = self._min_needed_repetitions(m)
+            self.model.add(self.treatment_vars[m][min_reps - 1]["is_present"] == 1)
+            pass
 
     def _set_optimization_goal(self):
         self.obj_factor = 1
@@ -417,11 +430,42 @@ class CPSolver(Solver):
         # Even distribution of treatments
         if self.add_even_distribution():
 
-
-
             if self.max_repr == "reservoir":  # type:ignore
                 for p in self.P:
-                    # Create new intervals
+                    # Daily even scheduling
+                    time_slots = []
+                    demands = []
+                    active_treatments = []
+                    for m in self.M_p[p]:
+                        for rep in self.I_m[m]:
+                            time_slots.append(
+                                self.patient_vars[p][m][rep]["interval"].start_expr()
+                            )
+                            demands.append(1)
+
+                            active_treatments.append(
+                                self.patient_vars[p][m][rep]["patient2treatment"]
+                            )
+
+                            time_slots.append(
+                                self.patient_vars[p][m][rep]["interval"].start_expr()
+                                + int(self.num_time_slots / 2)
+                            )
+                            demands.append(-1)
+                            active_treatments.append(
+                                self.patient_vars[p][m][rep]["patient2treatment"]
+                            )
+                    self.model.add_reservoir_constraint_with_active(
+                        time_slots,
+                        demands,
+                        active_treatments,
+                        min_level=0,
+                        max_level=self.daily_upper[p],
+                    )
+                    # Even window scheduling not needed when length of stay is too short
+                    if p.length_of_stay <= self.e_w:
+                        continue
+                    # Create new intervals for e_w scheduling
                     time_slots = []
                     demands = []
                     active_treatments = []
@@ -454,38 +498,9 @@ class CPSolver(Solver):
                         demands,
                         active_treatments,
                         min_level=0,
-                        max_level=e_w_upper[p],
+                        max_level=self.e_w_upper[p],
                     )
-                    # Daily even scheduling
-                    time_slots = []
-                    demands = []
-                    active_treatments = []
-                    for m in self.M_p[p]:
-                        for rep in self.I_m[m]:
-                            time_slots.append(
-                                self.patient_vars[p][m][rep]["interval"].start_expr()
-                            )
-                            demands.append(1)
 
-                            active_treatments.append(
-                                self.patient_vars[p][m][rep]["patient2treatment"]
-                            )
-
-                            time_slots.append(
-                                self.patient_vars[p][m][rep]["interval"].start_expr()
-                                + int(self.num_time_slots / 2)
-                            )
-                            demands.append(-1)
-                            active_treatments.append(
-                                self.patient_vars[p][m][rep]["patient2treatment"]
-                            )
-                    self.model.add_reservoir_constraint_with_active(
-                        time_slots,
-                        demands,
-                        active_treatments,
-                        min_level=0,
-                        max_level=daily_upper[p],
-                    )
             elif self.max_repr == "cumulative":  # type:ignore
                 for p in self.P:
                     # Handle the even window scheduling
@@ -510,7 +525,7 @@ class CPSolver(Solver):
                     self.model.add_cumulative(
                         intervals=intervals,
                         demands=[1] * len(intervals),
-                        capacity=e_w_upper[p],
+                        capacity=self.e_w_upper[p],
                     )
                     # Handle the daily even scheduling
                     intervals = []
@@ -533,15 +548,16 @@ class CPSolver(Solver):
                     self.model.add_cumulative(
                         intervals=intervals,
                         demands=[1] * len(intervals),
-                        capacity=daily_upper[p],
+                        capacity=self.daily_upper[p],
                     )
 
             else:
                 logger.warning(
                     f"Invalid max_repr value: {self.max_repr}"  # type:ignore
                 )  # type:ignore
-                
-            self.min_repr = None # for now ignore min
+
+            # for now ignore min
+            return
             if self.min_repr == "reservoir":  # type:ignore
                 for p in self.P:
                     # Create new intervals
@@ -551,7 +567,7 @@ class CPSolver(Solver):
                         (self.admission_vars[p] * self.num_time_slots)
                         + int(self.num_time_slots * (self.l_p[p] - 0.5)),
                     ]
-                    demands = [-e_w_lower[p], e_w_lower[p]]
+                    demands = [-self.e_w_lower[p], self.e_w_lower[p]]
                     active_treatments = [True, True]
                     for m in self.M_p[p]:
                         for rep in self.I_m[m]:
@@ -600,7 +616,7 @@ class CPSolver(Solver):
                             name=f"min_treatment_int_dummy_p{p.id}",
                         )
                     ]
-                    demands = [e_w_lower[p]]
+                    demands = [self.e_w_lower[p]]
                     for m in self.M_p[p]:
                         for rep in self.I_m[m]:
                             start_length = self.model.new_int_var(
@@ -657,7 +673,7 @@ class CPSolver(Solver):
                     self.model.add_cumulative(
                         intervals=intervals,
                         demands=demands,
-                        capacity=total_treatments_p - e_w_lower[p],
+                        capacity=total_treatments_p - self.e_w_lower[p],
                     )
             else:
                 logger.warning(

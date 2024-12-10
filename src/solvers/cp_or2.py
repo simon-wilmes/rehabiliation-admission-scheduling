@@ -21,16 +21,14 @@ class CPSolver2(Solver):
 
     SOLVER_OPTIONS.update(
         {
-            "product_repr": ["only-if", "leq-constraints"],
-            "treatment-scheduling": ["2d", "1d"],
-            "break_symmetry": ["False", "ordering", "2d-view"],
+            "treatments_in_adm_period": ["if_only", "cumulative"],
+            "break_symmetry": [False, True],
         }
     )  # Add any additional options here
 
     SOLVER_DEFAULT_OPTIONS = {
-        "product_repr": "only-if",
-        "treatment-scheduling": "1d",
-        "break_symmetry": "False",
+        "break_symmetry": False,
+        "treatments_in_adm_period": "if_only",
     }
 
     def __init__(self, instance: Instance, **kwargs):
@@ -69,7 +67,7 @@ class CPSolver2(Solver):
 
         self.model = cp_model.CpModel()
         self._create_constraints()
-        if self.break_symmetry != "False":  # type: ignore
+        if self.break_symmetry:  # type: ignore
             self._break_symmetry()
         self._set_optimization_goal()
 
@@ -293,7 +291,6 @@ class CPSolver2(Solver):
                         self.patient_treat_vars[(p, m)][r, d] = patient2treatment
 
                         # CONSTRAINT: treatment must be scheduled if patient is assigned to it
-
                         self.model.add_implication(
                             patient2treatment,
                             self.treatment_vars[m][r][d]["is_present"],
@@ -312,10 +309,9 @@ class CPSolver2(Solver):
 
                 self.model.add_no_overlap(intervals_per_day)
 
-        # CONSTRAINT P1: Patient has lr_pm treatments scheduled
+        # CONSTRAINT P1: Patient has <= lr_pm treatments scheduled
         for p in self.P:
             for m in self.M_p[p]:
-
                 self.model.add(
                     cp_model.LinearExpr.Sum(
                         [var for var in self.patient_treat_vars[p, m].values()]
@@ -333,7 +329,6 @@ class CPSolver2(Solver):
         for (m, r, d), patient_vars in tmp_treat_rep_day_vars.items():
             self.model.add(cp_model.LinearExpr.Sum(patient_vars) <= self.k_m[m])
 
-        pass
         # Admission constraints
         for p in self.P:
             admission_day = self.admission_vars[p]
@@ -348,32 +343,92 @@ class CPSolver2(Solver):
             admission_day = self.admission_vars[p]
 
             self.model.add(admission_day >= p.earliest_admission_date.day)
-
             self.model.add(admission_day < p.admitted_before_date.day)
 
         # Ensure treatments are scheduled within admission period
-        for (p, m, r), day_vars in self.patient_treat_rep_vars.items():
+        if self.treatments_in_adm_period == "if_only":  # type: ignore
+            # Admission before variables
+            adm_before_pd = {}
+            for p in self.P:
+                for d in self.D_p[p]:
+                    new_bool_var = self.model.new_bool_var(f"adm_before_p{p.id}_{d}")
+                    adm_before_pd[p, d] = new_bool_var
+                    self.model.add(self.admission_vars[p] <= d).only_enforce_if(
+                        new_bool_var
+                    )
+                    self.model.add(self.admission_vars[p] > d).only_enforce_if(
+                        ~new_bool_var
+                    )
 
-            admission_day = self.admission_vars[p]
-            for d, var in day_vars.items():
-                new_bool_var = self.model.new_bool_var(
-                    f"adm_before{p.id}_{m.id}_{r}_{d}"
-                )
-                self.model.add(admission_day > d).only_enforce_if(new_bool_var)
-                self.model.add(admission_day <= d).only_enforce_if(~new_bool_var)
-                self.model.add(var == 0).only_enforce_if(new_bool_var)
+            for (p, m, r), day_vars in self.patient_treat_rep_vars.items():
+                # logger.info(f"Patient {p.id} Treatment {m.id} rep {r}")
+                admission_day = self.admission_vars[p]
+                for d, var in day_vars.items():
+                    # logger.debug(d)
+                    # Get the two variables indicating that day d lies outside the admission period
 
-                new_bool_var = self.model.new_bool_var(
-                    f"adm_before{p.id}_{m.id}_{r}_{d}"
-                )
-                self.model.add(admission_day < d - self.l_p[p]).only_enforce_if(
-                    new_bool_var
-                )
-                self.model.add(admission_day >= d - self.l_p[p]).only_enforce_if(
-                    ~new_bool_var
-                )
-                self.model.add(var == 0).only_enforce_if(new_bool_var)
+                    if d < max(self.D_p[p]):  # if the patient can be admitted after
+                        # logger.debug("Patient can be admitted after")
+                        adm_after_d = ~adm_before_pd[p, d]  # admitted after d
+                        self.model.add(var == 0).only_enforce_if(
+                            adm_after_d
+                        )  # no treatment
 
+                    if d - self.l_p[p] >= min(
+                        self.D_p[p]
+                    ):  # if the patient can be discharged before d
+                        # logger.debug("Patient can be discharged before")
+                        adm_before_d = adm_before_pd[
+                            p, d - self.l_p[p]
+                        ]  # admitted before d and already discharged
+                        self.model.add(var == 0).only_enforce_if(adm_before_d)
+        elif self.treatments_in_adm_period == "cumulative":  # type: ignore
+            for p in self.P:
+                admission_day = self.admission_vars[p]
+                size_1 = self.model.new_int_var(
+                    min(self.D_p[p]), max(self.D_p[p]), f"size_1_p{p.id}"
+                )
+                size_2 = self.model.new_int_var(
+                    min(self.D_p[p]), max(self.D_p[p]), f"size_2_p{p.id}"
+                )
+                intervals = [
+                    self.model.new_interval_var(
+                        start=min(self.A_p[p]),
+                        end=admission_day,
+                        size=size_1,
+                        name=f"interval_1_p{p.id}",
+                    ),
+                    self.model.new_interval_var(
+                        start=admission_day + (self.l_p[p]),
+                        end=max(self.A_p[p]) + 1,
+                        size=size_2,
+                        name=f"interval_2_p{p.id}",
+                    ),
+                ]
+                demands = [self.daily_upper[p], self.daily_upper[p]]
+
+                for d in self.A_p[p]:
+                    for m in self.M_p[p]:
+                        for r in self.I_m[m]:
+                            interval = self.model.new_optional_fixed_size_interval_var(
+                                start=d,
+                                size=1,
+                                is_present=self.patient_vars[p][m][r][d],
+                                name=f"daily_interval_p{p.id}_m{m.id}_r{r}_d{d}",
+                            )
+                            intervals.append(interval)
+                            demands.append(1)
+
+                self.model.add_cumulative(
+                    intervals,
+                    demands,
+                    capacity=self.daily_upper[p],
+                )
+
+        else:
+            logger.warning(
+                "treatments_in_adm_period has to be either 'if_only' or 'cumulative'"
+            )
         # Bed capacity constraints via reservoir constraint
         bed_changes_time = []
         bed_changes_amount = []
@@ -393,10 +448,36 @@ class CPSolver2(Solver):
         )
 
         # Even distribution of treatments
-        if self.add_even_distribution():
-            logger.warning(
-                "Even distribution constraint not implemented for CP solver."
-            )
+        # Constraint: Every day at most daily_upper
+
+        # Can be ignored if cumulative is set for treatments_in_adm_period
+        # As the cumulative constraint already ensures that the daily_upper is not exceeded
+        if self.treatments_in_adm_period != "cumulative":  # type: ignore
+            for p in self.P:
+                for d in self.A_p[p]:
+                    var_list = []
+                    for m in self.M_p[p]:
+                        for r in self.I_m[m]:
+                            var_list.append(self.patient_vars[p][m][r][d])
+                    self.model.add(
+                        cp_model.LinearExpr.Sum(var_list) <= self.daily_upper[p]
+                    )
+
+        # Constraint: Every e_w days at most e_w_upper
+        for p in self.P:
+            # e_w is not needed if length of stay is too short
+            if p.length_of_stay <= self.e_w:
+                continue
+            for d in self.A_p[p]:
+                # check if the window is partially outside of patients stay => ignore
+                if d + self.e_w >= p.admitted_before_date.day + p.length_of_stay:
+                    continue
+                var_list = []
+                for d_prime in range(d, d + self.e_w):
+                    for m in self.M_p[p]:
+                        for r in self.I_m[m]:
+                            var_list.append(self.patient_vars[p][m][r][d_prime])
+                self.model.add(cp_model.LinearExpr.Sum(var_list) <= self.e_w_upper[p])
 
         # Conflict groups
         if self.add_conflict_groups():

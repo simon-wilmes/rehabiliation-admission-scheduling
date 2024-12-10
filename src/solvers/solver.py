@@ -13,15 +13,11 @@ from src.time import DayHour
 from pprint import pprint as pp
 from collections import defaultdict
 from time import time
-import contextlib
-from src.utils import MultiWriter
-import os
-from datetime import datetime
 
 
 class Solver(ABC):
     BASE_SOLVER_OPTIONS = {
-        "number_of_threads": (int, 1, 24),
+        "number_of_threads": [1, 4, 12],
         "treatment_value": (float, 0.0, 10.0),
         "delay_value": (float, 0.0, 10.0),
         "missing_treatment_value": (float, 0.0, 10.0),
@@ -274,13 +270,13 @@ class Solver(ABC):
         self.e_lb: float = self.instance.even_scheduling_lower  # type: ignore
         self.e_ub: float = self.instance.even_scheduling_upper  # type: ignore
 
-        e_w_upper = {
+        self.e_w_upper = {
             p: ceil(self.get_avg_treatments_per_e_w(p) * self.e_ub) for p in self.P
         }
-        e_w_lower = {
+        self.e_w_lower = {
             p: floor(self.get_avg_treatments_per_e_w(p) * self.e_lb) for p in self.P
         }
-        daily_upper = {
+        self.daily_upper = {
             p: ceil(
                 self.get_avg_treatments_per_e_w(p)
                 / self.e_w
@@ -308,3 +304,9 @@ class Solver(ABC):
     def _assert_schedule(self, schedule: list[Appointment]):
         for app in schedule:
             self._assert_appointment(app)
+
+    def _min_needed_repetitions(self, m: Treatment):
+        return max(
+            ceil(self.treatment_count[m] / self.k_m[m]),
+            max(self.lr_pm[p, m] for p in self.P if m in self.M_p[p]),
+        )
