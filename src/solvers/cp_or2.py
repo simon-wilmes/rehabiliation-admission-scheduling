@@ -255,7 +255,6 @@ class CPSolver2(Solver):
 
         # CONSTRAINT: Every treatment can only be scheduled once
         for (m, r), day_vars in self.treat_rep_vars.items():
-
             self.model.add_at_most_one(vars["is_present"] for vars in day_vars.values())
 
             pass
@@ -328,7 +327,7 @@ class CPSolver2(Solver):
 
         for (m, r, d), patient_vars in tmp_treat_rep_day_vars.items():
             self.model.add(cp_model.LinearExpr.Sum(patient_vars) <= self.k_m[m])
-
+            pass
         # Admission constraints
         for p in self.P:
             admission_day = self.admission_vars[p]
@@ -385,22 +384,22 @@ class CPSolver2(Solver):
         elif self.treatments_in_adm_period == "cumulative":  # type: ignore
             for p in self.P:
                 admission_day = self.admission_vars[p]
-                size_1 = self.model.new_int_var(
-                    min(self.D_p[p]), max(self.D_p[p]), f"size_1_p{p.id}"
-                )
+                size_1 = self.model.new_int_var(0, max(self.D_p[p]), f"size_1_p{p.id}")
                 size_2 = self.model.new_int_var(
-                    min(self.D_p[p]), max(self.D_p[p]), f"size_2_p{p.id}"
+                    0, max(self.D_p[p]) + self.l_p[p], f"size_2_p{p.id}"
                 )
+                logger.debug("")
+                intervals = []
                 intervals = [
                     self.model.new_interval_var(
-                        start=min(self.A_p[p]),
+                        start=0,
                         end=admission_day,
                         size=size_1,
                         name=f"interval_1_p{p.id}",
                     ),
                     self.model.new_interval_var(
                         start=admission_day + (self.l_p[p]),
-                        end=max(self.A_p[p]) + 1,
+                        end=max(self.D_p[p]) + self.l_p[p],
                         size=size_2,
                         name=f"interval_2_p{p.id}",
                     ),
@@ -449,7 +448,6 @@ class CPSolver2(Solver):
 
         # Even distribution of treatments
         # Constraint: Every day at most daily_upper
-
         # Can be ignored if cumulative is set for treatments_in_adm_period
         # As the cumulative constraint already ensures that the daily_upper is not exceeded
         if self.treatments_in_adm_period != "cumulative":  # type: ignore
@@ -470,7 +468,10 @@ class CPSolver2(Solver):
                 continue
             for d in self.A_p[p]:
                 # check if the window is partially outside of patients stay => ignore
-                if d + self.e_w >= p.admitted_before_date.day + p.length_of_stay:
+                if (
+                    d + self.e_w >= p.admitted_before_date.day + p.length_of_stay
+                    or d + self.e_w > max(self.D) + 1
+                ):
                     continue
                 var_list = []
                 for d_prime in range(d, d + self.e_w):
@@ -478,10 +479,6 @@ class CPSolver2(Solver):
                         for r in self.I_m[m]:
                             var_list.append(self.patient_vars[p][m][r][d_prime])
                 self.model.add(cp_model.LinearExpr.Sum(var_list) <= self.e_w_upper[p])
-
-        # Conflict groups
-        if self.add_conflict_groups():
-            logger.warning("Conflict Groups constraint not implemented for CP solver.")
 
     def _extract_solution(self, solver):
         appointments_dict = {}
@@ -541,9 +538,6 @@ class CPSolver2(Solver):
             schedule=appointments,
             patients_arrival=patients_arrival,
             solver=self,
-            test_even_distribution=self.add_even_distribution(),
-            test_conflict_groups=self.add_conflict_groups(),
-            test_resource_loyalty=self.add_resource_loyal(),
             solution_value=solver.objective_value,
         )
         return solution

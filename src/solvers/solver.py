@@ -17,25 +17,20 @@ from time import time
 
 class Solver(ABC):
     BASE_SOLVER_OPTIONS = {
-        "number_of_threads": [1, 4, 12],
-        "treatment_value": (float, 0.0, 10.0),
-        "delay_value": (float, 0.0, 10.0),
-        "missing_treatment_value": (float, 0.0, 10.0),
-        "use_conflict_groups": [True, False],
-        "use_resource_loyalty": [True, False],
-        "use_even_distribution": [True, False],
-        "log_to_console": [True, False],
+        "number_of_threads": [1, 4, 8, 12],
+        "enforce_min_treatments_per_day": [True, False],
+        "enforce_max_treatments_per_e_w": [True, False],
     }
     BASE_SOLVER_DEFAULT_OPTIONS = {
         "number_of_threads": 4,
-        "treatment_value": 4,
-        "delay_value": 2,
-        "missing_treatment_value": 8,
-        "use_conflict_groups": True,
-        "use_resource_loyalty": True,
-        "use_even_distribution": True,
+        "treatment_value": 2,
+        "delay_value": 1,
+        "missing_treatment_value": 4,
+        "enforce_min_treatments_per_day": True,
+        "enforce_max_treatments_per_e_w": True,
         "log_to_console": True,
-        "no_rel_heur_time": 3,
+        "log_to_file": True,
+        "no_rel_heur_time": 1,
     }
 
     def __init__(self, instance: Instance, **kwargs):
@@ -59,15 +54,6 @@ class Solver(ABC):
 
         self.instance = instance
 
-    def add_resource_loyal(self):
-        return self.use_resource_loyalty  # type: ignore
-
-    def add_even_distribution(self):
-        return True  # self.use_even_distribution  # type: ignore
-
-    def add_conflict_groups(self):
-        return self.use_conflict_groups  # type: ignore
-
     def get_avg_treatments_per_e_w(self, p: Patient):
         return sum(self.lr_pm[p, m] for m in self.M_p[p]) * self.e_w / p.length_of_stay
 
@@ -87,6 +73,7 @@ class Solver(ABC):
                 round(self.time_solve_model, 3),
                 solution.value,
             )
+            self.objective = solution.value
             logger.info(
                 "Total Time: %ss", round(time() - self.time_create_model_start, 3)
             )
@@ -281,6 +268,15 @@ class Solver(ABC):
                 self.get_avg_treatments_per_e_w(p)
                 / self.e_w
                 * self.instance.daily_scheduling_upper
+            )
+            for p in self.P
+        }
+
+        self.daily_lower = {
+            p: floor(
+                self.get_avg_treatments_per_e_w(p)
+                / self.e_w
+                * self.instance.daily_scheduling_lower
             )
             for p in self.P
         }

@@ -76,18 +76,12 @@ class Solution:
         schedule: list[Appointment],
         patients_arrival: dict[Patient, DayHour],
         solver=None,  # type: ignore
-        test_even_distribution=True,
-        test_conflict_groups=True,
-        test_resource_loyalty=False,
         solution_value: float = 0,
     ):
         self.instance = instance
         self.schedule = schedule  # List of Appointments
         self.patients_arrival = patients_arrival  # Dict[Patient, DayHour]
         self.solver = solver
-        self.test_even_distribution = test_even_distribution
-        self.test_conflict_groups = test_conflict_groups
-        self.test_resource_loyalty = test_resource_loyalty
 
         # Log the schedule for all patients and treatments
         for patients in self.patients_arrival:
@@ -133,9 +127,6 @@ class Solution:
         for solver_cls in solvers_cls:
             solver = solver_cls(
                 self.instance,
-                use_resource_loyalty=self.test_resource_loyalty,
-                use_even_distribution=self.test_even_distribution,
-                use_conflict_groups=self.test_conflict_groups,
                 break_symetry=True,
                 log_to_console=False,
             )
@@ -217,17 +208,13 @@ class Solution:
         self._check_treatment_assignment_during_stay()
         self._check_no_overlapping_appointments()
         self._check_resource_availability_and_uniqueness()
-        if self.test_resource_loyalty:
-            self._check_resource_loyalty()
+
         self._check_bed_capacity()
         self._check_total_treatments_scheduled()
         self._check_no_treatments_outside_horizont()
         self._check_daily_scheduling()
-        if self.test_even_distribution:
+        if self.solver.enforce_max_treatments_per_e_w:  # type: ignore
             self._check_even_scheduling()
-
-        if self.test_conflict_groups:
-            self._check_conflict_groups()
 
     def _check_patient_admission(self):
         """
@@ -497,7 +484,6 @@ class Solution:
 
         e_w = self.instance.even_scheduling_width
         e_ub = self.instance.even_scheduling_upper
-        e_lb = self.instance.even_scheduling_lower
 
         for patient in self.instance.patients.values():
             avg_treatments = (
@@ -604,6 +590,7 @@ class Solution:
 
         # Parameters from the instance
         daily_upper = self.instance.daily_scheduling_upper
+        daily_lower = self.instance.daily_scheduling_lower
 
         for patient in self.instance.patients.values():
             total_required_treatments = sum(
@@ -618,12 +605,15 @@ class Solution:
             ):
                 treatments_today = patient_day_count.get((patient, day), 0)
                 upper_bound = math.ceil(avg_per_day * daily_upper)
+                lower_bound = math.floor(avg_per_day * daily_lower)
 
-                # Note: If avg_per_day is small, it's possible lower_bound is 0.
-                # This check ensures we don't fail patients who might not need many treatments daily.
-                if treatments_today > upper_bound:
+                # Check if the lower bound should be enforced
+                if not self.solver.enforce_min_treatments_per_day:  # type: ignore
+                    lower_bound = 0
+
+                if treatments_today > upper_bound or treatments_today < lower_bound:
                     raise ValueError(
                         f"Patient {patient.id} on day {day} has {treatments_today} treatments, "
-                        f"expected <={upper_bound}  (avg={avg_per_day:.2f}, "
-                        f"multipliers={daily_upper})."
+                        f"expected {lower_bound} <= x <={upper_bound}   (avg={avg_per_day:.2f}, "
+                        f"multipliers={daily_upper}/{daily_lower})."
                     )

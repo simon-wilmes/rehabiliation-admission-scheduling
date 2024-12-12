@@ -6,6 +6,9 @@ from itertools import combinations
 import os
 from src.utils import get_file_writer_context, generate_combis
 import contextlib
+from typing import Type
+from src.solvers.solver import Solver
+from pprint import pformat
 
 
 def main():
@@ -24,7 +27,7 @@ def main():
     # Assert Custom Instance
     if True:
         largest_folder = "test_inst"
-        file = "instance_1.txt"
+        file = "instance_5.txt"
     else:
         largest_folder = "comp_study_001"
         file = "instance_1.txt"
@@ -33,22 +36,22 @@ def main():
     # Set Settings
     #####################################
     default_settings = {
-        "use_resource_loyalty": False,
-        "use_conflict_groups": False,
-        "use_even_distribution": False,
+        "enforce_min_treatments_per_day": False,
+        "enforce_max_treatments_per_e_w": True,
     }
 
     # Solver settings
     settings_dict = {
         MIPSolver: {},
-        MIPSolver2: {},
+        MIPSolver2: {"break_symmetry": True},
         MIPSolver3: {
-            "break_symmetry": False,
-            "break_symmetry_strong": False,
+            "break_symmetry": True,
+            "break_symmetry_strong": True,
         },
         CPSolver: {
             "break_symmetry": True,
             "max_repr": "cumulative",
+            "min_repr": "cumulative",
         },
         CPSolver2: {
             "break_symmetry": False,
@@ -79,20 +82,20 @@ def main():
     inst = create_instance_from_file("data/" + str(largest_folder) + "/" + file)
     logger.info("Successfully created instance from file.")
 
-    solver_cls = MIPSolver
+    solver_cls = MIPSolver3
     # Create kwargs for solver
     kwargs = settings_dict[solver_cls]
     kwargs.update(default_settings)
     kwargs.update(debug_settings)
 
-    test_parameter_combinations = True
+    test_parameter_combinations = False
     if test_parameter_combinations:
         test_run(
             solver_cls,
             inst,
             debug_settings,
             kwargs,
-            ["add_knowledge", "number_of_threads"],
+            ["add_knowledge", "break_symmetry", "break_symmetry_strong"],
         )
     else:
         logger.info("Running with: " + str(kwargs))
@@ -109,14 +112,17 @@ def main():
             solution = solver.solve_model()
 
 
-def test_run(solver_cls, inst, debug_settings, kwargs, testing_keys):
+def test_run(solver_cls: Type[Solver], inst, debug_settings, kwargs, testing_keys):
     # Build kwargs
 
     testing_keys = sorted(testing_keys)
     settings_comb = generate_combis(solver_cls, testing_keys)
     time_values = {}
-
-    logger.info(f"{len(settings_comb)} Combinations to test: " + str(settings_comb))
+    solution_values = {}
+    logger.info(
+        f"{len(settings_comb)} Combinations to test: \n"
+        + pformat(settings_comb, indent=4)
+    )
 
     for settings in settings_comb:
         logger.info("Running with Testing settings Combination: " + str(settings))
@@ -138,6 +144,7 @@ def test_run(solver_cls, inst, debug_settings, kwargs, testing_keys):
                 x[1] for x in sorted(list(settings.items()), key=lambda x: x[0])
             )
             time_values[sorted_comb] = solver.total_time if solution else "N/A"
+            solution_values[sorted_comb] = solution.value if solution else "N/A"
 
     logger.info(f"Keys Tested: {testing_keys}")
     for key, value in time_values.items():

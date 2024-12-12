@@ -256,73 +256,47 @@ class MIPSolver2(Solver):
             )
         logger.debug("Constraint (r7) created.")
 
-        if self.add_resource_loyal():
-            logger.warning("Resource loyalty not implemented for MIP2")
-
-        if self.add_even_distribution():
-            # Constraint (a4): Even distribution of treatments over rolling windows
-            for p in self.P:
-                # Skip patients that do not require even distribution as they stay fewer days than the
-                # length of the rolling window
-                if p.length_of_stay < self.e_w:
+        # Constraint (a4): Max num of treatments over e_w days
+        for p in self.P:
+            # Skip patients that do not require even distribution as they stay fewer days than the
+            # length of the rolling window
+            if p.length_of_stay <= self.e_w:
+                continue
+            for d in self.A_p[p]:
+                # check if the window is partially outside of patients stay => ignore
+                if (
+                    d + self.e_w >= p.admitted_before_date.day + p.length_of_stay
+                    or d + self.e_w > max(self.D) + 1
+                ):
                     continue
 
-                # Get average number of treatments during rolling window
-                avg_treatments = (
-                    sum(self.lr_pm[p, m] for m in self.M_p[p])
-                    * self.e_w
-                    / p.length_of_stay
-                )
-
-                # Get all possible days at which a rolling window could start for patient p
-                min_day = p.earliest_admission_date.day
-                max_day = (
-                    min(
-                        max(self.D) + 1,
-                        p.admitted_before_date.day + p.length_of_stay - 1,
-                    )
-                    - self.e_w
-                )
-
-                for d in range(min_day, max_day + 1):
-                    # Determine the range of days to consider
-                    days = range(d, d + self.e_w)
-                    # sum up all treatments for patient p within the rolling window
-                    total_treatments = gp.quicksum(
-                        self.y_pmi[p, m, i] * self.x_midt[m, i, day, t]
+                self.model.addConstr(
+                    gp.quicksum(
+                        self.x_midt[m, i, d_prime, t] * self.y_pmi[p, m, i]
                         for m in self.M_p[p]
                         for i in self.I_m[m]
-                        for day in days
+                        for t in self.T
+                        for d_prime in range(d, d + self.e_w)
+                    )
+                    <= self.e_w_upper[p],
+                    name=f"constraint_a4_ub_p{p.id}_d{d}",
+                )
+        logger.debug("Constraint (a4) created.")
+
+        # Constraint (a5): Max num of treatments every day
+        for p in self.P:
+            for d in self.A_p[p]:
+                self.model.addConstr(
+                    gp.quicksum(
+                        self.x_midt[m, i, d, t] * self.y_pmi[p, m, i]
+                        for m in self.M_p[p]
+                        for i in self.I_m[m]
                         for t in self.T
                     )
-                    # get for each admission day the required number of treatments for this rolling window
-                    required_treatments_lb = floor(avg_treatments * self.e_lb)
-                    required_treatments_ub = ceil(avg_treatments * self.e_ub)
-                    for d_prime in self.D_p[p]:
-                        num_days_during_window = len(
-                            set(range(d_prime, d_prime + p.length_of_stay)) & set(days)
-                        )
-                        # if this rolling window is not fully contained in the admitted period
-                        # for a_pd[p, d_prime] = 1 then ignore the lb
-                        if num_days_during_window < self.e_w:
-                            # set required treatments lb to 0
-                            required_treatments_lb -= (
-                                floor(avg_treatments * self.e_lb)
-                                * self.a_pd[p, d_prime]
-                            )
-
-                    self.model.addConstr(
-                        total_treatments >= required_treatments_lb,
-                        name=f"constraint_a4_lb_p{p.id}_d{d}",
-                    )
-                    self.model.addConstr(
-                        total_treatments <= required_treatments_ub,
-                        name=f"constraint_a4_ub_p{p.id}_d{d}",
-                    )
-            logger.debug("Constraint (a4) created.")
-
-        if self.add_conflict_groups():
-            logger.warning("Conflict groups not implemented for MIP2")
+                    <= self.daily_upper[p],
+                    name=f"constraint_a5_ub_p{p.id}_d{d}",
+                )
+        logger.debug("Constraint (a5) created.")
 
     def _set_optimization_goal(self):
 
@@ -435,8 +409,5 @@ class MIPSolver2(Solver):
             schedule=appointments,
             patients_arrival=patients_arrival,
             solver=self,
-            test_even_distribution=self.add_even_distribution(),
-            test_conflict_groups=self.add_conflict_groups(),
-            test_resource_loyalty=self.add_resource_loyal(),
             solution_value=self.model.objVal,
         )

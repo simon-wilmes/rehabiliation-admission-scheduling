@@ -45,6 +45,7 @@ class Instance:
         self.even_scheduling_lower = instance_data.get("even_scheduling_lower", 0.8)
 
         self.daily_scheduling_upper = instance_data.get("daily_scheduling_upper", 1.3)
+        self.daily_scheduling_lower = instance_data.get("daily_scheduling_lower", 0.7)
 
         self.time_slot_length: Duration = instance_data.get(
             "time_slot_length", Duration(0, 15)
@@ -79,7 +80,15 @@ class Instance:
             num_days_stayed += self.patients[p].length_of_stay
             for m in self.patients[p].treatments:
                 for fhat in m.resources:
-                    num_resources_needed[fhat] += m.resources[fhat] * m.duration.hours
+                    num_resources_needed[fhat] += (
+                        m.resources[fhat] * m.duration.hours / m.num_participants
+                    )
+
+        # avail_resources = defaultdict(float)
+        # for f in self.resources.values():
+        #    avail_resources[f.resource_group] += (
+        #        self.workday_start - self.workday_end
+        #    ).hour
 
         logger.debug(f"Number of patients: {len(self.patients)}")
         logger.debug(f"Number of beds: {self.beds_capacity}")
@@ -95,7 +104,7 @@ class Instance:
 
         for fhat in num_resources_needed:
             logger.debug(
-                f"Number of resource units needed per treatment by {fhat}: {num_resources_needed[fhat]}"
+                f"Number of resource hours needed per all treatment by {fhat}: {num_resources_needed[fhat]}"
             )
 
 

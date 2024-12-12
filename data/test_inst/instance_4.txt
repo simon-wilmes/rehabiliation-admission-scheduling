@@ -9,7 +9,7 @@ even_scheduling_upper: 1.2
 even_scheduling_lower: 0.8
 even_scheduling_width: 5
 
-horizon_length: 4
+horizon_length: 100
 time_slot_length: Duration(hours=2)
 
 conflict_groups: []
@@ -27,10 +27,10 @@ conflict_groups: []
 
 
 [DATA: TREATMENTS]: tid, num_participants, name, duration, resources
-0; 5; music_therapy; Duration(hours=1, minutes=0); {0:(1,False), 1: (1, False)}
+0; 5; music_therapy; Duration(hours=1, minutes=0); {0:1, 1: 1}
 
 
 
 
-[DATA: PATIENTS]: pid, name, treatments, length_of_stay, earliest_admission_date, admitted_before_date, already_admitted_date, already_resource_loyal, already_scheduled_treatments
-0; patient0; {0:1}; 1; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; {}; []
+[DATA: PATIENTS]: pid, name, treatments, length_of_stay, earliest_admission_date, admitted_before_date, already_admitted_date,  already_scheduled_treatments
+0; patient0; {0:1}; 1; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []

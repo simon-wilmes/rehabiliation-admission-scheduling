@@ -19,11 +19,13 @@ class MIPSolver3(Solver):
         {
             "break_symmetry": [True, False],
             "break_symmetry_strong": [True, False],
+            "add_knowledge": [True, False],
         }
     )  # Add any additional options here
 
     SOLVER_DEFAULT_OPTIONS = {
         "break_symmetry": True,
+        "add_knowledge": False,
         "break_symmetry_strong": True,
     }
 
@@ -40,6 +42,17 @@ class MIPSolver3(Solver):
                     f" ---- {key} to { self.__class__.SOLVER_DEFAULT_OPTIONS[key]} (default)"
                 )
         super().__init__(instance, **kwargs)
+
+    def _add_knowledge_num_needed_treatments(self):
+        # Calculate minimum number of repetitions needed for each treatment
+        for m in self.M:
+            min_reps = self._min_needed_repetitions(m)
+            for i in range(min_reps):
+                self.model.addConstr(
+                    gp.quicksum(self.x_midt[m, i, d, t] for d in self.D for t in self.T)
+                    == 1
+                )
+            pass
 
     def _solve_model(self) -> Solution | int:
         self.model.optimize()
@@ -88,12 +101,13 @@ class MIPSolver3(Solver):
         self._create_constraints()
         if self.break_symmetry:  # type: ignore
             self._break_symmetry()
-
+        if self.add_knowledge:  # type:ignore
+            self._add_knowledge_num_needed_treatments()
         self._set_optimization_goal()
         self.model = self.model
 
     def _break_symmetry(self):
-        if self.break_symetry_strong:  # type: ignore
+        if self.break_symmetry_strong:  # type: ignore
             for m in self.M:
                 for i in self.I_m[m]:
                     if i == 0:
@@ -108,21 +122,20 @@ class MIPSolver3(Solver):
                         self.model.addConstr(prev >= succ)
 
             logger.debug("Constraint (strong symmetry) created.")
-        else:
-            for m in self.M:
-                for i in self.I_m[m]:
-                    if i == 0:
-                        continue
-                    self.model.addConstr(
-                        gp.quicksum(
-                            self.x_midt[m, i, d, t] for d, t in product(self.D, self.T)
-                        )
-                        <= gp.quicksum(
-                            self.x_midt[m, i - 1, d, t]
-                            for d, t in product(self.D, self.T)
-                        )
+
+        for m in self.M:
+            for i in self.I_m[m]:
+                if i == 0:
+                    continue
+                self.model.addConstr(
+                    gp.quicksum(
+                        self.x_midt[m, i, d, t] for d, t in product(self.D, self.T)
                     )
-            logger.debug("Constraint (symmetry) created.")
+                    <= gp.quicksum(
+                        self.x_midt[m, i - 1, d, t] for d, t in product(self.D, self.T)
+                    )
+                )
+        logger.debug("Constraint (symmetry) created.")
 
     def _create_variables(self):
         self.x_midt = self.model.addVars(
@@ -298,70 +311,65 @@ class MIPSolver3(Solver):
             )
         logger.debug("Constraint (r7) created.")
 
-        if self.add_even_distribution():
-            # Constraint (a4): Even distribution of treatments over rolling windows
+        if self.enforce_max_treatments_per_e_w:  # type: ignore
+            # Constraint (a4): Max num of treatments over e_w days
             for p in self.P:
                 # Skip patients that do not require even distribution as they stay fewer days than the
                 # length of the rolling window
-                if p.length_of_stay < self.e_w:
+                if p.length_of_stay <= self.e_w:
                     continue
+                for d in self.A_p[p]:
+                    # check if the window is partially outside of patients stay => ignore
+                    if (
+                        d + self.e_w >= p.admitted_before_date.day + p.length_of_stay
+                        or d + self.e_w > max(self.D) + 1
+                    ):
+                        continue
 
-                # Get average  umber of treatments during rolling window
-                avg_treatments = (
-                    sum(self.lr_pm[p, m] for m in self.M_p[p])
-                    * self.e_w
-                    / p.length_of_stay
-                )
-
-                # Get all possible days at which a rolling window could start for patient p
-                min_day = p.earliest_admission_date.day
-                max_day = (
-                    min(
-                        max(self.D) + 1,
-                        p.admitted_before_date.day + p.length_of_stay - 1,
-                    )
-                    - self.e_w
-                )
-
-                for d in range(min_day, max_day + 1):
-                    # Determine the range of days to consider
-                    days = range(d, d + self.e_w)
-                    # sum up all treatments for patient p within the rolling window
-                    total_treatments = gp.quicksum(
-                        self.y_pmidt[p, m, i, day, t]
-                        for m in self.M_p[p]
-                        for i in self.I_m[m]
-                        for day in days
-                        for t in self.T
-                    )
-                    # get for each admission day the required number of treatments for this rolling window
-                    required_treatments_lb = floor(avg_treatments * self.e_lb)
-                    required_treatments_ub = ceil(avg_treatments * self.e_ub)
-                    for d_prime in self.D_p[p]:
-                        num_days_during_window = len(
-                            set(range(d_prime, d_prime + p.length_of_stay)) & set(days)
+                    self.model.addConstr(
+                        gp.quicksum(
+                            self.y_pmidt[p, m, i, d_prime, t]
+                            for m in self.M_p[p]
+                            for i in self.I_m[m]
+                            for t in self.T
+                            for d_prime in range(d, d + self.e_w)
                         )
-                        # if this rolling window is not fully contained in the admitted period
-                        # for a_pd[p, d_prime] = 1 then ignore the lb
-                        if num_days_during_window < self.e_w:
-                            # set required treatments lb to 0
-                            required_treatments_lb -= (
-                                floor(avg_treatments * self.e_lb)
-                                * self.a_pd[p, d_prime]
-                            )
-
-                    self.model.addConstr(
-                        total_treatments >= required_treatments_lb,
-                        name=f"constraint_a4_lb_p{p.id}_d{d}",
-                    )
-                    self.model.addConstr(
-                        total_treatments <= required_treatments_ub,
+                        <= self.e_w_upper[p],
                         name=f"constraint_a4_ub_p{p.id}_d{d}",
                     )
             logger.debug("Constraint (a4) created.")
 
-    def _set_optimization_goal(self):
+        # Constraint (a5): Max num of treatments every day
+        for p in self.P:
+            for d in self.A_p[p]:
+                self.model.addConstr(
+                    gp.quicksum(
+                        self.y_pmidt[p, m, i, d, t]
+                        for m in self.M_p[p]
+                        for i in self.I_m[m]
+                        for t in self.T
+                    )
+                    <= self.daily_upper[p],
+                    name=f"constraint_a5_ub_p{p.id}_d{d}",
+                )
+        logger.debug("Constraint (a5) created.")
 
+        if self.enforce_min_treatments_per_day:  # type: ignore
+            for p in self.P:
+                for d in self.A_p[p]:
+                    self.model.addConstr(
+                        gp.quicksum(
+                            self.y_pmidt[p, m, i, d, t]
+                            for m in self.M_p[p]
+                            for i in self.I_m[m]
+                            for t in self.T
+                        )
+                        >= self.daily_lower[p],
+                        name=f"constraint_a5_ub_p{p.id}_d{d}",
+                    )
+            logger.debug("Constraint (a5) created.")
+
+    def _set_optimization_goal(self):
         minimize_treatments = gp.quicksum(
             self.x_midt[m, i, d, t]
             for m in self.M
@@ -467,7 +475,7 @@ class MIPSolver3(Solver):
         for p in self.P:
             for d in self.D_p[p]:
                 if self.a_pd[p, d].X > 0.5:  # type: ignore
-                    logger.debug(f"a_{p.id}_{d} = {self.a_pd[p,d].X}")
+                    # logger.debug(f"a_{p.id}_{d} = {self.a_pd[p,d].X}")
                     patients_arrival[p] = DayHour(
                         day=d, hour=self.instance.workday_start.hour
                     )
@@ -477,8 +485,5 @@ class MIPSolver3(Solver):
             schedule=appointments,
             patients_arrival=patients_arrival,
             solver=self,
-            test_even_distribution=self.add_even_distribution(),
-            test_conflict_groups=self.add_conflict_groups(),
-            test_resource_loyalty=self.add_resource_loyal(),
             solution_value=self.model.objVal,
         )
