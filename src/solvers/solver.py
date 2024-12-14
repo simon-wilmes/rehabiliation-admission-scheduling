@@ -20,14 +20,16 @@ class Solver(ABC):
         "number_of_threads": [1, 4, 8, 12],
         "enforce_min_treatments_per_day": [True, False],
         "enforce_max_treatments_per_e_w": [True, False],
+        "enforce_min_patients_per_treatment": [True, False],
     }
     BASE_SOLVER_DEFAULT_OPTIONS = {
         "number_of_threads": 4,
-        "treatment_value": 2,
+        "treatment_value": 0,
         "delay_value": 1,
         "missing_treatment_value": 4,
         "enforce_min_treatments_per_day": True,
         "enforce_max_treatments_per_e_w": True,
+        "enforce_min_patients_per_treatment": True,
         "log_to_console": True,
         "log_to_file": True,
         "no_rel_heur_time": 1,
@@ -138,7 +140,7 @@ class Solver(ABC):
             m: list(m.resources.keys()) for m in self.instance.treatments.values()
         }
         self.fhat = {
-            fhat: [f for f in self.F if f.resource_group == fhat] for fhat in self.Fhat
+            fhat: [f for f in self.F if fhat in f.resource_groups] for fhat in self.Fhat
         }
         p2 = self.P[0]
         self.A_p = {  # For a patient p the days at which a treatment might be scheduled
@@ -163,11 +165,18 @@ class Solver(ABC):
             )
             for p in self.instance.patients.values()
         }
-
+        self.P_m = {
+            m: list(p for p in self.P if m in p.treatments.keys()) for m in self.M
+        }
         self.M_p = {
             p: list(p.treatments.keys()) for p in self.instance.patients.values()
         }
-        self.k_m = {t: t.num_participants for t in self.instance.treatments.values()}
+        self.k_m = {
+            t: t.max_num_participants for t in self.instance.treatments.values()
+        }
+        self.j_m = {
+            t: t.min_num_participants for t in self.instance.treatments.values()
+        }
         self.r_pm = {
             (p, m): int(p.treatments[m])
             for p in self.instance.patients.values()
@@ -279,6 +288,10 @@ class Solver(ABC):
                 * self.instance.daily_scheduling_lower
             )
             for p in self.P
+        }
+
+        self.L_pm = {
+            (p, m): list(range(self.lr_pm[p, m])) for p in self.P for m in self.M_p[p]
         }
 
     def _assert_patients_arrival_day(self, patient: Patient, day: int):

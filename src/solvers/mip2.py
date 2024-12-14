@@ -127,7 +127,7 @@ class MIPSolver2(Solver):
 
     def _create_constraints(self):
         self.model.update()
-        # Constraint: Every patient is assigned to exactly the required number of treatments
+        # Constraint: Every patient is assigned to at most the required number of treatments
         for p in self.P:
             for m in self.M_p[p]:
                 self.model.addConstr(
@@ -297,6 +297,22 @@ class MIPSolver2(Solver):
                     name=f"constraint_a5_ub_p{p.id}_d{d}",
                 )
         logger.debug("Constraint (a5) created.")
+
+        if self.enforce_min_treatments_per_day:  # type: ignore
+            # Constraint (a5): Min num of treatments every day
+            for p in self.P:
+                for d in self.A_p[p]:
+                    self.model.addConstr(
+                        gp.quicksum(
+                            self.x_midt[m, i, d, t] * self.y_pmi[p, m, i]
+                            for m in self.M_p[p]
+                            for i in self.I_m[m]
+                            for t in self.T
+                        )
+                        >= self.daily_lower[p],
+                        name=f"constraint_a5_ub_p{p.id}_d{d}",
+                    )
+            logger.debug("Constraint (a5) created.")
 
     def _set_optimization_goal(self):
 

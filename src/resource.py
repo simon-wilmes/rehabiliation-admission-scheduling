@@ -20,7 +20,7 @@ class Resource:
     def __init__(
         self,
         rid: RID,
-        resource_group: ResourceGroup,
+        resource_groups: list[ResourceGroup],
         name: str = "",
         unavailable_time_slots: list[tuple[DayHour, DayHour, int | None]] = list(),
         **kwargs,
@@ -29,7 +29,7 @@ class Resource:
             unavailable_time_slots = []
 
         self.id = rid
-        self.resource_group = resource_group
+        self.resource_groups = set(resource_groups)
         self.name = name
         self.unavailable_time_slots = unavailable_time_slots
 

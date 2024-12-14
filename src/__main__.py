@@ -1,7 +1,17 @@
 from src.instance import create_instance_from_file
-from src.solvers import MIPSolver, MIPSolver2, MIPSolver3
-from src.solvers import CPSolver, CPSolver2
+from src.solvers import (
+    MIPSolver,
+    MIPSolver2,
+    MIPSolver3,
+    LBBDSolver,
+    CPSolver,
+    CPSolver2,
+)
+from src.solvers.subsolvers import CPSubsolver
+
 from src.logging import logger
+
+
 from itertools import combinations
 import os
 from src.utils import get_file_writer_context, generate_combis
@@ -22,27 +32,32 @@ def main():
         f for f in os.listdir(data_path) if os.path.isdir(os.path.join(data_path, f))
     ]
     inst_folders = [f for f in folders if f.startswith("inst") and f[4:].isdigit()]
-    largest_folder = max(inst_folders, key=lambda x: int(x[4:]))
+    if len(inst_folders) != 0:
+        largest_folder = max(inst_folders, key=lambda x: int(x[4:]))
 
     # Assert Custom Instance
     if True:
         largest_folder = "test_inst"
-        file = "instance_5.txt"
-    else:
+        file = "instance_7.txt"
+    elif False:
         largest_folder = "comp_study_001"
         file = "instance_1.txt"
+    else:
+        largest_folder = "testinstance_files"
+        file = "resource_only_in_groups.txt"
 
     #####################################
     # Set Settings
     #####################################
     default_settings = {
-        "enforce_min_treatments_per_day": False,
+        "enforce_min_treatments_per_day": True,
         "enforce_max_treatments_per_e_w": True,
+        "enforce_min_patients_per_treatment": True,
     }
 
     # Solver settings
     settings_dict = {
-        MIPSolver: {},
+        MIPSolver: {"use_lazy_constraints": True},
         MIPSolver2: {"break_symmetry": True},
         MIPSolver3: {
             "break_symmetry": True,
@@ -56,6 +71,12 @@ def main():
         CPSolver2: {
             "break_symmetry": False,
             "treatments_in_adm_period": "cumulative",
+        },
+        LBBDSolver: {
+            "break_symmetry": True,
+            "subsolver_cls": CPSubsolver,
+            "subsolver.store_results": True,
+            "subsolver.store_results_method": "hash",
         },
     }
 
@@ -82,7 +103,7 @@ def main():
     inst = create_instance_from_file("data/" + str(largest_folder) + "/" + file)
     logger.info("Successfully created instance from file.")
 
-    solver_cls = MIPSolver3
+    solver_cls = LBBDSolver
     # Create kwargs for solver
     kwargs = settings_dict[solver_cls]
     kwargs.update(default_settings)

@@ -460,7 +460,13 @@ class CPSolver2(Solver):
                     self.model.add(
                         cp_model.LinearExpr.Sum(var_list) <= self.daily_upper[p]
                     )
-
+        for p in self.P:
+            for d in self.A_p[p]:
+                var_list = []
+                for m in self.M_p[p]:
+                    for r in self.I_m[m]:
+                        var_list.append(self.patient_vars[p][m][r][d])
+                self.model.add(cp_model.LinearExpr.Sum(var_list) >= self.daily_lower[p])
         # Constraint: Every e_w days at most e_w_upper
         for p in self.P:
             # e_w is not needed if length of stay is too short

@@ -23,11 +23,13 @@ class Appointment:
         start_date: DayHour,
         treatment: Treatment,
         resources: dict[ResourceGroup, list[Resource]],
+        solver=None,  # type: ignore
     ):
         self.patients = patients
         self.start_date = start_date
         self.treatment = treatment
         self.resources = resources
+        self.solver = solver
         self.is_valid_appointment()
 
     def is_valid_appointment(self):
@@ -47,16 +49,19 @@ class Appointment:
                 )
 
         # Check that no more than the maximum number of patients take part in this treatment
-        if len(self.patients) > self.treatment.num_participants:
+        if len(self.patients) > self.treatment.max_num_participants:
             raise ValueError(
-                f"Appointment has {len(self.patients)} patients, but the maximum is {self.treatment.num_participants} "
+                f"Appointment has {len(self.patients)} patients, but the maximum is {self.treatment.max_num_participants} "
                 f"at day {self.start_date.day}, hour {self.start_date.hour}."
             )
-        # Check that this appointment is not empty
-        if not self.patients:
-            raise ValueError(
-                f"Appointment has no patients at day {self.start_date.day}, hour {self.start_date.hour}."
-            )
+            # Check that no more than the maximum number of patients take part in this treatment
+
+        if self.solver and self.solver.enforce_min_patients_per_treatment:  # type: ignore
+            if len(self.patients) < self.treatment.min_num_participants:
+                raise ValueError(
+                    f"Appointment has {len(self.patients)} patients, but the minimum is {self.treatment.min_num_participants} "
+                    f"at day {self.start_date.day}, hour {self.start_date.hour}."
+                )
 
     def __le__(self, other):
         return self.start_date <= other.start_date
@@ -82,6 +87,9 @@ class Solution:
         self.schedule = schedule  # List of Appointments
         self.patients_arrival = patients_arrival  # Dict[Patient, DayHour]
         self.solver = solver
+
+        # remove all empty appintments
+        self.schedule = list(filter(lambda x: len(x.patients), self.schedule))
 
         # Log the schedule for all patients and treatments
         for patients in self.patients_arrival:
@@ -507,24 +515,6 @@ class Solution:
                         f"starting at day {day}, which exceeds the upper bound of {ceil(avg_treatments * e_ub)}."
                     )
 
-                """
-                MIN IS CURRENTLY NOT ENFORCED
-                
-                # Check lowerbound if the day range is completely within the patient's stay
-                # Currently not in use
-                if (
-                    self.patients_arrival[patient].day <= day
-                    and day + e_w
-                    <= self.patients_arrival[patient].day + patient.length_of_stay
-                ):
-
-                    if treatments_scheduled < floor(avg_treatments * e_lb):
-                        raise ValueError(
-                            f"Patient {patient.id} has {treatments_scheduled} treatments scheduled in the window "
-                            f"starting at day {day}, which is below the lower bound of {floor(avg_treatments * e_lb)}."
-                        )
-                """
-
     def _check_no_treatments_outside_horizont(self):
         """
         Ensure that no treatment is scheduled outside the horizon length.
@@ -601,7 +591,10 @@ class Solution:
 
             for day in range(
                 self.patients_arrival[patient].day,
-                self.patients_arrival[patient].day + patient.length_of_stay,
+                min(
+                    self.patients_arrival[patient].day + patient.length_of_stay,
+                    self.instance.horizon_length,
+                ),
             ):
                 treatments_today = patient_day_count.get((patient, day), 0)
                 upper_bound = math.ceil(avg_per_day * daily_upper)

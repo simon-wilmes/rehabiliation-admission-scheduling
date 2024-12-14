@@ -8,10 +8,11 @@ class Treatment:
     def __init__(
         self,
         tid: TID,
-        num_participants: int,
+        max_participants: int,
         duration: Duration,
         name: str = "",
         resources: dict[ResourceGroup, int] = dict(),
+        min_participants: int = 0,
         rest_time: Duration = Duration(hours=0),
         # resources: dict[ResourceGroup, tuple[num_of_resource_group, resource_loyal?]] = None,
     ):
@@ -19,7 +20,8 @@ class Treatment:
             resources = {}
 
         self.id = tid
-        self.num_participants = num_participants
+        self.max_num_participants = max_participants
+        self.min_num_participants = min_participants
         self.duration = duration
         self.name = name
         self.resources = {rg: n for rg, n in resources.items()}

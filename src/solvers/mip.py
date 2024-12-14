@@ -11,15 +11,24 @@ from src.solution import Appointment, Solution, NO_SOLUTION_FOUND
 from src.time import DayHour
 from src.patients import Patient
 from src.solvers.solver import Solver
+from src.treatments import Treatment
+from src.resource import Resource, ResourceGroup
+from itertools import combinations
 
 PRINT_VARIABLES = False
 
 
 class MIPSolver(Solver):
     SOLVER_OPTIONS = Solver.BASE_SOLVER_OPTIONS.copy()
-    SOLVER_OPTIONS.update([])  # Add any additional options here
+    SOLVER_OPTIONS.update(
+        {
+            "use_lazy_constraints": [True, False],
+        }
+    )  # Add any additional options here
 
-    SOLVER_DEFAULT_OPTIONS = {}
+    SOLVER_DEFAULT_OPTIONS = {
+        "use_lazy_constraints": True,
+    }
 
     def __init__(self, instance: Instance, **kwargs):
         logger.debug(f"Setting options: {self.__class__.__name__}")
@@ -45,6 +54,7 @@ class MIPSolver(Solver):
 
         # self.model.setParam("CutPasses", 3)
         self.model.setParam("NoRelHeurTime", self.no_rel_heur_time)  # type: ignore
+        self.model.setParam("LazyConstraints", int(self.use_lazy_constraints))  # type: ignore
         vars = self._create_variables()
         self._create_constraints()
         self._set_optimization_goal()
@@ -52,7 +62,67 @@ class MIPSolver(Solver):
         self.vars = vars
 
     def _solve_model(self) -> Solution | int:
-        self.model.optimize()
+        self.num_lazy_added = 0
+        self.num_conflicts_found = 0
+
+        def _lazy_constraint_callback(model: gp.Model, where):
+            if where == gp.GRB.Callback.MIPSOL:
+                # Get all x_pmdt and z_pmgfdt values
+                x_pmdt = model.cbGetSolution(self.x_pmdt)
+                z_pmgfdt = model.cbGetSolution(self.z_pmgfdt)
+
+                for d, t, m in product(self.D, self.T, self.M):
+                    patients = set()
+                    for p in self.P:
+                        if (p, m, d, t) in x_pmdt and x_pmdt[p, m, d, t] > 0.5:
+                            patients.add(p)
+
+                    groups: list[tuple[set[Patient], set[Resource]]] = []
+                    if len(patients) > 1:
+
+                        for p in patients:
+                            resources_by_patient = {
+                                f
+                                for fhat in self.Fhat_m[m]
+                                for f in self.fhat[fhat]
+                                if z_pmgfdt[p, m, fhat, f, d, t] > 0.5
+                            }
+                            added = False
+                            for patients_in_group, resources_in_group in groups:
+                                if len(resources_by_patient & resources_in_group) > 0:
+                                    # if patient shares a resource with the group, add patient to the group
+                                    patients_in_group.add(p)
+                                    resources_in_group |= resources_by_patient
+                                    added = True
+                            if not added:
+                                groups.append((set([p]), resources_by_patient))
+
+                    for group_p, group_f in groups:
+                        if len(group_f) > self.total_num_resources_m[m]:
+                            self.num_conflicts_found += 1
+                            for (p1, p2), ((fhat1, f1), (fhat2, f2)) in product(
+                                combinations(group_p, 2),
+                                product(
+                                    self.all_resources_possibly_used_by_m[m], repeat=2
+                                ),
+                            ):
+
+                                if f1 == f2:
+                                    continue
+
+                                self.num_lazy_added += 1
+                                model.cbLazy(
+                                    self.z_pmgfdt[p1, m, fhat1, f1, d, t]
+                                    >= self.z_pmgfdt[p2, m, fhat1, f1, d, t]
+                                    + self.z_pmgfdt[p1, m, fhat2, f2, d, t]
+                                    + self.z_pmgfdt[p2, m, fhat2, f2, d, t]
+                                    - 2
+                                )
+
+        if self.use_lazy_constraints:  # type: ignore
+            self.model.optimize(_lazy_constraint_callback)
+        else:
+            self.model.optimize()
         if (
             self.model.status == gp.GRB.OPTIMAL
             or self.model.status == gp.GRB.TIME_LIMIT
@@ -85,28 +155,39 @@ class MIPSolver(Solver):
 
     def _set_optimization_goal(self):
 
-        o_pmdt_keys = []
+        o_pmfdt_keys = []
         for p in self.P:
-            o_pmdt_keys.extend(product([p], self.M_p[p], self.A_p[p], self.T))
-        o_pmdt = self.model.addVars(o_pmdt_keys, vtype=gp.GRB.BINARY, name="o_pmdt")
+            for m in self.M_p[p]:
+                o_pmfdt_keys.extend(
+                    product(
+                        [p],
+                        [m],
+                        [f for _, f in self.all_resources_possibly_used_by_m[m]],
+                        self.A_p[p],
+                        self.T,
+                    )
+                )
+        self.o_pmfdt = self.model.addVars(
+            o_pmfdt_keys, vtype=gp.GRB.BINARY, name="self.o_pmdt"
+        )
 
         for p in self.P:
             for m, d, t in product(self.M_p[p], self.A_p[p], self.T):
-                for fhat in self.Fhat_m[m]:
-                    for f in self.fhat[fhat]:
-                        self.model.addConstr(
-                            o_pmdt[p, m, d, t]
-                            >= self.z_pmfdt[p, m, f, d, t]
-                            - gp.quicksum(
-                                self.z_pmfdt[p_prime, m, f, d, t]
-                                for p_prime in self._get_smaller_patients(p)
-                                if (p_prime, m, f, d, t) in self.z_pmfdt
-                            )
+                for fhat, f in self.all_resources_possibly_used_by_m[m]:
+                    self.model.addConstr(
+                        self.o_pmfdt[p, m, f, d, t]
+                        >= self.z_pmgfdt[p, m, fhat, f, d, t]
+                        - gp.quicksum(
+                            self.z_pmgfdt[p_prime, m, fhat, f, d, t]
+                            for p_prime in self._get_smaller_patients(p)
+                            if (p_prime, m, fhat, f, d, t) in self.z_pmgfdt
                         )
-                        pass
+                    )
+
         logger.debug("Constraint (optimization) created.")
         minimize_treatments = gp.quicksum(
-            o_pmdt[p, m, d, t] for p, m, d, t in o_pmdt_keys
+            self.o_pmfdt[p, m, f, d, t] / self.total_num_resources_m[m]
+            for p, m, f, d, t in self.o_pmfdt.keys()
         )
 
         minimize_delay = gp.quicksum(
@@ -150,6 +231,17 @@ class MIPSolver(Solver):
     def _create_parameter_sets(self):
         # Define any additional sets or mappings needed for the self.model
         super()._create_parameter_sets()
+        self.total_num_resources_m = {m: sum(m.resources.values()) for m in self.M}
+
+        self.all_resources_possibly_used_by_m: dict[
+            Treatment, set[tuple[ResourceGroup, Resource]]
+        ] = {}
+        for m in self.M:
+            resources = set()
+            for fhat in self.Fhat_m[m]:
+                resources |= set((fhat, f) for f in self.fhat[fhat])
+            self.all_resources_possibly_used_by_m[m] = resources
+        pass
 
     def _get_smaller_patients(self, p: Patient) -> list[Patient]:
         ind1 = self.P.index(p)
@@ -168,56 +260,51 @@ class MIPSolver(Solver):
             x_pmdt_keys, vtype=gp.GRB.BINARY, name="x_pmdt"
         )
         # Create self.z_pmfdt
-        z_pmfdt_keys = []
+        z_pmfhatfdt_keys = []
         for p in self.P:
             for m in self.M_p[p]:
                 for fhat in self.Fhat_m[m]:
-                    z_pmfdt_keys.extend(
-                        product([p], [m], self.fhat[fhat], self.A_p[p], self.T)
+                    z_pmfhatfdt_keys.extend(
+                        product([p], [m], [fhat], self.fhat[fhat], self.A_p[p], self.T)
                     )
 
-        self.z_pmfdt = self.model.addVars(
-            z_pmfdt_keys, vtype=gp.GRB.BINARY, name="self.z_pmfdt"
+        self.z_pmgfdt = self.model.addVars(
+            z_pmfhatfdt_keys, vtype=gp.GRB.BINARY, name="z_pmgfdt"
         )
 
-        # Create self.u_mfdt
-        u_mfdt_keys = []
+        # Create self.y_mfdt
+        y_mgfdt_keys = []
         for m in self.M:
             for fhat in self.Fhat_m[m]:
-                u_mfdt_keys.extend(product([m], self.fhat[fhat], self.D, self.T))
-        self.u_mfdt = self.model.addVars(
-            u_mfdt_keys, vtype=gp.GRB.BINARY, name="self.u_mfdt"
-        )
-
-        # Create  v_pmf
-        v_pmf_keys = []
-        for p in self.P:
-            for m in self.M_p[p]:
-                for fhat in self.Fhat_m[m]:
-                    v_pmf_keys.extend(product([p], [m], self.fhat[fhat]))
-        self.v_pmf = self.model.addVars(
-            v_pmf_keys, vtype=gp.GRB.BINARY, name="self.v_pmf"
+                y_mgfdt_keys.extend(
+                    product([m], [fhat], self.fhat[fhat], self.D, self.T)
+                )
+        self.y_mgfdt = self.model.addVars(
+            y_mgfdt_keys, vtype=gp.GRB.BINARY, name="y_mfdt"
         )
 
         # Create self.a_pd
         a_pd_keys = []
         for p in self.P:
             a_pd_keys.extend(product([p], self.D_p[p]))
-        self.a_pd = self.model.addVars(a_pd_keys, vtype=gp.GRB.BINARY, name="self.a_pd")
+        self.a_pd = self.model.addVars(a_pd_keys, vtype=gp.GRB.BINARY, name="a_pd")
 
-        self.vars = {
-            "self.x_pmdt": self.x_pmdt,
-            "self.z_pmfdt": self.z_pmfdt,
-            "self.u_mfdt": self.u_mfdt,
-            "self.v_pmf": self.v_pmf,
-            "self.a_pd": self.a_pd,
-        }
         logger.debug("Variables created.")
 
     def _create_constraints(self):
+        self.model.update()
         #####################################
         # Create constraints
         #####################################
+
+        # Constraint: y_fmdt are set correctly
+        for m, g, f, d, t in self.y_mgfdt.keys():
+            for p in self.P:
+                if d in self.A_p[p] and m in self.M_p[p]:
+                    self.model.addConstr(
+                        self.z_pmgfdt[p, m, g, f, d, t] <= self.y_mgfdt[m, g, f, d, t],
+                        name=f"constraint_y_fmdt_m{m.id}_fhat{g.id}_f{f.id}_d{d}_t{t}_p{p.id}",
+                    )
 
         # Constraint (p1): Sum over all scheduled treatments equals total repetitions left
         for p in self.P:
@@ -265,14 +352,16 @@ class MIPSolver(Solver):
                     )
         logger.debug("Constraint (p3) created.")
         # Constraint (p4): Total admitted patients cannot exceed total beds
-        for d in self.D:
+        for d in range(
+            max([p.admitted_before_date.day + p.length_of_stay for p in self.P]) + 1
+        ):
             expr = gp.LinExpr()
             for p in self.P:
                 delta_set = [
                     delta for delta in self.D_p[p] if d - self.l_p[p] < delta <= d
                 ]
                 expr += gp.quicksum(self.a_pd[p, delta] for delta in delta_set)
-            self.model.addConstr(expr <= self.b, name=f"constraint_p4_d{d}")
+            self.model.addConstr(expr <= self.b, name=f"constraint_total_beds_d{d}")
         logger.debug("Constraint (p4) created.")
         # Constraint (p6): Patient admitted exactly once within the specified time
         for p in self.P:
@@ -304,27 +393,15 @@ class MIPSolver(Solver):
                                 <= t
                             ]
                             expr += gp.quicksum(
-                                self.u_mfdt[m, f, d, tau]
+                                self.y_mgfdt[m, fhat, f, d, tau]
                                 for tau in tau_set
-                                if (m, f, d, tau) in self.u_mfdt
+                                if (m, fhat, f, d, tau) in self.y_mgfdt
                             )
                         self.model.addConstr(
                             expr <= self.av_fdt[f, d, t],
                             name=f"constraint_r2_fhat{fhat.id}_f{f.id}_d{d}_t{t}",
                         )
-        logger.debug("Constraint (r2) created.")
-        # Constraint (r3): Linking z and u variables
-        for p in self.P:
-            for m in self.M_p[p]:
-                for fhat in self.Fhat_m[m]:
-                    for f in self.fhat[fhat]:
-                        for d in self.A_p[p]:
-                            for t in self.T:
-                                self.model.addConstr(
-                                    self.z_pmfdt[p, m, f, d, t]
-                                    <= self.u_mfdt[m, f, d, t],
-                                    name=f"constraint_r3_p{p.id}_m{m.id}_f{f.id}_d{d}_t{t}",
-                                )
+
         logger.debug("Constraint (r3) created.")
         # Constraint (r4): Assign required number of resources for each treatment
         for p in self.P:
@@ -333,7 +410,8 @@ class MIPSolver(Solver):
                     for d in self.A_p[p]:
                         for t in self.T:
                             lhs = gp.quicksum(
-                                self.z_pmfdt[p, m, f, d, t] for f in self.fhat[fhat]
+                                self.z_pmgfdt[p, m, fhat, f, d, t]
+                                for f in self.fhat[fhat]
                             )
                             rhs = self.n_fhatm[fhat, m] * self.x_pmdt[p, m, d, t]
                             self.model.addConstr(
@@ -348,64 +426,60 @@ class MIPSolver(Solver):
                     for d in self.D:
                         for t in self.T:
                             lhs = gp.quicksum(
-                                self.z_pmfdt[p, m, f, d, t]
+                                self.z_pmgfdt[p, m, fhat, f, d, t]
                                 for p in self.P
-                                if (p, m, f, d, t) in self.z_pmfdt
+                                if (p, m, fhat, f, d, t) in self.z_pmgfdt
                             )
                             self.model.addConstr(
                                 lhs <= self.k_m[m],
-                                name=f"constraint_a1_m{m.id}_f{f.id}_d{d}_t{t}",
+                                name=f"constraint_max_patients_m{m.id}_f{f.id}_d{d}_t{t}",
                             )
-        logger.debug("Constraint (a1) created.")
-        # if self.add_resource_loyal():
-        #    # Constraint (a2-help): Resource loyalty linking
-        #    for p in self.P:
-        #        for m in self.M_p[p]:
-        #            for fhat in self.Fhat_m[m]:
-        #                for f in self.fhat[fhat]:
-        #                    for d in self.A_p[p]:
-        #                        for t in self.T:
-        #                            self.model.addConstr(
-        #                                self.z_pmfdt[p, m, f, d, t] <= self.v_pmf[p, m, f],
-        #                                name=f"constraint_a2_help_p{p.id}_m{m.id}_f{f.id}_d{d}_t{t}",
-        #                            )
+        if self.enforce_min_patients_per_treatment:  # type: ignore
+            # Constraint (a1): Limit the number of patients per treatment
+            for m in self.M:
+                for fhat in self.Fhat_m[m]:
+                    for f in self.fhat[fhat]:
+                        for d in self.D:
+                            for t in self.T:
+                                lhs = gp.quicksum(
+                                    self.z_pmgfdt[p, m, fhat, f, d, t]
+                                    for p in self.P
+                                    if (p, m, fhat, f, d, t) in self.z_pmgfdt
+                                )
+                                self.model.addConstr(
+                                    lhs >= self.j_m[m] * self.y_mgfdt[m, fhat, f, d, t],
+                                    name=f"constraint_min_patients_m{m.id}_f{f.id}_d{d}_t{t}",
+                                )
 
-        # Constraint (a2): Resource loyalty constraint
-        # if self.add_resource_loyal():
-        #    for p in self.P:
-        #        for m in self.M_p[p]:
-        #            for fhat in self.Lhat_m[m]:
-        #                self.model.addConstr(
-        #                    gp.quicksum(self.v_pmf[p, m, f] for f in self.fhat[fhat])
-        #                    <= self.n_fhatm[fhat, m],
-        #                    name=f"constraint_a2_p{p.id}_m{m.id}_fhat{fhat.id}",
-        #                )
+        logger.debug("Constraint (a1) created.")
 
         # Constraint (a4): Max num of treatments over e_w days
-        for p in self.P:
-            # Skip patients that do not require even distribution as they stay fewer days than the
-            # length of the rolling window
-            if p.length_of_stay <= self.e_w:
-                continue
-            for d in self.A_p[p]:
-                # check if the window is partially outside of patients stay => ignore
-                if (
-                    d + self.e_w >= p.admitted_before_date.day + p.length_of_stay
-                    or d + self.e_w > max(self.D) + 1
-                ):
+        if self.enforce_max_treatments_per_e_w:  # type: ignore
+            for p in self.P:
+                # Skip patients that do not require even distribution as they stay fewer days than the
+                # length of the rolling window
+                if p.length_of_stay <= self.e_w:
                     continue
+                for d in self.A_p[p]:
+                    # check if the window is partially outside of patients stay => ignore
+                    if (
+                        d + self.e_w >= p.admitted_before_date.day + p.length_of_stay
+                        or d + self.e_w > max(self.D) + 1
+                    ):
+                        continue
 
-                self.model.addConstr(
-                    gp.quicksum(
-                        self.x_pmdt[p, m, d_prime, t]
-                        for m in self.M_p[p]
-                        for t in self.T
-                        for d_prime in range(d, d + self.e_w)
+                    self.model.addConstr(
+                        gp.quicksum(
+                            self.x_pmdt[p, m, d_prime, t]
+                            for m in self.M_p[p]
+                            for t in self.T
+                            for d_prime in range(d, d + self.e_w)
+                        )
+                        <= self.e_w_upper[p],
+                        name=f"constraint_a4_ub_p{p.id}_d{d}",
                     )
-                    <= self.e_w_upper[p],
-                    name=f"constraint_a4_ub_p{p.id}_d{d}",
-                )
-        logger.debug("Constraint (a4) created.")
+
+            logger.debug("Constraint (a4) created.")
 
         # Constraint (a5): Max num of treatments every day
         for p in self.P:
@@ -418,7 +492,46 @@ class MIPSolver(Solver):
                     name=f"constraint_a5_ub_p{p.id}_d{d}",
                 )
         logger.debug("Constraint (a5) created.")
+        if self.enforce_min_treatments_per_day:  # type: ignore
+            # Constraint (a7): Min num of treatments every day
+            for p in self.P:
+                for d in self.A_p[p]:
+                    # Test if for day d the patient is always admitted then we can enforce the lower bound
+                    if (
+                        p.admitted_before_date.day - 1
+                        <= d
+                        < p.earliest_admission_date.day + p.length_of_stay
+                    ):
 
+                        self.model.addConstr(
+                            gp.quicksum(
+                                self.x_pmdt[p, m, d, t]
+                                for m in self.M_p[p]
+                                for t in self.T
+                            )
+                            >= self.daily_lower[p],
+                            name=f"constraint_a6_lb_p{p.id}_d{d}",
+                        )
+                    else:
+                        # otherwise only enfore the lowerbound if admitted before
+                        delta_set = [
+                            delta
+                            for delta in self.D_p[p]
+                            if d - self.l_p[p] < delta <= d
+                        ]
+
+                        self.model.addConstr(
+                            gp.quicksum(
+                                self.x_pmdt[p, m, d, t]
+                                for m in self.M_p[p]
+                                for t in self.T
+                            )
+                            >= self.daily_lower[p]
+                            * gp.quicksum(self.a_pd[p, delta] for delta in delta_set),
+                            name=f"constraint_a6_lb_p{p.id}_d{d}",
+                        )
+
+            logger.debug("Constraint (a5) created.")
         # Constraint: Make sure that already admitted patients are admitted on the first day of the planning horizon
         for p in self.P:
             if p.already_admitted:
@@ -427,34 +540,33 @@ class MIPSolver(Solver):
                 )
         logger.debug("Constraint (already_admitted) created.")
 
-        # Constraint: Group people into sessions, enforce transitive property amongs resource usage
-        p1_index = 0
-        for p1, p2 in product(self.P, self.P):
-            if self.P.index(p1) > p1_index:
-                p1_index = self.P.index(p1)
-                logger.debug(f"New patient index seen: {p1_index}")
-            if self.P.index(p1) >= self.P.index(p2):
-                continue
-            # Find iterate over common treatments
-            for m in set(self.M_p[p1]) & set(self.M_p[p2]):
-                common_resources = set()
-                for fhat in self.Fhat_m[m]:
-                    common_resources |= set(self.fhat[fhat])
+        if not self.use_lazy_constraints:  # type: ignore
+            # Constraint: Group people into sessions, enforce transitive property amongs resource usage
+            p1_index = 0
+            for p1, p2 in product(self.P, self.P):
+                if self.P.index(p1) > p1_index:
+                    p1_index = self.P.index(p1)
+                    logger.debug(f"New patient index seen: {p1_index}")
+                if self.P.index(p1) >= self.P.index(p2):
+                    continue
+                # Find iterate over common treatments
+                for m in set(self.M_p[p1]) & set(self.M_p[p2]):
 
-                for f1, f2 in product(common_resources, common_resources):
-                    if self.F.index(f1) >= self.F.index(f2):
-                        continue
-                    D_p1p2 = set(self.A_p[p1]) & set(self.A_p[p2])
-                    for d, t in product(D_p1p2, self.T):
-                        self.model.addConstr(
-                            self.z_pmfdt[p1, m, f1, d, t]
-                            >= self.z_pmfdt[p2, m, f1, d, t]
-                            + self.z_pmfdt[p1, m, f2, d, t]
-                            + self.z_pmfdt[p2, m, f2, d, t]
-                            - 2,
-                            name=f"constraint_transitive_p{p1.id}_p{p2.id}_m{m.id}_f{f.id}_{d}_{t}",
-                        )
-        logger.debug("Constraint (transitive) created.")
+                    for (fhat1, f1), (fhat2, f2) in product(
+                        self.all_resources_possibly_used_by_m[m],
+                        self.all_resources_possibly_used_by_m[m],
+                    ):
+                        D_p1p2 = set(self.A_p[p1]) & set(self.A_p[p2])
+                        for d, t in product(D_p1p2, self.T):
+                            self.model.addConstr(
+                                self.z_pmgfdt[p1, m, fhat1, f1, d, t]
+                                >= self.z_pmgfdt[p2, m, fhat1, f1, d, t]
+                                + self.z_pmgfdt[p1, m, fhat2, f2, d, t]
+                                + self.z_pmgfdt[p2, m, fhat2, f2, d, t]
+                                - 2,
+                                name=f"constraint_transitive_p{p1.id}_p{p2.id}_m{m.id}_f{f.id}_{d}_{t}",
+                            )
+            logger.debug("Constraint (transitive) created.")
 
     def _extract_solution(self):
         """
@@ -466,26 +578,27 @@ class MIPSolver(Solver):
         from collections import defaultdict
 
         # Print out all variables that are one
-        if PRINT_VARIABLES:
+        if True:
             for key in self.x_pmdt:
                 if self.x_pmdt[key].X > 0.5:  # type: ignore
                     logger.debug(f"self.x_pmdt{key} = {self.x_pmdt[key].X}")  # type: ignore
 
-            for key in self.z_pmfdt:
-                if self.z_pmfdt[key].X > 0.5:  # type: ignore
-                    logger.debug(f"self.z_pmfdt{key} = {self.z_pmfdt[key].X}")  # type: ignore
-
-            for key in self.u_mfdt:
-                if self.u_mfdt[key].X > 0.5:  # type: ignore
-                    logger.debug(f"self.u_mfdt{key} = {self.u_mfdt[key].X}")  # type: ignore
-
-            for key in self.v_pmf:
-                if self.v_pmf[key].X > 0.5:  # type: ignore
-                    logger.debug(f"self.v_pmf{key} = {self.v_pmf[key].X}")  # type: ignore
+            for key in self.z_pmgfdt:
+                if self.z_pmgfdt[key].X > 0.5:  # type: ignore
+                    logger.debug(f"self.z_pmfdt{key} = {self.z_pmgfdt[key].X}")  # type: ignore
 
             for key in self.a_pd:
                 if self.a_pd[key].X > 0.5:  # type: ignore
                     logger.debug(f"self.a_pd{key} = {self.a_pd[key].X}")  # type: ignore
+
+            for key in self.y_mgfdt:
+                if self.y_mgfdt[key].X > 0.5:
+                    logger.debug(f"self.y_mgfdt{key} = {self.y_mgfdt[key].X}")
+
+            for key in self.o_pmfdt:
+                if self.o_pmfdt[key].X > 0.5:
+                    # logger.debug(f"self.o_pmfdt{key} = {self.o_pmfdt[key].X}")
+                    pass
 
         # appointments_dict: key=(m, d, t, frozenset of resource IDs), value=list of patients
         appointments_dict = defaultdict(list)
@@ -504,10 +617,10 @@ class MIPSolver(Solver):
                     # Find resources assigned to patient p for this treatment at (d, t)
                     resources_in_group = []
                     for f in self.instance.resources.values():
-                        if f.resource_group != fhat:
+                        if fhat not in f.resource_groups:
                             continue
-                        z_key = (p, m, f, d, t)
-                        if z_key in self.z_pmfdt and self.z_pmfdt[z_key].X > 0.5:  # type: ignore
+                        z_key = (p, m, fhat, f, d, t)
+                        if z_key in self.z_pmgfdt and self.z_pmgfdt[z_key].X > 0.5:  # type: ignore
                             resources_in_group.append(f)
 
                     # Sort resources to ensure consistent ordering
@@ -566,6 +679,7 @@ class MIPSolver(Solver):
                 start_date=start_date,
                 treatment=m,
                 resources=resources,
+                solver=self,
             )
             appointments.append(appointment)
 

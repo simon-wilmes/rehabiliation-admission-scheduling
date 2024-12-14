@@ -40,7 +40,7 @@ class DayHour:
         if isinstance(other, DayHour):
             total_hours = self.day * 24 + self.hour - other.day * 24 - other.hour
             new_day, new_hour = divmod(total_hours, 24)
-            return DayHour(new_day, new_hour)
+            return DayHour(new_day, new_hour)  # type: ignore
 
         if isinstance(other, Duration):
             total_hours = self.hour - other.hours
@@ -49,7 +49,7 @@ class DayHour:
             if new_hour < 0:
                 new_hour += 24
                 new_day -= 1
-            return DayHour(new_day, new_hour)
+            return DayHour(new_day, new_hour)  # type: ignore
         return NotImplemented
 
     def __add__(self, other):
@@ -57,7 +57,7 @@ class DayHour:
             total_hours = self.hour + other.hours
             extra_days, new_hour = divmod(total_hours, 24)
             new_day = self.day + extra_days
-            return DayHour(new_day, new_hour)
+            return DayHour(new_day, new_hour)  # type: ignore
         return NotImplemented
 
 

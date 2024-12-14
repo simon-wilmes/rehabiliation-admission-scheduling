@@ -71,7 +71,7 @@ def write_instance_to_file(file_path: str, instance: Instance):
                 + "}"
             )
             file.write(
-                f"{tid}; {treatment.num_participants}; {treatment.name}; {duration}; {resources_str}\n"
+                f"{tid}; {treatment.max_num_participants}; {treatment.name}; {duration}; {resources_str}\n"
             )
         file.write("\n")
 

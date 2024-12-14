@@ -213,7 +213,7 @@ class CPSolver(Solver):
                 for fhat in self.Fhat_m[m]:
                     for f in self.fhat[fhat]:
                         use_resource = self.model.new_bool_var(
-                            f"use_resource_m{m.id}_r{r}_f{f.id}",
+                            f"use_resource_m{m.id}_r{r}_fhat{fhat.id}_f{f.id}",
                         )
                         resource_vars[fhat][f] = use_resource
 
@@ -228,14 +228,6 @@ class CPSolver(Solver):
                         )
                         == self.n_fhatm[fhat, m] * is_treatment_scheduled
                     )
-
-                # Add variables that store the day of the treatment # TODO: ugly
-                # day_slot = self.model.new_int_var(
-                #     0, len(self.D) - 1, f"start_day_m{m.id}_r{r}"
-                # )
-                # self.model.add_division_equality(
-                #     day_slot, start_slot, self.num_time_slots
-                # )
 
                 self.treatment_vars[m][r] = {
                     "interval": interval,
@@ -300,7 +292,7 @@ class CPSolver(Solver):
                     <= self.lr_pm[p, m]
                 )
 
-        # CONSTRAINT A1: A treatment is provided for at most k_m patients
+        # CONSTRAINT A1: A treatment is provided for at most k_m patients and at least j
         for m in self.M:
             # loop over all patients that could attend this treatment
 
@@ -315,6 +307,26 @@ class CPSolver(Solver):
                     )
 
                 self.model.add(cp_model.LinearExpr.Sum(patients_list) <= self.k_m[m])
+
+        if self.enforce_min_patients_per_treatment:  # type:ignore
+            # Constraint: A treatment is provided for at least j_m patients
+            for m in self.M:
+                # loop over all patients that could attend this treatment
+
+                for rep in self.I_m[m]:
+                    patients_list = []
+                    for p in self.P:
+                        if m not in self.M_p[p]:
+                            continue
+
+                        patients_list.append(
+                            self.patient_vars[p][m][rep]["patient2treatment"]
+                        )
+
+                    self.model.add(
+                        cp_model.LinearExpr.Sum(patients_list)
+                        <= self.j_m[m] * self.treatment_vars[m][rep]["is_present"]
+                    )
 
         # CONSTRAINT P2: every patient has only a single treatment at a time
         for p, ptreatment_vars in self.patient_vars.items():
@@ -373,7 +385,6 @@ class CPSolver(Solver):
 
         # Resource capacity constraints
         for f in self.F:
-            fhat = f.resource_group
             # CONSTRAINT R2, T2
             # Resource can only be used by a single treatment at a time
 
@@ -381,8 +392,10 @@ class CPSolver(Solver):
             intervals_using_f = []
 
             for m, rep in self.treatment_vars.items():
+                common_rg = f.resource_groups & set(self.Fhat_m[m])
+
                 # Skip treatments that do not use resource f
-                if f.resource_group not in self.Fhat_m[m]:
+                if not len(common_rg):
                     continue
 
                 for r, vars in rep.items():
@@ -392,14 +405,15 @@ class CPSolver(Solver):
                         vars["resources"],
                     )
 
-                    interval_f = self.model.new_optional_fixed_size_interval_var(
-                        interval.start_expr(),
-                        self.du_m[m],
-                        resources[fhat][f],
-                        f"interval_p{p.id}_m{m.id}_f{f.id}_r{r}",
-                    )
+                    for fhat in common_rg:
+                        interval_f = self.model.new_optional_fixed_size_interval_var(
+                            interval.start_expr(),
+                            self.du_m[m],
+                            resources[fhat][f],
+                            f"interval_p{p.id}_m{m.id}_f{f.id}_r{r}",
+                        )
 
-                    intervals_using_f.append(interval_f)
+                        intervals_using_f.append(interval_f)
 
             # CONSTRAINT R3: Resource availability constraints
             length = 0
@@ -506,6 +520,10 @@ class CPSolver(Solver):
 
         elif self.max_repr == "cumulative":  # type:ignore
             for p in self.P:
+                # only apply e_w scheduling if length of stay is long enough
+                if p.length_of_stay < self.e_w:
+                    continue
+
                 # Handle the even window scheduling
                 intervals = []
                 for m in self.M_p[p]:
@@ -550,6 +568,7 @@ class CPSolver(Solver):
             logger.warning(
                 f"Invalid max_repr value: {self.max_repr}"  # type:ignore
             )  # type:ignore
+
         if self.enforce_min_treatments_per_day:  # type:ignore
 
             if self.min_repr == "reservoir":  # type:ignore
@@ -597,6 +616,9 @@ class CPSolver(Solver):
                 for p in self.P:
                     start_slot = 0
                     end_slot = (len(self.D) + 2) * self.num_time_slots
+
+                    if self.daily_lower[p] == 0:
+                        continue
                     # Create new intervals
                     intervals = [
                         self.model.new_fixed_size_interval_var(
@@ -606,11 +628,12 @@ class CPSolver(Solver):
                             name=f"min_treatment_int_dummy_p{p.id}",
                         )
                     ]
+
                     demands = [self.daily_lower[p]]
 
                     # demands = []
+                    count_intervals = 0
                     for m in self.M_p[p]:
-
                         for rep in self.I_m[m]:
                             new_int_var_start = self.model.new_interval_var(
                                 start=start_slot,
@@ -655,13 +678,13 @@ class CPSolver(Solver):
                             intervals.append(new_int_var_start)
                             intervals.append(new_int_var_middle)
                             intervals.append(new_int_var_end)
+                            count_intervals += 1
 
                     demands += [1] * (len(intervals) - len(demands))
-                    total_treatments_p = sum(self.lr_pm[p, m] for m in self.M_p[p])
                     self.model.add_cumulative(
                         intervals=intervals,
                         demands=demands,
-                        capacity=total_treatments_p,
+                        capacity=count_intervals,
                     )
             elif self.min_repr == "day-variables":  # type:ignore
                 pass
@@ -718,7 +741,7 @@ class CPSolver(Solver):
             # if len(patients) == 0:
             #    logger.warning("Treatment scheduled without patients. ")
             #    continue
-            appointments.append(Appointment(patients=patients, **appointment_parameter))
+            appointments.append(Appointment(patients=patients, solver=self, **appointment_parameter))
         patients_arrival = {}
         for p in self.P:
             admission_day = self.admission_vars[p]

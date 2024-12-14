@@ -1,0 +1,264 @@
+from .subsolver import (
+    Subsolver,
+)
+from src.logging import logger
+from src.treatments import Treatment
+from src.patients import Patient
+from typing import Iterable
+from ortools.sat.python import cp_model
+from collections import defaultdict
+from src.instance import Instance
+from src.solvers import Solver
+
+
+class CPSubsolver(Subsolver):
+
+    SOLVER_OPTIONS = Subsolver.BASE_SOLVER_OPTIONS.copy()
+    SOLVER_OPTIONS.update(
+        {
+            "estimated_needed_treatments": [True, False],
+        }
+    )  # Add any additional options here
+    SOLVER_DEFAULT_OPTIONS = {
+        "estimated_needed_treatments": True,
+    }
+
+    def __init__(self, instance: Instance, solver: Solver, **kwargs):
+        logger.debug(f"Setting options: {self.__class__.__name__}")
+
+        for key in kwargs:
+            assert (
+                key in self.__class__.BASE_SOLVER_DEFAULT_OPTIONS
+                or key in self.__class__.SOLVER_DEFAULT_OPTIONS
+            ), f"Invalid option: {key}"
+
+        for key in self.__class__.SOLVER_DEFAULT_OPTIONS:
+
+            if key in kwargs:
+                setattr(self, key, kwargs[key])
+                logger.debug(f" ---- {key} to {kwargs[key]}")
+            else:
+                setattr(self, key, self.__class__.SOLVER_DEFAULT_OPTIONS[key])
+                logger.debug(
+                    f" ---- {key} to { self.__class__.SOLVER_DEFAULT_OPTIONS[key]} (default)"
+                )
+        super().__init__(instance, solver, **kwargs)
+
+    def _solve_subsystem(
+        self,
+        day: int,
+        appointments: dict[Treatment, int],
+        patients: dict[Treatment, dict[Patient, int]],
+        max_appointments: dict[Treatment, int] | None = None,
+    ) -> dict:
+        # Restrict M_p to the daily treatment schedule
+        M_p = {p: [m for m in patients if p in patients[m]] for p in self.solver.P}
+
+        logger.debug("Solving subsystem with CPSubsolver")
+        sub_solver = cp_model.CpSolver()
+        sub_solver.parameters.log_search_progress = self.solver.log_to_console  # type: ignore
+
+        self.model = cp_model.CpModel()
+
+        if max_appointments is None:
+            max_appointments = {
+                m: sum(patients[m].values()) for m in appointments.keys()
+            }
+
+        appointment_vars: dict[Treatment, dict[int, dict]] = {
+            m: {} for m in appointments.keys()
+        }
+
+        for m in appointments.keys():
+            du_m = self.solver.du_m[m]
+            for r in range(max_appointments[m]):
+                start_slot = self.model.new_int_var(
+                    0,
+                    len(self.solver.T) - du_m - 1,
+                    f"start_time_m{m.id}_r{r}",
+                )
+                is_treatment_scheduled = self.model.new_bool_var(
+                    f"schedule_treatment_m{m.id}_r{r}"
+                )
+                # Create interval variable
+                interval = self.model.new_optional_fixed_size_interval_var(
+                    start=start_slot,
+                    size=du_m,
+                    is_present=is_treatment_scheduled,
+                    name=f"interval_m{m.id}_r{r}",
+                )
+
+                # Create Resource variables that assign resources to the treatment
+                resource_vars = defaultdict(dict)
+                for fhat in self.solver.Fhat_m[m]:
+                    for f in self.solver.fhat[fhat]:
+                        use_resource = self.model.new_bool_var(
+                            f"use_resource_m{m.id}_r{r}_fhat{fhat.id}_f{f.id}",
+                        )
+                        resource_vars[fhat][f] = use_resource
+
+                        # CONSTRAINT: resources can only be assigned if is_present is true
+                        self.model.add_implication(use_resource, is_treatment_scheduled)
+
+                    # CONSTRAINT R4: Make sure that every treatment has the required resources
+
+                    self.model.add(
+                        cp_model.LinearExpr.Sum(
+                            [resource_vars[fhat][f] for f in self.solver.fhat[fhat]]
+                        )
+                        == self.solver.n_fhatm[fhat, m] * is_treatment_scheduled
+                    )
+
+                appointment_vars[m][r] = {
+                    "interval": interval,
+                    "start_slot": start_slot,
+                    "is_present": is_treatment_scheduled,
+                    "resources": resource_vars,
+                }
+
+        # Constraint: Enforce symmetry breaking
+        for m in appointments.keys():
+            for r in range(max_appointments[m]):
+                if r == 0:
+                    continue
+                self.model.add(
+                    appointment_vars[m][r]["start_slot"]
+                    >= appointment_vars[m][r - 1]["start_slot"]
+                )
+                self.model.add(
+                    appointment_vars[m][r]["is_present"]
+                    <= appointment_vars[m][r - 1]["is_present"]
+                )
+
+        # Create patients variables
+        patient_vars = {}
+        for m in patients:
+            patient_vars[m] = {}
+            for p in patients[m]:
+                patient_vars[m][p] = {}
+                expr_list = []
+                for r in appointment_vars[m]:
+                    patient2treatment_var = self.model.new_bool_var(
+                        f"patient2treatment_{p.id}_m{m.id}_r{r}"
+                    )
+
+                    patient_vars[m][p][r] = patient2treatment_var
+                    expr_list.append(patient2treatment_var)
+
+                    # Constraint: Treatment must be scheduled if patient is assigned
+                    self.model.add(
+                        patient2treatment_var <= appointment_vars[m][r]["is_present"]
+                    )
+
+                # Constraint: every patient is assigned to exactly the required number of treatments
+                self.model.add(cp_model.LinearExpr().Sum(expr_list) == patients[m][p])
+
+            # Constraint: Every Treatment has at most k_m patients if a patient is scheduled to the treatment
+            if patients[m]:
+                for r in appointment_vars[m]:
+                    self.model.add(
+                        cp_model.LinearExpr.Sum(
+                            [patient_vars[m][p][r] for p in patients[m]]
+                        )
+                        <= self.solver.k_m[m]
+                    )
+
+        if self.enforce_min_patients_per_treatment:  # type:ignore
+            pass
+
+        # CONSTRAINT P2: every patient has only a single treatment at a time
+        for p in patient_vars[m]:
+            intervals = []
+            for m in M_p[p]:
+                for r in appointment_vars[m]:
+                    # Create interval variable with length with rest time
+                    interval = self.model.new_optional_fixed_size_interval_var(
+                        start=appointment_vars[m][r]["start_slot"],
+                        size=self.solver.du_m[m],
+                        is_present=patient_vars[m][p][r],
+                        name=f"interval_p{p.id}_m{m.id}_r{r}",
+                    )
+
+                    intervals.append(interval)
+
+            self.model.add_no_overlap(intervals)
+
+        # CONSTRAINT: Resource constraints
+        for f in self.solver.F:
+            intervals = []
+            demands = []
+            for fhat in self.solver.Fhat:
+                if fhat not in f.resource_groups:
+                    continue
+
+                for m in appointments:
+                    if fhat not in m.resources:
+                        continue
+                    for r in appointment_vars[m]:
+                        new_interval_var = (
+                            self.model.new_optional_fixed_size_interval_var(
+                                start=appointment_vars[m][r]["start_slot"],
+                                size=self.solver.du_m[m],
+                                is_present=appointment_vars[m][r]["resources"][fhat][f],
+                                name=f"interval_f{f.id}_m{m.id}_r{r}",
+                            )
+                        )
+                        intervals.append(new_interval_var)
+                        demands.append(1)
+
+            self.model.add_no_overlap(intervals)
+
+        if self.estimated_needed_treatments:  # type: ignore
+            # Define obj function
+            obj_function = []
+            for m in appointments:
+                m_var = self.model.new_int_var(
+                    0, max_appointments[m], f"needed_treatments_{m.id}"
+                )
+                self.model.add(
+                    m_var
+                    >= cp_model.LinearExpr.Sum(
+                        [
+                            appointment_vars[m][r]["is_present"]
+                            for r in appointment_vars[m]
+                        ]
+                    )
+                    - appointments[m]
+                )
+
+                obj_function.append(m_var)
+            self.model.minimize(cp_model.LinearExpr.Sum(obj_function))
+
+        status = sub_solver.Solve(self.model)
+
+        if status in [cp_model.OPTIMAL, cp_model.FEASIBLE]:
+            if sub_solver.objective_value == 0:
+                # Print out all varibles
+
+                for m in appointment_vars:
+                    for rep in appointment_vars[m]:
+                        if sub_solver.value(appointment_vars[m][rep]["is_present"]):
+                            resources_for_rep = []
+                            for fhat in appointment_vars[m][rep]["resources"]:
+                                for f, var in appointment_vars[m][rep]["resources"][
+                                    fhat
+                                ].items():
+                                    if sub_solver.value(var):
+                                        resources_for_rep.append(f)
+
+                            logger.debug(
+                                f"Appointment {m.id}/{rep} at {sub_solver.value(appointment_vars[m][rep]['start_slot'])} using resources {resources_for_rep}"
+                            )
+
+                        for p in patient_vars[m]:
+                            if sub_solver.value(patient_vars[m][p][rep]):
+                                logger.debug(
+                                    f"Patient {p.id} assigned to treatment {m.id}/{rep}"
+                                )
+                        pass
+                    pass
+                return {"status_code": Subsolver.FEASIBLE}
+            # collect num treatments needed and return
+
+        # Model is infeasible this means that we need to generate a cut, either return informations
+        return {"status_code": Subsolver.COMPLETELY_INFEASIBLE}

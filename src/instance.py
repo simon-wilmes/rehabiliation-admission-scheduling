@@ -81,7 +81,7 @@ class Instance:
             for m in self.patients[p].treatments:
                 for fhat in m.resources:
                     num_resources_needed[fhat] += (
-                        m.resources[fhat] * m.duration.hours / m.num_participants
+                        m.resources[fhat] * m.duration.hours / m.max_num_participants
                     )
 
         # avail_resources = defaultdict(float)
@@ -224,7 +224,12 @@ def create_instance_from_file(file_path: str) -> "Instance":
                         value = data[key]
                         parsed_data[key] = parsing_parameter(value)
 
-                    parsed_data["resource_group"] = resource_groups[int(data["rgid"])]
+                    parsed_data["resource_groups"] = list(
+                        map(
+                            lambda x: resource_groups[int(x)],
+                            parsed_data["rgid"],
+                        )
+                    )
 
                     resource = Resource(**parsed_data)
 
