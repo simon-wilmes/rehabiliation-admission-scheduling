@@ -369,13 +369,7 @@ class MIPSolver(Solver):
                 gp.quicksum(self.a_pd[p, d] for d in self.D_p[p]) == 1,
                 name=f"constraint_p6_p{p.id}",
             )
-        logger.debug("Constraint (p6) created.")
-        # Constraint (p7): Patient is admitted exactly once
-        for p in self.P:
-            self.model.addConstr(
-                gp.quicksum(self.a_pd[p, d] for d in self.D_p[p]) == 1,
-                name=f"constraint_p7_p{p.id}",
-            )
+
         logger.debug("Constraint (p7) created.")
         # Constraint (r2): Resource availability and utilization
         for fhat in self.Fhat:

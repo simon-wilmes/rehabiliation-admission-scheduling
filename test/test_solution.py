@@ -13,10 +13,10 @@ def setup_instance():
     # Create resources
     rg_therapists = ResourceGroup(0, "therapists")
     rg_rooms = ResourceGroup(1, "rooms")
-    therapist0 = Resource(0, rg_therapists, "therapist0")
-    therapist1 = Resource(1, rg_therapists, "therapist1")
-    room0 = Resource(3, rg_rooms, "room0")
-    room1 = Resource(4, rg_rooms, "room1")
+    therapist0 = Resource(0, [rg_therapists], "therapist0")
+    therapist1 = Resource(1, [rg_therapists], "therapist1")
+    room0 = Resource(3, [rg_rooms], "room0")
+    room1 = Resource(4, [rg_rooms], "room1")
 
     # Create treatments
     treatment0 = Treatment(

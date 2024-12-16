@@ -741,7 +741,9 @@ class CPSolver(Solver):
             # if len(patients) == 0:
             #    logger.warning("Treatment scheduled without patients. ")
             #    continue
-            appointments.append(Appointment(patients=patients, solver=self, **appointment_parameter))
+            appointments.append(
+                Appointment(patients=patients, solver=self, **appointment_parameter)
+            )
         patients_arrival = {}
         for p in self.P:
             admission_day = self.admission_vars[p]

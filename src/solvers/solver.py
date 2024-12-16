@@ -290,8 +290,10 @@ class Solver(ABC):
             for p in self.P
         }
 
-        self.L_pm = {
-            (p, m): list(range(self.lr_pm[p, m])) for p in self.P for m in self.M_p[p]
+        self.BD_L_pm = {
+            (p, m): list(range(1, self.lr_pm[p, m] + 1))
+            for p in self.P
+            for m in self.M_p[p]
         }
 
     def _assert_patients_arrival_day(self, patient: Patient, day: int):

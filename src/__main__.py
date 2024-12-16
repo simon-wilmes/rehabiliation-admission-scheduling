@@ -38,7 +38,7 @@ def main():
     # Assert Custom Instance
     if True:
         largest_folder = "test_inst"
-        file = "instance_7.txt"
+        file = "instance_1.txt"
     elif False:
         largest_folder = "comp_study_001"
         file = "instance_1.txt"
@@ -57,7 +57,7 @@ def main():
 
     # Solver settings
     settings_dict = {
-        MIPSolver: {"use_lazy_constraints": True},
+        MIPSolver: {"use_lazy_constraints": False},
         MIPSolver2: {"break_symmetry": True},
         MIPSolver3: {
             "break_symmetry": True,
@@ -87,7 +87,7 @@ def main():
             "log_to_console": True,
             "log_to_file": True,
         }
-        logger.setLevel("DEBUG")
+        logger.setLevel("INFO")
     else:
         debug_settings = {
             "log_to_console": False,
