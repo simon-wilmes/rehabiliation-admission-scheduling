@@ -42,6 +42,7 @@ class MIPSolver3(Solver):
                     f" ---- {key} to { self.__class__.SOLVER_DEFAULT_OPTIONS[key]} (default)"
                 )
         super().__init__(instance, **kwargs)
+        self._create_parameter_sets()
 
     def _add_knowledge_num_needed_treatments(self):
         # Calculate minimum number of repetitions needed for each treatment
@@ -89,8 +90,6 @@ class MIPSolver3(Solver):
             return NO_SOLUTION_FOUND
 
     def _create_model(self):
-
-        self._create_parameter_sets()
 
         self.model = gp.Model("UpdatedMIP")
         self.model.setParam("LogToConsole", int(self.log_to_console))  # type: ignore

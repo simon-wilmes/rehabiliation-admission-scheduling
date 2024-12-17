@@ -43,9 +43,10 @@ class MIPSolver(Solver):
                     f" ---- {key} to { self.__class__.SOLVER_DEFAULT_OPTIONS[key]} (default)"
                 )
         super().__init__(instance, **kwargs)
+        self._create_parameter_sets()
 
     def _create_model(self):
-        self._create_parameter_sets()
+
         # Create the self.model
         self.model = gp.Model("PatientAdmissionScheduling")
         self.model.setParam("LogToConsole", int(self.log_to_console))  # type: ignore
@@ -130,7 +131,6 @@ class MIPSolver(Solver):
         ):
             logger.info("Optimal solution found.")
             logger.debug("Sub Objectives:")
-            logger.debug(f"(SOLVER):Minimize Treatments: {self.mt.X}")
             logger.debug(f"(SOLVER):Minimize Delay: {self.md.X}")
             logger.debug(f"(SOLVER):Minimize Missing Treatments: {self.mmt.X}")
 
@@ -155,41 +155,6 @@ class MIPSolver(Solver):
 
     def _set_optimization_goal(self):
 
-        o_pmfdt_keys = []
-        for p in self.P:
-            for m in self.M_p[p]:
-                o_pmfdt_keys.extend(
-                    product(
-                        [p],
-                        [m],
-                        [f for _, f in self.all_resources_possibly_used_by_m[m]],
-                        self.A_p[p],
-                        self.T,
-                    )
-                )
-        self.o_pmfdt = self.model.addVars(
-            o_pmfdt_keys, vtype=gp.GRB.BINARY, name="self.o_pmdt"
-        )
-
-        for p in self.P:
-            for m, d, t in product(self.M_p[p], self.A_p[p], self.T):
-                for fhat, f in self.all_resources_possibly_used_by_m[m]:
-                    self.model.addConstr(
-                        self.o_pmfdt[p, m, f, d, t]
-                        >= self.z_pmgfdt[p, m, fhat, f, d, t]
-                        - gp.quicksum(
-                            self.z_pmgfdt[p_prime, m, fhat, f, d, t]
-                            for p_prime in self._get_smaller_patients(p)
-                            if (p_prime, m, fhat, f, d, t) in self.z_pmgfdt
-                        )
-                    )
-
-        logger.debug("Constraint (optimization) created.")
-        minimize_treatments = gp.quicksum(
-            self.o_pmfdt[p, m, f, d, t] / self.total_num_resources_m[m]
-            for p, m, f, d, t in self.o_pmfdt.keys()
-        )
-
         minimize_delay = gp.quicksum(
             (d - p.earliest_admission_date.day) * self.a_pd[p, d]
             for p in self.P
@@ -209,18 +174,15 @@ class MIPSolver(Solver):
             minimize_missing_treatment += total_treatments - scheduled_treatments
 
         objective = (
-            self.treatment_value * minimize_treatments  # type: ignore
-            + self.delay_value * minimize_delay  # type: ignore
+            +self.delay_value * minimize_delay  # type: ignore
             + self.missing_treatment_value * minimize_missing_treatment  # type: ignore
         )
         # Create variables for easier extraction of individual values
-        self.mt = self.model.addVar(name="minimize_treatments", vtype=gp.GRB.CONTINUOUS)
         self.md = self.model.addVar(name="minimize_delay", vtype=gp.GRB.CONTINUOUS)
         self.mmt = self.model.addVar(
             name="minimize_missing_treatment", vtype=gp.GRB.CONTINUOUS
         )
 
-        self.model.addConstr(self.mt == self.treatment_value * minimize_treatments)
         self.model.addConstr(self.md == self.delay_value * minimize_delay)
         self.model.addConstr(
             self.mmt == self.missing_treatment_value * minimize_missing_treatment
@@ -372,11 +334,12 @@ class MIPSolver(Solver):
 
         logger.debug("Constraint (p7) created.")
         # Constraint (r2): Resource availability and utilization
-        for fhat in self.Fhat:
-            for f in self.fhat[fhat]:
-                for d in self.D:
-                    for t in self.T:
-                        expr = gp.LinExpr()
+        for f in self.F:
+            for d in self.D:
+                for t in self.T:
+
+                    expr = gp.LinExpr()
+                    for fhat in f.resource_groups:
                         for m in self.M_fhat[fhat]:
                             du_m_m = self.du_m[m]
                             tau_set = [
@@ -391,10 +354,10 @@ class MIPSolver(Solver):
                                 for tau in tau_set
                                 if (m, fhat, f, d, tau) in self.y_mgfdt
                             )
-                        self.model.addConstr(
-                            expr <= self.av_fdt[f, d, t],
-                            name=f"constraint_r2_fhat{fhat.id}_f{f.id}_d{d}_t{t}",
-                        )
+                    self.model.addConstr(
+                        expr <= self.av_fdt[f, d, t],
+                        name=f"constraint_r2_fhat{fhat.id}_f{f.id}_d{d}_t{t}",
+                    )
 
         logger.debug("Constraint (r3) created.")
         # Constraint (r4): Assign required number of resources for each treatment
@@ -588,11 +551,6 @@ class MIPSolver(Solver):
             for key in self.y_mgfdt:
                 if self.y_mgfdt[key].X > 0.5:
                     logger.debug(f"self.y_mgfdt{key} = {self.y_mgfdt[key].X}")
-
-            for key in self.o_pmfdt:
-                if self.o_pmfdt[key].X > 0.5:
-                    # logger.debug(f"self.o_pmfdt{key} = {self.o_pmfdt[key].X}")
-                    pass
 
         # appointments_dict: key=(m, d, t, frozenset of resource IDs), value=list of patients
         appointments_dict = defaultdict(list)

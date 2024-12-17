@@ -44,6 +44,7 @@ class CPSolver2(Solver):
                 )
 
         super().__init__(instance, **kwargs)
+        self._create_parameter_sets()
 
     def _solve_model(self):
         solver = cp_model.CpSolver()
@@ -63,7 +64,6 @@ class CPSolver2(Solver):
             return NO_SOLUTION_FOUND
 
     def _create_model(self):
-        self._create_parameter_sets()
 
         self.model = cp_model.CpModel()
         self._create_constraints()

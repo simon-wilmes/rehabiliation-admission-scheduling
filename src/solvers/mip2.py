@@ -32,6 +32,7 @@ class MIPSolver2(Solver):
                     f" ---- {key} to { self.__class__.SOLVER_DEFAULT_OPTIONS[key]} (default)"
                 )
         super().__init__(instance, **kwargs)
+        self._create_parameter_sets()
 
     def _solve_model(self) -> Solution | int:
         self.model.optimize()
@@ -68,8 +69,6 @@ class MIPSolver2(Solver):
             return NO_SOLUTION_FOUND
 
     def _create_model(self):
-
-        self._create_parameter_sets()
 
         self.model = gp.Model("UpdatedMIP")
         self.model.setParam("LogToConsole", int(self.log_to_console))  # type: ignore

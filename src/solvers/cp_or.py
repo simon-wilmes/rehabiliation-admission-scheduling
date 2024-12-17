@@ -29,7 +29,7 @@ class CPSolver(Solver):
 
     SOLVER_DEFAULT_OPTIONS = {
         "break_symmetry": True,
-        "min_repr": "reservoir",
+        "min_repr": "cumulative",
         "max_repr": "cumulative",
         "add_knowledge": True,
     }
@@ -55,6 +55,7 @@ class CPSolver(Solver):
                 )
 
         super().__init__(instance, **kwargs)
+        self._create_parameter_sets()
 
     def _solve_model(self):
         solver = cp_model.CpSolver()
@@ -81,7 +82,6 @@ class CPSolver(Solver):
             return NO_SOLUTION_FOUND
 
     def _create_model(self):
-        self._create_parameter_sets()
 
         self.model = cp_model.CpModel()
         self._create_constraints()
@@ -570,7 +570,6 @@ class CPSolver(Solver):
             )  # type:ignore
 
         if self.enforce_min_treatments_per_day:  # type:ignore
-
             if self.min_repr == "reservoir":  # type:ignore
                 for p in self.P:
                     # Create new intervals
@@ -735,12 +734,6 @@ class CPSolver(Solver):
             value = appointments_dict[key]
             appointment_parameter = value["appointment_parameter"]
             patients = value["patients"]
-            # logger.debug(patients)
-            # logger.debug(appointment_parameter)
-            # logger.debug(key)
-            # if len(patients) == 0:
-            #    logger.warning("Treatment scheduled without patients. ")
-            #    continue
             appointments.append(
                 Appointment(patients=patients, solver=self, **appointment_parameter)
             )

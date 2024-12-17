@@ -13,7 +13,7 @@ from src.solution import NO_SOLUTION_FOUND
 from math import floor, gcd, ceil
 from pprint import pformat
 from .subsolvers import Subsolver, CPSubsolver
-from itertools import product
+from itertools import product, combinations
 from typing import Callable, Any
 
 
@@ -23,12 +23,14 @@ class LBBDSolver(Solver):
     SOLVER_OPTIONS.update(
         {
             "break_symmetry": [True, False],
+            "use_helper_constraints": [True, False],
         }
     )  # Add any additional options here
 
     SOLVER_DEFAULT_OPTIONS = {
         "break_symmetry": True,
         "subsolver_cls": CPSubsolver,
+        "use_helper_constraints": True,
     }
 
     def __init__(self, instance: Instance, **kwargs):
@@ -59,11 +61,17 @@ class LBBDSolver(Solver):
         }
 
         super().__init__(instance, **kwargs)
+        self._create_parameter_sets()
 
         # Add min_patients_per_treatment to subsolver kwargs
         subsolver_kwargs["enforce_min_patients_per_treatment"] = self.enforce_min_patients_per_treatment  # type: ignore
 
         self.subsolver: Subsolver = self.subsolver_cls(instance=instance, solver=self, **subsolver_kwargs)  # type: ignore
+
+        self.count_good_cuts = 0
+        self.count_bad_cuts = 0
+        self.already_seen_forbidden_strs = set()
+        self.count_unnecessary_comps = 0
 
     def build_patients_dict(self, f_is_true: Callable[[Var], bool]):
         patients = [{m: {} for m in self.M} for _ in self.D]
@@ -109,19 +117,38 @@ class LBBDSolver(Solver):
                         result = self.subsolver.is_day_infeasible(d, patients[d])  # type: ignore
                         status_code = result["status_code"]
                         if result["status_code"] == Subsolver.COMPLETELY_INFEASIBLE:
+                            self.count_good_cuts += 1
                             # not is Feasible, generate cut
                             logger.debug("Subproblem not feasible.")
                             count_days_infeasible += 1
 
-                            forbidden_vars = [
-                                sum(
-                                    self.x_pmdri[p, m, d, patients[d][m][p], i]
-                                    for i in self.max_repetitions[m]
-                                )
-                                for m in patients[d]
-                                for p in patients[d][m]
-                                if patients[d][m][p] > 0
-                            ]
+                            forbidden_vars_str = []
+                            forbidden_vars = []
+                            for m in patients[d]:
+                                for p in patients[d][m]:
+                                    if patients[d][m][p] > 0:
+                                        forbidden_vars.append(
+                                            sum(
+                                                self.x_pmdri[
+                                                    p, m, d, patients[d][m][p], i
+                                                ]
+                                                for i in self.max_repetitions[m]
+                                            )
+                                        )
+                                        forbidden_vars_str.append(
+                                            f"{m.id},{patients[d][m][p]}"
+                                        )
+                            forbidden_vars_str = "|".join(sorted(forbidden_vars_str))
+
+                            logger.info("forbidden_vars: " + forbidden_vars_str)
+                            logger.info(
+                                forbidden_vars_str in self.already_seen_forbidden_strs
+                            )
+                            self.count_unnecessary_comps += (
+                                forbidden_vars_str in self.already_seen_forbidden_strs
+                            )
+                            self.already_seen_forbidden_strs.add(forbidden_vars_str)
+
                             model.cbLazy(
                                 gp.quicksum(forbidden_vars) <= len(forbidden_vars) - 1
                             )
@@ -129,18 +156,12 @@ class LBBDSolver(Solver):
                             result["status_code"]
                             == Subsolver.DIFFERENT_TREATMENTS_NEEDED
                         ):
+                            self.count_bad_cuts += 1
                             # forbid this exact treatment combination
                             logger.info("Different treatments needed")
                             logger.info("patients[d]: " + str(patients[d]))
-                            true_vars = [
-                                (key, model.cbGetSolution(var))
-                                for key, var in self.x_pmdri.items()
-                                if model.cbGetSolution(var) > 0.5 and key[2] == d
-                            ]
+
                             forbidden_vars = []
-                            new = self.build_patients_dict(
-                                lambda x: model.cbGetSolution(x) > 0.5
-                            )
 
                             for m in patients[d]:
                                 for p in patients[d][m]:
@@ -169,14 +190,23 @@ class LBBDSolver(Solver):
                                 gp.quicksum(forbidden_vars) <= len(forbidden_vars) - 1
                             )
 
+                    logger.info(
+                        f"Number of cuts added: {self.count_bad_cuts + self.count_good_cuts} (bad={self.count_bad_cuts}, good={self.count_good_cuts})"
+                    )
                     logger.debug(
                         "All days finished with {} days infeasible".format(
                             count_days_infeasible
                         )
                     )
+                    logger.info(
+                        f"Unnecessary comps: ({self.count_unnecessary_comps} / {self.count_good_cuts})"
+                    )
+                    logger.info(f"Calls to is_day_infeasible: {self.subsolver.calls_to_solve_subsystem}/ {self.subsolver.calls_to_is_day_infeasible}")  # type: ignore
+                    logger.info("Calls")
                 except Exception as e:
                     logger.debug(str(e))
                     logger.exception("Error in solution callback")
+                    raise Exception("Error in solution callback")
 
         self.model.optimize(_solution_callback)
 
@@ -211,7 +241,7 @@ class LBBDSolver(Solver):
             return NO_SOLUTION_FOUND
 
     def _create_model(self):
-        self._create_parameter_sets()
+
         # Create the self.model
         self.model = gp.Model("PatientAdmissionScheduling")
         self.model.setParam("LogToConsole", int(self.log_to_console))  # type: ignore
@@ -227,7 +257,8 @@ class LBBDSolver(Solver):
             self._break_symmetry()
             pass
 
-        self._helper_constraints()
+        if self.use_helper_constraints:  # type: ignore
+            self._helper_constraints()
 
         self._set_optimization_goal()
 
@@ -281,20 +312,26 @@ class LBBDSolver(Solver):
         super()._create_parameter_sets()
 
     def _break_symmetry(self):
-        for p, m, d, r, i in self.x_pmdri:
-            if i >= 1:
-                continue
-            if r == 1:
-                continue
-            self.model.addConstr(
-                gp.quicksum(
-                    self.x_pmdri[p, m, d, r, i] for i in self.max_repetitions[m]
-                )
-                <= gp.quicksum(
-                    self.x_pmdri[p, m, d, r - 1, i] for i in self.max_repetitions[m]
-                ),
-                name=f"symmetry_breaking_x_pmdri_p{p.id}_m{m.id}_d{d}_r{r}_",
-            )
+        for d in self.D:
+            for m in self.M:
+                for i in self.max_repetitions[m]:
+                    if i == 0:
+                        continue
+                    self.model.addConstr(
+                        gp.quicksum(
+                            self.x_pmdri[p, m, d, r, i]
+                            for p in self.P
+                            if m in self.M_p[p] and d in self.A_p[p]
+                            for r in self.BD_L_pm[p, m]
+                        )
+                        <= gp.quicksum(
+                            self.x_pmdri[p, m, d, r, i - 1]
+                            for p in self.P
+                            if m in self.M_p[p] and d in self.A_p[p]
+                            for r in self.BD_L_pm[p, m]
+                        ),
+                        name=f"constraint_break_symmetry_m{m.id}_d{d}_i{i}",
+                    )
 
     def _set_optimization_goal(self):
 
@@ -336,6 +373,21 @@ class LBBDSolver(Solver):
 
     def _create_constraints(self):
         self.model.update()
+        for p, m, d, r, i in self.x_pmdri:
+            if i >= 1:
+                continue
+            if r == 1:
+                continue
+            self.model.addConstr(
+                gp.quicksum(
+                    self.x_pmdri[p, m, d, r, i] for i in self.max_repetitions[m]
+                )
+                <= gp.quicksum(
+                    self.x_pmdri[p, m, d, r - 1, i] for i in self.max_repetitions[m]
+                ),
+                name=f"constraint_x_pmdri_work_p{p.id}_m{m.id}_d{d}_r{r}",
+            )
+
         # Ensure the i part of x_pmdri works
         for p in self.P:
             for m in self.M_p[p]:
@@ -535,8 +587,39 @@ class LBBDSolver(Solver):
 
     def _helper_constraints(self):
         """Adds constraints to make sure that obvious constraints are met."""
+        resource_groups = set()
+        for f in self.F:
+            for r in range(len(f.resource_groups)):
+                resource_groups = resource_groups.union(
+                    set(combinations(f.resource_groups, r + 1))
+                )
 
-        # Add that for a treatment with k=min_number_treatments, you need at least k patients having said treatment
+        for d in self.D:
+            # Count resource usage
+            for resource_group in resource_groups:
+                # count max number of available resources time slots
+                avail_resources = 0
+                for fhat in resource_group:
+                    for f in self.fhat[fhat]:
+                        avail_resources += sum(self.av_fdt[f, d, t] for t in self.T)
+
+                all_treatments_require_rg = gp.LinExpr()
+                for m in self.M:
+                    for fhat in resource_group:
+                        if fhat not in m.resources:
+                            continue
+                        all_treatments_require_rg += (
+                            gp.quicksum(
+                                self.y_mdi[m, d, i] for i in self.max_repetitions[m]
+                            )
+                            * self.n_fhatm[fhat, m]
+                            * self.du_m[m]
+                        )
+                self.model.addConstr(
+                    all_treatments_require_rg <= avail_resources,
+                    name=f"constraint_enough_resource_group_{resource_group}_d{d}",
+                )
+        # Add combined resources groups when resources are in multiple groups
         pass
 
     def _extract_solution(self):
@@ -560,7 +643,7 @@ class LBBDSolver(Solver):
         # get dailys schedule
         patients = self.build_patients_dict(lambda x: x.X > 0.5)
         appointments = []
-
+        patients = self.build_patients_dict(lambda x: x.X > 0.5)
         for d in self.D:
             day_solution = self.subsolver.get_day_solution(d, patients[d])
             appointments.extend(day_solution)

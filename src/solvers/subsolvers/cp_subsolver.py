@@ -11,6 +11,7 @@ from src.instance import Instance
 from src.solvers import Solver
 from src.solution import Solution, Appointment
 from src.time import DayHour
+from itertools import combinations
 
 
 class CPSubsolver(Subsolver):
@@ -19,10 +20,12 @@ class CPSubsolver(Subsolver):
     SOLVER_OPTIONS.update(
         {
             "estimated_needed_treatments": [True, False],
+            "add_patient_symmetry": [True, False],
         }
     )  # Add any additional options here
     SOLVER_DEFAULT_OPTIONS = {
         "estimated_needed_treatments": True,
+        "add_patient_symmetry": True,
     }
 
     def __init__(self, instance: Instance, solver: Solver, **kwargs):
@@ -44,7 +47,29 @@ class CPSubsolver(Subsolver):
                 logger.debug(
                     f" ---- {key} to { self.__class__.SOLVER_DEFAULT_OPTIONS[key]} (default)"
                 )
+
         super().__init__(instance, solver, **kwargs)
+
+        self.create_parameters()
+
+    def create_parameters(self):
+        if self.add_patient_symmetry:  # type:ignore
+            # Compute for what treatment and days a patient is symmetric
+            self.patients_symmetry = defaultdict(list)
+
+            for p1, p2 in combinations(self.solver.P, r=2):
+                if p1 == p2:
+                    continue
+                D_p1p2 = set(self.solver.A_p[p1]) & set(self.solver.A_p[p2])
+                for m in self.solver.M:
+                    if not (m in self.solver.M_p[p1] and m in self.solver.M_p[p2]):
+                        continue
+                    rep = min(self.solver.lr_pm[p1, m], self.solver.lr_pm[p2, m])
+                    for d in D_p1p2:
+                        for r in range(rep + 1):
+                            self.patients_symmetry[(p1, d, m, r)].append(p2)
+                            self.patients_symmetry[(p2, d, m, r)].append(p1)
+        pass
 
     def create_model(self, day: int, patients: dict[Treatment, dict[Patient, int]]):
         M_p = {p: [m for m in patients if p in patients[m]] for p in self.solver.P}
@@ -251,6 +276,7 @@ class CPSubsolver(Subsolver):
         )
         model, appointment_vars, patient_vars = self.create_model(day, patients)
         status = sub_solver.Solve(model)
+        assert status == cp_model.OPTIMAL, f"Subsolver on day {day} is not optimal"
         assert (
             sub_solver.objective_value == 0
         ), f"Eventhough optimality is claimed, subsystem on day {day} is not feasible"

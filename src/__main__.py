@@ -57,7 +57,7 @@ def main():
 
     # Solver settings
     settings_dict = {
-        MIPSolver: {"use_lazy_constraints": False},
+        MIPSolver: {"use_lazy_constraints": True},
         MIPSolver2: {"break_symmetry": True},
         MIPSolver3: {
             "break_symmetry": True,
@@ -73,10 +73,12 @@ def main():
             "treatments_in_adm_period": "cumulative",
         },
         LBBDSolver: {
-            "break_symmetry": True,
+            "break_symmetry": False,
             "subsolver_cls": CPSubsolver,
             "subsolver.store_results": True,
             "subsolver.store_results_method": "hash",
+            "subsolver.add_patient_symmetry": True,
+            "use_helper_constraints": True,
         },
     }
 
@@ -103,7 +105,7 @@ def main():
     inst = create_instance_from_file("data/" + str(largest_folder) + "/" + file)
     logger.info("Successfully created instance from file.")
 
-    solver_cls = LBBDSolver
+    solver_cls = MIPSolver
     # Create kwargs for solver
     kwargs = settings_dict[solver_cls]
     kwargs.update(default_settings)
@@ -119,11 +121,10 @@ def main():
             ["add_knowledge", "break_symmetry", "break_symmetry_strong"],
         )
     else:
-        logger.info("Running with: " + str(kwargs))
         context = get_file_writer_context(solver_cls, inst, **debug_settings)
         with contextlib.redirect_stdout(context):  # type: ignore
             logger.info(
-                f"Running with solver: {solver_cls.__name__} and kwargs: {kwargs}"
+                f"Running with solver: {solver_cls.__name__} and kwargs: \n{pformat(kwargs)}"
             )
             solver = solver_cls(
                 inst,

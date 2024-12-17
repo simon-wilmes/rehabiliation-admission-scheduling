@@ -142,7 +142,7 @@ class Solver(ABC):
         self.fhat = {
             fhat: [f for f in self.F if fhat in f.resource_groups] for fhat in self.Fhat
         }
-        p2 = self.P[0]
+
         self.A_p = {  # For a patient p the days at which a treatment might be scheduled
             p: list(
                 range(
@@ -168,20 +168,25 @@ class Solver(ABC):
         self.P_m = {
             m: list(p for p in self.P if m in p.treatments.keys()) for m in self.M
         }
+        
         self.M_p = {
             p: list(p.treatments.keys()) for p in self.instance.patients.values()
         }
+        
         self.k_m = {
             t: t.max_num_participants for t in self.instance.treatments.values()
         }
+        
         self.j_m = {
             t: t.min_num_participants for t in self.instance.treatments.values()
         }
+        
         self.r_pm = {
             (p, m): int(p.treatments[m])
             for p in self.instance.patients.values()
             for m in self.M_p[p]
         }
+        
         self.lr_pm = defaultdict(
             int,
             {
@@ -192,6 +197,7 @@ class Solver(ABC):
         )
 
         self.l_p = {p: p.length_of_stay for p in self.instance.patients.values()}
+        
         self.du_m = {
             m: ceil(m.duration / self.instance.time_slot_length)
             for m in self.instance.treatments.values()
