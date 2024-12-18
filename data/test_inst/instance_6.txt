@@ -1,15 +1,18 @@
 [INSTANCE]
-num_beds: 1
+num_beds: 2
 workday_start: 8 # uhr
-workday_end: 10 # uhr
+workday_end: 15 # uhr
 day_start:0
 
 even_scheduling_upper: 2
 even_scheduling_width: 5
 
-daily_scheduling_upper: 3
+daily_scheduling_upper: 1.5
 daily_scheduling_lower: 1
 horizon_length: 5
+
+time_slot_length: Duration(hours=1)
+
 
 conflict_groups: []
 # conflict groups is a list of sets where each set represents a single conflict group
@@ -24,7 +27,7 @@ conflict_groups: []
 
 [DATA: RESOURCES]: rid, rgid, name, unavailable_time_slots
 # "rid" is of type int (must be unique)
-# "rgid" is of type int: refers to the rgid of a resource_group
+# "rgid" is of type list[int]: refers to the rgid's of a resource_groups
 # "name" is of type str
 # "unavailable_time_slots" is of type: list[tuple[DayHour, DayHour, int | None]]
 # where the syntax is the first entry says the start date, 
@@ -32,9 +35,9 @@ conflict_groups: []
 # and the last entry is the interval of days of repetition, none if only once
 
 0;  [0];  therapist0; None 
-1;  [0];  therapist1; None
-3;  [1];  room3;  None
-4;  [1];  room4;  None
+#1; [0];  therapist1; None
+1;  [1];  room1;  None
+#4; [1];  room4;  None
 
 [DATA: TREATMENTS]: tid, num_participants, name, duration, resources
 # "tid" is of type int (must be unique)
@@ -59,5 +62,5 @@ conflict_groups: []
 # "already_resource_loyal" is a dictionary where the keys are (tuples) of treatment TID and RGID and values is a the list of RID that are loyal, this means that the list must have length of required resources of RGID for treatment TID
 # "already_scheduled_treatments" is a list of tuples where each tuple contains a treatment ID (int) and the number of times it was already scheduled in the past
 
-0; patient0; {0: 5}; 5; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False;  []
-#1; patient1; {0:4}; 2; DayHour(day=1, hour=0, minutes=0); DayHour(day=5, hour=0, minutes=0); False; []
+0; patient0; {0: 4}; 2; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False;  []
+1; patient1; {0: 4}; 2; DayHour(day=0, hour=0, minutes=0); DayHour(day=5, hour=0, minutes=0); False; []
