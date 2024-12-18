@@ -7,12 +7,14 @@ from src.instance import Instance
 from src.logging import logger
 from src.solution import Solution, Appointment
 from src.utils import slice_dict
+from time import time
+from collections import defaultdict
 
 
 class Subsolver(ABC):
     FEASIBLE = 0
-    COMPLETELY_INFEASIBLE = 1
-    DIFFERENT_TREATMENTS_NEEDED = 2
+    TOO_MANY_TREATMENTS = 1
+    MIN_PATIENTS_PROBLEM = 2
     BASE_SOLVER_OPTIONS = {
         "store_results": [True, False],
         "store_results_method": ["dict", "hash"],
@@ -67,6 +69,11 @@ class Subsolver(ABC):
                         break
                 else:
                     self.days_symmetry[d] = d
+
+            self.days_symmetric_to = defaultdict(set)
+            for d in self.solver.D:
+                self.days_symmetric_to[self.days_symmetry[d]].add(d)
+
         else:
             self.get_day_symmetry = lambda x: x
 
@@ -122,6 +129,9 @@ class Subsolver(ABC):
         # In the future, this method could be used to calculate a hash for the resource profile of that day
         return self.days_symmetry[d]
 
+    def get_days_symmetric_to(self, d: int) -> set[int]:
+        return self.days_symmetric_to[self._get_day_symmetry(d)]
+
     def _add_result_feasible_hash(
         self,
         day: int,
@@ -138,22 +148,15 @@ class Subsolver(ABC):
         # Check if this day has already been seen with the same configuration and report the result
         if self.store_results:  # type:ignore
             if self.get_result_feasible(day, patients):
-                logger.debug("Used stored results")
+                # logger.debug("Used stored results")
                 return {"status_code": Subsolver.FEASIBLE}
 
             if self.get_result_infeasible(day, patients):
-                logger.debug("Used stored results")
-                return {"status_code": Subsolver.COMPLETELY_INFEASIBLE}
+                # logger.debug("Used stored results")
+                return {"status_code": Subsolver.TOO_MANY_TREATMENTS}
         self.calls_to_solve_subsystem += 1
+
         results = self._solve_subsystem(day, patients)
-        logger.debug(
-            "Subsolver results: "
-            + (
-                "FEASIBLE"
-                if results["status_code"] == Subsolver.FEASIBLE
-                else "INFEASIBLE"
-            )
-        )
 
         if (
             self.store_results  # type:ignore
@@ -161,7 +164,7 @@ class Subsolver(ABC):
         ):
 
             self.add_result_feasible(day, patients)
-            logger.debug(f"Adding result to store: {len(self.feasible_results)}")
+            # logger.debug(f"Adding result to store: {len(self.feasible_results)}")
 
         return results
 
