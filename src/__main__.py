@@ -7,7 +7,8 @@ from src.solvers import (
     CPSolver,
     CPSolver2,
 )
-from src.solvers.subsolvers import CPSubsolver
+from src.solvers.subsolvers import CPSubsolver, CPSubsolver2
+
 
 from src.logging import logger
 
@@ -44,7 +45,7 @@ def main():
         file = "instance_1.txt"
     else:
         largest_folder = "testinstance_files"
-        file = "resource_only_in_groups.txt"
+        file = "double_resources.txt"
 
     #####################################
     # Set Settings
@@ -87,9 +88,9 @@ def main():
     if print_detailed_debug:
         debug_settings = {
             "log_to_console": True,
-            "log_to_file": True,
+            "log_to_file": False,
         }
-        logger.setLevel("INFO")
+        logger.setLevel("DEBUG")
     else:
         debug_settings = {
             "log_to_console": False,
@@ -105,7 +106,7 @@ def main():
     inst = create_instance_from_file("data/" + str(largest_folder) + "/" + file)
     logger.info("Successfully created instance from file.")
 
-    solver_cls = MIPSolver
+    solver_cls = LBBDSolver
     # Create kwargs for solver
     kwargs = settings_dict[solver_cls]
     kwargs.update(default_settings)
@@ -132,6 +133,44 @@ def main():
             )
             solver.create_model()
             solution = solver.solve_model()
+
+            return
+            solver2 = solver_cls(
+                inst,
+                **kwargs,
+            )
+            # solver2.J_md = {
+            #     (m, d): list(range(solver2._max_needed_repetitions(m, d)))
+            #     for m in solver2.M
+            #     for d in solver2.D
+            # }
+
+            solver2.BD_L_pm = {
+                (p, m): list(
+                    range(1, min(solver2.lr_pm[p, m], solver2.daily_upper[p]) + 1)
+                )
+                for p in solver2.P
+                for m in solver2.M_p[p]
+            }
+
+            # assert true vars
+
+            solver2.create_model()
+            for key in solver.x_pmdri:
+                if solver.x_pmdri[key].X > 0.5:
+                    solver2.model.addConstr(
+                        solver2.x_pmdri[key] == 1,
+                        f"x_pmdri_true{key}",
+                    )
+
+            for key in solver.a_pd:
+                if solver.a_pd[key].X > 0.5:
+                    solver2.model.addConstr(
+                        solver2.a_pd[key] == 1,
+                        f"a_pd_true{key}",
+                    )
+
+            solver2.solve_model()
 
 
 def test_run(solver_cls: Type[Solver], inst, debug_settings, kwargs, testing_keys):

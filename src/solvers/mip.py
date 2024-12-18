@@ -138,6 +138,7 @@ class MIPSolver(Solver):
             return solution
         else:
             logger.info("No optimal solution found.")
+            return NO_SOLUTION_FOUND
             # Compute IIS
             self.model.computeIIS()
 
@@ -290,9 +291,9 @@ class MIPSolver(Solver):
                         self.model.addConstr(
                             self.x_pmdt[p, m, d, t]
                             <= gp.quicksum(self.a_pd[p, delta] for delta in delta_set),
-                            name=f"constraint_p2_p{p.id}_m{m.id}_d{d}_t{t}",
+                            name=f"constraint_m_when_admitted_p{p.id}_m{m.id}_d{d}_t{t}",
                         )
-        logger.debug("Constraint (p2) created.")
+        logger.debug("Constraint (when_admitted) created.")
         # Constraint (p3): Only one treatment at a time per patient
         for p in self.P:
             for d in self.A_p[p]:

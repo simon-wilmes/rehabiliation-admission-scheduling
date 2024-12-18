@@ -44,17 +44,6 @@ class MIPSolver3(Solver):
         super().__init__(instance, **kwargs)
         self._create_parameter_sets()
 
-    def _add_knowledge_num_needed_treatments(self):
-        # Calculate minimum number of repetitions needed for each treatment
-        for m in self.M:
-            min_reps = self._min_needed_repetitions(m)
-            for i in range(min_reps):
-                self.model.addConstr(
-                    gp.quicksum(self.x_midt[m, i, d, t] for d in self.D for t in self.T)
-                    == 1
-                )
-            pass
-
     def _solve_model(self) -> Solution | int:
         self.model.optimize()
         if (
@@ -64,7 +53,6 @@ class MIPSolver3(Solver):
         ):
             logger.info("Optimal solution found.")
             logger.debug("Sub Objectives:")
-            logger.debug(f"(SOLVER):Minimize Treatments: {self.mt.X}")
             logger.debug(f"(SOLVER):Minimize Delay: {self.md.X}")
             logger.debug(f"(SOLVER):Minimize Missing Treatments: {self.mmt.X}")
 
@@ -72,6 +60,7 @@ class MIPSolver3(Solver):
             return solution
         else:
             logger.info("No optimal solution found.")
+            # return NO_SOLUTION_FOUND
             # return NO_SOLUTION_FOUND
             # Compute IIS
             self.model.computeIIS()
@@ -100,8 +89,7 @@ class MIPSolver3(Solver):
         self._create_constraints()
         if self.break_symmetry:  # type: ignore
             self._break_symmetry()
-        if self.add_knowledge:  # type:ignore
-            self._add_knowledge_num_needed_treatments()
+
         self._set_optimization_goal()
         self.model = self.model
 
@@ -161,12 +149,11 @@ class MIPSolver3(Solver):
             name="y_pmidt",
         )
 
-        self.z_fmidt = self.model.addVars(
-            ((f, m, i, d, t) for f in self.F for m in self.M for i in self.I_m[m] for d in self.D for t in self.T),  # type: ignore
+        self.z_gfmidt = self.model.addVars(
+            ((fhat, f, m, i, d, t) for m in self.M for fhat in self.Fhat_m[m] for f in self.fhat[fhat] for i in self.I_m[m] for d in self.D for t in self.T),  # type: ignore
             vtype=gp.GRB.BINARY,
             name="z_fmidt",
         )
-
         logger.debug("Variables created.")
 
     def _create_constraints(self):
@@ -198,9 +185,9 @@ class MIPSolver3(Solver):
                         self.model.addConstr(
                             self.y_pmidt[p, m, i, d, t]
                             <= gp.quicksum(self.a_pd[p, delta] for delta in delta_set),
-                            name=f"constraint_p2_b_p{p.id}_m{m.id}_i{i}_d{d}_t{t}",
+                            name=f"constraint_m_when_admitted_p{p.id}_m{m.id}_i{i}_d{d}_t{t}",
                         )
-        logger.debug("Constraint (p2) created.")
+        logger.debug("Constraint (when_admitted) created.")
 
         # Constraint: Only one treatment every timeslot per patient
         for p in self.P:
@@ -238,22 +225,23 @@ class MIPSolver3(Solver):
         logger.debug("Constraint (r1) created.")
 
         # Constraint: Resource usage constraint
-        for fhat in self.Fhat:
-            for f in self.fhat[fhat]:
-                for d, t in product(self.D, self.T):
-                    self.model.addConstr(
-                        gp.quicksum(
-                            self.z_fmidt[f, m, i, d, tau]
-                            for m in self.M_fhat[fhat]
-                            for i in self.I_m[m]
-                            for tau in self.T
-                            if t - self.du_m[m] * self.instance.time_slot_length.hours
-                            < tau
-                            <= t
-                        )
-                        <= int(f.is_available(DayHour(d, t))),
-                        name=f"constraint_r2_b_f{f.id}_d{d}_t{t}",
+
+        for f in self.F:
+            for d, t in product(self.D, self.T):
+                self.model.addConstr(
+                    gp.quicksum(
+                        self.z_gfmidt[fhat, f, m, i, d, tau]
+                        for fhat in f.resource_groups
+                        for m in self.M_fhat[fhat]
+                        for i in self.I_m[m]
+                        for tau in self.T
+                        if t - self.du_m[m] * self.instance.time_slot_length.hours
+                        < tau
+                        <= t
                     )
+                    <= int(f.is_available(DayHour(d, t))),
+                    name=f"constraint_r2_b_f{f.id}_d{d}_t{t}",
+                )
         logger.debug("Constraint (r2) created.")
 
         # Constraint: Treatment has resources
@@ -262,7 +250,7 @@ class MIPSolver3(Solver):
                 for d, t, fhat in product(self.D, self.T, self.Fhat_m[m]):
                     self.model.addConstr(
                         gp.quicksum(
-                            self.z_fmidt[f, m, i, d, t] for f in self.fhat[fhat]
+                            self.z_gfmidt[fhat, f, m, i, d, t] for f in self.fhat[fhat]
                         )
                         == self.n_fhatm[fhat, m] * self.x_midt[m, i, d, t],
                         name=f"constraint_r3_b_m{m.id}_i{i}_fhat{fhat.id}",
@@ -369,14 +357,6 @@ class MIPSolver3(Solver):
             logger.debug("Constraint (a5) created.")
 
     def _set_optimization_goal(self):
-        minimize_treatments = gp.quicksum(
-            self.x_midt[m, i, d, t]
-            for m in self.M
-            for i in self.I_m[m]
-            for d in self.D
-            for t in self.T
-        )
-
         minimize_delay = gp.quicksum(
             (d - min(self.D_p[p])) * self.a_pd[p, d]
             for p in self.P
@@ -396,18 +376,15 @@ class MIPSolver3(Solver):
             minimize_missing_treatment += total_treatments - scheduled_treatments
 
         objective = (
-            self.treatment_value * minimize_treatments  # type: ignore
-            + self.delay_value * minimize_delay  # type: ignore
+            self.delay_value * minimize_delay  # type: ignore
             + self.missing_treatment_value * minimize_missing_treatment  # type: ignore
         )
         # Create variables for easier extraction of individual values
-        self.mt = self.model.addVar(name="minimize_treatments", vtype=gp.GRB.CONTINUOUS)
         self.md = self.model.addVar(name="minimize_delay", vtype=gp.GRB.CONTINUOUS)
         self.mmt = self.model.addVar(
             name="minimize_missing_treatment", vtype=gp.GRB.CONTINUOUS
         )
 
-        self.model.addConstr(self.mt == self.treatment_value * minimize_treatments)
         self.model.addConstr(self.md == self.delay_value * minimize_delay)
         self.model.addConstr(
             self.mmt == self.missing_treatment_value * minimize_missing_treatment
@@ -415,18 +392,7 @@ class MIPSolver3(Solver):
         self.model.setObjective(objective, gp.GRB.MINIMIZE)
 
     def _extract_solution(self):
-        """
-        m = self.M[2]
-        p = self.P[2]
-        assig = [
-            (
-                i,
-                gp.quicksum(
-                    self.x_midt[m, i, d, t] for d in self.A_p[p] for t in self.T
-                ).getValue(),
-            )
-            for i in range(0, 4)
-        ]"""
+
         # Simplified for clarity, adjust if required
         appointments = []
         for m in self.M:
@@ -451,13 +417,13 @@ class MIPSolver3(Solver):
                             # Get resources
                             resources = defaultdict(list)
 
-                            for f, _, _, _, _ in slice_dict(
-                                self.z_fmidt, (None, m, i, d, t)
+                            for fhat, f, _, _, _, _ in slice_dict(
+                                self.z_gfmidt, (None, None, m, i, d, t)
                             ):
-                                if self.z_fmidt[f, m, i, d, t].X > 0.5:
-                                    resources[f.resource_group].append(f)
+                                if self.z_gfmidt[fhat, f, m, i, d, t].X > 0.5:
+                                    resources[fhat].append(f)
                                 logger.debug(
-                                    f"z_{f.id}_{m.id}_{i}_{d}_{t} = {self.z_fmidt[f, m, i, d, t].X}"
+                                    f"z_{fhat.id}_f{f.id}_{m.id}_{i}_{d}_{t} = {self.z_gfmidt[fhat, f, m, i, d, t].X}"
                                 )
                             app = Appointment(
                                 start_date=DayHour(d, t),

@@ -168,25 +168,25 @@ class Solver(ABC):
         self.P_m = {
             m: list(p for p in self.P if m in p.treatments.keys()) for m in self.M
         }
-        
+
         self.M_p = {
             p: list(p.treatments.keys()) for p in self.instance.patients.values()
         }
-        
+
         self.k_m = {
             t: t.max_num_participants for t in self.instance.treatments.values()
         }
-        
+
         self.j_m = {
             t: t.min_num_participants for t in self.instance.treatments.values()
         }
-        
+
         self.r_pm = {
             (p, m): int(p.treatments[m])
             for p in self.instance.patients.values()
             for m in self.M_p[p]
         }
-        
+
         self.lr_pm = defaultdict(
             int,
             {
@@ -197,7 +197,7 @@ class Solver(ABC):
         )
 
         self.l_p = {p: p.length_of_stay for p in self.instance.patients.values()}
-        
+
         self.du_m = {
             m: ceil(m.duration / self.instance.time_slot_length)
             for m in self.instance.treatments.values()
@@ -244,30 +244,6 @@ class Solver(ABC):
                         max_treatment_people_specific[m],
                     )
 
-        self.n_m = {
-            m: max(
-                ceil(self.treatment_count[m] / self.k_m[m] * 2),  # type: ignore
-                max_treatment_people_specific[m],
-            )
-            for m in self.M
-        }
-
-        self.I_m_calc = {
-            m: list(
-                range(
-                    max(
-                        ceil(self.treatment_count[m] / self.k_m[m] * 2),  # type: ignore
-                        max_treatment_people_specific[m],
-                    )
-                ),
-            )
-            for m in self.M
-        }
-
-        self.I_m_max = {m: list(range(self.treatment_count[m])) for m in self.M}
-
-        self.I_m = self.I_m_max
-
         self.e_w: int = int(self.instance.even_scheduling_width)  # type: ignore
         self.e_lb: float = self.instance.even_scheduling_lower  # type: ignore
         self.e_ub: float = self.instance.even_scheduling_upper  # type: ignore
@@ -297,9 +273,35 @@ class Solver(ABC):
         }
 
         self.BD_L_pm = {
-            (p, m): list(range(1, self.lr_pm[p, m] + 1))
+            (p, m): list(range(1, min(self.lr_pm[p, m], self.daily_upper[p]) + 1))
             for p in self.P
             for m in self.M_p[p]
+        }
+
+        self.I_m_max = {
+            m: list(range(floor(self.treatment_count[m] / self.j_m[m]))) for m in self.M
+        }
+
+        self.J_md = {
+            (m, d): list(range(self._max_needed_repetitions(m, d)))
+            for m in self.M
+            for d in self.D
+        }
+
+        self.I_m_calc = {
+            m: list(
+                range(
+                    sum(
+                        max(self.J_md[m, d]) + 1 if len(self.J_md[m, d]) > 0 else 0
+                        for d in self.D
+                    )
+                )
+            )
+            for m in self.M
+        }
+        self.I_m = {
+            m: list(range(min(max(self.I_m_calc[m]), max(self.I_m_max[m])) + 1))
+            for m in self.M
         }
 
     def _assert_patients_arrival_day(self, patient: Patient, day: int):
@@ -322,8 +324,31 @@ class Solver(ABC):
         for app in schedule:
             self._assert_appointment(app)
 
-    def _min_needed_repetitions(self, m: Treatment):
-        return max(
-            ceil(self.treatment_count[m] / self.k_m[m]),
-            max(self.lr_pm[p, m] for p in self.P if m in self.M_p[p]),
-        )
+    def _max_needed_repetitions(self, m: Treatment, d: int):
+        avail_resource_units = defaultdict(int)
+
+        for fhat in m.resources:
+            for f in self.fhat[fhat]:
+                for t in self.T:
+                    avail_resource_units[fhat] += self.av_fdt[f, d, t]
+
+        max_reps_resources = 1000000
+        for fhat, x in avail_resource_units.items():
+            max_reps_resources = min(
+                floor(x / (m.resources[fhat] * self.du_m[m])), max_reps_resources
+            )
+
+        max_reps_patients = 0
+        for p in self.P:
+            if (
+                d < p.earliest_admission_date.day
+                or d > p.admitted_before_date.day + p.length_of_stay
+            ):
+                continue
+            if m not in self.M_p[p]:
+                continue
+            max_reps_patients += self.daily_upper[p]
+
+        max_reps_patients = floor(max_reps_patients / self.j_m[m])
+
+        return min(max_reps_resources, max_reps_patients)

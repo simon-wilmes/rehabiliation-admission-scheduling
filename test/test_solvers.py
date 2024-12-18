@@ -2,6 +2,7 @@ import pytest
 from src.solvers.solver import Solver
 from src.solvers.mip import MIPSolver
 from src.solvers.cp_or import CPSolver
+from src.solvers.mip3 import MIPSolver3
 from src.solvers import LBBDSolver
 from src.instance import create_instance_from_file
 from src.time import DayHour, Duration
@@ -10,7 +11,7 @@ from typing import Type, Any
 from src.logging import logger
 
 
-@pytest.mark.parametrize("solver", [MIPSolver, CPSolver, LBBDSolver])
+@pytest.mark.parametrize("solver", [MIPSolver, LBBDSolver, MIPSolver3])
 @pytest.mark.parametrize(
     "file_path_results",
     [

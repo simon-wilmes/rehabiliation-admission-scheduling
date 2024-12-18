@@ -15,18 +15,12 @@ from itertools import combinations
 from time import time
 
 
-class CPSubsolver(Subsolver):
+class CPSubsolver2(Subsolver):
 
     SOLVER_OPTIONS = Subsolver.BASE_SOLVER_OPTIONS.copy()
-    SOLVER_OPTIONS.update(
-        {
-            "estimated_needed_treatments": [True, False],
-            "add_patient_symmetry": [True, False],
-        }
-    )  # Add any additional options here
+    SOLVER_OPTIONS.update({})  # Add any additional options here
     SOLVER_DEFAULT_OPTIONS = {
-        "estimated_needed_treatments": True,
-        "add_patient_symmetry": True,
+        "add_patient_symmetry": False,
     }
 
     def __init__(self, instance: Instance, solver: Solver, **kwargs):
@@ -87,14 +81,31 @@ class CPSubsolver(Subsolver):
             m: {} for m in all_appointments
         }
 
+        self.all_is_late_scheduled = {}
+
         for m in all_appointments:
             du_m = self.solver.du_m[m]
             for r in range(max_appointments[m]):
-                start_slot = model.new_int_var(
-                    0,
-                    len(self.solver.T) - du_m - 1,
+                start_slot = model.new_int_var_from_domain(
+                    cp_model.Domain.from_intervals(  # type:ignore
+                        [  # type:ignore
+                            (0, len(self.solver.T) - du_m),  # type:ignore
+                            (len(self.solver.T), 2 * len(self.solver.T)),  # type:ignore
+                        ]  # type:ignore
+                    ),
                     f"start_time_m{m.id}_r{r}",
                 )
+
+                # Create the constraint that we want to minimize the late scheduled treatments
+                is_late_scheduled = model.new_bool_var(
+                    f"is_late_scheduled_m{m.id}_r{r}"
+                )
+                model.add(start_slot <= len(self.solver.T) - 1).only_enforce_if(
+                    is_late_scheduled.Not()
+                )
+                self.all_is_late_scheduled[m, r] = is_late_scheduled
+
+                # If treatment is even scheduled
                 is_treatment_scheduled = model.new_bool_var(
                     f"schedule_treatment_m{m.id}_r{r}"
                 )
@@ -131,6 +142,7 @@ class CPSubsolver(Subsolver):
                     "start_slot": start_slot,
                     "is_present": is_treatment_scheduled,
                     "resources": resource_vars,
+                    "is_late_scheduled": is_late_scheduled,
                 }
 
         # Constraint: Enforce symmetry breaking
@@ -149,23 +161,38 @@ class CPSubsolver(Subsolver):
 
         # Create patients variables
         patient_vars = {}
+        is_patient_late = {}
+
         for m in patients:
             patient_vars[m] = {}
+            is_patient_late[m] = {}
             for p in patients[m]:
                 patient_vars[m][p] = {}
+                is_patient_late[m][p] = {}
+
                 expr_list = []
                 for r in appointment_vars[m]:
                     patient2treatment_var = model.new_bool_var(
                         f"patient2treatment_{p.id}_m{m.id}_r{r}"
                     )
+                    is_patient_late_var = model.new_bool_var(
+                        f"patient_late_{p.id}_m{m.id}_r{r}"
+                    )
 
                     patient_vars[m][p][r] = patient2treatment_var
+                    is_patient_late[m][p][r] = is_patient_late_var
+
                     expr_list.append(patient2treatment_var)
 
                     # Constraint: Treatment must be scheduled if patient is assigned
                     model.add_implication(
                         patient2treatment_var, appointment_vars[m][r]["is_present"]
                     )
+
+                    # Constraint if treatment is late then and patient is assigned to it then patient is late with this treatment
+                    model.add_implication(
+                        appointment_vars[m][r]["is_late_scheduled"], is_patient_late_var
+                    ).only_enforce_if(patient2treatment_var)
 
                 # Constraint: every patient is assigned to exactly the required number of treatments
                 model.add(cp_model.LinearExpr().Sum(expr_list) == patients[m][p])
@@ -183,23 +210,16 @@ class CPSubsolver(Subsolver):
         if self.enforce_min_patients_per_treatment:  # type:ignore
             # Constraint: Every Treatment has at least j_m patients if treatment is scheduled
             # If not set boolean variable min_patients[m] to true
-            min_patients = {}
             for m in appointment_vars:
-                min_patients[m] = {}
                 for r in appointment_vars[m]:
-                    min_patients[m][r] = model.new_bool_var(
-                        f"min_patients_m{m.id}_r{r}"
-                    )
-                    model.add_hint(min_patients[m][r], False)
                     model.add(
                         cp_model.LinearExpr.Sum(
                             [patient_vars[m][p][r] for p in patients[m]]
                         )
                         >= self.solver.j_m[m] * appointment_vars[m][r]["is_present"]
-                    ).only_enforce_if(min_patients[m][r].Not())
+                    )
 
         # CONSTRAINT P2: every patient has only a single treatment at a time
-
         for p in all_patients:
             intervals = []
             for m in M_p[p]:
@@ -232,7 +252,7 @@ class CPSubsolver(Subsolver):
                             start=appointment_vars[m][r]["start_slot"],
                             size=self.solver.du_m[m],
                             is_present=appointment_vars[m][r]["resources"][fhat][f],
-                            name=f"interval_f{f.id}_m{m.id}_r{r}",
+                            name=f"interval_fhat{fhat.id}_f{f.id}_m{m.id}_r{r}",
                         )
                         intervals_using_f.append(new_interval_var)
                         demands.append(1)
@@ -262,13 +282,17 @@ class CPSubsolver(Subsolver):
 
             model.add_no_overlap(intervals_using_f)
 
-        if self.enforce_min_patients_per_treatment:  # type:ignore
-            min_vars_sum = []
-            for m in min_patients:
-                min_vars_sum.extend(min_patients[m].values())
-            model.Minimize(cp_model.LinearExpr.Sum(min_vars_sum))
+        # Actually minimize the late scheduled treatments
+        all_patients_late_vars = []
+        for m in is_patient_late:
+            for p in is_patient_late[m]:
+                all_patients_late_vars.extend(is_patient_late[m][p].values())
 
-        return model, appointment_vars, patient_vars
+        model.Minimize(
+            cp_model.LinearExpr.Sum(all_patients_late_vars)  # type:ignore
+        )
+
+        return model, appointment_vars, patient_vars, is_patient_late
 
     def _get_day_solution(
         self, day: int, patients: dict[Treatment, dict[Patient, int]]
@@ -278,7 +302,7 @@ class CPSubsolver(Subsolver):
         sub_solver.parameters.log_search_progress = (
             False  # self.solver.log_to_console  # type: ignore
         )
-        model, appointment_vars, patient_vars = self.create_model(day, patients)
+        model, appointment_vars, patient_vars, _ = self.create_model(day, patients)
         status = sub_solver.Solve(model)
         assert status == cp_model.OPTIMAL, f"Subsolver on day {day} is not optimal"
         assert (
@@ -329,46 +353,67 @@ class CPSubsolver(Subsolver):
             False  # self.solver.log_to_console  # type: ignore
         )
         self.time_create_model -= time()
-        model, appointment_vars, patient_vars = self.create_model(day, patients)
+        model, appointment_vars, patient_vars, is_patient_late = self.create_model(
+            day, patients
+        )
         self.time_create_model += time()
         self.time_solve_model -= time()
         status = sub_solver.Solve(model)
         self.time_solve_model += time()
-        if status in [cp_model.OPTIMAL, cp_model.FEASIBLE]:
-            if sub_solver.objective_value == 0:
-                # logger.debug("Objective value is 0")
-                # Print out all varibles
-                if False:
-                    for m in appointment_vars:
-                        for rep in appointment_vars[m]:
-                            if sub_solver.value(appointment_vars[m][rep]["is_present"]):
-                                resources_for_rep = []
-                                for fhat in appointment_vars[m][rep]["resources"]:
-                                    for f, var in appointment_vars[m][rep]["resources"][
-                                        fhat
-                                    ].items():
-                                        if sub_solver.value(var):
-                                            resources_for_rep.append(f)
 
+        code_dict = {cp_model.OPTIMAL: "OPTIMAL", cp_model.INFEASIBLE: "INFEASIBLE"}
+        code = code_dict[status]  # type:ignore
+        # logger.debug(f"Model is {code}")
+        if status == cp_model.OPTIMAL:
+            if False:
+                for m in appointment_vars:
+                    for rep in appointment_vars[m]:
+                        if sub_solver.value(appointment_vars[m][rep]["is_present"]):
+                            resources_for_rep = []
+                            for fhat in appointment_vars[m][rep]["resources"]:
+                                for f, var in appointment_vars[m][rep]["resources"][
+                                    fhat
+                                ].items():
+                                    if sub_solver.value(var):
+                                        resources_for_rep.append(f)
+
+                            if sub_solver.value(
+                                appointment_vars[m][rep]["start_slot"]
+                            ) < len(self.solver.T):
                                 logger.debug(
                                     f"Appointment {m.id}/{rep} at {self.solver.T[sub_solver.value(appointment_vars[m][rep]['start_slot'])]} using resources {resources_for_rep}"
                                 )
+                            else:
+                                logger.info(
+                                    f"Appointment {m.id}/{rep} at next day {sub_solver.value(appointment_vars[m][rep]["start_slot"])} using resources {resources_for_rep}"
+                                )
 
-                            for p in patient_vars[m]:
-                                if sub_solver.value(patient_vars[m][p][rep]):
-                                    logger.debug(
-                                        f"Patient {p.id} assigned to treatment {m.id}/{rep}"
-                                    )
-                            pass
+                        for p in patient_vars[m]:
+                            if sub_solver.value(patient_vars[m][p][rep]):
+                                logger.debug(
+                                    f"Patient {p.id} assigned to treatment {m.id}/{rep}"
+                                )
                         pass
+                    pass
+
+            if sub_solver.objective_value == 0:
+                # logger.debug("Objective value is 0")
+                # We can schedule everything fine => feasible
+
                 return {"status_code": Subsolver.FEASIBLE}
             else:
-                logger.debug(
-                    "Objective value is not 0 {}".format(sub_solver.objective_value)
-                )
-                # Is solvable if minimum patients is ignored => generate bad cut from this
-                return {"status_code": Subsolver.MIN_PATIENTS_PROBLEM}
-            # collect num treatments needed and return
+                # Calculate all the treatments that are late scheduled
+                late_scheduled_mp = defaultdict(int)
+                for m in is_patient_late:
+                    for p in is_patient_late[m]:
+                        for r in is_patient_late[m][p]:
+                            if sub_solver.value(is_patient_late[m][p][r]):
+                                late_scheduled_mp[(m, p)] += 1
 
-        # Model is infeasible this means that we need to generate a cut, either return informations
-        return {"status_code": Subsolver.TOO_MANY_TREATMENTS}
+                return {
+                    "status_code": Subsolver.TOO_MANY_TREATMENTS,
+                    "late_scheduled": late_scheduled_mp,
+                }
+
+        # Model is infeasible this means that the minimum patients per treatment were a problem
+        return {"status_code": Subsolver.MIN_PATIENTS_PROBLEM}
