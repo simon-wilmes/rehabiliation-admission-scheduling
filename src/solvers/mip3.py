@@ -19,13 +19,11 @@ class MIPSolver3(Solver):
         {
             "break_symmetry": [True, False],
             "break_symmetry_strong": [True, False],
-            "add_knowledge": [True, False],
         }
     )  # Add any additional options here
 
     SOLVER_DEFAULT_OPTIONS = {
         "break_symmetry": True,
-        "add_knowledge": False,
         "break_symmetry_strong": True,
     }
 

@@ -300,7 +300,15 @@ class Solver(ABC):
             for m in self.M
         }
         self.I_m = {
-            m: list(range(min(max(self.I_m_calc[m]), max(self.I_m_max[m])) + 1))
+            m: list(
+                range(
+                    min(
+                        max(self.I_m_calc[m] if len(self.I_m_calc[m]) > 0 else [0]),
+                        max(self.I_m_max[m] if len(self.I_m_max[m]) > 0 else [0]),
+                    )
+                    + 1
+                )
+            )
             for m in self.M
         }
 

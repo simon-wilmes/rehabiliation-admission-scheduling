@@ -20,7 +20,6 @@ class CPSubsolver2(Subsolver):
     SOLVER_OPTIONS = Subsolver.BASE_SOLVER_OPTIONS.copy()
     SOLVER_OPTIONS.update({})  # Add any additional options here
     SOLVER_DEFAULT_OPTIONS = {
-        "add_patient_symmetry": False,
     }
 
     def __init__(self, instance: Instance, solver: Solver, **kwargs):
@@ -50,22 +49,6 @@ class CPSubsolver2(Subsolver):
         self.time_solve_model = 0
 
     def create_parameters(self):
-        if self.add_patient_symmetry:  # type:ignore
-            # Compute for what treatment and days a patient is symmetric
-            self.patients_symmetry = defaultdict(list)
-
-            for p1, p2 in combinations(self.solver.P, r=2):
-                if p1 == p2:
-                    continue
-                D_p1p2 = set(self.solver.A_p[p1]) & set(self.solver.A_p[p2])
-                for m in self.solver.M:
-                    if not (m in self.solver.M_p[p1] and m in self.solver.M_p[p2]):
-                        continue
-                    rep = min(self.solver.lr_pm[p1, m], self.solver.lr_pm[p2, m])
-                    for d in D_p1p2:
-                        for r in range(rep + 1):
-                            self.patients_symmetry[(p1, d, m, r)].append(p2)
-                            self.patients_symmetry[(p2, d, m, r)].append(p1)
         pass
 
     def create_model(self, day: int, patients: dict[Treatment, dict[Patient, int]]):

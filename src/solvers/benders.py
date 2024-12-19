@@ -12,7 +12,7 @@ from src.solution import NO_SOLUTION_FOUND
 
 from math import floor, gcd, ceil, prod, log
 from pprint import pformat
-from .subsolvers import Subsolver, CPSubsolver
+from .subsolvers import Subsolver, CPSubsolver, CPSubsolver2
 from itertools import product, combinations
 from typing import Callable, Any
 from time import time
@@ -36,7 +36,6 @@ class LBBDSolver(Solver):
         "subsolver_cls": CPSubsolver,
         "use_helper_constraints": True,
         "add_constraints_to_symmetric_days": True,
-        "add_constraints_to_symmetric_patients": True,
     }
 
     def __init__(self, instance: Instance, **kwargs):
@@ -72,6 +71,10 @@ class LBBDSolver(Solver):
         # Add min_patients_per_treatment to subsolver kwargs
         subsolver_kwargs["enforce_min_patients_per_treatment"] = self.enforce_min_patients_per_treatment  # type: ignore
 
+        if isinstance(self.subsolver_cls, str):  # type: ignore
+            dict_subsolvers = {"CPSubsolver": CPSubsolver, "CPSubsolver2": CPSubsolver2}
+            self.subsolver_cls = dict_subsolvers[self.subsolver_cls]
+
         self.subsolver: Subsolver = self.subsolver_cls(instance=instance, solver=self, **subsolver_kwargs)  # type: ignore
 
         if not self.add_constraints_to_symmetric_days:  # type: ignore
@@ -81,8 +84,6 @@ class LBBDSolver(Solver):
                 assert d in self.subsolver.get_days_symmetric_to(
                     d
                 ), f"Day {d} not in symmetric days"
-        if self.add_constraints_to_symmetric_patients:  #    type: ignore
-            self.create_symmetric_patients()
 
         self.count_good_cuts = 0
         self.count_bad_cuts = 0
@@ -93,18 +94,6 @@ class LBBDSolver(Solver):
         self.num_constraints_added = 0
         self.all_cuts = []
         self.all_cuts_str = []
-
-    def create_symmetric_patients(self):
-        self.symmetric_patients = defaultdict(set)
-
-        for p in self.P:
-            num_all_treatments = [
-                range(self.lr_pm[p, m]) if m in self.M_p[p] else [0] for m in self.M
-            ]
-            for num_treatment in product(*num_all_treatments):
-                for d in self.A_p[p]:
-                    self.symmetric_patients[(d, num_treatment)].add(p)
-        pass
 
     def build_patients_dict(self, f_is_true: Callable[[Var], bool]):
         patients = [{m: {} for m in self.M} for _ in self.D]
@@ -135,86 +124,79 @@ class LBBDSolver(Solver):
             if where == gp.GRB.Callback.MIPSOL:
                 self.time_total -= time()
 
-                try:
-                    logger.debug("Solution callback")
-                    # Retrieve the solution
-                    # patients day assignments
+                logger.debug("Solution callback")
+                # Retrieve the solution
+                # patients day assignments
 
-                    patients = self.build_patients_dict(
-                        lambda x: model.cbGetSolution(x) > 0.5
+                patients = self.build_patients_dict(
+                    lambda x: model.cbGetSolution(x) > 0.5
+                )
+
+                # logger.debug("\n" + pformat(patients))
+                count_days_infeasible = 0
+
+                for d in self.D:
+                    # logger.debug(f"Checking day {d}")
+                    # logger.debug(f"Patients: {pformat(patients[d])}")
+                    self.time_is_feasible -= time()
+                    result = self.subsolver.is_day_infeasible(d, patients[d])  # type: ignore
+                    self.time_is_feasible += time()
+
+                    status_code = result["status_code"]
+
+                    if status_code == Subsolver.TOO_MANY_TREATMENTS:
+                        self.count_good_cuts += 1
+                        # not is Feasible, generate cut
+                        count_days_infeasible += 1
+                        # Dict that maps (p, m) to the number of treatments
+                        self._add_too_many_treatments(model, d, patients, result)
+
+                    if status_code == Subsolver.MIN_PATIENTS_PROBLEM:
+                        self.count_bad_cuts += 1
+                        count_days_infeasible += 1
+                        # forbid this exact treatment combination
+                        logger.info("Different treatments needed")
+                        logger.info("patients[d]: " + str(patients[d]))
+                        self._add_min_patients_violated(model, d, patients)
+
+                self.time_total += time()
+                logger.info(
+                    f"Number of cuts added: {self.count_bad_cuts + self.count_good_cuts} (bad={self.count_bad_cuts}, good={self.count_good_cuts})"
+                )
+                logger.debug(
+                    "All days finished with {}/{} days infeasible".format(
+                        count_days_infeasible, len(self.D)
                     )
+                )
+                logger.info(
+                    f"Unnecessary comps: ({self.count_unnecessary_comps} / {self.count_good_cuts})"
+                )
+                logger.info(f"Calls to is_day_infeasible: cp_solver={self.subsolver.calls_to_solve_subsystem}/ total={self.subsolver.calls_to_is_day_infeasible} stored={self.subsolver.calls_to_is_day_infeasible - self.subsolver.calls_to_solve_subsystem}")  # type: ignore
 
-                    # logger.debug("\n" + pformat(patients))
-                    count_days_infeasible = 0
-
-                    for d in self.D:
-                        # logger.debug(f"Checking day {d}")
-                        # logger.debug(f"Patients: {pformat(patients[d])}")
-                        self.time_is_feasible -= time()
-                        result = self.subsolver.is_day_infeasible(d, patients[d])  # type: ignore
-                        self.time_is_feasible += time()
-
-                        status_code = result["status_code"]
-
-                        if status_code == Subsolver.TOO_MANY_TREATMENTS:
-                            self.count_good_cuts += 1
-                            # not is Feasible, generate cut
-                            logger.debug(f"Subproblem not feasible on day {d}")
-                            count_days_infeasible += 1
-                            # Dict that maps (p, m) to the number of treatments
-                            self._add_too_many_treatments(model, d, patients, result)
-
-                        if status_code == Subsolver.MIN_PATIENTS_PROBLEM:
-                            self.count_bad_cuts += 1
-                            count_days_infeasible += 1
-                            # forbid this exact treatment combination
-                            logger.info("Different treatments needed")
-                            logger.info("patients[d]: " + str(patients[d]))
-                            self._add_min_patients_violated(model, d, patients)
-
-                    self.time_total += time()
-                    logger.info(
-                        f"Number of cuts added: {self.count_bad_cuts + self.count_good_cuts} (bad={self.count_bad_cuts}, good={self.count_good_cuts})"
-                    )
-                    logger.debug(
-                        "All days finished with {}/{} days infeasible".format(
-                            count_days_infeasible, len(self.D)
-                        )
-                    )
-                    logger.info(
-                        f"Unnecessary comps: ({self.count_unnecessary_comps} / {self.count_good_cuts})"
-                    )
-                    logger.info(f"Calls to is_day_infeasible: cp_solver={self.subsolver.calls_to_solve_subsystem}/ total={self.subsolver.calls_to_is_day_infeasible} stored={self.subsolver.calls_to_is_day_infeasible - self.subsolver.calls_to_solve_subsystem}")  # type: ignore
-
-                    logger.info(
-                        f"Is feasible: {self.time_is_feasible} {self.time_is_feasible / self.time_total}"
-                    )
-                    logger.info(
-                        "Subsolver: Solve Model: {}/{}".format(
-                            self.subsolver.time_solve_model,  # type: ignore
-                            self.subsolver.time_solve_model  # type: ignore
-                            / (  # type: ignore
-                                self.subsolver.time_create_model  # type: ignore
-                                + self.subsolver.time_solve_model  # type: ignore
-                            ),  # type: ignore
-                        )  # type: ignore
-                    )  # type: ignore
-                    logger.info(  # type: ignore
-                        "Subsolver: Create Model: {}/{}".format(  # type: ignore
-                            self.subsolver.time_create_model,  # type: ignore
+                logger.info(
+                    f"Is feasible: {self.time_is_feasible} {self.time_is_feasible / self.time_total}"
+                )
+                logger.info(
+                    "Subsolver: Solve Model: {}/{}".format(
+                        self.subsolver.time_solve_model,  # type: ignore
+                        self.subsolver.time_solve_model  # type: ignore
+                        / (  # type: ignore
                             self.subsolver.time_create_model  # type: ignore
-                            / (  # type: ignore
-                                self.subsolver.time_create_model  # type: ignore
-                                + self.subsolver.time_solve_model  # type: ignore
-                            ),
-                        )
+                            + self.subsolver.time_solve_model  # type: ignore
+                        ),  # type: ignore
+                    )  # type: ignore
+                )  # type: ignore
+                logger.info(  # type: ignore
+                    "Subsolver: Create Model: {}/{}".format(  # type: ignore
+                        self.subsolver.time_create_model,  # type: ignore
+                        self.subsolver.time_create_model  # type: ignore
+                        / (  # type: ignore
+                            self.subsolver.time_create_model  # type: ignore
+                            + self.subsolver.time_solve_model  # type: ignore
+                        ),
                     )
-                    logger.info(f"Num_constraints-added: {self.num_constraints_added}")
-
-                except Exception as e:
-                    logger.debug(str(e))
-                    logger.exception("Error in solution callback")
-                    raise Exception("Error in solution callback")
+                )
+                logger.info(f"Num_constraints-added: {self.num_constraints_added}")
 
         self.model.optimize(_solution_callback)
 

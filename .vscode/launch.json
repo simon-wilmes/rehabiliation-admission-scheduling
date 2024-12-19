@@ -8,7 +8,8 @@
             "name": "Python Debugger: Module",
             "type": "debugpy",
             "request": "launch",
-            "module": "src"
+            "module": "src",
+            "args": ["CPSolver", "{}", "/home/simon/Documents/uni/Kopra/rehabiliation-admission-scheduling/data/test_inst/instance_1.txt"]
         },
         {
             "name": "Python Debugger: Createinstance",
@@ -20,7 +21,7 @@
             "name": "Python Debugger: Solvable Instances",
             "type": "debugpy",
             "request": "launch",
-            "module": "src.instance_generation.create_solvable_instances"
+            "module": "src.instance_generation.create_solvable_instances",
         }
 
         

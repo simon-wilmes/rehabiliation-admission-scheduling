@@ -325,7 +325,7 @@ class CPSolver(Solver):
 
                     self.model.add(
                         cp_model.LinearExpr.Sum(patients_list)
-                        <= self.j_m[m] * self.treatment_vars[m][rep]["is_present"]
+                        >= self.j_m[m] * self.treatment_vars[m][rep]["is_present"]
                     )
 
         # CONSTRAINT P2: every patient has only a single treatment at a time
@@ -520,6 +520,27 @@ class CPSolver(Solver):
 
         elif self.max_repr == "cumulative":  # type:ignore
             for p in self.P:
+
+                # Handle the daily even scheduling
+                intervals = []
+                for m in self.M_p[p]:
+                    for rep in self.I_m[m]:
+                        new_int_var = self.model.new_optional_fixed_size_interval_var(
+                            start=self.patient_vars[p][m][rep]["interval"].start_expr(),
+                            size=int(self.num_time_slots / 2),
+                            name=f"max_treatment_int_p{p.id}_m{m.id}",
+                            is_present=self.patient_vars[p][m][rep][
+                                "patient2treatment"
+                            ],
+                        )
+                        intervals.append(new_int_var)
+
+                self.model.add_cumulative(
+                    intervals=intervals,
+                    demands=[1] * len(intervals),
+                    capacity=self.daily_upper[p],
+                )
+
                 # only apply e_w scheduling if length of stay is long enough
                 if p.length_of_stay < self.e_w:
                     continue
@@ -543,25 +564,6 @@ class CPSolver(Solver):
                     intervals=intervals,
                     demands=[1] * len(intervals),
                     capacity=self.e_w_upper[p],
-                )
-                # Handle the daily even scheduling
-                intervals = []
-                for m in self.M_p[p]:
-                    for rep in self.I_m[m]:
-                        new_int_var = self.model.new_optional_fixed_size_interval_var(
-                            start=self.patient_vars[p][m][rep]["interval"].start_expr(),
-                            size=int(self.num_time_slots / 2),
-                            name=f"max_treatment_int_p{p.id}_m{m.id}",
-                            is_present=self.patient_vars[p][m][rep][
-                                "patient2treatment"
-                            ],
-                        )
-                        intervals.append(new_int_var)
-
-                self.model.add_cumulative(
-                    intervals=intervals,
-                    demands=[1] * len(intervals),
-                    capacity=self.daily_upper[p],
                 )
 
         else:
@@ -612,23 +614,45 @@ class CPSolver(Solver):
                     )
                 pass
             elif self.min_repr == "cumulative":  # type:ignore
-                for p in self.P:
+
+                for ind, p in enumerate(self.P):
+                    if p.earliest_admission_date.day > self.instance.horizon_length:
+                        # if patient cannot even be admitted then ignore its min constraints
+                        continue
                     start_slot = 0
-                    end_slot = (len(self.D) + 2) * self.num_time_slots
+                    end_slot_horizon = len(self.D) * self.num_time_slots
 
                     if self.daily_lower[p] == 0:
                         continue
                     # Create new intervals
+                    end_position = self.model.new_int_var(
+                        0,
+                        (len(self.D) + 2) * self.num_time_slots,
+                        name=f"end_min_p{p.id}",
+                    )
+                    self.model.add_min_equality(
+                        end_position,
+                        [
+                            end_slot_horizon,
+                            self.admission_vars[p] * self.num_time_slots
+                            + int(self.l_p[p] * self.num_time_slots + 1),
+                        ],
+                    )
+                    size_var = self.model.new_int_var(
+                        0, len(self.D) * self.num_time_slots, f"size_min_p{p.id}"
+                    )
                     intervals = [
-                        self.model.new_fixed_size_interval_var(
+                        self.model.new_interval_var(
                             start=self.admission_vars[p] * self.num_time_slots
                             + int(self.num_time_slots / 2 - 1),
-                            size=int(self.l_p[p] * self.num_time_slots + 1),
+                            size=size_var,
+                            end=end_position,
                             name=f"min_treatment_int_dummy_p{p.id}",
                         )
                     ]
 
                     demands = [self.daily_lower[p]]
+                    length_middle = int(self.num_time_slots * 1.5)
 
                     # demands = []
                     count_intervals = 0
@@ -650,7 +674,7 @@ class CPSolver(Solver):
                                     start=self.patient_vars[p][m][rep][
                                         "interval"
                                     ].start_expr(),
-                                    size=int(self.num_time_slots * 1.5),
+                                    size=length_middle,
                                     is_present=self.patient_vars[p][m][rep][
                                         "patient2treatment"
                                     ].Not(),
@@ -670,7 +694,7 @@ class CPSolver(Solver):
                                 ].start_expr()
                                 + (int(self.num_time_slots * 1.5)),
                                 size=end_length,
-                                end=end_slot,
+                                end=end_slot_horizon + length_middle,
                                 name=f"min_treatment_int_end_p{p.id}_m{m.id}",
                             )
 
@@ -680,11 +704,14 @@ class CPSolver(Solver):
                             count_intervals += 1
 
                     demands += [1] * (len(intervals) - len(demands))
+
                     self.model.add_cumulative(
                         intervals=intervals,
                         demands=demands,
                         capacity=count_intervals,
                     )
+                    break
+
             elif self.min_repr == "day-variables":  # type:ignore
                 pass
             else:

@@ -1,38 +1,21 @@
 import logging
 import colorlog
-import io
 import sys
 
-# Create a buffered stdout stream
-buffered_stdout = io.TextIOWrapper(
-    open(sys.stdout.fileno(), mode="wb", buffering=2048),  # Large buffer
-    write_through=True,  # Do not flush immediately
-)
-DISABLE_FLUSH = False
 
-
-# Custom handler to suppress automatic flush
-class BufferedStreamHandler(logging.StreamHandler):
-    def flush(self):
-        """Override flush to prevent automatic flushing."""
-        pass
-
-
+# Custom handler remains the same
 class NormalStreamHandler(logging.StreamHandler):
     pass
 
 
-# Set up logger
+# Set up the logger
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
-if not DISABLE_FLUSH:
-    handler = NormalStreamHandler(buffered_stdout)
-else:
-    # Create a custom buffered handler
-    handler = BufferedStreamHandler(buffered_stdout)
+# Use sys.stdout directly without additional buffering layers
+handler = NormalStreamHandler(sys.stdout)
 
-# Set up color logging with colorlog
+# Set the colored formatter
 handler.setFormatter(
     colorlog.ColoredFormatter(
         "%(log_color)s%(asctime)s - %(levelname)s - %(message)s",
@@ -46,8 +29,11 @@ handler.setFormatter(
     )
 )
 
-# Add handler to logger
+# Add the handler to the logger
 logger.addHandler(handler)
 
-# Redirect `print` to logger
+# Redirect `print` to logger's debug method for convenience
 print = logger.debug
+
+# Test the logging
+print("This is a test debug message.")

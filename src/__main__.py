@@ -1,7 +1,6 @@
 from src.instance import create_instance_from_file
 from src.solvers import (
     MIPSolver,
-    MIPSolver2,
     MIPSolver3,
     LBBDSolver,
     CPSolver,
@@ -20,32 +19,60 @@ import contextlib
 from typing import Type
 from src.solvers.solver import Solver
 from pprint import pformat
+import sys
+import ast
+
+
+def read_solver_cls():
+    available_solvers: dict[str, Type[Solver]] = {
+        "MIPSolver": MIPSolver,
+        "MIPSolver3": MIPSolver3,
+        "CPSolver": CPSolver,
+        "LBBDSolver": LBBDSolver,
+    }
+
+    try:
+        arg_str = sys.argv[1]
+        assert arg_str in available_solvers, "1st argument is not a valid solver"
+        return available_solvers[arg_str]
+    except (ValueError, SyntaxError) as e:
+        logger.error(f"Invalid argument: {e}")
+
+    raise AssertionError("Invalid argument 1")
+
+
+def read_arg_dict():
+    try:
+        arg_dict = ast.literal_eval(sys.argv[2])
+        if isinstance(arg_dict, dict):
+            return arg_dict
+
+    except (ValueError, SyntaxError) as e:
+        logger.error(f"Invalid argument: {e}")
+
+    raise AssertionError("Invalid argument 2")
+
+
+def read_file_path():
+    try:
+        arg_str = sys.argv[3]
+        assert os.path.isfile(arg_str), "3rd Argument is not a path"
+
+        return arg_str
+    except (ValueError, SyntaxError) as e:
+        logger.error(f"Invalid argument: {e}")
+
+    assert False, "Invalid argument 3"
 
 
 def main():
     #####################################
     # Select instance
     #####################################
-
+    solver_cls = read_solver_cls()
+    arg_dict = read_arg_dict()
+    file_path = read_file_path()
     # Get largest test instance
-    data_path = "data"
-    folders = [
-        f for f in os.listdir(data_path) if os.path.isdir(os.path.join(data_path, f))
-    ]
-    inst_folders = [f for f in folders if f.startswith("inst") and f[4:].isdigit()]
-    if len(inst_folders) != 0:
-        largest_folder = max(inst_folders, key=lambda x: int(x[4:]))
-
-    # Assert Custom Instance
-    if True:
-        largest_folder = "test_inst"
-        file = "instance_1.txt"
-    elif False:
-        largest_folder = "comp_study_001"
-        file = "instance_1.txt"
-    else:
-        largest_folder = "testinstance_files"
-        file = "double_resources.txt"
 
     #####################################
     # Set Settings
@@ -59,7 +86,6 @@ def main():
     # Solver settings
     settings_dict = {
         MIPSolver: {"use_lazy_constraints": True},
-        MIPSolver2: {"break_symmetry": True},
         MIPSolver3: {
             "break_symmetry": True,
             "break_symmetry_strong": True,
@@ -78,99 +104,39 @@ def main():
             "subsolver_cls": CPSubsolver,
             "subsolver.store_results": True,
             "subsolver.store_results_method": "hash",
-            "subsolver.add_patient_symmetry": True,
             "use_helper_constraints": True,
         },
     }
 
     # Debug Settings
-    print_detailed_debug = True
-    if print_detailed_debug:
-        debug_settings = {
-            "log_to_console": True,
-            "log_to_file": False,
-        }
-        logger.setLevel("DEBUG")
-    else:
-        debug_settings = {
-            "log_to_console": False,
-            "log_to_file": False,
-        }
-        logger.setLevel("INFO")
+    debug_settings = {
+        "log_to_console": True,
+    }
+    logger.setLevel("DEBUG")
 
     #####################################
     # Run Solver
     #####################################
 
-    logger.info(f"Running with instance: {largest_folder}/{file}")
-    inst = create_instance_from_file("data/" + str(largest_folder) + "/" + file)
-    logger.info("Successfully created instance from file.")
+    inst = create_instance_from_file(file_path)
 
-    solver_cls = LBBDSolver
     # Create kwargs for solver
-    kwargs = settings_dict[solver_cls]
+    kwargs = settings_dict[solver_cls]  # type: ignore
     kwargs.update(default_settings)
     kwargs.update(debug_settings)
 
     test_parameter_combinations = False
-    if test_parameter_combinations:
-        test_run(
-            solver_cls,
-            inst,
-            debug_settings,
-            kwargs,
-            ["add_knowledge", "break_symmetry", "break_symmetry_strong"],
-        )
-    else:
-        context = get_file_writer_context(solver_cls, inst, **debug_settings)
-        with contextlib.redirect_stdout(context):  # type: ignore
-            logger.info(
-                f"Running with solver: {solver_cls.__name__} and kwargs: \n{pformat(kwargs)}"
-            )
-            solver = solver_cls(
-                inst,
-                **kwargs,
-            )
-            solver.create_model()
-            solution = solver.solve_model()
 
-            return
-            solver2 = solver_cls(
-                inst,
-                **kwargs,
-            )
-            # solver2.J_md = {
-            #     (m, d): list(range(solver2._max_needed_repetitions(m, d)))
-            #     for m in solver2.M
-            #     for d in solver2.D
-            # }
+    context = get_file_writer_context(**debug_settings)
 
-            solver2.BD_L_pm = {
-                (p, m): list(
-                    range(1, min(solver2.lr_pm[p, m], solver2.daily_upper[p]) + 1)
-                )
-                for p in solver2.P
-                for m in solver2.M_p[p]
-            }
-
-            # assert true vars
-
-            solver2.create_model()
-            for key in solver.x_pmdri:
-                if solver.x_pmdri[key].X > 0.5:
-                    solver2.model.addConstr(
-                        solver2.x_pmdri[key] == 1,
-                        f"x_pmdri_true{key}",
-                    )
-
-            for key in solver.a_pd:
-                if solver.a_pd[key].X > 0.5:
-                    solver2.model.addConstr(
-                        solver2.a_pd[key] == 1,
-                        f"a_pd_true{key}",
-                    )
-
-            solver2.solve_model()
+    print_dict = {"solver": solver_cls.__name__, "args": kwargs}
+    logger.info(print_dict)
+    solver = solver_cls(
+        inst,
+        **kwargs,
+    )
+    solver.create_model()
+    solution = solver.solve_model()
 
 
 def test_run(solver_cls: Type[Solver], inst, debug_settings, kwargs, testing_keys):

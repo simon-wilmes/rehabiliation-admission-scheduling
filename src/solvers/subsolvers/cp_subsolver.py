@@ -26,7 +26,7 @@ class CPSubsolver(Subsolver):
     )  # Add any additional options here
     SOLVER_DEFAULT_OPTIONS = {
         "estimated_needed_treatments": True,
-        "add_patient_symmetry": True,
+        "add_patient_symmetry": False,
     }
 
     def __init__(self, instance: Instance, solver: Solver, **kwargs):
