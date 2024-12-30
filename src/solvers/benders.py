@@ -188,7 +188,6 @@ class LBBDSolver(Solver):
             logger.info("No optimal solution found.")
             return NO_SOLUTION_FOUND
 
-
     def _add_min_patients_violated(self, model, d: int, patients: list[dict]):
         forbidden_vars = []
         for m in patients[d]:
@@ -249,7 +248,7 @@ class LBBDSolver(Solver):
         except Exception as e:
             logger.info("Debug Error in print_subsolver_stats")
             logger.error(e)
-            
+
     def _add_too_many_treatments(
         self, model, d: int, patients: list[dict], result: dict
     ):
@@ -759,7 +758,7 @@ class LBBDSolver(Solver):
 
     def _extract_solution(self):
         # Print all variables if they are 1
-        if True:
+        if False:
             for key in self.x_pmdri:
                 if self.x_pmdri[key].X > 0.5:
                     logger.info(f"x_pmdr{key} = {self.x_pmdri[key].X}")
