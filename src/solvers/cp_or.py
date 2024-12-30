@@ -710,7 +710,6 @@ class CPSolver(Solver):
                         demands=demands,
                         capacity=count_intervals,
                     )
-                    break
 
             elif self.min_repr == "day-variables":  # type:ignore
                 pass
@@ -771,28 +770,6 @@ class CPSolver(Solver):
             patients_arrival[p] = DayHour(
                 day=admission_day_value, hour=int(self.instance.workday_start.hour)
             )
-
-        for m, mvars in self.treatment_vars.items():
-            break
-            for r, vars in mvars.items():
-                if not solver.value(vars["is_present"]):
-                    pass
-                    # continue
-                logger.info("Treatment")
-                logger.debug(f"{m}: {r}")
-                logger.debug(f"start:{solver.value(vars["interval"].start_expr())}")
-                logger.debug(f"is_present: {solver.value(vars["is_present"])}")
-                for fhat, resources_var in vars["resources"].items():
-                    for f, resource_var in resources_var.items():
-                        logger.debug(f"resource:{f}")
-                        logger.debug(f"r2t: {solver.value(resource_var)}")
-                for p in self.patient_vars:
-
-                    logger.debug("Patient")
-                    logger.debug(f"p{p}")
-                    logger.debug(
-                        f"p2t: {solver.value(self.patient_vars[p][m][r]['patient2treatment'])}"
-                    )
 
         solution = Solution(
             instance=self.instance,

@@ -34,6 +34,3 @@ logger.addHandler(handler)
 
 # Redirect `print` to logger's debug method for convenience
 print = logger.debug
-
-# Test the logging
-print("This is a test debug message.")

@@ -19,8 +19,7 @@ class CPSubsolver2(Subsolver):
 
     SOLVER_OPTIONS = Subsolver.BASE_SOLVER_OPTIONS.copy()
     SOLVER_OPTIONS.update({})  # Add any additional options here
-    SOLVER_DEFAULT_OPTIONS = {
-    }
+    SOLVER_DEFAULT_OPTIONS = {}
 
     def __init__(self, instance: Instance, solver: Solver, **kwargs):
         logger.debug(f"Setting options: {self.__class__.__name__}")
@@ -348,37 +347,6 @@ class CPSubsolver2(Subsolver):
         code = code_dict[status]  # type:ignore
         # logger.debug(f"Model is {code}")
         if status == cp_model.OPTIMAL:
-            if False:
-                for m in appointment_vars:
-                    for rep in appointment_vars[m]:
-                        if sub_solver.value(appointment_vars[m][rep]["is_present"]):
-                            resources_for_rep = []
-                            for fhat in appointment_vars[m][rep]["resources"]:
-                                for f, var in appointment_vars[m][rep]["resources"][
-                                    fhat
-                                ].items():
-                                    if sub_solver.value(var):
-                                        resources_for_rep.append(f)
-
-                            if sub_solver.value(
-                                appointment_vars[m][rep]["start_slot"]
-                            ) < len(self.solver.T):
-                                logger.debug(
-                                    f"Appointment {m.id}/{rep} at {self.solver.T[sub_solver.value(appointment_vars[m][rep]['start_slot'])]} using resources {resources_for_rep}"
-                                )
-                            else:
-                                logger.info(
-                                    f"Appointment {m.id}/{rep} at next day {sub_solver.value(appointment_vars[m][rep]["start_slot"])} using resources {resources_for_rep}"
-                                )
-
-                        for p in patient_vars[m]:
-                            if sub_solver.value(patient_vars[m][p][rep]):
-                                logger.debug(
-                                    f"Patient {p.id} assigned to treatment {m.id}/{rep}"
-                                )
-                        pass
-                    pass
-
             if sub_solver.objective_value == 0:
                 # logger.debug("Objective value is 0")
                 # We can schedule everything fine => feasible

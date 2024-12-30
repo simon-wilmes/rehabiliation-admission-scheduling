@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# ===== All Replacing Keywords =====
+# $HASH
+# $SOLVER_NAME
+# $SOLVER_PARAMS
+# $SOLVER_INSTANCE
+# $MEMORY
+# $PARTITION
+# $OUTPUT_FOLDER
+# $RUNTIME
+# $MEMORY
+# $SCRIPT_FOLDER
+# ===== Slurm Job Name =====
+#SBATCH --job-name=$HASH_$SOLVER_NAME
+
+# ===== Output Files =====
+# %x will be replaced by the job name, and %j by the job ID.
+#SBATCH --output=$OUTPUT_FOLDER/%x_%j.out
+#SBATCH --error=$OUTPUT_FOLDER/%x_%j.err
+
+# ===== Email Notifications =====
+#SBATCH --mail-user=simon.wilmes@rwth-aachen.de
+#SBATCH --mail-type=BEGIN,END,FAIL
+
+# ===== Compute Resources =====
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1   # Number of CPU cores per task
+
+# ===== Memory and Time =====
+# Time in the format DD-HH:MM:SS or HH:MM:SS if less than a day.
+#SBATCH --mem=$MEMORY
+#SBATCH --time=$RUNTIME
+
+# ===== Partition / QoS =====
+#SBATCH --partition=$PARTITION
+
+# ===== GPU Resources (If Needed) =====
+
+# ===== Account/Project (If Required) =====
+
+
+############################################################
+# Environment Setup
+############################################################
+module load Python/3.10.4
+
+############################################################
+# Run Commands
+############################################################
+
+cd $SCRIPT_FOLDER
+python -m pipenv install
+echo "Current directory: $(pwd)"
+python -m pipenv run python -m src "$SOLVER_NAME" "$SOLVER_PARAMS" "$SOLVER_INSTANCE"
+
+

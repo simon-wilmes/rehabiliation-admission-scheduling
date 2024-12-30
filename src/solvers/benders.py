@@ -214,6 +214,7 @@ class LBBDSolver(Solver):
             return solution
         else:
             logger.info("No optimal solution found.")
+            return NO_SOLUTION_FOUND
             # Compute IIS
             self.model.computeIIS()
 
@@ -357,8 +358,8 @@ class LBBDSolver(Solver):
                 )
             )
 
-            self.all_cuts_str.append(f"({"".join(str(patients_copy).split())})")
-            forbidden_vars_str = f"({"".join(str(patients_copy).split())})"
+            self.all_cuts_str.append(f"({''.join(str(patients_copy).split())})")
+            forbidden_vars_str = f"({''.join(str(patients_copy).split())})"
 
             logger.info("forbidden_vars: " + forbidden_vars_str)
             logger.info(forbidden_vars_str in self.already_seen_forbidden_strs)

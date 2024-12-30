@@ -58,7 +58,7 @@ class MIPSolver3(Solver):
             return solution
         else:
             logger.info("No optimal solution found.")
-            # return NO_SOLUTION_FOUND
+            return NO_SOLUTION_FOUND
             # return NO_SOLUTION_FOUND
             # Compute IIS
             self.model.computeIIS()
