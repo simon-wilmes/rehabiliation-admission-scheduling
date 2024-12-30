@@ -119,12 +119,14 @@ class LBBDSolver(Solver):
 
     def _solve_model(self):
         # Define the callback for creating subproblems
+        self.num_solution_callbacks = 0
+
         def _solution_callback(model, where):
 
             if where == gp.GRB.Callback.MIPSOL:
                 self.time_total -= time()
-
-                logger.debug("Solution callback")
+                self.num_solution_callbacks += 1
+                # logger.debug("Solution callback")
                 # Retrieve the solution
                 # patients day assignments
 
@@ -155,50 +157,20 @@ class LBBDSolver(Solver):
                         self.count_bad_cuts += 1
                         count_days_infeasible += 1
                         # forbid this exact treatment combination
-                        logger.info("Different treatments needed")
-                        logger.info("patients[d]: " + str(patients[d]))
+                        # logger.info("Different treatments needed")
+                        # logger.info("patients[d]: " + str(patients[d]))
                         self._add_min_patients_violated(model, d, patients)
 
                 self.time_total += time()
-                logger.info(
-                    f"Number of cuts added: {self.count_bad_cuts + self.count_good_cuts} (bad={self.count_bad_cuts}, good={self.count_good_cuts})"
-                )
-                logger.debug(
-                    "All days finished with {}/{} days infeasible".format(
-                        count_days_infeasible, len(self.D)
-                    )
-                )
-                logger.info(
-                    f"Unnecessary comps: ({self.count_unnecessary_comps} / {self.count_good_cuts})"
-                )
-                logger.info(f"Calls to is_day_infeasible: cp_solver={self.subsolver.calls_to_solve_subsystem}/ total={self.subsolver.calls_to_is_day_infeasible} stored={self.subsolver.calls_to_is_day_infeasible - self.subsolver.calls_to_solve_subsystem}")  # type: ignore
 
-                logger.info(
-                    f"Is feasible: {self.time_is_feasible} {self.time_is_feasible / self.time_total}"
-                )
-                logger.info(
-                    "Subsolver: Solve Model: {}/{}".format(
-                        self.subsolver.time_solve_model,  # type: ignore
-                        self.subsolver.time_solve_model  # type: ignore
-                        / (  # type: ignore
-                            self.subsolver.time_create_model  # type: ignore
-                            + self.subsolver.time_solve_model  # type: ignore
-                        ),  # type: ignore
-                    )  # type: ignore
-                )  # type: ignore
-                logger.info(  # type: ignore
-                    "Subsolver: Create Model: {}/{}".format(  # type: ignore
-                        self.subsolver.time_create_model,  # type: ignore
-                        self.subsolver.time_create_model  # type: ignore
-                        / (  # type: ignore
-                            self.subsolver.time_create_model  # type: ignore
-                            + self.subsolver.time_solve_model  # type: ignore
-                        ),
-                    )
-                )
-                logger.info(f"Num_constraints-added: {self.num_constraints_added}")
+                if self.num_solution_callbacks % 100 == 0:
+                    self._print_subsolver_stats()
 
         self.model.optimize(_solution_callback)
+
+        logger.debug("Finished optimization")
+        logger.debug("Subsolver stats:")
+        self._print_subsolver_stats()
 
         if (
             self.model.status == gp.GRB.OPTIMAL
@@ -215,20 +187,7 @@ class LBBDSolver(Solver):
         else:
             logger.info("No optimal solution found.")
             return NO_SOLUTION_FOUND
-            # Compute IIS
-            self.model.computeIIS()
 
-            # Print IIS
-            logger.debug("\nIIS Constraints:")
-            for constr in self.model.getConstrs():
-                if constr.IISConstr:
-                    logger.debug(f"Constraint {constr.ConstrName} is in the IIS")
-
-            logger.debug("\nIIS Variables:")
-            for var in self.model.getVars():
-                if var.IISLB or var.IISUB:
-                    logger.debug(f"Variable {var.VarName} is in the IIS with bounds")
-            return NO_SOLUTION_FOUND
 
     def _add_min_patients_violated(self, model, d: int, patients: list[dict]):
         forbidden_vars = []
@@ -252,6 +211,45 @@ class LBBDSolver(Solver):
 
         model.cbLazy(gp.quicksum(forbidden_vars) <= len(forbidden_vars) - 1)
 
+    def _print_subsolver_stats(self):
+        try:
+            logger.info(
+                f"Number of cuts added: {self.count_bad_cuts + self.count_good_cuts} (bad={self.count_bad_cuts}, good={self.count_good_cuts})"
+            )
+            logger.info(
+                f"Unnecessary comps: ({self.count_unnecessary_comps} / {self.count_good_cuts})"
+            )
+            logger.info(
+                f"Calls to is_day_infeasible: cp_solver={self.subsolver.calls_to_solve_subsystem}/ total={self.subsolver.calls_to_is_day_infeasible} stored={self.subsolver.calls_to_is_day_infeasible - self.subsolver.calls_to_solve_subsystem}"
+            )  # type: ignor
+            logger.info(
+                f"Is feasible: {self.time_is_feasible} {self.time_is_feasible / self.time_total}"
+            )
+            logger.info(
+                "Subsolver: Solve Model: {}/{}".format(
+                    self.subsolver.time_solve_model,  # type: ignore
+                    self.subsolver.time_solve_model  # type: ignore
+                    / (  # type: ignore
+                        self.subsolver.time_create_model  # type: ignore
+                        + self.subsolver.time_solve_model  # type: ignore
+                    ),  # type: ignore
+                )  # type: ignore
+            )  # type: ignore
+            logger.info(  # type: ignore
+                "Subsolver: Create Model: {}/{}".format(  # type: ignore
+                    self.subsolver.time_create_model,  # type: ignore
+                    self.subsolver.time_create_model  # type: ignore
+                    / (  # type: ignore
+                        self.subsolver.time_create_model  # type: ignore
+                        + self.subsolver.time_solve_model  # type: ignore
+                    ),
+                )
+            )
+            logger.info(f"Num_constraints-added: {self.num_constraints_added}")
+        except Exception as e:
+            logger.info("Debug Error in print_subsolver_stats")
+            logger.error(e)
+            
     def _add_too_many_treatments(
         self, model, d: int, patients: list[dict], result: dict
     ):

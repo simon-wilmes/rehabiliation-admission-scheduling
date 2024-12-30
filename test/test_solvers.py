@@ -11,7 +11,7 @@ from typing import Type, Any
 from src.logging import logger
 
 
-@pytest.mark.parametrize("solver", [MIPSolver, LBBDSolver, MIPSolver3])
+@pytest.mark.parametrize("solver", [MIPSolver, LBBDSolver, CPSolver])
 @pytest.mark.parametrize(
     "file_path_results",
     [

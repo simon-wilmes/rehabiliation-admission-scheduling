@@ -363,9 +363,9 @@ class CPSubsolver(Subsolver):
                         pass
                 return {"status_code": Subsolver.FEASIBLE}
             else:
-                logger.debug(
-                    "Objective value is not 0 {}".format(sub_solver.objective_value)
-                )
+                # logger.debug(
+                #    "Objective value is not 0 {}".format(sub_solver.objective_value)
+                # )
                 # Is solvable if minimum patients is ignored => generate bad cut from this
                 return {"status_code": Subsolver.MIN_PATIENTS_PROBLEM}
             # collect num treatments needed and return
