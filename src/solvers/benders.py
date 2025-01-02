@@ -163,7 +163,7 @@ class LBBDSolver(Solver):
 
                 self.time_total += time()
 
-                if self.num_solution_callbacks % 100 == 0:
+                if self.num_solution_callbacks % 5 == 0:
                     self._print_subsolver_stats()
 
         self.model.optimize(_solution_callback)
@@ -370,10 +370,10 @@ class LBBDSolver(Solver):
         self.model = gp.Model("PatientAdmissionScheduling")
         self.model.setParam("LogToConsole", int(self.log_to_console))  # type: ignore
         self.model.setParam("Threads", self.number_of_threads)  # type: ignore
-        self.model.setParam("Cuts", 0)
+        # self.model.setParam("Cuts", 0)
         self.model.setParam("LazyConstraints", 1)
         # self.model.setParam("CutPasses", 3)
-        self.model.setParam("NoRelHeurTime", self.no_rel_heur_time)  # type: ignore
+        # self.model.setParam("NoRelHeurTime", self.no_rel_heur_time)  # type: ignore
         self._create_variables()
         self._create_constraints()
 

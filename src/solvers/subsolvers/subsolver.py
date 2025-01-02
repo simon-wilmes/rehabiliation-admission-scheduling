@@ -172,7 +172,7 @@ class Subsolver(ABC):
     def _get_day_solution(
         self, day: int, patients: dict[Treatment, dict[Patient, int]]
     ) -> list[Appointment]:
-        pass
+        pass 
 
     def get_day_solution(
         self, day: int, patients: dict[Treatment, dict[Patient, int]]

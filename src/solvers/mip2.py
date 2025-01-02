@@ -74,7 +74,7 @@ class MIPSolver2(Solver):
         self.model.setParam("LogToConsole", int(self.log_to_console))  # type: ignore
         self.model.setParam("Threads", self.number_of_threads)  # type: ignore
         self.model.setParam("Cuts", 0)
-        self.model.setParam("NoRelHeurTime", self.no_rel_heur_time)  # type: ignore
+        # self.model.setParam("NoRelHeurTime", self.no_rel_heur_time)  # type: ignore
         self._create_variables()
         self._create_constraints()
         self._set_optimization_goal()
