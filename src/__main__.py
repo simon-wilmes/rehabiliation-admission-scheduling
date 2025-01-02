@@ -73,6 +73,9 @@ def main():
     arg_dict = read_arg_dict()
     file_path = read_file_path()
     # Get largest test instance
+    logger.debug(f"Solver: {solver_cls}")
+    logger.debug(f"Args: {arg_dict}")
+    logger.debug(f"File path {file_path}")
 
     #####################################
     # Set Settings

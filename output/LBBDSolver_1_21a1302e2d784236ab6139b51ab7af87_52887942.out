@@ -1,0 +1,255 @@
+1.NAME: LBBDSolver
+2.PARAMS: {'break_symmetry': False, 'add_constraints_to_symmetrc_days': True, 'subsolver_cls': 'CPSubSolver2'}
+3.INSTANCE: /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_2_30.txt
+4.REPETITION: 1
+Current directory: /home/wx350715/Kobra/rehabiliation-admission-scheduling
+[34m2025-01-01 14:45:40,955 - DEBUG - Solver: <class 'src.solvers.benders.LBBDSolver'>[0m
+[34m2025-01-01 14:45:40,955 - DEBUG - Args: {'break_symmetry': False, 'add_constraints_to_symmetrc_days': True, 'subsolver_cls': 'CPSubSolver2'}[0m
+[34m2025-01-01 14:45:40,955 - DEBUG - File path /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_2_30.txt[0m
+[34m2025-01-01 14:45:40,955 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 14:45:40,955 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 14:45:40,955 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 14:45:40,955 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 14:45:40,955 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 14:45:40,955 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 14:45:40,955 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 14:45:40,955 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 14:45:40,955 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 14:45:40,955 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 14:45:40,955 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 14:45:40,956 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-01 14:45:40,956 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-01 14:45:40,956 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-01 14:45:40,956 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-01 14:45:40,956 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-01 14:45:40,956 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 14:45:40,956 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 14:45:40,956 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 14:45:40,956 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 14:45:40,956 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 14:45:40,956 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 14:45:40,956 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 14:45:40,956 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 14:45:40,957 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 14:45:40,957 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 14:45:40,957 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 14:45:40,957 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 14:45:40,957 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 14:45:40,957 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 14:45:40,957 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 14:45:40,957 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 14:45:40,957 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 14:45:40,957 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 14:45:40,957 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 14:45:40,957 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 14:45:40,958 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,958 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,958 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,958 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,958 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,958 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,958 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,958 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,958 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,958 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,959 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,959 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,959 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,959 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,959 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,959 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,959 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,959 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,959 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,959 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,960 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,960 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,960 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,961 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,961 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,961 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,961 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,961 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,961 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,961 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,961 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,961 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,961 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,961 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,962 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,962 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,962 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,962 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,962 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,962 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 14:45:40,962 - DEBUG - Instance data:[0m
+[34m2025-01-01 14:45:40,962 - DEBUG - Number of patients: 40[0m
+[34m2025-01-01 14:45:40,962 - DEBUG - Number of beds: 40[0m
+[34m2025-01-01 14:45:40,962 - DEBUG - Average number of treatments per patient: 24.5[0m
+[34m2025-01-01 14:45:40,962 - DEBUG - Average number of treatment per stayed day: 1.3611111111111112[0m
+[34m2025-01-01 14:45:40,963 - DEBUG - Number of treatments: 980[0m
+[34m2025-01-01 14:45:40,963 - DEBUG - Number of resources: 10[0m
+[34m2025-01-01 14:45:40,963 - DEBUG - Number of resource groups: 5[0m
+[34m2025-01-01 14:45:40,963 - DEBUG - Number of resource hours needed per all treatment by RG(rooms): 52.50000000000001[0m
+[34m2025-01-01 14:45:40,963 - DEBUG - Number of resource hours needed per all treatment by RG(physiotherapist): 20.0[0m
+[34m2025-01-01 14:45:40,963 - DEBUG - Number of resource hours needed per all treatment by RG(therapists): 24.374999999999986[0m
+[34m2025-01-01 14:45:40,963 - DEBUG - Number of resource hours needed per all treatment by RG(sport_room): 11.875[0m
+[34m2025-01-01 14:45:40,963 - DEBUG - Number of resource hours needed per all treatment by RG(language_therapist): 1.4999999999999998[0m
+[32m2025-01-01 14:45:40,963 - INFO - {'solver': 'LBBDSolver', 'args': {'break_symmetry': False, 'subsolver_cls': <class 'src.solvers.subsolvers.cp_subsolver.CPSubsolver'>, 'subsolver.store_results': True, 'subsolver.store_results_method': 'hash', 'use_helper_constraints': True, 'enforce_min_treatments_per_day': True, 'enforce_max_treatments_per_e_w': True, 'enforce_min_patients_per_treatment': True, 'log_to_console': True}}[0m
+[34m2025-01-01 14:45:40,963 - DEBUG - Setting options: LBBDSolver[0m
+[34m2025-01-01 14:45:40,963 - DEBUG -  ---- break_symmetry to False[0m
+[34m2025-01-01 14:45:40,963 - DEBUG -  ---- subsolver_cls to <class 'src.solvers.subsolvers.cp_subsolver.CPSubsolver'>[0m
+[34m2025-01-01 14:45:40,963 - DEBUG -  ---- use_helper_constraints to True[0m
+[34m2025-01-01 14:45:40,963 - DEBUG -  ---- add_constraints_to_symmetric_days to True (default)[0m
+[34m2025-01-01 14:45:40,963 - DEBUG - Setting options: Solver[0m
+[34m2025-01-01 14:45:40,963 - DEBUG -  ---- number_of_threads to 4 (default)[0m
+[34m2025-01-01 14:45:40,963 - DEBUG -  ---- treatment_value to 0 (default)[0m
+[34m2025-01-01 14:45:40,963 - DEBUG -  ---- delay_value to 1 (default)[0m
+[34m2025-01-01 14:45:40,963 - DEBUG -  ---- missing_treatment_value to 4 (default)[0m
+[34m2025-01-01 14:45:40,963 - DEBUG -  ---- enforce_min_treatments_per_day to True[0m
+[34m2025-01-01 14:45:40,963 - DEBUG -  ---- enforce_max_treatments_per_e_w to True[0m
+[34m2025-01-01 14:45:40,963 - DEBUG -  ---- enforce_min_patients_per_treatment to True[0m
+[34m2025-01-01 14:45:40,963 - DEBUG -  ---- log_to_console to True[0m
+[34m2025-01-01 14:45:40,963 - DEBUG -  ---- log_to_file to True (default)[0m
+[34m2025-01-01 14:45:40,963 - DEBUG -  ---- no_rel_heur_time to 1 (default)[0m
+[34m2025-01-01 14:45:40,980 - DEBUG - Setting options: CPSubsolver[0m
+[34m2025-01-01 14:45:40,980 - DEBUG -  ---- estimated_needed_treatments to True (default)[0m
+[34m2025-01-01 14:45:40,980 - DEBUG -  ---- add_patient_symmetry to False (default)[0m
+[34m2025-01-01 14:45:40,980 - DEBUG - Setting Subsolver options: SubSolver[0m
+[34m2025-01-01 14:45:40,980 - DEBUG -  ---- store_results to True[0m
+[34m2025-01-01 14:45:40,980 - DEBUG -  ---- store_results_method to hash[0m
+[34m2025-01-01 14:45:40,980 - DEBUG -  ---- enforce_min_patients_per_treatment to True[0m
+[34m2025-01-01 14:45:40,981 - DEBUG -  ---- use_day_symmetry to True (default)[0m
+[32m2025-01-01 14:45:40,995 - INFO - Create model: LBBDSolver[0m
+Set parameter TSPort to value 50039
+Set parameter TokenServer to value "license.itc.rwth-aachen.de"
+Set parameter Threads to value 4
+Set parameter Cuts to value 0
+Set parameter LazyConstraints to value 1
+Set parameter NoRelHeurTime to value 1
+[34m2025-01-01 14:45:41,315 - DEBUG - Variables created.[0m
+[34m2025-01-01 14:45:42,367 - DEBUG - Constraint (not too many treatments) created.[0m
+[34m2025-01-01 14:45:43,128 - DEBUG - Constraint (no_treatments_outside admittance) created.[0m
+[34m2025-01-01 14:45:43,130 - DEBUG - Constraint (bed_usage) created.[0m
+[34m2025-01-01 14:45:43,130 - DEBUG - Constraint (must be admitted) created.[0m
+[34m2025-01-01 14:45:43,243 - DEBUG - Constraint (e_w_ub) created.[0m
+[34m2025-01-01 14:45:43,275 - DEBUG - Constraint (day_ub) created.[0m
+[34m2025-01-01 14:45:43,309 - DEBUG - Constraint (Day always) created.[0m
+[34m2025-01-01 14:45:43,309 - DEBUG - Constraint (already_admitted) created.[0m
+[32m2025-01-01 14:45:45,117 - INFO - Time to create model: 4.122[0m
+[32m2025-01-01 14:45:45,117 - INFO - Solving model: LBBDSolver[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 4 threads
+
+Optimize a model with 204717 rows, 79045 columns and 1559765 nonzeros
+Model fingerprint: 0x7e34f956
+Variable types: 3 continuous, 79042 integer (79042 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 4e+03]
+Presolve added 0 rows and 636 columns
+Presolve removed 95502 rows and 0 columns
+Presolve time: 2.26s
+Presolved: 109215 rows, 79681 columns, 1216712 nonzeros
+Variable types: 1 continuous, 79680 integer (79025 binary)
+Starting NoRel heuristic
+Found heuristic solution: objective 2890.0000000
+Elapsed time for NoRel heuristic: 8s (best bound -303920)
+Root relaxation presolved: 108976 rows, 79920 columns, 1167933 nonzeros
+
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Ordering time: 0.39s
+
+Barrier statistics:
+ Dense cols : 90
+ AA' NZ     : 2.299e+05
+ Factor NZ  : 1.367e+06 (roughly 18 MB of memory)
+ Factor Ops : 6.187e+08 (less than 1 second per iteration)
+ Threads    : 2
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -2.79579450e+06 -2.53347784e+04  3.78e+04 2.59e+00  3.81e+02    13s
+   1  -1.49817552e+06 -5.42806156e+04  2.02e+04 2.10e+00  2.00e+02    13s
+
+Barrier performed 1 iterations in 13.47 seconds (9.16 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 0.26s (can be avoided by choosing Method=3)
+
+Solved with dual simplex
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+    3933    1.3000000e+03   0.000000e+00   0.000000e+00     13s
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root crossover log...
+
+       0 DPushes remaining with DInf 0.0000000e+00                14s
+
+   13974 PPushes remaining with PInf 0.0000000e+00                14s
+       0 PPushes remaining with PInf 0.0000000e+00                14s
+
+  Push phase complete: Pinf 0.0000000e+00, Dinf 1.4752644e-12     14s
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+   17916    1.3000000e+03   0.000000e+00   0.000000e+00     15s
+   17916    1.3000000e+03   0.000000e+00   0.000000e+00     15s
+
+Root relaxation: objective 1.300000e+03, 17916 iterations, 2.17 seconds (0.88 work units)
+Total elapsed time = 19.29s
+Total elapsed time = 24.04s
+Total elapsed time = 25.42s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1300.00000    0    8 2890.00000 1300.00000  55.0%     -   26s
+[32m2025-01-01 14:47:03,243 - INFO - d_prime: 11 d: 13[0m
+[32m2025-01-01 14:47:03,246 - INFO - d_prime: 12 d: 13[0m
+[32m2025-01-01 14:47:03,248 - INFO - d_prime: 13 d: 13[0m
+[32m2025-01-01 14:47:03,250 - INFO - forbidden_vars: ([{4:1},{5:1},{5:1},{9:1},{0:1,5:1},{0:2},{0:1,4:1},{0:1,2:1},{2:1,4:1},{2:1,4:1},{2:2},{2:1,5:1},{2:1,5:1},{2:1,5:1},{2:2},{2:1,5:1},{2:1,4:1},{2:1,4:1},{2:1,7:1},{2:2},{2:1,5:1},{5:1,7:1},{5:1,9:1},{5:1,7:1},{5:2},{5:1,8:1},{5:2},{5:2},{5:1,8:1},{5:1,8:1},{5:2},{5:2},{7:2},{7:2},{7:1,9:1},{7:2},{8:2},{8:2},{8:2},{8:1,9:1}])[0m
+[32m2025-01-01 14:47:03,250 - INFO - False[0m
+     0     0 1300.00000    0    8 2890.00000 1300.00000  55.0%     -   78s
+[32m2025-01-01 14:47:11,547 - INFO - d_prime: 11 d: 13[0m
+[32m2025-01-01 14:47:11,549 - INFO - d_prime: 12 d: 13[0m
+[32m2025-01-01 14:47:11,551 - INFO - d_prime: 13 d: 13[0m
+[32m2025-01-01 14:47:11,553 - INFO - forbidden_vars: ([{4:1},{5:1},{9:1},{9:1},{0:1,5:1},{0:2},{0:1,4:1},{0:1,2:1},{2:1,4:1},{2:1,4:1},{2:2},{2:1,5:1},{2:1,5:1},{2:1,5:1},{2:2},{2:1,5:1},{2:1,4:1},{2:1,4:1},{2:1,7:1},{2:2},{2:1,5:1},{5:1,7:1},{5:1,9:1},{5:1,7:1},{5:1,7:1},{5:2},{5:1,8:1},{5:2},{5:2},{5:1,8:1},{5:1,8:1},{5:2},{5:2},{7:2},{7:2},{7:2},{8:2},{8:2},{8:2},{8:1,9:1}])[0m
+[32m2025-01-01 14:47:11,553 - INFO - False[0m
+[32m2025-01-01 14:47:21,707 - INFO - d_prime: 11 d: 13[0m
+[32m2025-01-01 14:47:21,709 - INFO - d_prime: 12 d: 13[0m
+[32m2025-01-01 14:47:21,711 - INFO - d_prime: 13 d: 13[0m
+[32m2025-01-01 14:47:21,713 - INFO - forbidden_vars: ([{4:1},{5:1},{5:1},{9:1},{0:1,5:1},{0:2},{0:1,4:1},{0:1,2:1},{2:1,4:1},{2:1,4:1},{2:2},{2:1,5:1},{2:1,5:1},{2:1,5:1},{2:2},{2:1,5:1},{2:1,4:1},{2:1,4:1},{2:1,7:1},{2:2},{2:1,5:1},{5:1,7:1},{5:1,9:1},{5:1,7:1},{5:2},{5:1,8:1},{5:2},{5:2},{5:1,8:1},{5:1,8:1},{5:2},{5:2},{7:2},{7:2},{7:1,9:1},{7:2},{8:2},{8:2},{8:2},{8:1,9:1}])[0m
+[32m2025-01-01 14:47:21,713 - INFO - True[0m
+     0     0 1300.00000    0    8 2890.00000 1300.00000  55.0%     -   96s
+[32m2025-01-01 14:47:27,464 - INFO - d_prime: 11 d: 13[0m
+[32m2025-01-01 14:47:27,467 - INFO - d_prime: 12 d: 13[0m
+[32m2025-01-01 14:47:27,469 - INFO - d_prime: 13 d: 13[0m
+[32m2025-01-01 14:47:27,470 - INFO - forbidden_vars: ([{2:1},{4:1},{5:1},{5:1},{9:1},{0:1,5:1},{0:2},{0:1,4:1},{0:1,2:1},{2:1,4:1},{2:1,4:1},{2:2},{2:1,5:1},{2:1,5:1},{2:1,5:1},{2:2},{2:1,4:1},{2:1,4:1},{2:1,7:1},{2:2},{2:1,5:1},{5:1,7:1},{5:1,9:1},{5:1,7:1},{5:2},{5:1,8:1},{5:2},{5:2},{5:1,8:1},{5:1,8:1},{5:2},{5:2},{7:2},{7:2},{7:1,9:1},{7:2},{8:2},{8:2},{8:2},{8:1,9:1}])[0m
+[32m2025-01-01 14:47:27,470 - INFO - False[0m
+[32m2025-01-01 14:47:37,238 - INFO - d_prime: 11 d: 13[0m
+[32m2025-01-01 14:47:37,240 - INFO - d_prime: 12 d: 13[0m
+[32m2025-01-01 14:47:37,242 - INFO - d_prime: 13 d: 13[0m
+[32m2025-01-01 14:47:37,243 - INFO - forbidden_vars: ([{2:1},{4:1},{5:1},{5:1},{9:1},{0:1,5:1},{0:2},{0:1,4:1},{0:1,2:1},{2:1,4:1},{2:1,4:1},{2:2},{2:1,5:1},{2:1,5:1},{2:1,5:1},{2:2},{2:1,5:1},{2:1,4:1},{2:1,7:1},{2:2},{2:1,5:1},{5:1,7:1},{5:1,9:1},{5:1,7:1},{5:2},{5:1,8:1},{5:2},{5:2},{5:1,8:1},{5:1,8:1},{5:2},{5:2},{7:2},{7:2},{7:1,9:1},{7:2},{8:2},{8:2},{8:2},{8:1,9:1}])[0m
+[32m2025-01-01 14:47:37,243 - INFO - False[0m
+     0     0 1300.00000    0    8 2890.00000 1300.00000  55.0%     -  112s
+[32m2025-01-01 15:21:50,131 - INFO - d_prime: 11 d: 13[0m
+[32m2025-01-01 15:21:50,134 - INFO - d_prime: 12 d: 13[0m
+[32m2025-01-01 15:21:50,136 - INFO - d_prime: 13 d: 13[0m
+[32m2025-01-01 15:21:50,138 - INFO - forbidden_vars: ([{0:1},{0:1},{5:1},{5:1},{8:1},{8:1},{9:1},{0:1,5:1},{0:2},{2:1,4:1},{2:1,4:1},{2:2},{2:1,5:1},{2:1,5:1},{2:1,5:1},{2:2},{2:1,5:1},{2:1,4:1},{2:1,5:1},{2:1,9:1},{2:1,4:1},{4:1,9:1},{4:1,7:1},{5:1,7:1},{5:1,9:1},{5:1,7:1},{5:2},{5:1,9:1},{5:1,8:1},{5:2},{5:2},{7:2},{7:2},{7:1,9:1},{7:2},{8:2},{8:1,9:1},{8:1,9:1},{8:1,9:1},{8:1,9:1}])[0m
+[32m2025-01-01 15:21:50,138 - INFO - False[0m
+     0     0 1300.00000    0    8 2890.00000 1300.00000  55.0%     - 2164s

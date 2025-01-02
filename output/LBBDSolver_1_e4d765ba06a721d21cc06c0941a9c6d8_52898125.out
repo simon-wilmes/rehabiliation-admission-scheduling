@@ -1,0 +1,367 @@
+1.NAME: LBBDSolver
+2.PARAMS: {'break_symmetry': True, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubSolver'}
+3.INSTANCE: /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_3_15.txt
+4.REPETITION: 1
+Current directory: /home/wx350715/Kobra/rehabiliation-admission-scheduling
+[34m2025-01-01 18:42:55,297 - DEBUG - Solver: <class 'src.solvers.benders.LBBDSolver'>[0m
+[34m2025-01-01 18:42:55,297 - DEBUG - Args: {'break_symmetry': True, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubSolver'}[0m
+[34m2025-01-01 18:42:55,297 - DEBUG - File path /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_3_15.txt[0m
+[34m2025-01-01 18:42:55,297 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 18:42:55,297 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 18:42:55,297 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 18:42:55,297 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 18:42:55,297 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 18:42:55,297 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 18:42:55,297 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 18:42:55,297 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 18:42:55,297 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 18:42:55,297 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 18:42:55,297 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 18:42:55,298 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-01 18:42:55,298 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-01 18:42:55,298 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-01 18:42:55,298 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-01 18:42:55,298 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 18:42:55,298 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 18:42:55,298 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 18:42:55,298 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 18:42:55,298 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 18:42:55,298 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 18:42:55,298 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 18:42:55,298 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 18:42:55,298 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 18:42:55,298 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 18:42:55,299 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 18:42:55,299 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 18:42:55,299 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 18:42:55,299 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 18:42:55,299 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 18:42:55,299 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 18:42:55,299 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 18:42:55,299 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,299 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,299 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,299 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,299 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,300 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,300 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,300 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,300 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,300 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,300 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,300 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,300 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,300 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,300 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,300 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,301 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,301 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,301 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,301 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,301 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,301 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,301 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,301 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,301 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,302 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,302 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,302 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,302 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,302 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,302 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,303 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,303 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,303 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,303 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,303 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,303 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,303 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,303 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,303 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 18:42:55,303 - DEBUG - Instance data:[0m
+[34m2025-01-01 18:42:55,304 - DEBUG - Number of patients: 40[0m
+[34m2025-01-01 18:42:55,304 - DEBUG - Number of beds: 40[0m
+[34m2025-01-01 18:42:55,304 - DEBUG - Average number of treatments per patient: 29.275[0m
+[34m2025-01-01 18:42:55,304 - DEBUG - Average number of treatment per stayed day: 2.11754068716094[0m
+[34m2025-01-01 18:42:55,304 - DEBUG - Number of treatments: 1171[0m
+[34m2025-01-01 18:42:55,304 - DEBUG - Number of resources: 9[0m
+[34m2025-01-01 18:42:55,304 - DEBUG - Number of resource groups: 4[0m
+[34m2025-01-01 18:42:55,304 - DEBUG - Number of resource hours needed per all treatment by RG(therapists): 37.824999999999996[0m
+[34m2025-01-01 18:42:55,304 - DEBUG - Number of resource hours needed per all treatment by RG(rooms): 73.20000000000003[0m
+[34m2025-01-01 18:42:55,304 - DEBUG - Number of resource hours needed per all treatment by RG(physiotherapist): 25.5[0m
+[34m2025-01-01 18:42:55,304 - DEBUG - Number of resource hours needed per all treatment by RG(sport_room): 18.375[0m
+[32m2025-01-01 18:42:55,304 - INFO - {'solver': 'LBBDSolver', 'args': {'break_symmetry': False, 'subsolver_cls': <class 'src.solvers.subsolvers.cp_subsolver.CPSubsolver'>, 'subsolver.store_results': True, 'subsolver.store_results_method': 'hash', 'use_helper_constraints': True, 'enforce_min_treatments_per_day': True, 'enforce_max_treatments_per_e_w': True, 'enforce_min_patients_per_treatment': True, 'log_to_console': True}}[0m
+[34m2025-01-01 18:42:55,304 - DEBUG - Setting options: LBBDSolver[0m
+[34m2025-01-01 18:42:55,304 - DEBUG -  ---- break_symmetry to False[0m
+[34m2025-01-01 18:42:55,304 - DEBUG -  ---- subsolver_cls to <class 'src.solvers.subsolvers.cp_subsolver.CPSubsolver'>[0m
+[34m2025-01-01 18:42:55,304 - DEBUG -  ---- use_helper_constraints to True[0m
+[34m2025-01-01 18:42:55,304 - DEBUG -  ---- add_constraints_to_symmetric_days to True (default)[0m
+[34m2025-01-01 18:42:55,304 - DEBUG - Setting options: Solver[0m
+[34m2025-01-01 18:42:55,304 - DEBUG -  ---- number_of_threads to 4 (default)[0m
+[34m2025-01-01 18:42:55,304 - DEBUG -  ---- treatment_value to 0 (default)[0m
+[34m2025-01-01 18:42:55,304 - DEBUG -  ---- delay_value to 1 (default)[0m
+[34m2025-01-01 18:42:55,304 - DEBUG -  ---- missing_treatment_value to 4 (default)[0m
+[34m2025-01-01 18:42:55,304 - DEBUG -  ---- enforce_min_treatments_per_day to True[0m
+[34m2025-01-01 18:42:55,304 - DEBUG -  ---- enforce_max_treatments_per_e_w to True[0m
+[34m2025-01-01 18:42:55,304 - DEBUG -  ---- enforce_min_patients_per_treatment to True[0m
+[34m2025-01-01 18:42:55,304 - DEBUG -  ---- log_to_console to True[0m
+[34m2025-01-01 18:42:55,304 - DEBUG -  ---- log_to_file to True (default)[0m
+[34m2025-01-01 18:42:55,304 - DEBUG -  ---- no_rel_heur_time to 1 (default)[0m
+[34m2025-01-01 18:42:55,329 - DEBUG - Setting options: CPSubsolver[0m
+[34m2025-01-01 18:42:55,329 - DEBUG -  ---- estimated_needed_treatments to True (default)[0m
+[34m2025-01-01 18:42:55,329 - DEBUG -  ---- add_patient_symmetry to False (default)[0m
+[34m2025-01-01 18:42:55,329 - DEBUG - Setting Subsolver options: SubSolver[0m
+[34m2025-01-01 18:42:55,329 - DEBUG -  ---- store_results to True[0m
+[34m2025-01-01 18:42:55,329 - DEBUG -  ---- store_results_method to hash[0m
+[34m2025-01-01 18:42:55,329 - DEBUG -  ---- enforce_min_patients_per_treatment to True[0m
+[34m2025-01-01 18:42:55,329 - DEBUG -  ---- use_day_symmetry to True (default)[0m
+[32m2025-01-01 18:42:55,350 - INFO - Create model: LBBDSolver[0m
+Set parameter TSPort to value 50039
+Set parameter TokenServer to value "license.itc.rwth-aachen.de"
+Set parameter Threads to value 4
+Set parameter Cuts to value 0
+Set parameter LazyConstraints to value 1
+Set parameter NoRelHeurTime to value 1
+[34m2025-01-01 18:42:56,055 - DEBUG - Variables created.[0m
+[34m2025-01-01 18:42:58,464 - DEBUG - Constraint (not too many treatments) created.[0m
+[34m2025-01-01 18:43:00,390 - DEBUG - Constraint (no_treatments_outside admittance) created.[0m
+[34m2025-01-01 18:43:00,392 - DEBUG - Constraint (bed_usage) created.[0m
+[34m2025-01-01 18:43:00,392 - DEBUG - Constraint (must be admitted) created.[0m
+[34m2025-01-01 18:43:00,658 - DEBUG - Constraint (e_w_ub) created.[0m
+[34m2025-01-01 18:43:00,740 - DEBUG - Constraint (day_ub) created.[0m
+[34m2025-01-01 18:43:00,829 - DEBUG - Constraint (Day always) created.[0m
+[34m2025-01-01 18:43:00,829 - DEBUG - Constraint (already_admitted) created.[0m
+[32m2025-01-01 18:43:08,211 - INFO - Time to create model: 12.861[0m
+[32m2025-01-01 18:43:08,212 - INFO - Solving model: LBBDSolver[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 4 threads
+
+Optimize a model with 458980 rows, 188940 columns and 3797306 nonzeros
+Model fingerprint: 0x92455107
+Variable types: 3 continuous, 188937 integer (188937 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+03]
+[32m2025-01-01 18:43:40,145 - INFO - d_prime: 11 d: 13[0m
+[32m2025-01-01 18:43:40,148 - INFO - d_prime: 12 d: 13[0m
+[32m2025-01-01 18:43:40,150 - INFO - d_prime: 13 d: 13[0m
+[32m2025-01-01 18:43:40,152 - INFO - forbidden_vars: ([{0:1},{0:1},{0:1},{1:1},{3:1},{4:1},{4:1},{4:1},{4:1},{4:1},{5:1},{6:1},{6:1},{6:1},{7:1},{7:1},{7:1},{0:1,2:1},{0:1,2:1},{2:1,4:1},{2:2},{2:2},{2:2},{3:1,5:1},{3:1,6:1},{4:2},{4:2},{5:2},{5:2},{5:2},{0:3},{1:1,4:2},{2:1,5:2},{3:2,4:1},{5:2,6:1},{5:3},{1:4},{4:4},{4:1,5:3}])[0m
+[32m2025-01-01 18:43:40,152 - INFO - False[0m
+Presolve removed 227932 rows and 31 columns (presolve time = 5s) ...
+Presolve added 0 rows and 2452 columns
+Presolve removed 227917 rows and 0 columns
+Presolve time: 9.84s
+Presolved: 231063 rows, 191392 columns, 2889337 nonzeros
+Variable types: 1 continuous, 191391 integer (189784 binary)
+Starting NoRel heuristic
+Found phase-1 solution: relaxation 41
+Found phase-1 solution: relaxation 31
+Found phase-1 solution: relaxation 28
+Root relaxation presolved: 230836 rows, 191619 columns, 2776164 nonzeros
+
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Ordering time: 0.70s
+
+Barrier statistics:
+ Dense cols : 164
+ AA' NZ     : 2.942e+05
+ Factor NZ  : 1.599e+06 (roughly 24 MB of memory)
+ Factor Ops : 6.469e+08 (less than 1 second per iteration)
+ Threads    : 2
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -6.45342334e+06 -1.56848056e+04  1.64e+05 5.46e-01  1.71e+02    50s
+   1  -3.19729048e+06 -3.88330857e+04  8.11e+04 2.35e+00  8.26e+01    50s
+   2  -1.72020013e+06 -5.92458430e+04  4.36e+04 3.67e-02  4.63e+01    50s
+   3  -3.41981230e+05 -4.81188720e+04  8.67e+03 2.57e-02  9.78e+00    51s
+   4  -1.31569494e+05 -3.16219310e+04  3.34e+03 9.97e-03  3.81e+00    51s
+   5  -5.58460233e+04 -1.83619373e+04  1.43e+03 3.40e-03  1.62e+00    51s
+   6  -2.36530148e+04 -1.07190407e+04  6.17e+02 9.59e-04  7.27e-01    51s
+   7  -2.87976737e+03 -4.56500699e+03  9.51e+01 4.14e-04  1.98e-01    52s
+   8   1.11308689e+02 -2.44503312e+03  1.96e+01 2.40e-04  9.81e-02    52s
+   9   8.44125421e+02  2.58953061e+02  9.39e-01 3.65e-05  1.70e-02    52s
+  10   8.63408583e+02  6.36867540e+02  3.51e-01 9.16e-05  6.55e-03    52s
+  11   8.68927315e+02  8.61187062e+02  1.67e-01 8.08e-06  3.93e-04    52s
+  12   8.73998661e+02  8.73927306e+02  6.10e-05 5.44e-06  2.00e-06    52s
+  13   8.74000001e+02  8.73999927e+02  5.22e-11 2.51e-08  2.00e-09    52s
+  14   8.74000000e+02  8.74000000e+02  5.07e-14 1.81e-11  2.00e-12    53s
+
+Barrier solved model in 14 iterations and 52.56 seconds (25.71 work units)
+Optimal objective 8.74000000e+02
+
+
+Root crossover log...
+
+     130 DPushes remaining with DInf 0.0000000e+00                53s
+       0 DPushes remaining with DInf 0.0000000e+00                53s
+
+    8676 PPushes remaining with PInf 0.0000000e+00                53s
+       0 PPushes remaining with PInf 0.0000000e+00                54s
+
+  Push phase complete: Pinf 0.0000000e+00, Dinf 2.8421709e-14     54s
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+    8796    8.7400000e+02   0.000000e+00   0.000000e+00     54s
+Concurrent spin time: 1.27s (can be avoided by choosing Method=3)
+
+Solved with barrier
+    8796    8.7400000e+02   0.000000e+00   0.000000e+00     54s
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root crossover log...
+
+     849 DPushes remaining with DInf 0.0000000e+00                54s
+       0 DPushes remaining with DInf 0.0000000e+00                54s
+
+   25794 PPushes remaining with PInf 0.0000000e+00                54s
+       0 PPushes remaining with PInf 0.0000000e+00                55s
+
+  Push phase complete: Pinf 0.0000000e+00, Dinf 5.9818817e-13     55s
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+   34635    8.7400000e+02   0.000000e+00   0.000000e+00     55s
+   34635    8.7400000e+02   0.000000e+00   0.000000e+00     55s
+
+Root relaxation: objective 8.740000e+02, 34635 iterations, 7.77 seconds (3.55 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  874.00000    0 3924          -  874.00000      -     -   86s
+[32m2025-01-01 18:45:11,065 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-01 18:45:11,069 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-01 18:45:11,071 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-01 18:45:11,073 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-01 18:45:11,075 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-01 18:45:11,077 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-01 18:45:11,079 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-01 18:45:11,081 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-01 18:45:11,083 - INFO - d_prime: 11 d: 3[0m
+[32m2025-01-01 18:45:11,085 - INFO - d_prime: 12 d: 3[0m
+[32m2025-01-01 18:45:11,087 - INFO - d_prime: 13 d: 3[0m
+[32m2025-01-01 18:45:11,088 - INFO - forbidden_vars: ([{2:1},{3:1},{4:1},{4:1},{0:1,1:1},{2:1,4:1},{2:1,6:1},{2:1,5:1},{3:1,4:1},{3:2},{4:1,5:1},{0:1,3:1,6:1},{1:1,3:1,4:1},{3:1,5:1,6:1},{3:1,4:1,6:1},{1:1,3:1,4:1,6:1},{1:1,2:1,3:2},{1:1,3:3,6:1}])[0m
+[32m2025-01-01 18:45:11,088 - INFO - False[0m
+[32m2025-01-01 18:45:16,906 - INFO - d_prime: 4 d: 4[0m
+[32m2025-01-01 18:45:16,909 - INFO - d_prime: 5 d: 4[0m
+[32m2025-01-01 18:45:16,911 - INFO - d_prime: 6 d: 4[0m
+[32m2025-01-01 18:45:16,913 - INFO - d_prime: 7 d: 4[0m
+[32m2025-01-01 18:45:16,915 - INFO - d_prime: 8 d: 4[0m
+[32m2025-01-01 18:45:16,918 - INFO - d_prime: 9 d: 4[0m
+[32m2025-01-01 18:45:16,920 - INFO - d_prime: 10 d: 4[0m
+[32m2025-01-01 18:45:16,922 - INFO - d_prime: 11 d: 4[0m
+[32m2025-01-01 18:45:16,924 - INFO - d_prime: 12 d: 4[0m
+[32m2025-01-01 18:45:16,926 - INFO - d_prime: 13 d: 4[0m
+[32m2025-01-01 18:45:16,927 - INFO - forbidden_vars: ([{4:1},{6:1},{7:1},{0:2},{0:1,5:1},{1:1,6:1},{2:1,7:1},{2:1,5:1},{3:1,5:1},{3:1,6:1},{4:1,5:1},{6:1,7:1},{6:1,7:1},{0:1,3:1,7:1},{0:1,3:1,7:1},{0:2,3:1},{0:1,2:1,7:1},{0:1,4:1,7:1},{0:1,2:1,4:1},{1:1,4:1,5:1},{1:1,2:1,7:1},{3:2,7:1},{3:1,5:1,7:1},{3:1,4:1,7:1}])[0m
+[32m2025-01-01 18:45:16,927 - INFO - False[0m
+[32m2025-01-01 18:45:21,986 - INFO - d_prime: 5 d: 5[0m
+[32m2025-01-01 18:45:21,989 - INFO - d_prime: 6 d: 5[0m
+[32m2025-01-01 18:45:21,992 - INFO - d_prime: 7 d: 5[0m
+[32m2025-01-01 18:45:21,995 - INFO - d_prime: 8 d: 5[0m
+[32m2025-01-01 18:45:21,998 - INFO - d_prime: 9 d: 5[0m
+[32m2025-01-01 18:45:22,000 - INFO - d_prime: 10 d: 5[0m
+[32m2025-01-01 18:45:22,003 - INFO - d_prime: 11 d: 5[0m
+[32m2025-01-01 18:45:22,006 - INFO - d_prime: 12 d: 5[0m
+[32m2025-01-01 18:45:22,008 - INFO - d_prime: 13 d: 5[0m
+[32m2025-01-01 18:45:22,010 - INFO - forbidden_vars: ([{0:1},{2:1},{2:1},{3:1},{6:1},{0:1,2:1},{0:1,6:1},{1:1,5:1},{2:1,4:1},{2:1,6:1},{2:1,7:1},{3:1,5:1},{0:1,5:1,6:1},{0:1,4:1,7:1},{0:1,1:2},{1:2,7:1},{2:1,4:1,7:1},{2:1,4:2},{2:1,4:1,5:1},{2:2,5:1},{2:1,4:1,7:1},{3:1,7:2},{4:2,5:1},{4:1,5:2},{0:2,3:1,4:1},{0:1,4:1,7:2},{2:1,3:1,4:1,6:1}])[0m
+[32m2025-01-01 18:45:22,010 - INFO - False[0m
+[32m2025-01-01 18:45:29,369 - INFO - d_prime: 6 d: 6[0m
+[32m2025-01-01 18:45:29,372 - INFO - d_prime: 7 d: 6[0m
+[32m2025-01-01 18:45:29,375 - INFO - d_prime: 8 d: 6[0m
+[32m2025-01-01 18:45:29,378 - INFO - d_prime: 9 d: 6[0m
+[32m2025-01-01 18:45:29,381 - INFO - d_prime: 10 d: 6[0m
+[32m2025-01-01 18:45:29,384 - INFO - d_prime: 11 d: 6[0m
+[32m2025-01-01 18:45:29,387 - INFO - d_prime: 12 d: 6[0m
+[32m2025-01-01 18:45:29,390 - INFO - d_prime: 13 d: 6[0m
+[32m2025-01-01 18:45:29,392 - INFO - forbidden_vars: ([{0:1},{3:1},{4:1},{4:1},{7:1},{1:1,5:1},{2:1,3:1},{3:1,6:1},{3:1,4:1},{3:1,4:1},{4:1,6:1},{4:1,5:1},{5:1,6:1},{0:1,4:1,7:1},{0:1,2:2},{0:1,2:1,5:1},{0:1,2:1,4:1},{1:1,3:1,7:1},{1:1,4:1,7:1},{1:1,5:1,6:1},{2:1,5:1,7:1},{2:1,5:1,7:1},{2:2,3:1},{2:1,4:1,5:1},{3:1,5:1,6:1},{4:3},{2:3,5:1},{3:1,4:1,5:1,6:1},{2:2,3:1,5:1,7:1}])[0m
+[32m2025-01-01 18:45:29,392 - INFO - False[0m
+[32m2025-01-01 18:45:34,150 - INFO - d_prime: 7 d: 7[0m
+[32m2025-01-01 18:45:34,153 - INFO - d_prime: 8 d: 7[0m
+[32m2025-01-01 18:45:34,156 - INFO - d_prime: 9 d: 7[0m
+[32m2025-01-01 18:45:34,159 - INFO - d_prime: 10 d: 7[0m
+[32m2025-01-01 18:45:34,162 - INFO - d_prime: 11 d: 7[0m
+[32m2025-01-01 18:45:34,165 - INFO - d_prime: 12 d: 7[0m
+[32m2025-01-01 18:45:34,168 - INFO - d_prime: 13 d: 7[0m
+[32m2025-01-01 18:45:34,170 - INFO - forbidden_vars: ([{0:1},{2:1},{2:1},{2:1},{3:1},{4:1},{4:1},{5:1},{6:1},{6:1},{0:1,3:1},{1:1,2:1},{2:1,7:1},{2:1,3:1},{2:1,7:1},{2:1,4:1},{3:1,5:1},{7:2},{0:1,1:1,4:1},{0:1,5:2},{2:1,3:1,6:1},{2:1,3:1,5:1},{2:1,4:1,6:1},{2:1,3:1,5:1},{2:1,3:2},{3:1,5:1,7:1},{4:1,6:2},{4:1,6:2},{5:2,6:1},{6:1,7:2},{0:1,3:1,4:1,6:1},{1:1,2:1,4:1,5:1},{2:1,4:2,7:1},{2:1,3:1,5:1,6:1}])[0m
+[32m2025-01-01 18:45:34,170 - INFO - False[0m
+[32m2025-01-01 18:45:38,918 - INFO - d_prime: 8 d: 8[0m
+[32m2025-01-01 18:45:38,922 - INFO - d_prime: 9 d: 8[0m
+[32m2025-01-01 18:45:38,925 - INFO - d_prime: 10 d: 8[0m
+[32m2025-01-01 18:45:38,927 - INFO - d_prime: 11 d: 8[0m
+[32m2025-01-01 18:45:38,930 - INFO - d_prime: 12 d: 8[0m
+[32m2025-01-01 18:45:38,933 - INFO - d_prime: 13 d: 8[0m
+[32m2025-01-01 18:45:38,935 - INFO - forbidden_vars: ([{0:1},{0:1},{2:1},{3:1},{3:1},{3:1},{4:1},{5:1},{7:1},{0:1,5:1},{0:1,6:1},{1:1,2:1},{2:1,4:1},{3:1,7:1},{3:2},{3:2},{4:1,6:1},{5:2},{6:1,7:1},{6:1,7:1},{7:2},{0:1,5:1,7:1},{0:1,2:1,5:1},{0:1,2:1,3:1},{0:1,2:1,6:1},{0:1,5:2},{1:1,4:2},{1:1,6:1,7:1},{2:1,4:1,5:1},{3:1,4:1,7:1},{5:3},{0:1,5:3},{1:1,5:2,6:1},{2:1,4:1,5:1,7:1},{2:1,5:2,6:1},{3:2,5:2}])[0m
+[32m2025-01-01 18:45:38,935 - INFO - False[0m
+[32m2025-01-01 18:46:18,468 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-01 18:46:18,472 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-01 18:46:18,475 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-01 18:46:18,479 - INFO - d_prime: 13 d: 10[0m
+[32m2025-01-01 18:46:18,481 - INFO - forbidden_vars: ([{0:1},{1:1},{1:1},{2:1},{2:1},{2:1},{3:1},{3:1},{3:1},{4:1},{4:1},{4:1},{4:1},{5:1},{6:1},{6:1},{0:1,3:1},{0:1,6:1},{0:2},{0:1,6:1},{0:1,2:1},{1:1,5:1},{1:1,2:1},{5:2},{5:1,6:1},{0:1,2:1,6:1},{0:2,4:1},{1:1,2:1,5:1},{2:2,7:1},{3:1,5:1,6:1},{3:2,4:1},{4:1,5:1,7:1},{4:1,5:2},{6:1,7:2},{1:1,2:2,6:1},{1:1,2:1,4:1,5:1},{2:2,3:1,7:1},{4:1,5:1,6:2},{4:1,6:2,7:1}])[0m
+[32m2025-01-01 18:46:18,481 - INFO - False[0m
+[32m2025-01-01 18:46:24,347 - INFO - d_prime: 11 d: 11[0m
+[32m2025-01-01 18:46:24,351 - INFO - d_prime: 12 d: 11[0m
+[32m2025-01-01 18:46:24,354 - INFO - d_prime: 13 d: 11[0m
+[32m2025-01-01 18:46:24,356 - INFO - forbidden_vars: ([{0:1},{0:1},{1:1},{2:1},{2:1},{5:1},{5:1},{5:1},{5:1},{7:1},{7:1},{0:1,5:1},{1:1,7:1},{1:2},{2:2},{2:2},{2:1,3:1},{3:2},{3:1,4:1},{3:1,4:1},{3:1,4:1},{3:1,5:1},{4:2},{4:1,5:1},{4:2},{5:2},{5:1,7:1},{5:2},{5:2},{0:1,4:1,5:1},{0:1,2:2},{2:1,5:2},{2:3},{2:2,3:1},{2:3},{3:1,4:1,5:1},{3:1,5:2},{3:1,4:1,5:1},{5:1,7:2},{1:2,2:1,3:1}])[0m
+[32m2025-01-01 18:46:24,356 - INFO - False[0m
+[32m2025-01-01 18:46:32,790 - INFO - d_prime: 11 d: 12[0m
+[32m2025-01-01 18:46:32,793 - INFO - d_prime: 12 d: 12[0m
+[32m2025-01-01 18:46:32,797 - INFO - d_prime: 13 d: 12[0m
+[32m2025-01-01 18:46:32,799 - INFO - forbidden_vars: ([{1:1},{3:1},{4:1},{4:1},{6:1},{0:1,3:1},{0:1,1:1},{0:1,1:1},{0:1,5:1},{1:1,6:1},{2:1,6:1},{2:1,7:1},{2:1,5:1},{2:1,5:1},{3:1,6:1},{3:1,7:1},{4:1,5:1},{5:1,7:1},{5:1,7:1},{5:1,6:1},{5:2},{0:2,5:1},{0:1,5:2},{1:2,6:1},{1:2,5:1},{2:2,6:1},{2:1,3:1,6:1},{3:1,4:1,5:1},{3:1,6:2},{3:1,5:1,6:1},{4:1,5:2},{4:1,7:2},{5:2,6:1},{5:2,6:1},{5:2,6:1},{0:1,1:1,6:2},{0:1,3:2,6:1},{2:2,5:1,6:1},{2:1,3:1,6:2},{3:1,4:1,6:2}])[0m
+[32m2025-01-01 18:46:32,799 - INFO - False[0m
+[32m2025-01-01 18:46:38,275 - INFO - d_prime: 11 d: 13[0m
+[32m2025-01-01 18:46:38,279 - INFO - d_prime: 12 d: 13[0m
+[32m2025-01-01 18:46:38,283 - INFO - d_prime: 13 d: 13[0m
+[32m2025-01-01 18:46:38,285 - INFO - forbidden_vars: ([{0:1},{0:1},{0:1},{1:1},{1:1},{3:1},{5:1},{6:1},{1:2},{2:1,5:1},{2:1,5:1},{2:1,6:1},{2:1,3:1},{3:1,7:1},{3:1,7:1},{3:1,4:1},{4:1,5:1},{4:2},{6:1,7:1},{0:1,5:1,6:1},{0:1,2:1,5:1},{0:1,6:2},{0:1,6:1,7:1},{1:1,2:1,6:1},{2:1,4:1,6:1},{2:1,4:2},{2:1,4:1,6:1},{2:1,5:2},{2:1,4:1,5:1},{3:1,4:2},{4:2,6:1},{0:1,2:1,3:1,5:1},{0:1,2:1,5:1,6:1},{0:1,2:1,4:2},{1:2,3:1,7:1},{2:1,3:1,5:1,6:1},{2:1,3:1,6:1,7:1},{2:1,6:3},{3:1,6:3},{3:1,4:2,7:2}])[0m
+[32m2025-01-01 18:46:38,285 - INFO - False[0m
+     0     0  874.00000    0 3924          -  874.00000      -     -  209s
+[32m2025-01-01 18:47:09,627 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-01 18:47:09,630 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-01 18:47:09,631 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-01 18:47:09,633 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-01 18:47:09,635 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-01 18:47:09,637 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-01 18:47:09,638 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-01 18:47:09,640 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-01 18:47:09,642 - INFO - d_prime: 11 d: 3[0m
+[32m2025-01-01 18:47:09,644 - INFO - d_prime: 12 d: 3[0m
+[32m2025-01-01 18:47:09,646 - INFO - d_prime: 13 d: 3[0m
+[32m2025-01-01 18:47:09,647 - INFO - forbidden_vars: ([{2:1},{3:1},{4:1},{4:1},{0:1,1:1},{2:1,4:1},{2:1,5:1},{3:1,4:1},{4:1,5:1},{0:1,3:1,6:1},{1:1,3:1,4:1},{2:1,6:2},{3:1,6:2},{3:1,5:1,6:1},{3:1,6:2},{1:1,3:1,4:1,6:1},{1:1,2:1,3:2},{1:1,3:3,6:1}])[0m
+[32m2025-01-01 18:47:09,647 - INFO - False[0m
+[32m2025-01-01 18:47:14,785 - INFO - d_prime: 4 d: 4[0m
+[32m2025-01-01 18:47:14,787 - INFO - d_prime: 5 d: 4[0m
+[32m2025-01-01 18:47:14,790 - INFO - d_prime: 6 d: 4[0m
+[32m2025-01-01 18:47:14,792 - INFO - d_prime: 7 d: 4[0m
+[32m2025-01-01 18:47:14,794 - INFO - d_prime: 8 d: 4[0m
+[32m2025-01-01 18:47:14,796 - INFO - d_prime: 9 d: 4[0m
+[32m2025-01-01 18:47:14,798 - INFO - d_prime: 10 d: 4[0m
+[32m2025-01-01 18:47:14,800 - INFO - d_prime: 11 d: 4[0m
+[32m2025-01-01 18:47:14,802 - INFO - d_prime: 12 d: 4[0m
+[32m2025-01-01 18:47:14,804 - INFO - d_prime: 13 d: 4[0m
+[32m2025-01-01 18:47:14,805 - INFO - forbidden_vars: ([{4:1},{6:1},{7:1},{0:2},{0:1,5:1},{1:1,6:1},{2:1,7:1},{2:1,5:1},{3:1,7:1},{3:1,5:1},{3:1,6:1},{4:1,5:1},{6:1,7:1},{6:1,7:1},{0:1,3:1,7:1},{0:1,3:1,7:1},{0:2,3:1},{0:1,2:1,7:1},{0:1,4:1,7:1},{0:1,2:1,4:1},{1:1,4:1,5:1},{1:1,2:1,7:1},{3:1,5:1,7:1},{3:1,4:1,7:1}])[0m
+[32m2025-01-01 18:47:14,806 - INFO - False[0m
+[32m2025-01-01 18:47:18,539 - INFO - d_prime: 5 d: 5[0m
+[32m2025-01-01 18:47:18,542 - INFO - d_prime: 6 d: 5[0m
+[32m2025-01-01 18:47:18,545 - INFO - d_prime: 7 d: 5[0m
+[32m2025-01-01 18:47:18,547 - INFO - d_prime: 8 d: 5[0m
+[32m2025-01-01 18:47:18,550 - INFO - d_prime: 9 d: 5[0m
+[32m2025-01-01 18:47:18,553 - INFO - d_prime: 10 d: 5[0m
+[32m2025-01-01 18:47:18,555 - INFO - d_prime: 11 d: 5[0m
+[32m2025-01-01 18:47:18,558 - INFO - d_prime: 12 d: 5[0m
+[32m2025-01-01 18:47:18,561 - INFO - d_prime: 13 d: 5[0m
+[32m2025-01-01 18:47:18,562 - INFO - forbidden_vars: ([{0:1},{2:1},{2:1},{3:1},{6:1},{0:1,2:1},{0:1,6:1},{1:1,5:1},{2:1,4:1},{2:1,6:1},{2:2},{2:1,7:1},{3:1,5:1},{0:1,5:1,6:1},{0:1,4:1,7:1},{0:1,1:2},{1:2,7:1},{2:1,4:1,7:1},{2:1,4:2},{2:1,4:1,5:1},{2:1,4:1,7:1},{4:2,5:1},{4:1,5:2},{5:1,7:2},{0:2,3:1,4:1},{0:1,4:1,7:2},{2:1,3:1,4:1,6:1}])[0m
+[32m2025-01-01 18:47:18,562 - INFO - False[0m

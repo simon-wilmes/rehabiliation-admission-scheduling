@@ -3,23 +3,25 @@ from itertools import product
 from pathlib import Path
 from copy import copy
 from time import sleep
-
+from random import shuffle
 
 # 0. Define all parameters
 params = {
     "$RUNTIME": "01:00:00",
-    "$MEMORY": "5210MB",
-    "$PARTITION": "devel",  # "c23mm",
-    "$OUTPUT_FOLDER": "/work/wx350715/Kobra",
+    "$MEMORY": "10560MB",
+    "$PARTITION": "c23ml",  # "c23mm",
+    "$OUTPUT_FOLDER": "/work/wx350715/Kobra/output",
     "$SCRIPT_FOLDER": "/home/wx350715/Kobra/rehabiliation-admission-scheduling",
+    "$REPETITION": 1,
 }
 params_for_hash = {"$PARTITION", "$MEMORY", "$RUNTIME"}
 
 TEMPLATE_PATH = "cluster/cluster.template"
+SCRIPTS_FOLDER = "/work/wx350715/Kobra/scripts"
 
 # 1. Find all the instance files for the computational_study
 folder_path = (
-    "/home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_001"
+    "/home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002"
 )
 
 # Get all instance files
@@ -117,7 +119,7 @@ all_output = [
 # Get the starting hash from the output files
 hashes = set()
 for output_file in all_output:
-    hash = output_file.name.split("_")[0]
+    hash = output_file.name.split("_")[2]
     hashes.add(hash)
 import hashlib
 import subprocess
@@ -130,6 +132,7 @@ for solver_combi, instance_file in product(all_combis, instance_files):
     solver_combi_copy = copy(solver_combi)
     for param in params_for_hash:
         solver_combi_copy[param] = params[param]
+
     combi_str = str(
         sorted(
             [(key, value) for key, value in solver_combi_copy.items()],
@@ -149,6 +152,7 @@ for solver_combi, instance_file in product(all_combis, instance_files):
 print("")
 
 print(f"Need to run {len(to_run_combis)} combinations.")
+input("Press Enter to continue...")
 
 to_run_scripts = []
 # 5. Create the slurm scripts
@@ -174,7 +178,7 @@ for combi in to_run_combis:
         template_copy = template_copy.replace(key, str(value))
 
     # Write the template to a file
-    output_file = Path(output_path) / "scripts" / f"{hash}_cluster.sh"
+    output_file = Path(SCRIPTS_FOLDER) / f"{hash}_cluster.sh"
     to_run_scripts.append(output_file)
 
     with open(output_file, "w+") as f:
@@ -188,19 +192,31 @@ current_jobs = (
     len(result.stdout.decode("utf-8").strip().split("\n")) - 1
 )  # subtract 1 for the header line
 
-# Define the maximum number of jobs you want to run at the same time
+# Define the maximum number of jobs you can run at the same time
 max_jobs = 100
+max_jobs_to_run = 10000
 print("Currently running jobs:", current_jobs)
 print("Maximum number of jobs:", max_jobs)
+if max_jobs - current_jobs <= 0:
+    print("To many jobs are already running. Exiting.")
+    exit(0)
+
+
 print("Number of jobs to start:", min(max_jobs - current_jobs, len(to_run_scripts)))
-sleep(0.3)
+sleep(1)
 # Calculate the number of jobs to start
 jobs_to_start = min(max_jobs - current_jobs, len(to_run_scripts))
 
-
+# Shuffle the scripts so that the first k jobs are as diverse as possible
+shuffle(to_run_scripts)
+count = 0
 # Start the jobs
 for i, script in enumerate(to_run_scripts[:jobs_to_start]):
     print(f"Submitting job {i} {script}.")
     subprocess.run(["sbatch", script])
-    sleep(0.2)
-print(f"Submitted {jobs_to_start} jobs.")
+    sleep(0.4)
+    count += 1
+    if count >= max_jobs_to_run:
+        break
+
+print(f"Successfully submitted {jobs_to_start} jobs.")

@@ -308,7 +308,6 @@ class LBBDSolver(Solver):
                         )
                         self.num_constraints_added += 1
         else:
-
             for d_prime in self.subsolver.get_days_symmetric_to(d):
                 forbidden_vars = []
                 abort = False
@@ -453,7 +452,7 @@ class LBBDSolver(Solver):
     def _set_optimization_goal(self):
 
         minimize_delay = gp.quicksum(
-            (d - min(self.A_p[p])) * self.a_pd[p, d]
+            (d - min(self.D_p[p])) * self.a_pd[p, d]
             for p in self.P
             for d in self.D_p[p]
         )
@@ -618,17 +617,13 @@ class LBBDSolver(Solver):
                     continue
                 for d in self.A_p[p]:
                     # check if the window is partially outside of patients stay => ignore
-                    if (
-                        d + self.e_w >= p.admitted_before_date.day + p.length_of_stay
-                        or d + self.e_w > max(self.D) + 1
-                    ):
-                        continue
 
                     self.model.addConstr(
                         gp.quicksum(
                             self.x_pmdri[p, m, d_prime, r, i]
                             for m in self.M_p[p]
                             for d_prime in range(d, d + self.e_w)
+                            if d_prime in self.A_p[p]
                             for r in self.BD_L_pm[p, m]
                             for i in self.J_md[m, d_prime]
                         )

@@ -1,0 +1,403 @@
+1.NAME: MIPSolver
+2.PARAMS: {'use_lazy_constraints': False}
+3.INSTANCE: /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_4_5.txt
+4.REPETITION: 1
+Current directory: /home/wx350715/Kobra/rehabiliation-admission-scheduling
+[34m2025-01-01 15:58:45,849 - DEBUG - Solver: <class 'src.solvers.mip.MIPSolver'>[0m
+[34m2025-01-01 15:58:45,849 - DEBUG - Args: {'use_lazy_constraints': False}[0m
+[34m2025-01-01 15:58:45,849 - DEBUG - File path /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_4_5.txt[0m
+[34m2025-01-01 15:58:45,849 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 15:58:45,849 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 15:58:45,849 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 15:58:45,849 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 15:58:45,849 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 15:58:45,849 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 15:58:45,849 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 15:58:45,849 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 15:58:45,849 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 15:58:45,849 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 15:58:45,849 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-01 15:58:45,850 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-01 15:58:45,850 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-01 15:58:45,850 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-01 15:58:45,850 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-01 15:58:45,850 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 15:58:45,850 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 15:58:45,850 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 15:58:45,850 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 15:58:45,850 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 15:58:45,850 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 15:58:45,850 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 15:58:45,850 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 15:58:45,850 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 15:58:45,850 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-01 15:58:45,851 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 15:58:45,851 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 15:58:45,851 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 15:58:45,851 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 15:58:45,851 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 15:58:45,851 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 15:58:45,851 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 15:58:45,851 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-01 15:58:45,851 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,851 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,851 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,851 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,852 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,852 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,852 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,852 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,852 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,852 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,852 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,852 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,852 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,852 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,852 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,853 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,853 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,853 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,853 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,853 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,853 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,853 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,853 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,853 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,853 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,853 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,854 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,854 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,854 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,855 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-01 15:58:45,855 - DEBUG - Instance data:[0m
+[34m2025-01-01 15:58:45,855 - DEBUG - Number of patients: 30[0m
+[34m2025-01-01 15:58:45,855 - DEBUG - Number of beds: 40[0m
+[34m2025-01-01 15:58:45,855 - DEBUG - Average number of treatments per patient: 26.5[0m
+[34m2025-01-01 15:58:45,855 - DEBUG - Average number of treatment per stayed day: 2.2910662824207493[0m
+[34m2025-01-01 15:58:45,855 - DEBUG - Number of treatments: 795[0m
+[34m2025-01-01 15:58:45,855 - DEBUG - Number of resources: 10[0m
+[34m2025-01-01 15:58:45,855 - DEBUG - Number of resource groups: 4[0m
+[34m2025-01-01 15:58:45,855 - DEBUG - Number of resource hours needed per all treatment by RG(therapists): 22.441666666666695[0m
+[34m2025-01-01 15:58:45,855 - DEBUG - Number of resource hours needed per all treatment by RG(rooms): 41.99166666666666[0m
+[34m2025-01-01 15:58:45,855 - DEBUG - Number of resource hours needed per all treatment by RG(physiotherapist): 15.5[0m
+[34m2025-01-01 15:58:45,855 - DEBUG - Number of resource hours needed per all treatment by RG(sport_room): 6.75[0m
+[32m2025-01-01 15:58:45,855 - INFO - {'solver': 'MIPSolver', 'args': {'use_lazy_constraints': True, 'enforce_min_treatments_per_day': True, 'enforce_max_treatments_per_e_w': True, 'enforce_min_patients_per_treatment': True, 'log_to_console': True}}[0m
+[34m2025-01-01 15:58:45,855 - DEBUG - Setting options: MIPSolver[0m
+[34m2025-01-01 15:58:45,855 - DEBUG -  ---- use_lazy_constraints to True[0m
+[34m2025-01-01 15:58:45,855 - DEBUG - Setting options: Solver[0m
+[34m2025-01-01 15:58:45,855 - DEBUG -  ---- number_of_threads to 4 (default)[0m
+[34m2025-01-01 15:58:45,855 - DEBUG -  ---- treatment_value to 0 (default)[0m
+[34m2025-01-01 15:58:45,855 - DEBUG -  ---- delay_value to 1 (default)[0m
+[34m2025-01-01 15:58:45,855 - DEBUG -  ---- missing_treatment_value to 4 (default)[0m
+[34m2025-01-01 15:58:45,855 - DEBUG -  ---- enforce_min_treatments_per_day to True[0m
+[34m2025-01-01 15:58:45,855 - DEBUG -  ---- enforce_max_treatments_per_e_w to True[0m
+[34m2025-01-01 15:58:45,856 - DEBUG -  ---- enforce_min_patients_per_treatment to True[0m
+[34m2025-01-01 15:58:45,856 - DEBUG -  ---- log_to_console to True[0m
+[34m2025-01-01 15:58:45,856 - DEBUG -  ---- log_to_file to True (default)[0m
+[34m2025-01-01 15:58:45,856 - DEBUG -  ---- no_rel_heur_time to 1 (default)[0m
+[32m2025-01-01 15:58:45,935 - INFO - Create model: MIPSolver[0m
+Set parameter TSPort to value 50039
+Set parameter TokenServer to value "license.itc.rwth-aachen.de"
+Set parameter Threads to value 4
+Set parameter Cuts to value 0
+Set parameter NoRelHeurTime to value 1
+Set parameter LazyConstraints to value 1
+[34m2025-01-01 15:58:55,738 - DEBUG - Variables created.[0m
+[34m2025-01-01 15:59:06,372 - DEBUG - Constraint (p1) created.[0m
+[34m2025-01-01 15:59:08,492 - DEBUG - Constraint (when_admitted) created.[0m
+[34m2025-01-01 15:59:10,949 - DEBUG - Constraint (p3) created.[0m
+[34m2025-01-01 15:59:10,951 - DEBUG - Constraint (p4) created.[0m
+[34m2025-01-01 15:59:10,951 - DEBUG - Constraint (p7) created.[0m
+[34m2025-01-01 15:59:12,363 - DEBUG - Constraint (r3) created.[0m
+[34m2025-01-01 15:59:15,600 - DEBUG - Constraint (r4) created.[0m
+[34m2025-01-01 15:59:20,248 - DEBUG - Constraint (a1) created.[0m
+[34m2025-01-01 15:59:20,581 - DEBUG - Constraint (a4) created.[0m
+[34m2025-01-01 15:59:20,668 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-01 15:59:20,755 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-01 15:59:20,755 - DEBUG - Constraint (already_admitted) created.[0m
+[32m2025-01-01 15:59:27,317 - INFO - Time to create model: 41.382[0m
+[32m2025-01-01 15:59:27,318 - INFO - Solving model: MIPSolver[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 4 threads
+
+Optimize a model with 1860912 rows, 1448611 columns and 10556422 nonzeros
+Model fingerprint: 0x1693d841
+Variable types: 2 continuous, 1448609 integer (1448609 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+03]
+Presolve removed 789691 rows and 540947 columns (presolve time = 5s) ...
+Presolve removed 818521 rows and 541203 columns (presolve time = 10s) ...
+Presolve removed 818613 rows and 542513 columns (presolve time = 15s) ...
+Presolve removed 818613 rows and 552083 columns (presolve time = 20s) ...
+Presolve removed 818613 rows and 552083 columns (presolve time = 25s) ...
+Presolve removed 818613 rows and 552083 columns (presolve time = 30s) ...
+Presolve removed 818613 rows and 552083 columns (presolve time = 35s) ...
+Presolve removed 818613 rows and 552083 columns (presolve time = 40s) ...
+Presolve removed 818613 rows and 552083 columns (presolve time = 45s) ...
+Presolve removed 818613 rows and 552083 columns (presolve time = 50s) ...
+Presolve removed 818613 rows and 552083 columns (presolve time = 55s) ...
+Presolve removed 818613 rows and 552083 columns (presolve time = 60s) ...
+Presolve removed 818613 rows and 552083 columns (presolve time = 65s) ...
+Presolve removed 818613 rows and 552083 columns (presolve time = 70s) ...
+Presolve removed 818613 rows and 552083 columns (presolve time = 75s) ...
+Presolve removed 818613 rows and 552083 columns (presolve time = 80s) ...
+Presolve removed 818613 rows and 552083 columns (presolve time = 85s) ...
+Presolve removed 818613 rows and 552083 columns (presolve time = 90s) ...
+Presolve removed 818613 rows and 552083 columns (presolve time = 95s) ...
+Presolve removed 818613 rows and 558221 columns (presolve time = 104s) ...
+Presolve removed 818613 rows and 558221 columns (presolve time = 105s) ...
+Presolve removed 818613 rows and 558221 columns (presolve time = 110s) ...
+Presolve removed 818613 rows and 558221 columns (presolve time = 123s) ...
+Presolve removed 840501 rows and 559373 columns (presolve time = 125s) ...
+Presolve removed 840449 rows and 559283 columns
+Presolve time: 130.00s
+Presolved: 1020463 rows, 889328 columns, 5840483 nonzeros
+Variable types: 0 continuous, 889328 integer (889237 binary)
+Starting NoRel heuristic
+Found phase-1 solution: relaxation 166
+Root relaxation presolved: 1020309 rows, 889482 columns, 5775853 nonzeros
+
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Elapsed ordering time = 5s
+Elapsed ordering time = 10s
+Elapsed ordering time = 17s
+Elapsed ordering time = 20s
+Elapsed ordering time = 25s
+Elapsed ordering time = 30s
+Elapsed ordering time = 35s
+Elapsed ordering time = 40s
+Elapsed ordering time = 45s
+Ordering time: 48.84s
+
+Barrier statistics:
+ Dense cols : 85
+ AA' NZ     : 1.737e+07
+ Factor NZ  : 1.558e+08 (roughly 2.0 GB of memory)
+ Factor Ops : 6.291e+10 (roughly 7 seconds per iteration)
+ Threads    : 2
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -1.88050682e+07 -5.73754178e+06  4.41e+05 1.50e+00  4.72e+02   213s
+   1  -1.39746493e+07 -5.91059604e+06  3.28e+05 7.49e+00  3.56e+02   225s
+   2  -1.05655089e+07 -6.05055342e+06  2.48e+05 7.43e+00  2.73e+02   237s
+   3  -8.52596119e+06 -6.23301475e+06  2.01e+05 5.54e+00  2.21e+02   250s
+   4  -5.86566018e+06 -6.45115586e+06  1.39e+05 2.51e+00  1.52e+02   266s
+   5  -2.98176910e+06 -6.33816557e+06  7.07e+04 6.24e-01  7.80e+01   282s
+   6  -7.60613517e+05 -5.38817781e+06  1.81e+04 3.60e-02  2.12e+01   298s
+   7  -5.67338560e+05 -4.26809522e+06  1.35e+04 1.29e-02  1.51e+01   311s
+   8  -3.80525945e+05 -3.37099581e+06  9.06e+03 4.76e-03  9.98e+00   325s
+   9  -3.04280870e+05 -2.27343989e+06  7.25e+03 3.84e-13  7.43e+00   335s
+  10  -2.02208272e+05 -2.07313801e+06  4.83e+03 3.27e-13  5.19e+00   347s
+  11  -9.43344812e+04 -1.11358821e+06  2.27e+03 4.50e-04  2.39e+00   359s
+  12  -6.33503700e+04 -7.71028708e+05  1.54e+03 3.51e-04  1.59e+00   372s
+  13  -2.40984087e+04 -5.38870136e+05  6.04e+02 2.93e-04  7.34e-01   388s
+  14  -1.71056831e+04 -3.32755539e+05  4.34e+02 2.07e-04  4.84e-01   404s
+  15  -9.00718815e+03 -2.50653285e+05  2.36e+02 1.47e-04  2.91e-01   419s
+  16  -6.51550234e+03 -1.77977114e+05  1.74e+02 1.04e-04  2.04e-01   432s
+  17  -4.74953299e+03 -1.36058272e+05  1.31e+02 7.28e-05  1.50e-01   444s
+  18  -2.73194918e+03 -9.55575047e+04  8.22e+01 5.16e-05  9.52e-02   455s
+  19  -1.26383556e+03 -8.14102351e+04  4.70e+01 4.33e-05  6.64e-02   466s
+  20  -2.68543439e+02 -6.34546687e+04  2.34e+01 3.00e-05  4.32e-02   476s
+  21   6.82129511e+01 -4.19347399e+04  1.53e+01 1.77e-05  2.71e-02   488s
+  22   5.63639426e+02 -2.61236016e+04  3.36e+00 1.11e-05  1.43e-02   501s
+  23   6.74542328e+02 -1.45361420e+04  6.38e-01 5.93e-06  7.63e-03   516s
+  24   6.86970774e+02 -6.71811831e+02  2.75e-01 1.23e-05  6.81e-04   532s
+  25   6.86315126e+02  4.51323270e+01  2.13e-01 7.73e-05  3.23e-04   544s
+  26   6.86449589e+02  5.89048554e+02  7.44e-02 5.06e-05  4.96e-05   557s
+  27   6.84684391e+02  6.52825577e+02  1.13e-02 4.78e-05  1.59e-05   569s
+  28   6.84540596e+02  6.59636500e+02  7.89e-03 3.80e-05  1.24e-05   579s
+  29   6.84352893e+02  6.67630119e+02  4.13e-03 2.64e-05  8.31e-06   591s
+  30   6.84250244e+02  6.72642258e+02  3.05e-03 1.73e-05  5.77e-06   604s
+  31   6.84182903e+02  6.75449515e+02  2.36e-03 1.26e-05  4.34e-06   619s
+  32   6.84173344e+02  6.76038634e+02  2.23e-03 1.17e-05  4.05e-06   631s
+  33   6.84132974e+02  6.77131934e+02  1.76e-03 1.01e-05  3.48e-06   643s
+  34   6.84109475e+02  6.82218264e+02  1.37e-03 2.61e-06  9.59e-07   656s
+  35   6.84046482e+02  6.83249602e+02  3.36e-04 9.79e-07  3.99e-07   670s
+  36   6.84017959e+02  6.83655951e+02  1.47e-04 1.20e-06  1.81e-07   683s
+  37   6.84006734e+02  6.83883917e+02  6.33e-05 9.05e-07  6.17e-08   696s
+  38   6.84001685e+02  6.83989826e+02  1.33e-05 1.93e-07  6.12e-09   706s
+  39   6.84000011e+02  6.83999721e+02  2.84e-08 4.14e-08  1.43e-10   718s
+  40   6.84000000e+02  6.84000000e+02  7.53e-12 8.39e-11  1.43e-13   731s
+
+Barrier solved model in 40 iterations and 730.58 seconds (240.66 work units)
+Optimal objective 6.84000000e+02
+
+
+Root crossover log...
+
+   26570 DPushes remaining with DInf 0.0000000e+00               734s
+       0 DPushes remaining with DInf 0.0000000e+00               735s
+
+  498592 PPushes remaining with PInf 0.0000000e+00               735s
+  209180 PPushes remaining with PInf 1.3414797e-05               741s
+  183190 PPushes remaining with PInf 1.3414797e-05               745s
+  149286 PPushes remaining with PInf 0.0000000e+00               751s
+  141394 PPushes remaining with PInf 0.0000000e+00               758s
+  134468 PPushes remaining with PInf 0.0000000e+00               761s
+  115924 PPushes remaining with PInf 0.0000000e+00               768s
+  108297 PPushes remaining with PInf 0.0000000e+00               771s
+   99314 PPushes remaining with PInf 0.0000000e+00               776s
+   90025 PPushes remaining with PInf 0.0000000e+00               781s
+   82101 PPushes remaining with PInf 0.0000000e+00               787s
+   77183 PPushes remaining with PInf 0.0000000e+00               790s
+   71779 PPushes remaining with PInf 0.0000000e+00               797s
+   68972 PPushes remaining with PInf 0.0000000e+00               802s
+   67507 PPushes remaining with PInf 1.7280166e-04               806s
+   62649 PPushes remaining with PInf 1.7280166e-04               813s
+   60326 PPushes remaining with PInf 1.7280166e-04               816s
+   58257 PPushes remaining with PInf 1.7280166e-04               822s
+   56400 PPushes remaining with PInf 1.7280166e-04               827s
+   55897 PPushes remaining with PInf 1.7280166e-04               830s
+   54898 PPushes remaining with PInf 1.7280166e-04               836s
+   53215 PPushes remaining with PInf 1.7280166e-04               841s
+   52189 PPushes remaining with PInf 1.7280166e-04               847s
+   51666 PPushes remaining with PInf 1.7280166e-04               850s
+   50604 PPushes remaining with PInf 1.7280166e-04               857s
+   49222 PPushes remaining with PInf 1.7280166e-04               862s
+   48699 PPushes remaining with PInf 1.7280166e-04               865s
+   47598 PPushes remaining with PInf 1.7280166e-04               871s
+   46489 PPushes remaining with PInf 1.7280166e-04               878s
+   46008 PPushes remaining with PInf 1.7280166e-04               881s
+   45068 PPushes remaining with PInf 1.7280166e-04               889s
+   44576 PPushes remaining with PInf 1.7280166e-04               892s
+   44116 PPushes remaining with PInf 1.7280166e-04               895s
+   42846 PPushes remaining with PInf 1.7280166e-04               903s
+   42045 PPushes remaining with PInf 1.7280166e-04               907s
+   41485 PPushes remaining with PInf 1.7280166e-04               910s
+   40402 PPushes remaining with PInf 1.7280166e-04               918s
+   39913 PPushes remaining with PInf 1.7280166e-04               922s
+   39414 PPushes remaining with PInf 1.7280166e-04               926s
+   38953 PPushes remaining with PInf 1.7280166e-04               931s
+   38471 PPushes remaining with PInf 0.0000000e+00               936s
+   38009 PPushes remaining with PInf 0.0000000e+00               940s
+   37250 PPushes remaining with PInf 0.0000000e+00               946s
+   36623 PPushes remaining with PInf 0.0000000e+00               951s
+   36103 PPushes remaining with PInf 0.0000000e+00               956s
+   35118 PPushes remaining with PInf 0.0000000e+00               964s
+   34641 PPushes remaining with PInf 0.0000000e+00               968s
+   34166 PPushes remaining with PInf 0.0000000e+00               974s
+   33709 PPushes remaining with PInf 0.0000000e+00               979s
+   33252 PPushes remaining with PInf 0.0000000e+00               984s
+   32794 PPushes remaining with PInf 0.0000000e+00               990s
+   32276 PPushes remaining with PInf 0.0000000e+00               997s
+   31777 PPushes remaining with PInf 0.0000000e+00              1003s
+   31305 PPushes remaining with PInf 0.0000000e+00              1008s
+   30835 PPushes remaining with PInf 0.0000000e+00              1013s
+   30372 PPushes remaining with PInf 0.0000000e+00              1018s
+   29906 PPushes remaining with PInf 0.0000000e+00              1024s
+   29444 PPushes remaining with PInf 0.0000000e+00              1030s
+   28985 PPushes remaining with PInf 0.0000000e+00              1036s
+   28528 PPushes remaining with PInf 0.0000000e+00              1043s
+   28071 PPushes remaining with PInf 0.0000000e+00              1050s
+   27559 PPushes remaining with PInf 0.0000000e+00              1056s
+   27094 PPushes remaining with PInf 0.0000000e+00              1063s
+   26628 PPushes remaining with PInf 0.0000000e+00              1069s
+   26162 PPushes remaining with PInf 0.0000000e+00              1075s
+   25703 PPushes remaining with PInf 0.0000000e+00              1082s
+   25202 PPushes remaining with PInf 0.0000000e+00              1089s
+   24698 PPushes remaining with PInf 0.0000000e+00              1096s
+   24231 PPushes remaining with PInf 1.2730568e-03              1102s
+   23766 PPushes remaining with PInf 1.2730568e-03              1109s
+   23308 PPushes remaining with PInf 1.2730568e-03              1116s
+   22802 PPushes remaining with PInf 1.2730568e-03              1124s
+   22315 PPushes remaining with PInf 1.2730568e-03              1131s
+   21852 PPushes remaining with PInf 1.2730568e-03              1138s
+   21380 PPushes remaining with PInf 0.0000000e+00              1145s
+   20919 PPushes remaining with PInf 0.0000000e+00              1152s
+   20456 PPushes remaining with PInf 0.0000000e+00              1161s
+   19960 PPushes remaining with PInf 0.0000000e+00              1169s
+   19428 PPushes remaining with PInf 0.0000000e+00              1177s
+   18964 PPushes remaining with PInf 0.0000000e+00              1186s
+   18492 PPushes remaining with PInf 0.0000000e+00              1195s
+   17992 PPushes remaining with PInf 0.0000000e+00              1204s
+   17514 PPushes remaining with PInf 0.0000000e+00              1212s
+   17049 PPushes remaining with PInf 0.0000000e+00              1220s
+   16518 PPushes remaining with PInf 0.0000000e+00              1229s
+   16009 PPushes remaining with PInf 0.0000000e+00              1239s
+   15543 PPushes remaining with PInf 0.0000000e+00              1248s
+   15086 PPushes remaining with PInf 0.0000000e+00              1257s
+   14612 PPushes remaining with PInf 0.0000000e+00              1267s
+   14089 PPushes remaining with PInf 0.0000000e+00              1277s
+   13615 PPushes remaining with PInf 0.0000000e+00              1287s
+   13152 PPushes remaining with PInf 0.0000000e+00              1297s
+   12679 PPushes remaining with PInf 0.0000000e+00              1308s
+   12195 PPushes remaining with PInf 0.0000000e+00              1319s
+   11729 PPushes remaining with PInf 0.0000000e+00              1330s
+   11205 PPushes remaining with PInf 0.0000000e+00              1342s
+   10716 PPushes remaining with PInf 0.0000000e+00              1353s
+   10250 PPushes remaining with PInf 0.0000000e+00              1364s
+    9782 PPushes remaining with PInf 0.0000000e+00              1375s
+    9216 PPushes remaining with PInf 0.0000000e+00              1388s
+    8740 PPushes remaining with PInf 0.0000000e+00              1399s
+    8267 PPushes remaining with PInf 0.0000000e+00              1410s
+    7788 PPushes remaining with PInf 0.0000000e+00              1421s
+    7297 PPushes remaining with PInf 0.0000000e+00              1431s
+    6781 PPushes remaining with PInf 0.0000000e+00              1442s
+    6296 PPushes remaining with PInf 0.0000000e+00              1451s
+    5819 PPushes remaining with PInf 0.0000000e+00              1462s
+    5352 PPushes remaining with PInf 0.0000000e+00              1472s
+    4869 PPushes remaining with PInf 0.0000000e+00              1483s
+    4389 PPushes remaining with PInf 0.0000000e+00              1495s
+    3915 PPushes remaining with PInf 0.0000000e+00              1508s
+    3414 PPushes remaining with PInf 0.0000000e+00              1524s
+    2925 PPushes remaining with PInf 0.0000000e+00              1536s
+    2456 PPushes remaining with PInf 0.0000000e+00              1550s
+    1939 PPushes remaining with PInf 0.0000000e+00              1566s
+    1467 PPushes remaining with PInf 0.0000000e+00              1582s
+     960 PPushes remaining with PInf 0.0000000e+00              1599s
+     463 PPushes remaining with PInf 0.0000000e+00              1616s
+       0 PPushes remaining with PInf 0.0000000e+00              1632s
+
+  Push phase complete: Pinf 0.0000000e+00, Dinf 2.0758937e-09   1632s
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+  522540    6.8400000e+02   0.000000e+00   0.000000e+00   1634s
+Concurrent spin time: 0.08s
+
+Solved with barrier
+  522540    6.8400000e+02   0.000000e+00   0.000000e+00   1636s
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root crossover log...
+
+   15458 DPushes remaining with DInf 0.0000000e+00              1637s
+       0 DPushes remaining with DInf 0.0000000e+00              1637s
+
+   31799 PPushes remaining with PInf 0.0000000e+00              1637s
+    4976 PPushes remaining with PInf 0.0000000e+00              1641s
+    3329 PPushes remaining with PInf 0.0000000e+00              1646s
+    2242 PPushes remaining with PInf 0.0000000e+00              1651s
+    1174 PPushes remaining with PInf 0.0000000e+00              1657s
+     607 PPushes remaining with PInf 0.0000000e+00              1661s
+      32 PPushes remaining with PInf 0.0000000e+00              1667s
+       0 PPushes remaining with PInf 0.0000000e+00              1667s
+
+  Push phase complete: Pinf 0.0000000e+00, Dinf 7.0977332e-10   1668s
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+  554349    6.8400000e+02   0.000000e+00   0.000000e+00   1668s
+  554349    6.8400000e+02   0.000000e+00   0.000000e+00   1669s
+
+Root relaxation: objective 6.840000e+02, 554349 iterations, 1526.99 seconds (405.35 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  684.00000    0 23047          -  684.00000      -     - 3073s

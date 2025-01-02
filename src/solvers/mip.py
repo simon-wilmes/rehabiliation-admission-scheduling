@@ -420,18 +420,13 @@ class MIPSolver(Solver):
                     continue
                 for d in self.A_p[p]:
                     # check if the window is partially outside of patients stay => ignore
-                    if (
-                        d + self.e_w >= p.admitted_before_date.day + p.length_of_stay
-                        or d + self.e_w > max(self.D) + 1
-                    ):
-                        continue
-
                     self.model.addConstr(
                         gp.quicksum(
                             self.x_pmdt[p, m, d_prime, t]
                             for m in self.M_p[p]
                             for t in self.T
                             for d_prime in range(d, d + self.e_w)
+                            if d_prime in self.A_p[p]
                         )
                         <= self.e_w_upper[p],
                         name=f"constraint_a4_ub_p{p.id}_d{d}",

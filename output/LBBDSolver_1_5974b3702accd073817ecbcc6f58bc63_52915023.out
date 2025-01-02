@@ -1,0 +1,407 @@
+1.NAME: LBBDSolver
+2.PARAMS: {'break_symmetry': True, 'add_constraints_to_symmetrc_days': True, 'subsolver_cls': 'CPSubSolver2'}
+3.INSTANCE: /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_6_30.txt
+4.REPETITION: 1
+Current directory: /home/wx350715/Kobra/rehabiliation-admission-scheduling
+[34m2025-01-02 11:00:37,627 - DEBUG - Solver: <class 'src.solvers.benders.LBBDSolver'>[0m
+[34m2025-01-02 11:00:37,627 - DEBUG - Args: {'break_symmetry': True, 'add_constraints_to_symmetrc_days': True, 'subsolver_cls': 'CPSubSolver2'}[0m
+[34m2025-01-02 11:00:37,627 - DEBUG - File path /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_6_30.txt[0m
+[34m2025-01-02 11:00:37,628 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-02 11:00:37,628 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-02 11:00:37,628 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-02 11:00:37,628 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-02 11:00:37,628 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-02 11:00:37,628 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-02 11:00:37,628 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-02 11:00:37,628 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-02 11:00:37,628 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-02 11:00:37,628 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-02 11:00:37,628 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-02 11:00:37,628 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-02 11:00:37,629 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-02 11:00:37,629 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-02 11:00:37,629 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-02 11:00:37,629 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-02 11:00:37,629 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-02 11:00:37,629 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-02 11:00:37,629 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-02 11:00:37,629 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-02 11:00:37,629 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-02 11:00:37,629 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-02 11:00:37,629 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-02 11:00:37,629 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-02 11:00:37,629 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-02 11:00:37,629 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-02 11:00:37,630 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-02 11:00:37,630 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-02 11:00:37,630 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-02 11:00:37,630 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-02 11:00:37,630 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-02 11:00:37,630 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-02 11:00:37,630 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-02 11:00:37,630 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,630 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,630 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,630 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,630 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,631 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,631 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,631 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,631 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,631 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,631 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,631 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,631 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,631 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,631 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,631 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,632 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,632 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,632 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,632 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,632 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-02 11:00:37,632 - DEBUG - Instance data:[0m
+[34m2025-01-02 11:00:37,632 - DEBUG - Number of patients: 21[0m
+[34m2025-01-02 11:00:37,633 - DEBUG - Number of beds: 36[0m
+[34m2025-01-02 11:00:37,633 - DEBUG - Average number of treatments per patient: 32.38095238095238[0m
+[34m2025-01-02 11:00:37,633 - DEBUG - Average number of treatment per stayed day: 2.3859649122807016[0m
+[34m2025-01-02 11:00:37,633 - DEBUG - Number of treatments: 680[0m
+[34m2025-01-02 11:00:37,633 - DEBUG - Number of resources: 10[0m
+[34m2025-01-02 11:00:37,633 - DEBUG - Number of resource groups: 4[0m
+[34m2025-01-02 11:00:37,633 - DEBUG - Number of resource hours needed per all treatment by RG(therapists): 19.704166666666676[0m
+[34m2025-01-02 11:00:37,633 - DEBUG - Number of resource hours needed per all treatment by RG(rooms): 35.95416666666666[0m
+[34m2025-01-02 11:00:37,634 - DEBUG - Number of resource hours needed per all treatment by RG(physiotherapist): 15.5[0m
+[34m2025-01-02 11:00:37,634 - DEBUG - Number of resource hours needed per all treatment by RG(sport_room): 6.75[0m
+[32m2025-01-02 11:00:37,634 - INFO - {'solver': 'LBBDSolver', 'args': {'break_symmetry': False, 'subsolver_cls': <class 'src.solvers.subsolvers.cp_subsolver.CPSubsolver'>, 'subsolver.store_results': True, 'subsolver.store_results_method': 'hash', 'use_helper_constraints': True, 'enforce_min_treatments_per_day': True, 'enforce_max_treatments_per_e_w': True, 'enforce_min_patients_per_treatment': True, 'log_to_console': True}}[0m
+[34m2025-01-02 11:00:37,634 - DEBUG - Setting options: LBBDSolver[0m
+[34m2025-01-02 11:00:37,634 - DEBUG -  ---- break_symmetry to False[0m
+[34m2025-01-02 11:00:37,634 - DEBUG -  ---- subsolver_cls to <class 'src.solvers.subsolvers.cp_subsolver.CPSubsolver'>[0m
+[34m2025-01-02 11:00:37,634 - DEBUG -  ---- use_helper_constraints to True[0m
+[34m2025-01-02 11:00:37,634 - DEBUG -  ---- add_constraints_to_symmetric_days to True (default)[0m
+[34m2025-01-02 11:00:37,634 - DEBUG - Setting options: Solver[0m
+[34m2025-01-02 11:00:37,634 - DEBUG -  ---- number_of_threads to 4 (default)[0m
+[34m2025-01-02 11:00:37,634 - DEBUG -  ---- treatment_value to 0 (default)[0m
+[34m2025-01-02 11:00:37,634 - DEBUG -  ---- delay_value to 1 (default)[0m
+[34m2025-01-02 11:00:37,634 - DEBUG -  ---- missing_treatment_value to 4 (default)[0m
+[34m2025-01-02 11:00:37,634 - DEBUG -  ---- enforce_min_treatments_per_day to True[0m
+[34m2025-01-02 11:00:37,634 - DEBUG -  ---- enforce_max_treatments_per_e_w to True[0m
+[34m2025-01-02 11:00:37,634 - DEBUG -  ---- enforce_min_patients_per_treatment to True[0m
+[34m2025-01-02 11:00:37,634 - DEBUG -  ---- log_to_console to True[0m
+[34m2025-01-02 11:00:37,634 - DEBUG -  ---- log_to_file to True (default)[0m
+[34m2025-01-02 11:00:37,634 - DEBUG -  ---- no_rel_heur_time to 1 (default)[0m
+[34m2025-01-02 11:00:37,649 - DEBUG - Setting options: CPSubsolver[0m
+[34m2025-01-02 11:00:37,649 - DEBUG -  ---- estimated_needed_treatments to True (default)[0m
+[34m2025-01-02 11:00:37,649 - DEBUG -  ---- add_patient_symmetry to False (default)[0m
+[34m2025-01-02 11:00:37,649 - DEBUG - Setting Subsolver options: SubSolver[0m
+[34m2025-01-02 11:00:37,649 - DEBUG -  ---- store_results to True[0m
+[34m2025-01-02 11:00:37,649 - DEBUG -  ---- store_results_method to hash[0m
+[34m2025-01-02 11:00:37,649 - DEBUG -  ---- enforce_min_patients_per_treatment to True[0m
+[34m2025-01-02 11:00:37,649 - DEBUG -  ---- use_day_symmetry to True (default)[0m
+[32m2025-01-02 11:00:37,663 - INFO - Create model: LBBDSolver[0m
+Set parameter TSPort to value 50039
+Set parameter TokenServer to value "license.itc.rwth-aachen.de"
+Set parameter Threads to value 4
+Set parameter Cuts to value 0
+Set parameter LazyConstraints to value 1
+Set parameter NoRelHeurTime to value 1
+[34m2025-01-02 11:00:38,031 - DEBUG - Variables created.[0m
+[34m2025-01-02 11:00:39,209 - DEBUG - Constraint (not too many treatments) created.[0m
+[34m2025-01-02 11:00:40,011 - DEBUG - Constraint (no_treatments_outside admittance) created.[0m
+[34m2025-01-02 11:00:40,011 - DEBUG - Constraint (bed_usage) created.[0m
+[34m2025-01-02 11:00:40,012 - DEBUG - Constraint (must be admitted) created.[0m
+[34m2025-01-02 11:00:40,138 - DEBUG - Constraint (e_w_ub) created.[0m
+[34m2025-01-02 11:00:40,178 - DEBUG - Constraint (day_ub) created.[0m
+[34m2025-01-02 11:00:40,218 - DEBUG - Constraint (Day always) created.[0m
+[34m2025-01-02 11:00:40,218 - DEBUG - Constraint (already_admitted) created.[0m
+[32m2025-01-02 11:00:41,932 - INFO - Time to create model: 4.269[0m
+[32m2025-01-02 11:00:41,932 - INFO - Solving model: LBBDSolver[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 4 threads
+
+Optimize a model with 223441 rows, 93881 columns and 1798630 nonzeros
+Model fingerprint: 0xd03e3c89
+Variable types: 3 continuous, 93878 integer (93878 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+03]
+Presolve added 0 rows and 1440 columns
+Presolve removed 144064 rows and 0 columns
+Presolve time: 2.90s
+Presolved: 79377 rows, 95321 columns, 1187290 nonzeros
+Variable types: 1 continuous, 95320 integer (94520 binary)
+Starting NoRel heuristic
+Found phase-1 solution: relaxation 47
+Found phase-1 solution: relaxation 39
+Found phase-1 solution: relaxation 35
+Found phase-1 solution: relaxation 32
+Root relaxation presolved: 78994 rows, 95184 columns, 1118563 nonzeros
+
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Ordering time: 0.21s
+
+Barrier statistics:
+ Dense cols : 53
+ AA' NZ     : 1.071e+05
+ Factor NZ  : 3.548e+05 (roughly 8 MB of memory)
+ Factor Ops : 5.013e+07 (less than 1 second per iteration)
+ Threads    : 2
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -2.75310120e+06 -5.63497942e+04  6.16e+04 1.48e+00  7.65e+02     7s
+   1  -1.26922466e+06 -1.27122901e+05  2.84e+04 4.12e+00  3.48e+02     7s
+   2  -4.88195495e+05 -1.34842734e+05  1.10e+04 9.38e-13  1.40e+02     7s
+   3  -8.98983199e+04 -1.10433176e+05  2.07e+03 1.91e-13  3.01e+01     7s
+   4  -7.36412702e+04 -1.09441659e+05  1.70e+03 1.85e-13  2.56e+01     7s
+   5  -2.86223362e+04 -6.26340684e+04  6.65e+02 8.53e-14  1.02e+01     8s
+   6  -6.14942827e+03 -2.92391322e+04  1.54e+02 2.99e-04  2.90e+00     8s
+   7  -1.83031113e+03 -1.74514091e+04  5.69e+01 1.71e-04  1.37e+00     8s
+   8   1.59476302e+00 -6.61334070e+03  1.57e+01 5.88e-05  4.64e-01     8s
+   9   6.56403544e+02 -5.70483099e+02  6.65e-01 4.61e-06  6.87e-02     8s
+  10   6.64557632e+02  3.29462592e+02  2.40e-01 1.30e-05  1.88e-02     8s
+  11   6.69244210e+02  6.34508063e+02  1.34e-02 3.41e-06  1.91e-03     8s
+  12   6.68542572e+02  6.41218536e+02  5.58e-03 3.27e-06  1.49e-03     8s
+  13   6.68393728e+02  6.54451348e+02  3.46e-03 1.59e-06  7.61e-04     8s
+  14   6.68332015e+02  6.60025365e+02  3.88e-04 1.01e-06  4.49e-04     8s
+  15   6.68264464e+02  6.67523239e+02  9.89e-05 1.27e-05  4.02e-05     8s
+  16   6.68250343e+02  6.68244830e+02  2.08e-07 1.54e-07  2.98e-07     8s
+  17   6.68250000e+02  6.68250000e+02  7.19e-12 6.53e-08  1.87e-11     8s
+
+Barrier solved model in 17 iterations and 8.07 seconds (9.98 work units)
+Optimal objective 6.68250000e+02
+
+
+Root crossover log...
+
+     159 DPushes remaining with DInf 0.0000000e+00                 8s
+       0 DPushes remaining with DInf 0.0000000e+00                 8s
+
+    4754 PPushes remaining with PInf 0.0000000e+00                 8s
+Concurrent spin time: 0.33s (can be avoided by choosing Method=3)
+
+Solved with dual simplex
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+    4508    6.6825000e+02   0.000000e+00   0.000000e+00      8s
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root crossover log...
+
+       0 DPushes remaining with DInf 0.0000000e+00                 8s
+
+   15922 PPushes remaining with PInf 0.0000000e+00                 8s
+       0 PPushes remaining with PInf 0.0000000e+00                 9s
+
+  Push phase complete: Pinf 0.0000000e+00, Dinf 3.9680481e-12      9s
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+   20481    6.6825000e+02   0.000000e+00   0.000000e+00      9s
+   20481    6.6825000e+02   0.000000e+00   0.000000e+00      9s
+
+Root relaxation: objective 6.682500e+02, 20481 iterations, 3.34 seconds (1.00 work units)
+Total elapsed time = 14.14s
+Total elapsed time = 16.75s
+Total elapsed time = 20.07s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  668.25000    0  425          -  668.25000      -     -   21s
+     0     0  668.25000    0  372          -  668.25000      -     -   26s
+[32m2025-01-02 11:02:28,012 - INFO - d_prime: 9 d: 13[0m
+[32m2025-01-02 11:02:28,015 - INFO - d_prime: 10 d: 13[0m
+[32m2025-01-02 11:02:28,017 - INFO - d_prime: 11 d: 13[0m
+[32m2025-01-02 11:02:28,019 - INFO - d_prime: 12 d: 13[0m
+[32m2025-01-02 11:02:28,021 - INFO - d_prime: 13 d: 13[0m
+[32m2025-01-02 11:02:28,022 - INFO - forbidden_vars: ([{1:1},{6:1},{0:1,3:1},{1:1,3:1},{0:1,2:1,6:1},{0:1,2:1,4:1},{1:2,3:1},{1:2,2:1},{1:1,4:2},{0:1,3:1,5:1,6:1},{0:1,4:1,6:1,7:1},{0:1,1:2,2:1},{0:1,1:1,2:1,4:1},{2:1,6:1,7:2},{2:1,4:1,7:2},{2:1,5:3},{2:1,7:3},{4:2,5:2},{1:3,2:1,3:1},{5:3,6:1,7:1}])[0m
+[32m2025-01-02 11:02:28,023 - INFO - False[0m
+[32m2025-01-02 11:02:52,555 - INFO - d_prime: 8 d: 8[0m
+[32m2025-01-02 11:02:52,557 - INFO - d_prime: 9 d: 8[0m
+[32m2025-01-02 11:02:52,559 - INFO - d_prime: 10 d: 8[0m
+[32m2025-01-02 11:02:52,561 - INFO - d_prime: 11 d: 8[0m
+[32m2025-01-02 11:02:52,563 - INFO - d_prime: 12 d: 8[0m
+[32m2025-01-02 11:02:52,564 - INFO - d_prime: 13 d: 8[0m
+[32m2025-01-02 11:02:52,565 - INFO - forbidden_vars: ([{1:1},{5:1},{1:1,3:1},{3:1,5:1},{1:3},{1:1,3:1,6:1},{3:2,6:1},{3:2,6:1},{4:2,6:1},{6:1,7:2},{1:1,3:1,4:1,6:1},{1:1,3:1,6:1,7:1},{1:1,3:1,5:1,6:1},{1:3,3:1},{3:1,5:1,6:2},{3:1,6:3},{3:2,5:1,6:1},{3:1,4:1,6:2},{3:3,6:1}])[0m
+[32m2025-01-02 11:02:52,566 - INFO - False[0m
+[32m2025-01-02 11:02:53,705 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-02 11:02:53,707 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-02 11:02:53,709 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-02 11:02:53,710 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-02 11:02:53,712 - INFO - d_prime: 13 d: 10[0m
+[32m2025-01-02 11:02:53,713 - INFO - forbidden_vars: ([{3:1},{3:1},{4:1},{4:1},{0:1,4:1},{0:2},{0:1,1:1},{1:1,5:1},{1:1,3:1},{3:2},{3:2},{3:1,6:1},{0:3},{0:2,7:1},{0:2,6:1},{1:2,7:1},{1:1,4:2},{3:1,4:1,6:1},{3:1,4:1,6:1,7:1},{0:1,3:3,6:1}])[0m
+[32m2025-01-02 11:02:53,713 - INFO - False[0m
+     0     2  668.25000    0  372          -  668.25000      -     -  205s
+     3     8  668.29762    2  820          -  668.29762      -  8932  210s
+    15    20  673.00000    5  270          -  668.41667      -  2304  215s
+   183   196  673.00000   44  108          -  668.41667      -   229  220s
+   280   302  673.00000   67   87          -  668.41667      -   172  225s
+[32m2025-01-02 11:04:53,079 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-02 11:04:53,082 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-02 11:04:53,084 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-02 11:04:53,086 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-02 11:04:53,087 - INFO - d_prime: 13 d: 10[0m
+[32m2025-01-02 11:04:53,088 - INFO - forbidden_vars: ([{0:1},{1:1},{4:1},{5:1},{0:1,4:1},{0:1,4:1},{0:2},{0:1,1:1},{1:1,3:1},{3:2},{3:1,7:1},{3:1,6:1},{3:2},{0:3},{0:2,6:1},{1:2,7:1},{1:1,4:2},{3:1,4:1,6:1},{3:1,4:1,6:1,7:1},{0:1,3:3,6:1}])[0m
+[32m2025-01-02 11:04:53,088 - INFO - False[0m
+[32m2025-01-02 11:05:24,808 - INFO - d_prime: 9 d: 13[0m
+[32m2025-01-02 11:05:24,811 - INFO - d_prime: 10 d: 13[0m
+[32m2025-01-02 11:05:24,813 - INFO - d_prime: 11 d: 13[0m
+[32m2025-01-02 11:05:24,816 - INFO - d_prime: 12 d: 13[0m
+[32m2025-01-02 11:05:24,818 - INFO - d_prime: 13 d: 13[0m
+[32m2025-01-02 11:05:24,819 - INFO - forbidden_vars: ([{3:1},{0:1,4:1},{0:1,1:1},{1:1,6:1},{5:1,6:1},{0:1,1:1,3:1},{1:2,4:1},{1:3},{3:1,5:1,6:1},{0:2,4:1,7:1},{0:1,1:2,3:1},{1:3,3:1},{3:2,6:1,7:1},{3:2,5:1,6:1},{4:2,5:2},{4:1,5:3},{4:1,5:2,7:1},{4:1,7:3},{1:2,5:1,6:1,7:1},{1:2,4:1,5:1,7:1}])[0m
+[32m2025-01-02 11:05:24,820 - INFO - False[0m
+   377   403  673.00000   88   69          -  668.41667      -   143  283s
+   432   458  673.00000  103   64          -  668.41667      -   129  285s
+[32m2025-01-02 11:09:42,626 - INFO - d_prime: 8 d: 8[0m
+[32m2025-01-02 11:09:42,628 - INFO - d_prime: 9 d: 8[0m
+[32m2025-01-02 11:09:42,630 - INFO - d_prime: 10 d: 8[0m
+[32m2025-01-02 11:09:42,633 - INFO - forbidden_vars: ([{1:1},{2:1},{3:2},{6:2},{1:2,2:1},{2:2,5:1},{2:1,3:1,4:1},{3:2,7:1},{4:2,6:1},{1:1,2:1,3:1,6:1},{1:2,3:1,7:1},{1:1,2:1,5:1,6:1},{1:2,3:1,5:1},{2:2,5:1,6:1},{2:2,6:2},{2:1,3:2,4:1},{2:2,3:1,4:1},{1:2,2:2,3:1},{2:2,3:1,6:1,7:1},{2:2,3:2,6:1}])[0m
+[32m2025-01-02 11:09:42,633 - INFO - False[0m
+[32m2025-01-02 11:09:44,878 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-02 11:09:44,880 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-02 11:09:44,882 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-02 11:09:44,884 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-02 11:09:44,886 - INFO - d_prime: 13 d: 10[0m
+[32m2025-01-02 11:09:44,887 - INFO - forbidden_vars: ([{0:1},{1:1},{3:1},{0:2},{0:1,4:1},{0:1,5:1},{0:1,4:1},{0:1,4:1},{0:1,4:1},{1:1,7:1},{3:2},{3:1,4:1},{3:2},{0:1,3:1,7:1},{0:1,3:1,6:1},{0:1,1:2},{0:2,6:1},{1:2,4:1,6:1},{3:1,4:1,6:1,7:1},{0:1,3:3,6:1}])[0m
+[32m2025-01-02 11:09:44,887 - INFO - False[0m
+   495   519  673.00000  119   46          -  668.41667      -   116  591s
+[32m2025-01-02 11:11:12,892 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-02 11:11:12,894 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-02 11:11:12,895 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-02 11:11:12,897 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-02 11:11:12,898 - INFO - d_prime: 13 d: 10[0m
+[32m2025-01-02 11:11:12,899 - INFO - forbidden_vars: ([{0:1},{1:1},{4:1},{5:1},{0:1,4:1},{0:1,4:1},{0:1,5:1},{3:2},{3:1,7:1},{3:1,6:1},{3:1,6:1},{3:1,4:1},{3:2},{0:3},{0:2,5:1},{0:2,6:1},{1:2,7:1},{1:1,4:2},{3:1,4:1,6:1,7:1},{0:1,3:3,6:1}])[0m
+[32m2025-01-02 11:11:12,899 - INFO - False[0m
+[32m2025-01-02 11:12:02,775 - INFO - d_prime: 9 d: 13[0m
+[32m2025-01-02 11:12:02,778 - INFO - d_prime: 10 d: 13[0m
+[32m2025-01-02 11:12:02,780 - INFO - d_prime: 11 d: 13[0m
+[32m2025-01-02 11:12:02,781 - INFO - d_prime: 12 d: 13[0m
+[32m2025-01-02 11:12:02,783 - INFO - d_prime: 13 d: 13[0m
+[32m2025-01-02 11:12:02,785 - INFO - forbidden_vars: ([{3:1},{6:1},{0:1,4:1},{0:1,1:1},{5:1,6:1},{0:1,1:2},{0:1,3:2},{1:2,3:1},{1:3},{3:1,5:1,6:1},{0:2,4:1,7:1},{1:2,5:2},{1:3,3:1},{3:2,6:1,7:1},{3:2,5:1,6:1},{4:2,5:2},{4:1,5:2,7:1},{5:1,7:3},{1:2,5:1,6:1,7:1},{1:2,4:1,5:1,7:1}])[0m
+[32m2025-01-02 11:12:02,785 - INFO - False[0m
+   587   610  673.00000  136   35          -  668.41667      -   103  681s
+[32m2025-01-02 11:12:27,762 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-02 11:12:27,764 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-02 11:12:27,765 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-02 11:12:27,767 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-02 11:12:27,768 - INFO - d_prime: 13 d: 10[0m
+[32m2025-01-02 11:12:27,769 - INFO - forbidden_vars: ([{0:1},{1:1},{4:1},{5:1},{0:1,4:1},{0:1,4:1},{0:1,5:1},{1:1,7:1},{3:2},{3:1,7:1},{3:1,6:1},{3:1,6:1},{3:1,4:1},{3:2},{0:3},{0:2,5:1},{0:2,6:1},{1:1,4:2},{3:1,4:1,6:1,7:1},{0:1,3:3,6:1}])[0m
+[32m2025-01-02 11:12:27,770 - INFO - False[0m
+[32m2025-01-02 11:13:24,297 - INFO - d_prime: 9 d: 13[0m
+[32m2025-01-02 11:13:24,299 - INFO - d_prime: 10 d: 13[0m
+[32m2025-01-02 11:13:24,301 - INFO - d_prime: 11 d: 13[0m
+[32m2025-01-02 11:13:24,303 - INFO - d_prime: 12 d: 13[0m
+[32m2025-01-02 11:13:24,305 - INFO - d_prime: 13 d: 13[0m
+[32m2025-01-02 11:13:24,306 - INFO - forbidden_vars: ([{3:1},{6:1},{0:1,4:1},{0:1,1:1},{5:1,6:1},{0:1,1:2},{0:1,3:2},{1:2,4:1},{1:3},{3:1,5:1,6:1},{0:2,4:1,7:1},{1:2,5:2},{1:3,3:1},{3:2,6:1,7:1},{3:2,5:1,6:1},{4:2,5:2},{4:1,5:2,7:1},{5:1,7:3},{1:2,5:1,6:1,7:1},{1:2,4:1,5:1,7:1}])[0m
+[32m2025-01-02 11:13:24,306 - INFO - False[0m
+   682   712  673.00000  163   48          -  668.41667      -  93.6  763s
+   757   801  673.00000  175   43          -  668.41667      -  87.5  765s
+[32m2025-01-02 11:14:24,474 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-02 11:14:24,476 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-02 11:14:24,478 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-02 11:14:24,479 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-02 11:14:24,481 - INFO - d_prime: 13 d: 10[0m
+[32m2025-01-02 11:14:24,482 - INFO - forbidden_vars: ([{0:1},{0:1},{1:1},{4:1},{5:1},{0:1,4:1},{0:1,5:1},{3:2},{3:1,7:1},{3:1,6:1},{3:1,4:1},{3:2},{0:3},{0:2,4:1},{0:2,6:1},{1:2,7:1},{1:1,4:2},{3:1,4:1,6:1},{3:1,4:1,6:1,7:1},{0:1,3:3,6:1}])[0m
+[32m2025-01-02 11:14:24,482 - INFO - False[0m
+[32m2025-01-02 11:15:10,332 - INFO - d_prime: 9 d: 13[0m
+[32m2025-01-02 11:15:10,335 - INFO - d_prime: 10 d: 13[0m
+[32m2025-01-02 11:15:10,337 - INFO - d_prime: 11 d: 13[0m
+[32m2025-01-02 11:15:10,339 - INFO - d_prime: 12 d: 13[0m
+[32m2025-01-02 11:15:10,341 - INFO - d_prime: 13 d: 13[0m
+[32m2025-01-02 11:15:10,342 - INFO - forbidden_vars: ([{0:1},{3:1},{6:1},{0:1,5:1},{0:1,1:1},{0:1,1:2},{0:1,3:2},{1:2,4:1},{1:3},{3:1,5:1,6:1},{0:2,4:1,7:1},{1:2,5:2},{1:3,4:1},{3:2,6:1,7:1},{3:2,5:1,6:1},{4:2,5:2},{4:1,5:2,7:1},{5:1,7:3},{1:2,5:1,6:1,7:1},{1:2,4:1,5:1,7:1}])[0m
+[32m2025-01-02 11:15:10,342 - INFO - False[0m
+   959   992  673.00000  224  108          -  668.41667      -  75.4  869s
+  1003  1051  673.00000  234   69          -  668.41667      -  73.6  870s
+[32m2025-01-02 11:15:22,369 - INFO - d_prime: 8 d: 8[0m
+[32m2025-01-02 11:15:22,371 - INFO - d_prime: 9 d: 8[0m
+[32m2025-01-02 11:15:22,372 - INFO - d_prime: 10 d: 8[0m
+[32m2025-01-02 11:15:22,375 - INFO - forbidden_vars: ([{1:1},{1:1},{6:1},{1:1,2:1},{2:1,5:1},{3:2},{2:1,3:1,6:1},{3:2,6:1},{4:2,6:1},{1:2,2:1,6:1},{1:1,2:1,6:2},{1:2,2:1,6:1},{1:2,2:1,3:1},{2:1,3:2,4:1},{2:1,3:1,6:1,7:1},{3:2,4:1,6:1},{3:2,6:1,7:1},{4:2,6:2},{4:2,5:1,6:1},{2:1,3:3,6:1}])[0m
+[32m2025-01-02 11:15:22,375 - INFO - False[0m
+[32m2025-01-02 11:15:24,236 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-02 11:15:24,239 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-02 11:15:24,240 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-02 11:15:24,242 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-02 11:15:24,244 - INFO - d_prime: 13 d: 10[0m
+[32m2025-01-02 11:15:24,245 - INFO - forbidden_vars: ([{0:1},{1:1},{3:1},{4:1},{5:1},{0:1,4:1},{1:1,7:1},{1:1,4:1},{3:1,6:1},{3:1,4:1},{0:3},{0:2,4:1},{0:2,3:1},{0:2,6:1},{1:1,4:2},{3:1,4:1,7:1},{3:2,7:1},{3:1,6:1,7:1},{3:2,6:1},{0:1,3:3,6:1}])[0m
+[32m2025-01-02 11:15:24,245 - INFO - False[0m
+[32m2025-01-02 11:16:14,533 - INFO - d_prime: 9 d: 13[0m
+[32m2025-01-02 11:16:14,536 - INFO - d_prime: 10 d: 13[0m
+[32m2025-01-02 11:16:14,538 - INFO - d_prime: 11 d: 13[0m
+[32m2025-01-02 11:16:14,540 - INFO - d_prime: 12 d: 13[0m
+[32m2025-01-02 11:16:14,542 - INFO - d_prime: 13 d: 13[0m
+[32m2025-01-02 11:16:14,543 - INFO - forbidden_vars: ([{1:1},{0:1,2:1},{3:1,5:1},{5:1,6:1},{0:1,1:1,2:1},{0:1,2:1,4:1},{1:3},{2:1,4:2},{2:1,5:1,6:1},{0:2,4:1,7:1},{0:1,1:3},{1:1,2:1,7:2},{1:3,3:1},{1:2,4:1,5:1},{2:1,3:1,5:1,6:1},{2:1,4:1,5:2},{2:1,5:3},{3:1,7:3},{2:1,5:2,6:1,7:1},{2:1,5:1,6:1,7:2}])[0m
+[32m2025-01-02 11:16:14,543 - INFO - False[0m
+  1095  1120  671.00000  245   33          -  668.41667      -  68.5  932s
+  1229  1257  673.00000  282   52          -  668.41667      -  63.6  936s
+[32m2025-01-02 11:16:22,023 - INFO - d_prime: 8 d: 8[0m
+[32m2025-01-02 11:16:22,026 - INFO - d_prime: 9 d: 8[0m
+[32m2025-01-02 11:16:22,028 - INFO - d_prime: 10 d: 8[0m
+[32m2025-01-02 11:16:22,030 - INFO - forbidden_vars: ([{1:1},{1:1},{6:1},{1:1,2:1},{2:1,5:1},{3:2},{3:2,6:1},{3:1,4:1,6:1},{3:1,4:1,6:1},{1:2,2:1,6:1},{1:1,2:1,6:2},{1:2,2:1,3:1},{2:1,3:1,4:1,6:1},{2:1,3:1,4:2},{2:1,3:1,6:1,7:1},{3:2,6:1,7:1},{4:2,6:2},{4:2,5:1,6:1},{1:2,2:1,3:1,6:1},{2:1,3:3,6:1}])[0m
+[32m2025-01-02 11:16:22,030 - INFO - False[0m
+[32m2025-01-02 11:16:24,407 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-02 11:16:24,410 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-02 11:16:24,411 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-02 11:16:24,413 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-02 11:16:24,415 - INFO - d_prime: 13 d: 10[0m
+[32m2025-01-02 11:16:24,416 - INFO - forbidden_vars: ([{0:1},{1:1},{3:1},{4:1},{5:1},{0:1,4:1},{0:2},{1:1,7:1},{1:1,4:1},{3:1,6:1},{3:1,4:1},{0:3},{0:2,4:1},{0:2,6:1},{1:1,4:2},{3:1,4:1,7:1},{3:2,7:1},{3:1,6:1,7:1},{3:2,6:1},{0:1,3:3,6:1}])[0m
+[32m2025-01-02 11:16:24,416 - INFO - False[0m
+[32m2025-01-02 11:16:51,158 - INFO - d_prime: 9 d: 13[0m
+[32m2025-01-02 11:16:51,160 - INFO - d_prime: 10 d: 13[0m
+[32m2025-01-02 11:16:51,162 - INFO - d_prime: 11 d: 13[0m
+[32m2025-01-02 11:16:51,164 - INFO - d_prime: 12 d: 13[0m
+[32m2025-01-02 11:16:51,166 - INFO - d_prime: 13 d: 13[0m
+[32m2025-01-02 11:16:51,167 - INFO - forbidden_vars: ([{1:1},{0:1,2:1},{0:1,2:1},{3:1,5:1},{5:1,6:1},{0:1,2:1,4:1},{1:3},{2:1,4:2},{2:1,5:1,6:1},{0:2,4:1,7:1},{0:1,1:3},{1:1,2:1,7:2},{1:3,3:1},{1:2,4:1,5:1},{2:1,3:1,5:1,6:1},{2:1,4:1,5:2},{2:1,5:3},{3:1,7:3},{2:1,5:2,6:1,7:1},{2:1,5:1,6:1,7:2}])[0m
+[32m2025-01-02 11:16:51,167 - INFO - False[0m
+  1277  1301  673.00000  288   79          -  668.41667      -  64.9  970s
+  1522  1573  673.00000  341   30          -  668.41667      -  60.2  976s
+[32m2025-01-02 11:17:04,710 - INFO - d_prime: 8 d: 8[0m
+[32m2025-01-02 11:17:04,712 - INFO - d_prime: 9 d: 8[0m
+[32m2025-01-02 11:17:04,714 - INFO - d_prime: 10 d: 8[0m
+[32m2025-01-02 11:17:04,717 - INFO - forbidden_vars: ([{1:1},{1:1},{6:1},{1:1,2:1},{2:1,5:1},{3:2},{1:1,3:1,6:1},{3:2,6:1},{3:1,4:1,6:1},{1:2,2:1,6:1},{1:1,2:1,6:2},{1:2,2:1,3:1},{2:1,3:1,4:1,6:1},{2:1,3:1,4:2},{2:1,3:1,4:1,6:1},{3:2,6:1,7:1},{4:2,6:2},{4:2,5:1,6:1},{1:2,2:1,3:1,6:1},{2:1,3:3,6:1}])[0m
+[32m2025-01-02 11:17:04,717 - INFO - False[0m
+  1545  1576  671.00000  330   52          -  668.41667      -  60.5 1066s
+  1694  1757  673.00000  375   53          -  668.41667      -  59.2 1071s
+  1947  1988  673.00000  427   40          -  668.41667      -  56.2 1076s
+  2073  2131  673.00000  453   75          -  668.41667      -  56.0 1080s
+* 2117   318             337     671.0000000  668.41667  0.38%  55.4 1159s
+
+Cutting planes:
+  Lazy constraints: 93
+
+Explored 2390 nodes (264446 simplex iterations) in 1159.89 seconds (131.50 work units)
+Thread count was 4 (of 96 available processors)
+
+Solution count 1: 671 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.710000000000e+02, best bound 6.710000000000e+02, gap 0.0000%
+
+User-callback calls 17984, time in user-callback 1046.75 sec
+[34m2025-01-02 11:20:01,947 - DEBUG - Finished optimization[0m
+[34m2025-01-02 11:20:01,947 - DEBUG - Subsolver stats:[0m
+[32m2025-01-02 11:20:01,947 - INFO - Number of cuts added: 20 (bad=0, good=20)[0m
+[32m2025-01-02 11:20:01,947 - INFO - Unnecessary comps: (0 / 20)[0m
+[32m2025-01-02 11:20:01,947 - INFO - Calls to is_day_infeasible: cp_solver=107/ total=154 stored=47[0m
+[32m2025-01-02 11:20:01,947 - INFO - Is feasible: 1045.8045935630798 0.9992177566314274[0m
+[32m2025-01-02 11:20:01,947 - INFO - Subsolver: Solve Model: 1041.9998309612274/0.9964276358525671[0m
+[32m2025-01-02 11:20:01,947 - INFO - Subsolver: Create Model: 3.735748291015625/0.0035723641474328387[0m
+[32m2025-01-02 11:20:01,947 - INFO - Num_constraints-added: 93[0m
+[32m2025-01-02 11:20:01,947 - INFO - Optimal solution found.[0m
+[34m2025-01-02 11:20:01,947 - DEBUG - Sub Objectives:[0m
+[34m2025-01-02 11:20:01,947 - DEBUG - (SOLVER):Minimize Delay: 3.0[0m
+[34m2025-01-02 11:20:01,947 - DEBUG - (SOLVER):Minimize Missing Treatments: 668.0[0m
+[32m2025-01-02 11:20:01,948 - INFO - All cuts [defaultdict(<class 'dict'>, {P(patient0): {T(music_therapy): 1, T(group_therapy): 1, T(sport): 1}, P(patient4): {T(music_therapy): 1, T(knitting): 1, T(massage): 1, T(sport): 1}, P(patient6): {T(music_therapy): 1, T(knitting): 1}, P(patient9): {T(music_therapy): 1, T(group_therapy): 1, T(trust_exercise): 1}, P(patient11): {T(music_therapy): 1, T(trust_exercise): 1, T(sport): 1, T(physio): 1}, P(patient16): {T(music_therapy): 1, T(bath): 2, T(group_therapy): 1}, P(patient18): {T(music_therapy): 1, T(bath): 1, T(group_therapy): 1, T(trust_exercise): 1}, P(patient5): {T(bath): 1}, P(patient8): {T(bath): 2, T(knitting): 1}, P(patient10): {T(bath): 1, T(knitting): 1}, P(patient14): {T(bath): 2, T(group_therapy): 1}, P(patient15): {T(bath): 1, T(trust_exercise): 2}, P(patient17): {T(bath): 3, T(group_therapy): 1, T(knitting): 1}, P(patient2): {T(group_therapy): 1, T(sport): 1, T(physio): 2}, P(patient3): {T(group_therapy): 1, T(trust_exercise): 1, T(physio): 2}, P(patient13): {T(group_therapy): 1, T(massage): 3}, P(patient19): {T(group_therapy): 1, T(physio): 3}, P(patient12): {T(trust_exercise): 2, T(massage): 2}, P(patient1): {T(massage): 3, T(sport): 1, T(physio): 1}, P(patient7): {T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 3}, P(patient5): {T(bath): 1}, P(patient6): {T(bath): 1, T(knitting): 1}, P(patient12): {T(bath): 1, T(knitting): 1, T(trust_exercise): 1, T(sport): 1}, P(patient15): {T(bath): 1, T(knitting): 1, T(sport): 1}, P(patient16): {T(bath): 1, T(knitting): 1, T(sport): 1, T(physio): 1}, P(patient18): {T(bath): 1, T(knitting): 1, T(massage): 1, T(sport): 1}, P(patient19): {T(bath): 3, T(knitting): 1}, P(patient2): {T(knitting): 1, T(massage): 1, T(sport): 2}, P(patient4): {T(knitting): 1, T(sport): 3}, P(patient7): {T(knitting): 2, T(sport): 1}, P(patient8): {T(knitting): 2, T(sport): 1}, P(patient10): {T(knitting): 1, T(massage): 1}, P(patient11): {T(knitting): 2, T(massage): 1, T(sport): 1}, P(patient13): {T(knitting): 1, T(trust_exercise): 1, T(sport): 2}, P(patient17): {T(knitting): 3, T(sport): 1}, P(patient14): {T(trust_exercise): 2, T(sport): 1}, P(patient0): {T(massage): 1}, P(patient3): {T(sport): 1, T(physio): 2}}), defaultdict(<class 'dict'>, {P(patient0): {T(music_therapy): 3}, P(patient12): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient13): {T(music_therapy): 2, T(physio): 1}, P(patient14): {T(music_therapy): 2}, P(patient15): {T(music_therapy): 1, T(bath): 1}, P(patient17): {T(music_therapy): 1, T(knitting): 3, T(sport): 1}, P(patient19): {T(music_therapy): 2, T(sport): 1}, P(patient2): {T(bath): 2, T(physio): 1}, P(patient8): {T(bath): 1, T(massage): 1}, P(patient10): {T(bath): 1, T(knitting): 1}, P(patient16): {T(bath): 1, T(trust_exercise): 2}, P(patient1): {T(knitting): 1, T(trust_exercise): 1, T(sport): 1, T(physio): 1}, P(patient3): {T(knitting): 2}, P(patient4): {T(knitting): 2}, P(patient5): {T(knitting): 1}, P(patient7): {T(knitting): 1}, P(patient9): {T(knitting): 1, T(trust_exercise): 1, T(sport): 1}, P(patient18): {T(knitting): 1, T(sport): 1}, P(patient6): {T(trust_exercise): 1}, P(patient11): {T(trust_exercise): 1}}), defaultdict(<class 'dict'>, {P(patient0): {T(music_therapy): 3}, P(patient11): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient12): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient13): {T(music_therapy): 1}, P(patient14): {T(music_therapy): 2}, P(patient15): {T(music_therapy): 1, T(bath): 1}, P(patient17): {T(music_therapy): 1, T(knitting): 3, T(sport): 1}, P(patient19): {T(music_therapy): 2, T(sport): 1}, P(patient2): {T(bath): 2, T(physio): 1}, P(patient7): {T(bath): 1}, P(patient10): {T(bath): 1, T(knitting): 1}, P(patient16): {T(bath): 1, T(trust_exercise): 2}, P(patient1): {T(knitting): 1, T(trust_exercise): 1, T(sport): 1, T(physio): 1}, P(patient3): {T(knitting): 2}, P(patient4): {T(knitting): 1, T(physio): 1}, P(patient5): {T(knitting): 1, T(sport): 1}, P(patient9): {T(knitting): 1, T(trust_exercise): 1, T(sport): 1}, P(patient18): {T(knitting): 2}, P(patient6): {T(trust_exercise): 1}, P(patient8): {T(massage): 1}}), defaultdict(<class 'dict'>, {P(patient0): {T(music_therapy): 1, T(bath): 1, T(knitting): 1}, P(patient9): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient10): {T(music_therapy): 1, T(bath): 1}, P(patient11): {T(music_therapy): 2, T(trust_exercise): 1, T(physio): 1}, P(patient17): {T(music_therapy): 1, T(bath): 2, T(knitting): 1}, P(patient1): {T(bath): 2, T(massage): 1, T(sport): 1, T(physio): 1}, P(patient3): {T(bath): 2, T(trust_exercise): 1, T(massage): 1, T(physio): 1}, P(patient7): {T(bath): 1, T(sport): 1}, P(patient8): {T(bath): 2, T(trust_exercise): 1}, P(patient14): {T(bath): 3}, P(patient16): {T(bath): 3, T(knitting): 1}, P(patient2): {T(knitting): 2, T(sport): 1, T(physio): 1}, P(patient4): {T(knitting): 2, T(massage): 1, T(sport): 1}, P(patient5): {T(knitting): 1}, P(patient15): {T(knitting): 1, T(massage): 1, T(sport): 1}, P(patient12): {T(trust_exercise): 2, T(massage): 2}, P(patient13): {T(trust_exercise): 1, T(massage): 3}, P(patient18): {T(trust_exercise): 1, T(massage): 2, T(physio): 1}, P(patient19): {T(trust_exercise): 1, T(physio): 3}, P(patient6): {T(massage): 1, T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 2, T(group_therapy): 2, T(knitting): 1}, P(patient5): {T(bath): 1}, P(patient12): {T(bath): 1, T(group_therapy): 1, T(knitting): 1, T(sport): 1}, P(patient16): {T(bath): 2, T(knitting): 1, T(physio): 1}, P(patient18): {T(bath): 1, T(group_therapy): 1, T(massage): 1, T(sport): 1}, P(patient19): {T(bath): 2, T(knitting): 1, T(massage): 1}, P(patient20): {T(bath): 2, T(group_therapy): 1}, P(patient0): {T(group_therapy): 2, T(massage): 1}, P(patient2): {T(group_therapy): 2, T(massage): 1, T(sport): 1}, P(patient3): {T(group_therapy): 2, T(knitting): 1, T(sport): 1, T(physio): 1}, P(patient4): {T(group_therapy): 2, T(sport): 2}, P(patient6): {T(group_therapy): 1}, P(patient11): {T(group_therapy): 1, T(knitting): 2, T(trust_exercise): 1}, P(patient13): {T(group_therapy): 2, T(knitting): 1, T(trust_exercise): 1}, P(patient15): {T(group_therapy): 1, T(knitting): 1, T(trust_exercise): 1}, P(patient17): {T(group_therapy): 2, T(knitting): 2, T(sport): 1}, P(patient7): {T(knitting): 2}, P(patient8): {T(knitting): 2, T(physio): 1}, P(patient14): {T(trust_exercise): 2, T(sport): 1}, P(patient10): {T(sport): 2}}), defaultdict(<class 'dict'>, {P(patient0): {T(music_therapy): 2}, P(patient4): {T(music_therapy): 1, T(knitting): 1, T(physio): 1}, P(patient6): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient8): {T(music_therapy): 1, T(massage): 1}, P(patient9): {T(music_therapy): 1, T(knitting): 1, T(sport): 1}, P(patient11): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient12): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient13): {T(music_therapy): 1}, P(patient14): {T(music_therapy): 1, T(bath): 2}, P(patient15): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient17): {T(music_therapy): 1, T(knitting): 3, T(sport): 1}, P(patient19): {T(music_therapy): 2, T(sport): 1}, P(patient2): {T(bath): 1, T(physio): 1}, P(patient7): {T(bath): 1}, P(patient16): {T(bath): 2, T(trust_exercise): 1, T(sport): 1}, P(patient1): {T(knitting): 1, T(trust_exercise): 1, T(sport): 1, T(physio): 1}, P(patient3): {T(knitting): 2}, P(patient5): {T(knitting): 1}, P(patient10): {T(knitting): 1, T(trust_exercise): 1}, P(patient18): {T(knitting): 2}}), defaultdict(<class 'dict'>, {P(patient0): {T(music_therapy): 3}, P(patient11): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient12): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient13): {T(music_therapy): 1, T(massage): 1}, P(patient14): {T(music_therapy): 2, T(massage): 1}, P(patient15): {T(music_therapy): 1}, P(patient17): {T(music_therapy): 1, T(knitting): 3, T(sport): 1}, P(patient19): {T(music_therapy): 2, T(sport): 1}, P(patient2): {T(bath): 2, T(physio): 1}, P(patient7): {T(bath): 1}, P(patient16): {T(bath): 1, T(trust_exercise): 2}, P(patient1): {T(knitting): 1, T(trust_exercise): 1, T(sport): 1, T(physio): 1}, P(patient3): {T(knitting): 2}, P(patient4): {T(knitting): 1, T(physio): 1}, P(patient5): {T(knitting): 1, T(sport): 1}, P(patient9): {T(knitting): 1, T(sport): 1}, P(patient10): {T(knitting): 1, T(trust_exercise): 1}, P(patient18): {T(knitting): 2}, P(patient6): {T(trust_exercise): 1}, P(patient8): {T(massage): 1}}), defaultdict(<class 'dict'>, {P(patient0): {T(music_therapy): 1, T(bath): 2}, P(patient9): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient10): {T(music_therapy): 1, T(bath): 1}, P(patient11): {T(music_therapy): 2, T(trust_exercise): 1, T(physio): 1}, P(patient17): {T(music_therapy): 1, T(knitting): 2}, P(patient1): {T(bath): 2, T(massage): 1, T(sport): 1, T(physio): 1}, P(patient3): {T(bath): 2, T(trust_exercise): 1, T(massage): 1, T(physio): 1}, P(patient8): {T(bath): 2, T(knitting): 1}, P(patient13): {T(bath): 2, T(massage): 2}, P(patient14): {T(bath): 3}, P(patient16): {T(bath): 3, T(knitting): 1}, P(patient2): {T(knitting): 2, T(sport): 1, T(physio): 1}, P(patient4): {T(knitting): 2, T(massage): 1, T(sport): 1}, P(patient5): {T(knitting): 1}, P(patient15): {T(knitting): 1, T(massage): 1, T(sport): 1}, P(patient12): {T(trust_exercise): 2, T(massage): 2}, P(patient18): {T(trust_exercise): 1, T(massage): 2, T(physio): 1}, P(patient6): {T(massage): 1, T(sport): 1}, P(patient19): {T(massage): 1, T(physio): 3}, P(patient7): {T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient0): {T(music_therapy): 3}, P(patient11): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient12): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient13): {T(music_therapy): 1, T(massage): 1}, P(patient14): {T(music_therapy): 2, T(massage): 1}, P(patient15): {T(music_therapy): 1}, P(patient17): {T(music_therapy): 1, T(knitting): 3, T(sport): 1}, P(patient19): {T(music_therapy): 2, T(sport): 1}, P(patient2): {T(bath): 1, T(physio): 1}, P(patient7): {T(bath): 1}, P(patient16): {T(bath): 1, T(trust_exercise): 2}, P(patient1): {T(knitting): 1, T(trust_exercise): 1, T(sport): 1, T(physio): 1}, P(patient3): {T(knitting): 2}, P(patient4): {T(knitting): 1, T(physio): 1}, P(patient5): {T(knitting): 1, T(sport): 1}, P(patient9): {T(knitting): 1, T(sport): 1}, P(patient10): {T(knitting): 1, T(trust_exercise): 1}, P(patient18): {T(knitting): 2}, P(patient6): {T(trust_exercise): 1}, P(patient8): {T(massage): 1}}), defaultdict(<class 'dict'>, {P(patient0): {T(music_therapy): 1, T(bath): 2}, P(patient9): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient10): {T(music_therapy): 1, T(bath): 1}, P(patient11): {T(music_therapy): 2, T(trust_exercise): 1, T(physio): 1}, P(patient17): {T(music_therapy): 1, T(knitting): 2}, P(patient1): {T(bath): 2, T(massage): 1, T(sport): 1, T(physio): 1}, P(patient3): {T(bath): 2, T(trust_exercise): 1, T(massage): 1, T(physio): 1}, P(patient8): {T(bath): 2, T(trust_exercise): 1}, P(patient13): {T(bath): 2, T(massage): 2}, P(patient14): {T(bath): 3}, P(patient16): {T(bath): 3, T(knitting): 1}, P(patient2): {T(knitting): 2, T(sport): 1, T(physio): 1}, P(patient4): {T(knitting): 2, T(massage): 1, T(sport): 1}, P(patient5): {T(knitting): 1}, P(patient15): {T(knitting): 1, T(massage): 1, T(sport): 1}, P(patient12): {T(trust_exercise): 2, T(massage): 2}, P(patient18): {T(trust_exercise): 1, T(massage): 2, T(physio): 1}, P(patient6): {T(massage): 1, T(sport): 1}, P(patient19): {T(massage): 1, T(physio): 3}, P(patient7): {T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient0): {T(music_therapy): 3}, P(patient11): {T(music_therapy): 1}, P(patient12): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient13): {T(music_therapy): 1, T(massage): 1}, P(patient14): {T(music_therapy): 2, T(trust_exercise): 1}, P(patient15): {T(music_therapy): 1}, P(patient17): {T(music_therapy): 1, T(knitting): 3, T(sport): 1}, P(patient19): {T(music_therapy): 2, T(sport): 1}, P(patient2): {T(bath): 2, T(physio): 1}, P(patient7): {T(bath): 1}, P(patient16): {T(bath): 1, T(trust_exercise): 2}, P(patient1): {T(knitting): 1, T(trust_exercise): 1, T(sport): 1, T(physio): 1}, P(patient3): {T(knitting): 2}, P(patient4): {T(knitting): 1, T(physio): 1}, P(patient5): {T(knitting): 1, T(sport): 1}, P(patient9): {T(knitting): 1, T(trust_exercise): 1, T(sport): 1}, P(patient10): {T(knitting): 1, T(trust_exercise): 1}, P(patient18): {T(knitting): 2}, P(patient6): {T(trust_exercise): 1}, P(patient8): {T(massage): 1}}), defaultdict(<class 'dict'>, {P(patient0): {T(music_therapy): 1, T(bath): 2}, P(patient6): {T(music_therapy): 1, T(massage): 1}, P(patient9): {T(music_therapy): 1}, P(patient10): {T(music_therapy): 1, T(bath): 1}, P(patient11): {T(music_therapy): 2, T(trust_exercise): 1, T(physio): 1}, P(patient17): {T(music_therapy): 1, T(knitting): 2}, P(patient1): {T(bath): 2, T(massage): 1, T(sport): 1, T(physio): 1}, P(patient3): {T(bath): 2, T(trust_exercise): 1, T(massage): 1, T(physio): 1}, P(patient8): {T(bath): 2, T(trust_exercise): 1}, P(patient13): {T(bath): 2, T(massage): 2}, P(patient14): {T(bath): 3}, P(patient16): {T(bath): 3, T(trust_exercise): 1}, P(patient2): {T(knitting): 2, T(sport): 1, T(physio): 1}, P(patient4): {T(knitting): 2, T(massage): 1, T(sport): 1}, P(patient5): {T(knitting): 1}, P(patient15): {T(knitting): 1, T(massage): 1, T(sport): 1}, P(patient12): {T(trust_exercise): 2, T(massage): 2}, P(patient18): {T(trust_exercise): 1, T(massage): 2, T(physio): 1}, P(patient19): {T(massage): 1, T(physio): 3}, P(patient7): {T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 2, T(group_therapy): 1, T(sport): 1}, P(patient2): {T(bath): 1, T(group_therapy): 1, T(sport): 2}, P(patient3): {T(bath): 2, T(group_therapy): 1, T(sport): 1}, P(patient5): {T(bath): 1}, P(patient6): {T(bath): 1}, P(patient19): {T(bath): 2, T(group_therapy): 1, T(knitting): 1}, P(patient20): {T(bath): 1, T(group_therapy): 1}, P(patient0): {T(group_therapy): 1, T(massage): 1}, P(patient12): {T(group_therapy): 1, T(knitting): 2, T(trust_exercise): 1}, P(patient15): {T(group_therapy): 1, T(knitting): 1, T(sport): 1}, P(patient16): {T(group_therapy): 1, T(knitting): 1, T(sport): 1, T(physio): 1}, P(patient17): {T(group_therapy): 1, T(knitting): 3, T(sport): 1}, P(patient8): {T(knitting): 2, T(sport): 1}, P(patient10): {T(knitting): 2}, P(patient11): {T(knitting): 2, T(trust_exercise): 1, T(sport): 1}, P(patient13): {T(knitting): 2, T(sport): 1, T(physio): 1}, P(patient4): {T(trust_exercise): 2, T(sport): 2}, P(patient14): {T(trust_exercise): 2, T(sport): 1}, P(patient18): {T(trust_exercise): 2, T(massage): 1, T(sport): 1}, P(patient7): {T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient0): {T(music_therapy): 3}, P(patient11): {T(music_therapy): 1}, P(patient12): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient13): {T(music_therapy): 2, T(trust_exercise): 1}, P(patient14): {T(music_therapy): 2, T(knitting): 1}, P(patient17): {T(music_therapy): 1, T(knitting): 3, T(sport): 1}, P(patient19): {T(music_therapy): 2, T(sport): 1}, P(patient2): {T(bath): 1, T(physio): 1}, P(patient7): {T(bath): 1}, P(patient15): {T(bath): 1, T(trust_exercise): 1}, P(patient16): {T(bath): 1, T(trust_exercise): 2}, P(patient1): {T(knitting): 1, T(trust_exercise): 1, T(physio): 1}, P(patient3): {T(knitting): 2, T(physio): 1}, P(patient4): {T(knitting): 1, T(sport): 1, T(physio): 1}, P(patient5): {T(knitting): 1}, P(patient9): {T(knitting): 1, T(sport): 1}, P(patient10): {T(knitting): 1, T(trust_exercise): 1}, P(patient18): {T(knitting): 2, T(sport): 1}, P(patient6): {T(trust_exercise): 1}, P(patient8): {T(massage): 1}}), defaultdict(<class 'dict'>, {P(patient0): {T(music_therapy): 1, T(bath): 1, T(group_therapy): 1}, P(patient9): {T(music_therapy): 1, T(group_therapy): 1, T(trust_exercise): 1}, P(patient10): {T(music_therapy): 1, T(group_therapy): 1}, P(patient11): {T(music_therapy): 2, T(trust_exercise): 1, T(physio): 1}, P(patient17): {T(music_therapy): 1, T(bath): 3}, P(patient2): {T(bath): 1, T(group_therapy): 1, T(physio): 2}, P(patient7): {T(bath): 1}, P(patient14): {T(bath): 3}, P(patient16): {T(bath): 3, T(knitting): 1}, P(patient18): {T(bath): 2, T(trust_exercise): 1, T(massage): 1}, P(patient1): {T(group_therapy): 1, T(massage): 2, T(sport): 1, T(physio): 1}, P(patient3): {T(group_therapy): 1, T(massage): 1, T(sport): 1, T(physio): 2}, P(patient4): {T(group_therapy): 1, T(knitting): 1, T(massage): 1, T(sport): 1}, P(patient8): {T(group_therapy): 1, T(trust_exercise): 2}, P(patient12): {T(group_therapy): 1, T(trust_exercise): 1, T(massage): 2}, P(patient13): {T(group_therapy): 1, T(massage): 3}, P(patient15): {T(group_therapy): 1, T(massage): 1, T(sport): 1}, P(patient5): {T(knitting): 1, T(massage): 1}, P(patient19): {T(knitting): 1, T(physio): 3}, P(patient6): {T(massage): 1, T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 2, T(group_therapy): 1, T(sport): 1}, P(patient2): {T(bath): 1, T(group_therapy): 1, T(sport): 2}, P(patient3): {T(bath): 2, T(group_therapy): 1, T(knitting): 1, T(sport): 1}, P(patient5): {T(bath): 1}, P(patient6): {T(bath): 1}, P(patient19): {T(bath): 2, T(group_therapy): 1, T(knitting): 1}, P(patient20): {T(bath): 1, T(group_therapy): 1}, P(patient0): {T(group_therapy): 1, T(massage): 1}, P(patient11): {T(group_therapy): 1, T(knitting): 1, T(trust_exercise): 1, T(sport): 1}, P(patient12): {T(group_therapy): 1, T(knitting): 1, T(trust_exercise): 2}, P(patient16): {T(group_therapy): 1, T(knitting): 1, T(sport): 1, T(physio): 1}, P(patient17): {T(group_therapy): 1, T(knitting): 3, T(sport): 1}, P(patient8): {T(knitting): 2, T(sport): 1}, P(patient10): {T(knitting): 2}, P(patient13): {T(knitting): 2, T(sport): 1, T(physio): 1}, P(patient14): {T(knitting): 1, T(trust_exercise): 1, T(sport): 1}, P(patient15): {T(knitting): 1, T(trust_exercise): 1, T(sport): 1}, P(patient4): {T(trust_exercise): 2, T(sport): 2}, P(patient18): {T(trust_exercise): 2, T(massage): 1, T(sport): 1}, P(patient7): {T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient0): {T(music_therapy): 3}, P(patient11): {T(music_therapy): 1}, P(patient12): {T(music_therapy): 1, T(trust_exercise): 1}, P(patient13): {T(music_therapy): 2, T(trust_exercise): 1}, P(patient14): {T(music_therapy): 2}, P(patient17): {T(music_therapy): 1, T(knitting): 3, T(sport): 1}, P(patient19): {T(music_therapy): 2, T(sport): 1}, P(patient2): {T(bath): 1, T(physio): 1}, P(patient7): {T(bath): 1}, P(patient15): {T(bath): 1, T(trust_exercise): 1}, P(patient16): {T(bath): 1, T(trust_exercise): 2}, P(patient1): {T(knitting): 1, T(trust_exercise): 1, T(physio): 1}, P(patient3): {T(knitting): 2, T(physio): 1}, P(patient4): {T(knitting): 1, T(sport): 1, T(physio): 1}, P(patient5): {T(knitting): 1}, P(patient9): {T(knitting): 1, T(sport): 1}, P(patient10): {T(knitting): 1, T(trust_exercise): 1}, P(patient18): {T(knitting): 2, T(sport): 1}, P(patient6): {T(trust_exercise): 1}, P(patient8): {T(massage): 1}}), defaultdict(<class 'dict'>, {P(patient0): {T(music_therapy): 1, T(group_therapy): 1}, P(patient9): {T(music_therapy): 1, T(group_therapy): 1, T(trust_exercise): 1}, P(patient10): {T(music_therapy): 1, T(group_therapy): 1}, P(patient11): {T(music_therapy): 2, T(trust_exercise): 1, T(physio): 1}, P(patient17): {T(music_therapy): 1, T(bath): 3}, P(patient2): {T(bath): 1, T(group_therapy): 1, T(physio): 2}, P(patient7): {T(bath): 1}, P(patient14): {T(bath): 3}, P(patient16): {T(bath): 3, T(knitting): 1}, P(patient18): {T(bath): 2, T(trust_exercise): 1, T(massage): 1}, P(patient1): {T(group_therapy): 1, T(massage): 2, T(sport): 1, T(physio): 1}, P(patient3): {T(group_therapy): 1, T(massage): 1, T(sport): 1, T(physio): 2}, P(patient4): {T(group_therapy): 1, T(knitting): 1, T(massage): 1, T(sport): 1}, P(patient8): {T(group_therapy): 1, T(trust_exercise): 2}, P(patient12): {T(group_therapy): 1, T(trust_exercise): 1, T(massage): 2}, P(patient13): {T(group_therapy): 1, T(massage): 3}, P(patient15): {T(group_therapy): 1, T(massage): 1, T(sport): 1}, P(patient5): {T(knitting): 1, T(massage): 1}, P(patient19): {T(knitting): 1, T(physio): 3}, P(patient6): {T(massage): 1, T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 2, T(group_therapy): 1, T(sport): 1}, P(patient2): {T(bath): 1, T(group_therapy): 1, T(sport): 2}, P(patient3): {T(bath): 2, T(group_therapy): 1, T(knitting): 1, T(sport): 1}, P(patient5): {T(bath): 1}, P(patient6): {T(bath): 1}, P(patient14): {T(bath): 1, T(knitting): 1, T(sport): 1}, P(patient19): {T(bath): 2, T(group_therapy): 1, T(knitting): 1}, P(patient20): {T(bath): 1, T(group_therapy): 1}, P(patient0): {T(group_therapy): 1, T(massage): 1}, P(patient11): {T(group_therapy): 1, T(knitting): 1, T(trust_exercise): 1, T(sport): 1}, P(patient12): {T(group_therapy): 1, T(knitting): 1, T(trust_exercise): 2}, P(patient16): {T(group_therapy): 1, T(knitting): 1, T(trust_exercise): 1, T(sport): 1}, P(patient17): {T(group_therapy): 1, T(knitting): 3, T(sport): 1}, P(patient8): {T(knitting): 2, T(sport): 1}, P(patient10): {T(knitting): 2}, P(patient13): {T(knitting): 2, T(sport): 1, T(physio): 1}, P(patient15): {T(knitting): 1, T(trust_exercise): 1, T(sport): 1}, P(patient4): {T(trust_exercise): 2, T(sport): 2}, P(patient18): {T(trust_exercise): 2, T(massage): 1, T(sport): 1}, P(patient7): {T(sport): 1}})][0m
+[32m2025-01-02 11:20:01,948 - INFO - All cuts ['([{1:1},{6:1},{0:1,3:1},{1:1,3:1},{0:1,2:1,6:1},{0:1,2:1,4:1},{1:2,3:1},{1:2,2:1},{1:1,4:2},{0:1,3:1,5:1,6:1},{0:1,4:1,6:1,7:1},{0:1,1:2,2:1},{0:1,1:1,2:1,4:1},{2:1,6:1,7:2},{2:1,4:1,7:2},{2:1,5:3},{2:1,7:3},{4:2,5:2},{1:3,2:1,3:1},{5:3,6:1,7:1}])', '([{1:1},{5:1},{1:1,3:1},{3:1,5:1},{1:3},{1:1,3:1,6:1},{3:2,6:1},{3:2,6:1},{4:2,6:1},{6:1,7:2},{1:1,3:1,4:1,6:1},{1:1,3:1,6:1,7:1},{1:1,3:1,5:1,6:1},{1:3,3:1},{3:1,5:1,6:2},{3:1,6:3},{3:2,5:1,6:1},{3:1,4:1,6:2},{3:3,6:1}])', '([{3:1},{3:1},{4:1},{4:1},{0:1,4:1},{0:2},{0:1,1:1},{1:1,5:1},{1:1,3:1},{3:2},{3:2},{3:1,6:1},{0:3},{0:2,7:1},{0:2,6:1},{1:2,7:1},{1:1,4:2},{3:1,4:1,6:1},{3:1,4:1,6:1,7:1},{0:1,3:3,6:1}])', '([{0:1},{1:1},{4:1},{5:1},{0:1,4:1},{0:1,4:1},{0:2},{0:1,1:1},{1:1,3:1},{3:2},{3:1,7:1},{3:1,6:1},{3:2},{0:3},{0:2,6:1},{1:2,7:1},{1:1,4:2},{3:1,4:1,6:1},{3:1,4:1,6:1,7:1},{0:1,3:3,6:1}])', '([{3:1},{0:1,4:1},{0:1,1:1},{1:1,6:1},{5:1,6:1},{0:1,1:1,3:1},{1:2,4:1},{1:3},{3:1,5:1,6:1},{0:2,4:1,7:1},{0:1,1:2,3:1},{1:3,3:1},{3:2,6:1,7:1},{3:2,5:1,6:1},{4:2,5:2},{4:1,5:3},{4:1,5:2,7:1},{4:1,7:3},{1:2,5:1,6:1,7:1},{1:2,4:1,5:1,7:1}])', '([{1:1},{2:1},{3:2},{6:2},{1:2,2:1},{2:2,5:1},{2:1,3:1,4:1},{3:2,7:1},{4:2,6:1},{1:1,2:1,3:1,6:1},{1:2,3:1,7:1},{1:1,2:1,5:1,6:1},{1:2,3:1,5:1},{2:2,5:1,6:1},{2:2,6:2},{2:1,3:2,4:1},{2:2,3:1,4:1},{1:2,2:2,3:1},{2:2,3:1,6:1,7:1},{2:2,3:2,6:1}])', '([{0:1},{1:1},{3:1},{0:2},{0:1,4:1},{0:1,5:1},{0:1,4:1},{0:1,4:1},{0:1,4:1},{1:1,7:1},{3:2},{3:1,4:1},{3:2},{0:1,3:1,7:1},{0:1,3:1,6:1},{0:1,1:2},{0:2,6:1},{1:2,4:1,6:1},{3:1,4:1,6:1,7:1},{0:1,3:3,6:1}])', '([{0:1},{1:1},{4:1},{5:1},{0:1,4:1},{0:1,4:1},{0:1,5:1},{3:2},{3:1,7:1},{3:1,6:1},{3:1,6:1},{3:1,4:1},{3:2},{0:3},{0:2,5:1},{0:2,6:1},{1:2,7:1},{1:1,4:2},{3:1,4:1,6:1,7:1},{0:1,3:3,6:1}])', '([{3:1},{6:1},{0:1,4:1},{0:1,1:1},{5:1,6:1},{0:1,1:2},{0:1,3:2},{1:2,3:1},{1:3},{3:1,5:1,6:1},{0:2,4:1,7:1},{1:2,5:2},{1:3,3:1},{3:2,6:1,7:1},{3:2,5:1,6:1},{4:2,5:2},{4:1,5:2,7:1},{5:1,7:3},{1:2,5:1,6:1,7:1},{1:2,4:1,5:1,7:1}])', '([{0:1},{1:1},{4:1},{5:1},{0:1,4:1},{0:1,4:1},{0:1,5:1},{1:1,7:1},{3:2},{3:1,7:1},{3:1,6:1},{3:1,6:1},{3:1,4:1},{3:2},{0:3},{0:2,5:1},{0:2,6:1},{1:1,4:2},{3:1,4:1,6:1,7:1},{0:1,3:3,6:1}])', '([{3:1},{6:1},{0:1,4:1},{0:1,1:1},{5:1,6:1},{0:1,1:2},{0:1,3:2},{1:2,4:1},{1:3},{3:1,5:1,6:1},{0:2,4:1,7:1},{1:2,5:2},{1:3,3:1},{3:2,6:1,7:1},{3:2,5:1,6:1},{4:2,5:2},{4:1,5:2,7:1},{5:1,7:3},{1:2,5:1,6:1,7:1},{1:2,4:1,5:1,7:1}])', '([{0:1},{0:1},{1:1},{4:1},{5:1},{0:1,4:1},{0:1,5:1},{3:2},{3:1,7:1},{3:1,6:1},{3:1,4:1},{3:2},{0:3},{0:2,4:1},{0:2,6:1},{1:2,7:1},{1:1,4:2},{3:1,4:1,6:1},{3:1,4:1,6:1,7:1},{0:1,3:3,6:1}])', '([{0:1},{3:1},{6:1},{0:1,5:1},{0:1,1:1},{0:1,1:2},{0:1,3:2},{1:2,4:1},{1:3},{3:1,5:1,6:1},{0:2,4:1,7:1},{1:2,5:2},{1:3,4:1},{3:2,6:1,7:1},{3:2,5:1,6:1},{4:2,5:2},{4:1,5:2,7:1},{5:1,7:3},{1:2,5:1,6:1,7:1},{1:2,4:1,5:1,7:1}])', '([{1:1},{1:1},{6:1},{1:1,2:1},{2:1,5:1},{3:2},{2:1,3:1,6:1},{3:2,6:1},{4:2,6:1},{1:2,2:1,6:1},{1:1,2:1,6:2},{1:2,2:1,6:1},{1:2,2:1,3:1},{2:1,3:2,4:1},{2:1,3:1,6:1,7:1},{3:2,4:1,6:1},{3:2,6:1,7:1},{4:2,6:2},{4:2,5:1,6:1},{2:1,3:3,6:1}])', '([{0:1},{1:1},{3:1},{4:1},{5:1},{0:1,4:1},{1:1,7:1},{1:1,4:1},{3:1,6:1},{3:1,4:1},{0:3},{0:2,4:1},{0:2,3:1},{0:2,6:1},{1:1,4:2},{3:1,4:1,7:1},{3:2,7:1},{3:1,6:1,7:1},{3:2,6:1},{0:1,3:3,6:1}])', '([{1:1},{0:1,2:1},{3:1,5:1},{5:1,6:1},{0:1,1:1,2:1},{0:1,2:1,4:1},{1:3},{2:1,4:2},{2:1,5:1,6:1},{0:2,4:1,7:1},{0:1,1:3},{1:1,2:1,7:2},{1:3,3:1},{1:2,4:1,5:1},{2:1,3:1,5:1,6:1},{2:1,4:1,5:2},{2:1,5:3},{3:1,7:3},{2:1,5:2,6:1,7:1},{2:1,5:1,6:1,7:2}])', '([{1:1},{1:1},{6:1},{1:1,2:1},{2:1,5:1},{3:2},{3:2,6:1},{3:1,4:1,6:1},{3:1,4:1,6:1},{1:2,2:1,6:1},{1:1,2:1,6:2},{1:2,2:1,3:1},{2:1,3:1,4:1,6:1},{2:1,3:1,4:2},{2:1,3:1,6:1,7:1},{3:2,6:1,7:1},{4:2,6:2},{4:2,5:1,6:1},{1:2,2:1,3:1,6:1},{2:1,3:3,6:1}])', '([{0:1},{1:1},{3:1},{4:1},{5:1},{0:1,4:1},{0:2},{1:1,7:1},{1:1,4:1},{3:1,6:1},{3:1,4:1},{0:3},{0:2,4:1},{0:2,6:1},{1:1,4:2},{3:1,4:1,7:1},{3:2,7:1},{3:1,6:1,7:1},{3:2,6:1},{0:1,3:3,6:1}])', '([{1:1},{0:1,2:1},{0:1,2:1},{3:1,5:1},{5:1,6:1},{0:1,2:1,4:1},{1:3},{2:1,4:2},{2:1,5:1,6:1},{0:2,4:1,7:1},{0:1,1:3},{1:1,2:1,7:2},{1:3,3:1},{1:2,4:1,5:1},{2:1,3:1,5:1,6:1},{2:1,4:1,5:2},{2:1,5:3},{3:1,7:3},{2:1,5:2,6:1,7:1},{2:1,5:1,6:1,7:2}])', '([{1:1},{1:1},{6:1},{1:1,2:1},{2:1,5:1},{3:2},{1:1,3:1,6:1},{3:2,6:1},{3:1,4:1,6:1},{1:2,2:1,6:1},{1:1,2:1,6:2},{1:2,2:1,3:1},{2:1,3:1,4:1,6:1},{2:1,3:1,4:2},{2:1,3:1,4:1,6:1},{3:2,6:1,7:1},{4:2,6:2},{4:2,5:1,6:1},{1:2,2:1,3:1,6:1},{2:1,3:3,6:1}])'][0m

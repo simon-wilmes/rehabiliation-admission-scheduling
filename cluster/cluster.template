@@ -11,8 +11,9 @@
 # $RUNTIME
 # $MEMORY
 # $SCRIPT_FOLDER
+# $REPETITION
 # ===== Slurm Job Name =====
-#SBATCH --job-name=$HASH_$SOLVER_NAME
+#SBATCH --job-name=$SOLVER_NAME_$REPETITION_$HASH
 
 # ===== Output Files =====
 # %x will be replaced by the job name, and %j by the job ID.
@@ -21,7 +22,7 @@
 
 # ===== Email Notifications =====
 #SBATCH --mail-user=simon.wilmes@rwth-aachen.de
-#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --mail-type=FAIL
 
 # ===== Compute Resources =====
 #SBATCH --nodes=1
@@ -44,15 +45,22 @@
 ############################################################
 # Environment Setup
 ############################################################
-module load Python/3.10.4
 
+module load GCCcore/.12.2.0
+module load Gurobi/10.0.0
+module load Python/3.10.4
 ############################################################
 # Run Commands
 ############################################################
 
+echo "1.NAME: $SOLVER_NAME"
+echo "2.PARAMS: $SOLVER_PARAMS"
+echo "3.INSTANCE: $SOLVER_INSTANCE"
+echo "4.REPETITION: $REPETITION"
+
+
 cd $SCRIPT_FOLDER
-python -m pipenv install
 echo "Current directory: $(pwd)"
-python -m pipenv run python -m src "$SOLVER_NAME" "$SOLVER_PARAMS" "$SOLVER_INSTANCE"
+python -m src "$SOLVER_NAME" "$SOLVER_PARAMS" "$SOLVER_INSTANCE"
 
 
