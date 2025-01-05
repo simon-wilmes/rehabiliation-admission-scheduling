@@ -8,7 +8,7 @@ from random import shuffle
 # 0. Define all parameters
 params = {
     "$RUNTIME": "01:00:00",
-    "$MEMORY": "10560MB",
+    "$MEMORY": "15360MB",
     "$PARTITION": "c23ml",  # "c23mm",
     "$OUTPUT_FOLDER": "/work/wx350715/Kobra/output",
     "$SCRIPT_FOLDER": "/home/wx350715/Kobra/rehabiliation-admission-scheduling",
