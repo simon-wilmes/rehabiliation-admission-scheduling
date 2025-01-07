@@ -82,7 +82,7 @@ class MIPSolver3(Solver):
         self.model.setParam("LogToConsole", int(self.log_to_console))  # type: ignore
         self.model.setParam("Threads", self.number_of_threads)  # type: ignore
         self.model.setParam("Cuts", 0)
-        #self.model.setParam("NoRelHeurTime", self.no_rel_heur_time)  # type: ignore
+        # self.model.setParam("NoRelHeurTime", self.no_rel_heur_time)  # type: ignore
         self._create_variables()
         self._create_constraints()
         if self.break_symmetry:  # type: ignore
@@ -342,6 +342,10 @@ class MIPSolver3(Solver):
         if self.enforce_min_treatments_per_day:  # type: ignore
             for p in self.P:
                 for d in self.A_p[p]:
+                    # otherwise only enfore the lowerbound if admitted before
+                    delta_set = [
+                        delta for delta in self.D_p[p] if d - self.l_p[p] < delta <= d
+                    ]
                     self.model.addConstr(
                         gp.quicksum(
                             self.y_pmidt[p, m, i, d, t]
@@ -349,7 +353,8 @@ class MIPSolver3(Solver):
                             for i in self.I_m[m]
                             for t in self.T
                         )
-                        >= self.daily_lower[p],
+                        >= self.daily_lower[p]
+                        * gp.quicksum(self.a_pd[p, delta] for delta in delta_set),
                         name=f"constraint_a5_ub_p{p.id}_d{d}",
                     )
             logger.debug("Constraint (a5) created.")

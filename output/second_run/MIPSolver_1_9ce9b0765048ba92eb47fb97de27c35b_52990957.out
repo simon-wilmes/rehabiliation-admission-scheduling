@@ -1,0 +1,1724 @@
+1.NAME: MIPSolver
+2.PARAMS: {'use_lazy_constraints': False}
+3.INSTANCE: /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_8_15.txt
+4.REPETITION: 1
+Current directory: /home/wx350715/Kobra/rehabiliation-admission-scheduling
+[34m2025-01-06 21:31:24,500 - DEBUG - Solver: <class 'src.solvers.mip.MIPSolver'>[0m
+[34m2025-01-06 21:31:24,500 - DEBUG - Args: {'use_lazy_constraints': False}[0m
+[34m2025-01-06 21:31:24,501 - DEBUG - File path /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_8_15.txt[0m
+[34m2025-01-06 21:31:24,501 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-06 21:31:24,501 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-06 21:31:24,501 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-06 21:31:24,501 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-06 21:31:24,501 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-06 21:31:24,501 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-06 21:31:24,501 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-06 21:31:24,501 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-06 21:31:24,501 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-06 21:31:24,501 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-06 21:31:24,501 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-06 21:31:24,501 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-06 21:31:24,501 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-06 21:31:24,502 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-06 21:31:24,502 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-06 21:31:24,502 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-06 21:31:24,502 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-06 21:31:24,502 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-06 21:31:24,502 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-06 21:31:24,502 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-06 21:31:24,502 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-06 21:31:24,502 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-06 21:31:24,502 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-06 21:31:24,502 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-06 21:31:24,502 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-06 21:31:24,502 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-06 21:31:24,503 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-06 21:31:24,503 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-06 21:31:24,503 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-06 21:31:24,503 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-06 21:31:24,503 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-06 21:31:24,503 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-06 21:31:24,503 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-06 21:31:24,503 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-06 21:31:24,503 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-06 21:31:24,503 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-06 21:31:24,504 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,504 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,504 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,504 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,504 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,504 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,504 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,504 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,505 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,505 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,505 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,505 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,505 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,505 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,505 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,505 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,505 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,506 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,506 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,506 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-06 21:31:24,506 - DEBUG - Instance data:[0m
+[34m2025-01-06 21:31:24,506 - DEBUG - Number of patients: 19[0m
+[34m2025-01-06 21:31:24,506 - DEBUG - Number of beds: 40[0m
+[34m2025-01-06 21:31:24,508 - DEBUG - Average number of treatments per patient: 25.42105263157895[0m
+[34m2025-01-06 21:31:24,508 - DEBUG - Average number of treatment per stayed day: 2.542105263157895[0m
+[34m2025-01-06 21:31:24,508 - DEBUG - Number of treatments: 483[0m
+[34m2025-01-06 21:31:24,508 - DEBUG - Number of resources: 10[0m
+[34m2025-01-06 21:31:24,508 - DEBUG - Number of resource groups: 5[0m
+[34m2025-01-06 21:31:24,508 - DEBUG - Number of resource hours needed per all treatment by RG(rooms): 22.09999999999998[0m
+[34m2025-01-06 21:31:24,508 - DEBUG - Number of resource hours needed per all treatment by RG(physiotherapist): 9.75[0m
+[34m2025-01-06 21:31:24,508 - DEBUG - Number of resource hours needed per all treatment by RG(therapists): 7.975000000000001[0m
+[34m2025-01-06 21:31:24,508 - DEBUG - Number of resource hours needed per all treatment by RG(sport_room): 5.625[0m
+[32m2025-01-06 21:31:24,508 - INFO - {'solver': 'MIPSolver', 'args': {'use_lazy_constraints': True, 'enforce_min_treatments_per_day': True, 'enforce_max_treatments_per_e_w': True, 'enforce_min_patients_per_treatment': True, 'log_to_console': True}}[0m
+[34m2025-01-06 21:31:24,508 - DEBUG - Setting options: MIPSolver[0m
+[34m2025-01-06 21:31:24,508 - DEBUG -  ---- use_lazy_constraints to True[0m
+[34m2025-01-06 21:31:24,508 - DEBUG - Setting options: Solver[0m
+[34m2025-01-06 21:31:24,508 - DEBUG -  ---- number_of_threads to 1 (default)[0m
+[34m2025-01-06 21:31:24,508 - DEBUG -  ---- treatment_value to 0 (default)[0m
+[34m2025-01-06 21:31:24,508 - DEBUG -  ---- delay_value to 1 (default)[0m
+[34m2025-01-06 21:31:24,508 - DEBUG -  ---- missing_treatment_value to 4 (default)[0m
+[34m2025-01-06 21:31:24,508 - DEBUG -  ---- enforce_min_treatments_per_day to True[0m
+[34m2025-01-06 21:31:24,508 - DEBUG -  ---- enforce_max_treatments_per_e_w to True[0m
+[34m2025-01-06 21:31:24,509 - DEBUG -  ---- enforce_min_patients_per_treatment to True[0m
+[34m2025-01-06 21:31:24,509 - DEBUG -  ---- log_to_console to True[0m
+[34m2025-01-06 21:31:24,509 - DEBUG -  ---- log_to_file to True (default)[0m
+[32m2025-01-06 21:31:24,534 - INFO - Create model: MIPSolver[0m
+Set parameter TSPort to value 50039
+Set parameter TokenServer to value "license.itc.rwth-aachen.de"
+Set parameter Threads to value 1
+Set parameter Cuts to value 0
+Set parameter LazyConstraints to value 1
+[34m2025-01-06 21:31:25,759 - DEBUG - Variables created.[0m
+[34m2025-01-06 21:31:27,377 - DEBUG - Constraint (p1) created.[0m
+[34m2025-01-06 21:31:27,599 - DEBUG - Constraint (when_admitted) created.[0m
+[34m2025-01-06 21:31:27,774 - DEBUG - Constraint (p3) created.[0m
+[34m2025-01-06 21:31:27,775 - DEBUG - Constraint (p4) created.[0m
+[34m2025-01-06 21:31:27,776 - DEBUG - Constraint (p7) created.[0m
+[34m2025-01-06 21:31:27,976 - DEBUG - Constraint (r3) created.[0m
+[34m2025-01-06 21:31:28,457 - DEBUG - Constraint (r4) created.[0m
+[34m2025-01-06 21:31:29,399 - DEBUG - Constraint (a1) created.[0m
+[34m2025-01-06 21:31:29,441 - DEBUG - Constraint (a4) created.[0m
+[34m2025-01-06 21:31:29,450 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-06 21:31:29,461 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-06 21:31:29,461 - DEBUG - Constraint (already_admitted) created.[0m
+[32m2025-01-06 21:31:29,680 - INFO - Time to create model: 5.146[0m
+[32m2025-01-06 21:31:29,680 - INFO - Solving model: MIPSolver[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 1 threads
+
+Optimize a model with 246474 rows, 177203 columns and 1128600 nonzeros
+Model fingerprint: 0xaca90dad
+Variable types: 2 continuous, 177201 integer (177201 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 2e+03]
+Presolve removed 119217 rows and 73308 columns (presolve time = 5s) ...
+Presolve removed 119217 rows and 73308 columns (presolve time = 10s) ...
+Presolve removed 124162 rows and 74999 columns
+Presolve time: 13.21s
+Presolved: 122312 rows, 102204 columns, 542945 nonzeros
+Variable types: 0 continuous, 102204 integer (102140 binary)
+Root relaxation presolved: 122258 rows, 102258 columns, 536816 nonzeros
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0   -4.6120480e+03   2.038098e+04   0.000000e+00     15s
+    9848    5.3200040e+02   6.603117e+03   0.000000e+00     15s
+   18807    5.4000051e+02   2.943732e+03   0.000000e+00     20s
+   23758    5.4000055e+02   3.737032e+03   0.000000e+00     25s
+   27862    5.4000059e+02   3.858178e+03   0.000000e+00     30s
+   30812    5.4000060e+02   8.093703e+02   0.000000e+00     35s
+   33162    5.4000060e+02   7.545183e+01   0.000000e+00     40s
+   34804    5.4000000e+02   0.000000e+00   0.000000e+00     44s
+   34804    5.4000000e+02   0.000000e+00   0.000000e+00     44s
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root crossover log...
+
+    1816 DPushes remaining with DInf 0.0000000e+00                44s
+
+    3754 PPushes remaining with PInf 0.0000000e+00                44s
+       0 PPushes remaining with PInf 0.0000000e+00                44s
+
+  Push phase complete: Pinf 0.0000000e+00, Dinf 5.2358118e-12     44s
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+   38561    5.4000000e+02   0.000000e+00   0.000000e+00     44s
+   38561    5.4000000e+02   0.000000e+00   0.000000e+00     44s
+
+Root relaxation: objective 5.400000e+02, 38561 iterations, 30.14 seconds (33.91 work units)
+Total elapsed time = 56.60s
+Total elapsed time = 66.26s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  540.00000    0    -          -  540.00000      -     -   70s
+     0     0  540.00000    0  539          -  540.00000      -     -   80s
+     0     0  540.00000    0    -          -  540.00000      -     -   87s
+     0     0  540.00000    0  183          -  540.00000      -     -   90s
+H    0     0                     540.0000000  540.00000  0.00%     -  111s
+
+Cutting planes:
+  Lazy constraints: 20139
+
+Explored 1 nodes (227955 simplex iterations) in 111.91 seconds (101.12 work units)
+Thread count was 1 (of 96 available processors)
+
+Solution count 1: 540 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.400000000000e+02, best bound 5.400000000000e+02, gap 0.0000%
+
+User-callback calls 6310, time in user-callback 1.89 sec
+[32m2025-01-06 21:33:21,679 - INFO - Optimal solution found.[0m
+[34m2025-01-06 21:33:21,679 - DEBUG - Sub Objectives:[0m
+[34m2025-01-06 21:33:21,679 - DEBUG - (SOLVER):Minimize Delay: 0.0[0m
+[34m2025-01-06 21:33:21,679 - DEBUG - (SOLVER):Minimize Missing Treatments: 540.0[0m
+[34m2025-01-06 21:33:21,680 - DEBUG - self.x_pmdt(P(patient0), T(bath), 6, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,680 - DEBUG - self.x_pmdt(P(patient0), T(bath), 6, 15.25) = 1.0[0m
+[34m2025-01-06 21:33:21,680 - DEBUG - self.x_pmdt(P(patient0), T(bath), 9, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,680 - DEBUG - self.x_pmdt(P(patient0), T(bath), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,680 - DEBUG - self.x_pmdt(P(patient0), T(massage), 5, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,680 - DEBUG - self.x_pmdt(P(patient0), T(massage), 5, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,680 - DEBUG - self.x_pmdt(P(patient0), T(massage), 8, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,680 - DEBUG - self.x_pmdt(P(patient0), T(massage), 8, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,681 - DEBUG - self.x_pmdt(P(patient0), T(sport), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,681 - DEBUG - self.x_pmdt(P(patient0), T(sport), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,681 - DEBUG - self.x_pmdt(P(patient0), T(sport), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,681 - DEBUG - self.x_pmdt(P(patient0), T(sport), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,681 - DEBUG - self.x_pmdt(P(patient0), T(sport), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,681 - DEBUG - self.x_pmdt(P(patient0), T(sport), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,681 - DEBUG - self.x_pmdt(P(patient0), T(sport), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,681 - DEBUG - self.x_pmdt(P(patient0), T(sport), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,681 - DEBUG - self.x_pmdt(P(patient0), T(physio), 0, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,681 - DEBUG - self.x_pmdt(P(patient0), T(physio), 0, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,681 - DEBUG - self.x_pmdt(P(patient0), T(physio), 1, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,682 - DEBUG - self.x_pmdt(P(patient0), T(physio), 4, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,682 - DEBUG - self.x_pmdt(P(patient0), T(physio), 5, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,682 - DEBUG - self.x_pmdt(P(patient0), T(physio), 9, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,682 - DEBUG - self.x_pmdt(P(patient0), T(board_games), 1, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,682 - DEBUG - self.x_pmdt(P(patient0), T(board_games), 2, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,682 - DEBUG - self.x_pmdt(P(patient0), T(board_games), 5, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,682 - DEBUG - self.x_pmdt(P(patient0), T(board_games), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,682 - DEBUG - self.x_pmdt(P(patient0), T(board_games), 7, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,683 - DEBUG - self.x_pmdt(P(patient1), T(bath), 2, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,683 - DEBUG - self.x_pmdt(P(patient1), T(bath), 3, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,683 - DEBUG - self.x_pmdt(P(patient1), T(bath), 5, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,683 - DEBUG - self.x_pmdt(P(patient1), T(bath), 5, 12.25) = 1.0[0m
+[34m2025-01-06 21:33:21,683 - DEBUG - self.x_pmdt(P(patient1), T(bath), 7, 12.25) = 1.0[0m
+[34m2025-01-06 21:33:21,683 - DEBUG - self.x_pmdt(P(patient1), T(bath), 8, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,683 - DEBUG - self.x_pmdt(P(patient1), T(bath), 8, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,683 - DEBUG - self.x_pmdt(P(patient1), T(massage), 1, 10.5) = 1.0[0m
+[34m2025-01-06 21:33:21,683 - DEBUG - self.x_pmdt(P(patient1), T(massage), 1, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,683 - DEBUG - self.x_pmdt(P(patient1), T(massage), 6, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,683 - DEBUG - self.x_pmdt(P(patient1), T(massage), 7, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,684 - DEBUG - self.x_pmdt(P(patient1), T(sport), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,684 - DEBUG - self.x_pmdt(P(patient1), T(sport), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,684 - DEBUG - self.x_pmdt(P(patient1), T(sport), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,684 - DEBUG - self.x_pmdt(P(patient1), T(sport), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,684 - DEBUG - self.x_pmdt(P(patient1), T(sport), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,684 - DEBUG - self.x_pmdt(P(patient1), T(sport), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,684 - DEBUG - self.x_pmdt(P(patient1), T(sport), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,684 - DEBUG - self.x_pmdt(P(patient1), T(sport), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,684 - DEBUG - self.x_pmdt(P(patient1), T(sport), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,684 - DEBUG - self.x_pmdt(P(patient1), T(sport), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,684 - DEBUG - self.x_pmdt(P(patient1), T(physio), 1, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,684 - DEBUG - self.x_pmdt(P(patient1), T(physio), 3, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,685 - DEBUG - self.x_pmdt(P(patient1), T(physio), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,685 - DEBUG - self.x_pmdt(P(patient1), T(board_games), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,685 - DEBUG - self.x_pmdt(P(patient1), T(board_games), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,685 - DEBUG - self.x_pmdt(P(patient1), T(board_games), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,685 - DEBUG - self.x_pmdt(P(patient1), T(board_games), 7, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,685 - DEBUG - self.x_pmdt(P(patient1), T(board_games), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,685 - DEBUG - self.x_pmdt(P(patient2), T(bath), 5, 12.25) = 1.0[0m
+[34m2025-01-06 21:33:21,686 - DEBUG - self.x_pmdt(P(patient2), T(bath), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,686 - DEBUG - self.x_pmdt(P(patient2), T(bath), 7, 12.75) = 1.0[0m
+[34m2025-01-06 21:33:21,686 - DEBUG - self.x_pmdt(P(patient2), T(bath), 7, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,686 - DEBUG - self.x_pmdt(P(patient2), T(massage), 8, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,686 - DEBUG - self.x_pmdt(P(patient2), T(massage), 8, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,686 - DEBUG - self.x_pmdt(P(patient2), T(massage), 9, 15.25) = 1.0[0m
+[34m2025-01-06 21:33:21,686 - DEBUG - self.x_pmdt(P(patient2), T(sport), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,686 - DEBUG - self.x_pmdt(P(patient2), T(sport), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,686 - DEBUG - self.x_pmdt(P(patient2), T(sport), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,686 - DEBUG - self.x_pmdt(P(patient2), T(sport), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,686 - DEBUG - self.x_pmdt(P(patient2), T(sport), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,687 - DEBUG - self.x_pmdt(P(patient2), T(sport), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,687 - DEBUG - self.x_pmdt(P(patient2), T(sport), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,687 - DEBUG - self.x_pmdt(P(patient2), T(sport), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,687 - DEBUG - self.x_pmdt(P(patient2), T(sport), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,687 - DEBUG - self.x_pmdt(P(patient2), T(physio), 2, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,687 - DEBUG - self.x_pmdt(P(patient2), T(physio), 3, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,687 - DEBUG - self.x_pmdt(P(patient2), T(physio), 4, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,687 - DEBUG - self.x_pmdt(P(patient2), T(physio), 6, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,687 - DEBUG - self.x_pmdt(P(patient2), T(physio), 6, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,687 - DEBUG - self.x_pmdt(P(patient2), T(board_games), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,688 - DEBUG - self.x_pmdt(P(patient2), T(board_games), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,688 - DEBUG - self.x_pmdt(P(patient2), T(board_games), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,688 - DEBUG - self.x_pmdt(P(patient3), T(bath), 4, 12.75) = 1.0[0m
+[34m2025-01-06 21:33:21,688 - DEBUG - self.x_pmdt(P(patient3), T(bath), 7, 12.5) = 1.0[0m
+[34m2025-01-06 21:33:21,688 - DEBUG - self.x_pmdt(P(patient3), T(bath), 8, 12.5) = 1.0[0m
+[34m2025-01-06 21:33:21,688 - DEBUG - self.x_pmdt(P(patient3), T(bath), 9, 12.25) = 1.0[0m
+[34m2025-01-06 21:33:21,688 - DEBUG - self.x_pmdt(P(patient3), T(bath), 9, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,688 - DEBUG - self.x_pmdt(P(patient3), T(massage), 3, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,689 - DEBUG - self.x_pmdt(P(patient3), T(massage), 7, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,689 - DEBUG - self.x_pmdt(P(patient3), T(massage), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,689 - DEBUG - self.x_pmdt(P(patient3), T(massage), 9, 10.5) = 1.0[0m
+[34m2025-01-06 21:33:21,689 - DEBUG - self.x_pmdt(P(patient3), T(sport), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,689 - DEBUG - self.x_pmdt(P(patient3), T(sport), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,689 - DEBUG - self.x_pmdt(P(patient3), T(sport), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,689 - DEBUG - self.x_pmdt(P(patient3), T(sport), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,689 - DEBUG - self.x_pmdt(P(patient3), T(sport), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,689 - DEBUG - self.x_pmdt(P(patient3), T(sport), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,689 - DEBUG - self.x_pmdt(P(patient3), T(sport), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,689 - DEBUG - self.x_pmdt(P(patient3), T(physio), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,689 - DEBUG - self.x_pmdt(P(patient3), T(physio), 2, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,690 - DEBUG - self.x_pmdt(P(patient3), T(physio), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,690 - DEBUG - self.x_pmdt(P(patient3), T(physio), 5, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,690 - DEBUG - self.x_pmdt(P(patient3), T(physio), 8, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,690 - DEBUG - self.x_pmdt(P(patient3), T(board_games), 7, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,690 - DEBUG - self.x_pmdt(P(patient3), T(board_games), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,690 - DEBUG - self.x_pmdt(P(patient3), T(board_games), 8, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,690 - DEBUG - self.x_pmdt(P(patient4), T(bath), 4, 12.75) = 1.0[0m
+[34m2025-01-06 21:33:21,691 - DEBUG - self.x_pmdt(P(patient4), T(bath), 5, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,691 - DEBUG - self.x_pmdt(P(patient4), T(bath), 5, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,691 - DEBUG - self.x_pmdt(P(patient4), T(massage), 3, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,691 - DEBUG - self.x_pmdt(P(patient4), T(massage), 8, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,691 - DEBUG - self.x_pmdt(P(patient4), T(sport), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,691 - DEBUG - self.x_pmdt(P(patient4), T(sport), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,691 - DEBUG - self.x_pmdt(P(patient4), T(sport), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,691 - DEBUG - self.x_pmdt(P(patient4), T(sport), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,691 - DEBUG - self.x_pmdt(P(patient4), T(sport), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,692 - DEBUG - self.x_pmdt(P(patient4), T(sport), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,692 - DEBUG - self.x_pmdt(P(patient4), T(sport), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,692 - DEBUG - self.x_pmdt(P(patient4), T(sport), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,692 - DEBUG - self.x_pmdt(P(patient4), T(sport), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,692 - DEBUG - self.x_pmdt(P(patient4), T(physio), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,692 - DEBUG - self.x_pmdt(P(patient4), T(physio), 4, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,692 - DEBUG - self.x_pmdt(P(patient4), T(physio), 6, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,692 - DEBUG - self.x_pmdt(P(patient4), T(physio), 7, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,692 - DEBUG - self.x_pmdt(P(patient4), T(physio), 9, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,692 - DEBUG - self.x_pmdt(P(patient4), T(board_games), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,693 - DEBUG - self.x_pmdt(P(patient4), T(board_games), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,693 - DEBUG - self.x_pmdt(P(patient4), T(board_games), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,693 - DEBUG - self.x_pmdt(P(patient5), T(bath), 4, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,693 - DEBUG - self.x_pmdt(P(patient5), T(bath), 6, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,693 - DEBUG - self.x_pmdt(P(patient5), T(bath), 7, 12.5) = 1.0[0m
+[34m2025-01-06 21:33:21,693 - DEBUG - self.x_pmdt(P(patient5), T(bath), 8, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,693 - DEBUG - self.x_pmdt(P(patient5), T(bath), 9, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,693 - DEBUG - self.x_pmdt(P(patient5), T(massage), 4, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,693 - DEBUG - self.x_pmdt(P(patient5), T(massage), 5, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,693 - DEBUG - self.x_pmdt(P(patient5), T(massage), 6, 8.75) = 1.0[0m
+[34m2025-01-06 21:33:21,693 - DEBUG - self.x_pmdt(P(patient5), T(massage), 9, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,694 - DEBUG - self.x_pmdt(P(patient5), T(sport), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,694 - DEBUG - self.x_pmdt(P(patient5), T(sport), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,694 - DEBUG - self.x_pmdt(P(patient5), T(sport), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,694 - DEBUG - self.x_pmdt(P(patient5), T(sport), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,694 - DEBUG - self.x_pmdt(P(patient5), T(sport), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,694 - DEBUG - self.x_pmdt(P(patient5), T(physio), 4, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,694 - DEBUG - self.x_pmdt(P(patient5), T(board_games), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,694 - DEBUG - self.x_pmdt(P(patient5), T(board_games), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,695 - DEBUG - self.x_pmdt(P(patient5), T(board_games), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,695 - DEBUG - self.x_pmdt(P(patient5), T(board_games), 8, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,695 - DEBUG - self.x_pmdt(P(patient6), T(bath), 5, 10.5) = 1.0[0m
+[34m2025-01-06 21:33:21,695 - DEBUG - self.x_pmdt(P(patient6), T(bath), 6, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,695 - DEBUG - self.x_pmdt(P(patient6), T(bath), 7, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,695 - DEBUG - self.x_pmdt(P(patient6), T(bath), 8, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,695 - DEBUG - self.x_pmdt(P(patient6), T(bath), 9, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,695 - DEBUG - self.x_pmdt(P(patient6), T(bath), 9, 12.75) = 1.0[0m
+[34m2025-01-06 21:33:21,695 - DEBUG - self.x_pmdt(P(patient6), T(massage), 7, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,695 - DEBUG - self.x_pmdt(P(patient6), T(massage), 7, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,695 - DEBUG - self.x_pmdt(P(patient6), T(sport), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,695 - DEBUG - self.x_pmdt(P(patient6), T(sport), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,696 - DEBUG - self.x_pmdt(P(patient6), T(sport), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,696 - DEBUG - self.x_pmdt(P(patient6), T(board_games), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,696 - DEBUG - self.x_pmdt(P(patient6), T(board_games), 7, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,696 - DEBUG - self.x_pmdt(P(patient6), T(board_games), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,696 - DEBUG - self.x_pmdt(P(patient6), T(board_games), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,696 - DEBUG - self.x_pmdt(P(patient6), T(board_games), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,696 - DEBUG - self.x_pmdt(P(patient7), T(bath), 6, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,697 - DEBUG - self.x_pmdt(P(patient7), T(bath), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,697 - DEBUG - self.x_pmdt(P(patient7), T(bath), 8, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,697 - DEBUG - self.x_pmdt(P(patient7), T(massage), 3, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,697 - DEBUG - self.x_pmdt(P(patient7), T(massage), 4, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,697 - DEBUG - self.x_pmdt(P(patient7), T(massage), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,697 - DEBUG - self.x_pmdt(P(patient7), T(sport), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,697 - DEBUG - self.x_pmdt(P(patient7), T(sport), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,697 - DEBUG - self.x_pmdt(P(patient7), T(sport), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,697 - DEBUG - self.x_pmdt(P(patient7), T(sport), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,697 - DEBUG - self.x_pmdt(P(patient7), T(sport), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,697 - DEBUG - self.x_pmdt(P(patient7), T(sport), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,698 - DEBUG - self.x_pmdt(P(patient7), T(sport), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,698 - DEBUG - self.x_pmdt(P(patient7), T(sport), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,698 - DEBUG - self.x_pmdt(P(patient7), T(sport), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,698 - DEBUG - self.x_pmdt(P(patient7), T(sport), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,698 - DEBUG - self.x_pmdt(P(patient7), T(physio), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,698 - DEBUG - self.x_pmdt(P(patient7), T(physio), 2, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,698 - DEBUG - self.x_pmdt(P(patient7), T(physio), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,698 - DEBUG - self.x_pmdt(P(patient7), T(physio), 7, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,698 - DEBUG - self.x_pmdt(P(patient7), T(physio), 8, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,699 - DEBUG - self.x_pmdt(P(patient7), T(board_games), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,699 - DEBUG - self.x_pmdt(P(patient7), T(board_games), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,699 - DEBUG - self.x_pmdt(P(patient7), T(board_games), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,699 - DEBUG - self.x_pmdt(P(patient8), T(bath), 7, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,699 - DEBUG - self.x_pmdt(P(patient8), T(bath), 9, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,699 - DEBUG - self.x_pmdt(P(patient8), T(bath), 9, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,699 - DEBUG - self.x_pmdt(P(patient8), T(massage), 7, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,699 - DEBUG - self.x_pmdt(P(patient8), T(massage), 8, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,699 - DEBUG - self.x_pmdt(P(patient8), T(massage), 9, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,699 - DEBUG - self.x_pmdt(P(patient8), T(sport), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,700 - DEBUG - self.x_pmdt(P(patient8), T(sport), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,700 - DEBUG - self.x_pmdt(P(patient8), T(board_games), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,700 - DEBUG - self.x_pmdt(P(patient8), T(board_games), 7, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,700 - DEBUG - self.x_pmdt(P(patient8), T(board_games), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,700 - DEBUG - self.x_pmdt(P(patient8), T(board_games), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,700 - DEBUG - self.x_pmdt(P(patient9), T(bath), 9, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,700 - DEBUG - self.x_pmdt(P(patient9), T(bath), 9, 12.75) = 1.0[0m
+[34m2025-01-06 21:33:21,700 - DEBUG - self.x_pmdt(P(patient9), T(sport), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,700 - DEBUG - self.x_pmdt(P(patient9), T(sport), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,701 - DEBUG - self.x_pmdt(P(patient10), T(group_therapy), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,701 - DEBUG - self.x_pmdt(P(patient10), T(group_therapy), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,701 - DEBUG - self.x_pmdt(P(patient10), T(group_therapy), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,701 - DEBUG - self.x_pmdt(P(patient10), T(group_therapy), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,701 - DEBUG - self.x_pmdt(P(patient10), T(group_therapy), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,701 - DEBUG - self.x_pmdt(P(patient10), T(group_therapy), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,701 - DEBUG - self.x_pmdt(P(patient10), T(group_therapy), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,701 - DEBUG - self.x_pmdt(P(patient10), T(group_therapy), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,701 - DEBUG - self.x_pmdt(P(patient10), T(knitting), 0, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,701 - DEBUG - self.x_pmdt(P(patient10), T(knitting), 0, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,701 - DEBUG - self.x_pmdt(P(patient10), T(knitting), 1, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,701 - DEBUG - self.x_pmdt(P(patient10), T(knitting), 4, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,702 - DEBUG - self.x_pmdt(P(patient10), T(knitting), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,702 - DEBUG - self.x_pmdt(P(patient10), T(trust_exercise), 1, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,702 - DEBUG - self.x_pmdt(P(patient10), T(trust_exercise), 3, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,702 - DEBUG - self.x_pmdt(P(patient10), T(trust_exercise), 3, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,702 - DEBUG - self.x_pmdt(P(patient10), T(trust_exercise), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,702 - DEBUG - self.x_pmdt(P(patient10), T(massage), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,703 - DEBUG - self.x_pmdt(P(patient10), T(massage), 6, 8.75) = 1.0[0m
+[34m2025-01-06 21:33:21,703 - DEBUG - self.x_pmdt(P(patient10), T(board_games), 1, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,703 - DEBUG - self.x_pmdt(P(patient10), T(board_games), 2, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,703 - DEBUG - self.x_pmdt(P(patient10), T(board_games), 3, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,703 - DEBUG - self.x_pmdt(P(patient10), T(board_games), 5, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,703 - DEBUG - self.x_pmdt(P(patient10), T(board_games), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,703 - DEBUG - self.x_pmdt(P(patient10), T(board_games), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,704 - DEBUG - self.x_pmdt(P(patient11), T(group_therapy), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,704 - DEBUG - self.x_pmdt(P(patient11), T(group_therapy), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,704 - DEBUG - self.x_pmdt(P(patient11), T(group_therapy), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,704 - DEBUG - self.x_pmdt(P(patient11), T(group_therapy), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,704 - DEBUG - self.x_pmdt(P(patient11), T(group_therapy), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,704 - DEBUG - self.x_pmdt(P(patient11), T(knitting), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,704 - DEBUG - self.x_pmdt(P(patient11), T(knitting), 4, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,704 - DEBUG - self.x_pmdt(P(patient11), T(knitting), 5, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,704 - DEBUG - self.x_pmdt(P(patient11), T(knitting), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,704 - DEBUG - self.x_pmdt(P(patient11), T(knitting), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,705 - DEBUG - self.x_pmdt(P(patient11), T(trust_exercise), 2, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,705 - DEBUG - self.x_pmdt(P(patient11), T(trust_exercise), 3, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,705 - DEBUG - self.x_pmdt(P(patient11), T(trust_exercise), 3, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,705 - DEBUG - self.x_pmdt(P(patient11), T(trust_exercise), 7, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,705 - DEBUG - self.x_pmdt(P(patient11), T(massage), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,705 - DEBUG - self.x_pmdt(P(patient11), T(massage), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,706 - DEBUG - self.x_pmdt(P(patient11), T(board_games), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,706 - DEBUG - self.x_pmdt(P(patient11), T(board_games), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,706 - DEBUG - self.x_pmdt(P(patient11), T(board_games), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,706 - DEBUG - self.x_pmdt(P(patient11), T(board_games), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,706 - DEBUG - self.x_pmdt(P(patient12), T(group_therapy), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,706 - DEBUG - self.x_pmdt(P(patient12), T(group_therapy), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,706 - DEBUG - self.x_pmdt(P(patient12), T(group_therapy), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,706 - DEBUG - self.x_pmdt(P(patient12), T(group_therapy), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,706 - DEBUG - self.x_pmdt(P(patient12), T(knitting), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,706 - DEBUG - self.x_pmdt(P(patient12), T(knitting), 4, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,707 - DEBUG - self.x_pmdt(P(patient12), T(knitting), 6, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,707 - DEBUG - self.x_pmdt(P(patient12), T(knitting), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,707 - DEBUG - self.x_pmdt(P(patient12), T(knitting), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,707 - DEBUG - self.x_pmdt(P(patient12), T(trust_exercise), 3, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,707 - DEBUG - self.x_pmdt(P(patient12), T(trust_exercise), 6, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,707 - DEBUG - self.x_pmdt(P(patient12), T(massage), 3, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,707 - DEBUG - self.x_pmdt(P(patient12), T(massage), 3, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,707 - DEBUG - self.x_pmdt(P(patient12), T(massage), 5, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,707 - DEBUG - self.x_pmdt(P(patient12), T(massage), 5, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,708 - DEBUG - self.x_pmdt(P(patient12), T(massage), 8, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,708 - DEBUG - self.x_pmdt(P(patient12), T(massage), 9, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,708 - DEBUG - self.x_pmdt(P(patient12), T(massage), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,708 - DEBUG - self.x_pmdt(P(patient12), T(board_games), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,708 - DEBUG - self.x_pmdt(P(patient12), T(board_games), 7, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,708 - DEBUG - self.x_pmdt(P(patient12), T(board_games), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,708 - DEBUG - self.x_pmdt(P(patient12), T(board_games), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,708 - DEBUG - self.x_pmdt(P(patient13), T(group_therapy), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,708 - DEBUG - self.x_pmdt(P(patient13), T(group_therapy), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,708 - DEBUG - self.x_pmdt(P(patient13), T(group_therapy), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,708 - DEBUG - self.x_pmdt(P(patient13), T(group_therapy), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,708 - DEBUG - self.x_pmdt(P(patient13), T(group_therapy), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,709 - DEBUG - self.x_pmdt(P(patient13), T(board_games), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,709 - DEBUG - self.x_pmdt(P(patient14), T(group_therapy), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,709 - DEBUG - self.x_pmdt(P(patient14), T(group_therapy), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,709 - DEBUG - self.x_pmdt(P(patient14), T(group_therapy), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,709 - DEBUG - self.x_pmdt(P(patient14), T(group_therapy), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,709 - DEBUG - self.x_pmdt(P(patient14), T(group_therapy), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,709 - DEBUG - self.x_pmdt(P(patient14), T(knitting), 6, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,709 - DEBUG - self.x_pmdt(P(patient14), T(knitting), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,709 - DEBUG - self.x_pmdt(P(patient14), T(trust_exercise), 6, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,709 - DEBUG - self.x_pmdt(P(patient14), T(trust_exercise), 7, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,710 - DEBUG - self.x_pmdt(P(patient14), T(trust_exercise), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,710 - DEBUG - self.x_pmdt(P(patient14), T(massage), 9, 10.5) = 1.0[0m
+[34m2025-01-06 21:33:21,710 - DEBUG - self.x_pmdt(P(patient14), T(board_games), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,710 - DEBUG - self.x_pmdt(P(patient16), T(group_therapy), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,710 - DEBUG - self.x_pmdt(P(patient16), T(group_therapy), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,710 - DEBUG - self.x_pmdt(P(patient16), T(group_therapy), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,710 - DEBUG - self.x_pmdt(P(patient16), T(group_therapy), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,710 - DEBUG - self.x_pmdt(P(patient16), T(group_therapy), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,710 - DEBUG - self.x_pmdt(P(patient16), T(group_therapy), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,710 - DEBUG - self.x_pmdt(P(patient16), T(group_therapy), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,711 - DEBUG - self.x_pmdt(P(patient16), T(group_therapy), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,711 - DEBUG - self.x_pmdt(P(patient16), T(knitting), 4, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,711 - DEBUG - self.x_pmdt(P(patient16), T(knitting), 6, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,711 - DEBUG - self.x_pmdt(P(patient16), T(trust_exercise), 5, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,711 - DEBUG - self.x_pmdt(P(patient16), T(trust_exercise), 6, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,711 - DEBUG - self.x_pmdt(P(patient16), T(trust_exercise), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,711 - DEBUG - self.x_pmdt(P(patient16), T(massage), 5, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,712 - DEBUG - self.x_pmdt(P(patient16), T(massage), 9, 15.25) = 1.0[0m
+[34m2025-01-06 21:33:21,712 - DEBUG - self.x_pmdt(P(patient16), T(board_games), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,712 - DEBUG - self.x_pmdt(P(patient16), T(board_games), 5, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,712 - DEBUG - self.x_pmdt(P(patient16), T(board_games), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,712 - DEBUG - self.x_pmdt(P(patient16), T(board_games), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,712 - DEBUG - self.x_pmdt(P(patient16), T(board_games), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,712 - DEBUG - self.x_pmdt(P(patient17), T(group_therapy), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,712 - DEBUG - self.x_pmdt(P(patient17), T(group_therapy), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,712 - DEBUG - self.x_pmdt(P(patient17), T(group_therapy), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,712 - DEBUG - self.x_pmdt(P(patient17), T(group_therapy), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,712 - DEBUG - self.x_pmdt(P(patient17), T(group_therapy), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,712 - DEBUG - self.x_pmdt(P(patient17), T(group_therapy), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,713 - DEBUG - self.x_pmdt(P(patient17), T(group_therapy), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,713 - DEBUG - self.x_pmdt(P(patient17), T(knitting), 6, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,713 - DEBUG - self.x_pmdt(P(patient17), T(knitting), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,713 - DEBUG - self.x_pmdt(P(patient17), T(trust_exercise), 5, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,713 - DEBUG - self.x_pmdt(P(patient17), T(trust_exercise), 6, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,713 - DEBUG - self.x_pmdt(P(patient17), T(massage), 5, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,713 - DEBUG - self.x_pmdt(P(patient17), T(massage), 6, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,713 - DEBUG - self.x_pmdt(P(patient17), T(board_games), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,714 - DEBUG - self.x_pmdt(P(patient17), T(board_games), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,714 - DEBUG - self.x_pmdt(P(patient17), T(board_games), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,714 - DEBUG - self.x_pmdt(P(patient19), T(group_therapy), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,714 - DEBUG - self.x_pmdt(P(patient19), T(group_therapy), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,714 - DEBUG - self.x_pmdt(P(patient19), T(group_therapy), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,714 - DEBUG - self.x_pmdt(P(patient19), T(group_therapy), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,714 - DEBUG - self.x_pmdt(P(patient19), T(knitting), 0, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,714 - DEBUG - self.x_pmdt(P(patient19), T(knitting), 0, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,714 - DEBUG - self.x_pmdt(P(patient19), T(knitting), 1, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,715 - DEBUG - self.x_pmdt(P(patient19), T(knitting), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,715 - DEBUG - self.x_pmdt(P(patient19), T(knitting), 5, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,715 - DEBUG - self.x_pmdt(P(patient19), T(knitting), 6, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,715 - DEBUG - self.x_pmdt(P(patient19), T(knitting), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,715 - DEBUG - self.x_pmdt(P(patient19), T(trust_exercise), 6, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,715 - DEBUG - self.x_pmdt(P(patient19), T(trust_exercise), 6, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,716 - DEBUG - self.x_pmdt(P(patient19), T(massage), 0, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,716 - DEBUG - self.x_pmdt(P(patient19), T(massage), 0, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,716 - DEBUG - self.x_pmdt(P(patient19), T(massage), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,716 - DEBUG - self.x_pmdt(P(patient19), T(massage), 5, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,716 - DEBUG - self.x_pmdt(P(patient19), T(massage), 8, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,716 - DEBUG - self.x_pmdt(P(patient19), T(massage), 8, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,716 - DEBUG - self.x_pmdt(P(patient19), T(massage), 8, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,716 - DEBUG - self.x_pmdt(P(patient19), T(board_games), 1, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,716 - DEBUG - self.x_pmdt(P(patient19), T(board_games), 1, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,716 - DEBUG - self.x_pmdt(P(patient19), T(board_games), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,716 - DEBUG - self.x_pmdt(P(patient19), T(board_games), 3, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,717 - DEBUG - self.x_pmdt(P(patient19), T(board_games), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,717 - DEBUG - self.x_pmdt(P(patient19), T(board_games), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,717 - DEBUG - self.z_pmfdt(P(patient0), T(bath), RG(rooms), R(room0), 6, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,717 - DEBUG - self.z_pmfdt(P(patient0), T(bath), RG(rooms), R(room0), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,718 - DEBUG - self.z_pmfdt(P(patient0), T(bath), RG(rooms), R(sport_room), 6, 15.25) = 1.0[0m
+[34m2025-01-06 21:33:21,718 - DEBUG - self.z_pmfdt(P(patient0), T(bath), RG(rooms), R(sport_room), 9, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,719 - DEBUG - self.z_pmfdt(P(patient0), T(massage), RG(physiotherapist), R(therapist4), 5, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,719 - DEBUG - self.z_pmfdt(P(patient0), T(massage), RG(physiotherapist), R(physiotherapist), 5, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,719 - DEBUG - self.z_pmfdt(P(patient0), T(massage), RG(physiotherapist), R(physiotherapist), 8, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,720 - DEBUG - self.z_pmfdt(P(patient0), T(massage), RG(physiotherapist), R(physiotherapist), 8, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,720 - DEBUG - self.z_pmfdt(P(patient0), T(massage), RG(rooms), R(room0), 8, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,720 - DEBUG - self.z_pmfdt(P(patient0), T(massage), RG(rooms), R(room1), 5, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,720 - DEBUG - self.z_pmfdt(P(patient0), T(massage), RG(rooms), R(room1), 5, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,721 - DEBUG - self.z_pmfdt(P(patient0), T(massage), RG(rooms), R(sport_room), 8, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,722 - DEBUG - self.z_pmfdt(P(patient0), T(sport), RG(therapists), R(therapist0), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,722 - DEBUG - self.z_pmfdt(P(patient0), T(sport), RG(therapists), R(therapist1), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,722 - DEBUG - self.z_pmfdt(P(patient0), T(sport), RG(therapists), R(therapist1), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,722 - DEBUG - self.z_pmfdt(P(patient0), T(sport), RG(therapists), R(therapist1), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,722 - DEBUG - self.z_pmfdt(P(patient0), T(sport), RG(therapists), R(therapist2), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,722 - DEBUG - self.z_pmfdt(P(patient0), T(sport), RG(therapists), R(therapist2), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,723 - DEBUG - self.z_pmfdt(P(patient0), T(sport), RG(therapists), R(therapist4), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,724 - DEBUG - self.z_pmfdt(P(patient0), T(sport), RG(therapists), R(language_therapist0), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,724 - DEBUG - self.z_pmfdt(P(patient0), T(sport), RG(sport_room), R(sport_room), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,724 - DEBUG - self.z_pmfdt(P(patient0), T(sport), RG(sport_room), R(sport_room), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,724 - DEBUG - self.z_pmfdt(P(patient0), T(sport), RG(sport_room), R(sport_room), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,724 - DEBUG - self.z_pmfdt(P(patient0), T(sport), RG(sport_room), R(sport_room), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,724 - DEBUG - self.z_pmfdt(P(patient0), T(sport), RG(sport_room), R(sport_room), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,725 - DEBUG - self.z_pmfdt(P(patient0), T(sport), RG(sport_room), R(sport_room), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,725 - DEBUG - self.z_pmfdt(P(patient0), T(sport), RG(sport_room), R(sport_room), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,725 - DEBUG - self.z_pmfdt(P(patient0), T(sport), RG(sport_room), R(sport_room), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,725 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(sport_room), R(sport_room), 0, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,725 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(sport_room), R(sport_room), 0, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,725 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(sport_room), R(sport_room), 1, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,725 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(sport_room), R(sport_room), 4, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,725 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(sport_room), R(sport_room), 5, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,725 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(sport_room), R(sport_room), 9, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,726 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(rooms), R(room0), 4, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,726 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(rooms), R(room0), 5, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,726 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(rooms), R(room0), 9, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,726 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(rooms), R(room1), 0, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,726 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(rooms), R(room1), 0, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,726 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(rooms), R(room1), 1, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,727 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(physiotherapist), R(therapist4), 0, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,728 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(physiotherapist), R(therapist4), 5, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,728 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(physiotherapist), R(therapist4), 9, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,728 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(physiotherapist), R(physiotherapist), 0, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,728 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(physiotherapist), R(physiotherapist), 1, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,728 - DEBUG - self.z_pmfdt(P(patient0), T(physio), RG(physiotherapist), R(physiotherapist), 4, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,729 - DEBUG - self.z_pmfdt(P(patient0), T(board_games), RG(therapists), R(therapist0), 5, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,729 - DEBUG - self.z_pmfdt(P(patient0), T(board_games), RG(therapists), R(therapist1), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,730 - DEBUG - self.z_pmfdt(P(patient0), T(board_games), RG(therapists), R(therapist2), 7, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,730 - DEBUG - self.z_pmfdt(P(patient0), T(board_games), RG(therapists), R(therapist3), 1, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,731 - DEBUG - self.z_pmfdt(P(patient0), T(board_games), RG(therapists), R(language_therapist0), 2, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,732 - DEBUG - self.z_pmfdt(P(patient0), T(board_games), RG(rooms), R(room0), 2, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,732 - DEBUG - self.z_pmfdt(P(patient0), T(board_games), RG(rooms), R(room0), 5, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,732 - DEBUG - self.z_pmfdt(P(patient0), T(board_games), RG(rooms), R(room0), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,732 - DEBUG - self.z_pmfdt(P(patient0), T(board_games), RG(rooms), R(room1), 1, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,733 - DEBUG - self.z_pmfdt(P(patient0), T(board_games), RG(rooms), R(sport_room), 7, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,733 - DEBUG - self.z_pmfdt(P(patient1), T(bath), RG(rooms), R(room0), 2, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,733 - DEBUG - self.z_pmfdt(P(patient1), T(bath), RG(rooms), R(room0), 8, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,734 - DEBUG - self.z_pmfdt(P(patient1), T(bath), RG(rooms), R(room1), 3, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,734 - DEBUG - self.z_pmfdt(P(patient1), T(bath), RG(rooms), R(room1), 5, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,734 - DEBUG - self.z_pmfdt(P(patient1), T(bath), RG(rooms), R(room1), 5, 12.25) = 1.0[0m
+[34m2025-01-06 21:33:21,734 - DEBUG - self.z_pmfdt(P(patient1), T(bath), RG(rooms), R(sport_room), 7, 12.25) = 1.0[0m
+[34m2025-01-06 21:33:21,735 - DEBUG - self.z_pmfdt(P(patient1), T(bath), RG(rooms), R(sport_room), 8, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,735 - DEBUG - self.z_pmfdt(P(patient1), T(massage), RG(physiotherapist), R(therapist4), 1, 10.5) = 1.0[0m
+[34m2025-01-06 21:33:21,735 - DEBUG - self.z_pmfdt(P(patient1), T(massage), RG(physiotherapist), R(therapist4), 1, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,735 - DEBUG - self.z_pmfdt(P(patient1), T(massage), RG(physiotherapist), R(physiotherapist), 6, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,735 - DEBUG - self.z_pmfdt(P(patient1), T(massage), RG(physiotherapist), R(physiotherapist), 7, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,736 - DEBUG - self.z_pmfdt(P(patient1), T(massage), RG(rooms), R(room0), 1, 10.5) = 1.0[0m
+[34m2025-01-06 21:33:21,736 - DEBUG - self.z_pmfdt(P(patient1), T(massage), RG(rooms), R(room0), 7, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,736 - DEBUG - self.z_pmfdt(P(patient1), T(massage), RG(rooms), R(room1), 1, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,736 - DEBUG - self.z_pmfdt(P(patient1), T(massage), RG(rooms), R(room1), 6, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,737 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(therapists), R(therapist0), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,738 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(therapists), R(therapist0), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,738 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(therapists), R(therapist1), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,738 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(therapists), R(therapist1), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,738 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(therapists), R(therapist2), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,738 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(therapists), R(therapist2), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,739 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(therapists), R(therapist2), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,739 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(therapists), R(therapist2), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,739 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(therapists), R(therapist4), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,740 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(therapists), R(language_therapist0), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,740 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(sport_room), R(sport_room), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,740 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(sport_room), R(sport_room), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,740 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(sport_room), R(sport_room), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,740 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(sport_room), R(sport_room), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,741 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(sport_room), R(sport_room), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,741 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(sport_room), R(sport_room), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,741 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(sport_room), R(sport_room), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,741 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(sport_room), R(sport_room), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,741 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(sport_room), R(sport_room), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,741 - DEBUG - self.z_pmfdt(P(patient1), T(sport), RG(sport_room), R(sport_room), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,741 - DEBUG - self.z_pmfdt(P(patient1), T(physio), RG(sport_room), R(sport_room), 1, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,741 - DEBUG - self.z_pmfdt(P(patient1), T(physio), RG(sport_room), R(sport_room), 3, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,741 - DEBUG - self.z_pmfdt(P(patient1), T(physio), RG(sport_room), R(sport_room), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,742 - DEBUG - self.z_pmfdt(P(patient1), T(physio), RG(rooms), R(room0), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,742 - DEBUG - self.z_pmfdt(P(patient1), T(physio), RG(rooms), R(room1), 1, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,742 - DEBUG - self.z_pmfdt(P(patient1), T(physio), RG(rooms), R(room1), 3, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,743 - DEBUG - self.z_pmfdt(P(patient1), T(physio), RG(physiotherapist), R(therapist4), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,744 - DEBUG - self.z_pmfdt(P(patient1), T(physio), RG(physiotherapist), R(physiotherapist), 1, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,744 - DEBUG - self.z_pmfdt(P(patient1), T(physio), RG(physiotherapist), R(physiotherapist), 3, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,745 - DEBUG - self.z_pmfdt(P(patient1), T(board_games), RG(therapists), R(therapist1), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,745 - DEBUG - self.z_pmfdt(P(patient1), T(board_games), RG(therapists), R(therapist2), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,746 - DEBUG - self.z_pmfdt(P(patient1), T(board_games), RG(therapists), R(therapist3), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,747 - DEBUG - self.z_pmfdt(P(patient1), T(board_games), RG(therapists), R(language_therapist0), 7, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,747 - DEBUG - self.z_pmfdt(P(patient1), T(board_games), RG(therapists), R(language_therapist0), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,747 - DEBUG - self.z_pmfdt(P(patient1), T(board_games), RG(rooms), R(room0), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,747 - DEBUG - self.z_pmfdt(P(patient1), T(board_games), RG(rooms), R(room0), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,747 - DEBUG - self.z_pmfdt(P(patient1), T(board_games), RG(rooms), R(room0), 7, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,747 - DEBUG - self.z_pmfdt(P(patient1), T(board_games), RG(rooms), R(room0), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,748 - DEBUG - self.z_pmfdt(P(patient1), T(board_games), RG(rooms), R(room1), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,749 - DEBUG - self.z_pmfdt(P(patient2), T(bath), RG(rooms), R(room0), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,749 - DEBUG - self.z_pmfdt(P(patient2), T(bath), RG(rooms), R(sport_room), 5, 12.25) = 1.0[0m
+[34m2025-01-06 21:33:21,750 - DEBUG - self.z_pmfdt(P(patient2), T(bath), RG(rooms), R(sport_room), 7, 12.75) = 1.0[0m
+[34m2025-01-06 21:33:21,750 - DEBUG - self.z_pmfdt(P(patient2), T(bath), RG(rooms), R(sport_room), 7, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,750 - DEBUG - self.z_pmfdt(P(patient2), T(massage), RG(physiotherapist), R(therapist4), 9, 15.25) = 1.0[0m
+[34m2025-01-06 21:33:21,750 - DEBUG - self.z_pmfdt(P(patient2), T(massage), RG(physiotherapist), R(physiotherapist), 8, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,751 - DEBUG - self.z_pmfdt(P(patient2), T(massage), RG(physiotherapist), R(physiotherapist), 8, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,751 - DEBUG - self.z_pmfdt(P(patient2), T(massage), RG(rooms), R(room0), 8, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,751 - DEBUG - self.z_pmfdt(P(patient2), T(massage), RG(rooms), R(room0), 9, 15.25) = 1.0[0m
+[34m2025-01-06 21:33:21,752 - DEBUG - self.z_pmfdt(P(patient2), T(massage), RG(rooms), R(sport_room), 8, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,752 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(therapists), R(therapist0), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,752 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(therapists), R(therapist1), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,752 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(therapists), R(therapist1), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,753 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(therapists), R(therapist1), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,753 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(therapists), R(therapist2), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,753 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(therapists), R(therapist2), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,753 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(therapists), R(therapist2), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,753 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(therapists), R(therapist2), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,754 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(therapists), R(therapist4), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,755 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(sport_room), R(sport_room), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,755 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(sport_room), R(sport_room), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,755 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(sport_room), R(sport_room), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,755 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(sport_room), R(sport_room), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,755 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(sport_room), R(sport_room), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,755 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(sport_room), R(sport_room), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,755 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(sport_room), R(sport_room), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,755 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(sport_room), R(sport_room), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,755 - DEBUG - self.z_pmfdt(P(patient2), T(sport), RG(sport_room), R(sport_room), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,755 - DEBUG - self.z_pmfdt(P(patient2), T(physio), RG(sport_room), R(sport_room), 2, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,755 - DEBUG - self.z_pmfdt(P(patient2), T(physio), RG(sport_room), R(sport_room), 3, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,755 - DEBUG - self.z_pmfdt(P(patient2), T(physio), RG(sport_room), R(sport_room), 4, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,756 - DEBUG - self.z_pmfdt(P(patient2), T(physio), RG(sport_room), R(sport_room), 6, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,756 - DEBUG - self.z_pmfdt(P(patient2), T(physio), RG(sport_room), R(sport_room), 6, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,756 - DEBUG - self.z_pmfdt(P(patient2), T(physio), RG(rooms), R(room1), 2, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,756 - DEBUG - self.z_pmfdt(P(patient2), T(physio), RG(rooms), R(room1), 3, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,756 - DEBUG - self.z_pmfdt(P(patient2), T(physio), RG(rooms), R(room1), 4, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,757 - DEBUG - self.z_pmfdt(P(patient2), T(physio), RG(rooms), R(room1), 6, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,757 - DEBUG - self.z_pmfdt(P(patient2), T(physio), RG(rooms), R(room1), 6, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,757 - DEBUG - self.z_pmfdt(P(patient2), T(physio), RG(physiotherapist), R(therapist4), 2, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,757 - DEBUG - self.z_pmfdt(P(patient2), T(physio), RG(physiotherapist), R(therapist4), 6, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,758 - DEBUG - self.z_pmfdt(P(patient2), T(physio), RG(physiotherapist), R(physiotherapist), 3, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,758 - DEBUG - self.z_pmfdt(P(patient2), T(physio), RG(physiotherapist), R(physiotherapist), 4, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,758 - DEBUG - self.z_pmfdt(P(patient2), T(physio), RG(physiotherapist), R(physiotherapist), 6, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,759 - DEBUG - self.z_pmfdt(P(patient2), T(board_games), RG(therapists), R(therapist2), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,759 - DEBUG - self.z_pmfdt(P(patient2), T(board_games), RG(therapists), R(therapist3), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,760 - DEBUG - self.z_pmfdt(P(patient2), T(board_games), RG(therapists), R(language_therapist0), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,761 - DEBUG - self.z_pmfdt(P(patient2), T(board_games), RG(rooms), R(room0), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,761 - DEBUG - self.z_pmfdt(P(patient2), T(board_games), RG(rooms), R(room0), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,761 - DEBUG - self.z_pmfdt(P(patient2), T(board_games), RG(rooms), R(room1), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,762 - DEBUG - self.z_pmfdt(P(patient3), T(bath), RG(rooms), R(room0), 7, 12.5) = 1.0[0m
+[34m2025-01-06 21:33:21,762 - DEBUG - self.z_pmfdt(P(patient3), T(bath), RG(rooms), R(room0), 8, 12.5) = 1.0[0m
+[34m2025-01-06 21:33:21,762 - DEBUG - self.z_pmfdt(P(patient3), T(bath), RG(rooms), R(room0), 9, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,763 - DEBUG - self.z_pmfdt(P(patient3), T(bath), RG(rooms), R(room1), 9, 12.25) = 1.0[0m
+[34m2025-01-06 21:33:21,763 - DEBUG - self.z_pmfdt(P(patient3), T(bath), RG(rooms), R(sport_room), 4, 12.75) = 1.0[0m
+[34m2025-01-06 21:33:21,763 - DEBUG - self.z_pmfdt(P(patient3), T(massage), RG(physiotherapist), R(therapist4), 3, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,764 - DEBUG - self.z_pmfdt(P(patient3), T(massage), RG(physiotherapist), R(therapist4), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,764 - DEBUG - self.z_pmfdt(P(patient3), T(massage), RG(physiotherapist), R(therapist4), 9, 10.5) = 1.0[0m
+[34m2025-01-06 21:33:21,764 - DEBUG - self.z_pmfdt(P(patient3), T(massage), RG(physiotherapist), R(physiotherapist), 7, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,764 - DEBUG - self.z_pmfdt(P(patient3), T(massage), RG(rooms), R(room0), 7, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,764 - DEBUG - self.z_pmfdt(P(patient3), T(massage), RG(rooms), R(room0), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,764 - DEBUG - self.z_pmfdt(P(patient3), T(massage), RG(rooms), R(room0), 9, 10.5) = 1.0[0m
+[34m2025-01-06 21:33:21,765 - DEBUG - self.z_pmfdt(P(patient3), T(massage), RG(rooms), R(room1), 3, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,766 - DEBUG - self.z_pmfdt(P(patient3), T(sport), RG(therapists), R(therapist1), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,766 - DEBUG - self.z_pmfdt(P(patient3), T(sport), RG(therapists), R(therapist1), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,766 - DEBUG - self.z_pmfdt(P(patient3), T(sport), RG(therapists), R(therapist2), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,766 - DEBUG - self.z_pmfdt(P(patient3), T(sport), RG(therapists), R(therapist2), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,767 - DEBUG - self.z_pmfdt(P(patient3), T(sport), RG(therapists), R(therapist3), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,767 - DEBUG - self.z_pmfdt(P(patient3), T(sport), RG(therapists), R(therapist4), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,768 - DEBUG - self.z_pmfdt(P(patient3), T(sport), RG(therapists), R(language_therapist0), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,768 - DEBUG - self.z_pmfdt(P(patient3), T(sport), RG(sport_room), R(sport_room), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,768 - DEBUG - self.z_pmfdt(P(patient3), T(sport), RG(sport_room), R(sport_room), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,768 - DEBUG - self.z_pmfdt(P(patient3), T(sport), RG(sport_room), R(sport_room), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,768 - DEBUG - self.z_pmfdt(P(patient3), T(sport), RG(sport_room), R(sport_room), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,768 - DEBUG - self.z_pmfdt(P(patient3), T(sport), RG(sport_room), R(sport_room), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,768 - DEBUG - self.z_pmfdt(P(patient3), T(sport), RG(sport_room), R(sport_room), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,768 - DEBUG - self.z_pmfdt(P(patient3), T(sport), RG(sport_room), R(sport_room), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,769 - DEBUG - self.z_pmfdt(P(patient3), T(physio), RG(sport_room), R(sport_room), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,769 - DEBUG - self.z_pmfdt(P(patient3), T(physio), RG(sport_room), R(sport_room), 2, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,769 - DEBUG - self.z_pmfdt(P(patient3), T(physio), RG(sport_room), R(sport_room), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,769 - DEBUG - self.z_pmfdt(P(patient3), T(physio), RG(sport_room), R(sport_room), 5, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,769 - DEBUG - self.z_pmfdt(P(patient3), T(physio), RG(sport_room), R(sport_room), 8, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,769 - DEBUG - self.z_pmfdt(P(patient3), T(physio), RG(rooms), R(room0), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,769 - DEBUG - self.z_pmfdt(P(patient3), T(physio), RG(rooms), R(room0), 5, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,770 - DEBUG - self.z_pmfdt(P(patient3), T(physio), RG(rooms), R(room1), 2, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,770 - DEBUG - self.z_pmfdt(P(patient3), T(physio), RG(rooms), R(room1), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,770 - DEBUG - self.z_pmfdt(P(patient3), T(physio), RG(rooms), R(room1), 8, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,771 - DEBUG - self.z_pmfdt(P(patient3), T(physio), RG(physiotherapist), R(therapist4), 2, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,771 - DEBUG - self.z_pmfdt(P(patient3), T(physio), RG(physiotherapist), R(therapist4), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,771 - DEBUG - self.z_pmfdt(P(patient3), T(physio), RG(physiotherapist), R(therapist4), 5, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,771 - DEBUG - self.z_pmfdt(P(patient3), T(physio), RG(physiotherapist), R(therapist4), 8, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,771 - DEBUG - self.z_pmfdt(P(patient3), T(physio), RG(physiotherapist), R(physiotherapist), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,772 - DEBUG - self.z_pmfdt(P(patient3), T(board_games), RG(therapists), R(therapist1), 8, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,773 - DEBUG - self.z_pmfdt(P(patient3), T(board_games), RG(therapists), R(therapist4), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,774 - DEBUG - self.z_pmfdt(P(patient3), T(board_games), RG(therapists), R(language_therapist0), 7, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,774 - DEBUG - self.z_pmfdt(P(patient3), T(board_games), RG(rooms), R(room0), 7, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,775 - DEBUG - self.z_pmfdt(P(patient3), T(board_games), RG(rooms), R(room1), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,775 - DEBUG - self.z_pmfdt(P(patient3), T(board_games), RG(rooms), R(room1), 8, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,775 - DEBUG - self.z_pmfdt(P(patient4), T(bath), RG(rooms), R(room0), 5, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,776 - DEBUG - self.z_pmfdt(P(patient4), T(bath), RG(rooms), R(room1), 4, 12.75) = 1.0[0m
+[34m2025-01-06 21:33:21,776 - DEBUG - self.z_pmfdt(P(patient4), T(bath), RG(rooms), R(sport_room), 5, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,776 - DEBUG - self.z_pmfdt(P(patient4), T(massage), RG(physiotherapist), R(therapist4), 3, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,777 - DEBUG - self.z_pmfdt(P(patient4), T(massage), RG(physiotherapist), R(physiotherapist), 8, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,777 - DEBUG - self.z_pmfdt(P(patient4), T(massage), RG(rooms), R(room1), 3, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,778 - DEBUG - self.z_pmfdt(P(patient4), T(massage), RG(rooms), R(sport_room), 8, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,778 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(therapists), R(therapist0), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,778 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(therapists), R(therapist0), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,779 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(therapists), R(therapist1), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,779 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(therapists), R(therapist1), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,779 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(therapists), R(therapist2), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,779 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(therapists), R(therapist2), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,779 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(therapists), R(therapist2), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,779 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(therapists), R(therapist3), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,780 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(therapists), R(therapist4), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,780 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(sport_room), R(sport_room), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,780 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(sport_room), R(sport_room), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,781 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(sport_room), R(sport_room), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,781 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(sport_room), R(sport_room), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,781 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(sport_room), R(sport_room), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,781 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(sport_room), R(sport_room), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,781 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(sport_room), R(sport_room), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,781 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(sport_room), R(sport_room), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,781 - DEBUG - self.z_pmfdt(P(patient4), T(sport), RG(sport_room), R(sport_room), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,781 - DEBUG - self.z_pmfdt(P(patient4), T(physio), RG(sport_room), R(sport_room), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,781 - DEBUG - self.z_pmfdt(P(patient4), T(physio), RG(sport_room), R(sport_room), 4, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,781 - DEBUG - self.z_pmfdt(P(patient4), T(physio), RG(sport_room), R(sport_room), 6, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,781 - DEBUG - self.z_pmfdt(P(patient4), T(physio), RG(sport_room), R(sport_room), 7, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,782 - DEBUG - self.z_pmfdt(P(patient4), T(physio), RG(sport_room), R(sport_room), 9, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,782 - DEBUG - self.z_pmfdt(P(patient4), T(physio), RG(rooms), R(room0), 9, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,782 - DEBUG - self.z_pmfdt(P(patient4), T(physio), RG(rooms), R(room1), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,782 - DEBUG - self.z_pmfdt(P(patient4), T(physio), RG(rooms), R(room1), 4, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,782 - DEBUG - self.z_pmfdt(P(patient4), T(physio), RG(rooms), R(room1), 6, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,782 - DEBUG - self.z_pmfdt(P(patient4), T(physio), RG(rooms), R(room1), 7, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,783 - DEBUG - self.z_pmfdt(P(patient4), T(physio), RG(physiotherapist), R(therapist4), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,783 - DEBUG - self.z_pmfdt(P(patient4), T(physio), RG(physiotherapist), R(therapist4), 9, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,783 - DEBUG - self.z_pmfdt(P(patient4), T(physio), RG(physiotherapist), R(physiotherapist), 4, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,783 - DEBUG - self.z_pmfdt(P(patient4), T(physio), RG(physiotherapist), R(physiotherapist), 6, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,783 - DEBUG - self.z_pmfdt(P(patient4), T(physio), RG(physiotherapist), R(physiotherapist), 7, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,784 - DEBUG - self.z_pmfdt(P(patient4), T(board_games), RG(therapists), R(therapist0), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,785 - DEBUG - self.z_pmfdt(P(patient4), T(board_games), RG(therapists), R(therapist2), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,785 - DEBUG - self.z_pmfdt(P(patient4), T(board_games), RG(therapists), R(therapist4), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,786 - DEBUG - self.z_pmfdt(P(patient4), T(board_games), RG(rooms), R(room0), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,786 - DEBUG - self.z_pmfdt(P(patient4), T(board_games), RG(rooms), R(room1), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,786 - DEBUG - self.z_pmfdt(P(patient4), T(board_games), RG(rooms), R(room1), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,787 - DEBUG - self.z_pmfdt(P(patient5), T(bath), RG(rooms), R(room0), 4, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,787 - DEBUG - self.z_pmfdt(P(patient5), T(bath), RG(rooms), R(room0), 6, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,787 - DEBUG - self.z_pmfdt(P(patient5), T(bath), RG(rooms), R(room0), 8, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,788 - DEBUG - self.z_pmfdt(P(patient5), T(bath), RG(rooms), R(room1), 7, 12.5) = 1.0[0m
+[34m2025-01-06 21:33:21,788 - DEBUG - self.z_pmfdt(P(patient5), T(bath), RG(rooms), R(sport_room), 9, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,788 - DEBUG - self.z_pmfdt(P(patient5), T(massage), RG(physiotherapist), R(therapist4), 4, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,788 - DEBUG - self.z_pmfdt(P(patient5), T(massage), RG(physiotherapist), R(physiotherapist), 5, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,789 - DEBUG - self.z_pmfdt(P(patient5), T(massage), RG(physiotherapist), R(physiotherapist), 6, 8.75) = 1.0[0m
+[34m2025-01-06 21:33:21,789 - DEBUG - self.z_pmfdt(P(patient5), T(massage), RG(physiotherapist), R(physiotherapist), 9, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,789 - DEBUG - self.z_pmfdt(P(patient5), T(massage), RG(rooms), R(room0), 4, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,789 - DEBUG - self.z_pmfdt(P(patient5), T(massage), RG(rooms), R(room0), 6, 8.75) = 1.0[0m
+[34m2025-01-06 21:33:21,789 - DEBUG - self.z_pmfdt(P(patient5), T(massage), RG(rooms), R(room1), 5, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,789 - DEBUG - self.z_pmfdt(P(patient5), T(massage), RG(rooms), R(room1), 9, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,790 - DEBUG - self.z_pmfdt(P(patient5), T(sport), RG(therapists), R(therapist0), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,790 - DEBUG - self.z_pmfdt(P(patient5), T(sport), RG(therapists), R(therapist1), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,791 - DEBUG - self.z_pmfdt(P(patient5), T(sport), RG(therapists), R(therapist2), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,791 - DEBUG - self.z_pmfdt(P(patient5), T(sport), RG(therapists), R(therapist3), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,792 - DEBUG - self.z_pmfdt(P(patient5), T(sport), RG(therapists), R(language_therapist0), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,792 - DEBUG - self.z_pmfdt(P(patient5), T(sport), RG(sport_room), R(sport_room), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,792 - DEBUG - self.z_pmfdt(P(patient5), T(sport), RG(sport_room), R(sport_room), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,792 - DEBUG - self.z_pmfdt(P(patient5), T(sport), RG(sport_room), R(sport_room), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,792 - DEBUG - self.z_pmfdt(P(patient5), T(sport), RG(sport_room), R(sport_room), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,792 - DEBUG - self.z_pmfdt(P(patient5), T(sport), RG(sport_room), R(sport_room), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,792 - DEBUG - self.z_pmfdt(P(patient5), T(physio), RG(sport_room), R(sport_room), 4, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,793 - DEBUG - self.z_pmfdt(P(patient5), T(physio), RG(rooms), R(room0), 4, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,794 - DEBUG - self.z_pmfdt(P(patient5), T(physio), RG(physiotherapist), R(physiotherapist), 4, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,794 - DEBUG - self.z_pmfdt(P(patient5), T(board_games), RG(therapists), R(therapist0), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,795 - DEBUG - self.z_pmfdt(P(patient5), T(board_games), RG(therapists), R(therapist1), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,795 - DEBUG - self.z_pmfdt(P(patient5), T(board_games), RG(therapists), R(therapist1), 8, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,795 - DEBUG - self.z_pmfdt(P(patient5), T(board_games), RG(therapists), R(therapist2), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,796 - DEBUG - self.z_pmfdt(P(patient5), T(board_games), RG(rooms), R(room0), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,796 - DEBUG - self.z_pmfdt(P(patient5), T(board_games), RG(rooms), R(room0), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,797 - DEBUG - self.z_pmfdt(P(patient5), T(board_games), RG(rooms), R(room1), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,797 - DEBUG - self.z_pmfdt(P(patient5), T(board_games), RG(rooms), R(room1), 8, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,797 - DEBUG - self.z_pmfdt(P(patient6), T(bath), RG(rooms), R(room0), 6, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,797 - DEBUG - self.z_pmfdt(P(patient6), T(bath), RG(rooms), R(room0), 7, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,798 - DEBUG - self.z_pmfdt(P(patient6), T(bath), RG(rooms), R(room0), 9, 12.75) = 1.0[0m
+[34m2025-01-06 21:33:21,798 - DEBUG - self.z_pmfdt(P(patient6), T(bath), RG(rooms), R(room1), 9, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,798 - DEBUG - self.z_pmfdt(P(patient6), T(bath), RG(rooms), R(sport_room), 5, 10.5) = 1.0[0m
+[34m2025-01-06 21:33:21,798 - DEBUG - self.z_pmfdt(P(patient6), T(bath), RG(rooms), R(sport_room), 8, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,798 - DEBUG - self.z_pmfdt(P(patient6), T(massage), RG(physiotherapist), R(therapist4), 7, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,799 - DEBUG - self.z_pmfdt(P(patient6), T(massage), RG(physiotherapist), R(physiotherapist), 7, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,799 - DEBUG - self.z_pmfdt(P(patient6), T(massage), RG(rooms), R(room1), 7, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,800 - DEBUG - self.z_pmfdt(P(patient6), T(massage), RG(rooms), R(sport_room), 7, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,800 - DEBUG - self.z_pmfdt(P(patient6), T(sport), RG(therapists), R(therapist0), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,801 - DEBUG - self.z_pmfdt(P(patient6), T(sport), RG(therapists), R(therapist3), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,801 - DEBUG - self.z_pmfdt(P(patient6), T(sport), RG(therapists), R(language_therapist0), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,801 - DEBUG - self.z_pmfdt(P(patient6), T(sport), RG(sport_room), R(sport_room), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,802 - DEBUG - self.z_pmfdt(P(patient6), T(sport), RG(sport_room), R(sport_room), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,802 - DEBUG - self.z_pmfdt(P(patient6), T(sport), RG(sport_room), R(sport_room), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,803 - DEBUG - self.z_pmfdt(P(patient6), T(board_games), RG(therapists), R(therapist0), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,804 - DEBUG - self.z_pmfdt(P(patient6), T(board_games), RG(therapists), R(therapist1), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,804 - DEBUG - self.z_pmfdt(P(patient6), T(board_games), RG(therapists), R(therapist2), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,805 - DEBUG - self.z_pmfdt(P(patient6), T(board_games), RG(therapists), R(therapist4), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,805 - DEBUG - self.z_pmfdt(P(patient6), T(board_games), RG(therapists), R(language_therapist0), 7, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,805 - DEBUG - self.z_pmfdt(P(patient6), T(board_games), RG(rooms), R(room0), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,805 - DEBUG - self.z_pmfdt(P(patient6), T(board_games), RG(rooms), R(room0), 7, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,805 - DEBUG - self.z_pmfdt(P(patient6), T(board_games), RG(rooms), R(room1), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,806 - DEBUG - self.z_pmfdt(P(patient6), T(board_games), RG(rooms), R(room1), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,806 - DEBUG - self.z_pmfdt(P(patient6), T(board_games), RG(rooms), R(room1), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,807 - DEBUG - self.z_pmfdt(P(patient7), T(bath), RG(rooms), R(room1), 6, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,807 - DEBUG - self.z_pmfdt(P(patient7), T(bath), RG(rooms), R(room1), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,807 - DEBUG - self.z_pmfdt(P(patient7), T(bath), RG(rooms), R(room1), 8, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,807 - DEBUG - self.z_pmfdt(P(patient7), T(massage), RG(physiotherapist), R(therapist4), 3, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,807 - DEBUG - self.z_pmfdt(P(patient7), T(massage), RG(physiotherapist), R(therapist4), 4, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,808 - DEBUG - self.z_pmfdt(P(patient7), T(massage), RG(physiotherapist), R(therapist4), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,808 - DEBUG - self.z_pmfdt(P(patient7), T(massage), RG(rooms), R(room0), 4, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,809 - DEBUG - self.z_pmfdt(P(patient7), T(massage), RG(rooms), R(room0), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,809 - DEBUG - self.z_pmfdt(P(patient7), T(massage), RG(rooms), R(sport_room), 3, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,810 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(therapists), R(therapist0), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,810 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(therapists), R(therapist1), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,810 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(therapists), R(therapist1), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,810 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(therapists), R(therapist1), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,811 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(therapists), R(therapist2), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,811 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(therapists), R(therapist2), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,811 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(therapists), R(therapist2), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,811 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(therapists), R(therapist2), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,811 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(therapists), R(therapist3), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,812 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(therapists), R(therapist4), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,812 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(sport_room), R(sport_room), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,812 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(sport_room), R(sport_room), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,812 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(sport_room), R(sport_room), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,813 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(sport_room), R(sport_room), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,813 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(sport_room), R(sport_room), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,813 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(sport_room), R(sport_room), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,813 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(sport_room), R(sport_room), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,813 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(sport_room), R(sport_room), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,813 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(sport_room), R(sport_room), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,813 - DEBUG - self.z_pmfdt(P(patient7), T(sport), RG(sport_room), R(sport_room), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,813 - DEBUG - self.z_pmfdt(P(patient7), T(physio), RG(sport_room), R(sport_room), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,813 - DEBUG - self.z_pmfdt(P(patient7), T(physio), RG(sport_room), R(sport_room), 2, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,813 - DEBUG - self.z_pmfdt(P(patient7), T(physio), RG(sport_room), R(sport_room), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,814 - DEBUG - self.z_pmfdt(P(patient7), T(physio), RG(sport_room), R(sport_room), 7, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,814 - DEBUG - self.z_pmfdt(P(patient7), T(physio), RG(sport_room), R(sport_room), 8, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,814 - DEBUG - self.z_pmfdt(P(patient7), T(physio), RG(rooms), R(room0), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,814 - DEBUG - self.z_pmfdt(P(patient7), T(physio), RG(rooms), R(room0), 2, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,814 - DEBUG - self.z_pmfdt(P(patient7), T(physio), RG(rooms), R(room0), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,814 - DEBUG - self.z_pmfdt(P(patient7), T(physio), RG(rooms), R(room1), 7, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,815 - DEBUG - self.z_pmfdt(P(patient7), T(physio), RG(rooms), R(room1), 8, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,815 - DEBUG - self.z_pmfdt(P(patient7), T(physio), RG(physiotherapist), R(therapist4), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,815 - DEBUG - self.z_pmfdt(P(patient7), T(physio), RG(physiotherapist), R(therapist4), 8, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,816 - DEBUG - self.z_pmfdt(P(patient7), T(physio), RG(physiotherapist), R(physiotherapist), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,816 - DEBUG - self.z_pmfdt(P(patient7), T(physio), RG(physiotherapist), R(physiotherapist), 2, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,816 - DEBUG - self.z_pmfdt(P(patient7), T(physio), RG(physiotherapist), R(physiotherapist), 7, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,817 - DEBUG - self.z_pmfdt(P(patient7), T(board_games), RG(therapists), R(therapist1), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,817 - DEBUG - self.z_pmfdt(P(patient7), T(board_games), RG(therapists), R(therapist2), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,818 - DEBUG - self.z_pmfdt(P(patient7), T(board_games), RG(therapists), R(therapist4), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,819 - DEBUG - self.z_pmfdt(P(patient7), T(board_games), RG(rooms), R(room0), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,819 - DEBUG - self.z_pmfdt(P(patient7), T(board_games), RG(rooms), R(room0), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,819 - DEBUG - self.z_pmfdt(P(patient7), T(board_games), RG(rooms), R(room1), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,820 - DEBUG - self.z_pmfdt(P(patient8), T(bath), RG(rooms), R(room1), 7, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,820 - DEBUG - self.z_pmfdt(P(patient8), T(bath), RG(rooms), R(sport_room), 9, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,820 - DEBUG - self.z_pmfdt(P(patient8), T(bath), RG(rooms), R(sport_room), 9, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,821 - DEBUG - self.z_pmfdt(P(patient8), T(massage), RG(physiotherapist), R(physiotherapist), 7, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,821 - DEBUG - self.z_pmfdt(P(patient8), T(massage), RG(physiotherapist), R(physiotherapist), 8, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,821 - DEBUG - self.z_pmfdt(P(patient8), T(massage), RG(physiotherapist), R(physiotherapist), 9, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,821 - DEBUG - self.z_pmfdt(P(patient8), T(massage), RG(rooms), R(room0), 8, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,821 - DEBUG - self.z_pmfdt(P(patient8), T(massage), RG(rooms), R(room1), 9, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,821 - DEBUG - self.z_pmfdt(P(patient8), T(massage), RG(rooms), R(sport_room), 7, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,822 - DEBUG - self.z_pmfdt(P(patient8), T(sport), RG(therapists), R(therapist0), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,822 - DEBUG - self.z_pmfdt(P(patient8), T(sport), RG(therapists), R(therapist0), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,823 - DEBUG - self.z_pmfdt(P(patient8), T(sport), RG(sport_room), R(sport_room), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,823 - DEBUG - self.z_pmfdt(P(patient8), T(sport), RG(sport_room), R(sport_room), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,824 - DEBUG - self.z_pmfdt(P(patient8), T(board_games), RG(therapists), R(therapist0), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,824 - DEBUG - self.z_pmfdt(P(patient8), T(board_games), RG(therapists), R(therapist1), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,824 - DEBUG - self.z_pmfdt(P(patient8), T(board_games), RG(therapists), R(therapist2), 7, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,824 - DEBUG - self.z_pmfdt(P(patient8), T(board_games), RG(therapists), R(therapist4), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,825 - DEBUG - self.z_pmfdt(P(patient8), T(board_games), RG(rooms), R(room0), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,825 - DEBUG - self.z_pmfdt(P(patient8), T(board_games), RG(rooms), R(room1), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,825 - DEBUG - self.z_pmfdt(P(patient8), T(board_games), RG(rooms), R(room1), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,825 - DEBUG - self.z_pmfdt(P(patient8), T(board_games), RG(rooms), R(sport_room), 7, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,825 - DEBUG - self.z_pmfdt(P(patient9), T(bath), RG(rooms), R(room1), 9, 12.75) = 1.0[0m
+[34m2025-01-06 21:33:21,825 - DEBUG - self.z_pmfdt(P(patient9), T(bath), RG(rooms), R(sport_room), 9, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,826 - DEBUG - self.z_pmfdt(P(patient9), T(sport), RG(therapists), R(therapist0), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,826 - DEBUG - self.z_pmfdt(P(patient9), T(sport), RG(therapists), R(therapist2), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,826 - DEBUG - self.z_pmfdt(P(patient9), T(sport), RG(sport_room), R(sport_room), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,826 - DEBUG - self.z_pmfdt(P(patient9), T(sport), RG(sport_room), R(sport_room), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,827 - DEBUG - self.z_pmfdt(P(patient10), T(group_therapy), RG(therapists), R(therapist0), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,827 - DEBUG - self.z_pmfdt(P(patient10), T(group_therapy), RG(therapists), R(therapist0), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,828 - DEBUG - self.z_pmfdt(P(patient10), T(group_therapy), RG(therapists), R(therapist2), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,828 - DEBUG - self.z_pmfdt(P(patient10), T(group_therapy), RG(therapists), R(therapist2), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,829 - DEBUG - self.z_pmfdt(P(patient10), T(group_therapy), RG(therapists), R(therapist2), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,830 - DEBUG - self.z_pmfdt(P(patient10), T(group_therapy), RG(therapists), R(therapist4), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,830 - DEBUG - self.z_pmfdt(P(patient10), T(group_therapy), RG(therapists), R(language_therapist0), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,830 - DEBUG - self.z_pmfdt(P(patient10), T(group_therapy), RG(therapists), R(language_therapist0), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,831 - DEBUG - self.z_pmfdt(P(patient10), T(group_therapy), RG(rooms), R(room0), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,831 - DEBUG - self.z_pmfdt(P(patient10), T(group_therapy), RG(rooms), R(room0), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,831 - DEBUG - self.z_pmfdt(P(patient10), T(group_therapy), RG(rooms), R(room0), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,831 - DEBUG - self.z_pmfdt(P(patient10), T(group_therapy), RG(rooms), R(room0), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,831 - DEBUG - self.z_pmfdt(P(patient10), T(group_therapy), RG(rooms), R(room0), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,831 - DEBUG - self.z_pmfdt(P(patient10), T(group_therapy), RG(rooms), R(room0), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,831 - DEBUG - self.z_pmfdt(P(patient10), T(group_therapy), RG(rooms), R(room1), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,832 - DEBUG - self.z_pmfdt(P(patient10), T(group_therapy), RG(rooms), R(sport_room), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,832 - DEBUG - self.z_pmfdt(P(patient10), T(knitting), RG(therapists), R(therapist0), 0, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,832 - DEBUG - self.z_pmfdt(P(patient10), T(knitting), RG(therapists), R(therapist0), 0, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,833 - DEBUG - self.z_pmfdt(P(patient10), T(knitting), RG(therapists), R(therapist1), 1, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,834 - DEBUG - self.z_pmfdt(P(patient10), T(knitting), RG(therapists), R(therapist3), 4, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,835 - DEBUG - self.z_pmfdt(P(patient10), T(knitting), RG(therapists), R(therapist4), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,836 - DEBUG - self.z_pmfdt(P(patient10), T(knitting), RG(rooms), R(room0), 0, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,836 - DEBUG - self.z_pmfdt(P(patient10), T(knitting), RG(rooms), R(room0), 0, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,836 - DEBUG - self.z_pmfdt(P(patient10), T(knitting), RG(rooms), R(room0), 1, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,836 - DEBUG - self.z_pmfdt(P(patient10), T(knitting), RG(rooms), R(room0), 4, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,837 - DEBUG - self.z_pmfdt(P(patient10), T(knitting), RG(rooms), R(room1), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,838 - DEBUG - self.z_pmfdt(P(patient10), T(trust_exercise), RG(therapists), R(therapist1), 1, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,838 - DEBUG - self.z_pmfdt(P(patient10), T(trust_exercise), RG(therapists), R(therapist1), 3, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,839 - DEBUG - self.z_pmfdt(P(patient10), T(trust_exercise), RG(therapists), R(therapist2), 3, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,840 - DEBUG - self.z_pmfdt(P(patient10), T(trust_exercise), RG(therapists), R(therapist3), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,841 - DEBUG - self.z_pmfdt(P(patient10), T(trust_exercise), RG(rooms), R(room0), 1, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,841 - DEBUG - self.z_pmfdt(P(patient10), T(trust_exercise), RG(rooms), R(room0), 3, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,841 - DEBUG - self.z_pmfdt(P(patient10), T(trust_exercise), RG(rooms), R(room0), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,842 - DEBUG - self.z_pmfdt(P(patient10), T(trust_exercise), RG(rooms), R(room1), 3, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,843 - DEBUG - self.z_pmfdt(P(patient10), T(massage), RG(physiotherapist), R(physiotherapist), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,844 - DEBUG - self.z_pmfdt(P(patient10), T(massage), RG(physiotherapist), R(physiotherapist), 6, 8.75) = 1.0[0m
+[34m2025-01-06 21:33:21,844 - DEBUG - self.z_pmfdt(P(patient10), T(massage), RG(rooms), R(room0), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,844 - DEBUG - self.z_pmfdt(P(patient10), T(massage), RG(rooms), R(room0), 6, 8.75) = 1.0[0m
+[34m2025-01-06 21:33:21,846 - DEBUG - self.z_pmfdt(P(patient10), T(board_games), RG(therapists), R(therapist0), 1, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,846 - DEBUG - self.z_pmfdt(P(patient10), T(board_games), RG(therapists), R(therapist0), 5, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,847 - DEBUG - self.z_pmfdt(P(patient10), T(board_games), RG(therapists), R(therapist2), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,848 - DEBUG - self.z_pmfdt(P(patient10), T(board_games), RG(therapists), R(language_therapist0), 2, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,849 - DEBUG - self.z_pmfdt(P(patient10), T(board_games), RG(therapists), R(language_therapist0), 3, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,849 - DEBUG - self.z_pmfdt(P(patient10), T(board_games), RG(therapists), R(language_therapist0), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,849 - DEBUG - self.z_pmfdt(P(patient10), T(board_games), RG(rooms), R(room0), 1, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,849 - DEBUG - self.z_pmfdt(P(patient10), T(board_games), RG(rooms), R(room0), 2, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,849 - DEBUG - self.z_pmfdt(P(patient10), T(board_games), RG(rooms), R(room0), 3, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,849 - DEBUG - self.z_pmfdt(P(patient10), T(board_games), RG(rooms), R(room0), 5, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,849 - DEBUG - self.z_pmfdt(P(patient10), T(board_games), RG(rooms), R(room0), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,850 - DEBUG - self.z_pmfdt(P(patient10), T(board_games), RG(rooms), R(room0), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,851 - DEBUG - self.z_pmfdt(P(patient11), T(group_therapy), RG(therapists), R(therapist0), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,852 - DEBUG - self.z_pmfdt(P(patient11), T(group_therapy), RG(therapists), R(therapist2), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,852 - DEBUG - self.z_pmfdt(P(patient11), T(group_therapy), RG(therapists), R(therapist2), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,853 - DEBUG - self.z_pmfdt(P(patient11), T(group_therapy), RG(therapists), R(therapist4), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,853 - DEBUG - self.z_pmfdt(P(patient11), T(group_therapy), RG(therapists), R(language_therapist0), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,854 - DEBUG - self.z_pmfdt(P(patient11), T(group_therapy), RG(rooms), R(room0), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,854 - DEBUG - self.z_pmfdt(P(patient11), T(group_therapy), RG(rooms), R(room0), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,854 - DEBUG - self.z_pmfdt(P(patient11), T(group_therapy), RG(rooms), R(room0), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,854 - DEBUG - self.z_pmfdt(P(patient11), T(group_therapy), RG(rooms), R(room0), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,854 - DEBUG - self.z_pmfdt(P(patient11), T(group_therapy), RG(rooms), R(room1), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,856 - DEBUG - self.z_pmfdt(P(patient11), T(knitting), RG(therapists), R(therapist3), 4, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,857 - DEBUG - self.z_pmfdt(P(patient11), T(knitting), RG(therapists), R(therapist4), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,857 - DEBUG - self.z_pmfdt(P(patient11), T(knitting), RG(therapists), R(language_therapist0), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,857 - DEBUG - self.z_pmfdt(P(patient11), T(knitting), RG(therapists), R(language_therapist0), 5, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,858 - DEBUG - self.z_pmfdt(P(patient11), T(knitting), RG(therapists), R(language_therapist0), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,858 - DEBUG - self.z_pmfdt(P(patient11), T(knitting), RG(rooms), R(room0), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,858 - DEBUG - self.z_pmfdt(P(patient11), T(knitting), RG(rooms), R(room0), 4, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,858 - DEBUG - self.z_pmfdt(P(patient11), T(knitting), RG(rooms), R(room1), 5, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,859 - DEBUG - self.z_pmfdt(P(patient11), T(knitting), RG(rooms), R(room1), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,859 - DEBUG - self.z_pmfdt(P(patient11), T(knitting), RG(rooms), R(room1), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,859 - DEBUG - self.z_pmfdt(P(patient11), T(trust_exercise), RG(therapists), R(therapist0), 3, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,860 - DEBUG - self.z_pmfdt(P(patient11), T(trust_exercise), RG(therapists), R(therapist1), 3, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,860 - DEBUG - self.z_pmfdt(P(patient11), T(trust_exercise), RG(therapists), R(therapist1), 7, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,861 - DEBUG - self.z_pmfdt(P(patient11), T(trust_exercise), RG(therapists), R(language_therapist0), 2, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,862 - DEBUG - self.z_pmfdt(P(patient11), T(trust_exercise), RG(rooms), R(room0), 2, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,862 - DEBUG - self.z_pmfdt(P(patient11), T(trust_exercise), RG(rooms), R(room0), 3, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,863 - DEBUG - self.z_pmfdt(P(patient11), T(trust_exercise), RG(rooms), R(room1), 3, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,863 - DEBUG - self.z_pmfdt(P(patient11), T(trust_exercise), RG(rooms), R(room1), 7, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,863 - DEBUG - self.z_pmfdt(P(patient11), T(massage), RG(physiotherapist), R(therapist4), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,864 - DEBUG - self.z_pmfdt(P(patient11), T(massage), RG(physiotherapist), R(physiotherapist), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,864 - DEBUG - self.z_pmfdt(P(patient11), T(massage), RG(rooms), R(room0), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,865 - DEBUG - self.z_pmfdt(P(patient11), T(massage), RG(rooms), R(room1), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,866 - DEBUG - self.z_pmfdt(P(patient11), T(board_games), RG(therapists), R(therapist0), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,867 - DEBUG - self.z_pmfdt(P(patient11), T(board_games), RG(therapists), R(therapist1), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,867 - DEBUG - self.z_pmfdt(P(patient11), T(board_games), RG(therapists), R(therapist1), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,868 - DEBUG - self.z_pmfdt(P(patient11), T(board_games), RG(therapists), R(therapist4), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,869 - DEBUG - self.z_pmfdt(P(patient11), T(board_games), RG(rooms), R(room0), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,869 - DEBUG - self.z_pmfdt(P(patient11), T(board_games), RG(rooms), R(room1), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,869 - DEBUG - self.z_pmfdt(P(patient11), T(board_games), RG(rooms), R(room1), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,870 - DEBUG - self.z_pmfdt(P(patient11), T(board_games), RG(rooms), R(room1), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,870 - DEBUG - self.z_pmfdt(P(patient12), T(group_therapy), RG(therapists), R(therapist0), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,871 - DEBUG - self.z_pmfdt(P(patient12), T(group_therapy), RG(therapists), R(therapist2), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,871 - DEBUG - self.z_pmfdt(P(patient12), T(group_therapy), RG(therapists), R(therapist2), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,872 - DEBUG - self.z_pmfdt(P(patient12), T(group_therapy), RG(therapists), R(language_therapist0), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,873 - DEBUG - self.z_pmfdt(P(patient12), T(group_therapy), RG(rooms), R(room0), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,873 - DEBUG - self.z_pmfdt(P(patient12), T(group_therapy), RG(rooms), R(room0), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,873 - DEBUG - self.z_pmfdt(P(patient12), T(group_therapy), RG(rooms), R(room0), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,873 - DEBUG - self.z_pmfdt(P(patient12), T(group_therapy), RG(rooms), R(room1), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,874 - DEBUG - self.z_pmfdt(P(patient12), T(knitting), RG(therapists), R(therapist0), 4, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,874 - DEBUG - self.z_pmfdt(P(patient12), T(knitting), RG(therapists), R(therapist0), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,876 - DEBUG - self.z_pmfdt(P(patient12), T(knitting), RG(therapists), R(language_therapist0), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,876 - DEBUG - self.z_pmfdt(P(patient12), T(knitting), RG(therapists), R(language_therapist0), 6, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,876 - DEBUG - self.z_pmfdt(P(patient12), T(knitting), RG(therapists), R(language_therapist0), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,876 - DEBUG - self.z_pmfdt(P(patient12), T(knitting), RG(rooms), R(room0), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,877 - DEBUG - self.z_pmfdt(P(patient12), T(knitting), RG(rooms), R(room0), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,877 - DEBUG - self.z_pmfdt(P(patient12), T(knitting), RG(rooms), R(room1), 4, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,877 - DEBUG - self.z_pmfdt(P(patient12), T(knitting), RG(rooms), R(room1), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,878 - DEBUG - self.z_pmfdt(P(patient12), T(knitting), RG(rooms), R(sport_room), 6, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,878 - DEBUG - self.z_pmfdt(P(patient12), T(trust_exercise), RG(therapists), R(therapist0), 3, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,879 - DEBUG - self.z_pmfdt(P(patient12), T(trust_exercise), RG(therapists), R(therapist1), 6, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,881 - DEBUG - self.z_pmfdt(P(patient12), T(trust_exercise), RG(rooms), R(room1), 3, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,881 - DEBUG - self.z_pmfdt(P(patient12), T(trust_exercise), RG(rooms), R(room1), 6, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,882 - DEBUG - self.z_pmfdt(P(patient12), T(massage), RG(physiotherapist), R(therapist4), 3, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,882 - DEBUG - self.z_pmfdt(P(patient12), T(massage), RG(physiotherapist), R(therapist4), 5, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,882 - DEBUG - self.z_pmfdt(P(patient12), T(massage), RG(physiotherapist), R(therapist4), 8, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,882 - DEBUG - self.z_pmfdt(P(patient12), T(massage), RG(physiotherapist), R(therapist4), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,882 - DEBUG - self.z_pmfdt(P(patient12), T(massage), RG(physiotherapist), R(physiotherapist), 3, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,882 - DEBUG - self.z_pmfdt(P(patient12), T(massage), RG(physiotherapist), R(physiotherapist), 5, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,882 - DEBUG - self.z_pmfdt(P(patient12), T(massage), RG(physiotherapist), R(physiotherapist), 9, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,883 - DEBUG - self.z_pmfdt(P(patient12), T(massage), RG(rooms), R(room0), 3, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,883 - DEBUG - self.z_pmfdt(P(patient12), T(massage), RG(rooms), R(room0), 3, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,883 - DEBUG - self.z_pmfdt(P(patient12), T(massage), RG(rooms), R(room0), 8, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,883 - DEBUG - self.z_pmfdt(P(patient12), T(massage), RG(rooms), R(room0), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,883 - DEBUG - self.z_pmfdt(P(patient12), T(massage), RG(rooms), R(room1), 5, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,883 - DEBUG - self.z_pmfdt(P(patient12), T(massage), RG(rooms), R(room1), 5, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,884 - DEBUG - self.z_pmfdt(P(patient12), T(massage), RG(rooms), R(room1), 9, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,885 - DEBUG - self.z_pmfdt(P(patient12), T(board_games), RG(therapists), R(therapist1), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,885 - DEBUG - self.z_pmfdt(P(patient12), T(board_games), RG(therapists), R(therapist3), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,886 - DEBUG - self.z_pmfdt(P(patient12), T(board_games), RG(therapists), R(therapist4), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,886 - DEBUG - self.z_pmfdt(P(patient12), T(board_games), RG(therapists), R(language_therapist0), 7, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,887 - DEBUG - self.z_pmfdt(P(patient12), T(board_games), RG(rooms), R(room0), 7, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,887 - DEBUG - self.z_pmfdt(P(patient12), T(board_games), RG(rooms), R(room1), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,887 - DEBUG - self.z_pmfdt(P(patient12), T(board_games), RG(rooms), R(room1), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,887 - DEBUG - self.z_pmfdt(P(patient12), T(board_games), RG(rooms), R(room1), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,888 - DEBUG - self.z_pmfdt(P(patient13), T(group_therapy), RG(therapists), R(therapist0), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,888 - DEBUG - self.z_pmfdt(P(patient13), T(group_therapy), RG(therapists), R(therapist0), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,888 - DEBUG - self.z_pmfdt(P(patient13), T(group_therapy), RG(therapists), R(therapist2), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,888 - DEBUG - self.z_pmfdt(P(patient13), T(group_therapy), RG(therapists), R(therapist4), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,889 - DEBUG - self.z_pmfdt(P(patient13), T(group_therapy), RG(therapists), R(language_therapist0), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,889 - DEBUG - self.z_pmfdt(P(patient13), T(group_therapy), RG(rooms), R(room0), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,889 - DEBUG - self.z_pmfdt(P(patient13), T(group_therapy), RG(rooms), R(room0), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,889 - DEBUG - self.z_pmfdt(P(patient13), T(group_therapy), RG(rooms), R(room0), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,889 - DEBUG - self.z_pmfdt(P(patient13), T(group_therapy), RG(rooms), R(room0), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,889 - DEBUG - self.z_pmfdt(P(patient13), T(group_therapy), RG(rooms), R(room1), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,892 - DEBUG - self.z_pmfdt(P(patient13), T(board_games), RG(therapists), R(therapist0), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,893 - DEBUG - self.z_pmfdt(P(patient13), T(board_games), RG(rooms), R(room1), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,893 - DEBUG - self.z_pmfdt(P(patient14), T(group_therapy), RG(therapists), R(therapist0), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,893 - DEBUG - self.z_pmfdt(P(patient14), T(group_therapy), RG(therapists), R(therapist0), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,893 - DEBUG - self.z_pmfdt(P(patient14), T(group_therapy), RG(therapists), R(therapist0), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,894 - DEBUG - self.z_pmfdt(P(patient14), T(group_therapy), RG(therapists), R(therapist2), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,895 - DEBUG - self.z_pmfdt(P(patient14), T(group_therapy), RG(therapists), R(language_therapist0), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,895 - DEBUG - self.z_pmfdt(P(patient14), T(group_therapy), RG(rooms), R(room0), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,895 - DEBUG - self.z_pmfdt(P(patient14), T(group_therapy), RG(rooms), R(room0), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,895 - DEBUG - self.z_pmfdt(P(patient14), T(group_therapy), RG(rooms), R(room0), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,895 - DEBUG - self.z_pmfdt(P(patient14), T(group_therapy), RG(rooms), R(room1), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,895 - DEBUG - self.z_pmfdt(P(patient14), T(group_therapy), RG(rooms), R(sport_room), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,896 - DEBUG - self.z_pmfdt(P(patient14), T(knitting), RG(therapists), R(therapist1), 6, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,896 - DEBUG - self.z_pmfdt(P(patient14), T(knitting), RG(therapists), R(therapist4), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,897 - DEBUG - self.z_pmfdt(P(patient14), T(knitting), RG(rooms), R(room0), 6, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,897 - DEBUG - self.z_pmfdt(P(patient14), T(knitting), RG(rooms), R(room1), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,898 - DEBUG - self.z_pmfdt(P(patient14), T(trust_exercise), RG(therapists), R(therapist2), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,898 - DEBUG - self.z_pmfdt(P(patient14), T(trust_exercise), RG(therapists), R(therapist4), 6, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,899 - DEBUG - self.z_pmfdt(P(patient14), T(trust_exercise), RG(therapists), R(language_therapist0), 7, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,899 - DEBUG - self.z_pmfdt(P(patient14), T(trust_exercise), RG(rooms), R(room0), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,899 - DEBUG - self.z_pmfdt(P(patient14), T(trust_exercise), RG(rooms), R(room1), 6, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,900 - DEBUG - self.z_pmfdt(P(patient14), T(trust_exercise), RG(rooms), R(sport_room), 7, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,900 - DEBUG - self.z_pmfdt(P(patient14), T(massage), RG(physiotherapist), R(therapist4), 9, 10.5) = 1.0[0m
+[34m2025-01-06 21:33:21,900 - DEBUG - self.z_pmfdt(P(patient14), T(massage), RG(rooms), R(room0), 9, 10.5) = 1.0[0m
+[34m2025-01-06 21:33:21,902 - DEBUG - self.z_pmfdt(P(patient14), T(board_games), RG(therapists), R(language_therapist0), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,902 - DEBUG - self.z_pmfdt(P(patient14), T(board_games), RG(rooms), R(room0), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,903 - DEBUG - self.z_pmfdt(P(patient16), T(group_therapy), RG(therapists), R(therapist0), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,903 - DEBUG - self.z_pmfdt(P(patient16), T(group_therapy), RG(therapists), R(therapist0), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,904 - DEBUG - self.z_pmfdt(P(patient16), T(group_therapy), RG(therapists), R(therapist2), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,904 - DEBUG - self.z_pmfdt(P(patient16), T(group_therapy), RG(therapists), R(therapist2), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,904 - DEBUG - self.z_pmfdt(P(patient16), T(group_therapy), RG(therapists), R(therapist2), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,905 - DEBUG - self.z_pmfdt(P(patient16), T(group_therapy), RG(therapists), R(therapist4), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,905 - DEBUG - self.z_pmfdt(P(patient16), T(group_therapy), RG(therapists), R(language_therapist0), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,905 - DEBUG - self.z_pmfdt(P(patient16), T(group_therapy), RG(therapists), R(language_therapist0), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,905 - DEBUG - self.z_pmfdt(P(patient16), T(group_therapy), RG(rooms), R(room0), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,905 - DEBUG - self.z_pmfdt(P(patient16), T(group_therapy), RG(rooms), R(room0), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,906 - DEBUG - self.z_pmfdt(P(patient16), T(group_therapy), RG(rooms), R(room0), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,906 - DEBUG - self.z_pmfdt(P(patient16), T(group_therapy), RG(rooms), R(room0), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,906 - DEBUG - self.z_pmfdt(P(patient16), T(group_therapy), RG(rooms), R(room0), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,906 - DEBUG - self.z_pmfdt(P(patient16), T(group_therapy), RG(rooms), R(room1), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,906 - DEBUG - self.z_pmfdt(P(patient16), T(group_therapy), RG(rooms), R(room1), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,906 - DEBUG - self.z_pmfdt(P(patient16), T(group_therapy), RG(rooms), R(sport_room), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,907 - DEBUG - self.z_pmfdt(P(patient16), T(knitting), RG(therapists), R(therapist0), 4, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,908 - DEBUG - self.z_pmfdt(P(patient16), T(knitting), RG(therapists), R(language_therapist0), 6, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,909 - DEBUG - self.z_pmfdt(P(patient16), T(knitting), RG(rooms), R(room1), 4, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,909 - DEBUG - self.z_pmfdt(P(patient16), T(knitting), RG(rooms), R(sport_room), 6, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,910 - DEBUG - self.z_pmfdt(P(patient16), T(trust_exercise), RG(therapists), R(therapist1), 6, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,911 - DEBUG - self.z_pmfdt(P(patient16), T(trust_exercise), RG(therapists), R(therapist3), 5, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,911 - DEBUG - self.z_pmfdt(P(patient16), T(trust_exercise), RG(therapists), R(therapist3), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,912 - DEBUG - self.z_pmfdt(P(patient16), T(trust_exercise), RG(rooms), R(room0), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,912 - DEBUG - self.z_pmfdt(P(patient16), T(trust_exercise), RG(rooms), R(room1), 6, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,913 - DEBUG - self.z_pmfdt(P(patient16), T(trust_exercise), RG(rooms), R(sport_room), 5, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,913 - DEBUG - self.z_pmfdt(P(patient16), T(massage), RG(physiotherapist), R(therapist4), 5, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,913 - DEBUG - self.z_pmfdt(P(patient16), T(massage), RG(physiotherapist), R(therapist4), 9, 15.25) = 1.0[0m
+[34m2025-01-06 21:33:21,914 - DEBUG - self.z_pmfdt(P(patient16), T(massage), RG(rooms), R(room0), 9, 15.25) = 1.0[0m
+[34m2025-01-06 21:33:21,914 - DEBUG - self.z_pmfdt(P(patient16), T(massage), RG(rooms), R(sport_room), 5, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,915 - DEBUG - self.z_pmfdt(P(patient16), T(board_games), RG(therapists), R(therapist0), 5, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,915 - DEBUG - self.z_pmfdt(P(patient16), T(board_games), RG(therapists), R(therapist0), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,915 - DEBUG - self.z_pmfdt(P(patient16), T(board_games), RG(therapists), R(therapist1), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,916 - DEBUG - self.z_pmfdt(P(patient16), T(board_games), RG(therapists), R(therapist2), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,916 - DEBUG - self.z_pmfdt(P(patient16), T(board_games), RG(therapists), R(therapist3), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,917 - DEBUG - self.z_pmfdt(P(patient16), T(board_games), RG(rooms), R(room0), 5, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,917 - DEBUG - self.z_pmfdt(P(patient16), T(board_games), RG(rooms), R(room0), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,917 - DEBUG - self.z_pmfdt(P(patient16), T(board_games), RG(rooms), R(room0), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,917 - DEBUG - self.z_pmfdt(P(patient16), T(board_games), RG(rooms), R(room1), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,918 - DEBUG - self.z_pmfdt(P(patient16), T(board_games), RG(rooms), R(room1), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,918 - DEBUG - self.z_pmfdt(P(patient17), T(group_therapy), RG(therapists), R(therapist0), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,918 - DEBUG - self.z_pmfdt(P(patient17), T(group_therapy), RG(therapists), R(therapist0), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,918 - DEBUG - self.z_pmfdt(P(patient17), T(group_therapy), RG(therapists), R(therapist0), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,919 - DEBUG - self.z_pmfdt(P(patient17), T(group_therapy), RG(therapists), R(therapist2), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,919 - DEBUG - self.z_pmfdt(P(patient17), T(group_therapy), RG(therapists), R(therapist2), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,920 - DEBUG - self.z_pmfdt(P(patient17), T(group_therapy), RG(therapists), R(therapist4), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,920 - DEBUG - self.z_pmfdt(P(patient17), T(group_therapy), RG(therapists), R(language_therapist0), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,920 - DEBUG - self.z_pmfdt(P(patient17), T(group_therapy), RG(rooms), R(room0), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,920 - DEBUG - self.z_pmfdt(P(patient17), T(group_therapy), RG(rooms), R(room0), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,920 - DEBUG - self.z_pmfdt(P(patient17), T(group_therapy), RG(rooms), R(room0), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,920 - DEBUG - self.z_pmfdt(P(patient17), T(group_therapy), RG(rooms), R(room0), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,920 - DEBUG - self.z_pmfdt(P(patient17), T(group_therapy), RG(rooms), R(room0), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,921 - DEBUG - self.z_pmfdt(P(patient17), T(group_therapy), RG(rooms), R(room1), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,921 - DEBUG - self.z_pmfdt(P(patient17), T(group_therapy), RG(rooms), R(sport_room), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,921 - DEBUG - self.z_pmfdt(P(patient17), T(knitting), RG(therapists), R(therapist0), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,923 - DEBUG - self.z_pmfdt(P(patient17), T(knitting), RG(therapists), R(language_therapist0), 6, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,923 - DEBUG - self.z_pmfdt(P(patient17), T(knitting), RG(rooms), R(room0), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,923 - DEBUG - self.z_pmfdt(P(patient17), T(knitting), RG(rooms), R(sport_room), 6, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,924 - DEBUG - self.z_pmfdt(P(patient17), T(trust_exercise), RG(therapists), R(therapist2), 6, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,924 - DEBUG - self.z_pmfdt(P(patient17), T(trust_exercise), RG(therapists), R(therapist3), 5, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,925 - DEBUG - self.z_pmfdt(P(patient17), T(trust_exercise), RG(rooms), R(room0), 6, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,926 - DEBUG - self.z_pmfdt(P(patient17), T(trust_exercise), RG(rooms), R(sport_room), 5, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,926 - DEBUG - self.z_pmfdt(P(patient17), T(massage), RG(physiotherapist), R(therapist4), 5, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,926 - DEBUG - self.z_pmfdt(P(patient17), T(massage), RG(physiotherapist), R(therapist4), 6, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,927 - DEBUG - self.z_pmfdt(P(patient17), T(massage), RG(rooms), R(room0), 6, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,927 - DEBUG - self.z_pmfdt(P(patient17), T(massage), RG(rooms), R(room1), 5, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,928 - DEBUG - self.z_pmfdt(P(patient17), T(board_games), RG(therapists), R(therapist0), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,928 - DEBUG - self.z_pmfdt(P(patient17), T(board_games), RG(therapists), R(therapist2), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,929 - DEBUG - self.z_pmfdt(P(patient17), T(board_games), RG(therapists), R(therapist4), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,929 - DEBUG - self.z_pmfdt(P(patient17), T(board_games), RG(rooms), R(room0), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,930 - DEBUG - self.z_pmfdt(P(patient17), T(board_games), RG(rooms), R(room1), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,930 - DEBUG - self.z_pmfdt(P(patient17), T(board_games), RG(rooms), R(room1), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,931 - DEBUG - self.z_pmfdt(P(patient19), T(group_therapy), RG(therapists), R(therapist0), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,931 - DEBUG - self.z_pmfdt(P(patient19), T(group_therapy), RG(therapists), R(therapist0), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,932 - DEBUG - self.z_pmfdt(P(patient19), T(group_therapy), RG(therapists), R(therapist2), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,933 - DEBUG - self.z_pmfdt(P(patient19), T(group_therapy), RG(therapists), R(language_therapist0), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,934 - DEBUG - self.z_pmfdt(P(patient19), T(group_therapy), RG(rooms), R(room0), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,935 - DEBUG - self.z_pmfdt(P(patient19), T(group_therapy), RG(rooms), R(room1), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,935 - DEBUG - self.z_pmfdt(P(patient19), T(group_therapy), RG(rooms), R(room1), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,935 - DEBUG - self.z_pmfdt(P(patient19), T(group_therapy), RG(rooms), R(sport_room), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,936 - DEBUG - self.z_pmfdt(P(patient19), T(knitting), RG(therapists), R(therapist0), 0, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,936 - DEBUG - self.z_pmfdt(P(patient19), T(knitting), RG(therapists), R(therapist0), 0, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,936 - DEBUG - self.z_pmfdt(P(patient19), T(knitting), RG(therapists), R(therapist1), 1, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,937 - DEBUG - self.z_pmfdt(P(patient19), T(knitting), RG(therapists), R(therapist1), 6, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,938 - DEBUG - self.z_pmfdt(P(patient19), T(knitting), RG(therapists), R(therapist4), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,939 - DEBUG - self.z_pmfdt(P(patient19), T(knitting), RG(therapists), R(language_therapist0), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,939 - DEBUG - self.z_pmfdt(P(patient19), T(knitting), RG(therapists), R(language_therapist0), 5, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,939 - DEBUG - self.z_pmfdt(P(patient19), T(knitting), RG(rooms), R(room0), 0, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,939 - DEBUG - self.z_pmfdt(P(patient19), T(knitting), RG(rooms), R(room0), 0, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,939 - DEBUG - self.z_pmfdt(P(patient19), T(knitting), RG(rooms), R(room0), 1, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,939 - DEBUG - self.z_pmfdt(P(patient19), T(knitting), RG(rooms), R(room0), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,940 - DEBUG - self.z_pmfdt(P(patient19), T(knitting), RG(rooms), R(room0), 6, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,940 - DEBUG - self.z_pmfdt(P(patient19), T(knitting), RG(rooms), R(room1), 5, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,940 - DEBUG - self.z_pmfdt(P(patient19), T(knitting), RG(rooms), R(room1), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,941 - DEBUG - self.z_pmfdt(P(patient19), T(trust_exercise), RG(therapists), R(therapist0), 6, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,942 - DEBUG - self.z_pmfdt(P(patient19), T(trust_exercise), RG(therapists), R(therapist2), 6, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,945 - DEBUG - self.z_pmfdt(P(patient19), T(trust_exercise), RG(rooms), R(room0), 6, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,945 - DEBUG - self.z_pmfdt(P(patient19), T(trust_exercise), RG(rooms), R(room1), 6, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,946 - DEBUG - self.z_pmfdt(P(patient19), T(massage), RG(physiotherapist), R(therapist4), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,946 - DEBUG - self.z_pmfdt(P(patient19), T(massage), RG(physiotherapist), R(therapist4), 5, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,946 - DEBUG - self.z_pmfdt(P(patient19), T(massage), RG(physiotherapist), R(therapist4), 8, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,946 - DEBUG - self.z_pmfdt(P(patient19), T(massage), RG(physiotherapist), R(physiotherapist), 0, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,947 - DEBUG - self.z_pmfdt(P(patient19), T(massage), RG(physiotherapist), R(physiotherapist), 0, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,947 - DEBUG - self.z_pmfdt(P(patient19), T(massage), RG(physiotherapist), R(physiotherapist), 8, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,947 - DEBUG - self.z_pmfdt(P(patient19), T(massage), RG(physiotherapist), R(physiotherapist), 8, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,947 - DEBUG - self.z_pmfdt(P(patient19), T(massage), RG(rooms), R(room0), 0, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,948 - DEBUG - self.z_pmfdt(P(patient19), T(massage), RG(rooms), R(room0), 8, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,948 - DEBUG - self.z_pmfdt(P(patient19), T(massage), RG(rooms), R(room0), 8, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,948 - DEBUG - self.z_pmfdt(P(patient19), T(massage), RG(rooms), R(room1), 0, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,948 - DEBUG - self.z_pmfdt(P(patient19), T(massage), RG(rooms), R(room1), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,948 - DEBUG - self.z_pmfdt(P(patient19), T(massage), RG(rooms), R(room1), 8, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,949 - DEBUG - self.z_pmfdt(P(patient19), T(massage), RG(rooms), R(sport_room), 5, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,949 - DEBUG - self.z_pmfdt(P(patient19), T(board_games), RG(therapists), R(therapist0), 1, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,950 - DEBUG - self.z_pmfdt(P(patient19), T(board_games), RG(therapists), R(therapist1), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,951 - DEBUG - self.z_pmfdt(P(patient19), T(board_games), RG(therapists), R(therapist3), 1, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,951 - DEBUG - self.z_pmfdt(P(patient19), T(board_games), RG(therapists), R(therapist3), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,952 - DEBUG - self.z_pmfdt(P(patient19), T(board_games), RG(therapists), R(language_therapist0), 3, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,952 - DEBUG - self.z_pmfdt(P(patient19), T(board_games), RG(therapists), R(language_therapist0), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,953 - DEBUG - self.z_pmfdt(P(patient19), T(board_games), RG(rooms), R(room0), 1, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,953 - DEBUG - self.z_pmfdt(P(patient19), T(board_games), RG(rooms), R(room0), 3, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,953 - DEBUG - self.z_pmfdt(P(patient19), T(board_games), RG(rooms), R(room0), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,953 - DEBUG - self.z_pmfdt(P(patient19), T(board_games), RG(rooms), R(room1), 1, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,953 - DEBUG - self.z_pmfdt(P(patient19), T(board_games), RG(rooms), R(room1), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,954 - DEBUG - self.z_pmfdt(P(patient19), T(board_games), RG(rooms), R(room1), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,954 - DEBUG - self.a_pd(P(patient0), 0) = 1.0[0m
+[34m2025-01-06 21:33:21,954 - DEBUG - self.a_pd(P(patient1), 1) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient2), 2) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient3), 2) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient4), 3) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient5), 4) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient6), 5) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient7), 2) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient8), 7) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient9), 9) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient10), 0) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient11), 2) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient12), 3) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient13), 8) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient14), 6) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient15), 11) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient16), 4) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient17), 5) = 1.0[0m
+[34m2025-01-06 21:33:21,955 - DEBUG - self.a_pd(P(patient19), 0) = 1.0[0m
+[34m2025-01-06 21:33:21,960 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room0), 2, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,960 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room0), 4, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,960 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room0), 5, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,960 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room0), 6, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,960 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room0), 6, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,960 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room0), 6, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,960 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room0), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,960 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room0), 7, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,960 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room0), 7, 12.5) = 1.0[0m
+[34m2025-01-06 21:33:21,960 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room0), 8, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,960 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room0), 8, 12.5) = 1.0[0m
+[34m2025-01-06 21:33:21,960 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room0), 8, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,960 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room0), 9, 12.75) = 1.0[0m
+[34m2025-01-06 21:33:21,960 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room0), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,961 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room0), 9, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,961 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room1), 3, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,961 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room1), 4, 12.75) = 1.0[0m
+[34m2025-01-06 21:33:21,961 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room1), 5, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,961 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room1), 5, 12.25) = 1.0[0m
+[34m2025-01-06 21:33:21,961 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room1), 6, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,961 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room1), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,961 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room1), 7, 12.5) = 1.0[0m
+[34m2025-01-06 21:33:21,961 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room1), 7, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,961 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room1), 8, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,961 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room1), 9, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,961 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room1), 9, 12.25) = 1.0[0m
+[34m2025-01-06 21:33:21,961 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(room1), 9, 12.75) = 1.0[0m
+[34m2025-01-06 21:33:21,962 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(sport_room), 4, 12.75) = 1.0[0m
+[34m2025-01-06 21:33:21,962 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(sport_room), 5, 10.5) = 1.0[0m
+[34m2025-01-06 21:33:21,962 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(sport_room), 5, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,962 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(sport_room), 5, 12.25) = 1.0[0m
+[34m2025-01-06 21:33:21,962 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(sport_room), 6, 15.25) = 1.0[0m
+[34m2025-01-06 21:33:21,962 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(sport_room), 7, 12.25) = 1.0[0m
+[34m2025-01-06 21:33:21,962 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(sport_room), 7, 12.75) = 1.0[0m
+[34m2025-01-06 21:33:21,962 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(sport_room), 7, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,962 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(sport_room), 8, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,962 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(sport_room), 8, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,962 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(sport_room), 9, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,962 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(sport_room), 9, 12.0) = 1.0[0m
+[34m2025-01-06 21:33:21,962 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(sport_room), 9, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,962 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(sport_room), 9, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,962 - DEBUG - self.y_mgfdt(T(bath), RG(rooms), R(sport_room), 9, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,963 - DEBUG - self.y_mgfdt(T(group_therapy), RG(therapists), R(therapist0), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,963 - DEBUG - self.y_mgfdt(T(group_therapy), RG(therapists), R(therapist0), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,963 - DEBUG - self.y_mgfdt(T(group_therapy), RG(therapists), R(therapist0), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,964 - DEBUG - self.y_mgfdt(T(group_therapy), RG(therapists), R(therapist2), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,964 - DEBUG - self.y_mgfdt(T(group_therapy), RG(therapists), R(therapist2), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,964 - DEBUG - self.y_mgfdt(T(group_therapy), RG(therapists), R(therapist2), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,965 - DEBUG - self.y_mgfdt(T(group_therapy), RG(therapists), R(therapist4), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,965 - DEBUG - self.y_mgfdt(T(group_therapy), RG(therapists), R(language_therapist0), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,966 - DEBUG - self.y_mgfdt(T(group_therapy), RG(therapists), R(language_therapist0), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,966 - DEBUG - self.y_mgfdt(T(group_therapy), RG(rooms), R(room0), 4, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,966 - DEBUG - self.y_mgfdt(T(group_therapy), RG(rooms), R(room0), 6, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,966 - DEBUG - self.y_mgfdt(T(group_therapy), RG(rooms), R(room0), 8, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,966 - DEBUG - self.y_mgfdt(T(group_therapy), RG(rooms), R(room0), 8, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,966 - DEBUG - self.y_mgfdt(T(group_therapy), RG(rooms), R(room0), 9, 8.5) = 1.0[0m
+[34m2025-01-06 21:33:21,966 - DEBUG - self.y_mgfdt(T(group_therapy), RG(rooms), R(room0), 9, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,967 - DEBUG - self.y_mgfdt(T(group_therapy), RG(rooms), R(room1), 4, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,967 - DEBUG - self.y_mgfdt(T(group_therapy), RG(rooms), R(room1), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,967 - DEBUG - self.y_mgfdt(T(group_therapy), RG(rooms), R(sport_room), 7, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,967 - DEBUG - self.y_mgfdt(T(knitting), RG(therapists), R(therapist0), 0, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,967 - DEBUG - self.y_mgfdt(T(knitting), RG(therapists), R(therapist0), 0, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,968 - DEBUG - self.y_mgfdt(T(knitting), RG(therapists), R(therapist0), 4, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,968 - DEBUG - self.y_mgfdt(T(knitting), RG(therapists), R(therapist0), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,968 - DEBUG - self.y_mgfdt(T(knitting), RG(therapists), R(therapist1), 1, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,968 - DEBUG - self.y_mgfdt(T(knitting), RG(therapists), R(therapist1), 6, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,969 - DEBUG - self.y_mgfdt(T(knitting), RG(therapists), R(therapist3), 4, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,970 - DEBUG - self.y_mgfdt(T(knitting), RG(therapists), R(therapist4), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,970 - DEBUG - self.y_mgfdt(T(knitting), RG(therapists), R(language_therapist0), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,970 - DEBUG - self.y_mgfdt(T(knitting), RG(therapists), R(language_therapist0), 5, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,970 - DEBUG - self.y_mgfdt(T(knitting), RG(therapists), R(language_therapist0), 6, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,971 - DEBUG - self.y_mgfdt(T(knitting), RG(therapists), R(language_therapist0), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,971 - DEBUG - self.y_mgfdt(T(knitting), RG(rooms), R(room0), 0, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,971 - DEBUG - self.y_mgfdt(T(knitting), RG(rooms), R(room0), 0, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,971 - DEBUG - self.y_mgfdt(T(knitting), RG(rooms), R(room0), 1, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,971 - DEBUG - self.y_mgfdt(T(knitting), RG(rooms), R(room0), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,971 - DEBUG - self.y_mgfdt(T(knitting), RG(rooms), R(room0), 4, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,971 - DEBUG - self.y_mgfdt(T(knitting), RG(rooms), R(room0), 6, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,971 - DEBUG - self.y_mgfdt(T(knitting), RG(rooms), R(room0), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,971 - DEBUG - self.y_mgfdt(T(knitting), RG(rooms), R(room1), 4, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,972 - DEBUG - self.y_mgfdt(T(knitting), RG(rooms), R(room1), 5, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,972 - DEBUG - self.y_mgfdt(T(knitting), RG(rooms), R(room1), 7, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,972 - DEBUG - self.y_mgfdt(T(knitting), RG(rooms), R(room1), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,972 - DEBUG - self.y_mgfdt(T(knitting), RG(rooms), R(sport_room), 6, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,973 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(therapists), R(therapist0), 3, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,973 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(therapists), R(therapist0), 6, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,973 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(therapists), R(therapist1), 1, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,973 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(therapists), R(therapist1), 3, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,973 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(therapists), R(therapist1), 6, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,973 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(therapists), R(therapist1), 7, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,974 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(therapists), R(therapist2), 3, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,974 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(therapists), R(therapist2), 6, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,974 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(therapists), R(therapist2), 6, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,974 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(therapists), R(therapist2), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,974 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(therapists), R(therapist3), 5, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,975 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(therapists), R(therapist3), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,975 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(therapists), R(therapist4), 6, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,975 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(therapists), R(language_therapist0), 2, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,976 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(therapists), R(language_therapist0), 7, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,976 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(rooms), R(room0), 1, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,976 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(rooms), R(room0), 2, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,976 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(rooms), R(room0), 3, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,976 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(rooms), R(room0), 6, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,976 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(rooms), R(room0), 6, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,976 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(rooms), R(room0), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,976 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(rooms), R(room0), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,977 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(rooms), R(room1), 3, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,977 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(rooms), R(room1), 3, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,977 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(rooms), R(room1), 6, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,977 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(rooms), R(room1), 6, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,977 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(rooms), R(room1), 6, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,977 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(rooms), R(room1), 7, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,977 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(rooms), R(sport_room), 5, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,978 - DEBUG - self.y_mgfdt(T(trust_exercise), RG(rooms), R(sport_room), 7, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,978 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 1, 10.5) = 1.0[0m
+[34m2025-01-06 21:33:21,978 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 1, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,978 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,978 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 3, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,978 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 3, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,978 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 3, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,978 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 4, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,978 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 5, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,978 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 5, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,978 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 5, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,978 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 5, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,978 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 5, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,978 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 6, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,979 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 7, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,979 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 8, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,979 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,979 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 9, 10.5) = 1.0[0m
+[34m2025-01-06 21:33:21,979 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,979 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(therapist4), 9, 15.25) = 1.0[0m
+[34m2025-01-06 21:33:21,979 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 0, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,979 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 0, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,979 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,979 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 3, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,979 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 5, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,979 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 5, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,979 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 6, 8.75) = 1.0[0m
+[34m2025-01-06 21:33:21,979 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 6, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,980 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 7, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,980 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 7, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,980 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 8, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,980 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 8, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,980 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 8, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,980 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 8, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,980 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 8, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,980 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 9, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,980 - DEBUG - self.y_mgfdt(T(massage), RG(physiotherapist), R(physiotherapist), 9, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,980 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room0), 0, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,980 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room0), 1, 10.5) = 1.0[0m
+[34m2025-01-06 21:33:21,980 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room0), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,980 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room0), 3, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,980 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room0), 3, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,980 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room0), 4, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,980 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room0), 6, 8.75) = 1.0[0m
+[34m2025-01-06 21:33:21,981 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room0), 6, 11.25) = 1.0[0m
+[34m2025-01-06 21:33:21,981 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room0), 7, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,981 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room0), 8, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,981 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room0), 8, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,981 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room0), 8, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,981 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room0), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,981 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room0), 9, 10.5) = 1.0[0m
+[34m2025-01-06 21:33:21,981 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room0), 9, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,981 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room0), 9, 15.25) = 1.0[0m
+[34m2025-01-06 21:33:21,981 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room1), 0, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,981 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room1), 1, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,981 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room1), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,981 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room1), 3, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,981 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room1), 5, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,981 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room1), 5, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,982 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room1), 5, 14.25) = 1.0[0m
+[34m2025-01-06 21:33:21,982 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room1), 5, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,982 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room1), 5, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,982 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room1), 6, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,982 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room1), 7, 8.25) = 1.0[0m
+[34m2025-01-06 21:33:21,982 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room1), 8, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,982 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room1), 9, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,982 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(room1), 9, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,982 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(sport_room), 3, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,982 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(sport_room), 5, 11.5) = 1.0[0m
+[34m2025-01-06 21:33:21,982 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(sport_room), 5, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,982 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(sport_room), 7, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,983 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(sport_room), 8, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,983 - DEBUG - self.y_mgfdt(T(massage), RG(rooms), R(sport_room), 8, 15.5) = 1.0[0m
+[34m2025-01-06 21:33:21,983 - DEBUG - self.y_mgfdt(T(sport), RG(therapists), R(therapist0), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,983 - DEBUG - self.y_mgfdt(T(sport), RG(therapists), R(therapist0), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,983 - DEBUG - self.y_mgfdt(T(sport), RG(therapists), R(therapist1), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,983 - DEBUG - self.y_mgfdt(T(sport), RG(therapists), R(therapist1), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,984 - DEBUG - self.y_mgfdt(T(sport), RG(therapists), R(therapist1), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,984 - DEBUG - self.y_mgfdt(T(sport), RG(therapists), R(therapist2), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,984 - DEBUG - self.y_mgfdt(T(sport), RG(therapists), R(therapist2), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,984 - DEBUG - self.y_mgfdt(T(sport), RG(therapists), R(therapist2), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,984 - DEBUG - self.y_mgfdt(T(sport), RG(therapists), R(therapist2), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,985 - DEBUG - self.y_mgfdt(T(sport), RG(therapists), R(therapist3), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,985 - DEBUG - self.y_mgfdt(T(sport), RG(therapists), R(therapist4), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,986 - DEBUG - self.y_mgfdt(T(sport), RG(therapists), R(language_therapist0), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,986 - DEBUG - self.y_mgfdt(T(sport), RG(sport_room), R(sport_room), 2, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,986 - DEBUG - self.y_mgfdt(T(sport), RG(sport_room), R(sport_room), 2, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,986 - DEBUG - self.y_mgfdt(T(sport), RG(sport_room), R(sport_room), 3, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,986 - DEBUG - self.y_mgfdt(T(sport), RG(sport_room), R(sport_room), 3, 14.75) = 1.0[0m
+[34m2025-01-06 21:33:21,986 - DEBUG - self.y_mgfdt(T(sport), RG(sport_room), R(sport_room), 4, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,986 - DEBUG - self.y_mgfdt(T(sport), RG(sport_room), R(sport_room), 4, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,986 - DEBUG - self.y_mgfdt(T(sport), RG(sport_room), R(sport_room), 5, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,987 - DEBUG - self.y_mgfdt(T(sport), RG(sport_room), R(sport_room), 6, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,987 - DEBUG - self.y_mgfdt(T(sport), RG(sport_room), R(sport_room), 8, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,987 - DEBUG - self.y_mgfdt(T(sport), RG(sport_room), R(sport_room), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,987 - DEBUG - self.y_mgfdt(T(sport), RG(sport_room), R(sport_room), 9, 10.75) = 1.0[0m
+[34m2025-01-06 21:33:21,987 - DEBUG - self.y_mgfdt(T(sport), RG(sport_room), R(sport_room), 9, 14.0) = 1.0[0m
+[34m2025-01-06 21:33:21,987 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 0, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,987 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 0, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,987 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 1, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,987 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,987 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 2, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,987 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 2, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,987 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,987 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 3, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,987 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 4, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,987 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 4, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,987 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,988 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 5, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,988 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 6, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,988 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 6, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,988 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 7, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,988 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 8, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,988 - DEBUG - self.y_mgfdt(T(physio), RG(sport_room), R(sport_room), 9, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,988 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room0), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,988 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room0), 2, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,988 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room0), 4, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,988 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room0), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,988 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room0), 5, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,989 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room0), 9, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,989 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room1), 0, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,989 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room1), 0, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,989 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room1), 1, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,989 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room1), 2, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,989 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room1), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,989 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room1), 3, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,989 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room1), 4, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,989 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room1), 6, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,989 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room1), 6, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,989 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room1), 7, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,989 - DEBUG - self.y_mgfdt(T(physio), RG(rooms), R(room1), 8, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,990 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(therapist4), 0, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,990 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(therapist4), 2, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,990 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(therapist4), 3, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,990 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(therapist4), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,990 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(therapist4), 5, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,990 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(therapist4), 6, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,991 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(therapist4), 8, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,991 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(therapist4), 9, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,991 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(physiotherapist), 0, 13.0) = 1.0[0m
+[34m2025-01-06 21:33:21,991 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(physiotherapist), 1, 15.0) = 1.0[0m
+[34m2025-01-06 21:33:21,991 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(physiotherapist), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,991 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(physiotherapist), 2, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,991 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(physiotherapist), 3, 9.25) = 1.0[0m
+[34m2025-01-06 21:33:21,991 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(physiotherapist), 4, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,991 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(physiotherapist), 4, 13.5) = 1.0[0m
+[34m2025-01-06 21:33:21,991 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(physiotherapist), 6, 11.0) = 1.0[0m
+[34m2025-01-06 21:33:21,991 - DEBUG - self.y_mgfdt(T(physio), RG(physiotherapist), R(physiotherapist), 7, 9.75) = 1.0[0m
+[34m2025-01-06 21:33:21,993 - DEBUG - self.y_mgfdt(T(board_games), RG(therapists), R(therapist0), 1, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,994 - DEBUG - self.y_mgfdt(T(board_games), RG(therapists), R(therapist0), 5, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,994 - DEBUG - self.y_mgfdt(T(board_games), RG(therapists), R(therapist0), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,994 - DEBUG - self.y_mgfdt(T(board_games), RG(therapists), R(therapist1), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,994 - DEBUG - self.y_mgfdt(T(board_games), RG(therapists), R(therapist1), 8, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,995 - DEBUG - self.y_mgfdt(T(board_games), RG(therapists), R(therapist1), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,995 - DEBUG - self.y_mgfdt(T(board_games), RG(therapists), R(therapist2), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,995 - DEBUG - self.y_mgfdt(T(board_games), RG(therapists), R(therapist2), 7, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,995 - DEBUG - self.y_mgfdt(T(board_games), RG(therapists), R(therapist3), 1, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,995 - DEBUG - self.y_mgfdt(T(board_games), RG(therapists), R(therapist3), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,995 - DEBUG - self.y_mgfdt(T(board_games), RG(therapists), R(therapist3), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,996 - DEBUG - self.y_mgfdt(T(board_games), RG(therapists), R(therapist4), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,996 - DEBUG - self.y_mgfdt(T(board_games), RG(therapists), R(language_therapist0), 2, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,996 - DEBUG - self.y_mgfdt(T(board_games), RG(therapists), R(language_therapist0), 3, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,997 - DEBUG - self.y_mgfdt(T(board_games), RG(therapists), R(language_therapist0), 7, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,997 - DEBUG - self.y_mgfdt(T(board_games), RG(therapists), R(language_therapist0), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,997 - DEBUG - self.y_mgfdt(T(board_games), RG(rooms), R(room0), 1, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,997 - DEBUG - self.y_mgfdt(T(board_games), RG(rooms), R(room0), 2, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,997 - DEBUG - self.y_mgfdt(T(board_games), RG(rooms), R(room0), 3, 13.75) = 1.0[0m
+[34m2025-01-06 21:33:21,997 - DEBUG - self.y_mgfdt(T(board_games), RG(rooms), R(room0), 5, 10.0) = 1.0[0m
+[34m2025-01-06 21:33:21,997 - DEBUG - self.y_mgfdt(T(board_games), RG(rooms), R(room0), 5, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,997 - DEBUG - self.y_mgfdt(T(board_games), RG(rooms), R(room0), 7, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,998 - DEBUG - self.y_mgfdt(T(board_games), RG(rooms), R(room0), 7, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,998 - DEBUG - self.y_mgfdt(T(board_games), RG(rooms), R(room0), 8, 9.0) = 1.0[0m
+[34m2025-01-06 21:33:21,998 - DEBUG - self.y_mgfdt(T(board_games), RG(rooms), R(room1), 1, 10.25) = 1.0[0m
+[34m2025-01-06 21:33:21,998 - DEBUG - self.y_mgfdt(T(board_games), RG(rooms), R(room1), 2, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,998 - DEBUG - self.y_mgfdt(T(board_games), RG(rooms), R(room1), 4, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:21,998 - DEBUG - self.y_mgfdt(T(board_games), RG(rooms), R(room1), 8, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,998 - DEBUG - self.y_mgfdt(T(board_games), RG(rooms), R(room1), 8, 9.5) = 1.0[0m
+[34m2025-01-06 21:33:21,998 - DEBUG - self.y_mgfdt(T(board_games), RG(rooms), R(room1), 8, 13.25) = 1.0[0m
+[34m2025-01-06 21:33:21,998 - DEBUG - self.y_mgfdt(T(board_games), RG(rooms), R(room1), 9, 8.0) = 1.0[0m
+[34m2025-01-06 21:33:21,999 - DEBUG - self.y_mgfdt(T(board_games), RG(rooms), R(sport_room), 7, 14.5) = 1.0[0m
+[34m2025-01-06 21:33:22,042 - DEBUG - Patient 0 is admitted at day 0.[0m
+[34m2025-01-06 21:33:22,042 - DEBUG - Patient 1 is admitted at day 1.[0m
+[34m2025-01-06 21:33:22,042 - DEBUG - Patient 2 is admitted at day 2.[0m
+[34m2025-01-06 21:33:22,042 - DEBUG - Patient 3 is admitted at day 2.[0m
+[34m2025-01-06 21:33:22,042 - DEBUG - Patient 4 is admitted at day 3.[0m
+[34m2025-01-06 21:33:22,042 - DEBUG - Patient 5 is admitted at day 4.[0m
+[34m2025-01-06 21:33:22,042 - DEBUG - Patient 6 is admitted at day 5.[0m
+[34m2025-01-06 21:33:22,042 - DEBUG - Patient 7 is admitted at day 2.[0m
+[34m2025-01-06 21:33:22,042 - DEBUG - Patient 8 is admitted at day 7.[0m
+[34m2025-01-06 21:33:22,042 - DEBUG - Patient 9 is admitted at day 9.[0m
+[34m2025-01-06 21:33:22,042 - DEBUG - Patient 10 is admitted at day 0.[0m
+[34m2025-01-06 21:33:22,042 - DEBUG - Patient 11 is admitted at day 2.[0m
+[34m2025-01-06 21:33:22,042 - DEBUG - Patient 12 is admitted at day 3.[0m
+[34m2025-01-06 21:33:22,042 - DEBUG - Patient 13 is admitted at day 8.[0m
+[34m2025-01-06 21:33:22,042 - DEBUG - Patient 14 is admitted at day 6.[0m
+[34m2025-01-06 21:33:22,042 - DEBUG - Patient 15 is admitted at day 11.[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patient 16 is admitted at day 4.[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patient 17 is admitted at day 5.[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patient 19 is admitted at day 0.[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0] have treatment 1 starting at day 6, hour 14.75 using resources [6].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0] have treatment 1 starting at day 6, hour 15.25 using resources [8].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0] have treatment 1 starting at day 9, hour 10.25 using resources [8].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0] have treatment 1 starting at day 9, hour 14.0 using resources [6].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0, 5] have treatment 5 starting at day 5, hour 11.5 using resources [5, 7].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0] have treatment 5 starting at day 5, hour 14.75 using resources [4, 7].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0] have treatment 5 starting at day 8, hour 9.75 using resources [5, 8].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0, 8] have treatment 5 starting at day 8, hour 14.25 using resources [5, 6].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0, 1, 2, 3, 7] have treatment 6 starting at day 2, hour 10.0 using resources [1, 8].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0, 1, 2, 3, 7] have treatment 6 starting at day 2, hour 13.0 using resources [2, 8].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0, 1, 2, 3, 4, 7] have treatment 6 starting at day 3, hour 10.25 using resources [4, 8].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0, 1, 2, 3, 4, 7] have treatment 6 starting at day 3, hour 14.75 using resources [1, 8].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0, 1, 2, 3, 4, 7] have treatment 6 starting at day 4, hour 9.25 using resources [2, 8].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0, 2, 4, 5, 7] have treatment 6 starting at day 4, hour 10.75 using resources [1, 8].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0, 1, 3, 5, 6] have treatment 6 starting at day 6, hour 13.25 using resources [9, 8].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0, 1, 4, 6, 7, 8] have treatment 6 starting at day 8, hour 13.0 using resources [0, 8].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0] have treatment 7 starting at day 0, hour 10.0 using resources [8, 7, 4].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0] have treatment 7 starting at day 0, hour 13.0 using resources [8, 7, 5].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0, 1] have treatment 7 starting at day 1, hour 15.0 using resources [8, 7, 5].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0, 5] have treatment 7 starting at day 4, hour 8.0 using resources [8, 6, 5].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0, 3] have treatment 7 starting at day 5, hour 13.25 using resources [8, 6, 4].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0, 4] have treatment 7 starting at day 9, hour 9.25 using resources [8, 6, 4].[0m
+[34m2025-01-06 21:33:22,043 - DEBUG - Patients [0, 19] have treatment 9 starting at day 1, hour 10.25 using resources [3, 7].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [0, 10] have treatment 9 starting at day 2, hour 14.5 using resources [9, 6].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [0, 10, 16] have treatment 9 starting at day 5, hour 10.0 using resources [0, 6].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [0, 1, 5, 7, 8, 11, 16] have treatment 9 starting at day 7, hour 8.0 using resources [1, 6].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [0, 8] have treatment 9 starting at day 7, hour 14.5 using resources [2, 8].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1] have treatment 1 starting at day 2, hour 12.0 using resources [6].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1] have treatment 1 starting at day 3, hour 14.0 using resources [7].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1] have treatment 1 starting at day 5, hour 10.25 using resources [7].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1] have treatment 1 starting at day 5, hour 12.25 using resources [7].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1] have treatment 1 starting at day 7, hour 12.25 using resources [8].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1] have treatment 1 starting at day 8, hour 8.5 using resources [6].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1] have treatment 1 starting at day 8, hour 14.25 using resources [8].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1] have treatment 5 starting at day 1, hour 10.5 using resources [4, 6].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1] have treatment 5 starting at day 1, hour 14.25 using resources [4, 7].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1] have treatment 5 starting at day 6, hour 9.25 using resources [5, 7].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1, 3] have treatment 5 starting at day 7, hour 11.5 using resources [5, 6].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1, 2, 4, 5, 7] have treatment 6 starting at day 9, hour 8.0 using resources [2, 8].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1, 2, 4, 7, 9] have treatment 6 starting at day 9, hour 10.75 using resources [2, 8].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1, 2, 4, 5, 8, 9] have treatment 6 starting at day 9, hour 14.0 using resources [0, 8].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1, 2] have treatment 7 starting at day 3, hour 9.25 using resources [8, 7, 5].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1, 7] have treatment 7 starting at day 4, hour 14.5 using resources [8, 6, 4].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1, 2, 19] have treatment 9 starting at day 2, hour 8.0 using resources [3, 7].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1, 2, 4, 5, 6, 7, 10, 16, 17] have treatment 9 starting at day 5, hour 14.5 using resources [2, 6].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1, 3, 6, 12] have treatment 9 starting at day 7, hour 9.5 using resources [9, 6].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [1, 2, 10, 14, 19] have treatment 9 starting at day 8, hour 9.0 using resources [9, 6].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [2] have treatment 1 starting at day 5, hour 12.25 using resources [8].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [2] have treatment 1 starting at day 7, hour 11.0 using resources [6].[0m
+[34m2025-01-06 21:33:22,044 - DEBUG - Patients [2] have treatment 1 starting at day 7, hour 12.75 using resources [8].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [2] have treatment 1 starting at day 7, hour 13.25 using resources [8].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [2, 19] have treatment 5 starting at day 8, hour 10.75 using resources [5, 6].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [2, 4] have treatment 5 starting at day 8, hour 15.5 using resources [5, 8].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [2, 16] have treatment 5 starting at day 9, hour 15.25 using resources [4, 6].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [2, 3] have treatment 7 starting at day 2, hour 15.0 using resources [8, 7, 4].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [2, 4] have treatment 7 starting at day 4, hour 13.5 using resources [8, 7, 5].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [2] have treatment 7 starting at day 6, hour 10.0 using resources [8, 7, 4].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [2, 4] have treatment 7 starting at day 6, hour 11.0 using resources [8, 7, 5].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [3] have treatment 1 starting at day 4, hour 12.75 using resources [8].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [3] have treatment 1 starting at day 7, hour 12.5 using resources [6].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [3] have treatment 1 starting at day 8, hour 12.5 using resources [6].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [3] have treatment 1 starting at day 9, hour 12.25 using resources [7].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [3] have treatment 1 starting at day 9, hour 14.75 using resources [6].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [3, 4] have treatment 5 starting at day 3, hour 11.5 using resources [4, 7].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [3] have treatment 5 starting at day 9, hour 8.0 using resources [4, 6].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [3, 14] have treatment 5 starting at day 9, hour 10.5 using resources [4, 6].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [3, 4, 5, 6, 7] have treatment 6 starting at day 5, hour 9.25 using resources [3, 8].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [3, 7] have treatment 7 starting at day 2, hour 8.0 using resources [8, 6, 5].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [3, 4] have treatment 7 starting at day 3, hour 8.0 using resources [8, 7, 4].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [3, 7] have treatment 7 starting at day 8, hour 11.0 using resources [8, 7, 4].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [3, 4, 6, 7, 8, 11, 12, 17] have treatment 9 starting at day 8, hour 8.0 using resources [4, 7].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [3, 5] have treatment 9 starting at day 8, hour 13.25 using resources [1, 7].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [4] have treatment 1 starting at day 4, hour 12.75 using resources [7].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [4] have treatment 1 starting at day 5, hour 8.0 using resources [6].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [4] have treatment 1 starting at day 5, hour 11.0 using resources [8].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [4, 7] have treatment 7 starting at day 7, hour 9.75 using resources [8, 7, 5].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [4, 5, 6, 8, 11, 13, 16, 17] have treatment 9 starting at day 8, hour 9.5 using resources [0, 7].[0m
+[34m2025-01-06 21:33:22,045 - DEBUG - Patients [5] have treatment 1 starting at day 4, hour 9.0 using resources [6].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [5] have treatment 1 starting at day 6, hour 8.0 using resources [6].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [5] have treatment 1 starting at day 7, hour 12.5 using resources [7].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [5] have treatment 1 starting at day 8, hour 14.75 using resources [6].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [5] have treatment 1 starting at day 9, hour 13.0 using resources [8].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [5, 7] have treatment 5 starting at day 4, hour 13.75 using resources [4, 6].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [5, 10] have treatment 5 starting at day 6, hour 8.75 using resources [5, 6].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [5, 8] have treatment 5 starting at day 9, hour 10.25 using resources [5, 7].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [6] have treatment 1 starting at day 5, hour 10.5 using resources [8].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [6] have treatment 1 starting at day 6, hour 12.0 using resources [6].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [6] have treatment 1 starting at day 7, hour 12.0 using resources [6].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [6] have treatment 1 starting at day 8, hour 12.0 using resources [8].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [6] have treatment 1 starting at day 9, hour 11.5 using resources [7].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [6] have treatment 1 starting at day 9, hour 12.75 using resources [6].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [6] have treatment 5 starting at day 7, hour 8.25 using resources [4, 7].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [6, 8] have treatment 5 starting at day 7, hour 13.75 using resources [5, 8].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [6, 11, 12, 19] have treatment 9 starting at day 9, hour 8.0 using resources [1, 7].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [7] have treatment 1 starting at day 6, hour 8.5 using resources [7].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [7] have treatment 1 starting at day 7, hour 11.0 using resources [7].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [7] have treatment 1 starting at day 8, hour 12.0 using resources [7].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [7] have treatment 5 starting at day 3, hour 13.25 using resources [4, 8].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [7, 12] have treatment 5 starting at day 9, hour 13.25 using resources [4, 6].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [7] have treatment 7 starting at day 2, hour 9.0 using resources [8, 6, 5].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [8] have treatment 1 starting at day 7, hour 13.25 using resources [7].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [8] have treatment 1 starting at day 9, hour 13.5 using resources [8].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [8] have treatment 1 starting at day 9, hour 15.5 using resources [8].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [9] have treatment 1 starting at day 9, hour 12.0 using resources [8].[0m
+[34m2025-01-06 21:33:22,046 - DEBUG - Patients [9] have treatment 1 starting at day 9, hour 12.75 using resources [7].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 11, 12, 16, 19] have treatment 2 starting at day 4, hour 8.25 using resources [2, 7].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 11, 12, 16, 19] have treatment 2 starting at day 4, hour 13.0 using resources [9, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 11, 14, 16, 17] have treatment 2 starting at day 6, hour 13.5 using resources [2, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 14, 16, 17, 19] have treatment 2 starting at day 7, hour 11.0 using resources [0, 8].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 11, 12, 13, 14, 17] have treatment 2 starting at day 8, hour 11.25 using resources [0, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 12, 13, 16, 17] have treatment 2 starting at day 8, hour 13.5 using resources [2, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 13, 14, 16, 17] have treatment 2 starting at day 9, hour 8.5 using resources [9, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 11, 13, 16, 17] have treatment 2 starting at day 9, hour 11.25 using resources [4, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 19] have treatment 3 starting at day 0, hour 8.0 using resources [0, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 19] have treatment 3 starting at day 0, hour 13.5 using resources [0, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 19] have treatment 3 starting at day 1, hour 14.0 using resources [1, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 11] have treatment 3 starting at day 4, hour 10.0 using resources [3, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 11, 14, 19] have treatment 3 starting at day 7, hour 14.0 using resources [4, 7].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10] have treatment 4 starting at day 1, hour 11.5 using resources [1, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10] have treatment 4 starting at day 3, hour 11.0 using resources [2, 7].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 11] have treatment 4 starting at day 3, hour 11.5 using resources [1, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 16] have treatment 4 starting at day 8, hour 8.0 using resources [3, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 11] have treatment 5 starting at day 2, hour 10.0 using resources [5, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 19] have treatment 9 starting at day 1, hour 8.0 using resources [0, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [10, 19] have treatment 9 starting at day 3, hour 13.75 using resources [9, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [11, 12, 19] have treatment 3 starting at day 3, hour 8.0 using resources [9, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [11, 19] have treatment 3 starting at day 5, hour 8.25 using resources [9, 7].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [11, 12] have treatment 3 starting at day 9, hour 14.0 using resources [9, 7].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [11] have treatment 4 starting at day 2, hour 13.75 using resources [9, 6].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [11, 12] have treatment 4 starting at day 3, hour 13.0 using resources [0, 7].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [11] have treatment 4 starting at day 7, hour 11.5 using resources [1, 7].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [11, 19] have treatment 5 starting at day 2, hour 13.0 using resources [4, 7].[0m
+[34m2025-01-06 21:33:22,047 - DEBUG - Patients [12, 16] have treatment 3 starting at day 4, hour 9.75 using resources [0, 7].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [12, 16, 17] have treatment 3 starting at day 6, hour 8.0 using resources [9, 8].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [12, 17] have treatment 3 starting at day 7, hour 14.0 using resources [0, 6].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [12, 16] have treatment 4 starting at day 6, hour 15.5 using resources [1, 7].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [12] have treatment 5 starting at day 3, hour 11.0 using resources [5, 6].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [12] have treatment 5 starting at day 3, hour 15.5 using resources [4, 6].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [12] have treatment 5 starting at day 5, hour 14.25 using resources [4, 7].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [12] have treatment 5 starting at day 5, hour 15.5 using resources [5, 7].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [12, 19] have treatment 5 starting at day 8, hour 15.5 using resources [4, 6].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [12] have treatment 5 starting at day 9, hour 11.0 using resources [5, 7].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [12, 16] have treatment 9 starting at day 4, hour 14.5 using resources [3, 7].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [13, 14, 16, 17, 19] have treatment 2 starting at day 9, hour 13.25 using resources [0, 7].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [14, 19] have treatment 3 starting at day 6, hour 9.25 using resources [1, 6].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [14] have treatment 4 starting at day 6, hour 14.75 using resources [4, 7].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [14] have treatment 4 starting at day 7, hour 8.25 using resources [9, 8].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [14] have treatment 4 starting at day 8, hour 13.0 using resources [2, 6].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [16, 17] have treatment 4 starting at day 5, hour 8.0 using resources [3, 8].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [16] have treatment 5 starting at day 5, hour 11.5 using resources [4, 8].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [17] have treatment 4 starting at day 6, hour 15.5 using resources [2, 6].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [17] have treatment 5 starting at day 5, hour 11.0 using resources [4, 7].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [17] have treatment 5 starting at day 6, hour 11.25 using resources [4, 6].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [19] have treatment 4 starting at day 6, hour 13.0 using resources [2, 6].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [19] have treatment 4 starting at day 6, hour 14.0 using resources [0, 7].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [19] have treatment 5 starting at day 0, hour 11.5 using resources [5, 7].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [19] have treatment 5 starting at day 0, hour 15.5 using resources [5, 6].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [19] have treatment 5 starting at day 5, hour 15.5 using resources [4, 8].[0m
+[34m2025-01-06 21:33:22,048 - DEBUG - Patients [19] have treatment 5 starting at day 8, hour 14.75 using resources [5, 7].[0m
+[34m2025-01-06 21:33:22,056 - DEBUG - Checking solution value.[0m
+[34m2025-01-06 21:33:22,056 - DEBUG - Solvers objective function value: 540.0[0m
+[34m2025-01-06 21:33:22,057 - DEBUG - (VERIFIER):Treatment value: 0[0m
+[34m2025-01-06 21:33:22,057 - DEBUG - (VERIFIER):Delay value: 0[0m
+[34m2025-01-06 21:33:22,057 - DEBUG - (VERIFIER):Missing treatment value: 540[0m
+[34m2025-01-06 21:33:22,058 - DEBUG - Correct objective function value: 540[0m
+[34m2025-01-06 21:33:22,058 - DEBUG - Solution is valid.[0m
+[34m2025-01-06 21:33:22,058 - DEBUG - All solvers accepted the solution.[0m
+[32m2025-01-06 21:33:22,058 - INFO - Time to find solution: 112.377s with value 540.000000[0m
+[32m2025-01-06 21:33:22,058 - INFO - Total Time: 117.524s[0m

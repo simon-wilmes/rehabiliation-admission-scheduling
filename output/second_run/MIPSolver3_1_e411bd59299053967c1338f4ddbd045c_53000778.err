@@ -1,0 +1,23 @@
+[INFO] Module binutils/2.38 loaded.
+[INFO] Module zlib/1.2.13 loaded.
+[INFO] Module GCCcore/.12.2.0 loaded.
+[INFO] Module binutils/2.38 loaded.
+[INFO] Module numactl/2.0.16 loaded.
+[INFO] Module UCX/1.17.0 loaded.
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) UCX/1.17.0     2) binutils/2.38     3) numactl/2.0.16     4) zlib/1.2.13
+
+The following have been reloaded with a version change:
+  1) GCCcore/.11.3.0 => GCCcore/.12.2.0
+
+Gurobi shell based on Python 3.10.4 can be launched with command `gurobi.sh`
+Gurobi Python Interface can be loaded in Python 3.10.4 with 'import gurobipy'
+[INFO] Module Gurobi/10.0.0 loaded.
+
+The following have been reloaded with a version change:
+  1) zlib/1.2.13 => zlib/1.2.12
+
+[INFO] Module Python/3.10.4 loaded.
+/var/spool/slurm/job53000778/slurm_script: line 64: 129587 Killed                  python -m src "MIPSolver3" "{'break_symmetry': True, 'break_symmetry_strong': True}" "/home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_1_more_resources_15.txt"
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=53000778.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.

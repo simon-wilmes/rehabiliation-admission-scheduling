@@ -1,0 +1,944 @@
+1.NAME: LBBDSolver
+2.PARAMS: {'break_symmetry': True, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubSolver'}
+3.INSTANCE: /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_6_30.txt
+4.REPETITION: 1
+Current directory: /home/wx350715/Kobra/rehabiliation-admission-scheduling
+[34m2025-01-07 02:12:27,284 - DEBUG - Solver: <class 'src.solvers.benders.LBBDSolver'>[0m
+[34m2025-01-07 02:12:27,284 - DEBUG - Args: {'break_symmetry': True, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubSolver'}[0m
+[34m2025-01-07 02:12:27,284 - DEBUG - File path /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_6_30.txt[0m
+[34m2025-01-07 02:12:27,284 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-07 02:12:27,284 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-07 02:12:27,285 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-07 02:12:27,285 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-07 02:12:27,285 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-07 02:12:27,285 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-07 02:12:27,285 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-07 02:12:27,285 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-07 02:12:27,285 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-07 02:12:27,285 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-07 02:12:27,285 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-07 02:12:27,285 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-07 02:12:27,285 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-07 02:12:27,285 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-07 02:12:27,285 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-07 02:12:27,285 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-07 02:12:27,285 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-07 02:12:27,285 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-07 02:12:27,286 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-07 02:12:27,286 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-07 02:12:27,286 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-07 02:12:27,286 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-07 02:12:27,286 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-07 02:12:27,286 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-07 02:12:27,286 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-07 02:12:27,286 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-07 02:12:27,286 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-07 02:12:27,286 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-07 02:12:27,286 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-07 02:12:27,287 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-07 02:12:27,287 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-07 02:12:27,287 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-07 02:12:27,287 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-07 02:12:27,287 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,287 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,287 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,287 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,287 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,288 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,288 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,288 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,288 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,288 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,288 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,288 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,288 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,288 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,289 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,289 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,289 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,289 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,289 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,289 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,289 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-07 02:12:27,289 - DEBUG - Instance data:[0m
+[34m2025-01-07 02:12:27,289 - DEBUG - Number of patients: 21[0m
+[34m2025-01-07 02:12:27,291 - DEBUG - Number of beds: 36[0m
+[34m2025-01-07 02:12:27,291 - DEBUG - Average number of treatments per patient: 32.38095238095238[0m
+[34m2025-01-07 02:12:27,291 - DEBUG - Average number of treatment per stayed day: 2.3859649122807016[0m
+[34m2025-01-07 02:12:27,291 - DEBUG - Number of treatments: 680[0m
+[34m2025-01-07 02:12:27,291 - DEBUG - Number of resources: 10[0m
+[34m2025-01-07 02:12:27,291 - DEBUG - Number of resource groups: 4[0m
+[34m2025-01-07 02:12:27,291 - DEBUG - Number of resource hours needed per all treatment by RG(therapists): 19.704166666666676[0m
+[34m2025-01-07 02:12:27,291 - DEBUG - Number of resource hours needed per all treatment by RG(rooms): 35.95416666666666[0m
+[34m2025-01-07 02:12:27,291 - DEBUG - Number of resource hours needed per all treatment by RG(physiotherapist): 15.5[0m
+[34m2025-01-07 02:12:27,291 - DEBUG - Number of resource hours needed per all treatment by RG(sport_room): 6.75[0m
+[32m2025-01-07 02:12:27,291 - INFO - {'solver': 'LBBDSolver', 'args': {'break_symmetry': False, 'subsolver_cls': <class 'src.solvers.subsolvers.cp_subsolver.CPSubsolver'>, 'subsolver.store_results': True, 'subsolver.store_results_method': 'hash', 'use_helper_constraints': True, 'enforce_min_treatments_per_day': True, 'enforce_max_treatments_per_e_w': True, 'enforce_min_patients_per_treatment': True, 'log_to_console': True}}[0m
+[34m2025-01-07 02:12:27,291 - DEBUG - Setting options: LBBDSolver[0m
+[34m2025-01-07 02:12:27,291 - DEBUG -  ---- break_symmetry to False[0m
+[34m2025-01-07 02:12:27,291 - DEBUG -  ---- subsolver_cls to <class 'src.solvers.subsolvers.cp_subsolver.CPSubsolver'>[0m
+[34m2025-01-07 02:12:27,291 - DEBUG -  ---- use_helper_constraints to True[0m
+[34m2025-01-07 02:12:27,291 - DEBUG -  ---- add_constraints_to_symmetric_days to True (default)[0m
+[34m2025-01-07 02:12:27,291 - DEBUG - Setting options: Solver[0m
+[34m2025-01-07 02:12:27,291 - DEBUG -  ---- number_of_threads to 1 (default)[0m
+[34m2025-01-07 02:12:27,291 - DEBUG -  ---- treatment_value to 0 (default)[0m
+[34m2025-01-07 02:12:27,291 - DEBUG -  ---- delay_value to 1 (default)[0m
+[34m2025-01-07 02:12:27,291 - DEBUG -  ---- missing_treatment_value to 4 (default)[0m
+[34m2025-01-07 02:12:27,292 - DEBUG -  ---- enforce_min_treatments_per_day to True[0m
+[34m2025-01-07 02:12:27,292 - DEBUG -  ---- enforce_max_treatments_per_e_w to True[0m
+[34m2025-01-07 02:12:27,292 - DEBUG -  ---- enforce_min_patients_per_treatment to True[0m
+[34m2025-01-07 02:12:27,292 - DEBUG -  ---- log_to_console to True[0m
+[34m2025-01-07 02:12:27,292 - DEBUG -  ---- log_to_file to True (default)[0m
+[34m2025-01-07 02:12:27,310 - DEBUG - Setting options: CPSubsolver[0m
+[34m2025-01-07 02:12:27,310 - DEBUG -  ---- estimated_needed_treatments to True (default)[0m
+[34m2025-01-07 02:12:27,310 - DEBUG -  ---- add_patient_symmetry to False (default)[0m
+[34m2025-01-07 02:12:27,310 - DEBUG - Setting Subsolver options: SubSolver[0m
+[34m2025-01-07 02:12:27,310 - DEBUG -  ---- store_results to True[0m
+[34m2025-01-07 02:12:27,310 - DEBUG -  ---- store_results_method to hash[0m
+[34m2025-01-07 02:12:27,310 - DEBUG -  ---- enforce_min_patients_per_treatment to True[0m
+[34m2025-01-07 02:12:27,310 - DEBUG -  ---- use_day_symmetry to True (default)[0m
+[32m2025-01-07 02:12:27,325 - INFO - Create model: LBBDSolver[0m
+Set parameter TSPort to value 50039
+Set parameter TokenServer to value "license.itc.rwth-aachen.de"
+Set parameter Threads to value 1
+Set parameter LazyConstraints to value 1
+[34m2025-01-07 02:12:27,803 - DEBUG - Variables created.[0m
+[34m2025-01-07 02:12:29,325 - DEBUG - Constraint (not too many treatments) created.[0m
+[34m2025-01-07 02:12:30,293 - DEBUG - Constraint (no_treatments_outside admittance) created.[0m
+[34m2025-01-07 02:12:30,294 - DEBUG - Constraint (bed_usage) created.[0m
+[34m2025-01-07 02:12:30,294 - DEBUG - Constraint (must be admitted) created.[0m
+[34m2025-01-07 02:12:30,447 - DEBUG - Constraint (e_w_ub) created.[0m
+[34m2025-01-07 02:12:30,498 - DEBUG - Constraint (day_ub) created.[0m
+[34m2025-01-07 02:12:30,549 - DEBUG - Constraint (Day always) created.[0m
+[34m2025-01-07 02:12:30,549 - DEBUG - Constraint (already_admitted) created.[0m
+[32m2025-01-07 02:12:32,499 - INFO - Time to create model: 5.174[0m
+[32m2025-01-07 02:12:32,500 - INFO - Solving model: LBBDSolver[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 1 threads
+
+Optimize a model with 223441 rows, 93881 columns and 1798630 nonzeros
+Model fingerprint: 0x48ff6fac
+Variable types: 3 continuous, 93878 integer (93878 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+03]
+Presolve added 0 rows and 1440 columns
+Presolve removed 144064 rows and 0 columns
+Presolve time: 3.18s
+Presolved: 79377 rows, 95321 columns, 1187290 nonzeros
+Variable types: 1 continuous, 95320 integer (94520 binary)
+Root relaxation presolved: 78994 rows, 95184 columns, 1118563 nonzeros
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+    1566    4.5600032e+02   4.126982e+02   0.000000e+00      5s
+    4486    6.6825000e+02   0.000000e+00   0.000000e+00      5s
+    4486    6.6825000e+02   0.000000e+00   0.000000e+00      5s
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root crossover log...
+
+     688 DPushes remaining with DInf 0.0000000e+00                 5s
+       0 DPushes remaining with DInf 0.0000000e+00                 5s
+
+   17030 PPushes remaining with PInf 0.0000000e+00                 5s
+       0 PPushes remaining with PInf 0.0000000e+00                 6s
+
+  Push phase complete: Pinf 0.0000000e+00, Dinf 5.9063865e-14      6s
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+   21563    6.6825000e+02   0.000000e+00   0.000000e+00      6s
+   21563    6.6825000e+02   0.000000e+00   0.000000e+00      6s
+
+Root relaxation: objective 6.682500e+02, 21563 iterations, 1.00 seconds (1.03 work units)
+Total elapsed time = 14.12s
+Total elapsed time = 18.62s
+Total elapsed time = 22.53s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  668.25000    0  447          -  668.25000      -     -   26s
+     0     0  669.50000    0  652          -  669.50000      -     -   33s
+     0     0  669.50000    0  652          -  669.50000      -     -   34s
+     0     0  670.03571    0  853          -  670.03571      -     -   40s
+[32m2025-01-07 02:13:20,895 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:13:20,896 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:13:20,897 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:13:20,897 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:13:20,898 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:13:20,898 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:13:20,899 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:13:20,900 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:13:20,901 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:13:20,902 - INFO - forbidden_vars: ([{1:2},{4:1,6:1},{1:2,6:1},{1:1,3:2,6:1},{3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:13:20,902 - INFO - False[0m
+[32m2025-01-07 02:13:21,255 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 02:13:21,255 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 02:13:21,256 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 02:13:21,257 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 02:13:21,257 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 02:13:21,258 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 02:13:21,259 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 02:13:21,260 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 02:13:21,260 - INFO - forbidden_vars: ([{0:1,4:1,6:1},{0:2,1:1},{3:2,6:1},{3:2,4:1,7:1},{3:2,6:1,7:1},{0:2,3:1,6:1,7:1},{3:3,6:1,7:1}])[0m
+[32m2025-01-07 02:13:21,260 - INFO - False[0m
+[32m2025-01-07 02:14:09,424 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-07 02:14:09,426 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-07 02:14:09,428 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-07 02:14:09,429 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-07 02:14:09,431 - INFO - d_prime: 13 d: 10[0m
+[32m2025-01-07 02:14:09,432 - INFO - forbidden_vars: ([{1:1},{3:1},{3:1},{4:1},{5:1},{1:1,4:1},{1:1,4:1},{3:1,6:1},{3:1,6:1},{3:1,6:1},{4:1,6:1},{5:1,6:1},{6:2},{6:2},{6:2},{6:2},{1:1,3:1,6:1},{3:1,4:1,6:1},{4:2,7:1},{3:3,6:1}])[0m
+[32m2025-01-07 02:14:09,432 - INFO - False[0m
+     0     0  670.03571    0  853          -  670.03571      -     -  146s
+     0     0  670.03571    0  825          -  670.03571      -     -  147s
+     0     0  670.08000    0  727          -  670.08000      -     -  150s
+[32m2025-01-07 02:15:10,255 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:15:10,256 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:15:10,256 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:15:10,257 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:15:10,257 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:15:10,258 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:15:10,259 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:15:10,259 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:15:10,260 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:15:10,262 - INFO - forbidden_vars: ([{1:1,6:1},{1:2},{4:1,6:1},{1:1,3:2,6:1},{3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:15:10,262 - INFO - False[0m
+[32m2025-01-07 02:15:10,539 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 02:15:10,540 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 02:15:10,540 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 02:15:10,541 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 02:15:10,541 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 02:15:10,542 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 02:15:10,542 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 02:15:10,543 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 02:15:10,544 - INFO - forbidden_vars: ([{4:1,6:1},{0:2,3:1},{0:2,1:1},{3:2,6:1},{3:2,6:1,7:1},{3:2,6:1,7:1},{3:3,6:1,7:1}])[0m
+[32m2025-01-07 02:15:10,544 - INFO - False[0m
+     0     0  670.08000    0  727          -  670.08000      -     -  223s
+     0     0  670.19231    0  691          -  670.19231      -     -  225s
+     0     0  670.19231    0  609          -  670.19231      -     -  225s
+     0     0  670.22222    0  542          -  670.22222      -     -  228s
+[32m2025-01-07 02:16:25,737 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:16:25,738 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:16:25,738 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:16:25,739 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:16:25,740 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:16:25,740 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:16:25,741 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:16:25,742 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:16:25,743 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:16:25,744 - INFO - forbidden_vars: ([{1:1,6:1},{1:2},{3:1,4:1,6:1},{3:3,6:1},{4:1,5:1,6:1,7:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:16:25,744 - INFO - False[0m
+[32m2025-01-07 02:17:00,656 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 02:17:00,658 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 02:17:00,658 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 02:17:00,659 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 02:17:00,659 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 02:17:00,660 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 02:17:00,661 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 02:17:00,661 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 02:17:00,662 - INFO - forbidden_vars: ([{0:2},{3:1,6:1},{0:1,4:1,6:1},{0:1,3:1,7:1},{3:2,6:1,7:1},{3:2,6:1,7:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 02:17:00,662 - INFO - False[0m
+[32m2025-01-07 02:21:27,950 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-07 02:21:27,954 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-07 02:21:27,955 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-07 02:21:27,957 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-07 02:21:27,959 - INFO - d_prime: 13 d: 10[0m
+[32m2025-01-07 02:21:27,960 - INFO - forbidden_vars: ([{3:1},{3:1},{3:1},{2:1,5:1},{2:1,3:1},{2:1,3:1},{2:1,3:1},{2:1,6:1},{3:1,6:1},{4:1,6:1},{4:1,6:1},{5:1,6:1},{1:2,4:1},{2:1,3:2},{2:1,3:1,4:1},{2:1,6:2},{2:1,4:1,6:1},{3:1,5:1,6:1},{1:1,2:1,3:3},{4:3,6:1,7:1}])[0m
+[32m2025-01-07 02:21:27,960 - INFO - False[0m
+     0     0  670.22222    0  542          -  670.22222      -     -  589s
+[32m2025-01-07 02:22:25,133 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:22:25,133 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:22:25,134 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:22:25,134 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:22:25,135 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:22:25,135 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:22:25,136 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:22:25,137 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:22:25,137 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:22:25,138 - INFO - forbidden_vars: ([{6:1},{1:2},{3:1,4:1,6:1},{3:3,6:1},{4:1,5:1,6:1,7:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:22:25,138 - INFO - False[0m
+[32m2025-01-07 02:23:36,576 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 02:23:36,576 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 02:23:36,577 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 02:23:36,577 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 02:23:36,578 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 02:23:36,578 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 02:23:36,579 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 02:23:36,579 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 02:23:36,580 - INFO - forbidden_vars: ([{3:1,6:1},{0:1,4:1,6:1},{0:3,3:1},{0:4},{3:2,6:1,7:1},{3:2,6:1,7:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 02:23:36,580 - INFO - False[0m
+[32m2025-01-07 02:27:53,771 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-07 02:27:53,775 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-07 02:27:53,777 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-07 02:27:53,779 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-07 02:27:53,781 - INFO - d_prime: 13 d: 10[0m
+[32m2025-01-07 02:27:53,783 - INFO - forbidden_vars: ([{3:1},{3:1},{3:1},{2:1,5:1},{2:1,3:1},{2:1,3:1},{2:1,3:1},{2:1,6:1},{4:1,6:1},{4:1,6:1},{5:1,6:1},{1:1,2:1,3:1},{1:1,2:1,6:1},{1:2,4:1},{2:1,3:2},{2:1,4:1,6:1},{3:1,5:1,6:1},{3:1,6:2},{1:1,2:1,3:3},{4:3,6:1,7:1}])[0m
+[32m2025-01-07 02:27:53,783 - INFO - False[0m
+     0     0  670.22222    0  542          -  670.22222      -     -  982s
+[32m2025-01-07 02:28:58,751 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:28:58,752 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:28:58,753 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:28:58,753 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:28:58,754 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:28:58,755 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:28:58,755 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:28:58,756 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:28:58,757 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:28:58,758 - INFO - forbidden_vars: ([{1:1,6:1},{1:2},{3:1,4:1,6:1},{1:1,3:2,6:1},{3:3,6:1},{4:1,5:1,6:1,7:1}])[0m
+[32m2025-01-07 02:28:58,758 - INFO - False[0m
+[32m2025-01-07 02:29:48,252 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 02:29:48,254 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 02:29:48,255 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 02:29:48,255 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 02:29:48,256 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 02:29:48,256 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 02:29:48,257 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 02:29:48,257 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 02:29:48,258 - INFO - forbidden_vars: ([{0:1,6:1},{0:2},{3:1,6:1},{0:1,3:1,7:1},{3:2,6:1,7:1},{3:2,6:1,7:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 02:29:48,258 - INFO - False[0m
+[32m2025-01-07 02:34:12,911 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-07 02:34:12,913 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-07 02:34:12,915 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-07 02:34:12,916 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-07 02:34:12,918 - INFO - d_prime: 13 d: 10[0m
+[32m2025-01-07 02:34:12,919 - INFO - forbidden_vars: ([{3:1},{3:1},{3:1},{2:1,5:1},{2:1,3:1},{2:1,3:1},{2:1,3:1},{2:1,6:1},{3:1,6:1},{4:1,6:1},{4:1,6:1},{5:1,6:1},{1:1,2:1,3:1},{1:2,4:1},{2:1,6:2},{2:1,4:1,6:1},{3:1,5:1,6:1},{2:1,3:3},{1:1,2:1,3:3},{4:3,6:1,7:1}])[0m
+[32m2025-01-07 02:34:12,919 - INFO - False[0m
+[32m2025-01-07 02:35:04,114 - INFO - Number of cuts added: 14 (bad=0, good=14)[0m
+[32m2025-01-07 02:35:04,115 - INFO - Unnecessary comps: (0 / 14)[0m
+[32m2025-01-07 02:35:04,115 - INFO - Calls to is_day_infeasible: cp_solver=61/ total=70 stored=9[0m
+[32m2025-01-07 02:35:04,115 - INFO - Is feasible: 1300.1419034004211 0.9997827654053062[0m
+[32m2025-01-07 02:35:04,115 - INFO - Subsolver: Solve Model: 1298.2401111125946/0.9985608716825171[0m
+[32m2025-01-07 02:35:04,115 - INFO - Subsolver: Create Model: 1.8710267543792725/0.0014391283174828968[0m
+[32m2025-01-07 02:35:04,115 - INFO - Num_constraints-added: 105[0m
+     0     0  670.22222    0  542          -  670.22222      -     - 1351s
+[32m2025-01-07 02:35:07,411 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:35:07,411 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:35:07,412 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:35:07,412 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:35:07,413 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:35:07,414 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:35:07,415 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:35:07,416 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:35:07,417 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:35:07,418 - INFO - forbidden_vars: ([{1:1,6:1},{1:2},{3:1,4:1,6:1},{4:1,5:1,6:1},{3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:35:07,418 - INFO - False[0m
+[32m2025-01-07 02:36:06,189 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 02:36:06,190 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 02:36:06,191 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 02:36:06,191 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 02:36:06,191 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 02:36:06,192 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 02:36:06,192 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 02:36:06,193 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 02:36:06,193 - INFO - forbidden_vars: ([{0:1,6:1},{3:1,6:1},{0:3,3:1},{0:4},{3:2,6:1,7:1},{3:2,6:1,7:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 02:36:06,193 - INFO - False[0m
+[32m2025-01-07 02:40:49,270 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-07 02:40:49,274 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-07 02:40:49,276 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-07 02:40:49,278 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-07 02:40:49,280 - INFO - d_prime: 13 d: 10[0m
+[32m2025-01-07 02:40:49,281 - INFO - forbidden_vars: ([{3:1},{3:1},{2:1,5:1},{2:1,3:1},{2:1,3:1},{2:1,3:1},{2:1,3:1},{2:1,6:1},{3:1,4:1},{4:1,6:1},{4:1,6:1},{5:1,6:1},{1:2,4:1},{2:1,6:2},{2:1,4:1,6:1},{3:1,5:1,6:1},{3:1,6:2},{2:1,3:3},{1:1,2:1,3:3},{4:3,6:1,7:1}])[0m
+[32m2025-01-07 02:40:49,281 - INFO - False[0m
+     0     0  670.22222    0  542          -  670.22222      -     - 1721s
+[32m2025-01-07 02:41:17,834 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:41:17,835 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:41:17,835 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:41:17,835 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:41:17,836 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:41:17,837 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:41:17,837 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:41:17,838 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:41:17,839 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:41:17,840 - INFO - forbidden_vars: ([{1:1,6:1},{1:2},{3:1,6:1},{3:3,6:1},{4:1,5:1,6:1,7:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:41:17,840 - INFO - False[0m
+[32m2025-01-07 02:41:59,220 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 02:41:59,221 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 02:41:59,221 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 02:41:59,222 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 02:41:59,222 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 02:41:59,223 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 02:41:59,223 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 02:41:59,224 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 02:41:59,224 - INFO - forbidden_vars: ([{3:1,6:1},{0:1,4:1,6:1},{3:2,6:1},{0:3,3:1},{0:4},{3:2,6:1,7:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 02:41:59,224 - INFO - False[0m
+     0     0  670.22222    0  542          -  670.22222      -     - 1848s
+     0     0  670.22222    0  493          -  670.22222      -     - 1849s
+     0     0  670.22222    0  567          -  670.22222      -     - 1850s
+[32m2025-01-07 02:43:27,625 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:43:27,626 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:43:27,627 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:43:27,627 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:43:27,628 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:43:27,628 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:43:27,629 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:43:27,630 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:43:27,631 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:43:27,632 - INFO - forbidden_vars: ([{1:2},{3:1,6:1},{4:1,6:1},{3:3,6:1},{4:1,5:1,6:1,7:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:43:27,632 - INFO - False[0m
+[32m2025-01-07 02:47:43,892 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 02:47:43,894 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 02:47:43,895 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 02:47:43,895 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 02:47:43,896 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 02:47:43,896 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 02:47:43,897 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 02:47:43,898 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 02:47:43,898 - INFO - forbidden_vars: ([{3:1,6:1},{0:1,4:1,6:1},{0:2,3:1,7:1},{0:4},{3:2,6:1,7:1},{3:2,6:1,7:1},{0:1,3:2,6:1,7:1}])[0m
+[32m2025-01-07 02:47:43,899 - INFO - False[0m
+     0     0  670.22222    0  567          -  670.22222      -     - 2177s
+     0     0  670.22222    0  435          -  670.22222      -     - 2178s
+     0     0  670.22222    0  182          -  670.22222      -     - 2181s
+[32m2025-01-07 02:49:03,294 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:49:03,295 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:49:03,295 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:49:03,296 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:49:03,296 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:49:03,297 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:49:03,298 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:49:03,299 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:49:03,299 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:49:03,300 - INFO - forbidden_vars: ([{1:2},{3:1,6:1},{1:1,3:1,6:1},{3:3,6:1},{3:1,4:1,6:1,7:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:49:03,300 - INFO - False[0m
+[32m2025-01-07 02:49:44,789 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 02:49:44,790 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 02:49:44,791 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 02:49:44,791 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 02:49:44,792 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 02:49:44,793 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 02:49:44,793 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 02:49:44,794 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 02:49:44,795 - INFO - forbidden_vars: ([{3:1,6:1},{4:1,6:1},{0:1,3:1,7:1},{0:2,1:1},{0:1,3:2,6:1},{3:2,6:1,7:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 02:49:44,795 - INFO - False[0m
+     0     0  670.22222    0  182          -  670.22222      -     - 2288s
+[32m2025-01-07 02:50:46,572 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:50:46,573 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:50:46,574 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:50:46,574 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:50:46,575 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:50:46,575 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:50:46,576 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:50:46,577 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:50:46,577 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:50:46,579 - INFO - forbidden_vars: ([{1:2},{3:1,6:1},{1:1,3:1,6:1},{1:2,3:1,6:1},{3:3,6:1},{3:1,4:1,6:1,7:1}])[0m
+[32m2025-01-07 02:50:46,579 - INFO - False[0m
+[32m2025-01-07 02:51:19,330 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 02:51:19,331 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 02:51:19,332 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 02:51:19,332 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 02:51:19,333 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 02:51:19,333 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 02:51:19,334 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 02:51:19,334 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 02:51:19,335 - INFO - forbidden_vars: ([{0:2},{3:1,6:1},{4:1,6:1},{0:1,3:1,7:1},{0:1,3:2,6:1},{3:2,6:1,7:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 02:51:19,335 - INFO - False[0m
+[32m2025-01-07 02:51:19,335 - INFO - Number of cuts added: 25 (bad=0, good=25)[0m
+[32m2025-01-07 02:51:19,336 - INFO - Unnecessary comps: (0 / 25)[0m
+[32m2025-01-07 02:51:19,336 - INFO - Calls to is_day_infeasible: cp_solver=107/ total=140 stored=33[0m
+[32m2025-01-07 02:51:19,336 - INFO - Is feasible: 2267.567834377289 0.9997690491135418[0m
+[32m2025-01-07 02:51:19,336 - INFO - Subsolver: Solve Model: 2264.2091019153595/0.9985414869587063[0m
+[32m2025-01-07 02:51:19,336 - INFO - Subsolver: Create Model: 3.307202100753784/0.001458513041293785[0m
+[32m2025-01-07 02:51:19,336 - INFO - Num_constraints-added: 195[0m
+     0     0  670.22222    0  182          -  670.22222      -     - 2326s
+[32m2025-01-07 02:51:27,841 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:51:27,843 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:51:27,843 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:51:27,844 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:51:27,844 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:51:27,845 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:51:27,846 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:51:27,846 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:51:27,847 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:51:27,848 - INFO - forbidden_vars: ([{1:2},{3:1,6:1},{1:1,3:1,6:1},{3:1,4:1,6:1},{3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:51:27,848 - INFO - False[0m
+[32m2025-01-07 02:51:50,573 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 02:51:50,574 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 02:51:50,575 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 02:51:50,575 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 02:51:50,576 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 02:51:50,577 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 02:51:50,577 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 02:51:50,578 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 02:51:50,579 - INFO - forbidden_vars: ([{3:1,6:1},{4:1,6:1},{0:1,3:1,7:1},{0:2,1:1},{3:2,6:1},{0:1,3:2,6:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 02:51:50,579 - INFO - False[0m
+     0     0  670.22222    0  182          -  670.22222      -     - 2357s
+[32m2025-01-07 02:52:02,384 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:52:02,385 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:52:02,385 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:52:02,386 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:52:02,386 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:52:02,387 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:52:02,387 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:52:02,388 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:52:02,389 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:52:02,390 - INFO - forbidden_vars: ([{1:2},{3:1,6:1},{1:1,3:1,6:1},{3:1,6:1,7:1},{3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:52:02,390 - INFO - False[0m
+     0     0  670.22222    0  182          -  670.22222      -     - 2370s
+[32m2025-01-07 02:52:09,254 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:52:09,255 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:52:09,256 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:52:09,256 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:52:09,257 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:52:09,257 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:52:09,258 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:52:09,258 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:52:09,259 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:52:09,260 - INFO - forbidden_vars: ([{1:2},{3:1,6:1},{3:1,6:1},{3:3,6:1},{3:1,4:1,6:1,7:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:52:09,260 - INFO - False[0m
+     0     0  670.22222    0  182          -  670.22222      -     - 2376s
+     0     0  670.22222    0  425          -  670.22222      -     - 2377s
+     0     0  670.22222    0  181          -  670.22222      -     - 2382s
+[32m2025-01-07 02:52:20,231 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:52:20,232 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:52:20,233 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:52:20,233 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:52:20,234 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:52:20,234 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:52:20,236 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:52:20,236 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:52:20,237 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:52:20,238 - INFO - forbidden_vars: ([{1:2},{3:1,6:1},{1:1,4:1,6:1},{3:3,6:1},{3:1,4:1,6:1,7:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:52:20,238 - INFO - False[0m
+[32m2025-01-07 02:53:23,556 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 02:53:23,557 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 02:53:23,557 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 02:53:23,558 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 02:53:23,558 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 02:53:23,559 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 02:53:23,559 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 02:53:23,560 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 02:53:23,560 - INFO - forbidden_vars: ([{3:1,6:1},{0:2,6:1},{0:1,3:1,7:1},{0:3},{0:1,3:2,6:1},{3:2,6:1,7:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 02:53:23,560 - INFO - False[0m
+     0     0  670.22222    0  181          -  670.22222      -     - 2534s
+[32m2025-01-07 02:54:49,632 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:54:49,633 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:54:49,633 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:54:49,634 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:54:49,634 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:54:49,635 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:54:49,636 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:54:49,637 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:54:49,637 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:54:49,638 - INFO - forbidden_vars: ([{1:2},{3:1,6:1},{1:1,4:1,6:1},{1:2,3:1,6:1},{3:3,6:1},{3:1,4:1,6:1,7:1}])[0m
+[32m2025-01-07 02:54:49,638 - INFO - False[0m
+[32m2025-01-07 02:54:49,935 - INFO - Number of cuts added: 32 (bad=0, good=32)[0m
+[32m2025-01-07 02:54:49,935 - INFO - Unnecessary comps: (0 / 32)[0m
+[32m2025-01-07 02:54:49,935 - INFO - Calls to is_day_infeasible: cp_solver=125/ total=210 stored=85[0m
+[32m2025-01-07 02:54:49,936 - INFO - Is feasible: 2471.784989833832 0.9997058712275427[0m
+[32m2025-01-07 02:54:49,936 - INFO - Subsolver: Solve Model: 2467.9316487312317/0.9984649214789775[0m
+[32m2025-01-07 02:54:49,936 - INFO - Subsolver: Create Model: 3.7942934036254883/0.0015350785210225674[0m
+[32m2025-01-07 02:54:49,936 - INFO - Num_constraints-added: 256[0m
+     0     0  670.22222    0  181          -  670.22222      -     - 2537s
+[32m2025-01-07 02:54:57,387 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:54:57,389 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:54:57,389 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:54:57,390 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:54:57,391 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:54:57,391 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:54:57,392 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:54:57,393 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:54:57,394 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:54:57,395 - INFO - forbidden_vars: ([{1:2},{3:1,6:1},{1:1,4:1,6:1},{3:1,4:1,6:1},{3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:54:57,395 - INFO - False[0m
+[32m2025-01-07 02:55:49,955 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 02:55:49,957 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 02:55:49,957 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 02:55:49,958 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 02:55:49,958 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 02:55:49,959 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 02:55:49,959 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 02:55:49,959 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 02:55:49,960 - INFO - forbidden_vars: ([{0:1,6:1},{0:2},{3:1,6:1},{0:1,3:1,7:1},{0:1,3:2,6:1},{3:2,6:1,7:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 02:55:49,960 - INFO - False[0m
+     0     0  670.22222    0  181          -  670.22222      -     - 2597s
+[32m2025-01-07 02:55:55,876 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:55:55,876 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:55:55,877 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:55:55,877 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:55:55,878 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:55:55,879 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:55:55,879 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:55:55,880 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:55:55,881 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:55:55,882 - INFO - forbidden_vars: ([{1:2},{3:1,6:1},{1:1,4:1,6:1},{3:1,6:1,7:1},{3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:55:55,882 - INFO - False[0m
+     0     0  670.22222    0  181          -  670.22222      -     - 2603s
+[32m2025-01-07 02:56:02,444 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:56:02,445 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:56:02,445 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:56:02,446 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:56:02,446 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:56:02,447 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:56:02,447 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:56:02,448 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:56:02,449 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:56:02,450 - INFO - forbidden_vars: ([{1:1,6:1},{1:2},{3:1,6:1},{3:3,6:1},{3:1,4:1,6:1,7:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:56:02,450 - INFO - False[0m
+     0     0  670.22222    0  181          -  670.22222      -     - 2609s
+     0     0  670.22222    0  345          -  670.22222      -     - 2610s
+     0     0  670.22222    0  167          -  670.22222      -     - 2615s
+[32m2025-01-07 02:56:12,921 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:56:12,922 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:56:12,922 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:56:12,923 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:56:12,923 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:56:12,924 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:56:12,924 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:56:12,925 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:56:12,926 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:56:12,927 - INFO - forbidden_vars: ([{6:1},{1:2},{1:1,4:1,6:1},{3:3,6:1},{3:2,6:1,7:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:56:12,927 - INFO - False[0m
+[32m2025-01-07 02:56:36,847 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 02:56:36,848 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 02:56:36,848 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 02:56:36,849 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 02:56:36,849 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 02:56:36,850 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 02:56:36,850 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 02:56:36,850 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 02:56:36,851 - INFO - forbidden_vars: ([{0:2},{3:1,6:1},{0:2,6:1},{0:1,3:1,7:1},{3:2,6:1},{0:1,3:2,6:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 02:56:36,851 - INFO - False[0m
+     0     0  670.22222    0  167          -  670.22222      -     - 2713s
+[32m2025-01-07 02:57:52,099 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:57:52,100 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:57:52,101 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:57:52,101 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:57:52,102 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:57:52,102 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:57:52,103 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:57:52,104 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:57:52,104 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:57:52,106 - INFO - forbidden_vars: ([{6:1},{1:2},{1:1,4:1,6:1},{3:3,6:1},{3:2,4:1,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:57:52,106 - INFO - False[0m
+[32m2025-01-07 02:57:53,186 - INFO - Number of cuts added: 39 (bad=0, good=39)[0m
+[32m2025-01-07 02:57:53,186 - INFO - Unnecessary comps: (0 / 39)[0m
+[32m2025-01-07 02:57:53,186 - INFO - Calls to is_day_infeasible: cp_solver=142/ total=280 stored=138[0m
+[32m2025-01-07 02:57:53,187 - INFO - Is feasible: 2648.936587333679 0.9996496049164229[0m
+[32m2025-01-07 02:57:53,187 - INFO - Subsolver: Solve Model: 2644.605952978134/0.9983899172907847[0m
+[32m2025-01-07 02:57:53,187 - INFO - Subsolver: Create Model: 4.264901161193848/0.0016100827092152066[0m
+[32m2025-01-07 02:57:53,187 - INFO - Num_constraints-added: 317[0m
+     0     0  670.22222    0  167          -  670.22222      -     - 2720s
+[32m2025-01-07 02:58:02,973 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:58:02,974 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:58:02,974 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:58:02,975 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:58:02,975 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:58:02,976 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:58:02,977 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:58:02,978 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:58:02,978 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:58:02,979 - INFO - forbidden_vars: ([{1:2},{3:1,6:1},{1:1,4:1,6:1},{3:2,6:1},{3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:58:02,979 - INFO - False[0m
+[32m2025-01-07 02:58:28,962 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 02:58:28,964 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 02:58:28,964 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 02:58:28,965 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 02:58:28,965 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 02:58:28,965 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 02:58:28,966 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 02:58:28,966 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 02:58:28,967 - INFO - forbidden_vars: ([{6:1},{0:2},{0:2,6:1},{0:1,3:1,7:1},{3:1,6:1,7:1},{0:1,3:2,6:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 02:58:28,967 - INFO - False[0m
+     0     0  670.22222    0  167          -  670.22222      -     - 2756s
+[32m2025-01-07 02:58:35,435 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:58:35,436 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:58:35,437 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:58:35,437 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:58:35,438 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:58:35,438 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:58:35,439 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:58:35,440 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:58:35,440 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:58:35,441 - INFO - forbidden_vars: ([{1:2},{3:1,6:1},{4:1,6:1},{3:3,6:1},{3:1,4:1,6:1,7:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 02:58:35,441 - INFO - False[0m
+[32m2025-01-07 02:59:34,226 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 02:59:34,227 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 02:59:34,228 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 02:59:34,228 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 02:59:34,229 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 02:59:34,229 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 02:59:34,229 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 02:59:34,230 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 02:59:34,231 - INFO - forbidden_vars: ([{3:1,7:1},{3:1,6:1},{0:2,6:1},{0:3},{0:1,3:2,6:1},{3:2,6:1,7:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 02:59:34,231 - INFO - False[0m
+     0     0  670.22222    0  167          -  670.22222      -     - 2823s
+[32m2025-01-07 02:59:42,390 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 02:59:42,391 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 02:59:42,391 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 02:59:42,392 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 02:59:42,393 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 02:59:42,393 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 02:59:42,394 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 02:59:42,395 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 02:59:42,396 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 02:59:42,397 - INFO - forbidden_vars: ([{1:2},{3:1,6:1},{1:1,4:1,6:1},{1:1,3:2,6:1},{3:3,6:1},{3:1,4:1,6:1,7:1}])[0m
+[32m2025-01-07 02:59:42,397 - INFO - False[0m
+[32m2025-01-07 03:00:11,888 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 03:00:11,890 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 03:00:11,890 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 03:00:11,891 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 03:00:11,891 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 03:00:11,892 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 03:00:11,892 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 03:00:11,892 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 03:00:11,893 - INFO - forbidden_vars: ([{0:2},{3:1,6:1},{0:2,6:1},{0:1,3:1,7:1},{3:2,6:1},{3:2,6:1,7:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 03:00:11,893 - INFO - False[0m
+     0     0  670.22222    0  167          -  670.22222      -     - 2859s
+     0     0  670.22222    0  405          -  670.22222      -     - 2860s
+     0     0  670.22222    0  161          -  670.22222      -     - 2863s
+[32m2025-01-07 03:00:23,463 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 03:00:23,464 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 03:00:23,465 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 03:00:23,465 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 03:00:23,466 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 03:00:23,467 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 03:00:23,468 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 03:00:23,468 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 03:00:23,469 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 03:00:23,470 - INFO - forbidden_vars: ([{0:1,1:1},{0:1,3:1,6:1},{1:1,4:1,6:1},{3:3,6:1},{3:1,4:1,6:1,7:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 03:00:23,470 - INFO - False[0m
+[32m2025-01-07 03:01:00,523 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 03:01:00,524 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 03:01:00,525 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 03:01:00,525 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 03:01:00,526 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 03:01:00,526 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 03:01:00,527 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 03:01:00,528 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 03:01:00,528 - INFO - forbidden_vars: ([{0:2},{3:1,6:1},{0:2,6:1},{0:1,1:1,3:1},{0:1,3:2,6:1},{3:2,6:1,7:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 03:01:00,529 - INFO - False[0m
+     0     0  670.22222    0  161          -  670.22222      -     - 2973s
+[32m2025-01-07 03:02:11,225 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 03:02:11,226 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 03:02:11,226 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 03:02:11,227 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 03:02:11,227 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 03:02:11,228 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 03:02:11,229 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 03:02:11,230 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 03:02:11,231 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 03:02:11,231 - INFO - forbidden_vars: ([{0:1,1:1},{0:1,3:1,6:1},{1:1,4:1,6:1},{1:2,3:1,6:1},{3:3,6:1},{3:1,4:1,6:1,7:1}])[0m
+[32m2025-01-07 03:02:11,232 - INFO - False[0m
+[32m2025-01-07 03:02:20,887 - INFO - Number of cuts added: 48 (bad=0, good=48)[0m
+[32m2025-01-07 03:02:20,887 - INFO - Unnecessary comps: (0 / 48)[0m
+[32m2025-01-07 03:02:20,887 - INFO - Calls to is_day_infeasible: cp_solver=164/ total=350 stored=186[0m
+[32m2025-01-07 03:02:20,887 - INFO - Is feasible: 2911.6390628814697 0.9996060263859132[0m
+[32m2025-01-07 03:02:20,887 - INFO - Subsolver: Solve Model: 2906.7149760723114/0.9983344132250831[0m
+[32m2025-01-07 03:02:20,887 - INFO - Subsolver: Create Model: 4.849463224411011/0.0016655867749169175[0m
+[32m2025-01-07 03:02:20,887 - INFO - Num_constraints-added: 394[0m
+     0     0  670.22222    0  161          -  670.22222      -     - 2988s
+[32m2025-01-07 03:02:27,513 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 03:02:27,514 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 03:02:27,514 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 03:02:27,515 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 03:02:27,515 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 03:02:27,516 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 03:02:27,517 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 03:02:27,518 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 03:02:27,519 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 03:02:27,519 - INFO - forbidden_vars: ([{0:1,1:1},{0:1,3:1,6:1},{1:1,4:1,6:1},{3:1,4:1,6:1},{3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 03:02:27,520 - INFO - False[0m
+[32m2025-01-07 03:02:42,793 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 03:02:42,794 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 03:02:42,795 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 03:02:42,795 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 03:02:42,796 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 03:02:42,796 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 03:02:42,797 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 03:02:42,798 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 03:02:42,799 - INFO - forbidden_vars: ([{0:2},{3:1,6:1},{0:2,6:1},{0:1,1:1,3:1},{3:2,6:1},{0:1,3:2,6:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 03:02:42,799 - INFO - False[0m
+     0     0  670.22222    0  161          -  670.22222      -     - 3012s
+[32m2025-01-07 03:02:50,990 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 03:02:50,992 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 03:02:50,992 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 03:02:50,993 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 03:02:50,994 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 03:02:50,995 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 03:02:50,996 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 03:02:50,997 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 03:02:50,997 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 03:02:50,998 - INFO - forbidden_vars: ([{0:1,1:1},{0:1,3:1,6:1},{1:1,4:1,6:1},{1:1,3:2,6:1},{3:3,6:1},{3:1,4:1,6:1,7:1}])[0m
+[32m2025-01-07 03:02:50,998 - INFO - False[0m
+     0     0  670.22222    0  161          -  670.22222      -     - 3018s
+[32m2025-01-07 03:02:57,191 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 03:02:57,192 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 03:02:57,192 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 03:02:57,193 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 03:02:57,194 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 03:02:57,194 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 03:02:57,195 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 03:02:57,196 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 03:02:57,197 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 03:02:57,197 - INFO - forbidden_vars: ([{0:1,1:1},{0:1,3:1,6:1},{1:1,4:1,6:1},{3:1,6:1,7:1},{3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 03:02:57,197 - INFO - False[0m
+     0     0  670.22222    0  161          -  670.22222      -     - 3024s
+     0     0  670.22222    0  213          -  670.22222      -     - 3025s
+     0     0  670.22222    0  201          -  670.22222      -     - 3030s
+     0     0  670.22222    0  201          -  670.22222      -     - 3031s
+[32m2025-01-07 03:03:05,175 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 03:03:05,177 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 03:03:05,177 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 03:03:05,178 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 03:03:05,178 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 03:03:05,179 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 03:03:05,180 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 03:03:05,181 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 03:03:05,181 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 03:03:05,182 - INFO - forbidden_vars: ([{0:2},{0:1,3:1,6:1},{1:1,4:1,6:1},{3:1,4:1,6:1,7:1},{0:1,3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 03:03:05,182 - INFO - False[0m
+     0     0  670.22222    0  201          -  670.22222      -     - 3120s
+[32m2025-01-07 03:04:33,786 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 03:04:33,787 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 03:04:33,788 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 03:04:33,789 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 03:04:33,789 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 03:04:33,790 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 03:04:33,791 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 03:04:33,792 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 03:04:33,792 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 03:04:33,793 - INFO - forbidden_vars: ([{0:2},{0:1,3:1,6:1},{1:1,4:1,6:1},{1:2,3:1,6:1},{3:1,4:1,6:1,7:1},{0:1,3:3,6:1}])[0m
+[32m2025-01-07 03:04:33,793 - INFO - False[0m
+[32m2025-01-07 03:04:33,794 - INFO - Number of cuts added: 54 (bad=0, good=54)[0m
+[32m2025-01-07 03:04:33,794 - INFO - Unnecessary comps: (0 / 54)[0m
+[32m2025-01-07 03:04:33,794 - INFO - Calls to is_day_infeasible: cp_solver=182/ total=420 stored=238[0m
+[32m2025-01-07 03:04:33,794 - INFO - Is feasible: 3036.510954618454 0.999554380144079[0m
+[32m2025-01-07 03:04:33,794 - INFO - Subsolver: Solve Model: 3031.064265012741/0.9982333870239734[0m
+[32m2025-01-07 03:04:33,794 - INFO - Subsolver: Create Model: 5.364193916320801/0.0017666129760266882[0m
+[32m2025-01-07 03:04:33,794 - INFO - Num_constraints-added: 447[0m
+[32m2025-01-07 03:04:34,069 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 03:04:34,070 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 03:04:34,070 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 03:04:34,071 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 03:04:34,071 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 03:04:34,072 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 03:04:34,073 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 03:04:34,074 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 03:04:34,074 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 03:04:34,075 - INFO - forbidden_vars: ([{0:2},{0:1,3:1,6:1},{1:1,4:1,6:1},{3:1,4:1,6:1},{0:1,3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 03:04:34,075 - INFO - False[0m
+[32m2025-01-07 03:04:34,377 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 03:04:34,379 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 03:04:34,379 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 03:04:34,380 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 03:04:34,380 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 03:04:34,381 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 03:04:34,382 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 03:04:34,383 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 03:04:34,384 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 03:04:34,384 - INFO - forbidden_vars: ([{0:2},{0:1,3:1,6:1},{1:1,4:1,6:1},{1:1,3:2,6:1},{3:1,4:1,6:1,7:1},{0:1,3:3,6:1}])[0m
+[32m2025-01-07 03:04:34,384 - INFO - False[0m
+[32m2025-01-07 03:04:34,680 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 03:04:34,682 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 03:04:34,682 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 03:04:34,683 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 03:04:34,683 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 03:04:34,684 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 03:04:34,685 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 03:04:34,685 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 03:04:34,686 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 03:04:34,687 - INFO - forbidden_vars: ([{0:2},{4:1,6:1},{0:1,3:1,6:1},{3:1,4:1,6:1,7:1},{0:1,3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 03:04:34,687 - INFO - False[0m
+[32m2025-01-07 03:04:36,794 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 03:04:36,795 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 03:04:36,795 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 03:04:36,796 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 03:04:36,797 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 03:04:36,798 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 03:04:36,798 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 03:04:36,799 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 03:04:36,800 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 03:04:36,800 - INFO - forbidden_vars: ([{0:2},{0:2,6:1},{1:1,4:1,6:1},{3:1,4:1,6:1,7:1},{1:2,3:2,6:1},{3:3,6:1,7:1}])[0m
+[32m2025-01-07 03:04:36,800 - INFO - False[0m
+[32m2025-01-07 03:05:31,272 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-07 03:05:31,275 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-07 03:05:31,277 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-07 03:05:31,279 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-07 03:05:31,281 - INFO - d_prime: 13 d: 10[0m
+[32m2025-01-07 03:05:31,282 - INFO - forbidden_vars: ([{0:1},{1:1},{3:1},{3:1},{3:1},{4:1},{0:1,3:1},{1:1,4:1},{3:2},{6:1,7:1},{6:2},{1:1,3:1,6:1},{1:1,3:1,4:1},{3:1,5:1,6:1},{3:1,6:2},{3:1,4:1,6:1},{3:1,6:2},{4:1,5:1,6:1},{3:4},{4:3,7:1}])[0m
+[32m2025-01-07 03:05:31,282 - INFO - False[0m
+[32m2025-01-07 03:06:27,966 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 03:06:27,967 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 03:06:27,967 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 03:06:27,968 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 03:06:27,968 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 03:06:27,969 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 03:06:27,970 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 03:06:27,971 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 03:06:27,972 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 03:06:27,972 - INFO - d_prime: 11 d: 2[0m
+[32m2025-01-07 03:06:27,973 - INFO - d_prime: 12 d: 2[0m
+[32m2025-01-07 03:06:27,974 - INFO - d_prime: 13 d: 2[0m
+[32m2025-01-07 03:06:27,975 - INFO - forbidden_vars: ([{4:1,6:1},{1:1,4:1,6:1},{3:1,4:1,6:1,7:1},{1:1,3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 03:06:27,975 - INFO - False[0m
+[32m2025-01-07 03:08:18,401 - INFO - Number of cuts added: 60 (bad=0, good=60)[0m
+[32m2025-01-07 03:08:18,402 - INFO - Unnecessary comps: (0 / 60)[0m
+[32m2025-01-07 03:08:18,402 - INFO - Calls to is_day_infeasible: cp_solver=210/ total=490 stored=280[0m
+[32m2025-01-07 03:08:18,402 - INFO - Is feasible: 3257.0484306812286 0.9995209638340463[0m
+[32m2025-01-07 03:08:18,402 - INFO - Subsolver: Solve Model: 3250.725706100464/0.9980884954919382[0m
+[32m2025-01-07 03:08:18,402 - INFO - Subsolver: Create Model: 6.225677251815796/0.001911504508061738[0m
+[32m2025-01-07 03:08:18,402 - INFO - Num_constraints-added: 500[0m
+     0     0  670.22222    0  201          -  670.22222      -     - 3345s
+[32m2025-01-07 03:08:24,786 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 03:08:24,787 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 03:08:24,788 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 03:08:24,788 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 03:08:24,789 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 03:08:24,790 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 03:08:24,791 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 03:08:24,791 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 03:08:24,792 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 03:08:24,793 - INFO - d_prime: 11 d: 2[0m
+[32m2025-01-07 03:08:24,794 - INFO - d_prime: 12 d: 2[0m
+[32m2025-01-07 03:08:24,795 - INFO - d_prime: 13 d: 2[0m
+[32m2025-01-07 03:08:24,795 - INFO - forbidden_vars: ([{1:1,4:1,6:1},{3:1,4:1,6:1},{1:1,3:1,6:1,7:1},{3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 03:08:24,795 - INFO - False[0m
+[32m2025-01-07 03:09:16,520 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-07 03:09:16,521 - INFO - d_prime: 4 d: 3[0m
+[32m2025-01-07 03:09:16,522 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-07 03:09:16,522 - INFO - d_prime: 6 d: 3[0m
+[32m2025-01-07 03:09:16,523 - INFO - d_prime: 7 d: 3[0m
+[32m2025-01-07 03:09:16,524 - INFO - d_prime: 8 d: 3[0m
+[32m2025-01-07 03:09:16,524 - INFO - d_prime: 9 d: 3[0m
+[32m2025-01-07 03:09:16,525 - INFO - d_prime: 10 d: 3[0m
+[32m2025-01-07 03:09:16,526 - INFO - forbidden_vars: ([{6:1},{0:1,6:1},{0:2,1:1},{1:1,3:2,7:1},{3:2,6:1,7:1},{0:1,3:2,6:1,7:1},{3:2,6:1,7:2}])[0m
+[32m2025-01-07 03:09:16,526 - INFO - False[0m
+     0     0  670.22222    0  201          -  670.22222      -     - 3461s
+[32m2025-01-07 03:10:21,140 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 03:10:21,141 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 03:10:21,141 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 03:10:21,142 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 03:10:21,142 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 03:10:21,143 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 03:10:21,144 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 03:10:21,145 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 03:10:21,145 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 03:10:21,146 - INFO - d_prime: 11 d: 2[0m
+[32m2025-01-07 03:10:21,147 - INFO - d_prime: 12 d: 2[0m
+[32m2025-01-07 03:10:21,148 - INFO - d_prime: 13 d: 2[0m
+[32m2025-01-07 03:10:21,148 - INFO - forbidden_vars: ([{4:1,6:1},{1:1,3:1,6:1},{3:1,4:1,6:1,7:1},{1:1,3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 03:10:21,148 - INFO - False[0m
+     0     0  670.22222    0  201          -  670.22222      -     - 3569s
+[32m2025-01-07 03:12:09,960 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-07 03:12:09,961 - INFO - d_prime: 3 d: 2[0m
+[32m2025-01-07 03:12:09,962 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-07 03:12:09,963 - INFO - d_prime: 5 d: 2[0m
+[32m2025-01-07 03:12:09,963 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-07 03:12:09,964 - INFO - d_prime: 7 d: 2[0m
+[32m2025-01-07 03:12:09,965 - INFO - d_prime: 8 d: 2[0m
+[32m2025-01-07 03:12:09,966 - INFO - d_prime: 9 d: 2[0m
+[32m2025-01-07 03:12:09,967 - INFO - d_prime: 10 d: 2[0m
+[32m2025-01-07 03:12:09,968 - INFO - d_prime: 11 d: 2[0m
+[32m2025-01-07 03:12:09,969 - INFO - d_prime: 12 d: 2[0m
+[32m2025-01-07 03:12:09,970 - INFO - d_prime: 13 d: 2[0m
+[32m2025-01-07 03:12:09,970 - INFO - forbidden_vars: ([{1:1,4:1,6:1},{3:1,4:1,6:1},{3:1,4:2,6:1},{1:1,3:3,6:1},{1:2,3:2,6:1}])[0m
+[32m2025-01-07 03:12:09,970 - INFO - False[0m

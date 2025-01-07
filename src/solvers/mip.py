@@ -54,7 +54,7 @@ class MIPSolver(Solver):
         self.model.setParam("Cuts", 0)
 
         # self.model.setParam("CutPasses", 3)
-        self.model.setParam("NoRelHeurTime", self.no_rel_heur_time)  # type: ignore
+        # self.model.setParam("NoRelHeurTime", self.no_rel_heur_time)  # type: ignore
         self.model.setParam("LazyConstraints", int(self.use_lazy_constraints))  # type: ignore
         vars = self._create_variables()
         self._create_constraints()

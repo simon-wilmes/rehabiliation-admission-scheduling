@@ -4,6 +4,7 @@ from pathlib import Path
 from copy import copy
 from time import sleep
 from random import shuffle
+import sys
 
 # 0. Define all parameters
 params = {
@@ -152,7 +153,10 @@ for solver_combi, instance_file in product(all_combis, instance_files):
 print("")
 
 print(f"Need to run {len(to_run_combis)} combinations.")
-input("Press Enter to continue...")
+
+
+if len(sys.argv) < 2 or sys.argv[1] != "-y":
+    input("Press Enter to continue...")
 
 to_run_scripts = []
 # 5. Create the slurm scripts
@@ -211,12 +215,21 @@ jobs_to_start = min(max_jobs - current_jobs, len(to_run_scripts))
 shuffle(to_run_scripts)
 count = 0
 # Start the jobs
-for i, script in enumerate(to_run_scripts[:jobs_to_start]):
+result = subprocess.run(["squeue", "--me", "-o '%.100j'"], stdout=subprocess.PIPE)
+squeue_output = result.stdout.decode("utf-8")
+
+
+for i, script in enumerate(to_run_scripts):
+    name_of_script = str(script).split("/")[-1].split("_")[0]
+    if name_of_script in squeue_output:
+        print(f"Job {i} {script} has already been submitted.")
+        continue
     print(f"Submitting job {i} {script}.")
     subprocess.run(["sbatch", script])
-    sleep(0.4)
+
+    sleep(0.2)
     count += 1
-    if count >= max_jobs_to_run:
+    if count >= min(max_jobs_to_run, jobs_to_start):
         break
 
-print(f"Successfully submitted {jobs_to_start} jobs.")
+print(f"Successfully submitted {count} jobs.")

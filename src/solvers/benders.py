@@ -708,8 +708,8 @@ class LBBDSolver(Solver):
             for resource_group in resource_groups:
                 # count max number of available resources time slots
                 avail_resources = 0
-                for fhat in resource_group:
-                    for f in self.fhat[fhat]:
+                for f in self.F:
+                    if f.resource_groups.intersection(resource_group):
                         avail_resources += sum(self.av_fdt[f, d, t] for t in self.T)
 
                 all_treatments_require_rg = gp.LinExpr()

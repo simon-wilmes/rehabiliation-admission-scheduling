@@ -32,7 +32,6 @@ class Solver(ABC):
         "enforce_min_patients_per_treatment": True,
         "log_to_console": True,
         "log_to_file": True,
-        "no_rel_heur_time": 1,
     }
 
     def __init__(self, instance: Instance, **kwargs):
