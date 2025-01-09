@@ -5,3 +5,4 @@ from .mip2 import MIPSolver2
 from .solver import Solver
 from .mip3 import MIPSolver3
 from .benders import LBBDSolver
+from .mip4 import MIPSolver4

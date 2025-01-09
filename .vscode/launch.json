@@ -17,9 +17,9 @@
       "request": "launch",
       "module": "src",
       "args": [
-        "LBBDSolver",
+        "MIPSolver3",
         "{}",
-        "/home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_001/instance_1.txt"
+        "/home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_1_15.txt"
       ]
     },
     {
@@ -45,6 +45,15 @@
       "type": "debugpy",
       "request": "launch",
       "module": "src.cluster.create_runtime_plot"
-    }
+    },
+  {
+  "name": "Python Debugger: Attach",
+  "type": "debugpy",
+  "request": "attach",
+  "connect": {
+    "host": "localhost",
+    "port": 5678
+  }
+}
   ]
 }

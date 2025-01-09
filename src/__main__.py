@@ -5,6 +5,7 @@ from src.solvers import (
     LBBDSolver,
     CPSolver,
     CPSolver2,
+    MIPSolver4,
 )
 from src.solvers.subsolvers import CPSubsolver, CPSubsolver2
 
@@ -29,6 +30,7 @@ def read_solver_cls():
         "MIPSolver3": MIPSolver3,
         "CPSolver": CPSolver,
         "LBBDSolver": LBBDSolver,
+        "MIPSolver4": MIPSolver4,
     }
 
     try:
@@ -90,8 +92,12 @@ def main():
     settings_dict = {
         MIPSolver: {"use_lazy_constraints": True},
         MIPSolver3: {
-            "break_symmetry": True,
-            "break_symmetry_strong": True,
+            "break_symmetry": False,
+            "break_symmetry_strong": False,
+        },
+        MIPSolver4: {
+            "break_symmetry": False,
+            "break_symmetry_strong": False,
         },
         CPSolver: {
             "break_symmetry": True,
