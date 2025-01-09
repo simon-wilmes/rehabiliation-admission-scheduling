@@ -1,0 +1,832 @@
+1.NAME: MIPSolver3
+2.PARAMS: {'break_symmetry': False, 'break_symmetry_strong': False}
+3.INSTANCE: /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_6_30.txt
+4.REPETITION: 1
+Current directory: /home/wx350715/Kobra/rehabiliation-admission-scheduling
+[34m2025-01-08 14:49:36,721 - DEBUG - Solver: <class 'src.solvers.mip3.MIPSolver3'>[0m
+[34m2025-01-08 14:49:36,721 - DEBUG - Args: {'break_symmetry': False, 'break_symmetry_strong': False}[0m
+[34m2025-01-08 14:49:36,721 - DEBUG - File path /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_6_30.txt[0m
+[34m2025-01-08 14:49:36,732 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 14:49:36,732 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 14:49:36,732 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 14:49:36,732 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 14:49:36,732 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 14:49:36,732 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 14:49:36,732 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 14:49:36,732 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 14:49:36,732 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 14:49:36,732 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 14:49:36,732 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 14:49:36,733 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-08 14:49:36,733 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-08 14:49:36,733 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-08 14:49:36,733 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-08 14:49:36,733 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 14:49:36,733 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 14:49:36,733 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 14:49:36,733 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 14:49:36,733 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 14:49:36,733 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 14:49:36,733 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 14:49:36,733 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 14:49:36,733 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 14:49:36,733 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 14:49:36,734 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 14:49:36,734 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 14:49:36,734 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 14:49:36,734 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 14:49:36,734 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 14:49:36,734 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 14:49:36,734 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 14:49:36,734 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 14:49:36,734 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,734 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,734 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,735 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,735 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,735 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,735 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,735 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,735 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,735 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,735 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,735 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,735 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,735 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,736 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,736 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,736 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,736 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,736 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,736 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,736 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 14:49:36,736 - DEBUG - Instance data:[0m
+[34m2025-01-08 14:49:36,736 - DEBUG - Number of patients: 21[0m
+[34m2025-01-08 14:49:36,736 - DEBUG - Number of beds: 36[0m
+[34m2025-01-08 14:49:36,736 - DEBUG - Average number of treatments per patient: 32.38095238095238[0m
+[34m2025-01-08 14:49:36,737 - DEBUG - Average number of treatment per stayed day: 2.3859649122807016[0m
+[34m2025-01-08 14:49:36,737 - DEBUG - Number of treatments: 680[0m
+[34m2025-01-08 14:49:36,737 - DEBUG - Number of resources: 10[0m
+[34m2025-01-08 14:49:36,737 - DEBUG - Number of resource groups: 4[0m
+[34m2025-01-08 14:49:36,737 - DEBUG - Number of resource hours needed per all treatment by RG(therapists): 19.704166666666676[0m
+[34m2025-01-08 14:49:36,737 - DEBUG - Number of resource hours needed per all treatment by RG(rooms): 35.95416666666666[0m
+[34m2025-01-08 14:49:36,737 - DEBUG - Number of resource hours needed per all treatment by RG(physiotherapist): 15.5[0m
+[34m2025-01-08 14:49:36,737 - DEBUG - Number of resource hours needed per all treatment by RG(sport_room): 6.75[0m
+[32m2025-01-08 14:49:36,737 - INFO - {'solver': 'MIPSolver3', 'args': {'break_symmetry': True, 'break_symmetry_strong': True, 'enforce_min_treatments_per_day': True, 'enforce_max_treatments_per_e_w': True, 'enforce_min_patients_per_treatment': True, 'log_to_console': True}}[0m
+[34m2025-01-08 14:49:36,737 - DEBUG - Setting options: MIPSolver3[0m
+[34m2025-01-08 14:49:36,738 - DEBUG -  ---- break_symmetry to True[0m
+[34m2025-01-08 14:49:36,738 - DEBUG -  ---- break_symmetry_strong to True[0m
+[34m2025-01-08 14:49:36,738 - DEBUG - Setting options: Solver[0m
+[34m2025-01-08 14:49:36,738 - DEBUG -  ---- number_of_threads to 1 (default)[0m
+[34m2025-01-08 14:49:36,738 - DEBUG -  ---- treatment_value to 0 (default)[0m
+[34m2025-01-08 14:49:36,738 - DEBUG -  ---- delay_value to 1 (default)[0m
+[34m2025-01-08 14:49:36,738 - DEBUG -  ---- missing_treatment_value to 4 (default)[0m
+[34m2025-01-08 14:49:36,738 - DEBUG -  ---- enforce_min_treatments_per_day to True[0m
+[34m2025-01-08 14:49:36,738 - DEBUG -  ---- enforce_max_treatments_per_e_w to True[0m
+[34m2025-01-08 14:49:36,738 - DEBUG -  ---- enforce_min_patients_per_treatment to True[0m
+[34m2025-01-08 14:49:36,738 - DEBUG -  ---- log_to_console to True[0m
+[34m2025-01-08 14:49:36,738 - DEBUG -  ---- log_to_file to True (default)[0m
+[32m2025-01-08 14:49:36,754 - INFO - Create model: MIPSolver3[0m
+Set parameter TSPort to value 50039
+Set parameter TokenServer to value "license.itc.rwth-aachen.de"
+Set parameter Threads to value 1
+Set parameter Cuts to value 0
+[34m2025-01-08 14:49:47,219 - DEBUG - Variables created.[0m
+[34m2025-01-08 14:49:48,284 - DEBUG - Constraint (p1) created.[0m
+[34m2025-01-08 14:50:01,015 - DEBUG - Constraint (when_admitted) created.[0m
+[34m2025-01-08 14:50:02,385 - DEBUG - Constraint (p3) created.[0m
+[34m2025-01-08 14:50:02,386 - DEBUG - Constraint (r1) created.[0m
+[34m2025-01-08 14:50:04,753 - DEBUG - Constraint (r2) created.[0m
+[34m2025-01-08 14:50:06,899 - DEBUG - Constraint (r3) created.[0m
+[34m2025-01-08 14:50:15,834 - DEBUG - Constraint (r4) created.[0m
+[34m2025-01-08 14:50:15,892 - DEBUG - Constraint (r5) created.[0m
+[34m2025-01-08 14:50:17,573 - DEBUG - Constraint (r6) created.[0m
+[34m2025-01-08 14:50:17,574 - DEBUG - Constraint (r7) created.[0m
+[34m2025-01-08 14:50:19,748 - DEBUG - Constraint (a4) created.[0m
+[34m2025-01-08 14:50:20,514 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-08 14:50:21,306 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-08 14:50:21,690 - DEBUG - Constraint (strong symmetry) created.[0m
+[34m2025-01-08 14:50:21,787 - DEBUG - Constraint (symmetry) created.[0m
+[32m2025-01-08 14:50:46,012 - INFO - Time to create model: 69.258[0m
+[32m2025-01-08 14:50:46,012 - INFO - Solving model: MIPSolver3[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 1 threads
+
+Optimize a model with 2827601 rows, 2161508 columns and 22288469 nonzeros
+Model fingerprint: 0x2ac04f02
+Variable types: 2 continuous, 2161506 integer (2161506 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+03]
+Presolve removed 1096276 rows and 595980 columns (presolve time = 5s) ...
+Presolve removed 1096276 rows and 595985 columns (presolve time = 10s) ...
+Presolve removed 1096277 rows and 595986 columns (presolve time = 15s) ...
+Presolve removed 1099105 rows and 595986 columns (presolve time = 20s) ...
+Presolve removed 1346555 rows and 595986 columns (presolve time = 25s) ...
+Presolve removed 1423887 rows and 595986 columns (presolve time = 30s) ...
+Presolve removed 1452711 rows and 595987 columns (presolve time = 35s) ...
+Presolve removed 1452711 rows and 595987 columns (presolve time = 40s) ...
+Presolve removed 1452711 rows and 595987 columns (presolve time = 45s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 50s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 55s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 60s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 65s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 70s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 75s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 80s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 85s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 90s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 95s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 100s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 105s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 110s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 115s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 120s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 125s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 130s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 135s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 140s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 145s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 150s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 155s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 160s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 165s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 170s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 175s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 180s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 185s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 190s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 195s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 200s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 205s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 210s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 215s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 220s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 225s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 230s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 235s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 240s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 245s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 250s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 255s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 260s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 265s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 270s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 275s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 280s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 285s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 290s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 295s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 300s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 305s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 310s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 315s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 320s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 325s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 330s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 335s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 340s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 345s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 350s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 355s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 360s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 365s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 370s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 375s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 380s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 385s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 390s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 395s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 400s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 405s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 410s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 415s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 420s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 425s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 430s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 435s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 440s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 445s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 450s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 455s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 460s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 465s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 470s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 475s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 480s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 485s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 490s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 495s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 500s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 505s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 510s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 515s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 520s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 525s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 530s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 535s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 540s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 545s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 550s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 555s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 560s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 565s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 570s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 575s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 580s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 585s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 590s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 595s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 600s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 605s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 610s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 615s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 620s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 625s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 630s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 635s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 640s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 645s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 650s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 655s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 660s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 665s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 670s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 675s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 680s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 685s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 690s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 695s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 700s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 705s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 710s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 715s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 720s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 725s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 730s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 735s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 740s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 745s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 750s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 755s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 760s) ...
+Presolve removed 1453280 rows and 595987 columns (presolve time = 765s) ...
+Presolve removed 1453280 rows and 610939 columns (presolve time = 770s) ...
+Presolve removed 1453288 rows and 610947 columns (presolve time = 775s) ...
+Presolve removed 1452713 rows and 610372 columns
+Presolve time: 778.27s
+Presolved: 1374888 rows, 1551136 columns, 11959098 nonzeros
+Variable types: 0 continuous, 1551136 integer (1551027 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0   -3.1880000e+03   6.783830e+05   0.000000e+00    794s
+   25608    1.9200000e+02   1.067609e+06   0.000000e+00    795s
+   51842    6.6018223e+02   1.469664e+04   0.000000e+00    801s
+   61145    6.6018230e+02   5.206183e+03   0.000000e+00    806s
+   66504    6.6818234e+02   6.095707e+04   0.000000e+00    810s
+   73768    6.6818239e+02   5.149018e+04   0.000000e+00    815s
+   80429    6.6818244e+02   8.002986e+03   0.000000e+00    820s
+   82754    6.6818249e+02   2.018202e+04   0.000000e+00    826s
+   85582    6.6818251e+02   1.871829e+04   0.000000e+00    830s
+   90773    6.6818256e+02   5.347009e+03   0.000000e+00    835s
+   94642    6.6818259e+02   5.646444e+03   0.000000e+00    840s
+  100211    6.6818262e+02   8.514727e+03   0.000000e+00    845s
+  105430    6.6818264e+02   7.502500e+03   0.000000e+00    852s
+  106082    6.6818264e+02   1.176441e+04   0.000000e+00    856s
+  107575    6.6818265e+02   8.976241e+03   0.000000e+00    861s
+  109177    6.6818266e+02   8.028531e+03   0.000000e+00    866s
+  112200    6.6818267e+02   7.532277e+03   0.000000e+00    871s
+  113160    6.6818268e+02   5.886913e+04   0.000000e+00    875s
+  115950    6.6818270e+02   1.036926e+04   0.000000e+00    882s
+  117178    6.6818271e+02   7.834588e+03   0.000000e+00    887s
+  119253    6.6818272e+02   2.732794e+04   0.000000e+00    892s
+  120993    6.6818273e+02   4.176397e+03   0.000000e+00    897s
+  121953    6.6818273e+02   3.778906e+03   0.000000e+00    902s
+  124033    6.6818274e+02   4.110580e+03   0.000000e+00    906s
+  129325    6.6818276e+02   2.108012e+03   0.000000e+00    910s
+  132688    6.6818278e+02   1.380580e+03   0.000000e+00    916s
+  138359    6.6818280e+02   1.145929e+04   0.000000e+00    920s
+  142486    6.6818281e+02   4.183923e+03   0.000000e+00    925s
+  146178    6.6818282e+02   5.802102e+03   0.000000e+00    932s
+  149452    6.6818282e+02   1.127384e+04   0.000000e+00    936s
+  152390    6.6818285e+02   2.561754e+03   0.000000e+00    941s
+  155012    6.6818287e+02   3.205107e+03   0.000000e+00    946s
+  155886    6.6818288e+02   1.504503e+03   0.000000e+00    950s
+  158508    6.6818290e+02   5.155368e+03   0.000000e+00    956s
+  160693    6.6818292e+02   4.543996e+03   0.000000e+00    962s
+  161380    6.6818292e+02   2.912451e+03   0.000000e+00    966s
+  162674    6.6818293e+02   1.290917e+04   0.000000e+00    971s
+  164859    6.6818294e+02   3.550003e+03   0.000000e+00    975s
+  166170    6.6818295e+02   8.028978e+03   0.000000e+00    981s
+  166730    6.6818295e+02   4.731913e+03   0.000000e+00    986s
+  167540    6.6818295e+02   1.872367e+04   0.000000e+00    991s
+  168357    6.6818296e+02   6.237057e+03   0.000000e+00    997s
+  168717    6.6818296e+02   1.760577e+04   0.000000e+00   1001s
+  169277    6.6818296e+02   1.609091e+03   0.000000e+00   1006s
+  170588    6.6818297e+02   1.685459e+03   0.000000e+00   1012s
+  171462    6.6819256e+02   2.240972e+04   0.000000e+00   1015s
+  172279    6.6819256e+02   1.855698e+03   0.000000e+00   1020s
+  172929    6.6819256e+02   2.225179e+03   0.000000e+00   1026s
+  173709    6.6819256e+02   6.149078e+03   0.000000e+00   1032s
+  174576    6.6819257e+02   2.989129e+03   0.000000e+00   1038s
+  175013    6.6819257e+02   3.103193e+03   0.000000e+00   1040s
+  176217    6.6819257e+02   5.779500e+03   0.000000e+00   1047s
+  176627    6.6819257e+02   9.579156e+04   0.000000e+00   1050s
+  177494    6.6819257e+02   1.505018e+03   0.000000e+00   1055s
+  178708    6.6819258e+02   1.941153e+04   0.000000e+00   1062s
+  179358    6.6819258e+02   1.945320e+03   0.000000e+00   1067s
+  180088    6.6819258e+02   6.019027e+03   0.000000e+00   1073s
+  180418    6.6819258e+02   7.504996e+03   0.000000e+00   1076s
+  181215    6.6819259e+02   3.407523e+03   0.000000e+00   1082s
+  182089    6.6819259e+02   2.322660e+03   0.000000e+00   1087s
+  182526    6.6819259e+02   2.934683e+03   0.000000e+00   1090s
+  183243    6.6819259e+02   4.582899e+03   0.000000e+00   1096s
+  183773    6.6819260e+02   3.126616e+03   0.000000e+00   1102s
+  184530    6.6819260e+02   1.638306e+03   0.000000e+00   1108s
+  185404    6.6819260e+02   2.659054e+03   0.000000e+00   1112s
+  186041    6.6819260e+02   5.207514e+03   0.000000e+00   1117s
+  186491    6.6819260e+02   1.715974e+03   0.000000e+00   1123s
+  186761    6.6819260e+02   1.254490e+04   0.000000e+00   1126s
+  187618    6.6819261e+02   8.282233e+03   0.000000e+00   1131s
+  188208    6.6819261e+02   1.428274e+04   0.000000e+00   1137s
+  188548    6.6819261e+02   8.842463e+03   0.000000e+00   1142s
+  188848    6.6819261e+02   5.297638e+04   0.000000e+00   1147s
+  189318    6.6819261e+02   3.009188e+03   0.000000e+00   1152s
+  189628    6.6819261e+02   1.488729e+03   0.000000e+00   1157s
+  190088    6.6819261e+02   3.887006e+03   0.000000e+00   1162s
+  190458    6.6819262e+02   1.114446e+03   0.000000e+00   1167s
+  190828    6.6819262e+02   2.613547e+03   0.000000e+00   1173s
+  190988    6.6819262e+02   2.376297e+03   0.000000e+00   1175s
+  191488    6.6819262e+02   6.262531e+03   0.000000e+00   1181s
+  192048    6.6819262e+02   4.142469e+03   0.000000e+00   1186s
+  192438    6.6819262e+02   1.018191e+03   0.000000e+00   1191s
+  192918    6.6819262e+02   1.231952e+03   0.000000e+00   1197s
+  193608    6.6819262e+02   3.629349e+03   0.000000e+00   1203s
+  193948    6.6819262e+02   8.511219e+03   0.000000e+00   1206s
+  194338    6.6819262e+02   9.598551e+03   0.000000e+00   1211s
+  194738    6.6819263e+02   5.810229e+03   0.000000e+00   1217s
+  195128    6.6819263e+02   2.380241e+03   0.000000e+00   1222s
+  195308    6.6819263e+02   3.558335e+03   0.000000e+00   1225s
+  195638    6.6819263e+02   1.373031e+04   0.000000e+00   1231s
+  195988    6.6819263e+02   6.431766e+03   0.000000e+00   1236s
+  196468    6.6819265e+02   1.314024e+03   0.000000e+00   1242s
+  197158    6.6819267e+02   3.431836e+03   0.000000e+00   1247s
+  197518    6.6819268e+02   6.478023e+03   0.000000e+00   1250s
+  197958    6.6819268e+02   4.930938e+03   0.000000e+00   1256s
+  198418    6.6819270e+02   1.178728e+03   0.000000e+00   1261s
+  198908    6.6819270e+02   1.381532e+03   0.000000e+00   1266s
+  199398    6.6819271e+02   9.872334e+02   0.000000e+00   1271s
+  199768    6.6819271e+02   6.567957e+03   0.000000e+00   1276s
+  200198    6.6819272e+02   2.033874e+03   0.000000e+00   1282s
+  200658    6.6819273e+02   5.133944e+03   0.000000e+00   1287s
+  201148    6.6819273e+02   4.549716e+03   0.000000e+00   1292s
+  201618    6.6819274e+02   3.227752e+03   0.000000e+00   1297s
+  202218    6.6819275e+02   1.562809e+03   0.000000e+00   1302s
+  202428    6.6819275e+02   4.728574e+03   0.000000e+00   1305s
+  202988    6.6819276e+02   6.515282e+03   0.000000e+00   1310s
+  203548    6.6819276e+02   9.487630e+04   0.000000e+00   1316s
+  204078    6.6819277e+02   2.239357e+03   0.000000e+00   1321s
+  204568    6.6819277e+02   6.638687e+03   0.000000e+00   1327s
+  205275    6.6819278e+02   1.427564e+03   0.000000e+00   1333s
+  205665    6.6819279e+02   1.469303e+03   0.000000e+00   1336s
+  206539    6.6819280e+02   4.388773e+03   0.000000e+00   1341s
+  207149    6.6819280e+02   1.630931e+03   0.000000e+00   1346s
+  207929    6.6819282e+02   1.149016e+03   0.000000e+00   1352s
+  208606    6.6819283e+02   2.830471e+04   0.000000e+00   1358s
+  208926    6.6819283e+02   1.821104e+03   0.000000e+00   1361s
+  209426    6.6819283e+02   6.286706e+02   0.000000e+00   1366s
+  209886    6.6819284e+02   1.526946e+03   0.000000e+00   1371s
+  210366    6.6819284e+02   2.132911e+03   0.000000e+00   1377s
+  210886    6.6819294e+02   2.036621e+03   0.000000e+00   1382s
+  211266    6.6819294e+02   2.684690e+03   0.000000e+00   1387s
+  211766    6.6819294e+02   8.338768e+03   0.000000e+00   1393s
+  211986    6.6819294e+02   1.094876e+04   0.000000e+00   1395s
+  212436    6.6819295e+02   3.646647e+04   0.000000e+00   1401s
+  212896    6.6819295e+02   7.013533e+02   0.000000e+00   1406s
+  213716    6.6819296e+02   4.597783e+03   0.000000e+00   1412s
+  214176    6.6819296e+02   3.632002e+03   0.000000e+00   1417s
+  214656    6.6819296e+02   7.914124e+04   0.000000e+00   1422s
+  215036    6.6819297e+02   1.299574e+03   0.000000e+00   1427s
+  215586    6.6819297e+02   1.020001e+04   0.000000e+00   1433s
+  215846    6.6819297e+02   6.596550e+03   0.000000e+00   1435s
+  216256    6.6819298e+02   9.476788e+02   0.000000e+00   1440s
+  216646    6.6819298e+02   1.449814e+03   0.000000e+00   1445s
+  217086    6.6819298e+02   2.132154e+03   0.000000e+00   1450s
+  217786    6.6819299e+02   5.494656e+03   0.000000e+00   1457s
+  218476    6.6819299e+02   3.470288e+03   0.000000e+00   1463s
+  218776    6.6819300e+02   4.515485e+03   0.000000e+00   1465s
+  219296    6.6819300e+02   6.281694e+03   0.000000e+00   1471s
+  219766    6.6819300e+02   1.125097e+04   0.000000e+00   1476s
+  220166    6.6819300e+02   3.954603e+03   0.000000e+00   1481s
+  220536    6.6819301e+02   1.269809e+04   0.000000e+00   1486s
+  220976    6.6819301e+02   2.268152e+03   0.000000e+00   1492s
+  221456    6.6819302e+02   1.536337e+03   0.000000e+00   1497s
+  222116    6.6819302e+02   1.130147e+03   0.000000e+00   1503s
+  222366    6.6819302e+02   5.289012e+03   0.000000e+00   1505s
+  222926    6.6819303e+02   9.263192e+02   0.000000e+00   1512s
+  223426    6.6819303e+02   2.561849e+03   0.000000e+00   1518s
+  223626    6.6819303e+02   1.908641e+03   0.000000e+00   1520s
+  224226    6.6819303e+02   4.811993e+02   0.000000e+00   1527s
+  224646    6.6819304e+02   7.704886e+02   0.000000e+00   1530s
+  225176    6.6819304e+02   1.941824e+03   0.000000e+00   1536s
+  225696    6.6819304e+02   3.443342e+03   0.000000e+00   1542s
+  226136    6.6819304e+02   3.234612e+03   0.000000e+00   1548s
+  226366    6.6819304e+02   2.859180e+03   0.000000e+00   1551s
+  226746    6.6819304e+02   7.623089e+04   0.000000e+00   1556s
+  227116    6.6819305e+02   4.761188e+03   0.000000e+00   1561s
+  227576    6.6819305e+02   3.179678e+03   0.000000e+00   1567s
+  227806    6.6819305e+02   1.688922e+03   0.000000e+00   1570s
+  228226    6.6819305e+02   2.003867e+03   0.000000e+00   1576s
+  228636    6.6819305e+02   1.050560e+03   0.000000e+00   1582s
+  229116    6.6819305e+02   2.011866e+03   0.000000e+00   1587s
+  229326    6.6819306e+02   1.325721e+03   0.000000e+00   1590s
+  229756    6.6819310e+02   1.233210e+04   0.000000e+00   1596s
+  230226    6.6819311e+02   1.245347e+04   0.000000e+00   1601s
+  230616    6.6819311e+02   2.797622e+03   0.000000e+00   1607s
+  231006    6.6819311e+02   9.391035e+02   0.000000e+00   1612s
+  231186    6.6819311e+02   1.618401e+03   0.000000e+00   1615s
+  231576    6.6819311e+02   1.097976e+03   0.000000e+00   1621s
+  231946    6.6819311e+02   4.300901e+02   0.000000e+00   1626s
+  232316    6.6819311e+02   2.316013e+03   0.000000e+00   1632s
+  232706    6.6819312e+02   7.469082e+02   0.000000e+00   1638s
+  232936    6.6819321e+02   2.016333e+03   0.000000e+00   1641s
+  233356    6.6819326e+02   1.987604e+04   0.000000e+00   1647s
+  233856    6.6819331e+02   1.590351e+03   0.000000e+00   1653s
+  234076    6.6819332e+02   2.712367e+03   0.000000e+00   1655s
+  234476    6.6819332e+02   1.914314e+03   0.000000e+00   1661s
+  234766    6.6819332e+02   1.865594e+03   0.000000e+00   1666s
+  235146    6.6819332e+02   6.431133e+03   0.000000e+00   1672s
+  235616    6.6819332e+02   1.446426e+03   0.000000e+00   1678s
+  235796    6.6819332e+02   2.823358e+03   0.000000e+00   1681s
+  236146    6.6819332e+02   2.182148e+03   0.000000e+00   1686s
+  236456    6.6819338e+02   1.184496e+03   0.000000e+00   1692s
+  236766    6.6819338e+02   1.520190e+03   0.000000e+00   1697s
+  236896    6.6819338e+02   1.625159e+03   0.000000e+00   1700s
+  237206    6.6819343e+02   2.879181e+03   0.000000e+00   1706s
+  237536    6.6819343e+02   1.014737e+03   0.000000e+00   1711s
+  237836    6.6819343e+02   1.994038e+03   0.000000e+00   1717s
+  238116    6.6819343e+02   1.430445e+03   0.000000e+00   1723s
+  238286    6.6819343e+02   2.410143e+03   0.000000e+00   1725s
+  238796    6.6819348e+02   4.365318e+03   0.000000e+00   1732s
+  238996    6.6819348e+02   9.877709e+03   0.000000e+00   1735s
+  239466    6.6819354e+02   3.452578e+03   0.000000e+00   1741s
+  240016    6.6819354e+02   2.811916e+03   0.000000e+00   1748s
+  240306    6.6819359e+02   1.313273e+03   0.000000e+00   1751s
+  240776    6.6819359e+02   4.378500e+03   0.000000e+00   1757s
+  241136    6.6819360e+02   1.966062e+03   0.000000e+00   1763s
+  241296    6.6819360e+02   2.596381e+03   0.000000e+00   1766s
+  241686    6.6819360e+02   1.539884e+03   0.000000e+00   1772s
+  242006    6.6819360e+02   2.718424e+03   0.000000e+00   1777s
+  242266    6.6819360e+02   4.832142e+02   0.000000e+00   1782s
+  242396    6.6819360e+02   5.379639e+02   0.000000e+00   1785s
+  242676    6.6819360e+02   1.021572e+03   0.000000e+00   1791s
+  242946    6.6819360e+02   4.987416e+04   0.000000e+00   1796s
+  243226    6.6819365e+02   5.005515e+03   0.000000e+00   1801s
+  243486    6.6819392e+02   6.880470e+02   0.000000e+00   1807s
+  243776    6.6819398e+02   3.939298e+03   0.000000e+00   1813s
+  243906    6.6819398e+02   1.477141e+03   0.000000e+00   1815s
+  244186    6.6819398e+02   1.722493e+03   0.000000e+00   1821s
+  244486    6.6819398e+02   1.611650e+03   0.000000e+00   1826s
+  244816    6.6819404e+02   4.815818e+03   0.000000e+00   1832s
+  245196    6.6819404e+02   1.970000e+03   0.000000e+00   1837s
+  245376    6.6819404e+02   4.547105e+03   0.000000e+00   1840s
+  245756    6.6819404e+02   6.456594e+03   0.000000e+00   1846s
+  246066    6.6819404e+02   1.216763e+03   0.000000e+00   1852s
+  246336    6.6819405e+02   2.907130e+03   0.000000e+00   1857s
+  246576    6.6819405e+02   5.469386e+03   0.000000e+00   1862s
+  246866    6.6819405e+02   7.796806e+02   0.000000e+00   1867s
+  247136    6.6819405e+02   1.137630e+03   0.000000e+00   1872s
+  247416    6.6819405e+02   1.144337e+03   0.000000e+00   1877s
+  247726    6.6819405e+02   2.029378e+04   0.000000e+00   1883s
+  247856    6.6819411e+02   2.799546e+03   0.000000e+00   1885s
+  248146    6.6819411e+02   1.261335e+03   0.000000e+00   1891s
+  248446    6.6819411e+02   8.801841e+02   0.000000e+00   1896s
+  248746    6.6819411e+02   3.340451e+03   0.000000e+00   1901s
+  249096    6.6819411e+02   2.596040e+03   0.000000e+00   1907s
+  249406    6.6819411e+02   1.782368e+03   0.000000e+00   1912s
+  249566    6.6819411e+02   1.717298e+03   0.000000e+00   1915s
+  249886    6.6819411e+02   8.486082e+03   0.000000e+00   1920s
+  250206    6.6819411e+02   9.195055e+02   0.000000e+00   1926s
+  250476    6.6819411e+02   6.944655e+02   0.000000e+00   1931s
+  250796    6.6819411e+02   6.618830e+03   0.000000e+00   1937s
+  251066    6.6819412e+02   8.594207e+03   0.000000e+00   1942s
+  251356    6.6819412e+02   6.293312e+03   0.000000e+00   1947s
+  251666    6.6819417e+02   9.704888e+03   0.000000e+00   1952s
+  251876    6.6819429e+02   1.552861e+03   0.000000e+00   1955s
+  252276    6.6819435e+02   1.403420e+03   0.000000e+00   1961s
+  252676    6.6819435e+02   1.593112e+03   0.000000e+00   1967s
+  252916    6.6819479e+02   1.806044e+03   0.000000e+00   1970s
+  253386    6.6819492e+02   2.824302e+03   0.000000e+00   1976s
+  253786    6.6819492e+02   8.863337e+02   0.000000e+00   1983s
+  253966    6.6819492e+02   1.070378e+03   0.000000e+00   1986s
+  254336    6.6819492e+02   1.604976e+03   0.000000e+00   1992s
+  254696    6.6819492e+02   3.429257e+02   0.000000e+00   1997s
+  254996    6.6819492e+02   1.741141e+03   0.000000e+00   2002s
+  255276    6.6819492e+02   6.504477e+02   0.000000e+00   2008s
+  255426    6.6819492e+02   1.245738e+03   0.000000e+00   2010s
+  255756    6.6819513e+02   2.312048e+03   0.000000e+00   2016s
+  256156    6.6819559e+02   1.184084e+03   0.000000e+00   2021s
+  256406    6.6819559e+02   1.689519e+03   0.000000e+00   2027s
+  256716    6.6819582e+02   9.738296e+02   0.000000e+00   2032s
+  257006    6.6819582e+02   4.165905e+02   0.000000e+00   2038s
+  257126    6.6819582e+02   1.103084e+04   0.000000e+00   2041s
+  257446    6.6819582e+02   3.118393e+03   0.000000e+00   2047s
+  257736    6.6819582e+02   6.764136e+02   0.000000e+00   2053s
+  257906    6.6819582e+02   2.317158e+03   0.000000e+00   2056s
+  258176    6.6819582e+02   1.723504e+03   0.000000e+00   2062s
+  258466    6.6819582e+02   7.847838e+02   0.000000e+00   2068s
+  258606    6.6819582e+02   8.747421e+02   0.000000e+00   2071s
+  258896    6.6819582e+02   4.806698e+02   0.000000e+00   2077s
+  259166    6.6819582e+02   5.038382e+02   0.000000e+00   2083s
+  259296    6.6819582e+02   2.440949e+03   0.000000e+00   2086s
+  259606    6.6819582e+02   2.802404e+03   0.000000e+00   2092s
+  259906    6.6819582e+02   2.394302e+03   0.000000e+00   2098s
+  260056    6.6819582e+02   9.206879e+02   0.000000e+00   2101s
+  260326    6.6819582e+02   1.281559e+03   0.000000e+00   2107s
+  260576    6.6819582e+02   1.443933e+03   0.000000e+00   2113s
+  260716    6.6819583e+02   8.711614e+02   0.000000e+00   2115s
+  261036    6.6819583e+02   2.778813e+02   0.000000e+00   2121s
+  261326    6.6819583e+02   2.358816e+03   0.000000e+00   2127s
+  261616    6.6819583e+02   3.421910e+04   0.000000e+00   2133s
+  261766    6.6819583e+02   4.199045e+03   0.000000e+00   2136s
+  262056    6.6819583e+02   4.996984e+02   0.000000e+00   2142s
+  262386    6.6819583e+02   6.264626e+02   0.000000e+00   2147s
+  262536    6.6819583e+02   7.274892e+02   0.000000e+00   2150s
+  262906    6.6819583e+02   7.671463e+03   0.000000e+00   2156s
+  263176    6.6819583e+02   8.047863e+02   0.000000e+00   2162s
+  263436    6.6819583e+02   1.652953e+03   0.000000e+00   2168s
+  263606    6.6819583e+02   1.348026e+03   0.000000e+00   2171s
+  263896    6.6819583e+02   5.944182e+02   0.000000e+00   2177s
+  264406    6.6819583e+02   1.946799e+03   0.000000e+00   2183s
+  264586    6.6819583e+02   3.791262e+03   0.000000e+00   2186s
+  264966    6.6819584e+02   4.257119e+03   0.000000e+00   2192s
+  265096    6.6819584e+02   1.244419e+03   0.000000e+00   2195s
+  265416    6.6819584e+02   2.518288e+03   0.000000e+00   2201s
+  265686    6.6819584e+02   1.875928e+03   0.000000e+00   2207s
+  265986    6.6819584e+02   1.863568e+03   0.000000e+00   2212s
+  266116    6.6819584e+02   2.177858e+03   0.000000e+00   2215s
+  266366    6.6819584e+02   1.278488e+03   0.000000e+00   2221s
+  266596    6.6819584e+02   3.087097e+02   0.000000e+00   2226s
+  266876    6.6819584e+02   7.667737e+02   0.000000e+00   2232s
+  267196    6.6819584e+02   8.158819e+02   0.000000e+00   2238s
+  267366    6.6819584e+02   5.446056e+03   0.000000e+00   2241s
+  267676    6.6819584e+02   7.388974e+02   0.000000e+00   2247s
+  267846    6.6819584e+02   3.238494e+03   0.000000e+00   2251s
+  268176    6.6819584e+02   1.123584e+03   0.000000e+00   2257s
+  268356    6.6819584e+02   1.344090e+03   0.000000e+00   2260s
+  268666    6.6819584e+02   1.436315e+03   0.000000e+00   2266s
+  268966    6.6819584e+02   2.941960e+03   0.000000e+00   2273s
+  269106    6.6819584e+02   9.788288e+02   0.000000e+00   2276s
+  269406    6.6819586e+02   4.538358e+03   0.000000e+00   2281s
+  269716    6.6819588e+02   2.836256e+03   0.000000e+00   2288s
+  269886    6.6819588e+02   2.788489e+04   0.000000e+00   2291s
+  270216    6.6819589e+02   2.369344e+04   0.000000e+00   2297s
+  270356    6.6819589e+02   1.200488e+03   0.000000e+00   2300s
+  270676    6.6819590e+02   2.017496e+03   0.000000e+00   2306s
+  270986    6.6819591e+02   3.107086e+03   0.000000e+00   2312s
+  271336    6.6819592e+02   1.616371e+03   0.000000e+00   2318s
+  271496    6.6819592e+02   3.079341e+03   0.000000e+00   2321s
+  271826    6.6819593e+02   1.417454e+03   0.000000e+00   2327s
+  272146    6.6819593e+02   6.041966e+03   0.000000e+00   2332s
+  272296    6.6819593e+02   5.385547e+03   0.000000e+00   2335s
+  272626    6.6819594e+02   1.287213e+03   0.000000e+00   2341s
+  272956    6.6819594e+02   1.021047e+03   0.000000e+00   2347s
+  273096    6.6819594e+02   3.853422e+03   0.000000e+00   2350s
+  273386    6.6819595e+02   5.141826e+02   0.000000e+00   2356s
+  273686    6.6819595e+02   4.932125e+02   0.000000e+00   2362s
+  274016    6.6819595e+02   4.811248e+03   0.000000e+00   2368s
+  274166    6.6819595e+02   7.008511e+02   0.000000e+00   2371s
+  274476    6.6819596e+02   1.257925e+03   0.000000e+00   2376s
+  274776    6.6819596e+02   6.462079e+03   0.000000e+00   2382s
+  274926    6.6819596e+02   1.134312e+03   0.000000e+00   2385s
+  275216    6.6819597e+02   8.941742e+02   0.000000e+00   2391s
+  275486    6.6819597e+02   2.277716e+02   0.000000e+00   2397s
+  275756    6.6819597e+02   4.264902e+03   0.000000e+00   2402s
+  275896    6.6819597e+02   1.563220e+03   0.000000e+00   2405s
+  276196    6.6819598e+02   2.884880e+03   0.000000e+00   2411s
+  276496    6.6819598e+02   3.610168e+02   0.000000e+00   2417s
+  276816    6.6819598e+02   8.247687e+02   0.000000e+00   2423s
+  276966    6.6819598e+02   1.515457e+03   0.000000e+00   2426s
+  277266    6.6819598e+02   3.485576e+02   0.000000e+00   2432s
+  277536    6.6819599e+02   6.780304e+02   0.000000e+00   2437s
+  277826    6.6819599e+02   3.501213e+02   0.000000e+00   2443s
+  277956    6.6819599e+02   2.777103e+03   0.000000e+00   2446s
+  278266    6.6819599e+02   1.044638e+03   0.000000e+00   2451s
+  278556    6.6819599e+02   4.260203e+03   0.000000e+00   2457s
+  278696    6.6819600e+02   2.114823e+04   0.000000e+00   2460s
+  278986    6.6819600e+02   4.313865e+03   0.000000e+00   2466s
+  279266    6.6819600e+02   1.081530e+03   0.000000e+00   2472s
+  279566    6.6819600e+02   2.359491e+03   0.000000e+00   2478s
+  279696    6.6819600e+02   6.248160e+02   0.000000e+00   2481s
+  279986    6.6819601e+02   1.367028e+03   0.000000e+00   2486s
+  280266    6.6819601e+02   2.387023e+03   0.000000e+00   2492s
+  280406    6.6819601e+02   1.792280e+02   0.000000e+00   2495s
+  280696    6.6819601e+02   6.938901e+02   0.000000e+00   2501s
+  281006    6.6819601e+02   1.434051e+03   0.000000e+00   2507s
+  281296    6.6819602e+02   6.657388e+02   0.000000e+00   2512s
+  281426    6.6819602e+02   5.126158e+03   0.000000e+00   2515s
+  281706    6.6819602e+02   1.575522e+03   0.000000e+00   2521s
+  282036    6.6819602e+02   1.368057e+03   0.000000e+00   2527s
+  282306    6.6819602e+02   1.903221e+03   0.000000e+00   2532s
+  282446    6.6819602e+02   3.088626e+02   0.000000e+00   2535s
+  282746    6.6819603e+02   1.860236e+03   0.000000e+00   2541s
+  283036    6.6819603e+02   1.779618e+03   0.000000e+00   2547s
+  283336    6.6819603e+02   1.824483e+03   0.000000e+00   2552s
+  283476    6.6819603e+02   1.135820e+03   0.000000e+00   2555s
+  283756    6.6819603e+02   3.987496e+03   0.000000e+00   2561s
+  284066    6.6819603e+02   5.764151e+02   0.000000e+00   2567s
+  284356    6.6819603e+02   1.173477e+03   0.000000e+00   2572s
+  284636    6.6819604e+02   1.051889e+03   0.000000e+00   2578s
+  284756    6.6819604e+02   4.561131e+02   0.000000e+00   2580s
+  284996    6.6819604e+02   4.248940e+02   0.000000e+00   2586s
+  285246    6.6819604e+02   7.319512e+02   0.000000e+00   2591s
+  285496    6.6819604e+02   2.145072e+03   0.000000e+00   2597s
+  285766    6.6819604e+02   2.477579e+03   0.000000e+00   2602s
+  286016    6.6819604e+02   1.248746e+03   0.000000e+00   2607s
+  286266    6.6819604e+02   1.477929e+03   0.000000e+00   2613s
+  286386    6.6819604e+02   3.224702e+02   0.000000e+00   2615s
+  286626    6.6819604e+02   2.479835e+03   0.000000e+00   2621s
+  286866    6.6819605e+02   1.812739e+04   0.000000e+00   2627s
+  287106    6.6819605e+02   3.375284e+02   0.000000e+00   2633s
+  287236    6.6819605e+02   3.525524e+02   0.000000e+00   2635s
+  287486    6.6819605e+02   2.186979e+02   0.000000e+00   2641s
+  287736    6.6819605e+02   5.511634e+02   0.000000e+00   2647s
+  287866    6.6819605e+02   2.680311e+02   0.000000e+00   2650s
+  288086    6.6819605e+02   3.279581e+03   0.000000e+00   2656s
+  288326    6.6819605e+02   2.833110e+03   0.000000e+00   2662s
+  288566    6.6819605e+02   3.236975e+02   0.000000e+00   2668s
+  288686    6.6819605e+02   5.009822e+02   0.000000e+00   2671s
+  288916    6.6819606e+02   1.168840e+03   0.000000e+00   2677s
+  289036    6.6819606e+02   1.068133e+03   0.000000e+00   2680s
+  289286    6.6819606e+02   3.877778e+02   0.000000e+00   2686s
+  289546    6.6819606e+02   2.133083e+03   0.000000e+00   2692s
+  289666    6.6819606e+02   4.311728e+02   0.000000e+00   2695s
+  289906    6.6819606e+02   5.396802e+02   0.000000e+00   2701s
+  290176    6.6819606e+02   4.737211e+02   0.000000e+00   2707s
+  290296    6.6819606e+02   9.244238e+02   0.000000e+00   2710s
+  290546    6.6819606e+02   1.953076e+03   0.000000e+00   2715s
+  290786    6.6819606e+02   3.391597e+02   0.000000e+00   2721s
+  291036    6.6819607e+02   3.188396e+03   0.000000e+00   2726s
+  291306    6.6819607e+02   4.213550e+02   0.000000e+00   2732s
+  291546    6.6819607e+02   5.560416e+02   0.000000e+00   2737s
+  291686    6.6819607e+02   1.299340e+03   0.000000e+00   2740s
+  291946    6.6819607e+02   9.267998e+02   0.000000e+00   2746s
+  292176    6.6819607e+02   3.024433e+02   0.000000e+00   2751s
+  292416    6.6819607e+02   1.200727e+03   0.000000e+00   2757s
+  292666    6.6819607e+02   1.226938e+04   0.000000e+00   2763s
+  292776    6.6819607e+02   1.808919e+03   0.000000e+00   2766s
+  293036    6.6819607e+02   4.389176e+02   0.000000e+00   2771s
+  293266    6.6819607e+02   1.120930e+03   0.000000e+00   2777s
+  293486    6.6819607e+02   3.925184e+02   0.000000e+00   2782s
+  293606    6.6819607e+02   3.649082e+03   0.000000e+00   2785s
+  293846    6.6819608e+02   2.921836e+02   0.000000e+00   2791s
+  294076    6.6819608e+02   8.661891e+02   0.000000e+00   2797s
+  294296    6.6819608e+02   2.247292e+03   0.000000e+00   2802s
+  294506    6.6819608e+02   7.079108e+02   0.000000e+00   2808s
+  294626    6.6819608e+02   3.262852e+03   0.000000e+00   2810s
+  294846    6.6819608e+02   7.308017e+03   0.000000e+00   2816s
+  295096    6.6819608e+02   2.609989e+03   0.000000e+00   2822s
+  295336    6.6819608e+02   2.927702e+02   0.000000e+00   2827s
+  295456    6.6819608e+02   1.116256e+03   0.000000e+00   2830s
+  295706    6.6819608e+02   1.880347e+02   0.000000e+00   2836s
+  295966    6.6819608e+02   8.844214e+02   0.000000e+00   2842s
+  296106    6.6819608e+02   8.817571e+02   0.000000e+00   2845s
+  296376    6.6819609e+02   2.600266e+04   0.000000e+00   2851s
+  296636    6.6819609e+02   2.766972e+02   0.000000e+00   2857s
+  296886    6.6819609e+02   1.118029e+03   0.000000e+00   2863s
+  297016    6.6819609e+02   3.053146e+03   0.000000e+00   2866s
+  297296    6.6819609e+02   1.629518e+03   0.000000e+00   2872s
+  297436    6.6819609e+02   6.009098e+02   0.000000e+00   2875s
+  297696    6.6819609e+02   7.728403e+02   0.000000e+00   2881s
+  297946    6.6819609e+02   5.421460e+02   0.000000e+00   2887s
+  298206    6.6819609e+02   3.090895e+03   0.000000e+00   2892s
+  298316    6.6819609e+02   1.091822e+03   0.000000e+00   2895s
+  298576    6.6819609e+02   3.557250e+02   0.000000e+00   2901s
+  298826    6.6819609e+02   7.126734e+02   0.000000e+00   2907s
+  299076    6.6819609e+02   9.430371e+02   0.000000e+00   2913s
+  299196    6.6819609e+02   3.149710e+02   0.000000e+00   2915s
+  299416    6.6819609e+02   9.302477e+02   0.000000e+00   2921s
+  299656    6.6819609e+02   2.427388e+03   0.000000e+00   2927s
+  299896    6.6819610e+02   1.813593e+03   0.000000e+00   2933s
+  300006    6.6819610e+02   1.480853e+02   0.000000e+00   2935s
+  300236    6.6819610e+02   6.743735e+02   0.000000e+00   2941s
+  300446    6.6819610e+02   2.932238e+02   0.000000e+00   2947s
+  300666    6.6819610e+02   3.444200e+02   0.000000e+00   2952s
+  300776    6.6819610e+02   7.580032e+02   0.000000e+00   2955s
+  300996    6.6819610e+02   2.665493e+02   0.000000e+00   2961s
+  301216    6.6819610e+02   1.924269e+02   0.000000e+00   2967s
+  301456    6.6819610e+02   3.617922e+02   0.000000e+00   2973s
+  301566    6.6819610e+02   1.488878e+03   0.000000e+00   2976s
+  301776    6.6819610e+02   6.324257e+02   0.000000e+00   2982s
+  302006    6.6819610e+02   9.207920e+02   0.000000e+00   2988s
+  302116    6.6819610e+02   9.995599e+02   0.000000e+00   2990s
+  302356    6.6819610e+02   1.259918e+04   0.000000e+00   2996s
+  302566    6.6819610e+02   1.780003e+02   0.000000e+00   3002s
+  302776    6.6819610e+02   7.150830e+02   0.000000e+00   3008s
+  302886    6.6819610e+02   5.414123e+02   0.000000e+00   3011s
+  303116    6.6819610e+02   6.540911e+02   0.000000e+00   3017s
+  303236    6.6819610e+02   3.330332e+02   0.000000e+00   3021s
+  303446    6.6819610e+02   8.854930e+02   0.000000e+00   3026s
+  303666    6.6819611e+02   6.190634e+02   0.000000e+00   3032s
+  303776    6.6819611e+02   2.988727e+02   0.000000e+00   3035s
+  303986    6.6819611e+02   2.125941e+02   0.000000e+00   3041s
+  304196    6.6819611e+02   8.650276e+02   0.000000e+00   3047s
+  304396    6.6819611e+02   1.715424e+02   0.000000e+00   3052s
+  304506    6.6819611e+02   9.419719e+03   0.000000e+00   3055s
+  304726    6.6819611e+02   3.055312e+03   0.000000e+00   3061s
+  304926    6.6819611e+02   1.412083e+04   0.000000e+00   3066s
+  305146    6.6819611e+02   8.498799e+02   0.000000e+00   3072s
+  305246    6.6819611e+02   1.161633e+02   0.000000e+00   3075s
+  305446    6.6819611e+02   4.690560e+02   0.000000e+00   3081s
+  305666    6.6819611e+02   6.278988e+02   0.000000e+00   3087s
+  305936    6.6819611e+02   1.036559e+02   0.000000e+00   3093s
+  306066    6.6819611e+02   2.744507e+02   0.000000e+00   3096s
+  306306    6.6819611e+02   7.601410e+02   0.000000e+00   3102s
+  306536    6.6819611e+02   2.664504e+03   0.000000e+00   3108s
+  306646    6.6819611e+02   1.723890e+03   0.000000e+00   3110s
+  306856    6.6819611e+02   6.667459e+02   0.000000e+00   3116s
+  307056    6.6819611e+02   2.528567e+02   0.000000e+00   3122s
+  307266    6.6819611e+02   2.861008e+02   0.000000e+00   3128s
+  307366    6.6819611e+02   6.038219e+02   0.000000e+00   3131s
+  307556    6.6819611e+02   5.951231e+03   0.000000e+00   3136s
+  307756    6.6819611e+02   3.618761e+02   0.000000e+00   3142s
+  307966    6.6819611e+02   3.676740e+02   0.000000e+00   3148s
+  308076    6.6819611e+02   2.588900e+02   0.000000e+00   3150s
+  308296    6.6819612e+02   5.099509e+02   0.000000e+00   3157s
+  308586    6.6819612e+02   3.042293e+03   0.000000e+00   3165s
+  308796    6.6819612e+02   2.344273e+02   0.000000e+00   3171s
+  308996    6.6819612e+02   1.205283e+02   0.000000e+00   3177s
+  309206    6.6819612e+02   1.759752e+03   0.000000e+00   3182s
+  309316    6.6819612e+02   2.901666e+02   0.000000e+00   3185s
+  309516    6.6819612e+02   2.650433e+02   0.000000e+00   3191s
+  309726    6.6819612e+02   4.479744e+02   0.000000e+00   3197s
+  310016    6.6819612e+02   2.776618e+02   0.000000e+00   3205s
+  310296    6.6819612e+02   1.121565e+02   0.000000e+00   3214s
+  310396    6.6819612e+02   2.632480e+02   0.000000e+00   3217s
+  310586    6.6819612e+02   1.437275e+03   0.000000e+00   3222s
+  310786    6.6819612e+02   1.726907e+02   0.000000e+00   3228s
+  310886    6.6819612e+02   2.072929e+02   0.000000e+00   3231s
+  311086    6.6819612e+02   2.539898e+02   0.000000e+00   3237s
+  311366    6.6819612e+02   6.787017e+02   0.000000e+00   3245s
+  311566    6.6819612e+02   4.123233e+02   0.000000e+00   3252s
+  311766    6.6819612e+02   3.625212e+02   0.000000e+00   3257s
+  311866    6.6819612e+02   1.093918e+02   0.000000e+00   3260s
+  312056    6.6819612e+02   1.092952e+03   0.000000e+00   3265s
+  312346    6.6819612e+02   2.328202e+02   0.000000e+00   3273s
+  312446    6.6819612e+02   1.449176e+02   0.000000e+00   3275s
+  312636    6.6819612e+02   1.805357e+02   0.000000e+00   3280s
+  312836    6.6819612e+02   6.977893e+02   0.000000e+00   3285s
+  313116    6.6819612e+02   3.806806e+02   0.000000e+00   3293s
+  313216    6.6819612e+02   1.190635e+02   0.000000e+00   3295s
+  313426    6.6819612e+02   2.919171e+02   0.000000e+00   3301s
+  313626    6.6819612e+02   1.747900e+02   0.000000e+00   3306s
+  313826    6.6819612e+02   3.599405e+02   0.000000e+00   3311s
+  314026    6.6819612e+02   9.647492e+01   0.000000e+00   3316s
+  314206    6.6819612e+02   6.472169e+01   0.000000e+00   3321s
+  314386    6.6819613e+02   9.359851e+02   0.000000e+00   3326s
+  314566    6.6819613e+02   1.437166e+02   0.000000e+00   3331s
+  314746    6.6819613e+02   1.072134e+03   0.000000e+00   3336s
+  314936    6.6819613e+02   9.972755e+01   0.000000e+00   3341s
+  315126    6.6819613e+02   3.689972e+02   0.000000e+00   3346s
+  315326    6.6819613e+02   8.161626e+02   0.000000e+00   3351s
+  315686    6.6819613e+02   2.788516e+02   0.000000e+00   3358s
+  315866    6.6819613e+02   3.918975e+02   0.000000e+00   3361s
+  316226    6.6819613e+02   1.792114e+02   0.000000e+00   3368s
+  316406    6.6819613e+02   7.891562e+01   0.000000e+00   3372s
+  316586    6.6819613e+02   5.191612e+02   0.000000e+00   3376s
+  316946    6.6819613e+02   1.453820e+02   0.000000e+00   3383s
+  317126    6.6819613e+02   3.533891e+02   0.000000e+00   3386s
+  317406    6.6819613e+02   2.736733e+02   0.000000e+00   3392s
+  317586    6.6819613e+02   6.481383e+01   0.000000e+00   3395s
+  317956    6.6819613e+02   2.118205e+02   0.000000e+00   3403s
+  318136    6.6819613e+02   8.609114e+01   0.000000e+00   3406s
+  318326    6.6819613e+02   4.015547e+02   0.000000e+00   3410s
+  318696    6.6819613e+02   7.740619e+01   0.000000e+00   3418s
+  318876    6.6819613e+02   1.825048e+03   0.000000e+00   3421s
+  319236    6.6819613e+02   6.535324e+01   0.000000e+00   3428s
+  319416    6.6819613e+02   4.209032e+03   0.000000e+00   3432s
+  319596    6.6819613e+02   4.864736e+02   0.000000e+00   3436s
+  319956    6.6819613e+02   3.186837e+02   0.000000e+00   3443s
+  320236    6.6819613e+02   5.550753e+02   0.000000e+00   3448s
+  320416    6.6819613e+02   5.689061e+02   0.000000e+00   3452s
+  320596    6.6819613e+02   6.936818e+01   0.000000e+00   3456s
+  320946    6.6819613e+02   4.426057e+01   0.000000e+00   3463s
+  321136    6.6819613e+02   7.560786e+02   0.000000e+00   3467s
+  321316    6.6819613e+02   6.018377e+02   0.000000e+00   3471s
+  321676    6.6819613e+02   2.528426e+02   0.000000e+00   3478s
+  321776    6.6819613e+02   8.856824e+01   0.000000e+00   3480s
+  322056    6.6819613e+02   1.175812e+02   0.000000e+00   3486s
+  322416    6.6819613e+02   4.403151e+01   0.000000e+00   3493s
+  322596    6.6819613e+02   1.252442e+02   0.000000e+00   3497s
+  322776    6.6819613e+02   1.477157e+02   0.000000e+00   3500s
+  323136    6.6819613e+02   3.430017e+02   0.000000e+00   3508s
+  323316    6.6819613e+02   1.222109e+02   0.000000e+00   3511s
+  323676    6.6819614e+02   5.319070e+01   0.000000e+00   3518s
+  323856    6.6819614e+02   1.383105e+02   0.000000e+00   3522s
+  324036    6.6819614e+02   4.181641e+02   0.000000e+00   3525s

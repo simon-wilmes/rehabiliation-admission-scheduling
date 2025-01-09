@@ -1,36 +1,50 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {   
-            "name":"Python Debugger: Current File",
-            "type":"debugpy",
-            "request":"launch",
-            "program":"${file}",
-            "console":"integratedTerminal"
-        },
-        {
-            "name": "Python Debugger: Module",
-            "type": "debugpy",
-            "request": "launch",
-            "module": "src",
-            "args": ["LBBDSolver", "{}", "/home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_001/instance_1.txt"]
-        },
-        {
-            "name": "Python Debugger: Createinstance",
-            "type": "debugpy",
-            "request": "launch",
-            "module": "src.instance_generation"
-        },
-        {
-            "name": "Python Debugger: Solvable Instances",
-            "type": "debugpy",
-            "request": "launch",
-            "module": "src.instance_generation.create_solvable_instances",
-        }
-        
-        
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python Debugger: Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Python Debugger: Module",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "src",
+      "args": [
+        "LBBDSolver",
+        "{}",
+        "/home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_001/instance_1.txt"
+      ]
+    },
+    {
+      "name": "Python Debugger: Table Generation",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "src.cluster.generate_instance_table"
+    },
+    {
+      "name": "Python Debugger: Solvable Instances",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "src.instance_generation.create_solvable_instances"
+    },
+    {
+      "name": "Python Debugger: Extract Data",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "src.cluster.extract_data"
+    },
+    {
+      "name": "Python Debugger: Show Table",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "src.cluster.create_runtime_plot"
+    }
+  ]
 }

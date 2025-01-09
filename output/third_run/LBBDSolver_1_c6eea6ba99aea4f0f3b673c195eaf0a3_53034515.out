@@ -1,0 +1,712 @@
+1.NAME: LBBDSolver
+2.PARAMS: {'break_symmetry': True, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubSolver'}
+3.INSTANCE: /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_7_30.txt
+4.REPETITION: 1
+Current directory: /home/wx350715/Kobra/rehabiliation-admission-scheduling
+[34m2025-01-08 16:53:53,459 - DEBUG - Solver: <class 'src.solvers.benders.LBBDSolver'>[0m
+[34m2025-01-08 16:53:53,459 - DEBUG - Args: {'break_symmetry': True, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubSolver'}[0m
+[34m2025-01-08 16:53:53,459 - DEBUG - File path /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_7_30.txt[0m
+[34m2025-01-08 16:53:53,469 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 16:53:53,470 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 16:53:53,470 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 16:53:53,470 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 16:53:53,470 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 16:53:53,470 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 16:53:53,470 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 16:53:53,470 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 16:53:53,470 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 16:53:53,470 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 16:53:53,470 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-08 16:53:53,470 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-08 16:53:53,470 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-08 16:53:53,470 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-08 16:53:53,470 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-08 16:53:53,470 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-08 16:53:53,470 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 16:53:53,471 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 16:53:53,471 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 16:53:53,471 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 16:53:53,471 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 16:53:53,471 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 16:53:53,471 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 16:53:53,471 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 16:53:53,471 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 16:53:53,471 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-08 16:53:53,471 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 16:53:53,472 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 16:53:53,472 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 16:53:53,472 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 16:53:53,472 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 16:53:53,472 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 16:53:53,472 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 16:53:53,472 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 16:53:53,472 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 16:53:53,472 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-08 16:53:53,472 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,473 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,473 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,473 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,473 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,473 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,473 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,473 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,473 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,473 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,473 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,474 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,474 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,474 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,474 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,474 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,474 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,474 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,474 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,474 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-08 16:53:53,507 - DEBUG - Instance data:[0m
+[34m2025-01-08 16:53:53,533 - DEBUG - Number of patients: 19[0m
+[34m2025-01-08 16:53:53,533 - DEBUG - Number of beds: 40[0m
+[34m2025-01-08 16:53:53,534 - DEBUG - Average number of treatments per patient: 25.42105263157895[0m
+[34m2025-01-08 16:53:53,534 - DEBUG - Average number of treatment per stayed day: 2.542105263157895[0m
+[34m2025-01-08 16:53:53,534 - DEBUG - Number of treatments: 483[0m
+[34m2025-01-08 16:53:53,534 - DEBUG - Number of resources: 10[0m
+[34m2025-01-08 16:53:53,534 - DEBUG - Number of resource groups: 5[0m
+[34m2025-01-08 16:53:53,534 - DEBUG - Number of resource hours needed per all treatment by RG(rooms): 22.09999999999998[0m
+[34m2025-01-08 16:53:53,534 - DEBUG - Number of resource hours needed per all treatment by RG(physiotherapist): 9.75[0m
+[34m2025-01-08 16:53:53,534 - DEBUG - Number of resource hours needed per all treatment by RG(therapists): 7.975000000000001[0m
+[34m2025-01-08 16:53:53,534 - DEBUG - Number of resource hours needed per all treatment by RG(sport_room): 5.625[0m
+[32m2025-01-08 16:53:53,534 - INFO - {'solver': 'LBBDSolver', 'args': {'break_symmetry': False, 'subsolver_cls': <class 'src.solvers.subsolvers.cp_subsolver.CPSubsolver'>, 'subsolver.store_results': True, 'subsolver.store_results_method': 'hash', 'use_helper_constraints': True, 'enforce_min_treatments_per_day': True, 'enforce_max_treatments_per_e_w': True, 'enforce_min_patients_per_treatment': True, 'log_to_console': True}}[0m
+[34m2025-01-08 16:53:53,534 - DEBUG - Setting options: LBBDSolver[0m
+[34m2025-01-08 16:53:53,534 - DEBUG -  ---- break_symmetry to False[0m
+[34m2025-01-08 16:53:53,534 - DEBUG -  ---- subsolver_cls to <class 'src.solvers.subsolvers.cp_subsolver.CPSubsolver'>[0m
+[34m2025-01-08 16:53:53,534 - DEBUG -  ---- use_helper_constraints to True[0m
+[34m2025-01-08 16:53:53,534 - DEBUG -  ---- add_constraints_to_symmetric_days to True (default)[0m
+[34m2025-01-08 16:53:53,534 - DEBUG - Setting options: Solver[0m
+[34m2025-01-08 16:53:53,534 - DEBUG -  ---- number_of_threads to 1 (default)[0m
+[34m2025-01-08 16:53:53,534 - DEBUG -  ---- treatment_value to 0 (default)[0m
+[34m2025-01-08 16:53:53,534 - DEBUG -  ---- delay_value to 1 (default)[0m
+[34m2025-01-08 16:53:53,534 - DEBUG -  ---- missing_treatment_value to 4 (default)[0m
+[34m2025-01-08 16:53:53,534 - DEBUG -  ---- enforce_min_treatments_per_day to True[0m
+[34m2025-01-08 16:53:53,534 - DEBUG -  ---- enforce_max_treatments_per_e_w to True[0m
+[34m2025-01-08 16:53:53,534 - DEBUG -  ---- enforce_min_patients_per_treatment to True[0m
+[34m2025-01-08 16:53:53,535 - DEBUG -  ---- log_to_console to True[0m
+[34m2025-01-08 16:53:53,535 - DEBUG -  ---- log_to_file to True (default)[0m
+[34m2025-01-08 16:53:53,553 - DEBUG - Setting options: CPSubsolver[0m
+[34m2025-01-08 16:53:53,553 - DEBUG -  ---- estimated_needed_treatments to True (default)[0m
+[34m2025-01-08 16:53:53,553 - DEBUG -  ---- add_patient_symmetry to False (default)[0m
+[34m2025-01-08 16:53:53,553 - DEBUG - Setting Subsolver options: SubSolver[0m
+[34m2025-01-08 16:53:53,553 - DEBUG -  ---- store_results to True[0m
+[34m2025-01-08 16:53:53,553 - DEBUG -  ---- store_results_method to hash[0m
+[34m2025-01-08 16:53:53,553 - DEBUG -  ---- enforce_min_patients_per_treatment to True[0m
+[34m2025-01-08 16:53:53,553 - DEBUG -  ---- use_day_symmetry to True (default)[0m
+[32m2025-01-08 16:53:53,569 - INFO - Create model: LBBDSolver[0m
+Set parameter TSPort to value 50039
+Set parameter TokenServer to value "license.itc.rwth-aachen.de"
+Set parameter Threads to value 1
+Set parameter LazyConstraints to value 1
+[34m2025-01-08 16:53:53,886 - DEBUG - Variables created.[0m
+[34m2025-01-08 16:53:54,827 - DEBUG - Constraint (not too many treatments) created.[0m
+[34m2025-01-08 16:53:55,562 - DEBUG - Constraint (no_treatments_outside admittance) created.[0m
+[34m2025-01-08 16:53:55,564 - DEBUG - Constraint (bed_usage) created.[0m
+[34m2025-01-08 16:53:55,564 - DEBUG - Constraint (must be admitted) created.[0m
+[34m2025-01-08 16:53:55,675 - DEBUG - Constraint (e_w_ub) created.[0m
+[34m2025-01-08 16:53:55,709 - DEBUG - Constraint (day_ub) created.[0m
+[34m2025-01-08 16:53:55,743 - DEBUG - Constraint (Day always) created.[0m
+[34m2025-01-08 16:53:55,743 - DEBUG - Constraint (already_admitted) created.[0m
+[32m2025-01-08 16:53:56,826 - INFO - Time to create model: 3.258[0m
+[32m2025-01-08 16:53:56,827 - INFO - Solving model: LBBDSolver[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 1 threads
+
+Optimize a model with 143861 rows, 60266 columns and 1198005 nonzeros
+Model fingerprint: 0xecf54133
+Variable types: 3 continuous, 60263 integer (60263 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 2e+03]
+Presolve added 0 rows and 627 columns
+Presolve removed 72869 rows and 0 columns
+Presolve time: 1.72s
+Presolved: 70992 rows, 60893 columns, 889256 nonzeros
+Variable types: 1 continuous, 60892 integer (60604 binary)
+Root relaxation presolved: 70893 rows, 60992 columns, 857429 nonzeros
+
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root relaxation: objective 1.480000e+02, 17422 iterations, 0.81 seconds (0.78 work units)
+Total elapsed time = 5.88s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  148.00000    0   22          -  148.00000      -     -   10s
+[32m2025-01-08 16:54:10,799 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-08 16:54:10,800 - INFO - d_prime: 2 d: 1[0m
+[32m2025-01-08 16:54:10,800 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-08 16:54:10,801 - INFO - d_prime: 4 d: 1[0m
+[32m2025-01-08 16:54:10,801 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-08 16:54:10,801 - INFO - d_prime: 6 d: 1[0m
+[32m2025-01-08 16:54:10,802 - INFO - d_prime: 7 d: 1[0m
+[32m2025-01-08 16:54:10,802 - INFO - d_prime: 8 d: 1[0m
+[32m2025-01-08 16:54:10,802 - INFO - d_prime: 9 d: 1[0m
+[32m2025-01-08 16:54:10,803 - INFO - d_prime: 10 d: 1[0m
+[32m2025-01-08 16:54:10,803 - INFO - d_prime: 11 d: 1[0m
+[32m2025-01-08 16:54:10,803 - INFO - d_prime: 12 d: 1[0m
+[32m2025-01-08 16:54:10,804 - INFO - d_prime: 13 d: 1[0m
+[32m2025-01-08 16:54:10,804 - INFO - forbidden_vars: ([{5:1,9:1},{3:4},{3:4},{5:3,9:1}])[0m
+[32m2025-01-08 16:54:10,804 - INFO - False[0m
+[32m2025-01-08 16:54:22,777 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-08 16:54:22,778 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-08 16:54:22,779 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-08 16:54:22,780 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-08 16:54:22,781 - INFO - forbidden_vars: ([{3:1},{6:1},{6:1},{6:1},{1:1,7:1},{1:1,5:1},{1:1,6:1},{3:2},{3:2},{3:2},{6:1,7:1},{6:1,7:1},{5:2,7:1},{3:4},{3:3,4:1}])[0m
+[32m2025-01-08 16:54:22,781 - INFO - False[0m
+     0     0  148.00000    0   22          -  148.00000      -     -   28s
+[32m2025-01-08 16:54:26,660 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-08 16:54:26,661 - INFO - d_prime: 2 d: 1[0m
+[32m2025-01-08 16:54:26,661 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-08 16:54:26,662 - INFO - d_prime: 4 d: 1[0m
+[32m2025-01-08 16:54:26,662 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-08 16:54:26,662 - INFO - d_prime: 6 d: 1[0m
+[32m2025-01-08 16:54:26,663 - INFO - d_prime: 7 d: 1[0m
+[32m2025-01-08 16:54:26,663 - INFO - d_prime: 8 d: 1[0m
+[32m2025-01-08 16:54:26,663 - INFO - d_prime: 9 d: 1[0m
+[32m2025-01-08 16:54:26,664 - INFO - d_prime: 10 d: 1[0m
+[32m2025-01-08 16:54:26,664 - INFO - d_prime: 11 d: 1[0m
+[32m2025-01-08 16:54:26,664 - INFO - d_prime: 12 d: 1[0m
+[32m2025-01-08 16:54:26,664 - INFO - d_prime: 13 d: 1[0m
+[32m2025-01-08 16:54:26,665 - INFO - forbidden_vars: ([{5:1,9:1},{5:2,9:1},{3:4},{3:4}])[0m
+[32m2025-01-08 16:54:26,665 - INFO - False[0m
+[32m2025-01-08 16:54:34,003 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-08 16:54:34,004 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-08 16:54:34,004 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-08 16:54:34,005 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-08 16:54:34,006 - INFO - forbidden_vars: ([{3:1},{6:1},{6:1},{6:1},{1:1,7:1},{1:1,5:1},{1:1,6:1},{3:2},{3:2},{3:2},{6:1,7:1},{6:1,7:1},{3:3},{5:2,7:1},{3:4}])[0m
+[32m2025-01-08 16:54:34,006 - INFO - False[0m
+[32m2025-01-08 16:54:36,229 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-08 16:54:36,229 - INFO - d_prime: 2 d: 1[0m
+[32m2025-01-08 16:54:36,230 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-08 16:54:36,230 - INFO - d_prime: 4 d: 1[0m
+[32m2025-01-08 16:54:36,230 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-08 16:54:36,230 - INFO - d_prime: 6 d: 1[0m
+[32m2025-01-08 16:54:36,231 - INFO - d_prime: 7 d: 1[0m
+[32m2025-01-08 16:54:36,231 - INFO - d_prime: 8 d: 1[0m
+[32m2025-01-08 16:54:36,231 - INFO - d_prime: 9 d: 1[0m
+[32m2025-01-08 16:54:36,232 - INFO - d_prime: 10 d: 1[0m
+[32m2025-01-08 16:54:36,232 - INFO - d_prime: 11 d: 1[0m
+[32m2025-01-08 16:54:36,232 - INFO - d_prime: 12 d: 1[0m
+[32m2025-01-08 16:54:36,232 - INFO - d_prime: 13 d: 1[0m
+[32m2025-01-08 16:54:36,233 - INFO - forbidden_vars: ([{5:1,9:1},{5:1,9:1},{3:4},{3:4}])[0m
+[32m2025-01-08 16:54:36,233 - INFO - False[0m
+[32m2025-01-08 16:54:44,066 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-08 16:54:44,067 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-08 16:54:44,068 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-08 16:54:44,069 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-08 16:54:44,070 - INFO - forbidden_vars: ([{3:1},{6:1},{6:1},{6:1},{1:1,7:1},{1:1,5:1},{1:1,6:1},{3:2},{3:2},{3:2},{5:1,7:1},{6:1,7:1},{6:1,7:1},{3:4},{3:3,4:1}])[0m
+[32m2025-01-08 16:54:44,070 - INFO - False[0m
+     0     0  148.00000    0   22          -  148.00000      -     -   47s
+[32m2025-01-08 16:54:56,004 - INFO - d_prime: 9 d: 9[0m
+[32m2025-01-08 16:54:56,006 - INFO - d_prime: 10 d: 9[0m
+[32m2025-01-08 16:54:56,007 - INFO - d_prime: 11 d: 9[0m
+[32m2025-01-08 16:54:56,008 - INFO - d_prime: 12 d: 9[0m
+[32m2025-01-08 16:54:56,010 - INFO - forbidden_vars: ([{9:1},{2:1,9:1},{2:1,4:1},{2:1,3:1},{5:1,6:1},{5:1,6:1},{6:2},{1:1,5:1,6:1},{2:1,5:2},{2:1,9:2},{3:2,9:1},{5:2,6:1},{5:1,6:2},{6:3},{1:1,6:3},{3:3,9:1},{5:1,6:3},{6:4}])[0m
+[32m2025-01-08 16:54:56,010 - INFO - False[0m
+[32m2025-01-08 16:55:00,739 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-08 16:55:00,764 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-08 16:55:00,765 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-08 16:55:00,766 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-08 16:55:00,768 - INFO - forbidden_vars: ([{3:1},{6:1},{6:1},{6:1},{1:1,7:1},{1:1,6:1},{3:2},{3:2},{3:1,5:1},{3:1,4:1},{6:1,7:1},{6:1,7:1},{1:1,5:1,6:1},{5:2,7:1},{3:4}])[0m
+[32m2025-01-08 16:55:00,768 - INFO - False[0m
+     0     0  148.00000    0   22          -  148.00000      -     -   66s
+[32m2025-01-08 16:55:13,233 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-08 16:55:13,234 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-08 16:55:13,235 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-08 16:55:13,236 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-08 16:55:13,238 - INFO - forbidden_vars: ([{3:1},{3:1},{6:1},{6:1},{6:1},{1:1,7:1},{1:1,5:1},{1:1,6:1},{3:2},{6:1,7:1},{6:1,7:1},{3:3},{3:1,4:1,5:1},{5:2,7:1},{3:4}])[0m
+[32m2025-01-08 16:55:13,238 - INFO - False[0m
+[32m2025-01-08 16:55:13,901 - INFO - Number of cuts added: 9 (bad=0, good=9)[0m
+[32m2025-01-08 16:55:13,901 - INFO - Unnecessary comps: (0 / 9)[0m
+[32m2025-01-08 16:55:13,901 - INFO - Calls to is_day_infeasible: cp_solver=35/ total=70 stored=35[0m
+[32m2025-01-08 16:55:13,901 - INFO - Is feasible: 64.98278784751892 0.9971990697925796[0m
+[32m2025-01-08 16:55:13,901 - INFO - Subsolver: Solve Model: 64.23593997955322/0.98868617406957[0m
+[32m2025-01-08 16:55:13,901 - INFO - Subsolver: Create Model: 0.7350707054138184/0.011313825930429903[0m
+[32m2025-01-08 16:55:13,901 - INFO - Num_constraints-added: 63[0m
+     0     0  148.00000    0   22          -  148.00000      -     -   77s
+[32m2025-01-08 16:55:22,148 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-08 16:55:22,149 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-08 16:55:22,150 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-08 16:55:22,150 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-08 16:55:22,152 - INFO - forbidden_vars: ([{3:1},{6:1},{6:1},{6:1},{1:1,7:1},{1:1,5:1},{1:1,6:1},{3:2},{3:2},{4:1,5:1},{6:1,7:1},{6:1,7:1},{3:3},{5:2,7:1},{3:4}])[0m
+[32m2025-01-08 16:55:22,152 - INFO - False[0m
+     0     0  148.00000    0   22          -  148.00000      -     -   85s
+[32m2025-01-08 16:55:29,466 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-08 16:55:29,467 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-08 16:55:29,468 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-08 16:55:29,469 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-08 16:55:29,470 - INFO - forbidden_vars: ([{3:1},{6:1},{6:1},{6:1},{1:1,7:1},{1:1,5:1},{1:1,6:1},{3:2},{3:2},{6:1,7:1},{6:1,7:1},{3:3},{3:2,4:1},{5:2,7:1},{3:4}])[0m
+[32m2025-01-08 16:55:29,470 - INFO - False[0m
+     0     0  148.00000    0   22          -  148.00000      -     -   93s
+[32m2025-01-08 16:55:39,820 - INFO - d_prime: 9 d: 10[0m
+[32m2025-01-08 16:55:39,821 - INFO - d_prime: 10 d: 10[0m
+[32m2025-01-08 16:55:39,822 - INFO - d_prime: 11 d: 10[0m
+[32m2025-01-08 16:55:39,824 - INFO - d_prime: 12 d: 10[0m
+[32m2025-01-08 16:55:39,825 - INFO - forbidden_vars: ([{3:1},{3:1},{6:1},{6:1},{6:1},{1:1,7:1},{1:1,5:1},{1:1,6:1},{3:2},{3:2},{6:1,7:1},{6:1,7:1},{3:1,4:1,5:1},{5:2,7:1},{3:4}])[0m
+[32m2025-01-08 16:55:39,825 - INFO - False[0m
+     0     0  148.00000    0   22          -  148.00000      -     -  106s
+     0     0  148.00000    0  175          -  148.00000      -     -  107s
+[32m2025-01-08 16:55:47,390 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-08 16:55:47,391 - INFO - d_prime: 2 d: 1[0m
+[32m2025-01-08 16:55:47,391 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-08 16:55:47,393 - INFO - d_prime: 4 d: 1[0m
+[32m2025-01-08 16:55:47,394 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-08 16:55:47,394 - INFO - d_prime: 6 d: 1[0m
+[32m2025-01-08 16:55:47,394 - INFO - d_prime: 7 d: 1[0m
+[32m2025-01-08 16:55:47,395 - INFO - d_prime: 8 d: 1[0m
+[32m2025-01-08 16:55:47,395 - INFO - d_prime: 9 d: 1[0m
+[32m2025-01-08 16:55:47,395 - INFO - d_prime: 10 d: 1[0m
+[32m2025-01-08 16:55:47,396 - INFO - d_prime: 11 d: 1[0m
+[32m2025-01-08 16:55:47,396 - INFO - d_prime: 12 d: 1[0m
+[32m2025-01-08 16:55:47,396 - INFO - d_prime: 13 d: 1[0m
+[32m2025-01-08 16:55:47,397 - INFO - forbidden_vars: ([{5:2},{1:1,5:3},{3:4},{3:4}])[0m
+[32m2025-01-08 16:55:47,397 - INFO - False[0m
+     0     0  148.00000    0    -          -  148.00000      -     -  118s
+     0     0  148.00000    0   14          -  148.00000      -     -  118s
+[32m2025-01-08 16:55:55,658 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-08 16:55:55,659 - INFO - d_prime: 2 d: 1[0m
+[32m2025-01-08 16:55:55,659 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-08 16:55:55,660 - INFO - d_prime: 4 d: 1[0m
+[32m2025-01-08 16:55:55,660 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-08 16:55:55,660 - INFO - d_prime: 6 d: 1[0m
+[32m2025-01-08 16:55:55,661 - INFO - d_prime: 7 d: 1[0m
+[32m2025-01-08 16:55:55,661 - INFO - d_prime: 8 d: 1[0m
+[32m2025-01-08 16:55:55,661 - INFO - d_prime: 9 d: 1[0m
+[32m2025-01-08 16:55:55,661 - INFO - d_prime: 10 d: 1[0m
+[32m2025-01-08 16:55:55,662 - INFO - d_prime: 11 d: 1[0m
+[32m2025-01-08 16:55:55,662 - INFO - d_prime: 12 d: 1[0m
+[32m2025-01-08 16:55:55,662 - INFO - d_prime: 13 d: 1[0m
+[32m2025-01-08 16:55:55,663 - INFO - forbidden_vars: ([{5:2},{1:1,5:2},{3:4},{3:4}])[0m
+[32m2025-01-08 16:55:55,663 - INFO - False[0m
+[32m2025-01-08 16:55:56,011 - INFO - Number of cuts added: 14 (bad=0, good=14)[0m
+[32m2025-01-08 16:55:56,012 - INFO - Unnecessary comps: (0 / 14)[0m
+[32m2025-01-08 16:55:56,012 - INFO - Calls to is_day_infeasible: cp_solver=66/ total=140 stored=74[0m
+[32m2025-01-08 16:55:56,012 - INFO - Is feasible: 103.33380722999573 0.9969401577087562[0m
+[32m2025-01-08 16:55:56,012 - INFO - Subsolver: Solve Model: 101.80157136917114/0.9854152308274635[0m
+[32m2025-01-08 16:55:56,012 - INFO - Subsolver: Create Model: 1.506727695465088/0.0145847691725365[0m
+[32m2025-01-08 16:55:56,012 - INFO - Num_constraints-added: 101[0m
+[32m2025-01-08 16:55:56,670 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-08 16:55:56,671 - INFO - d_prime: 2 d: 1[0m
+[32m2025-01-08 16:55:56,671 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-08 16:55:56,671 - INFO - d_prime: 4 d: 1[0m
+[32m2025-01-08 16:55:56,671 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-08 16:55:56,672 - INFO - d_prime: 6 d: 1[0m
+[32m2025-01-08 16:55:56,672 - INFO - d_prime: 7 d: 1[0m
+[32m2025-01-08 16:55:56,672 - INFO - d_prime: 8 d: 1[0m
+[32m2025-01-08 16:55:56,672 - INFO - d_prime: 9 d: 1[0m
+[32m2025-01-08 16:55:56,673 - INFO - d_prime: 10 d: 1[0m
+[32m2025-01-08 16:55:56,673 - INFO - d_prime: 11 d: 1[0m
+[32m2025-01-08 16:55:56,673 - INFO - d_prime: 12 d: 1[0m
+[32m2025-01-08 16:55:56,673 - INFO - d_prime: 13 d: 1[0m
+[32m2025-01-08 16:55:56,674 - INFO - forbidden_vars: ([{5:2},{5:2},{3:4},{3:4}])[0m
+[32m2025-01-08 16:55:56,674 - INFO - False[0m
+[32m2025-01-08 16:55:57,038 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-08 16:55:57,038 - INFO - d_prime: 2 d: 1[0m
+[32m2025-01-08 16:55:57,038 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-08 16:55:57,039 - INFO - d_prime: 4 d: 1[0m
+[32m2025-01-08 16:55:57,039 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-08 16:55:57,039 - INFO - d_prime: 6 d: 1[0m
+[32m2025-01-08 16:55:57,040 - INFO - d_prime: 7 d: 1[0m
+[32m2025-01-08 16:55:57,040 - INFO - d_prime: 8 d: 1[0m
+[32m2025-01-08 16:55:57,040 - INFO - d_prime: 9 d: 1[0m
+[32m2025-01-08 16:55:57,041 - INFO - d_prime: 10 d: 1[0m
+[32m2025-01-08 16:55:57,041 - INFO - d_prime: 11 d: 1[0m
+[32m2025-01-08 16:55:57,041 - INFO - d_prime: 12 d: 1[0m
+[32m2025-01-08 16:55:57,042 - INFO - d_prime: 13 d: 1[0m
+[32m2025-01-08 16:55:57,042 - INFO - forbidden_vars: ([{5:2},{1:2,5:1},{3:4},{3:4}])[0m
+[32m2025-01-08 16:55:57,042 - INFO - False[0m
+     0     0  148.00000    0   14          -  148.00000      -     -  121s
+[32m2025-01-08 16:55:58,812 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-08 16:55:58,813 - INFO - d_prime: 2 d: 1[0m
+[32m2025-01-08 16:55:58,813 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-08 16:55:58,813 - INFO - d_prime: 4 d: 1[0m
+[32m2025-01-08 16:55:58,814 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-08 16:55:58,814 - INFO - d_prime: 6 d: 1[0m
+[32m2025-01-08 16:55:58,814 - INFO - d_prime: 7 d: 1[0m
+[32m2025-01-08 16:55:58,814 - INFO - d_prime: 8 d: 1[0m
+[32m2025-01-08 16:55:58,815 - INFO - d_prime: 9 d: 1[0m
+[32m2025-01-08 16:55:58,815 - INFO - d_prime: 10 d: 1[0m
+[32m2025-01-08 16:55:58,815 - INFO - d_prime: 11 d: 1[0m
+[32m2025-01-08 16:55:58,816 - INFO - d_prime: 12 d: 1[0m
+[32m2025-01-08 16:55:58,816 - INFO - d_prime: 13 d: 1[0m
+[32m2025-01-08 16:55:58,817 - INFO - forbidden_vars: ([{1:1,5:1},{5:2},{3:4},{3:4}])[0m
+[32m2025-01-08 16:55:58,817 - INFO - False[0m
+[32m2025-01-08 16:55:59,720 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-08 16:55:59,721 - INFO - d_prime: 2 d: 1[0m
+[32m2025-01-08 16:55:59,721 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-08 16:55:59,721 - INFO - d_prime: 4 d: 1[0m
+[32m2025-01-08 16:55:59,722 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-08 16:55:59,722 - INFO - d_prime: 6 d: 1[0m
+[32m2025-01-08 16:55:59,722 - INFO - d_prime: 7 d: 1[0m
+[32m2025-01-08 16:55:59,722 - INFO - d_prime: 8 d: 1[0m
+[32m2025-01-08 16:55:59,723 - INFO - d_prime: 9 d: 1[0m
+[32m2025-01-08 16:55:59,723 - INFO - d_prime: 10 d: 1[0m
+[32m2025-01-08 16:55:59,723 - INFO - d_prime: 11 d: 1[0m
+[32m2025-01-08 16:55:59,723 - INFO - d_prime: 12 d: 1[0m
+[32m2025-01-08 16:55:59,724 - INFO - d_prime: 13 d: 1[0m
+[32m2025-01-08 16:55:59,724 - INFO - forbidden_vars: ([{5:2},{1:3},{3:4},{3:4}])[0m
+[32m2025-01-08 16:55:59,724 - INFO - False[0m
+     0     0  148.00000    0    3          -  148.00000      -     -  124s
+[32m2025-01-08 16:56:02,360 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-08 16:56:02,361 - INFO - d_prime: 2 d: 1[0m
+[32m2025-01-08 16:56:02,361 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-08 16:56:02,362 - INFO - d_prime: 4 d: 1[0m
+[32m2025-01-08 16:56:02,362 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-08 16:56:02,363 - INFO - d_prime: 6 d: 1[0m
+[32m2025-01-08 16:56:02,363 - INFO - d_prime: 7 d: 1[0m
+[32m2025-01-08 16:56:02,363 - INFO - d_prime: 8 d: 1[0m
+[32m2025-01-08 16:56:02,364 - INFO - d_prime: 9 d: 1[0m
+[32m2025-01-08 16:56:02,364 - INFO - d_prime: 10 d: 1[0m
+[32m2025-01-08 16:56:02,364 - INFO - d_prime: 11 d: 1[0m
+[32m2025-01-08 16:56:02,365 - INFO - d_prime: 12 d: 1[0m
+[32m2025-01-08 16:56:02,365 - INFO - d_prime: 13 d: 1[0m
+[32m2025-01-08 16:56:02,365 - INFO - forbidden_vars: ([{5:1,7:1},{1:1,5:3},{3:4},{3:4}])[0m
+[32m2025-01-08 16:56:02,365 - INFO - False[0m
+[32m2025-01-08 16:56:04,802 - INFO - Number of cuts added: 19 (bad=0, good=19)[0m
+[32m2025-01-08 16:56:04,802 - INFO - Unnecessary comps: (0 / 19)[0m
+[32m2025-01-08 16:56:04,802 - INFO - Calls to is_day_infeasible: cp_solver=74/ total=210 stored=136[0m
+[32m2025-01-08 16:56:04,802 - INFO - Is feasible: 110.73286986351013 0.9959897761129011[0m
+[32m2025-01-08 16:56:04,802 - INFO - Subsolver: Solve Model: 109.07666015625/0.985299493143087[0m
+[32m2025-01-08 16:56:04,802 - INFO - Subsolver: Create Model: 1.6274058818817139/0.014700506856913082[0m
+[32m2025-01-08 16:56:04,802 - INFO - Num_constraints-added: 166[0m
+     0     0  148.00000    0    3          -  148.00000      -     -  127s
+[32m2025-01-08 16:56:06,178 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-08 16:56:06,178 - INFO - d_prime: 2 d: 1[0m
+[32m2025-01-08 16:56:06,179 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-08 16:56:06,179 - INFO - d_prime: 4 d: 1[0m
+[32m2025-01-08 16:56:06,179 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-08 16:56:06,180 - INFO - d_prime: 6 d: 1[0m
+[32m2025-01-08 16:56:06,180 - INFO - d_prime: 7 d: 1[0m
+[32m2025-01-08 16:56:06,181 - INFO - d_prime: 8 d: 1[0m
+[32m2025-01-08 16:56:06,181 - INFO - d_prime: 9 d: 1[0m
+[32m2025-01-08 16:56:06,181 - INFO - d_prime: 10 d: 1[0m
+[32m2025-01-08 16:56:06,182 - INFO - d_prime: 11 d: 1[0m
+[32m2025-01-08 16:56:06,182 - INFO - d_prime: 12 d: 1[0m
+[32m2025-01-08 16:56:06,182 - INFO - d_prime: 13 d: 1[0m
+[32m2025-01-08 16:56:06,183 - INFO - forbidden_vars: ([{5:1,7:1},{1:1,5:2},{3:4},{3:4}])[0m
+[32m2025-01-08 16:56:06,183 - INFO - False[0m
+[32m2025-01-08 16:56:06,901 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-08 16:56:06,902 - INFO - d_prime: 2 d: 1[0m
+[32m2025-01-08 16:56:06,903 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-08 16:56:06,903 - INFO - d_prime: 4 d: 1[0m
+[32m2025-01-08 16:56:06,903 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-08 16:56:06,903 - INFO - d_prime: 6 d: 1[0m
+[32m2025-01-08 16:56:06,904 - INFO - d_prime: 7 d: 1[0m
+[32m2025-01-08 16:56:06,904 - INFO - d_prime: 8 d: 1[0m
+[32m2025-01-08 16:56:06,904 - INFO - d_prime: 9 d: 1[0m
+[32m2025-01-08 16:56:06,904 - INFO - d_prime: 10 d: 1[0m
+[32m2025-01-08 16:56:06,905 - INFO - d_prime: 11 d: 1[0m
+[32m2025-01-08 16:56:06,905 - INFO - d_prime: 12 d: 1[0m
+[32m2025-01-08 16:56:06,905 - INFO - d_prime: 13 d: 1[0m
+[32m2025-01-08 16:56:06,906 - INFO - forbidden_vars: ([{5:1,7:1},{5:3},{3:4},{3:4}])[0m
+[32m2025-01-08 16:56:06,906 - INFO - False[0m
+     0     0  148.00000    0    3          -  148.00000      -     -  130s
+[32m2025-01-08 16:56:07,505 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-08 16:56:07,506 - INFO - d_prime: 2 d: 1[0m
+[32m2025-01-08 16:56:07,506 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-08 16:56:07,507 - INFO - d_prime: 4 d: 1[0m
+[32m2025-01-08 16:56:07,507 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-08 16:56:07,507 - INFO - d_prime: 6 d: 1[0m
+[32m2025-01-08 16:56:07,507 - INFO - d_prime: 7 d: 1[0m
+[32m2025-01-08 16:56:07,508 - INFO - d_prime: 8 d: 1[0m
+[32m2025-01-08 16:56:07,508 - INFO - d_prime: 9 d: 1[0m
+[32m2025-01-08 16:56:07,508 - INFO - d_prime: 10 d: 1[0m
+[32m2025-01-08 16:56:07,509 - INFO - d_prime: 11 d: 1[0m
+[32m2025-01-08 16:56:07,509 - INFO - d_prime: 12 d: 1[0m
+[32m2025-01-08 16:56:07,509 - INFO - d_prime: 13 d: 1[0m
+[32m2025-01-08 16:56:07,509 - INFO - forbidden_vars: ([{5:1,7:1},{5:2},{3:4},{3:4}])[0m
+[32m2025-01-08 16:56:07,510 - INFO - False[0m
+[32m2025-01-08 16:56:08,015 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-08 16:56:08,015 - INFO - d_prime: 2 d: 1[0m
+[32m2025-01-08 16:56:08,016 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-08 16:56:08,016 - INFO - d_prime: 4 d: 1[0m
+[32m2025-01-08 16:56:08,016 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-08 16:56:08,016 - INFO - d_prime: 6 d: 1[0m
+[32m2025-01-08 16:56:08,017 - INFO - d_prime: 7 d: 1[0m
+[32m2025-01-08 16:56:08,017 - INFO - d_prime: 8 d: 1[0m
+[32m2025-01-08 16:56:08,017 - INFO - d_prime: 9 d: 1[0m
+[32m2025-01-08 16:56:08,018 - INFO - d_prime: 10 d: 1[0m
+[32m2025-01-08 16:56:08,018 - INFO - d_prime: 11 d: 1[0m
+[32m2025-01-08 16:56:08,018 - INFO - d_prime: 12 d: 1[0m
+[32m2025-01-08 16:56:08,019 - INFO - d_prime: 13 d: 1[0m
+[32m2025-01-08 16:56:08,019 - INFO - forbidden_vars: ([{1:1,5:1},{5:1,7:1},{3:4},{3:4}])[0m
+[32m2025-01-08 16:56:08,019 - INFO - False[0m
+[32m2025-01-08 16:56:08,605 - INFO - Number of cuts added: 23 (bad=0, good=23)[0m
+[32m2025-01-08 16:56:08,606 - INFO - Unnecessary comps: (0 / 23)[0m
+[32m2025-01-08 16:56:08,606 - INFO - Calls to is_day_infeasible: cp_solver=80/ total=280 stored=200[0m
+[32m2025-01-08 16:56:08,606 - INFO - Is feasible: 114.08574485778809 0.9950210695284822[0m
+[32m2025-01-08 16:56:08,606 - INFO - Subsolver: Solve Model: 112.37148809432983/0.9852421704231121[0m
+[32m2025-01-08 16:56:08,606 - INFO - Subsolver: Create Model: 1.6831996440887451/0.01475782957688788[0m
+[32m2025-01-08 16:56:08,606 - INFO - Num_constraints-added: 218[0m
+H    0     0                     148.0000000  148.00000  0.00%     -  131s
+     0     0  148.00000    0   18  148.00000  148.00000  0.00%     -  131s
+
+Cutting planes:
+  Gomory: 5
+  MIR: 20
+  Zero half: 24
+  Mod-K: 12
+  RLT: 13
+  Lazy constraints: 218
+
+Explored 1 nodes (72804 simplex iterations) in 131.72 seconds (23.43 work units)
+Thread count was 1 (of 96 available processors)
+
+Solution count 1: 148 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.480000000000e+02, best bound 1.480000000000e+02, gap 0.0000%
+
+User-callback calls 1992, time in user-callback 114.69 sec
+[34m2025-01-08 16:56:08,618 - DEBUG - Finished optimization[0m
+[34m2025-01-08 16:56:08,618 - DEBUG - Subsolver stats:[0m
+[32m2025-01-08 16:56:08,619 - INFO - Number of cuts added: 23 (bad=0, good=23)[0m
+[32m2025-01-08 16:56:08,619 - INFO - Unnecessary comps: (0 / 23)[0m
+[32m2025-01-08 16:56:08,619 - INFO - Calls to is_day_infeasible: cp_solver=80/ total=280 stored=200[0m
+[32m2025-01-08 16:56:08,619 - INFO - Is feasible: 114.08574485778809 0.9950210695284822[0m
+[32m2025-01-08 16:56:08,619 - INFO - Subsolver: Solve Model: 112.37148809432983/0.9852421704231121[0m
+[32m2025-01-08 16:56:08,619 - INFO - Subsolver: Create Model: 1.6831996440887451/0.01475782957688788[0m
+[32m2025-01-08 16:56:08,619 - INFO - Num_constraints-added: 218[0m
+[32m2025-01-08 16:56:08,619 - INFO - Optimal solution found.[0m
+[34m2025-01-08 16:56:08,619 - DEBUG - Sub Objectives:[0m
+[34m2025-01-08 16:56:08,619 - DEBUG - (SOLVER):Minimize Delay: 0.0[0m
+[34m2025-01-08 16:56:08,619 - DEBUG - (SOLVER):Minimize Missing Treatments: 148.0[0m
+[32m2025-01-08 16:56:08,619 - INFO - All cuts [defaultdict(<class 'dict'>, {P(patient10): {T(knitting): 4}, P(patient19): {T(knitting): 4}, P(patient0): {T(massage): 1, T(board_games): 1}, P(patient1): {T(massage): 3, T(board_games): 1}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 1, T(physio): 1}, P(patient6): {T(bath): 1, T(massage): 1}, P(patient8): {T(bath): 1, T(sport): 1}, P(patient11): {T(knitting): 2}, P(patient12): {T(knitting): 4}, P(patient13): {T(knitting): 1}, P(patient14): {T(knitting): 2}, P(patient16): {T(knitting): 2}, P(patient17): {T(knitting): 3, T(trust_exercise): 1}, P(patient3): {T(massage): 2, T(physio): 1}, P(patient2): {T(sport): 1, T(physio): 1}, P(patient4): {T(sport): 1}, P(patient5): {T(sport): 1, T(physio): 1}, P(patient7): {T(sport): 1}, P(patient9): {T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient10): {T(knitting): 4}, P(patient19): {T(knitting): 4}, P(patient0): {T(massage): 1, T(board_games): 1}, P(patient1): {T(massage): 2, T(board_games): 1}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 1, T(physio): 1}, P(patient6): {T(bath): 1, T(massage): 1}, P(patient8): {T(bath): 1, T(sport): 1}, P(patient11): {T(knitting): 2}, P(patient12): {T(knitting): 4}, P(patient13): {T(knitting): 1}, P(patient14): {T(knitting): 2}, P(patient16): {T(knitting): 2}, P(patient17): {T(knitting): 3}, P(patient3): {T(massage): 2, T(physio): 1}, P(patient2): {T(sport): 1, T(physio): 1}, P(patient4): {T(sport): 1}, P(patient5): {T(sport): 1, T(physio): 1}, P(patient7): {T(sport): 1}, P(patient9): {T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient10): {T(knitting): 4}, P(patient19): {T(knitting): 4}, P(patient0): {T(massage): 1, T(board_games): 1}, P(patient1): {T(massage): 1, T(board_games): 1}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 1, T(physio): 1}, P(patient6): {T(bath): 1, T(massage): 1}, P(patient8): {T(bath): 1, T(sport): 1}, P(patient11): {T(knitting): 2}, P(patient12): {T(knitting): 4}, P(patient13): {T(knitting): 1}, P(patient14): {T(knitting): 2}, P(patient16): {T(knitting): 2}, P(patient17): {T(knitting): 3, T(trust_exercise): 1}, P(patient3): {T(massage): 1, T(physio): 1}, P(patient2): {T(sport): 1, T(physio): 1}, P(patient4): {T(sport): 1}, P(patient5): {T(sport): 1, T(physio): 1}, P(patient7): {T(sport): 1}, P(patient9): {T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 1, T(sport): 3}, P(patient5): {T(bath): 1, T(massage): 1, T(sport): 1}, P(patient10): {T(group_therapy): 1, T(board_games): 1}, P(patient13): {T(group_therapy): 1, T(massage): 2}, P(patient14): {T(group_therapy): 1, T(trust_exercise): 1}, P(patient16): {T(group_therapy): 1, T(knitting): 1}, P(patient17): {T(group_therapy): 1, T(board_games): 2}, P(patient11): {T(knitting): 2, T(board_games): 1}, P(patient19): {T(knitting): 3, T(board_games): 1}, P(patient0): {T(massage): 2, T(sport): 1}, P(patient2): {T(massage): 1, T(sport): 1}, P(patient3): {T(massage): 1, T(sport): 1}, P(patient6): {T(massage): 1, T(sport): 3}, P(patient7): {T(massage): 1, T(sport): 2}, P(patient4): {T(sport): 3}, P(patient8): {T(sport): 2}, P(patient9): {T(sport): 4}, P(patient12): {T(board_games): 1}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 1, T(physio): 1}, P(patient6): {T(bath): 1, T(massage): 1, T(sport): 1}, P(patient8): {T(bath): 1, T(sport): 1}, P(patient11): {T(knitting): 2}, P(patient12): {T(knitting): 4}, P(patient13): {T(knitting): 1}, P(patient14): {T(knitting): 2}, P(patient16): {T(knitting): 1, T(massage): 1}, P(patient17): {T(knitting): 1, T(trust_exercise): 1}, P(patient3): {T(massage): 2, T(physio): 1}, P(patient2): {T(sport): 1, T(physio): 1}, P(patient4): {T(sport): 1}, P(patient5): {T(sport): 1, T(physio): 1}, P(patient7): {T(sport): 1}, P(patient9): {T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 1, T(physio): 1}, P(patient6): {T(bath): 1, T(massage): 1}, P(patient8): {T(bath): 1, T(sport): 1}, P(patient11): {T(knitting): 1}, P(patient12): {T(knitting): 4}, P(patient13): {T(knitting): 1}, P(patient14): {T(knitting): 2}, P(patient16): {T(knitting): 3}, P(patient17): {T(knitting): 1, T(trust_exercise): 1, T(massage): 1}, P(patient3): {T(massage): 2, T(physio): 1}, P(patient2): {T(sport): 1, T(physio): 1}, P(patient4): {T(sport): 1}, P(patient5): {T(sport): 1, T(physio): 1}, P(patient7): {T(sport): 1}, P(patient9): {T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 1, T(physio): 1}, P(patient6): {T(bath): 1, T(massage): 1}, P(patient8): {T(bath): 1, T(sport): 1}, P(patient11): {T(knitting): 2}, P(patient12): {T(knitting): 4}, P(patient13): {T(knitting): 1}, P(patient14): {T(knitting): 2}, P(patient16): {T(knitting): 3}, P(patient17): {T(trust_exercise): 1, T(massage): 1}, P(patient3): {T(massage): 2, T(physio): 1}, P(patient2): {T(sport): 1, T(physio): 1}, P(patient4): {T(sport): 1}, P(patient5): {T(sport): 1, T(physio): 1}, P(patient7): {T(sport): 1}, P(patient9): {T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 1, T(physio): 1}, P(patient6): {T(bath): 1, T(massage): 1}, P(patient8): {T(bath): 1, T(sport): 1}, P(patient11): {T(knitting): 2}, P(patient12): {T(knitting): 4}, P(patient13): {T(knitting): 1}, P(patient14): {T(knitting): 2}, P(patient16): {T(knitting): 3}, P(patient17): {T(knitting): 2, T(trust_exercise): 1}, P(patient3): {T(massage): 2, T(physio): 1}, P(patient2): {T(sport): 1, T(physio): 1}, P(patient4): {T(sport): 1}, P(patient5): {T(sport): 1, T(physio): 1}, P(patient7): {T(sport): 1}, P(patient9): {T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 1, T(physio): 1}, P(patient6): {T(bath): 1, T(massage): 1}, P(patient8): {T(bath): 1, T(sport): 1}, P(patient11): {T(knitting): 1}, P(patient12): {T(knitting): 4}, P(patient13): {T(knitting): 1}, P(patient14): {T(knitting): 2}, P(patient16): {T(knitting): 2}, P(patient17): {T(knitting): 1, T(trust_exercise): 1, T(massage): 1}, P(patient3): {T(massage): 2, T(physio): 1}, P(patient2): {T(sport): 1, T(physio): 1}, P(patient4): {T(sport): 1}, P(patient5): {T(sport): 1, T(physio): 1}, P(patient7): {T(sport): 1}, P(patient9): {T(sport): 1}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 1, T(massage): 3}, P(patient10): {T(knitting): 4}, P(patient19): {T(knitting): 4}, P(patient0): {T(massage): 2}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 1, T(massage): 2}, P(patient10): {T(knitting): 4}, P(patient19): {T(knitting): 4}, P(patient0): {T(massage): 2}}), defaultdict(<class 'dict'>, {P(patient10): {T(knitting): 4}, P(patient19): {T(knitting): 4}, P(patient0): {T(massage): 2}, P(patient1): {T(massage): 2}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 2, T(massage): 1}, P(patient10): {T(knitting): 4}, P(patient19): {T(knitting): 4}, P(patient0): {T(massage): 2}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 1, T(massage): 1}, P(patient10): {T(knitting): 4}, P(patient19): {T(knitting): 4}, P(patient0): {T(massage): 2}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 3}, P(patient10): {T(knitting): 4}, P(patient19): {T(knitting): 4}, P(patient0): {T(massage): 2}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 1, T(massage): 3}, P(patient10): {T(knitting): 4}, P(patient19): {T(knitting): 4}, P(patient0): {T(massage): 1, T(physio): 1}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 1, T(massage): 2}, P(patient10): {T(knitting): 4}, P(patient19): {T(knitting): 4}, P(patient0): {T(massage): 1, T(physio): 1}}), defaultdict(<class 'dict'>, {P(patient10): {T(knitting): 4}, P(patient19): {T(knitting): 4}, P(patient0): {T(massage): 1, T(physio): 1}, P(patient1): {T(massage): 3}}), defaultdict(<class 'dict'>, {P(patient10): {T(knitting): 4}, P(patient19): {T(knitting): 4}, P(patient0): {T(massage): 1, T(physio): 1}, P(patient1): {T(massage): 2}}), defaultdict(<class 'dict'>, {P(patient1): {T(bath): 1, T(massage): 1}, P(patient10): {T(knitting): 4}, P(patient19): {T(knitting): 4}, P(patient0): {T(massage): 1, T(physio): 1}})][0m
+[32m2025-01-08 16:56:08,620 - INFO - All cuts ['([{5:1,9:1},{3:4},{3:4},{5:3,9:1}])', '([{3:1},{6:1},{6:1},{6:1},{1:1,7:1},{1:1,5:1},{1:1,6:1},{3:2},{3:2},{3:2},{6:1,7:1},{6:1,7:1},{5:2,7:1},{3:4},{3:3,4:1}])', '([{5:1,9:1},{5:2,9:1},{3:4},{3:4}])', '([{3:1},{6:1},{6:1},{6:1},{1:1,7:1},{1:1,5:1},{1:1,6:1},{3:2},{3:2},{3:2},{6:1,7:1},{6:1,7:1},{3:3},{5:2,7:1},{3:4}])', '([{5:1,9:1},{5:1,9:1},{3:4},{3:4}])', '([{3:1},{6:1},{6:1},{6:1},{1:1,7:1},{1:1,5:1},{1:1,6:1},{3:2},{3:2},{3:2},{5:1,7:1},{6:1,7:1},{6:1,7:1},{3:4},{3:3,4:1}])', '([{9:1},{2:1,9:1},{2:1,4:1},{2:1,3:1},{5:1,6:1},{5:1,6:1},{6:2},{1:1,5:1,6:1},{2:1,5:2},{2:1,9:2},{3:2,9:1},{5:2,6:1},{5:1,6:2},{6:3},{1:1,6:3},{3:3,9:1},{5:1,6:3},{6:4}])', '([{3:1},{6:1},{6:1},{6:1},{1:1,7:1},{1:1,6:1},{3:2},{3:2},{3:1,5:1},{3:1,4:1},{6:1,7:1},{6:1,7:1},{1:1,5:1,6:1},{5:2,7:1},{3:4}])', '([{3:1},{3:1},{6:1},{6:1},{6:1},{1:1,7:1},{1:1,5:1},{1:1,6:1},{3:2},{6:1,7:1},{6:1,7:1},{3:3},{3:1,4:1,5:1},{5:2,7:1},{3:4}])', '([{3:1},{6:1},{6:1},{6:1},{1:1,7:1},{1:1,5:1},{1:1,6:1},{3:2},{3:2},{4:1,5:1},{6:1,7:1},{6:1,7:1},{3:3},{5:2,7:1},{3:4}])', '([{3:1},{6:1},{6:1},{6:1},{1:1,7:1},{1:1,5:1},{1:1,6:1},{3:2},{3:2},{6:1,7:1},{6:1,7:1},{3:3},{3:2,4:1},{5:2,7:1},{3:4}])', '([{3:1},{3:1},{6:1},{6:1},{6:1},{1:1,7:1},{1:1,5:1},{1:1,6:1},{3:2},{3:2},{6:1,7:1},{6:1,7:1},{3:1,4:1,5:1},{5:2,7:1},{3:4}])', '([{5:2},{1:1,5:3},{3:4},{3:4}])', '([{5:2},{1:1,5:2},{3:4},{3:4}])', '([{5:2},{5:2},{3:4},{3:4}])', '([{5:2},{1:2,5:1},{3:4},{3:4}])', '([{1:1,5:1},{5:2},{3:4},{3:4}])', '([{5:2},{1:3},{3:4},{3:4}])', '([{5:1,7:1},{1:1,5:3},{3:4},{3:4}])', '([{5:1,7:1},{1:1,5:2},{3:4},{3:4}])', '([{5:1,7:1},{5:3},{3:4},{3:4}])', '([{5:1,7:1},{5:2},{3:4},{3:4}])', '([{1:1,5:1},{5:1,7:1},{3:4},{3:4}])'][0m
+[34m2025-01-08 16:56:19,599 - DEBUG - Patient 0 is admitted at day 0.[0m
+[34m2025-01-08 16:56:19,599 - DEBUG - Patient 1 is admitted at day 1.[0m
+[34m2025-01-08 16:56:19,599 - DEBUG - Patient 2 is admitted at day 2.[0m
+[34m2025-01-08 16:56:19,599 - DEBUG - Patient 3 is admitted at day 2.[0m
+[34m2025-01-08 16:56:19,599 - DEBUG - Patient 4 is admitted at day 3.[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patient 5 is admitted at day 4.[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patient 6 is admitted at day 5.[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patient 7 is admitted at day 2.[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patient 8 is admitted at day 7.[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patient 9 is admitted at day 9.[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patient 10 is admitted at day 0.[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patient 11 is admitted at day 2.[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patient 12 is admitted at day 3.[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patient 13 is admitted at day 8.[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patient 14 is admitted at day 6.[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patient 15 is admitted at day 11.[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patient 16 is admitted at day 4.[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patient 17 is admitted at day 5.[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patient 19 is admitted at day 0.[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patients [10, 19] have treatment 3 starting at day 0, hour 14.0 using resources [4, 8].[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patients [19] have treatment 5 starting at day 0, hour 9.5 using resources [4, 7].[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patients [0] have treatment 7 starting at day 0, hour 9.5 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patients [0] have treatment 7 starting at day 0, hour 13.0 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patients [0, 10, 19] have treatment 9 starting at day 0, hour 8.0 using resources [3, 6].[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patients [0, 10, 19] have treatment 9 starting at day 0, hour 10.5 using resources [9, 6].[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patients [1] have treatment 1 starting at day 1, hour 10.0 using resources [8].[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patients [10, 19] have treatment 3 starting at day 1, hour 8.0 using resources [9, 7].[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patients [10, 19] have treatment 3 starting at day 1, hour 10.0 using resources [3, 6].[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patients [10, 19] have treatment 3 starting at day 1, hour 13.0 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,600 - DEBUG - Patients [0, 1] have treatment 5 starting at day 1, hour 8.0 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [1] have treatment 5 starting at day 1, hour 9.5 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [1] have treatment 5 starting at day 1, hour 15.0 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [0] have treatment 7 starting at day 1, hour 8.5 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [1] have treatment 1 starting at day 2, hour 11.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [11] have treatment 4 starting at day 2, hour 9.5 using resources [9, 6].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [19] have treatment 4 starting at day 2, hour 11.0 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [10] have treatment 5 starting at day 2, hour 10.0 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [19] have treatment 5 starting at day 2, hour 10.5 using resources [4, 6].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [0, 1, 2, 3, 7] have treatment 6 starting at day 2, hour 8.0 using resources [0, 8].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [0, 1, 2, 3, 7] have treatment 6 starting at day 2, hour 9.5 using resources [0, 8].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [0, 1, 2, 3, 7] have treatment 6 starting at day 2, hour 13.0 using resources [0, 8].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [10, 11] have treatment 9 starting at day 2, hour 8.0 using resources [2, 6].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [10, 12] have treatment 4 starting at day 3, hour 9.5 using resources [9, 6].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [10] have treatment 4 starting at day 3, hour 10.0 using resources [3, 6].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [11, 19] have treatment 5 starting at day 3, hour 10.5 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [3, 4] have treatment 5 starting at day 3, hour 11.0 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [2] have treatment 5 starting at day 3, hour 11.5 using resources [4, 6].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [0, 1, 2, 4, 7] have treatment 6 starting at day 3, hour 9.5 using resources [0, 8].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [0, 2, 3, 7, 11, 19] have treatment 9 starting at day 3, hour 8.0 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [0, 2] have treatment 9 starting at day 3, hour 13.0 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [0, 1] have treatment 9 starting at day 3, hour 14.5 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [5] have treatment 1 starting at day 4, hour 9.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [5] have treatment 1 starting at day 4, hour 9.5 using resources [7].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [4] have treatment 1 starting at day 4, hour 10.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [0] have treatment 1 starting at day 4, hour 10.5 using resources [7].[0m
+[34m2025-01-08 16:56:19,601 - DEBUG - Patients [10, 11, 12, 16, 19] have treatment 2 starting at day 4, hour 8.0 using resources [9, 6].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [11] have treatment 4 starting at day 4, hour 10.0 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [16, 19] have treatment 5 starting at day 4, hour 15.0 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [5] have treatment 5 starting at day 4, hour 15.5 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [2, 7] have treatment 7 starting at day 4, hour 8.0 using resources [8, 7, 4].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [2, 7] have treatment 7 starting at day 4, hour 9.0 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [0, 1] have treatment 7 starting at day 4, hour 13.0 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [1] have treatment 7 starting at day 4, hour 14.0 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [3, 10] have treatment 9 starting at day 4, hour 10.5 using resources [9, 6].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [7] have treatment 1 starting at day 5, hour 11.0 using resources [8].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [5] have treatment 1 starting at day 5, hour 11.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [4] have treatment 1 starting at day 5, hour 11.5 using resources [7].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [3] have treatment 1 starting at day 5, hour 11.5 using resources [6].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [3] have treatment 1 starting at day 5, hour 12.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [3] have treatment 1 starting at day 5, hour 12.5 using resources [7].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [2] have treatment 1 starting at day 5, hour 12.5 using resources [6].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [0] have treatment 1 starting at day 5, hour 12.5 using resources [8].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [10, 12, 16, 17, 19] have treatment 2 starting at day 5, hour 9.5 using resources [9, 6].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [10, 11, 12, 16, 17] have treatment 2 starting at day 5, hour 10.5 using resources [1, 6].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [10, 11, 12, 16, 17] have treatment 2 starting at day 5, hour 13.0 using resources [2, 6].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [16, 19] have treatment 5 starting at day 5, hour 14.0 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [12] have treatment 5 starting at day 5, hour 14.5 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [1, 4, 5, 6, 7] have treatment 6 starting at day 5, hour 8.0 using resources [1, 8].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [1, 4, 5, 6, 7] have treatment 6 starting at day 5, hour 9.5 using resources [0, 8].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [0, 4, 5, 6, 7] have treatment 6 starting at day 5, hour 13.0 using resources [0, 8].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [0, 1, 2, 3, 6] have treatment 6 starting at day 5, hour 14.5 using resources [0, 8].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [17, 19] have treatment 9 starting at day 5, hour 8.0 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,602 - DEBUG - Patients [7] have treatment 1 starting at day 6, hour 8.0 using resources [8].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [6] have treatment 1 starting at day 6, hour 8.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [6] have treatment 1 starting at day 6, hour 8.5 using resources [7].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [6] have treatment 1 starting at day 6, hour 9.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [6] have treatment 1 starting at day 6, hour 9.5 using resources [7].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [5] have treatment 1 starting at day 6, hour 10.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [4] have treatment 1 starting at day 6, hour 10.5 using resources [7].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [3] have treatment 1 starting at day 6, hour 11.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [3] have treatment 1 starting at day 6, hour 11.5 using resources [8].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [2] have treatment 1 starting at day 6, hour 11.5 using resources [7].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [2] have treatment 1 starting at day 6, hour 12.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [1] have treatment 1 starting at day 6, hour 12.0 using resources [8].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [1] have treatment 1 starting at day 6, hour 12.5 using resources [7].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [1] have treatment 1 starting at day 6, hour 15.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [0] have treatment 1 starting at day 6, hour 15.5 using resources [7].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [10, 12, 14, 17, 19] have treatment 3 starting at day 6, hour 13.0 using resources [9, 7].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [16, 17] have treatment 4 starting at day 6, hour 15.0 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [10, 11] have treatment 4 starting at day 6, hour 15.5 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [16, 19] have treatment 5 starting at day 6, hour 11.0 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [11, 12] have treatment 5 starting at day 6, hour 11.5 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [5, 7] have treatment 5 starting at day 6, hour 14.0 using resources [4, 6].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [0, 7] have treatment 5 starting at day 6, hour 14.5 using resources [4, 6].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [5] have treatment 7 starting at day 6, hour 13.0 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [14, 17] have treatment 9 starting at day 6, hour 8.0 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [3, 14] have treatment 9 starting at day 6, hour 9.5 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [1] have treatment 1 starting at day 7, hour 12.0 using resources [6].[0m
+[34m2025-01-08 16:56:19,603 - DEBUG - Patients [11, 14, 16, 17, 19] have treatment 2 starting at day 7, hour 11.0 using resources [9, 7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [16, 17] have treatment 4 starting at day 7, hour 9.5 using resources [0, 7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [11, 12] have treatment 4 starting at day 7, hour 13.0 using resources [0, 7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [10] have treatment 4 starting at day 7, hour 13.5 using resources [0, 7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [16, 17] have treatment 5 starting at day 7, hour 8.0 using resources [4, 7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [12, 14] have treatment 5 starting at day 7, hour 8.5 using resources [4, 7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [8, 14] have treatment 5 starting at day 7, hour 9.0 using resources [4, 7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [5, 7] have treatment 5 starting at day 7, hour 10.5 using resources [4, 7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [1, 4] have treatment 5 starting at day 7, hour 11.5 using resources [4, 8].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [0] have treatment 5 starting at day 7, hour 11.5 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [6, 8] have treatment 7 starting at day 7, hour 8.0 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [4, 8] have treatment 7 starting at day 7, hour 10.5 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [4, 8] have treatment 7 starting at day 7, hour 13.0 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [2, 3] have treatment 7 starting at day 7, hour 14.0 using resources [8, 6, 4].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [0, 2] have treatment 7 starting at day 7, hour 15.0 using resources [8, 6, 4].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [1, 4, 5, 6, 7, 10, 12, 19] have treatment 9 starting at day 7, hour 9.0 using resources [2, 6].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [8] have treatment 1 starting at day 8, hour 8.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [7] have treatment 1 starting at day 8, hour 12.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [0] have treatment 1 starting at day 8, hour 12.5 using resources [7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [10, 13, 16, 17, 19] have treatment 2 starting at day 8, hour 9.5 using resources [9, 7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [10, 13, 14, 16, 17] have treatment 2 starting at day 8, hour 13.5 using resources [0, 7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [10, 11, 13, 14, 17] have treatment 2 starting at day 8, hour 14.5 using resources [0, 7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [19] have treatment 4 starting at day 8, hour 15.5 using resources [0, 7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [14, 19] have treatment 5 starting at day 8, hour 10.5 using resources [5, 7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [8, 12] have treatment 5 starting at day 8, hour 11.0 using resources [5, 7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [4, 8] have treatment 5 starting at day 8, hour 11.5 using resources [4, 7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [2] have treatment 5 starting at day 8, hour 13.0 using resources [4, 7].[0m
+[34m2025-01-08 16:56:19,604 - DEBUG - Patients [7, 8] have treatment 7 starting at day 8, hour 8.5 using resources [8, 7, 5].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [5, 6] have treatment 7 starting at day 8, hour 9.5 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [3, 4] have treatment 7 starting at day 8, hour 13.0 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [3, 4] have treatment 7 starting at day 8, hour 14.0 using resources [8, 6, 4].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [0, 3] have treatment 7 starting at day 8, hour 15.0 using resources [8, 6, 4].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [1, 2, 5, 6, 19] have treatment 9 starting at day 8, hour 8.0 using resources [2, 6].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [1, 5] have treatment 9 starting at day 8, hour 10.5 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [5] have treatment 1 starting at day 9, hour 9.5 using resources [7].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [10, 13, 14, 16, 17] have treatment 2 starting at day 9, hour 13.0 using resources [4, 7].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [11, 12, 16, 19] have treatment 3 starting at day 9, hour 10.0 using resources [1, 7].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [11, 16, 19] have treatment 3 starting at day 9, hour 14.0 using resources [9, 7].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [14] have treatment 4 starting at day 9, hour 8.0 using resources [9, 6].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [10, 13] have treatment 5 starting at day 9, hour 10.0 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [9, 13] have treatment 5 starting at day 9, hour 11.5 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [3, 6] have treatment 5 starting at day 9, hour 14.5 using resources [5, 8].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [0, 2] have treatment 5 starting at day 9, hour 15.0 using resources [4, 8].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [0, 1, 3, 4, 5, 6, 7, 8, 9] have treatment 6 starting at day 9, hour 8.0 using resources [3, 8].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [1, 3, 4, 6, 7, 8, 9] have treatment 6 starting at day 9, hour 10.0 using resources [0, 8].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [0, 1, 2, 6, 9] have treatment 6 starting at day 9, hour 13.0 using resources [0, 8].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [10, 12, 16, 17] have treatment 9 starting at day 9, hour 8.5 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [1, 17] have treatment 9 starting at day 9, hour 14.5 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [8] have treatment 1 starting at day 10, hour 12.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [6] have treatment 1 starting at day 10, hour 12.5 using resources [7].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [1] have treatment 1 starting at day 10, hour 12.5 using resources [6].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [11, 12, 13, 14, 16, 17] have treatment 3 starting at day 10, hour 8.0 using resources [9, 7].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [11, 12, 13, 14, 16, 17] have treatment 3 starting at day 10, hour 10.0 using resources [0, 7].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [12, 13, 16] have treatment 3 starting at day 10, hour 13.0 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,605 - DEBUG - Patients [17] have treatment 4 starting at day 10, hour 15.0 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [3, 6] have treatment 5 starting at day 10, hour 9.0 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [3] have treatment 5 starting at day 10, hour 9.5 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [2, 4, 5, 7, 8, 9] have treatment 6 starting at day 10, hour 9.0 using resources [1, 8].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [3, 5] have treatment 7 starting at day 10, hour 8.0 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [1, 2] have treatment 7 starting at day 10, hour 10.5 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [2] have treatment 1 starting at day 11, hour 12.5 using resources [6].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [12, 15, 17] have treatment 3 starting at day 11, hour 8.0 using resources [9, 7].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [11, 17] have treatment 3 starting at day 11, hour 10.0 using resources [9, 6].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [14] have treatment 4 starting at day 11, hour 10.0 using resources [2, 8].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [16] have treatment 4 starting at day 11, hour 14.5 using resources [4, 7].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [12, 15] have treatment 5 starting at day 11, hour 10.0 using resources [5, 7].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [12, 14] have treatment 5 starting at day 11, hour 10.5 using resources [4, 7].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [12, 15] have treatment 5 starting at day 11, hour 11.0 using resources [5, 7].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [14, 16] have treatment 5 starting at day 11, hour 11.5 using resources [4, 7].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [2, 4, 5, 6, 8, 9] have treatment 6 starting at day 11, hour 10.5 using resources [3, 8].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [2, 4, 6, 8, 9] have treatment 6 starting at day 11, hour 13.0 using resources [9, 8].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [2, 3, 4, 5, 6] have treatment 6 starting at day 11, hour 14.5 using resources [2, 8].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [7, 9] have treatment 7 starting at day 11, hour 8.0 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [7, 9] have treatment 7 starting at day 11, hour 9.0 using resources [8, 6, 4].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [11, 13, 15] have treatment 9 starting at day 11, hour 13.0 using resources [0, 7].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [7, 11, 17] have treatment 9 starting at day 11, hour 14.5 using resources [9, 6].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [6] have treatment 1 starting at day 12, hour 12.0 using resources [8].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [9] have treatment 1 starting at day 12, hour 12.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [9] have treatment 1 starting at day 12, hour 12.5 using resources [7].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [12, 14] have treatment 3 starting at day 12, hour 13.0 using resources [9, 7].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [13, 15] have treatment 4 starting at day 12, hour 11.0 using resources [1, 7].[0m
+[34m2025-01-08 16:56:19,606 - DEBUG - Patients [13] have treatment 4 starting at day 12, hour 11.5 using resources [0, 7].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [5] have treatment 5 starting at day 12, hour 8.0 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [15] have treatment 5 starting at day 12, hour 8.5 using resources [4, 6].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [4] have treatment 7 starting at day 12, hour 11.0 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [4, 6, 8, 9, 12, 13, 14, 16, 17] have treatment 9 starting at day 12, hour 8.0 using resources [0, 7].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [5, 6, 8, 12, 14, 15, 16, 17] have treatment 9 starting at day 12, hour 9.5 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [5, 6, 8, 17] have treatment 9 starting at day 12, hour 13.0 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [4, 8] have treatment 9 starting at day 12, hour 14.5 using resources [0, 6].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [15, 16] have treatment 9 starting at day 12, hour 14.5 using resources [4, 8].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [6] have treatment 1 starting at day 13, hour 8.0 using resources [8].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [9] have treatment 1 starting at day 13, hour 10.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [9] have treatment 1 starting at day 13, hour 12.0 using resources [7].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [8] have treatment 1 starting at day 13, hour 12.0 using resources [8].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [13, 14] have treatment 3 starting at day 13, hour 8.0 using resources [9, 7].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [13, 16] have treatment 3 starting at day 13, hour 10.0 using resources [1, 6].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [13, 14] have treatment 3 starting at day 13, hour 13.0 using resources [0, 8].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [14] have treatment 4 starting at day 13, hour 11.5 using resources [0, 7].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [15, 17] have treatment 5 starting at day 13, hour 8.0 using resources [5, 6].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [15, 17] have treatment 5 starting at day 13, hour 9.5 using resources [4, 6].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [6, 17] have treatment 5 starting at day 13, hour 10.0 using resources [5, 8].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [15, 17] have treatment 5 starting at day 13, hour 11.5 using resources [4, 8].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [5, 8] have treatment 7 starting at day 13, hour 8.5 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [5, 8] have treatment 7 starting at day 13, hour 10.5 using resources [8, 7, 4].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [5, 6] have treatment 7 starting at day 13, hour 15.0 using resources [8, 6, 5].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [15, 16] have treatment 9 starting at day 13, hour 13.0 using resources [4, 6].[0m
+[34m2025-01-08 16:56:19,607 - DEBUG - Patients [8, 16] have treatment 9 starting at day 13, hour 14.5 using resources [3, 7].[0m
+[34m2025-01-08 16:56:19,614 - DEBUG - Checking solution value.[0m
+[34m2025-01-08 16:56:19,614 - DEBUG - Solvers objective function value: 148.0[0m
+[34m2025-01-08 16:56:19,615 - DEBUG - (VERIFIER):Treatment value: 0[0m
+[34m2025-01-08 16:56:19,615 - DEBUG - (VERIFIER):Delay value: 0[0m
+[34m2025-01-08 16:56:19,615 - DEBUG - (VERIFIER):Missing treatment value: 148[0m
+[34m2025-01-08 16:56:19,615 - DEBUG - Correct objective function value: 148[0m
+[34m2025-01-08 16:56:19,615 - DEBUG - Solution is valid.[0m
+[34m2025-01-08 16:56:19,615 - DEBUG - All solvers accepted the solution.[0m
+[32m2025-01-08 16:56:19,615 - INFO - Time to find solution: 142.788s with value 148.000000[0m
+[32m2025-01-08 16:56:19,615 - INFO - Total Time: 146.046s[0m
