@@ -7,9 +7,13 @@ from src.solvers import (
     CPSolver2,
     MIPSolver4,
 )
-from src.solvers.subsolvers import CPSubsolver, CPSubsolver2
+from src.solvers.subsolvers import (
+    CPSubsolver,
+    CPSubsolver2,
+    MIPSubsolver,
+)  # , CPSubsolver3
 
-
+from src.solvers.benders import SUBSOLVERS_DICT
 from src.logging import logger
 
 
@@ -46,6 +50,10 @@ def read_solver_cls():
 def read_arg_dict():
     try:
         arg_dict = ast.literal_eval(sys.argv[2])
+        if "subsolver_cls" in arg_dict:
+            assert arg_dict["subsolver_cls"] in SUBSOLVERS_DICT, "Invalid subsolver"
+            arg_dict["subsolver_cls"] = SUBSOLVERS_DICT[arg_dict["subsolver_cls"]]
+
         if isinstance(arg_dict, dict):
             return arg_dict
 
@@ -82,23 +90,17 @@ def main():
     #####################################
     # Set Settings
     #####################################
-    default_settings = {
-        "enforce_min_treatments_per_day": True,
-        "enforce_max_treatments_per_e_w": True,
-        "enforce_min_patients_per_treatment": True,
-    }
+    default_settings = {}
 
     # Solver settings
     settings_dict = {
-        MIPSolver: {"use_lazy_constraints": True},
+        MIPSolver: {
+            # "use_lazy_constraints": True,
+        },
         MIPSolver3: {
             "break_symmetry": False,
-            "break_symmetry_strong": False,
         },
-        MIPSolver4: {
-            "break_symmetry": False,
-            "break_symmetry_strong": False,
-        },
+        MIPSolver4: {},
         CPSolver: {
             "break_symmetry": True,
             "max_repr": "cumulative",
@@ -109,10 +111,6 @@ def main():
             "treatments_in_adm_period": "cumulative",
         },
         LBBDSolver: {
-            "break_symmetry": False,
-            "subsolver_cls": CPSubsolver,
-            "subsolver.store_results": True,
-            "subsolver.store_results_method": "hash",
             "use_helper_constraints": True,
         },
     }
@@ -131,6 +129,7 @@ def main():
 
     # Create kwargs for solver
     kwargs = settings_dict[solver_cls]  # type: ignore
+    kwargs.update(arg_dict)
     kwargs.update(default_settings)
     kwargs.update(debug_settings)
 
@@ -146,6 +145,7 @@ def main():
     )
     solver.create_model()
     solution = solver.solve_model()
+    pass
 
 
 def test_run(solver_cls: Type[Solver], inst, debug_settings, kwargs, testing_keys):

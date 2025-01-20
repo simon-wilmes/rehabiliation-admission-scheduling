@@ -16,15 +16,11 @@ from math import floor, ceil
 class MIPSolver4(Solver):
     SOLVER_OPTIONS = Solver.BASE_SOLVER_OPTIONS.copy()
     SOLVER_OPTIONS.update(
-        {
-            "break_symmetry": [True, False],
-            "break_symmetry_strong": [True, False],
-        }
+        {"break_symmetry": [True, False]}
     )  # Add any additional options here
 
     SOLVER_DEFAULT_OPTIONS = {
         "break_symmetry": False,
-        "break_symmetry_strong": False,
     }
 
     def __init__(self, instance: Instance, **kwargs):
@@ -42,7 +38,7 @@ class MIPSolver4(Solver):
         super().__init__(instance, **kwargs)
         self._create_parameter_sets()
 
-    def _solve_model(self) -> Solution | int:
+    def _solve_model(self):
         self.model.optimize()
         if (
             self.model.status == gp.GRB.OPTIMAL
@@ -53,12 +49,12 @@ class MIPSolver4(Solver):
             logger.debug("Sub Objectives:")
             logger.debug(f"(SOLVER):Minimize Delay: {self.md.X}")
             logger.debug(f"(SOLVER):Minimize Missing Treatments: {self.mmt.X}")
+            self.solution_found = True
 
-            solution = self._extract_solution()
-            return solution
         else:
             logger.info("No optimal solution found.")
-            return NO_SOLUTION_FOUND
+            self.solution_found = False
+
             # return NO_SOLUTION_FOUND
             # Compute IIS
             self.model.computeIIS()
@@ -81,7 +77,6 @@ class MIPSolver4(Solver):
         self.model = gp.Model("UpdatedMIP")
         self.model.setParam("LogToConsole", int(self.log_to_console))  # type: ignore
         self.model.setParam("Threads", self.number_of_threads)  # type: ignore
-        self.model.setParam("Cuts", 0)
         # self.model.setParam("NoRelHeurTime", self.no_rel_heur_time)  # type: ignore
         self._create_variables()
         self._create_constraints()
@@ -288,7 +283,20 @@ class MIPSolver4(Solver):
                             for p in self.P
                             if m in self.M_p[p] and d in self.A_p[p]
                         )
-                        <= self.k_m[m],
+                        <= self.k_m[m] * self.x_midt[m, i, d, t],
+                        name=f"constraint_r6_b_m{m.id}_i{i}",
+                    )
+                # Constraint every session has at most k_m patients assigned
+        for m in self.M:
+            for d, t in product(self.D, self.T):
+                for i in self.J_md[m, d]:
+                    self.model.addConstr(
+                        gp.quicksum(
+                            self.y_pmidt[p, m, i, d, t]
+                            for p in self.P
+                            if m in self.M_p[p] and d in self.A_p[p]
+                        )
+                        >= self.j_m[m] * self.x_midt[m, i, d, t],
                         name=f"constraint_r6_b_m{m.id}_i{i}",
                     )
         logger.debug("Constraint (r6) created.")
@@ -300,33 +308,29 @@ class MIPSolver4(Solver):
             )
         logger.debug("Constraint (r7) created.")
 
-        if self.enforce_max_treatments_per_e_w:  # type: ignore
-            # Constraint (a4): Max num of treatments over e_w days
-            for p in self.P:
-                # Skip patients that do not require even distribution as they stay fewer days than the
-                # length of the rolling window
-                if p.length_of_stay <= self.e_w:
-                    continue
-                for d in self.A_p[p]:
-                    # check if the window is partially outside of patients stay => ignore
-                    if (
-                        d + self.e_w >= p.admitted_before_date.day + p.length_of_stay
-                        or d + self.e_w > max(self.D) + 1
-                    ):
-                        continue
-
-                    self.model.addConstr(
-                        gp.quicksum(
-                            self.y_pmidt[p, m, i, d_prime, t]
-                            for m in self.M_p[p]
-                            for d_prime in range(d, d + self.e_w)
-                            for i in self.J_md[m, d_prime]
-                            for t in self.T
-                        )
-                        <= self.e_w_upper[p],
-                        name=f"constraint_a4_ub_p{p.id}_d{d}",
+        # Constraint (a4): Max num of treatments over e_w days
+        for p in self.P:
+            # Skip patients that do not require even distribution as they stay fewer days than the
+            # length of the rolling window
+            if p.length_of_stay <= self.e_w:
+                continue
+            for d in self.A_p[p]:
+                # check if the window is partially outside of patients stay => ignore
+                viable_days_for_treatment = set(range(d, d + self.e_w)) & set(
+                    self.A_p[p]
+                )
+                self.model.addConstr(
+                    gp.quicksum(
+                        self.y_pmidt[p, m, i, d_prime, t]
+                        for m in self.M_p[p]
+                        for d_prime in viable_days_for_treatment
+                        for i in self.J_md[m, d_prime]
+                        for t in self.T
                     )
-            logger.debug("Constraint (a4) created.")
+                    <= self.e_w_upper[p],
+                    name=f"constraint_a4_ub_p{p.id}_d{d}",
+                )
+        logger.debug("Constraint (a4) created.")
 
         # Constraint (a5): Max num of treatments every day
         for p in self.P:
@@ -343,25 +347,24 @@ class MIPSolver4(Solver):
                 )
         logger.debug("Constraint (a5) created.")
 
-        if self.enforce_min_treatments_per_day:  # type: ignore
-            for p in self.P:
-                for d in self.A_p[p]:
-                    # otherwise only enfore the lowerbound if admitted before
-                    delta_set = [
-                        delta for delta in self.D_p[p] if d - self.l_p[p] < delta <= d
-                    ]
-                    self.model.addConstr(
-                        gp.quicksum(
-                            self.y_pmidt[p, m, i, d, t]
-                            for m in self.M_p[p]
-                            for i in self.J_md[m, d]
-                            for t in self.T
-                        )
-                        >= self.daily_lower[p]
-                        * gp.quicksum(self.a_pd[p, delta] for delta in delta_set),
-                        name=f"constraint_a5_ub_p{p.id}_d{d}",
+        for p in self.P:
+            for d in self.A_p[p]:
+                # otherwise only enfore the lowerbound if admitted before
+                delta_set = [
+                    delta for delta in self.D_p[p] if d - self.l_p[p] < delta <= d
+                ]
+                self.model.addConstr(
+                    gp.quicksum(
+                        self.y_pmidt[p, m, i, d, t]
+                        for m in self.M_p[p]
+                        for i in self.J_md[m, d]
+                        for t in self.T
                     )
-            logger.debug("Constraint (a5) created.")
+                    >= self.daily_lower[p]
+                    * gp.quicksum(self.a_pd[p, delta] for delta in delta_set),
+                    name=f"constraint_a5_ub_p{p.id}_d{d}",
+                )
+        logger.debug("Constraint (a5) created.")
 
     def _set_optimization_goal(self):
         minimize_delay = gp.quicksum(
@@ -399,40 +402,50 @@ class MIPSolver4(Solver):
         self.model.setObjective(objective, gp.GRB.MINIMIZE)
 
     def _extract_solution(self):
-
+        if not self.solution_found:
+            return NO_SOLUTION_FOUND
+        print_vars = False
         # Simplified for clarity, adjust if required
         appointments = []
+
+        x_midt_values = self.model.getAttr("X", self.x_midt)
+        y_midt_values = self.model.getAttr("X", self.y_pmidt)
+        z_gfmidt_values = self.model.getAttr("X", self.z_gfmidt)
+        a_pd_values = self.model.getAttr("X", self.a_pd)
         for m in self.M:
             for d in self.D:
                 for i in self.J_md[m, d]:
-
                     for t in self.T:
-                        if self.x_midt[m, i, d, t].X > 0.5:
-                            logger.debug(
-                                f"x_{m.id}_{i}_{d}_{t} = {self.x_midt[m, i, d, t].X}"
-                            )
+                        if x_midt_values[m, i, d, t] > 0.5:
+                            if print_vars:
+                                logger.debug(
+                                    f"x_{m.id}_{i}_{d}_{t} = {x_midt_values[m, i, d, t]}"
+                                )
                             # Get patients
                             patients = []
-                            for p, _, _, _, _ in slice_dict(
-                                self.y_pmidt, (None, m, i, d, t)
-                            ):
-                                logger.debug(
-                                    f"y_{p.id}_{m.id}_{i}_{d}_{t} = {self.y_pmidt[p, m, i,d,t].X}"
-                                )
-                                if self.y_pmidt[p, m, i, d, t].X > 0.5:
+                            for p in self.P:
+                                if m not in self.M_p[p]:
+                                    continue
+                                if d not in self.A_p[p]:
+                                    continue
+                                if print_vars:
+                                    logger.debug(
+                                        f"y_{p.id}_{m.id}_{i}_{d}_{t} = {y_midt_values[p, m, i,d,t]}"
+                                    )
+                                if y_midt_values[p, m, i, d, t] > 0.5:
                                     patients.append(p)
 
                             # Get resources
                             resources = defaultdict(list)
 
-                            for fhat, f, _, _, _, _ in slice_dict(
-                                self.z_gfmidt, (None, None, m, i, d, t)
-                            ):
-                                if self.z_gfmidt[fhat, f, m, i, d, t].X > 0.5:
-                                    resources[fhat].append(f)
-                                logger.debug(
-                                    f"z_{fhat.id}_f{f.id}_{m.id}_{i}_{d}_{t} = {self.z_gfmidt[fhat, f, m, i, d, t].X}"
-                                )
+                            for fhat in self.Fhat_m[m]:
+                                for f in self.fhat[fhat]:
+                                    if z_gfmidt_values[fhat, f, m, i, d, t] > 0.5:
+                                        resources[fhat].append(f)
+                                    if print_vars:
+                                        logger.debug(
+                                            f"z_{fhat.id}_f{f.id}_{m.id}_{i}_{d}_{t} = {z_gfmidt_values[fhat, f, m, i, d, t]}"
+                                        )
                             app = Appointment(
                                 start_date=DayHour(d, t),
                                 treatment=m,
@@ -447,7 +460,7 @@ class MIPSolver4(Solver):
         patients_arrival: dict[Patient, DayHour] = {}
         for p in self.P:
             for d in self.D_p[p]:
-                if self.a_pd[p, d].X > 0.5:  # type: ignore
+                if a_pd_values[p, d] > 0.5:  # type: ignore
                     # logger.debug(f"a_{p.id}_{d} = {self.a_pd[p,d].X}")
                     patients_arrival[p] = DayHour(
                         day=d, hour=self.instance.workday_start.hour

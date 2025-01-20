@@ -13,6 +13,11 @@ from src.solution import Solution, Appointment
 from src.time import DayHour
 from itertools import combinations
 from time import time
+from math import floor
+
+# #############################
+# This subsolver gives an extra day for late scheduling that is penalized
+# #############################
 
 
 class CPSubsolver2(Subsolver):
@@ -24,17 +29,12 @@ class CPSubsolver2(Subsolver):
     def __init__(self, instance: Instance, solver: Solver, **kwargs):
         logger.debug(f"Setting options: {self.__class__.__name__}")
 
-        for key in kwargs:
-            assert (
-                key in self.__class__.BASE_SOLVER_DEFAULT_OPTIONS
-                or key in self.__class__.SOLVER_DEFAULT_OPTIONS
-            ), f"Invalid option: {key}"
-
         for key in self.__class__.SOLVER_DEFAULT_OPTIONS:
 
             if key in kwargs:
                 setattr(self, key, kwargs[key])
                 logger.debug(f" ---- {key} to {kwargs[key]}")
+                del kwargs[key]
             else:
                 setattr(self, key, self.__class__.SOLVER_DEFAULT_OPTIONS[key])
                 logger.debug(
@@ -57,8 +57,13 @@ class CPSubsolver2(Subsolver):
         all_appointments = [m for m in patients.keys() if len(patients[m]) > 0]
         all_patients = {p for m in patients for p in patients[m]}
 
-        max_appointments = {m: sum(patients[m].values()) for m in all_appointments}
-
+        max_appointments = {
+            m: min(
+                floor(sum(patients[m].values()) / m.min_num_participants),
+                max(self.solver.J_md[m, day]) + 1,
+            )
+            for m in all_appointments
+        }
         appointment_vars: dict[Treatment, dict[int, dict]] = {
             m: {} for m in all_appointments
         }
@@ -189,17 +194,16 @@ class CPSubsolver2(Subsolver):
                         <= self.solver.k_m[m]
                     )
 
-        if self.enforce_min_patients_per_treatment:  # type:ignore
-            # Constraint: Every Treatment has at least j_m patients if treatment is scheduled
-            # If not set boolean variable min_patients[m] to true
-            for m in appointment_vars:
-                for r in appointment_vars[m]:
-                    model.add(
-                        cp_model.LinearExpr.Sum(
-                            [patient_vars[m][p][r] for p in patients[m]]
-                        )
-                        >= self.solver.j_m[m] * appointment_vars[m][r]["is_present"]
+        # Constraint: Every Treatment has at least j_m patients if treatment is scheduled
+        # If not set boolean variable min_patients[m] to true
+        for m in appointment_vars:
+            for r in appointment_vars[m]:
+                model.add(
+                    cp_model.LinearExpr.Sum(
+                        [patient_vars[m][p][r] for p in patients[m]]
                     )
+                    >= self.solver.j_m[m] * appointment_vars[m][r]["is_present"]
+                )
 
         # CONSTRAINT P2: every patient has only a single treatment at a time
         for p in all_patients:
@@ -328,7 +332,8 @@ class CPSubsolver2(Subsolver):
         patients: dict[Treatment, dict[Patient, int]],
     ) -> dict:
         # Restrict M_p to the daily treatment schedule
-
+        logger.debug("SUBSOLVER DAY" + str(day))
+        logger.debug("SUBSOLVER PATIENTS" + str(patients))
         # logger.debug("Solving subsystem with CPSubsolver")
         sub_solver = cp_model.CpSolver()
         sub_solver.parameters.log_search_progress = (

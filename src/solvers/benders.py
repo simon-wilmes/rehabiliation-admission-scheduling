@@ -12,12 +12,24 @@ from src.solution import NO_SOLUTION_FOUND
 
 from math import floor, gcd, ceil, prod, log
 from pprint import pformat
-from .subsolvers import Subsolver, CPSubsolver, CPSubsolver2
+from .subsolvers import (
+    Subsolver,
+    CPSubsolver,
+    CPSubsolver2,
+    MIPSubsolver,
+)  # , CPSubsolver3
 from itertools import product, combinations
 from typing import Callable, Any
 from time import time
 from random import random
 from copy import copy, deepcopy
+
+SUBSOLVERS_DICT = {
+    "CPSubsolver": CPSubsolver,
+    "CPSubsolver2": CPSubsolver2,
+    # "CPSubsolver3": CPSubsolnver3,
+    "MIPSubsolver": MIPSubsolver,
+}
 
 
 class LBBDSolver(Solver):
@@ -53,6 +65,7 @@ class LBBDSolver(Solver):
             if key in kwargs:
                 setattr(self, key, kwargs[key])
                 logger.debug(f" ---- {key} to {kwargs[key]}")
+                del kwargs[key]
             else:
                 setattr(self, key, self.__class__.SOLVER_DEFAULT_OPTIONS[key])
                 logger.debug(
@@ -64,16 +77,16 @@ class LBBDSolver(Solver):
             for key, value in kwargs.items()
             if key.startswith("subsolver.")
         }
-
+        for key in list(kwargs.keys()):
+            if key.startswith("subsolver."):
+                del kwargs[key]
+                
         super().__init__(instance, **kwargs)
         self._create_parameter_sets()
 
-        # Add min_patients_per_treatment to subsolver kwargs
-        subsolver_kwargs["enforce_min_patients_per_treatment"] = self.enforce_min_patients_per_treatment  # type: ignore
-
         if isinstance(self.subsolver_cls, str):  # type: ignore
-            dict_subsolvers = {"CPSubsolver": CPSubsolver, "CPSubsolver2": CPSubsolver2}
-            self.subsolver_cls = dict_subsolvers[self.subsolver_cls]
+
+            self.subsolver_cls = SUBSOLVERS_DICT[self.subsolver_cls]
 
         self.subsolver: Subsolver = self.subsolver_cls(instance=instance, solver=self, **subsolver_kwargs)  # type: ignore
 
@@ -117,9 +130,37 @@ class LBBDSolver(Solver):
 
         return patients
 
+    def run_day_d(self, d: int, model: gp.Model, patients: list[dict]) -> bool:
+        logger.debug(f"Checking day {d}")
+        # logger.debug(f"Patients: {pformat(patients[d])}")
+        self.time_is_feasible -= time()
+        result = self.subsolver.is_day_infeasible(d, patients[d])  # type: ignore
+        self.time_is_feasible += time()
+
+        status_code = result["status_code"]
+        if status_code != Subsolver.FEASIBLE:
+            logger.debug(f"Infeasible day {d}")
+
+        if status_code == Subsolver.TOO_MANY_TREATMENTS:
+
+            self.count_good_cuts += 1
+            # not is Feasible, generate cut
+            # Dict that maps (p, m) to the number of treatments
+            self._add_too_many_treatments(model, d, patients, result)
+            return True
+        if status_code == Subsolver.MIN_PATIENTS_PROBLEM:
+            self.count_bad_cuts += 1
+            # forbid this exact treatment combination
+            # logger.info("Different treatments needed")
+            # logger.info("patients[d]: " + str(patients[d]))
+            self._add_min_patients_violated(model, d, patients)
+            return True
+        return False
+
     def _solve_model(self):
         # Define the callback for creating subproblems
         self.num_solution_callbacks = 0
+        self.last_time_infeasible = []
 
         def _solution_callback(model, where):
 
@@ -135,37 +176,41 @@ class LBBDSolver(Solver):
                 )
 
                 # logger.debug("\n" + pformat(patients))
-                count_days_infeasible = 0
 
-                for d in self.D:
-                    # logger.debug(f"Checking day {d}")
-                    # logger.debug(f"Patients: {pformat(patients[d])}")
-                    self.time_is_feasible -= time()
-                    result = self.subsolver.is_day_infeasible(d, patients[d])  # type: ignore
-                    self.time_is_feasible += time()
+                next_time_infeasible = []
+                if self.last_time_infeasible:
+                    for d in self.last_time_infeasible:
+                        logger.debug("Last day infeasible: " + str(d))
+                        still_infeasible = self.run_day_d(d, model, patients)
+                        if still_infeasible:
+                            next_time_infeasible.append(d)
 
-                    status_code = result["status_code"]
+                if not next_time_infeasible:
+                    for d in self.D:
+                        if d in self.last_time_infeasible:
+                            continue
+                        still_infeasible = self.run_day_d(d, model, patients)
+                        if still_infeasible:
+                            next_time_infeasible.append(d)
 
-                    if status_code == Subsolver.TOO_MANY_TREATMENTS:
-                        self.count_good_cuts += 1
-                        # not is Feasible, generate cut
-                        count_days_infeasible += 1
-                        # Dict that maps (p, m) to the number of treatments
-                        self._add_too_many_treatments(model, d, patients, result)
-
-                    if status_code == Subsolver.MIN_PATIENTS_PROBLEM:
-                        self.count_bad_cuts += 1
-                        count_days_infeasible += 1
-                        # forbid this exact treatment combination
-                        # logger.info("Different treatments needed")
-                        # logger.info("patients[d]: " + str(patients[d]))
-                        self._add_min_patients_violated(model, d, patients)
-
+                self.last_time_infeasible = next_time_infeasible
                 self.time_total += time()
 
                 if self.num_solution_callbacks % 5 == 0:
                     self._print_subsolver_stats()
 
+        # self.model.addConstr(
+        #     self.x_pmdri[self.P[0], self.M[0], 0, 1, 0] == 1, name="extra1"
+        # )
+        # self.model.addConstr(
+        #     self.x_pmdri[self.P[1], self.M[0], 0, 1, 0] == 1, name="extra2"
+        # )
+        # self.model.addConstr(
+        #     self.x_pmdri[self.P[0], self.M[1], 0, 1, 0] == 1, name="extra3"
+        # )
+        # self.model.addConstr(
+        #     self.x_pmdri[self.P[1], self.M[2], 0, 1, 0] == 1, name="extra4"
+        # )
         self.model.optimize(_solution_callback)
 
         logger.debug("Finished optimization")
@@ -181,12 +226,16 @@ class LBBDSolver(Solver):
             logger.debug("Sub Objectives:")
             logger.debug(f"(SOLVER):Minimize Delay: {self.md.X}")
             logger.debug(f"(SOLVER):Minimize Missing Treatments: {self.mmt.X}")
-
-            solution = self._extract_solution()
-            return solution
+            self.solution_found = True
         else:
             logger.info("No optimal solution found.")
-            return NO_SOLUTION_FOUND
+            self.solution_found = False
+            # Calculate Minimum Infeasible Subsystem (MIS)
+            self.model.computeIIS()
+            logger.info("Minimum Infeasible Subsystem (MIS) constraints:")
+            for c in self.model.getConstrs():
+                if c.IISConstr:
+                    logger.info(f"{c.constrName}")
 
     def _add_min_patients_violated(self, model, d: int, patients: list[dict]):
         forbidden_vars = []
@@ -215,36 +264,41 @@ class LBBDSolver(Solver):
             logger.info(
                 f"Number of cuts added: {self.count_bad_cuts + self.count_good_cuts} (bad={self.count_bad_cuts}, good={self.count_good_cuts})"
             )
+            logger.info(f"Return infeasible: {self.subsolver.returns_infeasible}")
+            logger.info(f"Return feasible: {self.subsolver.returns_feasible}")
             logger.info(
                 f"Unnecessary comps: ({self.count_unnecessary_comps} / {self.count_good_cuts})"
             )
             logger.info(
                 f"Calls to is_day_infeasible: cp_solver={self.subsolver.calls_to_solve_subsystem}/ total={self.subsolver.calls_to_is_day_infeasible} stored={self.subsolver.calls_to_is_day_infeasible - self.subsolver.calls_to_solve_subsystem}"
             )  # type: ignor
-            logger.info(
-                f"Is feasible: {self.time_is_feasible} {self.time_is_feasible / self.time_total}"
-            )
-            logger.info(
-                "Subsolver: Solve Model: {}/{}".format(
-                    self.subsolver.time_solve_model,  # type: ignore
-                    self.subsolver.time_solve_model  # type: ignore
-                    / (  # type: ignore
-                        self.subsolver.time_create_model  # type: ignore
-                        + self.subsolver.time_solve_model  # type: ignore
-                    ),  # type: ignore
-                )  # type: ignore
-            )  # type: ignore
-            logger.info(  # type: ignore
-                "Subsolver: Create Model: {}/{}".format(  # type: ignore
-                    self.subsolver.time_create_model,  # type: ignore
-                    self.subsolver.time_create_model  # type: ignore
-                    / (  # type: ignore
-                        self.subsolver.time_create_model  # type: ignore
-                        + self.subsolver.time_solve_model  # type: ignore
-                    ),
-                )
-            )
             logger.info(f"Num_constraints-added: {self.num_constraints_added}")
+
+            if self.subsolver.time_create_model + self.subsolver.time_solve_model > 0:  # type: ignore
+                logger.info(
+                    f"Is feasible: {self.time_is_feasible} {self.time_is_feasible / self.time_total}"
+                )
+                logger.info(
+                    "Subsolver: Solve Model: {}/{}".format(
+                        self.subsolver.time_solve_model,  # type: ignore
+                        self.subsolver.time_solve_model  # type: ignore
+                        / (  # type: ignore
+                            self.subsolver.time_create_model  # type: ignore
+                            + self.subsolver.time_solve_model  # type: ignore
+                        ),  # type: ignore
+                    )  # type: ignore
+                )  # type: ignore
+                logger.info(  # type: ignore
+                    "Subsolver: Create Model: {}/{}".format(  # type: ignore
+                        self.subsolver.time_create_model,  # type: ignore
+                        self.subsolver.time_create_model  # type: ignore
+                        / (  # type: ignore
+                            self.subsolver.time_create_model  # type: ignore
+                            + self.subsolver.time_solve_model  # type: ignore
+                        ),
+                    )
+                )
+
         except Exception as e:
             logger.info("Debug Error in print_subsolver_stats")
             logger.error(e)
@@ -260,6 +314,9 @@ class LBBDSolver(Solver):
 
         if "late_scheduled" in result:
             late_scheduled = result["late_scheduled"]
+            logger.debug(
+                f"Late scheduled: {len(late_scheduled)} " + str(dict(late_scheduled))
+            )
             min_cut = patients_mem
 
             for (m, p), num in late_scheduled.items():
@@ -300,9 +357,6 @@ class LBBDSolver(Solver):
                         if abort:
                             break
                     if not abort:
-                        logger.info(
-                            f"d_prime: {d_prime} d:{d} m: {m_added} p: {p_added}"
-                        )
                         model.cbLazy(
                             gp.quicksum(forbidden_vars) <= len(forbidden_vars) - 1
                         )
@@ -470,12 +524,14 @@ class LBBDSolver(Solver):
             total_treatments = sum(self.lr_pm[p, m] for m in self.M_p[p])
 
             minimize_missing_treatment += total_treatments - scheduled_treatments
-
+        # print(minimize_missing_treatment)
+        # print(minimize_delay)
         objective = (
             self.delay_value * minimize_delay  # type: ignore
             + self.missing_treatment_value * minimize_missing_treatment  # type: ignore
         )
         # Create variables for easier extraction of individual values
+        # print(minimize_missing_treatment)
         self.mt = self.model.addVar(name="minimize_treatments", vtype=gp.GRB.CONTINUOUS)
         self.md = self.model.addVar(name="minimize_delay", vtype=gp.GRB.CONTINUOUS)
         self.mmt = self.model.addVar(
@@ -548,14 +604,14 @@ class LBBDSolver(Solver):
                         for r in self.BD_L_pm[p, m]
                     )
                     self.model.addConstr(
-                        num_participants <= self.k_m[m],
+                        num_participants <= self.k_m[m] * self.y_mdi[m, d, i],
                         name=f"constraint_max_participants_m{m.id}_d{d}_i{i}",
                     )
-                    if self.enforce_min_patients_per_treatment:  # type: ignore
-                        self.model.addConstr(
-                            num_participants >= self.j_m[m] * self.y_mdi[m, d, i],
-                            name=f"constraint_min_participants_m{m.id}_d{d}_i{i}",
-                        )
+
+                    self.model.addConstr(
+                        num_participants >= self.j_m[m] * self.y_mdi[m, d, i],
+                        name=f"constraint_min_participants_m{m.id}_d{d}_i{i}",
+                    )
 
         # Constraint: Every patient is assigned to at most the required number of treatments
         for p in self.P:
@@ -608,29 +664,29 @@ class LBBDSolver(Solver):
                 name=f"constraint_r2_b_p{p.id}",
             )
         logger.debug("Constraint (must be admitted) created.")
-        if self.enforce_max_treatments_per_e_w:  # type: ignore
-            # Constraint (a4): Max num of treatments over e_w days
-            for p in self.P:
-                # Skip patients that do not require even distribution as they stay fewer days than the
-                # length of the rolling window
-                if p.length_of_stay <= self.e_w:
-                    continue
-                for d in self.A_p[p]:
-                    # check if the window is partially outside of patients stay => ignore
 
-                    self.model.addConstr(
-                        gp.quicksum(
-                            self.x_pmdri[p, m, d_prime, r, i]
-                            for m in self.M_p[p]
-                            for d_prime in range(d, d + self.e_w)
-                            if d_prime in self.A_p[p]
-                            for r in self.BD_L_pm[p, m]
-                            for i in self.J_md[m, d_prime]
-                        )
-                        <= self.e_w_upper[p],
-                        name=f"constraint_e_w_ub_p{p.id}_d{d}",
+        # Constraint (a4): Max num of treatments over e_w days
+        for p in self.P:
+            # Skip patients that do not require even distribution as they stay fewer days than the
+            # length of the rolling window
+            if p.length_of_stay <= self.e_w:
+                continue
+            for d in self.A_p[p]:
+                # check if the window is partially outside of patients stay => ignore
+
+                self.model.addConstr(
+                    gp.quicksum(
+                        self.x_pmdri[p, m, d_prime, r, i]
+                        for m in self.M_p[p]
+                        for d_prime in range(d, d + self.e_w)
+                        if d_prime in self.A_p[p]
+                        for r in self.BD_L_pm[p, m]
+                        for i in self.J_md[m, d_prime]
                     )
-            logger.debug("Constraint (e_w_ub) created.")
+                    <= self.e_w_upper[p],
+                    name=f"constraint_e_w_ub_p{p.id}_d{d}",
+                )
+        logger.debug("Constraint (e_w_ub) created.")
         # Constraint (a4): Max num of treatments every day
         for p in self.P:
             for d in self.A_p[p]:
@@ -646,46 +702,44 @@ class LBBDSolver(Solver):
                 )
         logger.debug("Constraint (day_ub) created.")
         # Constraint (a5): Min num of treatments every day
-        if self.enforce_min_treatments_per_day:  # type: ignore
-            for p in self.P:
-                for d in self.A_p[p]:
-                    # Test if for day d the patient is always admitted then we can enforce the lower bound
-                    if (
-                        p.admitted_before_date.day - 1
-                        <= d
-                        < p.earliest_admission_date.day + p.length_of_stay
-                    ):
 
-                        self.model.addConstr(
-                            gp.quicksum(
-                                self.x_pmdri[p, m, d, r, i]
-                                for m in self.M_p[p]
-                                for r in self.BD_L_pm[p, m]
-                                for i in self.J_md[m, d]
-                            )
-                            >= self.daily_lower[p],
-                            name=f"constraint_day_always_lb_p{p.id}_d{d}",
+        for p in self.P:
+            for d in self.A_p[p]:
+                # Test if for day d the patient is always admitted then we can enforce the lower bound
+                if (
+                    p.admitted_before_date.day - 1
+                    <= d
+                    < p.earliest_admission_date.day + p.length_of_stay
+                ):
+                    pass
+                    self.model.addConstr(
+                        gp.quicksum(
+                            self.x_pmdri[p, m, d, r, i]
+                            for m in self.M_p[p]
+                            for r in self.BD_L_pm[p, m]
+                            for i in self.J_md[m, d]
                         )
-                    else:
-                        # otherwise only enfore the lowerbound if admitted before
-                        delta_set = [
-                            delta
-                            for delta in self.D_p[p]
-                            if d - self.l_p[p] < delta <= d
-                        ]
+                        >= self.daily_lower[p],
+                        name=f"constraint_day_always_lb_p{p.id}_d{d}",
+                    )
+                else:
+                    # otherwise only enfore the lowerbound if admitted before
+                    delta_set = [
+                        delta for delta in self.D_p[p] if d - self.l_p[p] < delta <= d
+                    ]
 
-                        self.model.addConstr(
-                            gp.quicksum(
-                                self.x_pmdri[p, m, d, r, i]
-                                for m in self.M_p[p]
-                                for r in self.BD_L_pm[p, m]
-                                for i in self.J_md[m, d]
-                            )
-                            >= self.daily_lower[p]
-                            * gp.quicksum(self.a_pd[p, delta] for delta in delta_set),
-                            name=f"constraint_day_lb_p{p.id}_d{d}",
+                    self.model.addConstr(
+                        gp.quicksum(
+                            self.x_pmdri[p, m, d, r, i]
+                            for m in self.M_p[p]
+                            for r in self.BD_L_pm[p, m]
+                            for i in self.J_md[m, d]
                         )
-            logger.debug("Constraint (Day always) created.")
+                        >= self.daily_lower[p]
+                        * gp.quicksum(self.a_pd[p, delta] for delta in delta_set),
+                        name=f"constraint_day_lb_p{p.id}_d{d}",
+                    )
+        logger.debug("Constraint (Day always) created.")
         # Constraint: Make sure that already admitted patients are admitted on the first day of the planning horizon
         for p in self.P:
             if p.already_admitted:
@@ -705,11 +759,11 @@ class LBBDSolver(Solver):
         # Add combined resources groups when resources are in multiple groups
         for d in self.D:
             # Count resource usage
-            for resource_group in resource_groups:
+            for resource_group in sorted(resource_groups):
                 # count max number of available resources time slots
                 avail_resources = 0
                 for f in self.F:
-                    if f.resource_groups.intersection(resource_group):
+                    if set(f.resource_groups).intersection(resource_group):
                         avail_resources += sum(self.av_fdt[f, d, t] for t in self.T)
 
                 all_treatments_require_rg = gp.LinExpr()
@@ -745,13 +799,15 @@ class LBBDSolver(Solver):
                         for i in self.J_md[m, d]
                     )
                 self.model.addConstr(
-                    expr <= len(self.T),
+                    expr <= len(self.T) - 1,
                     name=f"constraint_daily_time_upper_bound_p{p.id}_d{d}",
                 )
 
         pass
 
     def _extract_solution(self):
+        if not self.solution_found:
+            return NO_SOLUTION_FOUND
         # Print all variables if they are 1
         if False:
             for key in self.x_pmdri:
@@ -790,33 +846,3 @@ class LBBDSolver(Solver):
 
     def create_subproblem(self):
         pass
-
-    def generate_unique_tuples(self, lists):
-        num_solutions = 1000
-        worst_case = prod(len(sublist) for sublist in lists)
-        prop = (num_solutions / worst_case) ** (1 / len(lists))
-
-        def backtrack(current_tuple, used_elements, depth):
-            # Base case: If the tuple is complete, yield it
-            if depth == len(lists):
-                yield tuple(current_tuple)
-                return
-
-            # Iterate through the current list at 'depth'
-            for num in lists[depth]:
-                if (
-                    num not in used_elements and random() < prop
-                ):  # Check if num causes duplicates
-                    # Include num in the current tuple and mark it as used
-                    current_tuple.append(num)
-                    used_elements.add(num)
-                    # Recur to the next depth
-                    if random() < 0.1:
-                        yield from backtrack(current_tuple, used_elements, depth + 1)
-
-                    # Backtrack: remove num and unmark it
-                    current_tuple.pop()
-                    used_elements.remove(num)
-
-        # Start backtracking from depth 0
-        return backtrack([], set(), 0)

@@ -12,15 +12,18 @@
       "console": "integratedTerminal"
     },
     {
-      "name": "Python Debugger: Module",
+      "name": "Python Debugger: Module large",
       "type": "debugpy",
       "request": "launch",
       "module": "src",
-      "args": [
-        "MIPSolver3",
-        "{}",
-        "/home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002/instance_1_15.txt"
-      ]
+      "args": ["MIPSolver3", "{}", "data/comp_study_002/instance_10_30.txt"]
+    },
+    {
+      "name": "Python Debugger: Module small",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "src",
+      "args": ["LBBDSolver", "{}", "data/comp_study_002/instance_10_30.txt"]
     },
     {
       "name": "Python Debugger: Table Generation",
@@ -46,14 +49,14 @@
       "request": "launch",
       "module": "src.cluster.create_runtime_plot"
     },
-  {
-  "name": "Python Debugger: Attach",
-  "type": "debugpy",
-  "request": "attach",
-  "connect": {
-    "host": "localhost",
-    "port": 5678
-  }
-}
+    {
+      "name": "Python Debugger: Attach",
+      "type": "debugpy",
+      "request": "attach",
+      "connect": {
+        "host": "localhost",
+        "port": 5678
+      }
+    }
   ]
 }

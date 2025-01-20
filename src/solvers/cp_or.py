@@ -308,25 +308,24 @@ class CPSolver(Solver):
 
                 self.model.add(cp_model.LinearExpr.Sum(patients_list) <= self.k_m[m])
 
-        if self.enforce_min_patients_per_treatment:  # type:ignore
-            # Constraint: A treatment is provided for at least j_m patients
-            for m in self.M:
-                # loop over all patients that could attend this treatment
+        # Constraint: A treatment is provided for at least j_m patients
+        for m in self.M:
+            # loop over all patients that could attend this treatment
 
-                for rep in self.I_m[m]:
-                    patients_list = []
-                    for p in self.P:
-                        if m not in self.M_p[p]:
-                            continue
+            for rep in self.I_m[m]:
+                patients_list = []
+                for p in self.P:
+                    if m not in self.M_p[p]:
+                        continue
 
-                        patients_list.append(
-                            self.patient_vars[p][m][rep]["patient2treatment"]
-                        )
-
-                    self.model.add(
-                        cp_model.LinearExpr.Sum(patients_list)
-                        >= self.j_m[m] * self.treatment_vars[m][rep]["is_present"]
+                    patients_list.append(
+                        self.patient_vars[p][m][rep]["patient2treatment"]
                     )
+
+                self.model.add(
+                    cp_model.LinearExpr.Sum(patients_list)
+                    >= self.j_m[m] * self.treatment_vars[m][rep]["is_present"]
+                )
 
         # CONSTRAINT P2: every patient has only a single treatment at a time
         for p, ptreatment_vars in self.patient_vars.items():
@@ -571,152 +570,145 @@ class CPSolver(Solver):
                 f"Invalid max_repr value: {self.max_repr}"  # type:ignore
             )  # type:ignore
 
-        if self.enforce_min_treatments_per_day:  # type:ignore
-            if self.min_repr == "reservoir":  # type:ignore
-                for p in self.P:
-                    # Create new intervals
-                    time_slots = [
-                        self.admission_vars[p] * self.num_time_slots
-                        + int((self.e_w - 0.5) * self.num_time_slots - 1),
-                        (self.admission_vars[p] * self.num_time_slots)
-                        + int(self.num_time_slots * (self.l_p[p] - 0.5)),
-                    ]
-                    demands = [-self.e_w_lower[p], self.e_w_lower[p]]
-                    active_treatments = [True, True]
-                    for m in self.M_p[p]:
-                        for rep in self.I_m[m]:
-                            time_slots.append(
-                                self.patient_vars[p][m][rep]["interval"].start_expr()
-                            )
-                            demands.append(1)
-                            active_treatments.append(
-                                self.patient_vars[p][m][rep]["patient2treatment"]
-                            )
-
-                            time_slots.append(
-                                self.patient_vars[p][m][rep]["interval"].start_expr()
-                                + (
-                                    (self.e_w - 1) * self.num_time_slots
-                                    + int(self.num_time_slots / 2)
-                                )
-                            )
-                            demands.append(-1)
-                            active_treatments.append(
-                                self.patient_vars[p][m][rep]["patient2treatment"]
-                            )
-
-                    self.model.add_reservoir_constraint_with_active(
-                        time_slots,
-                        demands,
-                        active_treatments,
-                        min_level=0,
-                        max_level=100,
-                    )
-                pass
-            elif self.min_repr == "cumulative":  # type:ignore
-
-                for ind, p in enumerate(self.P):
-                    if p.earliest_admission_date.day > self.instance.horizon_length:
-                        # if patient cannot even be admitted then ignore its min constraints
-                        continue
-                    start_slot = 0
-                    end_slot_horizon = len(self.D) * self.num_time_slots
-
-                    if self.daily_lower[p] == 0:
-                        continue
-                    # Create new intervals
-                    end_position = self.model.new_int_var(
-                        0,
-                        (len(self.D) + 2) * self.num_time_slots,
-                        name=f"end_min_p{p.id}",
-                    )
-                    self.model.add_min_equality(
-                        end_position,
-                        [
-                            end_slot_horizon,
-                            self.admission_vars[p] * self.num_time_slots
-                            + int(self.l_p[p] * self.num_time_slots + 1),
-                        ],
-                    )
-                    size_var = self.model.new_int_var(
-                        0, len(self.D) * self.num_time_slots, f"size_min_p{p.id}"
-                    )
-                    intervals = [
-                        self.model.new_interval_var(
-                            start=self.admission_vars[p] * self.num_time_slots
-                            + int(self.num_time_slots / 2 - 1),
-                            size=size_var,
-                            end=end_position,
-                            name=f"min_treatment_int_dummy_p{p.id}",
+        if self.min_repr == "reservoir":  # type:ignore
+            for p in self.P:
+                # Create new intervals
+                time_slots = [
+                    self.admission_vars[p] * self.num_time_slots
+                    + int((self.e_w - 0.5) * self.num_time_slots - 1),
+                    (self.admission_vars[p] * self.num_time_slots)
+                    + int(self.num_time_slots * (self.l_p[p] - 0.5)),
+                ]
+                demands = [-self.e_w_lower[p], self.e_w_lower[p]]
+                active_treatments = [True, True]
+                for m in self.M_p[p]:
+                    for rep in self.I_m[m]:
+                        time_slots.append(
+                            self.patient_vars[p][m][rep]["interval"].start_expr()
                         )
-                    ]
+                        demands.append(1)
+                        active_treatments.append(
+                            self.patient_vars[p][m][rep]["patient2treatment"]
+                        )
 
-                    demands = [self.daily_lower[p]]
-                    length_middle = int(self.num_time_slots * 1.5)
-
-                    # demands = []
-                    count_intervals = 0
-                    for m in self.M_p[p]:
-                        for rep in self.I_m[m]:
-                            new_int_var_start = self.model.new_interval_var(
-                                start=start_slot,
-                                size=self.patient_vars[p][m][rep][
-                                    "interval"
-                                ].start_expr(),
-                                end=self.patient_vars[p][m][rep][
-                                    "interval"
-                                ].start_expr(),
-                                name=f"min_treatment_int_start_p{p.id}_m{m.id}",
+                        time_slots.append(
+                            self.patient_vars[p][m][rep]["interval"].start_expr()
+                            + (
+                                (self.e_w - 1) * self.num_time_slots
+                                + int(self.num_time_slots / 2)
                             )
+                        )
+                        demands.append(-1)
+                        active_treatments.append(
+                            self.patient_vars[p][m][rep]["patient2treatment"]
+                        )
 
-                            new_int_var_middle = (
-                                self.model.new_optional_fixed_size_interval_var(
-                                    start=self.patient_vars[p][m][rep][
-                                        "interval"
-                                    ].start_expr(),
-                                    size=length_middle,
-                                    is_present=self.patient_vars[p][m][rep][
-                                        "patient2treatment"
-                                    ].Not(),
-                                    name=f"min_treatment_int_middle_p{p.id}_m{m.id}",
-                                )
-                            )
+                self.model.add_reservoir_constraint_with_active(
+                    time_slots,
+                    demands,
+                    active_treatments,
+                    min_level=0,
+                    max_level=100,
+                )
+            pass
+        elif self.min_repr == "cumulative":  # type:ignore
 
-                            end_length = self.model.new_int_var(
-                                0,
-                                (len(self.D) + 2) * self.num_time_slots,
-                                f"min_cumulative_end_p{p.id}_m{m.id}",
-                            )
+            for ind, p in enumerate(self.P):
+                if p.earliest_admission_date.day > self.instance.horizon_length:
+                    # if patient cannot even be admitted then ignore its min constraints
+                    continue
+                start_slot = 0
+                end_slot_horizon = len(self.D) * self.num_time_slots
 
-                            new_int_var_end = self.model.new_interval_var(
+                if self.daily_lower[p] == 0:
+                    continue
+                # Create new intervals
+                end_position = self.model.new_int_var(
+                    0,
+                    (len(self.D) + 2) * self.num_time_slots,
+                    name=f"end_min_p{p.id}",
+                )
+                self.model.add_min_equality(
+                    end_position,
+                    [
+                        end_slot_horizon,
+                        self.admission_vars[p] * self.num_time_slots
+                        + int(self.l_p[p] * self.num_time_slots + 1),
+                    ],
+                )
+                size_var = self.model.new_int_var(
+                    0, len(self.D) * self.num_time_slots, f"size_min_p{p.id}"
+                )
+                intervals = [
+                    self.model.new_interval_var(
+                        start=self.admission_vars[p] * self.num_time_slots
+                        + int(self.num_time_slots / 2 - 1),
+                        size=size_var,
+                        end=end_position,
+                        name=f"min_treatment_int_dummy_p{p.id}",
+                    )
+                ]
+
+                demands = [self.daily_lower[p]]
+                length_middle = int(self.num_time_slots * 1.5)
+
+                # demands = []
+                count_intervals = 0
+                for m in self.M_p[p]:
+                    for rep in self.I_m[m]:
+                        new_int_var_start = self.model.new_interval_var(
+                            start=start_slot,
+                            size=self.patient_vars[p][m][rep]["interval"].start_expr(),
+                            end=self.patient_vars[p][m][rep]["interval"].start_expr(),
+                            name=f"min_treatment_int_start_p{p.id}_m{m.id}",
+                        )
+
+                        new_int_var_middle = (
+                            self.model.new_optional_fixed_size_interval_var(
                                 start=self.patient_vars[p][m][rep][
                                     "interval"
-                                ].start_expr()
-                                + (int(self.num_time_slots * 1.5)),
-                                size=end_length,
-                                end=end_slot_horizon + length_middle,
-                                name=f"min_treatment_int_end_p{p.id}_m{m.id}",
+                                ].start_expr(),
+                                size=length_middle,
+                                is_present=self.patient_vars[p][m][rep][
+                                    "patient2treatment"
+                                ].Not(),
+                                name=f"min_treatment_int_middle_p{p.id}_m{m.id}",
                             )
+                        )
 
-                            intervals.append(new_int_var_start)
-                            intervals.append(new_int_var_middle)
-                            intervals.append(new_int_var_end)
-                            count_intervals += 1
+                        end_length = self.model.new_int_var(
+                            0,
+                            (len(self.D) + 2) * self.num_time_slots,
+                            f"min_cumulative_end_p{p.id}_m{m.id}",
+                        )
 
-                    demands += [1] * (len(intervals) - len(demands))
+                        new_int_var_end = self.model.new_interval_var(
+                            start=self.patient_vars[p][m][rep]["interval"].start_expr()
+                            + (int(self.num_time_slots * 1.5)),
+                            size=end_length,
+                            end=end_slot_horizon + length_middle,
+                            name=f"min_treatment_int_end_p{p.id}_m{m.id}",
+                        )
 
-                    self.model.add_cumulative(
-                        intervals=intervals,
-                        demands=demands,
-                        capacity=count_intervals,
-                    )
+                        intervals.append(new_int_var_start)
+                        intervals.append(new_int_var_middle)
+                        intervals.append(new_int_var_end)
+                        count_intervals += 1
 
-            elif self.min_repr == "day-variables":  # type:ignore
-                pass
-            else:
-                logger.warning(
-                    f"Invalid min_repr value: {self.min_repr}"  # type:ignore
-                )  #
+                demands += [1] * (len(intervals) - len(demands))
+
+                self.model.add_cumulative(
+                    intervals=intervals,
+                    demands=demands,
+                    capacity=count_intervals,
+                )
+
+        elif self.min_repr == "day-variables":  # type:ignore
+            pass
+        else:
+            logger.warning(
+                f"Invalid min_repr value: {self.min_repr}"  # type:ignore
+            )  #
 
     def _extract_solution(self, solver):
         appointments_dict = {}

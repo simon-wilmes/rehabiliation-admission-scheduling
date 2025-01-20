@@ -14,6 +14,9 @@ class ResourceGroup:
     def __repr__(self):
         return self.__str__()
 
+    def __lt__(self, other):
+        return self.id < other.id
+
 
 class Resource:
 
@@ -29,7 +32,7 @@ class Resource:
             unavailable_time_slots = []
 
         self.id = rid
-        self.resource_groups = set(resource_groups)
+        self.resource_groups = sorted(resource_groups)
         self.name = name
         self.unavailable_time_slots = unavailable_time_slots
 
@@ -53,3 +56,6 @@ class Resource:
                         return False
 
         return True
+
+    def __lt__(self, other):
+        return self.id < other.id

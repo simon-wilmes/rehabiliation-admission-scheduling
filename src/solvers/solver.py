@@ -18,18 +18,12 @@ from time import time
 class Solver(ABC):
     BASE_SOLVER_OPTIONS = {
         "number_of_threads": [1, 4, 8, 12],
-        "enforce_min_treatments_per_day": [True, False],
-        "enforce_max_treatments_per_e_w": [True, False],
-        "enforce_min_patients_per_treatment": [True, False],
     }
     BASE_SOLVER_DEFAULT_OPTIONS = {
-        "number_of_threads": 1,
+        "number_of_threads": 20,
         "treatment_value": 0,
         "delay_value": 1,
         "missing_treatment_value": 4,
-        "enforce_min_treatments_per_day": True,
-        "enforce_max_treatments_per_e_w": True,
-        "enforce_min_patients_per_treatment": True,
         "log_to_console": True,
         "log_to_file": True,
     }
@@ -47,13 +41,18 @@ class Solver(ABC):
             if key in kwargs:
                 setattr(self, key, kwargs[key])
                 logger.debug(f" ---- {key} to {kwargs[key]}")
+                del kwargs[key]
             else:
                 setattr(self, key, self.__class__.BASE_SOLVER_DEFAULT_OPTIONS[key])
                 logger.debug(
                     f" ---- {key} to { self.__class__.BASE_SOLVER_DEFAULT_OPTIONS[key]} (default)"
                 )
-
+        assert len(kwargs) == 0, "Unknown options: " + ", ".join(kwargs.keys())
         self.instance = instance
+
+    @abstractmethod
+    def _extract_solution(self) -> Solution:
+        pass
 
     def get_avg_treatments_per_e_w(self, p: Patient):
         return sum(self.lr_pm[p, m] for m in self.M_p[p]) * self.e_w / p.length_of_stay
@@ -62,7 +61,10 @@ class Solver(ABC):
         logger.info("Solving model: %s", self.__class__.__name__)
         self.time_solve_model = time()
 
-        solution = self._solve_model()
+        self._solve_model()
+        self.time_extract_solution = time()
+        solution = self._extract_solution()
+        self.time_extract_solution = time() - self.time_extract_solution
 
         if check_better_solution and type(solution) is Solution:
             solution.check_other_solvers()
@@ -74,10 +76,14 @@ class Solver(ABC):
                 round(self.time_solve_model, 3),
                 solution.value,
             )
+            logger.info(
+                "Extract solution time: %ss", round(self.time_extract_solution, 3)
+            )
             self.objective = solution.value
             logger.info(
                 "Total Time: %ss", round(time() - self.time_create_model_start, 3)
             )
+
             self.total_time = round(time() - self.time_create_model_start, 3)
         else:
             logger.info(
@@ -281,8 +287,16 @@ class Solver(ABC):
             m: list(range(floor(self.treatment_count[m] / self.j_m[m]))) for m in self.M
         }
 
+        # Maximum daily number of repetititions possible of treatment m, resource and time wise
         self.J_md = {
-            (m, d): list(range(self._max_needed_repetitions(m, d)))
+            (m, d): list(range(self._max_needed_repetitions_per_day(m, d)))
+            for m in self.M
+            for d in self.D
+        }
+
+        # Maximum number of repetitions of treatment m, that can start at the same time slot on day d
+        self.I_md = {
+            (m, d): list(range(self._max_needed_repetitions_per_time_slot(m, d)))
             for m in self.M
             for d in self.D
         }
@@ -331,7 +345,7 @@ class Solver(ABC):
         for app in schedule:
             self._assert_appointment(app)
 
-    def _max_needed_repetitions(self, m: Treatment, d: int):
+    def _max_needed_repetitions_per_day(self, m: Treatment, d: int):
         avail_resource_units = defaultdict(int)
 
         for fhat in m.resources:
@@ -345,17 +359,14 @@ class Solver(ABC):
                 floor(x / (m.resources[fhat] * self.du_m[m])), max_reps_resources
             )
 
-        max_reps_patients = 0
-        for p in self.P:
-            if (
-                d < p.earliest_admission_date.day
-                or d > p.admitted_before_date.day + p.length_of_stay
-            ):
-                continue
-            if m not in self.M_p[p]:
-                continue
-            max_reps_patients += self.daily_upper[p]
+        return max_reps_resources
 
-        max_reps_patients = floor(max_reps_patients / self.j_m[m])
+    def _max_needed_repetitions_per_time_slot(self, m: Treatment, d: int) -> int:
+        max_number = 1000000
 
-        return min(max_reps_resources, max_reps_patients)
+        for fhat in m.resources:
+            max_number = min(
+                floor(len(self.fhat[fhat]) / m.resources[fhat]), max_number
+            )
+
+        return max_number

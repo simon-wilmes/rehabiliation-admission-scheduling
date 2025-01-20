@@ -5,6 +5,11 @@ from itertools import product
 import sys
 import io
 
+CP_PATH = (
+    "/home/simon/ibm/ILOG/CPLEX_Studio2211/cpoptimizer/bin/x86-64_linux/cpoptimizer"
+)
+
+
 A = TypeVar("A")
 B = TypeVar("B")
 

@@ -13,6 +13,7 @@ from src.solution import Solution, Appointment
 from src.time import DayHour
 from itertools import combinations
 from time import time
+from math import floor
 
 
 class CPSubsolver(Subsolver):
@@ -20,29 +21,22 @@ class CPSubsolver(Subsolver):
     SOLVER_OPTIONS = Subsolver.BASE_SOLVER_OPTIONS.copy()
     SOLVER_OPTIONS.update(
         {
-            "estimated_needed_treatments": [True, False],
-            "add_patient_symmetry": [True, False],
+            "restrict_obj_func_to_1": [True, False],
         }
     )  # Add any additional options here
     SOLVER_DEFAULT_OPTIONS = {
-        "estimated_needed_treatments": True,
-        "add_patient_symmetry": False,
+        "restrict_obj_func_to_1": False,
     }
 
     def __init__(self, instance: Instance, solver: Solver, **kwargs):
         logger.debug(f"Setting options: {self.__class__.__name__}")
-
-        for key in kwargs:
-            assert (
-                key in self.__class__.BASE_SOLVER_DEFAULT_OPTIONS
-                or key in self.__class__.SOLVER_DEFAULT_OPTIONS
-            ), f"Invalid option: {key}"
 
         for key in self.__class__.SOLVER_DEFAULT_OPTIONS:
 
             if key in kwargs:
                 setattr(self, key, kwargs[key])
                 logger.debug(f" ---- {key} to {kwargs[key]}")
+                del kwargs[key]
             else:
                 setattr(self, key, self.__class__.SOLVER_DEFAULT_OPTIONS[key])
                 logger.debug(
@@ -56,33 +50,26 @@ class CPSubsolver(Subsolver):
         self.time_solve_model = 0
 
     def create_parameters(self):
-        if self.add_patient_symmetry:  # type:ignore
-            # Compute for what treatment and days a patient is symmetric
-            self.patients_symmetry = defaultdict(list)
-
-            for p1, p2 in combinations(self.solver.P, r=2):
-                if p1 == p2:
-                    continue
-                D_p1p2 = set(self.solver.A_p[p1]) & set(self.solver.A_p[p2])
-                for m in self.solver.M:
-                    if not (m in self.solver.M_p[p1] and m in self.solver.M_p[p2]):
-                        continue
-                    rep = min(self.solver.lr_pm[p1, m], self.solver.lr_pm[p2, m])
-                    for d in D_p1p2:
-                        for r in range(rep + 1):
-                            self.patients_symmetry[(p1, d, m, r)].append(p2)
-                            self.patients_symmetry[(p2, d, m, r)].append(p1)
         pass
 
     def create_model(self, day: int, patients: dict[Treatment, dict[Patient, int]]):
+        logger.debug("SUBSOLVER DAY:" + str(day))
+        logger.debug("SUBSOLVER PATIENTS:" + str(patients))
+
         M_p = {p: [m for m in patients if p in patients[m]] for p in self.solver.P}
 
         model = cp_model.CpModel()
+
         all_appointments = [m for m in patients.keys() if len(patients[m]) > 0]
         all_patients = {p for m in patients for p in patients[m]}
 
-        max_appointments = {m: sum(patients[m].values()) for m in all_appointments}
-
+        max_appointments = {
+            m: min(
+                floor(sum(patients[m].values())),
+                max(self.solver.J_md[m, day]) + 1,
+            )
+            for m in all_appointments
+        }
         appointment_vars: dict[Treatment, dict[int, dict]] = {
             m: {} for m in all_appointments
         }
@@ -180,23 +167,20 @@ class CPSubsolver(Subsolver):
                         <= self.solver.k_m[m]
                     )
 
-        if self.enforce_min_patients_per_treatment:  # type:ignore
-            # Constraint: Every Treatment has at least j_m patients if treatment is scheduled
-            # If not set boolean variable min_patients[m] to true
-            min_patients = {}
-            for m in appointment_vars:
-                min_patients[m] = {}
-                for r in appointment_vars[m]:
-                    min_patients[m][r] = model.new_bool_var(
-                        f"min_patients_m{m.id}_r{r}"
+        # Constraint: Every Treatment has at least j_m patients if treatment is scheduled
+        # If not set boolean variable min_patients[m] to true
+        min_patients = {}
+        for m in appointment_vars:
+            min_patients[m] = {}
+            for r in appointment_vars[m]:
+                min_patients[m][r] = model.new_bool_var(f"min_patients_m{m.id}_r{r}")
+                model.add_hint(min_patients[m][r], False)
+                model.add(
+                    cp_model.LinearExpr.Sum(
+                        [patient_vars[m][p][r] for p in patients[m]]
                     )
-                    model.add_hint(min_patients[m][r], False)
-                    model.add(
-                        cp_model.LinearExpr.Sum(
-                            [patient_vars[m][p][r] for p in patients[m]]
-                        )
-                        >= self.solver.j_m[m] * appointment_vars[m][r]["is_present"]
-                    ).only_enforce_if(min_patients[m][r].Not())
+                    >= self.solver.j_m[m] * appointment_vars[m][r]["is_present"]
+                ).only_enforce_if(min_patients[m][r].Not())
 
         # CONSTRAINT P2: every patient has only a single treatment at a time
 
@@ -262,11 +246,20 @@ class CPSubsolver(Subsolver):
 
             model.add_no_overlap(intervals_using_f)
 
-        if self.enforce_min_patients_per_treatment:  # type:ignore
-            min_vars_sum = []
-            for m in min_patients:
-                min_vars_sum.extend(min_patients[m].values())
-            model.Minimize(cp_model.LinearExpr.Sum(min_vars_sum))
+        min_vars_sum = []
+        for m in min_patients:
+            min_vars_sum.extend(min_patients[m].values())
+
+        if self.restrict_obj_func_to_1:  # type: ignore
+            is_positive = model.new_bool_var("is_positive")
+            model.add(cp_model.LinearExpr.Sum(min_vars_sum) == 0).only_enforce_if(
+                is_positive.Not()
+            )
+
+            # Minimize the binary variable
+            model.minimize(is_positive)
+        else:
+            model.minimize(cp_model.LinearExpr.Sum(min_vars_sum))
 
         return model, appointment_vars, patient_vars
 
@@ -278,6 +271,8 @@ class CPSubsolver(Subsolver):
         sub_solver.parameters.log_search_progress = (
             False  # self.solver.log_to_console  # type: ignore
         )
+        sub_solver.parameters.num_workers = self.solver.number_of_threads  # type: ignore
+
         model, appointment_vars, patient_vars = self.create_model(day, patients)
         status = sub_solver.Solve(model)
         assert status == cp_model.OPTIMAL, f"Subsolver on day {day} is not optimal"
@@ -326,8 +321,9 @@ class CPSubsolver(Subsolver):
         # logger.debug("Solving subsystem with CPSubsolver")
         sub_solver = cp_model.CpSolver()
         sub_solver.parameters.log_search_progress = (
-            False  # self.solver.log_to_console  # type: ignore
+            True  # self.solver.log_to_console  # type: ignore
         )
+        sub_solver.parameters.num_workers = 20
         self.time_create_model -= time()
         model, appointment_vars, patient_vars = self.create_model(day, patients)
         self.time_create_model += time()
@@ -338,7 +334,7 @@ class CPSubsolver(Subsolver):
             if sub_solver.objective_value == 0:
                 # logger.debug("Objective value is 0")
                 # Print out all varibles
-                if False:
+                if True:
                     for m in appointment_vars:
                         for rep in appointment_vars[m]:
                             if sub_solver.value(appointment_vars[m][rep]["is_present"]):

@@ -1,153 +1,140 @@
-def generate_unique_tuples(lists):
-    def backtrack(current_tuple, used_elements, depth):
-        # Base case: If the tuple is complete, yield it
-        if depth == len(lists):
-            yield tuple(current_tuple)
-            return
-
-        # Iterate through the current list at 'depth'
-        for num in lists[depth]:
-            if num not in used_elements:  # Check if num causes duplicates
-                # Include num in the current tuple and mark it as used
-                current_tuple.append(num)
-                used_elements.add(num)
-
-                # Recur to the next depth
-                yield from backtrack(current_tuple, used_elements, depth + 1)
-
-                # Backtrack: remove num and unmark it
-                current_tuple.pop()
-                used_elements.remove(num)
-
-    # Start backtracking from depth 0
-    return backtrack([], set(), 0)
+from random import randint as rand
+from random import random as randf
+import numpy as np
+from gurobipy import Model, GRB, quicksum
 
 
-from itertools import product
+def set_max_k_values_to_one(matrix, k):
+    # Flatten the 2D list and find the k-th largest value
+    flattened = [val for row in matrix for val in row]
+    threshold = sorted(flattened, reverse=True)[k - 1]
 
-
-def product_of_unique_entries(lists):
-    # Step 1: Generate all combinations (one entry from each list)
-    all_combinations = product(*lists)
-
-    # Step 2: Filter out combinations where integers are not unique
-    result = [tup for tup in all_combinations if len(set(tup)) == len(tup)]
-
+    # Create a new matrix with values set to 1 or 0
+    result = [[1 if val >= threshold else 0 for val in row] for row in matrix]
     return result
 
 
-def generate_unique_tuples2(lists):
-    # Sort lists by their length and keep track of original indices
-    sorted_lists = sorted(enumerate(lists), key=lambda x: len(x[1]))
-    indices, sorted_lists = zip(*sorted_lists)
-
-    def backtrack(current_tuple, used_elements, depth):
-        # Base case: If the tuple is complete, reorder it and yield
-        if depth == len(sorted_lists):
-            # Reorder tuple to match the original list order
-            yield tuple(current_tuple[i] for i in indices)
-            return
-
-        # Iterate through the current list at 'depth'
-        for num in sorted_lists[depth]:
-            if num not in used_elements:  # Check for duplicates
-                # Include num in the current tuple and mark it as used
-                current_tuple.append(num)
-                used_elements.add(num)
-
-                # Recur to the next depth
-                yield from backtrack(current_tuple, used_elements, depth + 1)
-
-                # Backtrack: remove num and unmark it
-                current_tuple.pop()
-                used_elements.remove(num)
-
-    # Start backtracking
-    return backtrack([], set(), 0)
+n = 0
 
 
-from collections import Counter
+def run_algo(board, a, b, c):
+    # OPTIMAL
+    # All players' requirements
+    players = ["A", "B", "C"]
+    requirements = {"A": a, "B": b, "C": c}
 
+    # Dimensions
+    num_slots = len(board)
+    num_resources = len(board[0])
+    num_tasks = len(a)  # All players have the same number of tasks
 
-def generate_unique_tuples3(lists):
-    # Step 1: Compute global frequency of all elements across all lists
-    element_freq = Counter(num for sublist in lists for num in set(sublist))
+    # Create the model
+    model = Model("Player Task Scheduling")
 
-    # Step 2: Sort lists based on their "restrictiveness"
-    # A list is restrictive if it contains rare elements (low frequency)
-    def list_restrictiveness(lst):
-        return sum(element_freq[num] for num in set(lst)) / len(set(lst))
+    # Decision variables
+    x = model.addVars(
+        players,
+        range(num_tasks),
+        range(num_slots),
+        range(num_resources),
+        vtype=GRB.BINARY,
+        name="x",
+    )  # x[p, t, l, r] = 1 if player p completes task t at time l using resource r
 
-    sorted_lists_with_indices = sorted(
-        enumerate(lists), key=lambda x: list_restrictiveness(x[1])
+    finish_time = model.addVars(players, vtype=GRB.INTEGER, name="finish_time")
+
+    # Constraints
+
+    # 1. Resource availability (only use resources available in the board)
+    for l in range(num_slots):
+        for r in range(num_resources):
+            model.addConstr(
+                quicksum(x[p, t, l, r] for p in players for t in range(num_tasks))
+                <= board[l][r],
+                name=f"resource_avail_t{l}_r{r}",
+            )
+
+    # 2. Each task is completed exactly once per player
+    for p in players:
+        for t in range(num_tasks):
+            model.addConstr(
+                quicksum(
+                    x[p, t, l, r]
+                    for l in range(num_slots)
+                    for r in range(num_resources)
+                )
+                == 1,
+                name=f"task_once_{p}_t{t}",
+            )
+
+    # 3. Sequential tasks for each player
+    for p in players:
+        for t in range(1, num_tasks):  # Skip t=0 since it has no prerequisite
+            for l in range(num_slots):
+                model.addConstr(
+                    quicksum(x[p, t, lp, requirements[p][t]] for lp in range(l))
+                    >= quicksum(
+                        x[p, t - 1, l, requirements[p][t - 1]] for l in range(num_slots)
+                    ),
+                    name=f"sequential_{p}_t{t}_l{l}",
+                )
+
+    # 4. Each resource can only be used by one player per time slot
+    for l in range(num_slots):
+        for r in range(num_resources):
+            model.addConstr(
+                quicksum(x[p, t, l, r] for p in players for t in range(num_tasks)) <= 1,
+                name=f"resource_unique_t{l}_r{r}",
+            )
+
+    # Define finish_time as the maximum time slot where the last task is completed
+    for p in players:
+        model.addConstr(
+            finish_time[p]
+            == quicksum(
+                l * quicksum(x[p, num_tasks - 1, l, i] for i in range(num_resources))
+                for l in range(num_slots)
+            ),
+            name=f"finish_time_{p}",
+        )
+
+    # Objective: Minimize average finish time
+    model.setObjective(
+        quicksum(finish_time[p] for p in players) / len(players), GRB.MINIMIZE
     )
-    indices, sorted_lists = zip(*sorted_lists_with_indices)
 
-    def backtrack(current_tuple, used_elements, depth):
-        # Base case: If the tuple is complete, reorder and yield it
-        if depth == len(sorted_lists):
-            yield tuple(current_tuple[i] for i in indices)
-            return
-
-        # Step through the current list
-        for num in sorted_lists[depth]:
-            if num not in used_elements:
-                # Add num to the tuple and mark as used
-                current_tuple.append(num)
-                used_elements.add(num)
-
-                # Recursive call
-                yield from backtrack(current_tuple, used_elements, depth + 1)
-
-                # Backtrack
-                current_tuple.pop()
-                used_elements.remove(num)
-
-    # Start backtracking
-    return backtrack([], set(), 0)
+    # Optimize
+    model.optimize()
+    # Print results
+    if model.status == GRB.OPTIMAL:
+        print("\nOptimal Solution Found:")
+        for p in players:
+            for t in range(num_tasks):
+                for l in range(num_slots):
+                    for r in range(num_resources):
+                        if x[p, t, l, r].X > 0.5:
+                            print(
+                                f"Player {p} completes task {t} at time {l} using resource {r}"
+                            )
+        print("\nFinish Times:")
+        for p in players:
+            print(f"Player {p}: {finish_time[p].X}")
+        print(f"\nAverage Finish Time: {model.objVal}")
+    else:
+        print("No optimal solution found.")
 
 
-# Example usage
-lists = [[1, 2, 3, 2], [2, 3, 4], [1, 3, 5]]  # 4 elements  # 3 elements  # 3 elements
+while True:
+    a = [rand(0, 2) for _ in range(3)]
+    b = [rand(0, 2) for _ in range(3)]
+    c = [rand(0, 2) for _ in range(3)]
 
-# Generate tuples
-unique_tuples = list(generate_unique_tuples(lists))
-print("Unique tuples:", unique_tuples)
-
-
-from time import time
-
-example = [
-    [1, 2, 3, 4, 5, 6, 7, 8, 12],
-    [2, 3, 4, 5, 6, 8, 12],
-    # [3, 4, 5, 9, 12],
-    # [1, 2, 12],
-    # [1, 2, 3, 4],
-    # [3, 4, 5, 6, 9],
-    # [3, 4, 5, 6, 7],
-    # [3, 5, 7, 8],
-    # [1, 2, 3, 4, 5, 6],
-    # [6, 7, 8, 9],
-    # [10, 2, 3, 5],
-    # [11, 2, 4],
-]
-
-timea = time()
-
-resulta = list(generate_unique_tuples(example))
-timea = time() - timea
-
-timec = time()
-resultb = list(generate_unique_tuples2(example))
-timec = time() - timec
-
-timeb = time()
-resultc = list(generate_unique_tuples3(example))
-timeb = time() - timeb
-print(resulta)
-print(resultb)
-print(resultc)
-assert set(resulta) == set(resultb)
-assert set(resultb) == set(resultc)
-assert set(resultc) == set(resulta)
-print(timea, timec, timeb)
+    l = rand(12, 21)
+    board = []
+    for i in range(l):
+        board.append([])
+        for _ in range(0, 3):
+            board[-1].append(randf())
+    max_value = rand(9, 12)
+    board = set_max_k_values_to_one(board, max_value)
+    run_algo(board, a, b, c)

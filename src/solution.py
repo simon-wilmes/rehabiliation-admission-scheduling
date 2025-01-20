@@ -10,7 +10,7 @@ from typing import Type
 from src.utils import slice_dict
 from collections import defaultdict
 from math import ceil, floor
-
+import hashlib
 
 # Define the return code for the solver when no solution is found
 NO_SOLUTION_FOUND = 0
@@ -56,12 +56,11 @@ class Appointment:
             )
             # Check that no more than the maximum number of patients take part in this treatment
 
-        if self.solver and self.solver.enforce_min_patients_per_treatment:  # type: ignore
-            if len(self.patients) < self.treatment.min_num_participants:
-                raise ValueError(
-                    f"Appointment has {len(self.patients)} patients, but the minimum is {self.treatment.min_num_participants} "
-                    f"at day {self.start_date.day}, hour {self.start_date.hour}."
-                )
+        if len(self.patients) < self.treatment.min_num_participants:
+            raise ValueError(
+                f"Appointment has {len(self.patients)} patients, but the minimum is {self.treatment.min_num_participants} "
+                f"at day {self.start_date.day}, hour {self.start_date.hour}."
+            )
 
     def __le__(self, other):
         return self.start_date <= other.start_date
@@ -121,6 +120,38 @@ class Solution:
             ), "Solution value does not match calculated value."
 
             logger.debug("Solution is valid.")
+
+    def _print_hash(self):
+        def hash_appointments(appointments):
+            appointments_str = sorted(
+                f"{appt.start_date.day}-{appt.start_date.hour}-{appt.treatment.id}-"
+                f"{sorted(p.id for p in appt.patients)}-"
+                f"{sorted((rg.id, sorted(r.id for r in res)) for rg, res in appt.resources.items())}"
+                for appt in appointments
+            )
+            return hashlib.md5("".join(appointments_str).encode()).hexdigest()
+
+        def hash_patients_arrival(patients_arrival):
+            arrival_str = sorted(
+                f"{patient.id}-{dayhour.day}-{dayhour.hour}"
+                for patient, dayhour in patients_arrival.items()
+            )
+            return hashlib.md5("".join(arrival_str).encode()).hexdigest()
+
+        schedule_hash = hash_appointments(self.schedule)
+        patients_arrival_hash = hash_patients_arrival(self.patients_arrival)
+        solver_hash = (
+            hashlib.md5(str(self.solver).encode()).hexdigest()
+            if self.solver
+            else "None"
+        )
+
+        print(f"Schedule Hash: {schedule_hash}")
+        print(f"Patients Arrival Hash: {patients_arrival_hash}")
+        print(f"Solver Hash: {solver_hash}")
+        print(
+            f"Solution Hash: {hashlib.md5((schedule_hash + patients_arrival_hash + solver_hash).encode()).hexdigest()}"
+        )
 
     def check_other_solvers(self):
         from src.solvers import CPSolver, CPSolver2, MIPSolver, MIPSolver2, Solver
@@ -221,8 +252,10 @@ class Solution:
         self._check_total_treatments_scheduled()
         self._check_no_treatments_outside_horizont()
         self._check_daily_scheduling()
-        if self.solver.enforce_max_treatments_per_e_w:  # type: ignore
-            self._check_even_scheduling()
+
+        self._check_even_scheduling()
+
+        self._print_hash()
 
     def _check_patient_admission(self):
         """
@@ -599,10 +632,6 @@ class Solution:
                 treatments_today = patient_day_count.get((patient, day), 0)
                 upper_bound = math.ceil(avg_per_day * daily_upper)
                 lower_bound = math.floor(avg_per_day * daily_lower)
-
-                # Check if the lower bound should be enforced
-                if not self.solver.enforce_min_treatments_per_day:  # type: ignore
-                    lower_bound = 0
 
                 if treatments_today > upper_bound or treatments_today < lower_bound:
                     raise ValueError(

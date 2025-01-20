@@ -1,7 +1,7 @@
 [INSTANCE]
 num_beds: 40
 workday_start: 8 # uhr
-workday_end: 16 # uhr
+workday_end: 10 # uhr
 day_start:0
 # rolling_windows_days is a list of days at which to start a rolling window check
 
@@ -12,11 +12,11 @@ horizon_length: 14
 even_scheduling_upper: 1.1
 even_scheduling_width: 5
 
-time_slot_length: Duration(hours=0, minutes=5)
+time_slot_length: Duration(hours=1, minutes=0)
 
 
 daily_scheduling_upper: 1.3
-daily_scheduling_lower: 0.8
+daily_scheduling_lower: 1
 
 [DATA: RESOURCE_GROUPS]: rgid, name
 # "rgid" is of type int (must be unique)
@@ -24,7 +24,7 @@ daily_scheduling_lower: 0.8
 0; therapists
 1; rooms
 2; sport_room
-3; physiotherapist
+
 
 [DATA: RESOURCES]: rid, rgid, name, unavailable_time_slots
 # "rid" is of type int (must be unique)
@@ -35,9 +35,9 @@ daily_scheduling_lower: 0.8
 # the second entry is the end date of the unavailability 
 # and the last entry is the interval of days of repetition, none if only once
 
-0;  [0,1];  therapist0;  [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1)]
-
-
+0;  [0];  a1;  []
+1;  [1];  b1;  [(DayHour(day=0, hour=8, minutes=0), DayHour(day=0, hour=9, minutes=0), 1)]
+2;  [2];  c1;  [(DayHour(day=0, hour=9, minutes=0), DayHour(day=0, hour=10, minutes=0), 1)]
 
 [DATA: TREATMENTS]: tid, min_participants, max_participants, name, duration, resources
 # "tid" is of type int (must be unique)
@@ -46,8 +46,9 @@ daily_scheduling_lower: 0.8
 # "duration" is of type Duration
 # "resources" is of type dict[RGID, tuple[number_of_resources, requires_loyalty]]
 
-0; 2; 5; music_therapy; Duration(hours=0, minutes=45); {1:1}
-1; 1; 1; test; Duration(hours=0, minutes=30); {0:1}
+0; 2; 2; a; Duration(hours=1, minutes=0); {0: 1}
+1; 1; 1; b; Duration(hours=1, minutes=0); {1: 1}
+2; 1; 1; c; Duration(hours=1, minutes=0); {2: 1}
 
 
 
@@ -63,4 +64,7 @@ daily_scheduling_lower: 0.8
 # "already_resource_loyal" is a dictionary where the keys are (tuples) of treatment TID and RGID and values is a the list of RID that are loyal, this means that the list must have length of required resources of RGID for treatment TID
 # "already_scheduled_treatments" is a list of tuples where each tuple contains a treatment ID (int) and the number of times it was already scheduled in the past
 
-0; patient0;   {0:3,1:4,2:3,3:6,4:4,5:2,6:6,7:2};          14;      DayHour(day=0, hour=0, minutes=0); DayHour(day=6, hour=0, minutes=0); []
+0; patient0;   {0:1, 1:1};          1;      DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+1; patient1;   {0:1, 2:1};          1;      DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+2; patient1;   {0:1};          1;      DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+3; patient1;   {0:1};          1;      DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []

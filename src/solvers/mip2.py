@@ -73,7 +73,6 @@ class MIPSolver2(Solver):
         self.model = gp.Model("UpdatedMIP")
         self.model.setParam("LogToConsole", int(self.log_to_console))  # type: ignore
         self.model.setParam("Threads", self.number_of_threads)  # type: ignore
-        self.model.setParam("Cuts", 0)
         # self.model.setParam("NoRelHeurTime", self.no_rel_heur_time)  # type: ignore
         self._create_variables()
         self._create_constraints()
@@ -297,21 +296,20 @@ class MIPSolver2(Solver):
                 )
         logger.debug("Constraint (a5) created.")
 
-        if self.enforce_min_treatments_per_day:  # type: ignore
-            # Constraint (a5): Min num of treatments every day
-            for p in self.P:
-                for d in self.A_p[p]:
-                    self.model.addConstr(
-                        gp.quicksum(
-                            self.x_midt[m, i, d, t] * self.y_pmi[p, m, i]
-                            for m in self.M_p[p]
-                            for i in self.I_m[m]
-                            for t in self.T
-                        )
-                        >= self.daily_lower[p],
-                        name=f"constraint_a5_ub_p{p.id}_d{d}",
+        # Constraint (a5): Min num of treatments every day
+        for p in self.P:
+            for d in self.A_p[p]:
+                self.model.addConstr(
+                    gp.quicksum(
+                        self.x_midt[m, i, d, t] * self.y_pmi[p, m, i]
+                        for m in self.M_p[p]
+                        for i in self.I_m[m]
+                        for t in self.T
                     )
-            logger.debug("Constraint (a5) created.")
+                    >= self.daily_lower[p],
+                    name=f"constraint_a5_ub_p{p.id}_d{d}",
+                )
+        logger.debug("Constraint (a5) created.")
 
     def _set_optimization_goal(self):
 

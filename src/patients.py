@@ -41,3 +41,6 @@ class Patient:
 
     def __repr__(self):
         return self.__str__()
+
+    def __lt__(self, other):
+        return self.id < other.id

@@ -124,12 +124,13 @@ def main():
         err_file_str = "\\n".join(err_file)
 
         # Extract name params and instance
-
-        name_regex = r"1.NAME: (.*)\n"
+        job_name_regex = r"0.JOB_NAME: (.*)\n"
+        name_regex = r"1.SOLVER: (.*)\n"
         params_regex = r"2.PARAMS: (.*)\n"
         instance_regex = r"3.INSTANCE: (.*)\n"
         rep_regex = r"4.REPETITION: (.*)\n"
 
+        job_name_match = re.search(job_name_regex, out_file_str).group(1)  # type: ignore
         name_match = re.search(name_regex, out_file_str).group(1)  # type: ignore
         params_match = re.search(params_regex, out_file_str).group(1)  # type: ignore
         instance_match = re.search(instance_regex, out_file_str).group(1)  # type: ignore

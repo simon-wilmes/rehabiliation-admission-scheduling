@@ -23,11 +23,15 @@ class MIPSolver(Solver):
     SOLVER_OPTIONS.update(
         {
             "use_lazy_constraints": [True, False],
+            "substitute_x_pmdt": [True, False],
+            "substitute_x_small": [True, False],
         }
-    )  # Add any additional options here
+    )
 
     SOLVER_DEFAULT_OPTIONS = {
         "use_lazy_constraints": True,
+        "substitute_x_pmdt": False,
+        "substitute_x_small": False,
     }
 
     def __init__(self, instance: Instance, **kwargs):
@@ -37,6 +41,7 @@ class MIPSolver(Solver):
             if key in kwargs:
                 setattr(self, key, kwargs[key])
                 logger.debug(f" ---- {key} to {kwargs[key]}")
+                del kwargs[key]
             else:
                 setattr(self, key, self.__class__.SOLVER_DEFAULT_OPTIONS[key])
                 logger.debug(
@@ -51,7 +56,6 @@ class MIPSolver(Solver):
         self.model = gp.Model("PatientAdmissionScheduling")
         self.model.setParam("LogToConsole", int(self.log_to_console))  # type: ignore
         self.model.setParam("Threads", self.number_of_threads)  # type: ignore
-        self.model.setParam("Cuts", 0)
 
         # self.model.setParam("CutPasses", 3)
         # self.model.setParam("NoRelHeurTime", self.no_rel_heur_time)  # type: ignore
@@ -62,15 +66,30 @@ class MIPSolver(Solver):
 
         self.vars = vars
 
-    def _solve_model(self) -> Solution | int:
+    def _get_expr_value_model(self, model, expr):
+        value = expr.getConstant()
+        for i in range(expr.size()):
+            value += expr.getCoeff(i) * model.cbGetSolution(expr.getVar(i))
+        return value
+
+    def _solve_model(self):
         self.num_lazy_added = 0
         self.num_conflicts_found = 0
 
         def _lazy_constraint_callback(model: gp.Model, where):
             if where == gp.GRB.Callback.MIPSOL:
                 # Get all x_pmdt and z_pmgfdt values
-                x_pmdt = model.cbGetSolution(self.x_pmdt)
                 z_pmgfdt = model.cbGetSolution(self.z_pmgfdt)
+                if self.substitute_x_pmdt:  # type: ignore
+                    x_pmdt = {}
+                    for p in self.P:
+                        for m, d, t in product(self.M_p[p], self.A_p[p], self.T):
+                            x_pmdt[p, m, d, t] = self._get_expr_value_model(
+                                model, self.x_pmdt[p, m, d, t]
+                            )
+                            pass
+                else:
+                    x_pmdt = model.cbGetSolution(self.x_pmdt)
 
                 for d, t, m in product(self.D, self.T, self.M):
                     patients = set()
@@ -81,7 +100,7 @@ class MIPSolver(Solver):
                     groups: list[tuple[set[Patient], set[Resource]]] = []
                     if len(patients) > 1:
 
-                        for p in patients:
+                        for p in sorted(patients):
                             resources_by_patient = {
                                 f
                                 for fhat in self.Fhat_m[m]
@@ -102,7 +121,7 @@ class MIPSolver(Solver):
                         if len(group_f) > self.total_num_resources_m[m]:
                             self.num_conflicts_found += 1
                             for (p1, p2), ((fhat1, f1), (fhat2, f2)) in product(
-                                combinations(group_p, 2),
+                                combinations(sorted(list(group_p)), 2),
                                 product(
                                     self.all_resources_possibly_used_by_m[m], repeat=2
                                 ),
@@ -134,11 +153,12 @@ class MIPSolver(Solver):
             logger.debug(f"(SOLVER):Minimize Delay: {self.md.X}")
             logger.debug(f"(SOLVER):Minimize Missing Treatments: {self.mmt.X}")
 
-            solution = self._extract_solution()
-            return solution
+            self.solution_found = True
+
         else:
             logger.info("No optimal solution found.")
-            return NO_SOLUTION_FOUND
+            self.solution_found = False
+            return
             # Compute IIS
             self.model.computeIIS()
 
@@ -197,13 +217,13 @@ class MIPSolver(Solver):
         self.total_num_resources_m = {m: sum(m.resources.values()) for m in self.M}
 
         self.all_resources_possibly_used_by_m: dict[
-            Treatment, set[tuple[ResourceGroup, Resource]]
+            Treatment, list[tuple[ResourceGroup, Resource]]
         ] = {}
         for m in self.M:
             resources = set()
             for fhat in self.Fhat_m[m]:
                 resources |= set((fhat, f) for f in self.fhat[fhat])
-            self.all_resources_possibly_used_by_m[m] = resources
+            self.all_resources_possibly_used_by_m[m] = sorted(resources)
         pass
 
     def _get_smaller_patients(self, p: Patient) -> list[Patient]:
@@ -214,14 +234,6 @@ class MIPSolver(Solver):
         #####################################
         # Create variables
         #####################################
-        # Create self.x_pmdt
-        x_pmdt_keys = []
-        for p in self.P:
-            x_pmdt_keys.extend(product([p], self.M_p[p], self.A_p[p], self.T))
-
-        self.x_pmdt = self.model.addVars(
-            x_pmdt_keys, vtype=gp.GRB.BINARY, name="x_pmdt"
-        )
         # Create self.z_pmfdt
         z_pmfhatfdt_keys = []
         for p in self.P:
@@ -230,10 +242,37 @@ class MIPSolver(Solver):
                     z_pmfhatfdt_keys.extend(
                         product([p], [m], [fhat], self.fhat[fhat], self.A_p[p], self.T)
                     )
-
         self.z_pmgfdt = self.model.addVars(
             z_pmfhatfdt_keys, vtype=gp.GRB.BINARY, name="z_pmgfdt"
         )
+        # Create self.x_pmdt
+        if self.substitute_x_pmdt:  # type: ignore
+            self.x_pmdt = {}
+            for p in self.P:
+                for m, d, t in product(self.M_p[p], self.A_p[p], self.T):
+                    self.x_pmdt[p, m, d, t] = gp.LinExpr()
+                    num_added = 0
+                    for fhat in sorted(self.Fhat_m[m], key=lambda fhat: fhat.id):
+                        self.x_pmdt[p, m, d, t] += (
+                            gp.quicksum(
+                                self.z_pmgfdt[p, m, fhat, f, d, t]
+                                for f in self.fhat[fhat]
+                            )
+                            / self.n_fhatm[fhat, m]
+                        )
+                        num_added += 1
+                        if self.substitute_x_small:  # type: ignore
+                            break
+                    self.x_pmdt[p, m, d, t] /= num_added
+
+        else:
+            x_pmdt_keys = []
+            for p in self.P:
+                x_pmdt_keys.extend(product([p], self.M_p[p], self.A_p[p], self.T))
+
+            self.x_pmdt = self.model.addVars(
+                x_pmdt_keys, vtype=gp.GRB.BINARY, name="x_pmdt"
+            )
 
         # Create self.y_mfdt
         y_mgfdt_keys = []
@@ -392,97 +431,96 @@ class MIPSolver(Solver):
                                 lhs <= self.k_m[m],
                                 name=f"constraint_max_patients_m{m.id}_f{f.id}_d{d}_t{t}",
                             )
-        if self.enforce_min_patients_per_treatment:  # type: ignore
-            # Constraint (a1): Limit the number of patients per treatment
-            for m in self.M:
-                for fhat in self.Fhat_m[m]:
-                    for f in self.fhat[fhat]:
-                        for d in self.D:
-                            for t in self.T:
-                                lhs = gp.quicksum(
-                                    self.z_pmgfdt[p, m, fhat, f, d, t]
-                                    for p in self.P
-                                    if (p, m, fhat, f, d, t) in self.z_pmgfdt
-                                )
-                                self.model.addConstr(
-                                    lhs >= self.j_m[m] * self.y_mgfdt[m, fhat, f, d, t],
-                                    name=f"constraint_min_patients_m{m.id}_f{f.id}_d{d}_t{t}",
-                                )
+
+        # Constraint (a1): Limit the number of patients per treatment
+        for m in self.M:
+            for fhat in self.Fhat_m[m]:
+                for f in self.fhat[fhat]:
+                    for d in self.D:
+                        for t in self.T:
+                            lhs = gp.quicksum(
+                                self.z_pmgfdt[p, m, fhat, f, d, t]
+                                for p in self.P
+                                if (p, m, fhat, f, d, t) in self.z_pmgfdt
+                            )
+                            self.model.addConstr(
+                                lhs >= self.j_m[m] * self.y_mgfdt[m, fhat, f, d, t],
+                                name=f"constraint_min_patients_m{m.id}_f{f.id}_d{d}_t{t}",
+                            )
 
         logger.debug("Constraint (a1) created.")
 
         # Constraint (a4): Max num of treatments over e_w days
-        if self.enforce_max_treatments_per_e_w:  # type: ignore
-            for p in self.P:
-                # Skip patients that do not require even distribution as they stay fewer days than the
-                # length of the rolling window
-                if p.length_of_stay <= self.e_w:
-                    continue
-                for d in self.A_p[p]:
-                    # check if the window is partially outside of patients stay => ignore
-                    self.model.addConstr(
-                        gp.quicksum(
-                            self.x_pmdt[p, m, d_prime, t]
-                            for m in self.M_p[p]
-                            for t in self.T
-                            for d_prime in range(d, d + self.e_w)
-                            if d_prime in self.A_p[p]
-                        )
-                        <= self.e_w_upper[p],
-                        name=f"constraint_a4_ub_p{p.id}_d{d}",
-                    )
 
-            logger.debug("Constraint (a4) created.")
+        for p in self.P:
+            # Skip patients that do not require even distribution as they stay fewer days than the
+            # length of the rolling window
+            if p.length_of_stay <= self.e_w:
+                continue
+            for d in self.A_p[p]:
+                # check if the window is partially outside of patients stay => ignore
+                self.model.addConstr(
+                    gp.quicksum(
+                        self.x_pmdt[p, m, d_prime, t]
+                        for m in self.M_p[p]
+                        for t in self.T
+                        for d_prime in range(d, d + self.e_w)
+                        if d_prime in self.A_p[p]
+                    )
+                    <= self.e_w_upper[p],
+                    name=f"constraint_a4_ub_p{p.id}_d{d}",
+                )
+
+        logger.debug("Constraint (a4) created.")
 
         # Constraint (a5): Max num of treatments every day
         for p in self.P:
             for d in self.A_p[p]:
+                delta_set = [
+                    delta for delta in self.D_p[p] if d - self.l_p[p] < delta <= d
+                ]
+
                 self.model.addConstr(
                     gp.quicksum(
                         self.x_pmdt[p, m, d, t] for m in self.M_p[p] for t in self.T
                     )
-                    <= self.daily_upper[p],
+                    <= self.daily_upper[p]
+                    * gp.quicksum(self.a_pd[p, delta] for delta in delta_set),
                     name=f"constraint_a5_ub_p{p.id}_d{d}",
                 )
         logger.debug("Constraint (a5) created.")
-        if self.enforce_min_treatments_per_day:  # type: ignore
-            # Constraint (a7): Min num of treatments every day
-            for p in self.P:
-                for d in self.A_p[p]:
-                    # Test if for day d the patient is always admitted then we can enforce the lower bound
-                    if (
-                        p.admitted_before_date.day - 1
-                        <= d
-                        < p.earliest_admission_date.day + p.length_of_stay
-                    ):
 
-                        self.model.addConstr(
-                            gp.quicksum(
-                                self.x_pmdt[p, m, d, t]
-                                for m in self.M_p[p]
-                                for t in self.T
-                            )
-                            >= self.daily_lower[p],
-                            name=f"constraint_a6_lb_p{p.id}_d{d}",
-                        )
-                    else:
-                        # otherwise only enfore the lowerbound if admitted before
-                        delta_set = [
-                            delta
-                            for delta in self.D_p[p]
-                            if d - self.l_p[p] < delta <= d
-                        ]
+        # Constraint (a7): Min num of treatments every day
+        for p in self.P:
+            for d in self.A_p[p]:
+                # Test if for day d the patient is always admitted then we can enforce the lower bound
+                if (
+                    p.admitted_before_date.day - 1
+                    <= d
+                    < p.earliest_admission_date.day + p.length_of_stay
+                ):
 
-                        self.model.addConstr(
-                            gp.quicksum(
-                                self.x_pmdt[p, m, d, t]
-                                for m in self.M_p[p]
-                                for t in self.T
-                            )
-                            >= self.daily_lower[p]
-                            * gp.quicksum(self.a_pd[p, delta] for delta in delta_set),
-                            name=f"constraint_a6_lb_p{p.id}_d{d}",
+                    self.model.addConstr(
+                        gp.quicksum(
+                            self.x_pmdt[p, m, d, t] for m in self.M_p[p] for t in self.T
                         )
+                        >= self.daily_lower[p],
+                        name=f"constraint_a6_lb_p{p.id}_d{d}",
+                    )
+                else:
+                    # otherwise only enfore the lowerbound if admitted before
+                    delta_set = [
+                        delta for delta in self.D_p[p] if d - self.l_p[p] < delta <= d
+                    ]
+
+                    self.model.addConstr(
+                        gp.quicksum(
+                            self.x_pmdt[p, m, d, t] for m in self.M_p[p] for t in self.T
+                        )
+                        >= self.daily_lower[p]
+                        * gp.quicksum(self.a_pd[p, delta] for delta in delta_set),
+                        name=f"constraint_a6_lb_p{p.id}_d{d}",
+                    )
 
             logger.debug("Constraint (a5) created.")
         # Constraint: Make sure that already admitted patients are admitted on the first day of the planning horizon
@@ -503,13 +541,13 @@ class MIPSolver(Solver):
                 if self.P.index(p1) >= self.P.index(p2):
                     continue
                 # Find iterate over common treatments
-                for m in set(self.M_p[p1]) & set(self.M_p[p2]):
+                for m in sorted(set(self.M_p[p1]) & set(self.M_p[p2])):
 
                     for (fhat1, f1), (fhat2, f2) in product(
                         self.all_resources_possibly_used_by_m[m],
                         self.all_resources_possibly_used_by_m[m],
                     ):
-                        D_p1p2 = set(self.A_p[p1]) & set(self.A_p[p2])
+                        D_p1p2 = sorted(set(self.A_p[p1]) & set(self.A_p[p2]))
                         for d, t in product(D_p1p2, self.T):
                             self.model.addConstr(
                                 self.z_pmgfdt[p1, m, fhat1, f1, d, t]
@@ -521,6 +559,12 @@ class MIPSolver(Solver):
                             )
             logger.debug("Constraint (transitive) created.")
 
+    def get_x_pmdt_value(self, p, m, d, t):
+        if self.substitute_x_pmdt:  # type: ignore
+            return self.x_pmdt[p, m, d, t].getValue()  # type: ignore
+        else:
+            return self.x_pmdt[p, m, d, t].X
+
     def _extract_solution(self):
         """
         Extracts the solution from the MIP self.model and constructs a Solution object.
@@ -528,13 +572,15 @@ class MIPSolver(Solver):
         Returns:
             Solution: The constructed solution with appointments.
         """
+        if not self.solution_found:
+            return NO_SOLUTION_FOUND
         from collections import defaultdict
 
         # Print out all variables that are one
-        if True:
+        if False:
             for key in self.x_pmdt:
-                if self.x_pmdt[key].X > 0.5:  # type: ignore
-                    logger.debug(f"self.x_pmdt{key} = {self.x_pmdt[key].X}")  # type: ignore
+                if self.get_x_pmdt_value(*key) > 0.5:  # type: ignore
+                    logger.debug(f"self.x_pmdt{key} = {self.get_x_pmdt_value(*key)}")  # type: ignore
 
             for key in self.z_pmgfdt:
                 if self.z_pmgfdt[key].X > 0.5:  # type: ignore
@@ -553,7 +599,7 @@ class MIPSolver(Solver):
 
         # Collect scheduled treatments and group patients based on resources used
         for (p, m, d, t), var in self.x_pmdt.items():  # type: ignore
-            if var.X > 0.5:
+            if self.get_x_pmdt_value(p, m, d, t) > 0.5:
                 # Determine the resources used by patient p for treatment m at (d, t)
                 resources_used = defaultdict(
                     list
