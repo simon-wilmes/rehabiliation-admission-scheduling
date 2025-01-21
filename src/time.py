@@ -71,8 +71,8 @@ class Duration:
             raise ValueError("Invalid duration format. Use 'hours:minutes'.")
 
     def __init__(self, hours: float, minutes: float = 0):
-        if not (0 <= minutes < 60):
-            raise ValueError("Minutes must be between 0 and 59.")
+        if not (0 <= minutes <= 60):
+            raise ValueError("Minutes must be between 0 and 60.")
         if not (0 <= hours < 24):
             raise ValueError("Hours must be between 0 and 23.")
         self.hours: float = hours + minutes / 60
