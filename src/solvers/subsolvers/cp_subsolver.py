@@ -321,7 +321,7 @@ class CPSubsolver(Subsolver):
         # logger.debug("Solving subsystem with CPSubsolver")
         sub_solver = cp_model.CpSolver()
         sub_solver.parameters.log_search_progress = (
-            True  # self.solver.log_to_console  # type: ignore
+            False  # self.solver.log_to_console  # type: ignore
         )
         sub_solver.parameters.num_workers = self.solver.number_of_threads  # type: ignore
         self.time_create_model -= time()
@@ -334,7 +334,7 @@ class CPSubsolver(Subsolver):
             if sub_solver.objective_value == 0:
                 # logger.debug("Objective value is 0")
                 # Print out all varibles
-                if True:
+                if False:
                     for m in appointment_vars:
                         for rep in appointment_vars[m]:
                             if sub_solver.value(appointment_vars[m][rep]["is_present"]):
