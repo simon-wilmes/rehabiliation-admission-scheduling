@@ -80,7 +80,7 @@ class LBBDSolver(Solver):
         for key in list(kwargs.keys()):
             if key.startswith("subsolver."):
                 del kwargs[key]
-                
+
         super().__init__(instance, **kwargs)
         self._create_parameter_sets()
 
@@ -199,19 +199,8 @@ class LBBDSolver(Solver):
                 if self.num_solution_callbacks % 5 == 0:
                     self._print_subsolver_stats()
 
-        # self.model.addConstr(
-        #     self.x_pmdri[self.P[0], self.M[0], 0, 1, 0] == 1, name="extra1"
-        # )
-        # self.model.addConstr(
-        #     self.x_pmdri[self.P[1], self.M[0], 0, 1, 0] == 1, name="extra2"
-        # )
-        # self.model.addConstr(
-        #     self.x_pmdri[self.P[0], self.M[1], 0, 1, 0] == 1, name="extra3"
-        # )
-        # self.model.addConstr(
-        #     self.x_pmdri[self.P[1], self.M[2], 0, 1, 0] == 1, name="extra4"
-        # )
         self.model.optimize(_solution_callback)
+        self.model.setParam("DegenMoves", 0)
 
         logger.debug("Finished optimization")
         logger.debug("Subsolver stats:")

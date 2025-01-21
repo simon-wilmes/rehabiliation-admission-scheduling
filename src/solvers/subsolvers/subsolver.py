@@ -127,7 +127,7 @@ class Subsolver(ABC):
 
         prev_results = self._get_result(day, patients)
         if prev_results is not None:
-            if prev_results.get("status", None) == Subsolver.FEASIBLE:
+            if prev_results.get("status_code", None) == Subsolver.FEASIBLE:
                 self.returns_feasible += 1
             else:
                 self.returns_infeasible += 1
@@ -140,7 +140,7 @@ class Subsolver(ABC):
 
         # Store the result for future reference
         self._add_result(day, patients, result)
-        if result.get("status", None) == Subsolver.FEASIBLE:
+        if result.get("status_code", None) == Subsolver.FEASIBLE:
             self.returns_feasible += 1
         else:
             self.returns_infeasible += 1
