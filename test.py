@@ -1,28 +1,28 @@
-from ortools.sat.python import cp_model
-
-# Create a CP-SAT model
-model = cp_model.CpModel()
+import inspect
 
 
-# Define the start, size, and end of the interval
-start = model.new_int_var(0, 10, "start")
-size = 5
-end = model.new_int_var(0, 10, "end")
-end2 = model.new_int_var(0, 20, "end2")
+
+def some_function():
+    print("Starting function")
+    raise ValueError("This is a ValueError")
+    print("This line would normally not execute")
+    raise RuntimeError("This is a RuntimeError")
+    print("End of function")
 
 
-# define two intervals
-interval1 = model.new_interval_var(start, size, end, "interval1")
-interval2 = model.new_interval_var(end, 5, end2, "interval2")
+def execute_ignoring_exceptions(func):
+    # Get the source code of the function
+    func_code = inspect.getsource(func)
+    # Create an exec-safe version of the code
+    exec_code = f"""
+try:
+    {func_code}
+except Exception as e:
+    print(f"Ignored exception: {{e}}")
+"""
+    # Execute the code in a clean environment
+    exec(exec_code)
 
-# Add a no-overlap constraint
-model.add_no_overlap([interval1, interval2])
 
-solver = cp_model.CpSolver()
-status = solver.Solve(model)
-if status in [cp_model.OPTIMAL, cp_model.FEASIBLE]:
-    print("start:", solver.Value(start))
-    print("end:", solver.Value(end))
-    print("end2:", solver.Value(end2))
-else:
-    print("No solution found.")
+# Usage
+execute_ignoring_exceptions(some_function)

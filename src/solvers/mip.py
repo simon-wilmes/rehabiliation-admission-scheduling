@@ -354,9 +354,7 @@ class MIPSolver(Solver):
                     )
         logger.debug("Constraint (p3) created.")
         # Constraint (p4): Total admitted patients cannot exceed total beds
-        for d in range(
-            max([p.admitted_before_date.day + p.length_of_stay for p in self.P]) + 1
-        ):
+        for d in self.D:
             expr = gp.LinExpr()
             for p in self.P:
                 delta_set = [

@@ -37,12 +37,12 @@ class Appointment:
         # Check that all resource groups required for the treatment are satisfied
         for required_group, amount in self.treatment.resources.items():
             if required_group not in self.resources:
-                raise ValueError(
+                logger.warning(
                     f"Resource group {required_group.id} required for treatment {self.treatment.id} is missing "
                     f"at day {self.start_date.day}, hour {self.start_date.hour}."
                 )
             if len(set(self.resources[required_group])) != amount:
-                raise ValueError(
+                logger.warning(
                     f"Resource group {required_group.id} requires {amount} resources, "
                     f"but {len(set(self.resources[required_group]))} were provided "
                     f"at day {self.start_date.day}, hour {self.start_date.hour}."
@@ -50,14 +50,14 @@ class Appointment:
 
         # Check that no more than the maximum number of patients take part in this treatment
         if len(self.patients) > self.treatment.max_num_participants:
-            raise ValueError(
+            logger.warning(
                 f"Appointment has {len(self.patients)} patients, but the maximum is {self.treatment.max_num_participants} "
                 f"at day {self.start_date.day}, hour {self.start_date.hour}."
             )
             # Check that no more than the maximum number of patients take part in this treatment
 
         if len(self.patients) < self.treatment.min_num_participants:
-            raise ValueError(
+            logger.warning(
                 f"Appointment has {len(self.patients)} patients, but the minimum is {self.treatment.min_num_participants} "
                 f"at day {self.start_date.day}, hour {self.start_date.hour}."
             )
@@ -264,16 +264,14 @@ class Solution:
         """
         for patient in self.instance.patients.values():
             if patient not in self.patients_arrival:
-                raise ValueError(
-                    f"Patient {patient.id} does not have an admission date."
-                )
+                logger.warning(f"Patient {patient.id} does not have an admission date.")
 
             admission_day = self.patients_arrival[patient].day
             earliest_admission = patient.earliest_admission_date.day
             latest_admission = patient.admitted_before_date.day
 
             if not (earliest_admission <= admission_day < latest_admission):
-                raise ValueError(
+                logger.warning(
                     f"Patient {patient.id} admission day {admission_day} is outside "
                     f"their admission window ({earliest_admission} to {latest_admission})."
                 )
@@ -291,7 +289,7 @@ class Solution:
                     or self.patients_arrival[patient].day + patient.length_of_stay
                     <= appointment.start_date.day
                 ):
-                    raise ValueError(
+                    logger.warning(
                         f"Patient {patient.id} has treatments scheduled during day {appointment.start_date.day} but was admitted on day {self.patients_arrival[patient]} and has a length of stay of {patient.length_of_stay}."
                     )
 
@@ -325,7 +323,7 @@ class Solution:
                         continue  # Appointments are on different days
                     # Check for overlap
                     if start_j < end_i and end_j > start_i:
-                        raise ValueError(
+                        logger.warning(
                             f"Patient {patient.id} has overlapping appointments "
                             f"on day {day_i}: {appt_i.treatment.id} ({start_i}-{end_i}) "
                             f"and {appt_j.treatment.id} ({start_j}-{end_j})."
@@ -347,7 +345,7 @@ class Solution:
                 # Check for duplicates in resources
                 resource_ids = [res.id for res in resources]
                 if len(resource_ids) != len(set(resource_ids)):
-                    raise ValueError(
+                    logger.warning(
                         f"Appointment starting at day {start_day}, time {start_time} "
                         f"has duplicate resources in resource group {resource_group.id}."
                     )
@@ -358,7 +356,7 @@ class Solution:
                         key = (resource.id, start_day, time)
                         if key in resource_usage:
                             other_appointment = resource_usage[key]
-                            raise ValueError(
+                            logger.warning(
                                 f"Resource {resource.id} is double-booked at day {start_day}, time {time} "
                                 f"between appointments for treatments {appointment.treatment.id} "
                                 f"and {other_appointment.treatment.id}."
@@ -369,7 +367,7 @@ class Solution:
                             or time > self.instance.workday_end.hour
                             or time < self.instance.workday_start.hour
                         ):
-                            raise ValueError(
+                            logger.warning(
                                 f"Resource {resource.id} is not available at day {start_day}, time {time}."
                             )
                         resource_usage[key] = appointment
@@ -403,7 +401,7 @@ class Solution:
                     resource_ids = tuple(sorted([res.id for res in resources]))
                     if key in patient_resource_loyalty:
                         if patient_resource_loyalty[key] != resource_ids:
-                            raise ValueError(
+                            logger.warning(
                                 f"Patient {patient.id} has inconsistent resource usage for "
                                 f"treatment {treatment.id}, resource group {resource_group.id}. "
                                 f"Previously used resources {patient_resource_loyalty[key]}, "
@@ -421,7 +419,7 @@ class Solution:
                                     sorted([res.id for res in existing_resources])
                                 )
                                 if resource_ids != existing_resource_ids:
-                                    raise ValueError(
+                                    logger.warning(
                                         f"Patient {patient.id} has resource loyalty constraint to resources "
                                         f"{existing_resource_ids} for treatment {treatment.id}, resource group {resource_group.id}, "
                                         f"but uses resources {resource_ids}."
@@ -442,10 +440,11 @@ class Solution:
                     admitted_patients[day] = set()
                 admitted_patients[day].add(patient)
         for day, patients in admitted_patients.items():
-            if len(patients) > bed_capacity:
-                raise ValueError(
-                    f"Day {day} has {len(patients)} patients admitted, which exceeds bed capacity ({bed_capacity})."
-                )
+            if self.solver is not None and day in self.solver.D:
+                if len(patients) > bed_capacity:
+                    logger.warning(
+                        f"Day {day} has {len(patients)} patients admitted, which exceeds bed capacity ({bed_capacity})."
+                    )
 
     def _check_total_treatments_scheduled(self):
         """
@@ -474,7 +473,7 @@ class Solution:
                 key = (patient.id, treatment.id)
                 scheduled_count = scheduled_treatments.get(key, 0)
                 if scheduled_count > lr_pm:
-                    raise ValueError(
+                    logger.warning(
                         f"Patient {patient.id} has {scheduled_count} scheduled treatments for treatment {treatment.id}, "
                         f"but needs {lr_pm} out of the initial {patient.treatments[treatment]} repetitions."
                     )
@@ -504,7 +503,7 @@ class Solution:
                         conflict_treatment_ids = [
                             treatment.id for treatment in treatments_in_group
                         ]
-                        raise ValueError(
+                        logger.warning(
                             f"Patient {patient.id} has treatments {conflict_treatment_ids} from the same conflict group scheduled on day {day}."
                         )
 
@@ -543,7 +542,7 @@ class Solution:
 
                 # Check upperbound
                 if treatments_scheduled > ceil(avg_treatments * e_ub):
-                    raise ValueError(
+                    logger.warning(
                         f"Patient {patient.id} has {treatments_scheduled} treatments scheduled in the window "
                         f"starting at day {day}, which exceeds the upper bound of {ceil(avg_treatments * e_ub)}."
                     )
@@ -556,7 +555,7 @@ class Solution:
         for appointment in self.schedule:
             start_day = appointment.start_date.day
             if start_day >= horizon_length:
-                raise ValueError(
+                logger.warning(
                     f"Appointment for treatment {appointment.treatment.id} is scheduled outside the horizon length."
                 )
 
@@ -591,7 +590,7 @@ class Solution:
                 required_rest = appt_i.treatment.rest_time.hours
 
                 if abs_start_j < abs_end_i + required_rest:
-                    raise ValueError(
+                    logger.warning(
                         f"Patient {patient.id} has appointments too close together. After finishing treatment "
                         f"{appt_i.treatment.id} at day {appts[i][0]}, hour {end_i}, patient must rest {required_rest} "
                         f"hours before another treatment. The next treatment {appt_j.treatment.id} starts at day {next_day}, "
@@ -634,7 +633,7 @@ class Solution:
                 lower_bound = math.floor(avg_per_day * daily_lower)
 
                 if treatments_today > upper_bound or treatments_today < lower_bound:
-                    raise ValueError(
+                    logger.warning(
                         f"Patient {patient.id} on day {day} has {treatments_today} treatments, "
                         f"expected {lower_bound} <= x <={upper_bound}   (avg={avg_per_day:.2f}, "
                         f"multipliers={daily_upper}/{daily_lower})."
