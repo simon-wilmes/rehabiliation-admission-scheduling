@@ -323,7 +323,7 @@ class CPSubsolver(Subsolver):
         sub_solver.parameters.log_search_progress = (
             True  # self.solver.log_to_console  # type: ignore
         )
-        sub_solver.parameters.num_workers = 20
+        sub_solver.parameters.num_workers = self.solver.number_of_threads  # type: ignore
         self.time_create_model -= time()
         model, appointment_vars, patient_vars = self.create_model(day, patients)
         self.time_create_model += time()

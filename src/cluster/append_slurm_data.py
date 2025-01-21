@@ -47,7 +47,7 @@ def process_output_files(output_folder):
                 continue
 
             # Find the job name from the content
-            match = re.search(r"^0\. JOBNAME: (.+)$", content, re.MULTILINE)
+            match = re.search(r"^0\.JOB_NAME: (.+)$", content, re.MULTILINE)
             if match:
                 job_name = match.group(1).strip()
                 print(f"Processing job: {job_name} in file: {file_name}")
@@ -66,6 +66,6 @@ def process_output_files(output_folder):
                 print(f"No job name found in {file_name}. Skipping.")
 
 
-output_folder = "/work/wx350715/Kobra/output/"
+output_folder = "/work/wx350715/Kobra/output_core_test/"
 if os.path.isdir(output_folder):
     process_output_files(output_folder)
