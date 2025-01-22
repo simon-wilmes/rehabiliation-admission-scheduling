@@ -1,0 +1,638 @@
+0.JOB_NAME: MIPSolver_1_e06450f5364a5aa0d4a8a0ccdf4eb13e
+1.SOLVER: MIPSolver
+2.PARAMS: {'use_lazy_constraints': False, 'substitute_x_pmdt': False}
+3.INSTANCE: /home/ir803925/Kobra/rehabiliation-admission-scheduling/data/comp_study_003/instance_p40_t15_extra.txt
+4.REPETITION: 1
+5.CPU_CORES: 8
+Current directory: /home/ir803925/Kobra/rehabiliation-admission-scheduling
+[34m2025-01-22 13:47:57,998 - DEBUG - Solver: <class 'src.solvers.mip.MIPSolver'>[0m
+[34m2025-01-22 13:47:57,998 - DEBUG - Args: {'use_lazy_constraints': False, 'substitute_x_pmdt': False}[0m
+[34m2025-01-22 13:47:57,998 - DEBUG - File path /home/ir803925/Kobra/rehabiliation-admission-scheduling/data/comp_study_003/instance_p40_t15_extra.txt[0m
+[34m2025-01-22 13:47:57,999 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 13:47:57,999 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 13:47:58,000 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 13:47:58,000 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 13:47:58,000 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 13:47:58,000 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 13:47:58,000 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 13:47:58,000 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 13:47:58,000 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 13:47:58,000 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 13:47:58,000 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 13:47:58,000 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-22 13:47:58,000 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-22 13:47:58,000 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-22 13:47:58,000 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-22 13:47:58,000 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-22 13:47:58,000 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-22 13:47:58,001 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-22 13:47:58,001 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-22 13:47:58,001 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-22 13:47:58,001 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-22 13:47:58,001 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-22 13:47:58,001 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-22 13:47:58,001 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-22 13:47:58,001 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-22 13:47:58,001 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-22 13:47:58,001 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-22 13:47:58,001 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-22 13:47:58,001 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-22 13:47:58,002 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-22 13:47:58,002 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-22 13:47:58,002 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-22 13:47:58,002 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,002 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,002 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,002 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,002 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,002 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,002 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,003 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,003 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,003 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,003 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,003 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,003 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,003 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,003 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,003 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,003 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,004 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,004 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,004 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,004 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,004 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,004 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,004 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 13:47:58,004 - DEBUG - Instance data:[0m
+[34m2025-01-22 13:47:58,006 - DEBUG - Number of patients: 24[0m
+[34m2025-01-22 13:47:58,006 - DEBUG - Number of beds: 40[0m
+[34m2025-01-22 13:47:58,006 - DEBUG - Average number of treatments per patient: 27.875[0m
+[34m2025-01-22 13:47:58,006 - DEBUG - Average number of treatment per stayed day: 1.9970149253731344[0m
+[34m2025-01-22 13:47:58,006 - DEBUG - Number of treatments: 669[0m
+[34m2025-01-22 13:47:58,006 - DEBUG - Number of resources: 9[0m
+[34m2025-01-22 13:47:58,006 - DEBUG - Number of resource groups: 4[0m
+[34m2025-01-22 13:47:58,006 - DEBUG - Number of resource hours needed per all treatment by RG(therapists): 22.554166666666664[0m
+[34m2025-01-22 13:47:58,006 - DEBUG - Number of resource hours needed per all treatment by RG(rooms): 44.96666666666667[0m
+[34m2025-01-22 13:47:58,006 - DEBUG - Number of resource hours needed per all treatment by RG(physiotherapist): 16.5[0m
+[34m2025-01-22 13:47:58,006 - DEBUG - Number of resource hours needed per all treatment by RG(sport_room): 12.4375[0m
+[32m2025-01-22 13:47:58,006 - INFO - {'solver': 'MIPSolver', 'args': {'use_lazy_constraints': False, 'substitute_x_pmdt': False, 'log_to_console': True}}[0m
+[34m2025-01-22 13:47:58,006 - DEBUG - Setting options: MIPSolver[0m
+[34m2025-01-22 13:47:58,006 - DEBUG -  ---- use_lazy_constraints to False[0m
+[34m2025-01-22 13:47:58,006 - DEBUG -  ---- substitute_x_pmdt to False[0m
+[34m2025-01-22 13:47:58,006 - DEBUG -  ---- substitute_x_small to False (default)[0m
+[34m2025-01-22 13:47:58,006 - DEBUG - Setting options: Solver[0m
+[34m2025-01-22 13:47:58,006 - DEBUG -  ---- number_of_threads to 8 (default)[0m
+[34m2025-01-22 13:47:58,006 - DEBUG -  ---- treatment_value to 0 (default)[0m
+[34m2025-01-22 13:47:58,006 - DEBUG -  ---- delay_value to 1 (default)[0m
+[34m2025-01-22 13:47:58,006 - DEBUG -  ---- missing_treatment_value to 4 (default)[0m
+[34m2025-01-22 13:47:58,006 - DEBUG -  ---- log_to_console to True[0m
+[34m2025-01-22 13:47:58,006 - DEBUG -  ---- log_to_file to True (default)[0m
+[32m2025-01-22 13:47:58,020 - INFO - Create model: MIPSolver[0m
+Set parameter TSPort to value 50039
+Set parameter TokenServer to value "license.itc.rwth-aachen.de"
+Set parameter Threads to value 8
+[34m2025-01-22 13:47:59,305 - DEBUG - Variables created.[0m
+[34m2025-01-22 13:48:01,178 - DEBUG - Constraint (p1) created.[0m
+[34m2025-01-22 13:48:01,508 - DEBUG - Constraint (when_admitted) created.[0m
+[34m2025-01-22 13:48:01,655 - DEBUG - Constraint (p3) created.[0m
+[34m2025-01-22 13:48:01,656 - DEBUG - Constraint (p4) created.[0m
+[34m2025-01-22 13:48:01,657 - DEBUG - Constraint (p7) created.[0m
+[34m2025-01-22 13:48:01,720 - DEBUG - Constraint (r3) created.[0m
+[34m2025-01-22 13:48:02,331 - DEBUG - Constraint (r4) created.[0m
+[34m2025-01-22 13:48:02,822 - DEBUG - Constraint (a1) created.[0m
+[34m2025-01-22 13:48:02,880 - DEBUG - Constraint (a4) created.[0m
+[34m2025-01-22 13:48:02,895 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,896 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,897 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,898 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,899 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,899 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,900 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,900 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,901 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,901 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,902 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,902 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,903 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,904 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,904 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,905 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,905 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,906 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,907 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,907 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,908 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,908 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,909 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,909 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,910 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 13:48:02,910 - DEBUG - Constraint (already_admitted) created.[0m
+[34m2025-01-22 13:48:18,213 - DEBUG - New patient index seen: 1[0m
+[34m2025-01-22 13:48:32,180 - DEBUG - New patient index seen: 2[0m
+[34m2025-01-22 13:48:47,445 - DEBUG - New patient index seen: 3[0m
+[34m2025-01-22 13:49:01,690 - DEBUG - New patient index seen: 4[0m
+[34m2025-01-22 13:49:14,549 - DEBUG - New patient index seen: 5[0m
+[34m2025-01-22 13:49:26,068 - DEBUG - New patient index seen: 6[0m
+[34m2025-01-22 13:49:33,595 - DEBUG - New patient index seen: 7[0m
+[34m2025-01-22 13:49:40,611 - DEBUG - New patient index seen: 8[0m
+[34m2025-01-22 13:49:49,211 - DEBUG - New patient index seen: 9[0m
+[34m2025-01-22 13:49:56,985 - DEBUG - New patient index seen: 10[0m
+[34m2025-01-22 13:50:03,286 - DEBUG - New patient index seen: 11[0m
+[34m2025-01-22 13:50:08,407 - DEBUG - New patient index seen: 12[0m
+[34m2025-01-22 13:50:16,377 - DEBUG - New patient index seen: 13[0m
+[34m2025-01-22 13:50:21,761 - DEBUG - New patient index seen: 14[0m
+[34m2025-01-22 13:50:25,652 - DEBUG - New patient index seen: 15[0m
+[34m2025-01-22 13:50:29,546 - DEBUG - New patient index seen: 16[0m
+[34m2025-01-22 13:50:32,987 - DEBUG - New patient index seen: 17[0m
+[34m2025-01-22 13:50:36,736 - DEBUG - New patient index seen: 18[0m
+[34m2025-01-22 13:50:39,055 - DEBUG - New patient index seen: 19[0m
+[34m2025-01-22 13:50:41,517 - DEBUG - New patient index seen: 20[0m
+[34m2025-01-22 13:50:42,252 - DEBUG - New patient index seen: 21[0m
+[34m2025-01-22 13:50:43,295 - DEBUG - New patient index seen: 22[0m
+[34m2025-01-22 13:50:44,038 - DEBUG - New patient index seen: 23[0m
+[34m2025-01-22 13:50:44,038 - DEBUG - Constraint (transitive) created.[0m
+[32m2025-01-22 13:50:45,467 - INFO - Time to create model: 167.447[0m
+[32m2025-01-22 13:50:45,467 - INFO - Solving model: MIPSolver[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 8 threads
+
+Optimize a model with 12134416 rows, 231996 columns and 43704621 nonzeros
+Model fingerprint: 0x10c0481c
+Variable types: 2 continuous, 231994 integer (231994 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+03]
+Presolve removed 1705059 rows and 7533 columns (presolve time = 8s) ...
+Presolve removed 1708602 rows and 10782 columns (presolve time = 14s) ...
+Presolve removed 1708602 rows and 74098 columns (presolve time = 15s) ...
+Presolve removed 5046356 rows and 76159 columns (presolve time = 20s) ...
+Presolve removed 5046356 rows and 76159 columns (presolve time = 25s) ...
+Presolve removed 5046356 rows and 76159 columns (presolve time = 30s) ...
+Presolve removed 5046356 rows and 76159 columns (presolve time = 36s) ...
+Presolve removed 5046356 rows and 76163 columns (presolve time = 41s) ...
+Presolve removed 5046357 rows and 76164 columns (presolve time = 47s) ...
+Presolve removed 8069574 rows and 76164 columns (presolve time = 51s) ...
+Presolve removed 8081663 rows and 76164 columns (presolve time = 55s) ...
+Presolve removed 8081663 rows and 76164 columns (presolve time = 60s) ...
+Presolve removed 8081663 rows and 76164 columns (presolve time = 65s) ...
+Presolve removed 8081663 rows and 76164 columns (presolve time = 70s) ...
+Presolve removed 8093066 rows and 76167 columns (presolve time = 76s) ...
+Presolve removed 8093066 rows and 76167 columns (presolve time = 81s) ...
+Presolve removed 8093738 rows and 76167 columns (presolve time = 85s) ...
+Presolve removed 8093738 rows and 76170 columns (presolve time = 91s) ...
+Presolve removed 8094326 rows and 76758 columns (presolve time = 96s) ...
+Presolve removed 8096190 rows and 76758 columns (presolve time = 100s) ...
+Presolve removed 8096191 rows and 76843 columns (presolve time = 107s) ...
+Presolve removed 8096191 rows and 76843 columns (presolve time = 110s) ...
+Presolve removed 8096191 rows and 76843 columns (presolve time = 116s) ...
+Presolve removed 8096191 rows and 76843 columns (presolve time = 120s) ...
+Presolve removed 8096191 rows and 76843 columns (presolve time = 125s) ...
+Presolve removed 8096191 rows and 76843 columns (presolve time = 131s) ...
+Presolve removed 8096191 rows and 77163 columns (presolve time = 136s) ...
+Presolve removed 8096365 rows and 77163 columns (presolve time = 140s) ...
+Presolve removed 8096365 rows and 77163 columns (presolve time = 145s) ...
+Presolve removed 8096365 rows and 77163 columns (presolve time = 150s) ...
+Presolve removed 8096365 rows and 77163 columns (presolve time = 155s) ...
+Presolve removed 8096365 rows and 77163 columns (presolve time = 160s) ...
+Presolve removed 8096365 rows and 77163 columns (presolve time = 165s) ...
+Presolve removed 8096365 rows and 77163 columns (presolve time = 170s) ...
+Presolve removed 8096365 rows and 77163 columns (presolve time = 175s) ...
+Presolve removed 8096365 rows and 77163 columns (presolve time = 180s) ...
+Presolve removed 8096365 rows and 77163 columns (presolve time = 185s) ...
+Presolve removed 8096365 rows and 77163 columns (presolve time = 190s) ...
+Presolve removed 8096365 rows and 77163 columns (presolve time = 195s) ...
+Presolve removed 8096365 rows and 77163 columns (presolve time = 215s) ...
+Presolve removed 8096365 rows and 80067 columns (presolve time = 217s) ...
+Presolve removed 8096365 rows and 80067 columns (presolve time = 220s) ...
+Presolve removed 8096365 rows and 80067 columns (presolve time = 225s) ...
+Presolve removed 8096365 rows and 80067 columns (presolve time = 230s) ...
+Presolve removed 8096365 rows and 80067 columns (presolve time = 238s) ...
+Presolve removed 8216229 rows and 80223 columns (presolve time = 241s) ...
+Presolve removed 8216293 rows and 80223 columns (presolve time = 246s) ...
+Presolve removed 8216301 rows and 80231 columns (presolve time = 250s) ...
+Presolve removed 8216301 rows and 80231 columns (presolve time = 255s) ...
+Presolve removed 8216309 rows and 80231 columns (presolve time = 260s) ...
+Presolve removed 8216309 rows and 80231 columns (presolve time = 265s) ...
+Presolve removed 8216309 rows and 80231 columns (presolve time = 270s) ...
+Presolve removed 8216309 rows and 80231 columns (presolve time = 276s) ...
+Presolve removed 8216309 rows and 80231 columns (presolve time = 281s) ...
+Presolve removed 8216309 rows and 80231 columns
+Presolve time: 280.94s
+Presolved: 3918107 rows, 151765 columns, 15534292 nonzeros
+Variable types: 0 continuous, 151765 integer (151765 binary)
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Ordering time: 1.39s
+Ordering time: 3.00s
+
+Barrier statistics:
+ Dense cols : 322
+ Free vars  : 18024
+ AA' NZ     : 2.291e+06
+ Factor NZ  : 2.408e+07 (roughly 400 MB of memory)
+ Factor Ops : 6.419e+10 (less than 1 second per iteration)
+ Threads    : 5
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -9.78198553e+06  2.68800000e+03  3.09e+03 4.00e+00  1.97e+02   324s
+   1  -9.51616187e+06  4.48057410e+03  2.92e+03 1.35e+01  1.83e+02   324s
+   2  -9.04188862e+06  9.08331180e+03  2.56e+03 1.28e+01  1.60e+02   325s
+   3  -8.64615077e+06  1.20989380e+04  1.98e+03 9.96e+00  1.29e+02   325s
+   4  -7.90162992e+06  1.12716082e+04  1.25e+03 5.20e+00  7.15e+01   326s
+   5  -6.63409164e+06  8.85779991e+03  5.71e+02 3.18e+00  4.22e+01   326s
+
+Barrier performed 5 iterations in 326.39 seconds (215.84 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 0.21s
+
+Solved with dual simplex
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+   22193    5.0800000e+02   0.000000e+00   0.000000e+00    327s
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+   22193    5.0800000e+02   0.000000e+00   0.000000e+00    327s
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root crossover log...
+
+       0 DPushes remaining with DInf 0.0000000e+00               330s
+
+    6917 PPushes remaining with PInf 0.0000000e+00               330s
+       0 PPushes remaining with PInf 0.0000000e+00               336s
+
+  Push phase complete: Pinf 0.0000000e+00, Dinf 1.1719514e-12    336s
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+   29113    5.0800000e+02   0.000000e+00   0.000000e+00    337s
+   29113    5.0800000e+02   0.000000e+00   0.000000e+00    339s
+
+Root relaxation: objective 5.080000e+02, 29113 iterations, 32.60 seconds (33.69 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  508.00000    0 4888          -  508.00000      -     -  611s
+H    0     0                     640.0000000  508.00000  20.6%     -  669s
+H    0     0                     550.0000000  508.00000  7.64%     -  673s
+     0     0  508.00000    0 3835  550.00000  508.00000  7.64%     - 1154s
+H    0     0                     508.0000000  508.00000  0.00%     - 1196s
+     0     0  508.00000    0 3835  508.00000  508.00000  0.00%     - 1196s
+
+Cutting planes:
+  Gomory: 9
+  Cover: 70
+  Clique: 145
+  MIR: 15
+  StrongCG: 1
+  Zero half: 55
+  RLT: 26
+  BQP: 3
+
+Explored 1 nodes (111168 simplex iterations) in 1196.57 seconds (1440.49 work units)
+Thread count was 8 (of 96 available processors)
+
+Solution count 3: 508 550 640 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.080000000000e+02, best bound 5.080000000000e+02, gap 0.0000%
+[32m2025-01-22 14:10:45,192 - INFO - Optimal solution found.[0m
+[34m2025-01-22 14:10:45,193 - DEBUG - Sub Objectives:[0m
+[34m2025-01-22 14:10:45,193 - DEBUG - (SOLVER):Minimize Delay: 0.0[0m
+[34m2025-01-22 14:10:45,193 - DEBUG - (SOLVER):Minimize Missing Treatments: 508.0[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 16 is admitted at day 4.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 17 is admitted at day 5.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 18 is admitted at day 0.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 19 is admitted at day 0.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 20 is admitted at day 3.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 21 is admitted at day 4.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 22 is admitted at day 7.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 23 is admitted at day 7.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 24 is admitted at day 6.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 25 is admitted at day 1.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 26 is admitted at day 5.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 27 is admitted at day 2.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 28 is admitted at day 4.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 29 is admitted at day 1.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 30 is admitted at day 8.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 31 is admitted at day 7.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 32 is admitted at day 5.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 33 is admitted at day 4.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 34 is admitted at day 4.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 35 is admitted at day 3.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 36 is admitted at day 10.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 37 is admitted at day 7.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 38 is admitted at day 1.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patient 39 is admitted at day 3.[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patients [16, 18] have treatment 0 starting at day 6, hour 14.5 using resources [1, 3, 6].[0m
+[34m2025-01-22 14:10:45,256 - DEBUG - Patients [16, 33, 37] have treatment 0 starting at day 10, hour 9.5 using resources [1, 3, 6].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16] have treatment 1 starting at day 6, hour 12.5 using resources [7].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16] have treatment 1 starting at day 7, hour 10.0 using resources [7].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16] have treatment 1 starting at day 9, hour 12.5 using resources [8].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16] have treatment 1 starting at day 12, hour 8.0 using resources [8].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 20, 22, 24, 26, 27, 33, 34] have treatment 2 starting at day 9, hour 14.0 using resources [1, 6].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 21, 22, 23, 33] have treatment 2 starting at day 10, hour 14.0 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 26, 30, 31, 35, 39] have treatment 2 starting at day 11, hour 15.0 using resources [4, 7].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 38, 39] have treatment 3 starting at day 4, hour 8.0 using resources [0, 6].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 33, 34] have treatment 3 starting at day 5, hour 14.0 using resources [0, 6].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 17, 20, 22] have treatment 3 starting at day 8, hour 9.5 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 21, 34, 35] have treatment 3 starting at day 12, hour 8.5 using resources [0, 7].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 32] have treatment 4 starting at day 7, hour 15.5 using resources [4, 7].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16] have treatment 4 starting at day 10, hour 13.0 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 30] have treatment 4 starting at day 12, hour 10.5 using resources [2, 6].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 36] have treatment 4 starting at day 13, hour 8.0 using resources [1, 7].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 35] have treatment 5 starting at day 4, hour 15.5 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 17] have treatment 5 starting at day 6, hour 9.0 using resources [5, 8].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 17] have treatment 5 starting at day 7, hour 8.5 using resources [5, 7].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16] have treatment 5 starting at day 11, hour 11.5 using resources [5, 7].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 18, 19, 25, 26, 27, 28, 32, 34, 38] have treatment 6 starting at day 5, hour 8.0 using resources [3, 8].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 27, 29, 30, 34, 35] have treatment 6 starting at day 9, hour 9.0 using resources [2, 8].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 18, 21, 26, 27, 28, 31, 32, 34, 38] have treatment 6 starting at day 13, hour 9.0 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 29] have treatment 7 starting at day 4, hour 14.5 using resources [8, 6, 5].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [16, 29] have treatment 7 starting at day 5, hour 13.0 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [17, 29, 33, 35, 38] have treatment 0 starting at day 7, hour 13.5 using resources [2, 4, 7].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [17] have treatment 1 starting at day 11, hour 8.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [17, 22, 31, 32, 33] have treatment 2 starting at day 12, hour 9.0 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [17, 18, 21, 23, 34] have treatment 2 starting at day 13, hour 10.5 using resources [3, 6].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [17, 33, 35] have treatment 3 starting at day 5, hour 8.0 using resources [2, 7].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [17, 33] have treatment 3 starting at day 13, hour 8.5 using resources [0, 7].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [17, 26] have treatment 4 starting at day 5, hour 13.5 using resources [3, 6].[0m
+[34m2025-01-22 14:10:45,257 - DEBUG - Patients [17] have treatment 4 starting at day 6, hour 11.0 using resources [0, 6].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [17] have treatment 4 starting at day 8, hour 11.5 using resources [2, 8].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [17, 36] have treatment 4 starting at day 10, hour 9.0 using resources [1, 7].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [17, 19] have treatment 4 starting at day 13, hour 15.0 using resources [1, 7].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [17] have treatment 5 starting at day 6, hour 11.5 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [17, 30] have treatment 5 starting at day 10, hour 11.5 using resources [5, 7].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [17, 21, 24, 27, 29, 30, 31, 37, 39] have treatment 6 starting at day 8, hour 8.0 using resources [1, 8].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [17, 18, 19, 20, 21, 22, 25, 26, 27, 28, 29, 30, 31, 33, 34, 38] have treatment 6 starting at day 11, hour 10.5 using resources [3, 8].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [17, 18, 27, 37, 39] have treatment 6 starting at day 12, hour 10.5 using resources [3, 8].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [17, 29] have treatment 7 starting at day 9, hour 14.5 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [17, 28] have treatment 7 starting at day 12, hour 13.5 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18] have treatment 1 starting at day 2, hour 10.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18] have treatment 1 starting at day 5, hour 12.5 using resources [7].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18] have treatment 1 starting at day 9, hour 8.0 using resources [7].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18] have treatment 1 starting at day 10, hour 9.5 using resources [7].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18, 27, 28, 33, 39] have treatment 2 starting at day 4, hour 10.5 using resources [3, 7].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18, 23, 26, 32, 39] have treatment 2 starting at day 8, hour 13.0 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18, 19] have treatment 3 starting at day 0, hour 10.0 using resources [0, 6].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18, 29] have treatment 3 starting at day 2, hour 14.0 using resources [4, 7].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18, 34] have treatment 3 starting at day 4, hour 8.0 using resources [3, 7].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18, 23, 33, 39] have treatment 3 starting at day 8, hour 14.0 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18] have treatment 4 starting at day 0, hour 14.0 using resources [2, 8].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18] have treatment 4 starting at day 6, hour 15.5 using resources [2, 6].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18] have treatment 4 starting at day 8, hour 11.5 using resources [1, 6].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18, 33] have treatment 4 starting at day 9, hour 8.5 using resources [0, 7].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18, 32] have treatment 4 starting at day 13, hour 11.5 using resources [2, 8].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18] have treatment 5 starting at day 6, hour 8.0 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18, 19] have treatment 5 starting at day 7, hour 10.0 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18] have treatment 5 starting at day 10, hour 11.0 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18, 19, 25, 29, 38] have treatment 6 starting at day 1, hour 10.0 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18, 19, 20, 25, 35, 38] have treatment 6 starting at day 3, hour 9.5 using resources [3, 8].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18, 19] have treatment 7 starting at day 0, hour 8.0 using resources [8, 6, 4].[0m
+[34m2025-01-22 14:10:45,258 - DEBUG - Patients [18, 19] have treatment 7 starting at day 1, hour 15.0 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [18, 39] have treatment 7 starting at day 3, hour 14.5 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19, 23, 39] have treatment 0 starting at day 8, hour 11.0 using resources [0, 3, 7].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19, 33, 37] have treatment 0 starting at day 9, hour 9.5 using resources [1, 3, 6].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19, 38] have treatment 0 starting at day 10, hour 9.5 using resources [0, 4, 8].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19] have treatment 1 starting at day 6, hour 13.0 using resources [8].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19] have treatment 1 starting at day 8, hour 12.5 using resources [6].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19] have treatment 1 starting at day 10, hour 13.5 using resources [7].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19] have treatment 1 starting at day 12, hour 10.0 using resources [8].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19] have treatment 1 starting at day 13, hour 8.5 using resources [8].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19, 20, 28, 33, 35] have treatment 2 starting at day 8, hour 8.5 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19, 21, 34] have treatment 3 starting at day 4, hour 10.0 using resources [2, 6].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19, 22] have treatment 4 starting at day 12, hour 10.5 using resources [0, 7].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19] have treatment 4 starting at day 13, hour 9.5 using resources [2, 6].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19] have treatment 5 starting at day 2, hour 13.0 using resources [5, 8].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19, 33] have treatment 5 starting at day 5, hour 11.5 using resources [4, 7].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19] have treatment 5 starting at day 7, hour 9.0 using resources [5, 7].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19, 24] have treatment 5 starting at day 11, hour 8.0 using resources [5, 8].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19] have treatment 7 starting at day 0, hour 9.0 using resources [8, 6, 5].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19] have treatment 7 starting at day 1, hour 8.0 using resources [8, 7, 4].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19, 38] have treatment 7 starting at day 2, hour 14.0 using resources [8, 6, 5].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19] have treatment 7 starting at day 3, hour 13.5 using resources [8, 6, 5].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19, 21] have treatment 7 starting at day 5, hour 10.5 using resources [8, 6, 4].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19, 21] have treatment 7 starting at day 6, hour 13.5 using resources [8, 7, 4].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [19, 34] have treatment 7 starting at day 11, hour 13.5 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [20, 34, 38] have treatment 0 starting at day 10, hour 8.0 using resources [2, 3, 8].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [20, 29, 39] have treatment 0 starting at day 10, hour 10.5 using resources [0, 2, 7].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [20] have treatment 1 starting at day 3, hour 12.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [20] have treatment 1 starting at day 4, hour 12.5 using resources [8].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [20] have treatment 1 starting at day 5, hour 8.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [20] have treatment 1 starting at day 11, hour 12.0 using resources [8].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [20, 25, 26, 32, 39] have treatment 2 starting at day 6, hour 10.5 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [20, 38] have treatment 3 starting at day 4, hour 10.0 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,259 - DEBUG - Patients [20, 39] have treatment 3 starting at day 5, hour 8.5 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [20, 23] have treatment 3 starting at day 7, hour 10.0 using resources [1, 8].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [20, 21, 23] have treatment 3 starting at day 13, hour 13.5 using resources [0, 6].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [20, 26] have treatment 4 starting at day 5, hour 15.5 using resources [4, 7].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [20, 38] have treatment 4 starting at day 6, hour 8.0 using resources [4, 7].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [20, 32] have treatment 4 starting at day 8, hour 15.5 using resources [3, 8].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [20, 35] have treatment 4 starting at day 9, hour 15.5 using resources [1, 7].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [20, 24] have treatment 4 starting at day 11, hour 10.0 using resources [4, 7].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [20] have treatment 4 starting at day 12, hour 15.5 using resources [1, 8].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [20] have treatment 5 starting at day 3, hour 8.0 using resources [4, 7].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [20] have treatment 5 starting at day 4, hour 8.5 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [20] have treatment 5 starting at day 9, hour 8.5 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [20] have treatment 5 starting at day 10, hour 13.5 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [20, 24] have treatment 5 starting at day 13, hour 10.5 using resources [5, 8].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [20] have treatment 5 starting at day 13, hour 11.0 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [20, 29] have treatment 7 starting at day 6, hour 9.5 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [21, 34] have treatment 0 starting at day 7, hour 9.0 using resources [0, 3, 6].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [21, 24, 27, 33, 34] have treatment 2 starting at day 6, hour 11.0 using resources [3, 7].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [21, 24, 26, 30, 31] have treatment 2 starting at day 8, hour 10.0 using resources [3, 7].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [21, 28] have treatment 4 starting at day 4, hour 13.5 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [21, 28] have treatment 4 starting at day 4, hour 15.0 using resources [4, 7].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [21] have treatment 4 starting at day 5, hour 13.0 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [21, 23] have treatment 4 starting at day 9, hour 8.0 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [21, 23] have treatment 4 starting at day 9, hour 11.0 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [21, 37] have treatment 5 starting at day 9, hour 13.0 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [21] have treatment 5 starting at day 10, hour 8.5 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [22] have treatment 1 starting at day 7, hour 12.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [22] have treatment 1 starting at day 8, hour 8.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [22] have treatment 1 starting at day 8, hour 12.5 using resources [7].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [22] have treatment 1 starting at day 10, hour 9.0 using resources [8].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [22] have treatment 1 starting at day 10, hour 12.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [22] have treatment 1 starting at day 12, hour 12.0 using resources [8].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [22] have treatment 1 starting at day 13, hour 12.5 using resources [6].[0m
+[34m2025-01-22 14:10:45,260 - DEBUG - Patients [22, 30, 31, 36, 39] have treatment 2 starting at day 13, hour 10.5 using resources [2, 7].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [22] have treatment 4 starting at day 7, hour 15.5 using resources [3, 8].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [22] have treatment 4 starting at day 9, hour 11.5 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [22, 24] have treatment 5 starting at day 7, hour 11.0 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [22] have treatment 5 starting at day 9, hour 8.0 using resources [5, 8].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [22, 39] have treatment 5 starting at day 13, hour 13.0 using resources [5, 7].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [23] have treatment 1 starting at day 7, hour 12.0 using resources [7].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [23] have treatment 1 starting at day 7, hour 12.5 using resources [7].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [23] have treatment 1 starting at day 12, hour 12.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [23] have treatment 1 starting at day 12, hour 13.0 using resources [8].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [23] have treatment 1 starting at day 13, hour 8.5 using resources [6].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [23] have treatment 1 starting at day 13, hour 12.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [23, 26, 27, 30, 31, 32, 37, 39] have treatment 2 starting at day 11, hour 13.0 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [23, 24, 26, 31, 33, 38] have treatment 3 starting at day 7, hour 8.0 using resources [1, 8].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [23, 34] have treatment 3 starting at day 8, hour 8.0 using resources [3, 7].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [23, 25, 33, 38] have treatment 3 starting at day 12, hour 13.5 using resources [0, 6].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [23] have treatment 4 starting at day 10, hour 9.0 using resources [3, 6].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [23] have treatment 4 starting at day 12, hour 8.5 using resources [3, 6].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [23] have treatment 5 starting at day 10, hour 8.0 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [24] have treatment 4 starting at day 6, hour 8.5 using resources [3, 6].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [24, 35] have treatment 5 starting at day 12, hour 8.0 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [24] have treatment 5 starting at day 12, hour 11.5 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [24, 33] have treatment 5 starting at day 13, hour 11.5 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [25, 33, 34] have treatment 0 starting at day 7, hour 11.0 using resources [0, 4, 7].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [25] have treatment 1 starting at day 8, hour 12.5 using resources [8].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [25] have treatment 4 starting at day 1, hour 13.5 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [25] have treatment 4 starting at day 2, hour 9.5 using resources [1, 6].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [25, 37] have treatment 4 starting at day 8, hour 13.0 using resources [2, 8].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [25, 35] have treatment 4 starting at day 9, hour 13.0 using resources [0, 8].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [25, 32] have treatment 4 starting at day 12, hour 8.0 using resources [1, 7].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [26] have treatment 1 starting at day 6, hour 12.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [26] have treatment 1 starting at day 6, hour 12.5 using resources [8].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [26] have treatment 1 starting at day 8, hour 12.0 using resources [7].[0m
+[34m2025-01-22 14:10:45,261 - DEBUG - Patients [26] have treatment 1 starting at day 12, hour 12.5 using resources [8].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [26, 29, 31, 33, 34, 39] have treatment 3 starting at day 13, hour 14.0 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [26] have treatment 4 starting at day 7, hour 13.0 using resources [2, 7].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [26] have treatment 4 starting at day 7, hour 15.5 using resources [2, 6].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [26, 32] have treatment 4 starting at day 10, hour 11.5 using resources [0, 6].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [26, 38] have treatment 4 starting at day 12, hour 11.0 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [26, 30] have treatment 4 starting at day 13, hour 8.0 using resources [3, 8].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [26, 39] have treatment 5 starting at day 10, hour 8.5 using resources [4, 7].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [26] have treatment 5 starting at day 10, hour 15.5 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [26, 34] have treatment 7 starting at day 12, hour 14.5 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [27, 39] have treatment 0 starting at day 3, hour 9.5 using resources [0, 4, 7].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [27, 35, 39] have treatment 0 starting at day 3, hour 11.0 using resources [0, 2, 7].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [27, 28, 34] have treatment 0 starting at day 7, hour 8.0 using resources [0, 2, 6].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [27] have treatment 1 starting at day 2, hour 9.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [27] have treatment 1 starting at day 3, hour 15.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [27] have treatment 1 starting at day 9, hour 12.5 using resources [6].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [27] have treatment 1 starting at day 13, hour 15.5 using resources [6].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [27] have treatment 5 starting at day 2, hour 8.5 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [27, 29] have treatment 5 starting at day 4, hour 13.0 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [27, 38] have treatment 5 starting at day 10, hour 14.5 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [27, 38] have treatment 7 starting at day 2, hour 11.0 using resources [8, 6, 5].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [27, 39] have treatment 7 starting at day 7, hour 13.5 using resources [8, 6, 5].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [27, 29] have treatment 7 starting at day 7, hour 14.5 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [27, 33] have treatment 7 starting at day 11, hour 14.5 using resources [8, 6, 5].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [28] have treatment 1 starting at day 6, hour 12.0 using resources [8].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [28] have treatment 1 starting at day 9, hour 15.5 using resources [6].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [28] have treatment 1 starting at day 11, hour 10.0 using resources [8].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [28] have treatment 1 starting at day 13, hour 13.0 using resources [8].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [28] have treatment 1 starting at day 13, hour 14.0 using resources [7].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [28, 33] have treatment 5 starting at day 5, hour 10.5 using resources [5, 7].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [28, 39] have treatment 5 starting at day 7, hour 13.0 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [28, 30] have treatment 5 starting at day 10, hour 8.0 using resources [4, 7].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [28] have treatment 5 starting at day 10, hour 13.5 using resources [5, 8].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [28, 30] have treatment 5 starting at day 12, hour 11.0 using resources [5, 7].[0m
+[34m2025-01-22 14:10:45,262 - DEBUG - Patients [28, 29] have treatment 7 starting at day 6, hour 14.5 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [28, 38] have treatment 7 starting at day 8, hour 14.5 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [28, 35] have treatment 7 starting at day 9, hour 10.5 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [29, 38] have treatment 3 starting at day 2, hour 8.0 using resources [0, 8].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [29] have treatment 4 starting at day 2, hour 11.5 using resources [4, 7].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [29] have treatment 4 starting at day 3, hour 8.5 using resources [3, 7].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [29] have treatment 4 starting at day 9, hour 13.5 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [29] have treatment 4 starting at day 12, hour 10.0 using resources [1, 6].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [29, 33] have treatment 4 starting at day 13, hour 13.0 using resources [2, 6].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [29, 35] have treatment 5 starting at day 11, hour 9.5 using resources [5, 7].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [29, 39] have treatment 7 starting at day 5, hour 14.5 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [29] have treatment 7 starting at day 11, hour 8.5 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [30] have treatment 1 starting at day 8, hour 12.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [30] have treatment 1 starting at day 9, hour 12.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [30] have treatment 1 starting at day 12, hour 12.5 using resources [7].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [30, 39] have treatment 5 starting at day 13, hour 13.5 using resources [4, 7].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [31, 35, 37] have treatment 0 starting at day 7, hour 14.5 using resources [0, 2, 6].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [31] have treatment 1 starting at day 7, hour 12.0 using resources [8].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [31] have treatment 1 starting at day 8, hour 15.5 using resources [7].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [31] have treatment 1 starting at day 10, hour 14.5 using resources [7].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [31] have treatment 1 starting at day 12, hour 12.0 using resources [7].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [31] have treatment 4 starting at day 9, hour 11.5 using resources [0, 6].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [31] have treatment 5 starting at day 12, hour 8.5 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [31, 39] have treatment 7 starting at day 9, hour 13.5 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [32] have treatment 1 starting at day 5, hour 12.0 using resources [7].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [32] have treatment 1 starting at day 5, hour 12.5 using resources [6].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [32] have treatment 1 starting at day 6, hour 12.5 using resources [6].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [32] have treatment 1 starting at day 7, hour 10.5 using resources [6].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [32] have treatment 1 starting at day 7, hour 12.5 using resources [6].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [32] have treatment 1 starting at day 10, hour 15.5 using resources [8].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [32] have treatment 1 starting at day 11, hour 12.5 using resources [8].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [32] have treatment 1 starting at day 13, hour 8.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [32] have treatment 5 starting at day 9, hour 15.5 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,263 - DEBUG - Patients [32, 35] have treatment 5 starting at day 11, hour 10.0 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [33, 35, 39] have treatment 0 starting at day 6, hour 8.0 using resources [0, 2, 8].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [33, 34] have treatment 0 starting at day 10, hour 15.0 using resources [0, 2, 7].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [33, 39] have treatment 0 starting at day 11, hour 9.0 using resources [0, 3, 6].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [33] have treatment 1 starting at day 4, hour 15.5 using resources [7].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [33] have treatment 1 starting at day 6, hour 15.5 using resources [8].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [33] have treatment 1 starting at day 12, hour 15.5 using resources [6].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [33] have treatment 4 starting at day 11, hour 15.5 using resources [1, 6].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [33] have treatment 5 starting at day 4, hour 13.0 using resources [4, 7].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [33, 35] have treatment 5 starting at day 6, hour 10.5 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [33, 39] have treatment 7 starting at day 4, hour 13.5 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [34] have treatment 1 starting at day 5, hour 11.5 using resources [8].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [34] have treatment 7 starting at day 8, hour 13.5 using resources [8, 7, 5].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [35, 38] have treatment 0 starting at day 6, hour 13.0 using resources [0, 3, 6].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [35] have treatment 1 starting at day 4, hour 12.0 using resources [8].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [35] have treatment 1 starting at day 5, hour 12.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [35] have treatment 1 starting at day 8, hour 12.0 using resources [8].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [35] have treatment 1 starting at day 10, hour 15.0 using resources [8].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [35] have treatment 1 starting at day 13, hour 12.0 using resources [7].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [35] have treatment 4 starting at day 3, hour 9.0 using resources [0, 6].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [35] have treatment 4 starting at day 11, hour 13.0 using resources [1, 7].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [35] have treatment 4 starting at day 13, hour 13.5 using resources [2, 8].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [35] have treatment 5 starting at day 3, hour 8.5 using resources [5, 6].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [35] have treatment 5 starting at day 4, hour 8.0 using resources [5, 8].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [35] have treatment 5 starting at day 4, hour 10.0 using resources [5, 7].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [35] have treatment 5 starting at day 10, hour 11.5 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [36] have treatment 1 starting at day 10, hour 10.5 using resources [8].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [36] have treatment 1 starting at day 11, hour 13.0 using resources [8].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [36] have treatment 1 starting at day 11, hour 14.5 using resources [7].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [36] have treatment 1 starting at day 12, hour 9.5 using resources [6].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [36, 37] have treatment 5 starting at day 12, hour 13.0 using resources [5, 7].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [37] have treatment 1 starting at day 13, hour 10.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [37] have treatment 1 starting at day 13, hour 11.5 using resources [7].[0m
+[34m2025-01-22 14:10:45,264 - DEBUG - Patients [37] have treatment 4 starting at day 7, hour 13.0 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,265 - DEBUG - Patients [38] have treatment 1 starting at day 9, hour 15.0 using resources [6].[0m
+[34m2025-01-22 14:10:45,265 - DEBUG - Patients [38] have treatment 1 starting at day 13, hour 12.0 using resources [8].[0m
+[34m2025-01-22 14:10:45,265 - DEBUG - Patients [38] have treatment 4 starting at day 1, hour 11.5 using resources [2, 6].[0m
+[34m2025-01-22 14:10:45,265 - DEBUG - Patients [38] have treatment 4 starting at day 1, hour 14.5 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,265 - DEBUG - Patients [38] have treatment 4 starting at day 3, hour 8.5 using resources [4, 8].[0m
+[34m2025-01-22 14:10:45,265 - DEBUG - Patients [38] have treatment 4 starting at day 3, hour 15.5 using resources [3, 7].[0m
+[34m2025-01-22 14:10:45,265 - DEBUG - Patients [38] have treatment 4 starting at day 5, hour 10.0 using resources [0, 8].[0m
+[34m2025-01-22 14:10:45,265 - DEBUG - Patients [38] have treatment 4 starting at day 7, hour 11.5 using resources [3, 6].[0m
+[34m2025-01-22 14:10:45,265 - DEBUG - Patients [38] have treatment 5 starting at day 11, hour 8.5 using resources [4, 6].[0m
+[34m2025-01-22 14:10:45,265 - DEBUG - Patients [39] have treatment 1 starting at day 12, hour 15.5 using resources [7].[0m
+[34m2025-01-22 14:10:45,265 - DEBUG - Patients [39] have treatment 4 starting at day 3, hour 13.5 using resources [1, 7].[0m
+[34m2025-01-22 14:10:45,265 - DEBUG - Patients [39] have treatment 4 starting at day 9, hour 11.5 using resources [1, 7].[0m
+[34m2025-01-22 14:10:45,265 - DEBUG - Patients [39] have treatment 4 starting at day 11, hour 8.0 using resources [4, 7].[0m
+[34m2025-01-22 14:10:45,265 - DEBUG - Patients [39] have treatment 5 starting at day 4, hour 15.5 using resources [4, 8].[0m
+Schedule Hash: ca07d6a0687113c4ab7d9c519cd051e3
+Patients Arrival Hash: 87bda9f5a4584723c1fd81234c1e3da2
+Solver Hash: 8cbffbc25323f90efb25d20d9ab3bcbc
+Solution Hash: 29ab360de86f0237694a9ad6818f876d
+[34m2025-01-22 14:10:45,272 - DEBUG - Checking solution value.[0m
+[34m2025-01-22 14:10:45,272 - DEBUG - Solvers objective function value: 508.0[0m
+[34m2025-01-22 14:10:45,274 - DEBUG - (VERIFIER):Treatment value: 0[0m
+[34m2025-01-22 14:10:45,274 - DEBUG - (VERIFIER):Delay value: 0[0m
+[34m2025-01-22 14:10:45,274 - DEBUG - (VERIFIER):Missing treatment value: 508[0m
+[34m2025-01-22 14:10:45,274 - DEBUG - Correct objective function value: 508[0m
+[34m2025-01-22 14:10:45,274 - DEBUG - Solution is valid.[0m
+[34m2025-01-22 14:10:45,275 - DEBUG - All solvers accepted the solution.[0m
+[32m2025-01-22 14:10:45,275 - INFO - Time to find solution: 1199.807s with value 508.000000[0m
+[32m2025-01-22 14:10:45,275 - INFO - Extract solution time: 0.082s[0m
+[32m2025-01-22 14:10:45,275 - INFO - Total Time: 1367.254s[0m

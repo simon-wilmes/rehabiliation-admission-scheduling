@@ -66,14 +66,14 @@ def main():
         "CPSolver",
         "{'break_symmetry': True, 'break_symmetry_strong': True}",
         "{'break_symmetry': True, 'break_symmetry_strong': False}",
-        "{'break_symmetry': False, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubSolver2'}",
-        "{'break_symmetry': True, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubSolver2'}",
-        "{'break_symmetry': True, 'add_constraints_to_symmetrc_days': True, 'subsolver_cls': 'CPSubSolver2'}",
-        "{'break_symmetry': False, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubSolver'}",
-        "{'break_symmetry': True, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubSolver'}",
-        "{'break_symmetry': True, 'add_constraints_to_symmetrc_days': True, 'subsolver_cls': 'CPSubSolver'}",
-    }"""
-
+        "{'break_symmetry': False, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubsolver2'}",
+        "{'break_symmetry': True, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubsolver2'}",
+        "{'break_symmetry': True, 'add_constraints_to_symmetrc_days': True, 'subsolver_cls': 'CPSubsolver2'}",
+        "{'break_symmetry': False, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubsolver'}",
+        "{'break_symmetry': True, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubsolver'}",
+        "{'break_symmetry': True, 'add_constraints_to_symmetrc_days': True, 'subsolver_cls': 'CPSubsolver'}",
+    }
+    """
     def test_timeout(err_file_str):
         timeout_regex = "DUE TO TIME LIMIT"
         timeout_match = re.search(timeout_regex, err_file_str)

@@ -5,113 +5,177 @@ from copy import copy
 from time import sleep
 from random import shuffle
 import sys
+import hashlib
+import subprocess
+
+USERNAME = "ir803925"
 
 # 0. Define all parameters
-params = {
+params_all = {
     "$RUNTIME": "01:00:00",
-    "$MEMORY": "15360MB",
     "$PARTITION": "c23ml",  # "c23mm",
-    "$OUTPUT_FOLDER": "/work/wx350715/Kobra/output",
-    "$SCRIPT_FOLDER": "/home/wx350715/Kobra/rehabiliation-admission-scheduling",
+    "$OUTPUT_FOLDER": f"/work/{USERNAME}/Kobra/output",
+    "$SCRIPT_FOLDER": f"/home/{USERNAME}/Kobra/rehabiliation-admission-scheduling",
     "$REPETITION": 1,
+    "$CPU_CORES": 8,
+    "$MEMORY_PER_CORE": 5000,
 }
-params_for_hash = {"$PARTITION", "$MEMORY", "$RUNTIME"}
+# Empty dict means that every run has the same params multiple
+params_multiple = [{}]
 
-TEMPLATE_PATH = "cluster/cluster.template"
-SCRIPTS_FOLDER = "/work/wx350715/Kobra/scripts"
+
+TEMPLATE_PATH = f"/home/{USERNAME}/Kobra/rehabiliation-admission-scheduling/src/cluster/cluster.template"
+SCRIPTS_FOLDER = f"/work/{USERNAME}/Kobra/scripts"
 
 # 1. Find all the instance files for the computational_study
-folder_path = (
-    "/home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_002"
+INSTANCE_FOLDER_PATH = (
+    f"/home/{USERNAME}/Kobra/rehabiliation-admission-scheduling/data/comp_study_003"
 )
 
 # Get all instance files
-assert os.path.isdir(folder_path)
-assert os.path.isdir(params["$OUTPUT_FOLDER"])
-assert os.path.isdir(params["$SCRIPT_FOLDER"])
-assert os.path.isfile(params["$SCRIPT_FOLDER"] + "/" + TEMPLATE_PATH)
+assert os.path.isdir(INSTANCE_FOLDER_PATH)
+
+
+all_solver_combis = [
+    {"solver": "MIPSolver", "use_lazy_constraints": True, "substitute_x_pmdt": False},
+    {"solver": "MIPSolver", "use_lazy_constraints": False, "substitute_x_pmdt": False},
+    {"solver": "MIPSolver", "use_lazy_constraints": True, "substitute_x_pmdt": True},
+    {"solver": "MIPSolver", "use_lazy_constraints": False, "substitute_x_pmdt": True},
+    {"solver": "MIPSolver3", "break_symmetry": False},
+    {"solver": "MIPSolver3", "break_symmetry": True},
+    {
+        "solver": "LBBDSolver",
+        "break_symmetry": False,
+        "add_constraints_to_symmetric_days": False,
+        "subsolver.restrict_obj_func_to_1": False,
+        "subsolver_cls": "CPSubsolver",
+    },
+    {
+        "solver": "LBBDSolver",
+        "break_symmetry": True,
+        "add_constraints_to_symmetric_days": False,
+        "subsolver.restrict_obj_func_to_1": False,
+        "subsolver_cls": "CPSubsolver",
+    },
+    {
+        "solver": "LBBDSolver",
+        "break_symmetry": False,
+        "add_constraints_to_symmetric_days": True,
+        "subsolver.restrict_obj_func_to_1": False,
+        "subsolver_cls": "CPSubsolver",
+    },
+    {
+        "solver": "LBBDSolver",
+        "break_symmetry": True,
+        "add_constraints_to_symmetric_days": True,
+        "subsolver.restrict_obj_func_to_1": False,
+        "subsolver_cls": "CPSubsolver",
+    },
+    {
+        "solver": "LBBDSolver",
+        "break_symmetry": False,
+        "add_constraints_to_symmetric_days": False,
+        "subsolver.restrict_obj_func_to_1": True,
+        "subsolver_cls": "CPSubsolver",
+    },
+    {
+        "solver": "LBBDSolver",
+        "break_symmetry": True,
+        "add_constraints_to_symmetric_days": False,
+        "subsolver.restrict_obj_func_to_1": True,
+        "subsolver_cls": "CPSubsolver",
+    },
+    {
+        "solver": "LBBDSolver",
+        "break_symmetry": False,
+        "add_constraints_to_symmetric_days": True,
+        "subsolver.restrict_obj_func_to_1": True,
+        "subsolver_cls": "CPSubsolver",
+    },
+    {
+        "solver": "LBBDSolver",
+        "break_symmetry": True,
+        "add_constraints_to_symmetric_days": True,
+        "subsolver.restrict_obj_func_to_1": True,
+        "subsolver_cls": "CPSubsolver",
+    },
+    
+    {
+        "solver": "LBBDSolver",
+        "break_symmetry": False,
+        "add_constraints_to_symmetric_days": False,
+        "subsolver.restrict_obj_func_to_1": False,
+        "subsolver_cls": "MIPSubsolver",
+    },
+    {
+        "solver": "LBBDSolver",
+        "break_symmetry": True,
+        "add_constraints_to_symmetric_days": False,
+        "subsolver.restrict_obj_func_to_1": False,
+        "subsolver_cls": "MIPSubsolver",
+    },
+    {
+        "solver": "LBBDSolver",
+        "break_symmetry": False,
+        "add_constraints_to_symmetric_days": True,
+        "subsolver.restrict_obj_func_to_1": False,
+        "subsolver_cls": "MIPSubsolver",
+    },
+    {
+        "solver": "LBBDSolver",
+        "break_symmetry": True,
+        "add_constraints_to_symmetric_days": True,
+        "subsolver.restrict_obj_func_to_1": False,
+        "subsolver_cls": "MIPSubsolver",
+    },
+    {
+        "solver": "LBBDSolver",
+        "break_symmetry": False,
+        "add_constraints_to_symmetric_days": False,
+        "subsolver.restrict_obj_func_to_1": True,
+        "subsolver_cls": "MIPSubsolver",
+    },
+    {
+        "solver": "LBBDSolver",
+        "break_symmetry": True,
+        "add_constraints_to_symmetric_days": False,
+        "subsolver.restrict_obj_func_to_1": True,
+        "subsolver_cls": "MIPSubsolver",
+    },
+    {
+        "solver": "LBBDSolver",
+        "break_symmetry": False,
+        "add_constraints_to_symmetric_days": True,
+        "subsolver.restrict_obj_func_to_1": True,
+        "subsolver_cls": "MIPSubsolver",
+    },
+    {
+        "solver": "LBBDSolver",
+        "break_symmetry": True,
+        "add_constraints_to_symmetric_days": True,
+        "subsolver.restrict_obj_func_to_1": True,
+        "subsolver_cls": "MIPSubsolver",
+    },
+]
+
 
 instance_files = [
-    os.path.join(folder_path, f)
-    for f in os.listdir(folder_path)
-    if os.path.isfile(os.path.join(folder_path, f))
+    os.path.join(INSTANCE_FOLDER_PATH, f)
+    for f in os.listdir(INSTANCE_FOLDER_PATH)
+    if os.path.isfile(os.path.join(INSTANCE_FOLDER_PATH, f))
 ]
 print(f"Found {len(instance_files)} instance files.")
 
-
-# 2. Generate all the combinations to run for the solvers
-
-all_combis = [
-    {"solver": "CPSolver", "break_symmetry": True},
-    {"solver": "CPSolver", "break_symmetry": False},
-    {"solver": "MIPSolver", "use_lazy_constraints": True},
-    {"solver": "MIPSolver", "use_lazy_constraints": False},
-    {"solver": "MIPSolver3", "break_symmetry": False, "break_symmetry_strong": False},
-    {"solver": "MIPSolver3", "break_symmetry": True, "break_symmetry_strong": False},
-    {"solver": "MIPSolver3", "break_symmetry": True, "break_symmetry_strong": True},
-    {
-        "solver": "LBBDSolver",
-        "break_symmetry": False,
-        "add_constraints_to_symmetrc_days": False,
-        "subsolver_cls": "CPSubSolver",
-    },
-    {
-        "solver": "LBBDSolver",
-        "break_symmetry": True,
-        "add_constraints_to_symmetrc_days": False,
-        "subsolver_cls": "CPSubSolver",
-    },
-    {
-        "solver": "LBBDSolver",
-        "break_symmetry": False,
-        "add_constraints_to_symmetrc_days": True,
-        "subsolver_cls": "CPSubSolver",
-    },
-    {
-        "solver": "LBBDSolver",
-        "break_symmetry": True,
-        "add_constraints_to_symmetrc_days": True,
-        "subsolver_cls": "CPSubSolver",
-    },
-    {
-        "solver": "LBBDSolver",
-        "break_symmetry": False,
-        "add_constraints_to_symmetrc_days": False,
-        "subsolver_cls": "CPSubSolver2",
-    },
-    {
-        "solver": "LBBDSolver",
-        "break_symmetry": True,
-        "add_constraints_to_symmetrc_days": False,
-        "subsolver_cls": "CPSubSolver2",
-    },
-    {
-        "solver": "LBBDSolver",
-        "break_symmetry": False,
-        "add_constraints_to_symmetrc_days": True,
-        "subsolver_cls": "CPSubSolver2",
-    },
-    {
-        "solver": "LBBDSolver",
-        "break_symmetry": True,
-        "add_constraints_to_symmetrc_days": True,
-        "subsolver_cls": "CPSubSolver2",
-    },
-]
-
-
 # 3. Read in the slurm template
-template_path = Path(params["$SCRIPT_FOLDER"]) / TEMPLATE_PATH
-with open(template_path, "r") as f:
+with open(TEMPLATE_PATH, "r") as f:
     template = f.read()
 
-
 # 4. Check with combinations are still missing
-output_path = params["$OUTPUT_FOLDER"]
+output_path = params_all["$OUTPUT_FOLDER"]
 
 # Get all the output files in the output path directory
 assert os.path.isdir(output_path)
-all_output = [
+all_files_output = [
     Path(output_path) / f
     for f in os.listdir(output_path)
     if os.path.isfile(os.path.join(output_path, f))
@@ -119,75 +183,97 @@ all_output = [
 
 # Get the starting hash from the output files
 hashes = set()
-for output_file in all_output:
+for output_file in all_files_output:
     hash = output_file.name.split("_")[2]
     hashes.add(hash)
-import hashlib
-import subprocess
-
 
 to_run_combis = []
+assert os.path.isdir(params_all["$OUTPUT_FOLDER"])
+assert os.path.isdir(params_all["$SCRIPT_FOLDER"])
 
-for solver_combi, instance_file in product(all_combis, instance_files):
+core_hours_required = 0
+for solver_combi, params_combi, instance_file in product(
+    all_solver_combis, params_multiple, instance_files
+):
     # get output hash
-    solver_combi_copy = copy(solver_combi)
-    for param in params_for_hash:
-        solver_combi_copy[param] = params[param]
+    hash_copy = copy(solver_combi)
+    for param_key in params_combi:
+        hash_copy[param_key] = params_combi[param_key]
 
-    combi_str = str(
+    hash_combi_str = str(
         sorted(
-            [(key, value) for key, value in solver_combi_copy.items()],
+            [(key, value) for key, value in hash_copy.items()],
             key=lambda x: x[0],
         )
     )
-    combi_str = str(combi_str + instance_file).encode()
-    hash = hashlib.md5(combi_str).hexdigest()
-    # print(hash)
+    hash_combi_str = str(hash_combi_str + instance_file).encode()
+    hash = hashlib.md5(hash_combi_str).hexdigest()
+    params_combi_copy = copy(params_combi)
+    for key in params_all:
+        params_combi_copy[key] = params_all[key]
+    params_combi_copy["$MEMORY"] = (
+        str(
+            max(
+                params_combi_copy["$MEMORY_PER_CORE"]
+                * int(params_combi_copy["$CPU_CORES"]),
+                5000,
+            )
+        )
+        + "MB"
+    )
 
     if hash in hashes:
         print(".", end="")
     else:
         print("x", end="")
-        to_run_combis.append((solver_combi, instance_file, hash))
+        to_run_combis.append((solver_combi, params_combi_copy, instance_file, hash))
+        runtime_in_hours = params_combi_copy["$RUNTIME"].split(":")
+        try:
+            runtime_in_hours = int(runtime_in_hours[0]) + int(runtime_in_hours[1]) / 60
+            core_hours_required += runtime_in_hours * params_combi_copy["$CPU_CORES"]
+        except:
+            print(
+                f"Error with runtime: {params_combi_copy['$RUNTIME']}. Will be Ignored!"
+            )
 
 print("")
 
 print(f"Need to run {len(to_run_combis)} combinations.")
-
-
+print(f"Using {core_hours_required:.1f} core hours.")
 if len(sys.argv) < 2 or sys.argv[1] != "-y":
     input("Press Enter to continue...")
+    pass
 
 to_run_scripts = []
 # 5. Create the slurm scripts
 for combi in to_run_combis:
     # Create the template by replacing the parameters
-    solver_combi, instance_file, hash = combi
-    params_copy = copy(params)
+    solver_combi, params_combi, instance_file, hash = combi
+    params_copy = copy(params_combi)
     # Update dictionary
     params_copy["$HASH"] = hash
     params_copy["$SOLVER_INSTANCE"] = instance_file
     params_copy["$SOLVER_NAME"] = solver_combi["solver"]
 
-    solver_combi_copy = copy(solver_combi)
-    solver_combi_copy.pop("solver")
-    params_copy["$SOLVER_PARAMS"] = solver_combi_copy
+    hash_copy = copy(solver_combi)
+    hash_copy.pop("solver")
+    params_copy["$SOLVER_PARAMS"] = hash_copy
 
     print("Create template with the following params and hash:")
     print(params_copy)
     print(hash)
 
-    template_copy = template
+    template_copy = copy(template)
     for key, value in params_copy.items():
         template_copy = template_copy.replace(key, str(value))
 
+    # assert "$" not in template_copy, "Not all parameters were replaced."
     # Write the template to a file
     output_file = Path(SCRIPTS_FOLDER) / f"{hash}_cluster.sh"
     to_run_scripts.append(output_file)
 
     with open(output_file, "w+") as f:
         f.write(template_copy)
-
 
 print("Finished creating scripts. Now starting the slurm jobs.")
 # Get the number of currently submitted jobs
@@ -198,18 +284,23 @@ current_jobs = (
 
 # Define the maximum number of jobs you can run at the same time
 max_jobs = 100
-max_jobs_to_run = 10000
+max_jobs_to_run = 100
 print("Currently running jobs:", current_jobs)
 print("Maximum number of jobs:", max_jobs)
 if max_jobs - current_jobs <= 0:
     print("To many jobs are already running. Exiting.")
     exit(0)
+jobs_to_start = min(max_jobs - current_jobs, len(to_run_scripts))
+print(
+    "Number possible number of jobs to start:",
+    jobs_to_start,
+)
+if max_jobs_to_run < jobs_to_start:
+    print("Restricting the number of jobs to start to", max_jobs_to_run)
 
-
-print("Number of jobs to start:", min(max_jobs - current_jobs, len(to_run_scripts)))
 sleep(1)
 # Calculate the number of jobs to start
-jobs_to_start = min(max_jobs - current_jobs, len(to_run_scripts))
+
 
 # Shuffle the scripts so that the first k jobs are as diverse as possible
 shuffle(to_run_scripts)
@@ -217,7 +308,6 @@ count = 0
 # Start the jobs
 result = subprocess.run(["squeue", "--me", "-o '%.100j'"], stdout=subprocess.PIPE)
 squeue_output = result.stdout.decode("utf-8")
-
 
 for i, script in enumerate(to_run_scripts):
     name_of_script = str(script).split("/")[-1].split("_")[0]
