@@ -1,6 +1,7 @@
 from src.time import Duration, DayHour
 from src.types import RID, RGID
 from copy import deepcopy
+from itertools import product
 
 
 class ResourceGroup:
@@ -35,6 +36,7 @@ class Resource:
         self.resource_groups = sorted(resource_groups)
         self.name = name
         self.unavailable_time_slots = unavailable_time_slots
+        self._total_availability_hours_dict = {}
 
     def __str__(self):
         return f"R({self.name})"
@@ -59,3 +61,15 @@ class Resource:
 
     def __lt__(self, other):
         return self.id < other.id
+
+    def total_availability_hours(self, end_day: int) -> float:
+        if end_day in self._total_availability_hours_dict:
+            return self._total_availability_hours_dict[end_day]
+        minutes_available = 0
+        for d in range(end_day):
+            for hour, minute in product(range(24), range(60)):
+                if self.is_available(DayHour(d, hour, minute)):
+                    minutes_available += 1
+
+        self._total_availability_hours_dict[d] = minutes_available / 60
+        return minutes_available / 60

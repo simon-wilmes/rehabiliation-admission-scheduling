@@ -21,6 +21,10 @@ for solv in all_solv_par_inst_rep:
                 succ_sol[solv] += 1
 print(succ_sol)
 
+pprint_dict(all_inst_solv_par_rep)
+pass
+pprint_dict(all_solv_par_inst_rep)
+
 best_solver_dict = defaultdict(int)
 for inst in all_inst_solv_par_rep:
     for par in all_inst_solv_par_rep[inst]:

@@ -44,6 +44,10 @@ def pprint_dict(d):
     print(json.dumps(d, indent=4, sort_keys=True))
 
 
+def hash_dict(d):
+    return json.dumps(d, sort_keys=True)
+
+
 def set_clipboard(text):
     if pyperclip_available:
         pyperclip.copy(text)
@@ -54,11 +58,11 @@ def main():
     output_dir = (
         Path(os.path.abspath(os.path.dirname(__file__))).parent.parent
         / "output"
-        / "second_run"
+        / "rev_run_1"
     )
 
-    unwanted_keys = {
-        "{'use_lazy_constraints': True}",
+    unwanted_keys = {}
+    """{'use_lazy_constraints': True}",
         "CPSolver",
         "{'break_symmetry': True, 'break_symmetry_strong': True}",
         "{'break_symmetry': True, 'break_symmetry_strong': False}",
@@ -68,7 +72,7 @@ def main():
         "{'break_symmetry': False, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubSolver'}",
         "{'break_symmetry': True, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubSolver'}",
         "{'break_symmetry': True, 'add_constraints_to_symmetrc_days': True, 'subsolver_cls': 'CPSubSolver'}",
-    }
+    }"""
 
     def test_timeout(err_file_str):
         timeout_regex = "DUE TO TIME LIMIT"
@@ -132,7 +136,7 @@ def main():
 
         job_name_match = re.search(job_name_regex, out_file_str).group(1)  # type: ignore
         name_match = re.search(name_regex, out_file_str).group(1)  # type: ignore
-        params_match = re.search(params_regex, out_file_str).group(1)  # type: ignore
+        params_match = eval(re.search(params_regex, out_file_str).group(1))  # type: ignore
         instance_match = re.search(instance_regex, out_file_str).group(1)  # type: ignore
         rep_match = re.search(rep_regex, out_file_str).group(1)  # type: ignore
 
@@ -174,22 +178,25 @@ def main():
         instance_file_name = r"\_".join(instance_file_name.split("_")[:-1]).replace(
             r"instance\_", r"inst\_"
         )
-        time_slot_length = int(instance_match.split("_")[-1].split(".")[0])
+        time_slot_length = int(instance_match.split("/")[-1].split("_")[2][1:])
         for word in replace_words:
             instance_file_name = instance_file_name.replace(word, replace_words[word])
 
         if name_match == "CPSolver":
             return
 
-        if params_match in unwanted_keys:
-            return
 
         if name_match == "LBBDSolver":
-            params = eval(params_match)["subsolver_cls"]
+            params = params_match["subsolver_cls"]
+            params_match.pop("subsolver_cls")
             name_match = "LBBDSolver_" + params
 
-        all_solv_par_inst_rep[name_match][instance_file_name][time_slot_length] = data
-        all_inst_solv_par_rep[instance_file_name][time_slot_length][name_match] = data
+        all_solv_par_inst_rep[name_match][hash_dict(params_match)][
+            instance_file_name
+        ] = data
+        all_inst_solv_par_rep[instance_file_name][name_match][
+            hash_dict(params_match)
+        ] = data
 
     # Loop through all files in the directory
     for file in os.listdir(output_dir):

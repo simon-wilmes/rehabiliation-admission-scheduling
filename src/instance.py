@@ -9,6 +9,7 @@ from src.logging import logger, print
 from typing import Any
 import re
 from collections import defaultdict
+import itertools
 
 
 class Instance:
@@ -70,25 +71,98 @@ class Instance:
         self.analyse_data()
         # Print comprehensive instance data
 
+    def all_nonempty_subsets(self, input_set):
+        """Generate all non-empty subsets of a given set."""
+        elements = list(input_set)
+        subsets = []
+        for size in range(1, len(elements) + 1):
+            subsets.extend(itertools.combinations(elements, size))
+        return subsets
+
     def analyse_data(self):
         logger.debug(f"Instance data:")
         num_treatments = 0
         num_days_stayed = 0
-        num_resources_needed = defaultdict(float)
+        num_resources_needed_best_case = defaultdict(float)
+        num_resources_needed_worst_case = defaultdict(float)
+
         for p in self.patients:
             num_treatments += sum(val for val in self.patients[p].treatments.values())
             num_days_stayed += self.patients[p].length_of_stay
+            proportial_stay = self.horizon_length / self.patients[p].length_of_stay
             for m in self.patients[p].treatments:
                 for fhat in m.resources:
-                    num_resources_needed[fhat] += (
-                        m.resources[fhat] * m.duration.hours / m.max_num_participants
+                    num_resources_needed_best_case[fhat] += (
+                        self.patients[p].treatments[m]
+                        * (
+                            m.resources[fhat]
+                            * m.duration.hours
+                            / m.max_num_participants
+                        )
+                        * proportial_stay
+                    )
+                    num_resources_needed_worst_case[fhat] += (
+                        self.patients[p].treatments[m]
+                        * (
+                            m.resources[fhat]
+                            * m.duration.hours
+                            / m.min_num_participants
+                        )
+                        * proportial_stay
                     )
 
-        # avail_resources = defaultdict(float)
-        # for f in self.resources.values():
-        #    avail_resources[f.resource_group] += (
-        #        self.workday_start - self.workday_end
-        #    ).hour
+        resource_best_worst = {}
+        resource_combi_usage_best = {}
+        resource_combi_usage_worst = {}
+        for resource in self.resources.values():
+            logger.debug(resource.id)
+            max_usage_best = 10000
+            max_usage_worst = 10000
+
+            for subset_resource_groups in self.all_nonempty_subsets(
+                resource.resource_groups
+            ):
+                subset_resource_groups = frozenset(subset_resource_groups)
+                if not subset_resource_groups in resource_combi_usage_best:
+                    logger.debug("New Resource Group:" + str(subset_resource_groups))
+                    hours_needed_treatment_best = 0
+                    hours_needed_treatment_worst = 0
+                    hours_provided_resources = 0
+
+                    for rg in self.resource_groups.values():
+                        if rg in subset_resource_groups:
+                            hours_needed_treatment_best += (
+                                num_resources_needed_best_case[rg]
+                            )
+                            hours_needed_treatment_worst += (
+                                num_resources_needed_worst_case[rg]
+                            )
+                    for tmp_resource in self.resources.values():
+                        if any(
+                            f in subset_resource_groups
+                            for f in tmp_resource.resource_groups
+                        ):
+                            hours_provided_resources += (
+                                tmp_resource.total_availability_hours(
+                                    self.horizon_length
+                                )
+                            )
+                    resource_combi_usage_best[subset_resource_groups] = (
+                        hours_provided_resources / hours_needed_treatment_best
+                    )
+                    resource_combi_usage_worst[subset_resource_groups] = (
+                        hours_provided_resources / hours_needed_treatment_worst
+                    )
+                    pass
+                max_usage_best = min(
+                    max_usage_best,
+                    resource_combi_usage_best[subset_resource_groups],
+                )
+                max_usage_worst = min(
+                    max_usage_worst,
+                    resource_combi_usage_worst[subset_resource_groups],
+                )
+            resource_best_worst[resource] = (max_usage_best, max_usage_worst)
 
         logger.debug(f"Number of patients: {len(self.patients)}")
         logger.debug(f"Number of beds: {self.beds_capacity}")
@@ -102,10 +176,11 @@ class Instance:
         logger.debug(f"Number of resources: {len(self.resources)}")
         logger.debug(f"Number of resource groups: {len(self.resource_groups)}")
 
-        for fhat in num_resources_needed:
+        for fhat in num_resources_needed_best_case:
             logger.debug(
-                f"Number of resource hours needed per all treatment by {fhat}: {num_resources_needed[fhat]}"
+                f"Number of resource hours needed per all treatment by {fhat}: {num_resources_needed_best_case[fhat]}"
             )
+        pass
 
 
 def create_instance_from_file(file_path: str) -> "Instance":
