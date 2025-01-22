@@ -2,6 +2,7 @@ from src.time import Duration, DayHour
 from src.types import RID, RGID
 from copy import deepcopy
 from itertools import product
+from src.logging import logger
 
 
 class ResourceGroup:
@@ -62,14 +63,13 @@ class Resource:
     def __lt__(self, other):
         return self.id < other.id
 
-    def total_availability_hours(self, end_day: int) -> float:
-        if end_day in self._total_availability_hours_dict:
-            return self._total_availability_hours_dict[end_day]
+    def total_availability_hours(self, day: int) -> float:
+        if day in self._total_availability_hours_dict:
+            return self._total_availability_hours_dict[day]
         minutes_available = 0
-        for d in range(end_day):
-            for hour, minute in product(range(24), range(60)):
-                if self.is_available(DayHour(d, hour, minute)):
-                    minutes_available += 1
+        for hour, minute in product(range(24), range(60)):
+            if self.is_available(DayHour(day, hour, minute)):
+                minutes_available += 1
 
-        self._total_availability_hours_dict[d] = minutes_available / 60
+        self._total_availability_hours_dict[day] = minutes_available / 60
         return minutes_available / 60

@@ -59,7 +59,7 @@ class Instance:
             resource.unavailable_time_slots.extend(
                 [
                     (DayHour(0, 0), DayHour(0, self.workday_start.hour), 1),
-                    (DayHour(0, self.workday_end.hour), DayHour(0, 23, 59), 1),
+                    (DayHour(0, self.workday_end.hour), DayHour(0, 23, 59.99999), 1),
                 ]
             )
 
@@ -142,11 +142,12 @@ class Instance:
                             f in subset_resource_groups
                             for f in tmp_resource.resource_groups
                         ):
-                            hours_provided_resources += (
-                                tmp_resource.total_availability_hours(
-                                    self.horizon_length
+                            for d in range(self.horizon_length):
+                                hours_provided_resources += (
+                                    tmp_resource.total_availability_hours(
+                                        self.horizon_length
+                                    )
                                 )
-                            )
                     resource_combi_usage_best[subset_resource_groups] = (
                         hours_provided_resources / hours_needed_treatment_best
                     )

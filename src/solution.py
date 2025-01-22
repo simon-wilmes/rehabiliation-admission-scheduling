@@ -146,10 +146,10 @@ class Solution:
             else "None"
         )
 
-        print(f"Schedule Hash: {schedule_hash}")
-        print(f"Patients Arrival Hash: {patients_arrival_hash}")
-        print(f"Solver Hash: {solver_hash}")
-        print(
+        logger.debug(f"Schedule Hash: {schedule_hash}")
+        logger.debug(f"Patients Arrival Hash: {patients_arrival_hash}")
+        logger.debug(f"Solver Hash: {solver_hash}")
+        logger.debug(
             f"Solution Hash: {hashlib.md5((schedule_hash + patients_arrival_hash + solver_hash).encode()).hexdigest()}"
         )
 
@@ -254,7 +254,7 @@ class Solution:
         self._check_daily_scheduling()
 
         self._check_even_scheduling()
-
+        self._print_resource_usage()
         self._print_hash()
 
     def _check_patient_admission(self):
@@ -638,3 +638,47 @@ class Solution:
                         f"expected {lower_bound} <= x <={upper_bound}   (avg={avg_per_day:.2f}, "
                         f"multipliers={daily_upper}/{daily_lower})."
                     )
+
+    def _print_resource_usage(self):
+        """
+        Calculate resource utilization by comparing assigned time to available time.
+        Returns a dictionary with resource utilization factors.
+        """
+        if self.solver is None:
+            logger.warning("Solver is not set, cannot calculate resource utilization.")
+            return
+        resource_usage = defaultdict(float)  # Track assigned hours per resource
+        resource_availability = defaultdict(float)  # Track available hours per resource
+
+        # Calculate total available hours for each resource
+        for day in range(self.instance.horizon_length):
+            for resource in self.instance.resources.values():
+                resource_availability[resource.id] += resource.total_availability_hours(
+                    day
+                )
+
+        # Calculate assigned hours for each resource
+        for appointment in self.schedule:
+            duration = appointment.treatment.duration.hours
+            for _, resources in appointment.resources.items():
+                for resource in resources:
+                    resource_usage[resource.id] += duration
+
+        # Calculate utilization factor for each resource
+        utilization_factors = {}
+        for resource_id in resource_availability.keys():
+            if resource_availability[resource_id] > 0:
+                utilization_factors[resource_id] = (
+                    resource_usage[resource_id] / resource_availability[resource_id]
+                )
+            else:
+                utilization_factors[resource_id] = 0
+                logger.warning(f"Resource {resource_id} has no available hours")
+
+        logger.debug("Resource utilization factors:")
+        for resource_id, factor in utilization_factors.items():
+            logger.debug(f"Resource {resource_id}: {factor:.2f}")
+        logger.debug(
+            "Average utilization factor: %.2f",
+            sum(utilization_factors.values()) / len(utilization_factors),
+        )
