@@ -3,7 +3,7 @@ import re
 import subprocess
 
 
-def get_slurm_stats(job_name):
+def get_slurm_stats(job_id):
     """
     Retrieves SLURM resource usage statistics for a given job name.
     Replace 'sacct' with the appropriate SLURM command as needed.
@@ -13,9 +13,8 @@ def get_slurm_stats(job_name):
             [
                 "sacct",
                 "-j",
-                job_name,
-                "--format=JobID,MaxRSS,Elapsed,State",
-                "--noheader",
+                job_id,
+                "--format=JobID%60,MaxRSS,Elapsed,State",
             ],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -25,7 +24,7 @@ def get_slurm_stats(job_name):
             raise Exception(result.stderr)
         return result.stdout.strip()
     except Exception as e:
-        print(f"Error retrieving SLURM stats for job {job_name}: {e}")
+        print(f"Error retrieving SLURM stats for job {job_id}: {e}")
         return None
 
 
@@ -47,25 +46,26 @@ def process_output_files(output_folder):
                 continue
 
             # Find the job name from the content
-            match = re.search(r"^0\.JOB_NAME: (.+)$", content, re.MULTILINE)
-            if match:
-                job_name = match.group(1).strip()
-                print(f"Processing job: {job_name} in file: {file_name}")
 
-                # Get SLURM stats
-                slurm_stats = get_slurm_stats(job_name)
-                if slurm_stats:
-                    # Append stats to the file
-                    with open(file_path, "a") as file:
-                        file.write("\nSLURM STATS:\n")
-                        file.write(slurm_stats + "\n")
-                    print(f"Appended stats to {file_name}.")
-                else:
-                    print(f"Failed to retrieve stats for {file_name}.")
+            job_id = file_path.split("_")[-1][:-4]
+            print(f"Processing job: {job_id} in file: {file_name}")
+
+            # Get SLURM stats
+            slurm_stats = get_slurm_stats(job_id)
+            if slurm_stats:
+                # Append stats to the file
+                with open(file_path, "a") as file:
+                    file.write("\nSLURM STATS:\n")
+                    file.write(slurm_stats + "\n")
+                print(f"Appended stats to {file_name}.")
             else:
-                print(f"No job name found in {file_name}. Skipping.")
+                print(f"Failed to retrieve stats for {file_name}.")
 
 
-output_folder = "/work/wx350715/Kobra/output_core_test/"
+output_folder = (
+    "/home/ir803925/Kobra/rehabiliation-admission-scheduling/output/rev_run_1"
+)
 if os.path.isdir(output_folder):
     process_output_files(output_folder)
+else:
+    print("Output folder doesnt exist!")

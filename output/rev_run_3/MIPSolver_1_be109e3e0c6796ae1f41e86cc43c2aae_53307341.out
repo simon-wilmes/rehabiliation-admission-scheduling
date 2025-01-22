@@ -1,0 +1,104 @@
+0.JOB_NAME: MIPSolver_1_be109e3e0c6796ae1f41e86cc43c2aae
+1.SOLVER: MIPSolver
+2.PARAMS: {'use_lazy_constraints': False, 'substitute_x_pmdt': True}
+3.INSTANCE: /home/ir803925/Kobra/rehabiliation-admission-scheduling/data/comp_study_003/test.txt
+4.REPETITION: 1
+5.CPU_CORES: 8
+Current directory: /home/ir803925/Kobra/rehabiliation-admission-scheduling
+[34m2025-01-22 23:24:05,932 - DEBUG - Solver: <class 'src.solvers.mip.MIPSolver'>[0m
+[34m2025-01-22 23:24:05,932 - DEBUG - Args: {'use_lazy_constraints': False, 'substitute_x_pmdt': True}[0m
+[34m2025-01-22 23:24:05,932 - DEBUG - File path /home/ir803925/Kobra/rehabiliation-admission-scheduling/data/comp_study_003/test.txt[0m
+[34m2025-01-22 23:24:05,932 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 23:24:05,932 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 23:24:05,932 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 23:24:05,932 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 23:24:05,933 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 23:24:05,933 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 23:24:05,933 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 23:24:05,933 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 23:24:05,933 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 23:24:05,933 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 23:24:05,933 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-22 23:24:05,933 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-22 23:24:05,933 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-22 23:24:05,933 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-22 23:24:05,933 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-22 23:24:05,933 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-22 23:24:05,933 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-22 23:24:05,933 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-22 23:24:05,933 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-22 23:24:05,933 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-22 23:24:05,934 - DEBUG - Instance data:[0m
+[34m2025-01-22 23:24:05,934 - DEBUG - 0[0m
+[34m2025-01-22 23:24:05,934 - DEBUG - New Resource Group:frozenset({RG(therapists)})[0m
+[34m2025-01-22 23:24:05,943 - DEBUG - 1[0m
+[34m2025-01-22 23:24:05,943 - DEBUG - New Resource Group:frozenset({RG(physiotherapists)})[0m
+[34m2025-01-22 23:24:05,952 - DEBUG - New Resource Group:frozenset({RG(therapists), RG(physiotherapists)})[0m
+[34m2025-01-22 23:24:05,952 - DEBUG - 2[0m
+[34m2025-01-22 23:24:05,952 - DEBUG - 3[0m
+[34m2025-01-22 23:24:05,952 - DEBUG - Number of patients: 1[0m
+[34m2025-01-22 23:24:05,952 - DEBUG - Number of beds: 10[0m
+[34m2025-01-22 23:24:05,952 - DEBUG - Average number of treatments per patient: 48.0[0m
+[34m2025-01-22 23:24:05,952 - DEBUG - Average number of treatment per stayed day: 6.0[0m
+[34m2025-01-22 23:24:05,952 - DEBUG - Number of treatments: 48[0m
+[34m2025-01-22 23:24:05,952 - DEBUG - Number of resources: 4[0m
+[34m2025-01-22 23:24:05,952 - DEBUG - Number of resource groups: 2[0m
+[34m2025-01-22 23:24:05,952 - DEBUG - Number of resource hours needed per all treatment by RG(therapists): 8.0[0m
+[34m2025-01-22 23:24:05,952 - DEBUG - Number of resource hours needed per all treatment by RG(physiotherapists): 8.0[0m
+[32m2025-01-22 23:24:05,952 - INFO - {'solver': 'MIPSolver', 'args': {'use_lazy_constraints': False, 'substitute_x_pmdt': True, 'log_to_console': True}}[0m
+[34m2025-01-22 23:24:05,952 - DEBUG - Setting options: MIPSolver[0m
+[34m2025-01-22 23:24:05,952 - DEBUG -  ---- use_lazy_constraints to False[0m
+[34m2025-01-22 23:24:05,952 - DEBUG -  ---- substitute_x_pmdt to True[0m
+[34m2025-01-22 23:24:05,952 - DEBUG -  ---- substitute_x_small to False (default)[0m
+[34m2025-01-22 23:24:05,952 - DEBUG - Setting options: Solver[0m
+[34m2025-01-22 23:24:05,952 - DEBUG -  ---- number_of_threads to 8 (default)[0m
+[34m2025-01-22 23:24:05,952 - DEBUG -  ---- treatment_value to 0 (default)[0m
+[34m2025-01-22 23:24:05,953 - DEBUG -  ---- delay_value to 1 (default)[0m
+[34m2025-01-22 23:24:05,953 - DEBUG -  ---- missing_treatment_value to 4 (default)[0m
+[34m2025-01-22 23:24:05,954 - DEBUG -  ---- log_to_console to True[0m
+[34m2025-01-22 23:24:05,954 - DEBUG -  ---- log_to_file to True (default)[0m
+[32m2025-01-22 23:24:05,955 - INFO - Create model: MIPSolver[0m
+Set parameter TSPort to value 50039
+Set parameter TokenServer to value "license.itc.rwth-aachen.de"
+Set parameter Threads to value 8
+[34m2025-01-22 23:24:05,975 - DEBUG - Variables created.[0m
+[34m2025-01-22 23:24:05,977 - DEBUG - Constraint (p1) created.[0m
+[34m2025-01-22 23:24:05,978 - DEBUG - Constraint (when_admitted) created.[0m
+[34m2025-01-22 23:24:05,978 - DEBUG - Constraint (p3) created.[0m
+[34m2025-01-22 23:24:05,978 - DEBUG - Constraint (p4) created.[0m
+[34m2025-01-22 23:24:05,978 - DEBUG - Constraint (p7) created.[0m
+[34m2025-01-22 23:24:05,980 - DEBUG - Constraint (r3) created.[0m
+[34m2025-01-22 23:24:05,981 - DEBUG - Constraint (r4) created.[0m
+[34m2025-01-22 23:24:05,984 - DEBUG - Constraint (a1) created.[0m
+[34m2025-01-22 23:24:05,984 - DEBUG - Constraint (a4) created.[0m
+[34m2025-01-22 23:24:05,984 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 23:24:05,984 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-22 23:24:05,984 - DEBUG - Constraint (already_admitted) created.[0m
+[34m2025-01-22 23:24:05,984 - DEBUG - Constraint (transitive) created.[0m
+[32m2025-01-22 23:24:05,985 - INFO - Time to create model: 0.029[0m
+[32m2025-01-22 23:24:05,985 - INFO - Solving model: MIPSolver[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 8 threads
+
+Optimize a model with 885 rows, 363 columns and 3533 nonzeros
+Model fingerprint: 0x1af89085
+Variable types: 2 continuous, 361 integer (361 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 8e+00]
+  Objective range  [4e+00, 4e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 2e+02]
+Presolve removed 696 rows and 263 columns
+Presolve time: 0.00s
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 96 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+[32m2025-01-22 23:24:05,998 - INFO - No optimal solution found.[0m
+[32m2025-01-22 23:24:05,998 - INFO - Time to show infeasibility: 0.014s[0m

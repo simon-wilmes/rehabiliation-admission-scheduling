@@ -99,7 +99,6 @@ all_solver_combis = [
         "subsolver.restrict_obj_func_to_1": True,
         "subsolver_cls": "CPSubsolver",
     },
-    
     {
         "solver": "LBBDSolver",
         "break_symmetry": False,
@@ -190,8 +189,9 @@ for output_file in all_files_output:
 to_run_combis = []
 assert os.path.isdir(params_all["$OUTPUT_FOLDER"])
 assert os.path.isdir(params_all["$SCRIPT_FOLDER"])
-
+found_existing = 0
 core_hours_required = 0
+exists_name = []
 for solver_combi, params_combi, instance_file in product(
     all_solver_combis, params_multiple, instance_files
 ):
@@ -207,7 +207,7 @@ for solver_combi, params_combi, instance_file in product(
         )
     )
     hash_combi_str = str(hash_combi_str + instance_file).encode()
-    hash = hashlib.md5(hash_combi_str).hexdigest()
+    hash = str(hashlib.md5(hash_combi_str).hexdigest())[:10]
     params_combi_copy = copy(params_combi)
     for key in params_all:
         params_combi_copy[key] = params_all[key]
@@ -224,6 +224,8 @@ for solver_combi, params_combi, instance_file in product(
 
     if hash in hashes:
         print(".", end="")
+        found_existing += 1
+        exists_name.append((solver_combi, params_combi_copy, instance_file, hash))
     else:
         print("x", end="")
         to_run_combis.append((solver_combi, params_combi_copy, instance_file, hash))
@@ -237,6 +239,9 @@ for solver_combi, params_combi, instance_file in product(
             )
 
 print("")
+print(f"Alreay exists {found_existing} combinations.")
+for name in enumerate(exists_name):
+    print(name[0], name[1])
 
 print(f"Need to run {len(to_run_combis)} combinations.")
 print(f"Using {core_hours_required:.1f} core hours.")

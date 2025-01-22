@@ -10,7 +10,7 @@ while True:
     if time.time() - start_time > repetition_time:
         # Execute run_scripts.py
         result = subprocess.run(
-            ["python", "src/cluster/run_scripts_cores.py", "-y"], stdout=subprocess.PIPE
+            ["python", "src/cluster/run_scripts.py", "-y"], stdout=subprocess.PIPE
         )  # -y flag to skip the confirmation
         output = result.stdout.decode("utf-8")
         print(time.strftime("%Y-%m-%d %H:%M:%S"))
