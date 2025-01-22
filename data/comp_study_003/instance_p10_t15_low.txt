@@ -44,11 +44,12 @@ daily_scheduling_lower: 0.8
 # and the last entry is the interval of days of repetition, none if only once
 
 #staff:
-0; [0];  therapist0; [] 
-1; [0,1];  therapist2; []
-2; [0,1,3];  therapist3; []
-3; [0,2];  therapist4; []
-4; [0,4]; therapist6; []
+
+0; [0];  therapist0; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=14), DayHour(day=1, hour=14, minutes=30), 1), (DayHour(day=1, hour=9), DayHour(day=1, hour=9, minutes=15), 2), (DayHour(day=0, hour=16), DayHour(day=0, hour=17), 2)] 
+1; [0,1];  therapist2; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=16), DayHour(day=1, hour=16, minutes=30), 1), (DayHour(day=1, hour=9, minutes=30), DayHour(day=1, hour=10, minutes=15), 2), (DayHour(day=0, hour=14), DayHour(day=0, hour=15), 2)] 
+2; [0,1,3];  therapist3; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1), (DayHour(day=1, hour=14, minutes= 0), DayHour(day=1, hour=14, minutes=30), 1),(DayHour(day=1, hour= 9, minutes= 0), DayHour(day=1, hour= 9, minutes=15), 2),(DayHour(day=1, hour=16  minutes= 0), DayHour(day=1, hour=16, minutes=30), 1)]
+3; [0,2];  therapist4; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=16, minutes= 0), DayHour(day=1, hour=16, minutes=30), 1), (DayHour(day=1, hour= 9, minutes=30), DayHour(day=1, hour=10, minutes=15), 1),(DayHour(day=0, hour=14, minutes=30), DayHour(day=0, hour=15, minutes= 0), 2)]
+4; [0,4]; therapist6; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=11, minutes= 0), DayHour(day=1, hour=11, minutes=30), 1),(DayHour(day=0, hour=16, minutes= 0), DayHour(day=0, hour=17, minutes= 0), 2),(DayHour(day=0, hour= 8, minutes=45), DayHour(day=0, hour=10, minutes=30), 1)]
 
 #rooms:
 5; [5];  room0; []
@@ -84,7 +85,7 @@ daily_scheduling_lower: 0.8
 7; 3; 10; watergymnastics; Duration(hours=1, minutes=15); {4:1,7:1}
 8; 1; 1; hydrotherapy; Duration(hours=0, minutes=30); {0:1,11:1}
 9; 2; 10; nordic_walking; Duration(hours=1, minutes=15); {0:1}
-10; 1; 10; fitness_training; Duration(hours=0, minutes=45); {1:1,10:1}
+10; 1; 1; fitness_training; Duration(hours=0, minutes=45); {1:1,10:1}
 11; 1; 5; yoga; Duration(hours=0, minutes=45); {0:1,6:1}
 12; 1; 1; psychotherapy_single; Duration(hours=0, minutes=45); {2:1,5:1}
 13; 3; 6; psychotherapy_group_a; Duration(hours=1, minutes=00); {2:1,5:1}
