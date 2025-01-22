@@ -20,7 +20,7 @@ class Solver(ABC):
         "number_of_threads": [1, 4, 8, 12],
     }
     BASE_SOLVER_DEFAULT_OPTIONS = {
-        "number_of_threads": 20,
+        "number_of_threads": 8,
         "treatment_value": 0,
         "delay_value": 1,
         "missing_treatment_value": 4,

@@ -227,15 +227,15 @@ handles, labels = ax.get_legend_handles_labels()
 unique_labels = dict(zip(labels, handles))
 
 rename_dict = {
-    "LBBDSolver_CPSubSolver (5)": r"LBBD-Resources (5min)",
-    "LBBDSolver_CPSubSolver (15)": r"LBBD-Resources (15min)",
-    "LBBDSolver_CPSubSolver (30)": r"LBBD-Resources (30min)",
+    "LBBDSolver_CPSubsolver (5)": r"LBBD-Resources (5min)",
+    "LBBDSolver_CPSubsolver (15)": r"LBBD-Resources (15min)",
+    "LBBDSolver_CPSubsolver (30)": r"LBBD-Resources (30min)",
     "MIPSolver (5)": "MIP-RUA (5min)",
     "MIPSolver (15)": "MIP-RUA (15min)",
     "MIPSolver (30)": "MIP-RUA (30min)",
-    "LBBDSolver_CPSubSolver2 (5)": r"LBBD-Groupsize (5min)",
-    "LBBDSolver_CPSubSolver2 (15)": r"LBBD-Groupsize (15min)",
-    "LBBDSolver_CPSubSolver2 (30)": r"LBBD-Groupsize (30min)",
+    "LBBDSolver_CPSubsolver2 (5)": r"LBBD-Groupsize (5min)",
+    "LBBDSolver_CPSubsolver2 (15)": r"LBBD-Groupsize (15min)",
+    "LBBDSolver_CPSubsolver2 (30)": r"LBBD-Groupsize (30min)",
 }
 new_unique_labels = []
 new_unique_handles = []

@@ -12,6 +12,7 @@
 # $MEMORY
 # $SCRIPT_FOLDER
 # $REPETITION
+# $CPU_CORES
 # ===== Slurm Job Name =====
 #SBATCH --job-name=$SOLVER_NAME_$REPETITION_$HASH
 
@@ -27,7 +28,7 @@
 # ===== Compute Resources =====
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=1   # Number of CPU cores per task
+#SBATCH --cpus-per-task=$CPU_CORES   # Number of CPU cores per task
 
 # ===== Memory and Time =====
 # Time in the format DD-HH:MM:SS or HH:MM:SS if less than a day.
@@ -57,7 +58,7 @@ echo "1.SOLVER: $SOLVER_NAME"
 echo "2.PARAMS: $SOLVER_PARAMS"
 echo "3.INSTANCE: $SOLVER_INSTANCE"
 echo "4.REPETITION: $REPETITION"
-
+echo "5.CPU_CORES: $CPU_CORES"
 
 cd $SCRIPT_FOLDER
 echo "Current directory: $(pwd)"
