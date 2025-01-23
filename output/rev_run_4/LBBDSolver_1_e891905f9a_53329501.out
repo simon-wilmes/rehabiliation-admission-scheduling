@@ -1,0 +1,1038 @@
+0.JOB_NAME: LBBDSolver_1_e891905f9a
+1.SOLVER: LBBDSolver
+2.PARAMS: {'break_symmetry': True, 'add_constraints_to_symmetric_days': True, 'subsolver.restrict_obj_func_to_1': False, 'subsolver_cls': 'CPSubsolver'}
+3.INSTANCE: /home/ir803925/Kobra/rehabiliation-admission-scheduling/data/comp_study_003/instance_p10_t15_low.txt
+4.REPETITION: 1
+5.CPU_CORES: 8
+Current directory: /home/ir803925/Kobra/rehabiliation-admission-scheduling
+[34m2025-01-23 11:08:42,979 - DEBUG - Solver: <class 'src.solvers.benders.LBBDSolver'>[0m
+[34m2025-01-23 11:08:42,979 - DEBUG - Args: {'break_symmetry': True, 'add_constraints_to_symmetric_days': True, 'subsolver.restrict_obj_func_to_1': False, 'subsolver_cls': <class 'src.solvers.subsolvers.cp_subsolver.CPSubsolver'>}[0m
+[34m2025-01-23 11:08:42,979 - DEBUG - File path /home/ir803925/Kobra/rehabiliation-admission-scheduling/data/comp_study_003/instance_p10_t15_low.txt[0m
+[34m2025-01-23 11:08:42,979 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-23 11:08:42,979 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-23 11:08:42,979 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-23 11:08:42,979 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-23 11:08:42,979 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-23 11:08:42,979 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-23 11:08:42,979 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-23 11:08:42,979 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-23 11:08:42,979 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-23 11:08:42,979 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-23 11:08:42,979 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,980 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,981 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,981 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,981 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,981 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,981 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,981 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,981 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,981 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,981 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,981 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,981 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,981 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-23 11:08:42,981 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,981 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,981 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,981 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,982 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,982 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,982 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,982 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,982 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,982 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,982 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,982 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,983 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,983 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,983 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,983 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,983 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,983 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,983 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,983 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,983 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,983 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-23 11:08:42,984 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-23 11:08:42,984 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-23 11:08:42,984 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-23 11:08:42,984 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-23 11:08:42,984 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-23 11:08:42,984 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-23 11:08:42,984 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-23 11:08:42,984 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-23 11:08:42,984 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-23 11:08:42,984 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-23 11:08:42,985 - DEBUG - Instance data:[0m
+[34m2025-01-23 11:08:42,985 - DEBUG - 0[0m
+[34m2025-01-23 11:08:42,985 - DEBUG - New Resource Group:frozenset({RG(therapists)})[0m
+[34m2025-01-23 11:08:43,038 - DEBUG - 1[0m
+[34m2025-01-23 11:08:43,038 - DEBUG - New Resource Group:frozenset({RG(physiotherapists)})[0m
+[34m2025-01-23 11:08:43,038 - DEBUG - New Resource Group:frozenset({RG(therapists), RG(physiotherapists)})[0m
+[34m2025-01-23 11:08:43,038 - DEBUG - 2[0m
+[34m2025-01-23 11:08:43,038 - DEBUG - New Resource Group:frozenset({RG(massage_therapist)})[0m
+[34m2025-01-23 11:08:43,038 - DEBUG - New Resource Group:frozenset({RG(massage_therapist), RG(therapists)})[0m
+[34m2025-01-23 11:08:43,039 - DEBUG - New Resource Group:frozenset({RG(massage_therapist), RG(physiotherapists)})[0m
+[34m2025-01-23 11:08:43,039 - DEBUG - New Resource Group:frozenset({RG(massage_therapist), RG(therapists), RG(physiotherapists)})[0m
+[34m2025-01-23 11:08:43,039 - DEBUG - 3[0m
+[34m2025-01-23 11:08:43,039 - DEBUG - New Resource Group:frozenset({RG(psychotherapists)})[0m
+[34m2025-01-23 11:08:43,039 - DEBUG - New Resource Group:frozenset({RG(psychotherapists), RG(therapists)})[0m
+[34m2025-01-23 11:08:43,039 - DEBUG - 4[0m
+[34m2025-01-23 11:08:43,039 - DEBUG - New Resource Group:frozenset({RG(lifeguards)})[0m
+[34m2025-01-23 11:08:43,039 - DEBUG - New Resource Group:frozenset({RG(lifeguards), RG(therapists)})[0m
+[34m2025-01-23 11:08:43,039 - DEBUG - 5[0m
+[34m2025-01-23 11:08:43,039 - DEBUG - New Resource Group:frozenset({RG(rooms)})[0m
+[34m2025-01-23 11:08:43,050 - DEBUG - 6[0m
+[34m2025-01-23 11:08:43,050 - DEBUG - 7[0m
+[34m2025-01-23 11:08:43,050 - DEBUG - New Resource Group:frozenset({RG(rooms_with_beamer)})[0m
+[34m2025-01-23 11:08:43,050 - DEBUG - New Resource Group:frozenset({RG(rooms), RG(rooms_with_beamer)})[0m
+[34m2025-01-23 11:08:43,050 - DEBUG - 8[0m
+[34m2025-01-23 11:08:43,050 - DEBUG - New Resource Group:frozenset({RG(sport_room)})[0m
+[34m2025-01-23 11:08:43,054 - DEBUG - 9[0m
+[34m2025-01-23 11:08:43,054 - DEBUG - New Resource Group:frozenset({RG(swimming_pool)})[0m
+[34m2025-01-23 11:08:43,058 - DEBUG - 10[0m
+[34m2025-01-23 11:08:43,058 - DEBUG - New Resource Group:frozenset({RG(arts_crafts_materials)})[0m
+[34m2025-01-23 11:08:43,065 - DEBUG - 11[0m
+[34m2025-01-23 11:08:43,065 - DEBUG - 12[0m
+[34m2025-01-23 11:08:43,065 - DEBUG - New Resource Group:frozenset({RG(fitness_machines)})[0m
+[34m2025-01-23 11:08:43,081 - DEBUG - 13[0m
+[34m2025-01-23 11:08:43,081 - DEBUG - 14[0m
+[34m2025-01-23 11:08:43,081 - DEBUG - 15[0m
+[34m2025-01-23 11:08:43,081 - DEBUG - 16[0m
+[34m2025-01-23 11:08:43,081 - DEBUG - New Resource Group:frozenset({RG(hydrotherapy_bath)})[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of patients: 10[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of beds: 10[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Average number of treatments per patient: 53.9[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Average number of treatment per stayed day: 2.9944444444444445[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of treatments: 539[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of resources: 17[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of resource groups: 12[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of resource hours needed per all treatment by RG(therapists): 12.891666666666667[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of resource hours needed per all treatment by RG(rooms): 29.011111111111113[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of resource hours needed per all treatment by RG(arts_crafts_materials): 2.236111111111111[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of resource hours needed per all treatment by RG(physiotherapists): 41.28055555555556[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of resource hours needed per all treatment by RG(lifeguards): 1.5069444444444442[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of resource hours needed per all treatment by RG(swimming_pool): 1.5069444444444442[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of resource hours needed per all treatment by RG(hydrotherapy_bath): 3.111111111111111[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of resource hours needed per all treatment by RG(sport_room): 32.25833333333333[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of resource hours needed per all treatment by RG(rooms_with_beamer): 1.7986111111111105[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of resource hours needed per all treatment by RG(psychotherapists): 14.972222222222225[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of resource hours needed per all treatment by RG(massage_therapist): 7.777777777777777[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Number of resource hours needed per all treatment by RG(fitness_machines): 9.333333333333334[0m
+[32m2025-01-23 11:08:43,085 - INFO - {'solver': 'LBBDSolver', 'args': {'use_helper_constraints': True, 'break_symmetry': True, 'add_constraints_to_symmetric_days': True, 'subsolver.restrict_obj_func_to_1': False, 'subsolver_cls': <class 'src.solvers.subsolvers.cp_subsolver.CPSubsolver'>, 'log_to_console': True}}[0m
+[34m2025-01-23 11:08:43,085 - DEBUG - Setting options: LBBDSolver[0m
+[34m2025-01-23 11:08:43,086 - DEBUG -  ---- break_symmetry to True[0m
+[34m2025-01-23 11:08:43,086 - DEBUG -  ---- subsolver_cls to <class 'src.solvers.subsolvers.cp_subsolver.CPSubsolver'>[0m
+[34m2025-01-23 11:08:43,086 - DEBUG -  ---- use_helper_constraints to True[0m
+[34m2025-01-23 11:08:43,086 - DEBUG -  ---- add_constraints_to_symmetric_days to True[0m
+[34m2025-01-23 11:08:43,086 - DEBUG - Setting options: Solver[0m
+[34m2025-01-23 11:08:43,086 - DEBUG -  ---- number_of_threads to 8 (default)[0m
+[34m2025-01-23 11:08:43,086 - DEBUG -  ---- treatment_value to 0 (default)[0m
+[34m2025-01-23 11:08:43,086 - DEBUG -  ---- delay_value to 1 (default)[0m
+[34m2025-01-23 11:08:43,086 - DEBUG -  ---- missing_treatment_value to 4 (default)[0m
+[34m2025-01-23 11:08:43,086 - DEBUG -  ---- log_to_console to True[0m
+[34m2025-01-23 11:08:43,086 - DEBUG -  ---- log_to_file to True (default)[0m
+[34m2025-01-23 11:08:43,109 - DEBUG - Setting options: CPSubsolver[0m
+[34m2025-01-23 11:08:43,109 - DEBUG -  ---- restrict_obj_func_to_1 to False[0m
+[34m2025-01-23 11:08:43,109 - DEBUG - Setting Subsolver options: SubSolver[0m
+[34m2025-01-23 11:08:43,109 - DEBUG -  ---- use_day_symmetry to True (default)[0m
+[32m2025-01-23 11:08:43,130 - INFO - Create model: LBBDSolver[0m
+Set parameter TSPort to value 50039
+Set parameter TokenServer to value "license.itc.rwth-aachen.de"
+Set parameter Threads to value 8
+Set parameter LazyConstraints to value 1
+[34m2025-01-23 11:08:43,234 - DEBUG - Variables created.[0m
+[34m2025-01-23 11:08:43,586 - DEBUG - Constraint (not too many treatments) created.[0m
+[34m2025-01-23 11:08:43,794 - DEBUG - Constraint (no_treatments_outside admittance) created.[0m
+[34m2025-01-23 11:08:43,794 - DEBUG - Constraint (bed_usage) created.[0m
+[34m2025-01-23 11:08:43,795 - DEBUG - Constraint (must be admitted) created.[0m
+[34m2025-01-23 11:08:43,824 - DEBUG - Constraint (e_w_ub) created.[0m
+[34m2025-01-23 11:08:43,832 - DEBUG - Constraint (day_ub) created.[0m
+[34m2025-01-23 11:08:43,841 - DEBUG - Constraint (Day always) created.[0m
+[34m2025-01-23 11:08:43,841 - DEBUG - Constraint (already_admitted) created.[0m
+[32m2025-01-23 11:08:44,046 - INFO - Time to create model: 0.916[0m
+[32m2025-01-23 11:08:44,047 - INFO - Solving model: LBBDSolver[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 8 threads
+
+Optimize a model with 70438 rows, 28881 columns and 519503 nonzeros
+Model fingerprint: 0x1825c778
+Variable types: 3 continuous, 28878 integer (28878 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  Objective range  [1e+00, 4e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 2e+03]
+Presolve removed 56536 rows and 3027 columns
+Presolve time: 0.48s
+Presolved: 13902 rows, 25854 columns, 282814 nonzeros
+Variable types: 1 continuous, 25853 integer (25789 binary)
+Root relaxation presolved: 13868 rows, 25888 columns, 263082 nonzeros
+
+Deterministic concurrent LP optimizer: primal and dual simplex
+Showing first log only...
+
+Concurrent spin time: 0.00s
+
+Solved with dual simplex
+
+Root relaxation: objective 1.520000e+03, 7632 iterations, 0.60 seconds (1.04 work units)
+[34m2025-01-23 11:08:45,968 - DEBUG - Checking day 0[0m
+[34m2025-01-23 11:08:45,968 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:45,968 - DEBUG - SUBSOLVER DAY:0[0m
+[34m2025-01-23 11:08:45,968 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1}, T(ergotherapy_b): {P(patient0_c): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient0_o): 5, P(patient1_o): 5}, T(physiotherapy_d): {}, T(watergymnastics): {}, T(hydrotherapy): {P(patient0_c): 3}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {P(patient1_p): 4}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:45,989 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:45,989 - DEBUG - Infeasible day 0[0m
+[32m2025-01-23 11:08:45,989 - INFO - d_prime: 0 d: 0[0m
+[32m2025-01-23 11:08:45,990 - INFO - forbidden_vars: ([{12:4},{0:1,1:1,8:3},{5:5},{5:5}])[0m
+[32m2025-01-23 11:08:45,990 - INFO - False[0m
+[34m2025-01-23 11:08:45,990 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:45,990 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:45,991 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:45,991 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {}, T(ergotherapy_b): {P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient1_o): 1}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {P(patient1_o): 1}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 2}, T(massage): {}}[0m
+[34m2025-01-23 11:08:45,996 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:45,997 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:45,997 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:45,997 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:45,997 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:45,998 - INFO - forbidden_vars: ([{1:1,7:3},{5:1,8:1,17:1,20:2},{7:3,17:1,20:1},{7:3,17:1,20:1}])[0m
+[32m2025-01-23 11:08:45,998 - INFO - False[0m
+[34m2025-01-23 11:08:45,998 - DEBUG - Checking day 2[0m
+[34m2025-01-23 11:08:45,998 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:45,998 - DEBUG - SUBSOLVER DAY:2[0m
+[34m2025-01-23 11:08:45,998 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1}, T(ergotherapy_b): {}, T(ergotherapy_c): {}, T(physiotherapy_a): {P(patient0_c): 1}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {P(patient1_o): 1}, T(watergymnastics): {}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {P(patient0_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {P(patient0_c): 1, P(patient0_o): 4, P(patient1_o): 3, P(patient0_p): 2, P(patient1_p): 3}}[0m
+[34m2025-01-23 11:08:46,023 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:46,023 - DEBUG - Checking day 3[0m
+[34m2025-01-23 11:08:46,023 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:46,023 - DEBUG - SUBSOLVER DAY:3[0m
+[34m2025-01-23 11:08:46,023 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {}, T(ergotherapy_b): {P(patient0_c): 2, P(patient0_o): 1, P(patient0_p): 2, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient1_o): 1}, T(physiotherapy_d): {}, T(watergymnastics): {}, T(hydrotherapy): {P(patient0_o): 1, P(patient1_o): 1}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient1_c): 4}, T(massage): {P(patient0_p): 2, P(patient1_p): 1}}[0m
+[34m2025-01-23 11:08:46,042 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:46,043 - DEBUG - Checking day 4[0m
+[34m2025-01-23 11:08:46,043 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:46,043 - DEBUG - SUBSOLVER DAY:4[0m
+[34m2025-01-23 11:08:46,043 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient1_c): 1, P(patient1_o): 1, P(patient2_o): 1}, T(ergotherapy_b): {P(patient0_c): 1, P(patient1_c): 2, P(patient0_o): 2, P(patient2_o): 2, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {P(patient0_c): 1, P(patient1_c): 1}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {P(patient1_o): 1, P(patient0_p): 2, P(patient1_p): 1}, T(yoga): {}, T(psychotherapy_single): {P(patient0_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1, P(patient2_o): 2}, T(massage): {}}[0m
+[34m2025-01-23 11:08:46,074 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:46,074 - DEBUG - Checking day 5[0m
+[34m2025-01-23 11:08:46,074 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:46,074 - DEBUG - SUBSOLVER DAY:5[0m
+[34m2025-01-23 11:08:46,074 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_o): 1, P(patient1_o): 1}, T(ergotherapy_b): {}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient2_o): 1}, T(physiotherapy_d): {P(patient2_o): 1}, T(watergymnastics): {}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {P(patient0_o): 1, P(patient2_o): 1}, T(yoga): {P(patient0_c): 4, P(patient1_c): 3, P(patient0_o): 2, P(patient1_o): 4, P(patient2_o): 1, P(patient0_p): 3, P(patient1_p): 4}, T(psychotherapy_single): {P(patient0_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {P(patient0_c): 1, P(patient1_c): 1, P(patient0_o): 1}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient2_o): 1}, T(massage): {}}[0m
+[34m2025-01-23 11:08:46,107 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:46,107 - DEBUG - Checking day 6[0m
+[34m2025-01-23 11:08:46,107 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:46,107 - DEBUG - SUBSOLVER DAY:6[0m
+[34m2025-01-23 11:08:46,107 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {}, T(ergotherapy_b): {}, T(ergotherapy_c): {P(patient0_p): 1, P(patient1_p): 1, P(patient2_p): 1}, T(physiotherapy_a): {}, T(physiotherapy_b): {P(patient2_o): 1}, T(physiotherapy_c): {}, T(physiotherapy_d): {P(patient0_o): 3, P(patient1_o): 1, P(patient2_o): 1}, T(watergymnastics): {P(patient0_c): 1, P(patient1_c): 1, P(patient2_p): 1}, T(hydrotherapy): {}, T(nordic_walking): {P(patient0_o): 1, P(patient1_p): 1}, T(fitness_training): {P(patient1_o): 4}, T(yoga): {P(patient2_o): 1, P(patient0_p): 1, P(patient1_p): 1}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1, P(patient0_o): 1}, T(massage): {P(patient0_c): 3, P(patient1_c): 3, P(patient2_o): 2, P(patient1_p): 1, P(patient2_p): 2}}[0m
+[34m2025-01-23 11:08:46,180 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:46,180 - DEBUG - Infeasible day 6[0m
+[32m2025-01-23 11:08:46,181 - INFO - d_prime: 6 d: 6[0m
+[32m2025-01-23 11:08:46,182 - INFO - forbidden_vars: ([{2:1,11:1},{2:1,9:1,11:1,21:1},{2:1,7:1,21:2},{7:1,21:3},{4:1,6:1,11:1,21:2},{6:3,9:1,20:1},{6:1,10:4},{7:1,20:1,21:3}])[0m
+[32m2025-01-23 11:08:46,182 - INFO - False[0m
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1520.00000    0    -          - 1520.00000      -     -    2s
+     0     0 1520.00000    0  171          - 1520.00000      -     -    2s
+     0     0 1520.00000    0   55          - 1520.00000      -     -    2s
+[34m2025-01-23 11:08:46,698 - DEBUG - Last day infeasible: 0[0m
+[34m2025-01-23 11:08:46,698 - DEBUG - Checking day 0[0m
+[34m2025-01-23 11:08:46,698 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:46,698 - DEBUG - SUBSOLVER DAY:0[0m
+[34m2025-01-23 11:08:46,698 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient0_o): 1}, T(ergotherapy_b): {P(patient0_c): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient0_o): 4, P(patient1_o): 5}, T(physiotherapy_d): {}, T(watergymnastics): {}, T(hydrotherapy): {P(patient0_c): 3}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {P(patient1_p): 4}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:46,714 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:46,714 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:46,714 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:46,714 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:46,714 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:46,714 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {}, T(ergotherapy_b): {P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient1_o): 1}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {P(patient1_o): 1}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_o): 1, P(patient1_o): 2}, T(massage): {}}[0m
+[34m2025-01-23 11:08:46,721 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:46,721 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:46,721 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:46,721 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:46,722 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:46,722 - INFO - forbidden_vars: ([{1:1,7:3},{7:3,17:1},{5:1,8:1,17:1,20:2},{7:3,17:1,20:1}])[0m
+[32m2025-01-23 11:08:46,722 - INFO - False[0m
+[34m2025-01-23 11:08:46,722 - DEBUG - Last day infeasible: 6[0m
+[34m2025-01-23 11:08:46,722 - DEBUG - Checking day 6[0m
+[34m2025-01-23 11:08:46,722 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:46,722 - DEBUG - SUBSOLVER DAY:6[0m
+[34m2025-01-23 11:08:46,722 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {}, T(ergotherapy_b): {}, T(ergotherapy_c): {P(patient0_p): 1, P(patient1_p): 1, P(patient2_p): 1}, T(physiotherapy_a): {}, T(physiotherapy_b): {P(patient2_o): 1}, T(physiotherapy_c): {}, T(physiotherapy_d): {P(patient0_o): 3, P(patient1_o): 2}, T(watergymnastics): {P(patient0_c): 1, P(patient1_c): 1, P(patient2_p): 1}, T(hydrotherapy): {}, T(nordic_walking): {P(patient0_o): 1, P(patient1_p): 1}, T(fitness_training): {P(patient1_o): 3}, T(yoga): {P(patient2_o): 1, P(patient0_p): 1, P(patient1_p): 1}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1, P(patient0_o): 1}, T(massage): {P(patient0_c): 3, P(patient1_c): 3, P(patient2_o): 3, P(patient1_p): 1, P(patient2_p): 1}}[0m
+[34m2025-01-23 11:08:46,802 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+     0     0 1520.00000    0  149          - 1520.00000      -     -    2s
+     0     0 1520.00000    0   13          - 1520.00000      -     -    3s
+[34m2025-01-23 11:08:47,294 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:47,295 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:47,295 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,295 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:47,295 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 3}, T(ergotherapy_b): {P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {P(patient1_o): 1}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:47,302 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,302 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:47,302 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:47,302 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:47,303 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:47,303 - INFO - forbidden_vars: ([{1:1,7:3},{0:1,7:3,17:1},{0:1,7:3,17:1},{0:3,8:1,17:1}])[0m
+[32m2025-01-23 11:08:47,303 - INFO - False[0m
+     0     0 1520.00000    0    4          - 1520.00000      -     -    3s
+[34m2025-01-23 11:08:47,675 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:47,675 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:47,675 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,675 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:47,675 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 3}, T(ergotherapy_b): {P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:47,682 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,683 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:47,683 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:47,683 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:47,684 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:47,684 - INFO - forbidden_vars: ([{0:3,17:1},{1:1,7:3},{0:1,7:3,17:1},{0:1,7:3,17:1}])[0m
+[32m2025-01-23 11:08:47,684 - INFO - False[0m
+[34m2025-01-23 11:08:47,693 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:47,694 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:47,694 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,694 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:47,694 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient1_o): 3}, T(ergotherapy_b): {P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {P(patient1_o): 1}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:47,700 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,700 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:47,700 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:47,700 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:47,701 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:47,701 - INFO - forbidden_vars: ([{1:1,7:3},{7:3,17:1},{0:1,7:3,17:1},{0:3,8:1,17:1}])[0m
+[32m2025-01-23 11:08:47,701 - INFO - False[0m
+[32m2025-01-23 11:08:47,701 - INFO - Number of cuts added: 7 (bad=0, good=7)[0m
+[32m2025-01-23 11:08:47,701 - INFO - Return infeasible: 7[0m
+[32m2025-01-23 11:08:47,701 - INFO - Return feasible: 6[0m
+[32m2025-01-23 11:08:47,701 - INFO - Unnecessary comps: (0 / 7)[0m
+[32m2025-01-23 11:08:47,701 - INFO - Calls to is_day_infeasible: cp_solver=13/ total=13 stored=0[0m
+[32m2025-01-23 11:08:47,701 - INFO - Num_constraints-added: 17[0m
+[32m2025-01-23 11:08:47,701 - INFO - Is feasible: 0.33273887634277344 0.888838504395764[0m
+[32m2025-01-23 11:08:47,701 - INFO - Subsolver: Solve Model: 0.2404499053955078/0.7333656196871132[0m
+[32m2025-01-23 11:08:47,701 - INFO - Subsolver: Create Model: 0.08742189407348633/0.2666343803128868[0m
+[34m2025-01-23 11:08:47,710 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:47,711 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:47,711 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,711 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:47,711 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 3}, T(ergotherapy_b): {}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {P(patient1_o): 1}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:47,717 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,717 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:47,717 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:47,718 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:47,718 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:47,718 - INFO - forbidden_vars: ([{7:3},{0:1,7:3,17:1},{0:1,7:3,17:1},{0:3,8:1,17:1}])[0m
+[32m2025-01-23 11:08:47,718 - INFO - False[0m
+[34m2025-01-23 11:08:47,728 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:47,728 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:47,728 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,728 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:47,728 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient1_o): 3}, T(ergotherapy_b): {P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:47,733 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,734 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:47,734 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:47,734 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:47,734 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:47,735 - INFO - forbidden_vars: ([{0:3,17:1},{1:1,7:3},{7:3,17:1},{0:1,7:3,17:1}])[0m
+[32m2025-01-23 11:08:47,735 - INFO - False[0m
+[34m2025-01-23 11:08:47,744 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:47,744 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:47,744 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,744 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:47,744 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient1_o): 3}, T(ergotherapy_b): {}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {P(patient1_o): 1}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:47,750 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,750 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:47,751 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:47,751 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:47,751 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:47,752 - INFO - forbidden_vars: ([{7:3},{7:3,17:1},{0:1,7:3,17:1},{0:3,8:1,17:1}])[0m
+[32m2025-01-23 11:08:47,752 - INFO - False[0m
+     0     0 1520.00000    0    7          - 1520.00000      -     -    3s
+[34m2025-01-23 11:08:47,832 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:47,833 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:47,833 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,833 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:47,833 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 3}, T(ergotherapy_b): {}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:47,839 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,839 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:47,839 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:47,840 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:47,840 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:47,840 - INFO - forbidden_vars: ([{7:3},{0:3,17:1},{0:1,7:3,17:1},{0:1,7:3,17:1}])[0m
+[32m2025-01-23 11:08:47,840 - INFO - False[0m
+[34m2025-01-23 11:08:47,850 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:47,850 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:47,850 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,850 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:47,851 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient1_o): 3}, T(ergotherapy_b): {}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:47,856 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,856 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:47,856 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:47,856 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:47,857 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:47,857 - INFO - forbidden_vars: ([{7:3},{0:3,17:1},{7:3,17:1},{0:1,7:3,17:1}])[0m
+[32m2025-01-23 11:08:47,857 - INFO - False[0m
+[32m2025-01-23 11:08:47,857 - INFO - Number of cuts added: 12 (bad=0, good=12)[0m
+[32m2025-01-23 11:08:47,857 - INFO - Return infeasible: 12[0m
+[32m2025-01-23 11:08:47,857 - INFO - Return feasible: 6[0m
+[32m2025-01-23 11:08:47,857 - INFO - Unnecessary comps: (0 / 12)[0m
+[32m2025-01-23 11:08:47,857 - INFO - Calls to is_day_infeasible: cp_solver=18/ total=18 stored=0[0m
+[32m2025-01-23 11:08:47,857 - INFO - Num_constraints-added: 32[0m
+[32m2025-01-23 11:08:47,857 - INFO - Is feasible: 0.3628842830657959 0.8266594322621853[0m
+[32m2025-01-23 11:08:47,857 - INFO - Subsolver: Solve Model: 0.24848651885986328/0.6968502173335999[0m
+[32m2025-01-23 11:08:47,857 - INFO - Subsolver: Create Model: 0.10809874534606934/0.30314978266640014[0m
+[34m2025-01-23 11:08:47,867 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:47,867 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:47,867 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,867 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:47,867 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 3}, T(ergotherapy_b): {P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {P(patient1_o): 1}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:47,873 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,873 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:47,873 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:47,873 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:47,874 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:47,874 - INFO - forbidden_vars: ([{0:1,7:3},{0:1,7:3},{0:3,8:1},{1:1,7:3}])[0m
+[32m2025-01-23 11:08:47,874 - INFO - False[0m
+[34m2025-01-23 11:08:47,884 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:47,884 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:47,884 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,884 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:47,884 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient1_o): 3}, T(ergotherapy_b): {P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {P(patient1_o): 1}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:47,889 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,889 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:47,889 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:47,890 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:47,890 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:47,890 - INFO - forbidden_vars: ([{7:3},{0:1,7:3},{0:3,8:1},{1:1,7:3}])[0m
+[32m2025-01-23 11:08:47,890 - INFO - False[0m
+[34m2025-01-23 11:08:47,900 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:47,900 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:47,900 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,900 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:47,900 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 3}, T(ergotherapy_b): {}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {P(patient1_o): 1}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:47,907 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:47,907 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:47,907 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:47,908 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:47,908 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:47,908 - INFO - forbidden_vars: ([{7:3},{0:1,7:3},{0:1,7:3},{0:3,8:1}])[0m
+[32m2025-01-23 11:08:47,909 - INFO - False[0m
+     0     0 1520.00000    0   27          - 1520.00000      -     -    3s
+[34m2025-01-23 11:08:48,053 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:48,170 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:48,170 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,170 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:48,170 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 3}, T(ergotherapy_b): {P(patient1_o): 1, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {P(patient0_o): 1}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1}, T(massage): {}}[0m
+[34m2025-01-23 11:08:48,177 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,177 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:48,177 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:48,178 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:48,178 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:48,178 - INFO - forbidden_vars: ([{1:1,7:3},{0:3,1:1,17:1},{6:1,7:3,17:1},{7:3,17:1,20:1}])[0m
+[32m2025-01-23 11:08:48,179 - INFO - False[0m
+     0     0 1520.00000    0    -          - 1520.00000      -     -    4s
+     0     0 1520.00000    0   20          - 1520.00000      -     -    4s
+[34m2025-01-23 11:08:48,248 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:48,248 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:48,248 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,248 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:48,248 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 3}, T(ergotherapy_b): {P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {P(patient0_o): 1}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1}, T(massage): {}}[0m
+[34m2025-01-23 11:08:48,254 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,254 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:48,254 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:48,255 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:48,255 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:48,255 - INFO - forbidden_vars: ([{0:3,17:1},{1:1,7:3},{6:1,7:3,17:1},{7:3,17:1,20:1}])[0m
+[32m2025-01-23 11:08:48,255 - INFO - False[0m
+[32m2025-01-23 11:08:48,255 - INFO - Number of cuts added: 17 (bad=0, good=17)[0m
+[32m2025-01-23 11:08:48,255 - INFO - Return infeasible: 17[0m
+[32m2025-01-23 11:08:48,255 - INFO - Return feasible: 6[0m
+[32m2025-01-23 11:08:48,255 - INFO - Unnecessary comps: (0 / 17)[0m
+[32m2025-01-23 11:08:48,255 - INFO - Calls to is_day_infeasible: cp_solver=23/ total=23 stored=0[0m
+[32m2025-01-23 11:08:48,256 - INFO - Num_constraints-added: 47[0m
+[32m2025-01-23 11:08:48,256 - INFO - Is feasible: 0.3932180404663086 0.631529773234894[0m
+[32m2025-01-23 11:08:48,256 - INFO - Subsolver: Solve Model: 0.2563314437866211/0.6655890606688875[0m
+[32m2025-01-23 11:08:48,256 - INFO - Subsolver: Create Model: 0.12878823280334473/0.3344109393311125[0m
+[34m2025-01-23 11:08:48,297 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:48,297 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:48,297 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,297 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:48,297 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 3}, T(ergotherapy_b): {P(patient1_o): 1, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {P(patient0_c): 1}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {P(patient0_o): 1}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:48,304 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,304 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:48,304 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:48,304 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:48,305 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:48,305 - INFO - forbidden_vars: ([{1:1,7:3},{0:3,1:1,17:1},{3:1,7:3,17:1},{6:1,7:3,17:1}])[0m
+[32m2025-01-23 11:08:48,305 - INFO - False[0m
+     0     0 1520.00000    0    -          - 1520.00000      -     -    4s
+     0     0 1520.00000    0   18          - 1520.00000      -     -    4s
+     0     0 1520.00000    0   10          - 1520.00000      -     -    4s
+     0     0 1520.00000    0    9          - 1520.00000      -     -    4s
+     0     0 1520.00000    0    9          - 1520.00000      -     -    4s
+[34m2025-01-23 11:08:48,475 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:48,476 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:48,476 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,476 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:48,476 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 3}, T(ergotherapy_b): {P(patient1_o): 1, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {P(patient0_o): 1}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:48,482 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,483 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:48,483 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:48,483 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:48,483 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:48,484 - INFO - forbidden_vars: ([{1:1,7:3},{7:3,17:1},{0:3,1:1,17:1},{6:1,7:3,17:1}])[0m
+[32m2025-01-23 11:08:48,484 - INFO - False[0m
+[34m2025-01-23 11:08:48,494 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:48,494 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:48,494 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,494 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:48,494 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 3}, T(ergotherapy_b): {P(patient1_o): 1, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {P(patient0_c): 1}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:48,500 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,500 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:48,500 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:48,501 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:48,501 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:48,501 - INFO - forbidden_vars: ([{1:1,7:3},{7:3,17:1},{0:3,1:1,17:1},{3:1,7:3,17:1}])[0m
+[32m2025-01-23 11:08:48,501 - INFO - False[0m
+[34m2025-01-23 11:08:48,511 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:48,511 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:48,511 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:48,512 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:48,512 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:48,512 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:48,513 - INFO - forbidden_vars: ([{7:3},{0:3,1:1,17:1},{6:1,7:3,17:1},{7:3,17:1,20:1}])[0m
+[32m2025-01-23 11:08:48,513 - INFO - False[0m
+[34m2025-01-23 11:08:48,522 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:48,522 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:48,523 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,523 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:48,523 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 3}, T(ergotherapy_b): {P(patient1_o): 1, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1}, T(massage): {}}[0m
+[34m2025-01-23 11:08:48,528 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,529 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:48,529 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:48,529 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:48,529 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:48,530 - INFO - forbidden_vars: ([{1:1,7:3},{7:3,17:1},{0:3,1:1,17:1},{7:3,17:1,20:1}])[0m
+[32m2025-01-23 11:08:48,530 - INFO - False[0m
+[32m2025-01-23 11:08:48,530 - INFO - Number of cuts added: 22 (bad=0, good=22)[0m
+[32m2025-01-23 11:08:48,530 - INFO - Return infeasible: 22[0m
+[32m2025-01-23 11:08:48,530 - INFO - Return feasible: 6[0m
+[32m2025-01-23 11:08:48,530 - INFO - Unnecessary comps: (0 / 22)[0m
+[32m2025-01-23 11:08:48,530 - INFO - Calls to is_day_infeasible: cp_solver=27/ total=28 stored=1[0m
+[32m2025-01-23 11:08:48,530 - INFO - Num_constraints-added: 62[0m
+[32m2025-01-23 11:08:48,530 - INFO - Is feasible: 0.41907715797424316 0.6129157676122836[0m
+[32m2025-01-23 11:08:48,530 - INFO - Subsolver: Solve Model: 0.2627987861633301/0.6424058821746702[0m
+[32m2025-01-23 11:08:48,530 - INFO - Subsolver: Create Model: 0.1462864875793457/0.3575941178253298[0m
+[34m2025-01-23 11:08:48,541 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:48,541 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:48,541 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,541 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:48,541 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 3}, T(ergotherapy_b): {P(patient1_o): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {P(patient0_c): 1}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {P(patient0_o): 1}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:48,546 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,547 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:48,547 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:48,547 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:48,547 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:48,548 - INFO - forbidden_vars: ([{7:3},{0:3,1:1,17:1},{3:1,7:3,17:1},{6:1,7:3,17:1}])[0m
+[32m2025-01-23 11:08:48,548 - INFO - False[0m
+[34m2025-01-23 11:08:48,647 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:48,647 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:48,647 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,647 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:48,647 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient1_o): 2}, T(ergotherapy_b): {P(patient1_o): 1, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient1_o): 1}, T(physiotherapy_d): {P(patient0_o): 1}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:48,654 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,654 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:48,654 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:48,655 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:48,655 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:48,656 - INFO - forbidden_vars: ([{1:1,7:3},{0:1,7:3,17:1},{0:2,1:1,5:1,17:1},{6:1,7:3,17:1}])[0m
+[32m2025-01-23 11:08:48,656 - INFO - False[0m
+[34m2025-01-23 11:08:48,966 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:48,967 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:48,967 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,967 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:48,967 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_o): 1, P(patient1_o): 3}, T(ergotherapy_b): {P(patient0_c): 1, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {P(patient1_o): 1}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:48,976 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:48,976 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:48,976 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:48,976 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:48,977 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:48,977 - INFO - forbidden_vars: ([{1:1,7:3},{0:1,7:3,17:1},{0:3,6:1,17:1},{1:1,7:3,17:1}])[0m
+[32m2025-01-23 11:08:48,977 - INFO - False[0m
+[34m2025-01-23 11:08:49,062 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:49,062 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:49,062 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:49,062 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:49,062 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 3}, T(ergotherapy_b): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {P(patient1_o): 1}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:49,069 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:49,069 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:49,069 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:49,069 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:49,070 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:49,070 - INFO - forbidden_vars: ([{1:1,7:3},{0:3,6:1,17:1},{1:1,7:3,17:1},{1:1,7:3,17:1}])[0m
+[32m2025-01-23 11:08:49,070 - INFO - False[0m
+[34m2025-01-23 11:08:49,270 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:49,270 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:49,270 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:49,271 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:49,271 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:49,271 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:49,272 - INFO - forbidden_vars: ([{1:1,7:3},{7:3,17:1},{0:3,6:1,17:1},{1:1,7:3,17:1}])[0m
+[32m2025-01-23 11:08:49,272 - INFO - False[0m
+[32m2025-01-23 11:08:49,272 - INFO - Number of cuts added: 27 (bad=0, good=27)[0m
+[32m2025-01-23 11:08:49,272 - INFO - Return infeasible: 27[0m
+[32m2025-01-23 11:08:49,272 - INFO - Return feasible: 6[0m
+[32m2025-01-23 11:08:49,272 - INFO - Unnecessary comps: (0 / 27)[0m
+[32m2025-01-23 11:08:49,272 - INFO - Calls to is_day_infeasible: cp_solver=31/ total=33 stored=2[0m
+[32m2025-01-23 11:08:49,272 - INFO - Num_constraints-added: 77[0m
+[32m2025-01-23 11:08:49,272 - INFO - Is feasible: 0.4481165409088135 0.5977085586555368[0m
+[32m2025-01-23 11:08:49,272 - INFO - Subsolver: Solve Model: 0.2699410915374756/0.6181461321336733[0m
+[32m2025-01-23 11:08:49,272 - INFO - Subsolver: Create Model: 0.16675353050231934/0.3818538678663267[0m
+     0     0 1520.00000    0    9          - 1520.00000      -     -    5s
+[34m2025-01-23 11:08:49,471 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:49,472 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:49,472 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:49,472 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:49,472 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_o): 1, P(patient1_o): 3}, T(ergotherapy_b): {P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {P(patient1_o): 1}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:49,478 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:49,478 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:49,478 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:49,479 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:49,479 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:49,479 - INFO - forbidden_vars: ([{1:1,7:3},{7:3,17:1},{0:1,7:3,17:1},{0:3,6:1,17:1}])[0m
+[32m2025-01-23 11:08:49,479 - INFO - False[0m
+[34m2025-01-23 11:08:49,660 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:49,660 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:49,660 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:49,660 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:49,661 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:49,661 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:49,662 - INFO - forbidden_vars: ([{7:3},{0:1,7:3,17:1},{0:3,6:1,17:1},{1:1,7:3,17:1}])[0m
+[32m2025-01-23 11:08:49,662 - INFO - False[0m
+[34m2025-01-23 11:08:50,120 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:50,120 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:50,120 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,120 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:50,120 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 4}, T(ergotherapy_b): {P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {P(patient0_o): 1}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:50,127 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,127 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:50,127 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:50,128 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:50,128 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:50,129 - INFO - forbidden_vars: ([{1:1,7:3},{7:3,17:1},{0:4,17:1},{6:1,7:3,17:1}])[0m
+[32m2025-01-23 11:08:50,129 - INFO - False[0m
+     0     2 1520.00000    0    6          - 1520.00000      -     -    6s
+[34m2025-01-23 11:08:50,239 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:50,239 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:50,239 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,240 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:50,240 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 4}, T(ergotherapy_b): {}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {P(patient0_o): 1}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {P(patient1_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1}, T(massage): {}}[0m
+[34m2025-01-23 11:08:50,248 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,248 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:50,249 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:50,249 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:50,249 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:50,250 - INFO - forbidden_vars: ([{7:3,12:1},{0:4,17:1},{6:1,7:3,17:1},{7:3,17:1,20:1}])[0m
+[32m2025-01-23 11:08:50,250 - INFO - False[0m
+[34m2025-01-23 11:08:50,331 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:50,331 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:50,331 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,331 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:50,331 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 4}, T(ergotherapy_b): {P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient0_o): 1}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1}, T(massage): {}}[0m
+[34m2025-01-23 11:08:50,338 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,338 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:50,339 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:50,339 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:50,339 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:50,340 - INFO - forbidden_vars: ([{1:1,7:3},{0:4,17:1},{5:1,7:3,17:1},{7:3,17:1,20:1}])[0m
+[32m2025-01-23 11:08:50,340 - INFO - False[0m
+[32m2025-01-23 11:08:50,340 - INFO - Number of cuts added: 32 (bad=0, good=32)[0m
+[32m2025-01-23 11:08:50,340 - INFO - Return infeasible: 32[0m
+[32m2025-01-23 11:08:50,340 - INFO - Return feasible: 6[0m
+[32m2025-01-23 11:08:50,340 - INFO - Unnecessary comps: (0 / 32)[0m
+[32m2025-01-23 11:08:50,340 - INFO - Calls to is_day_infeasible: cp_solver=35/ total=38 stored=3[0m
+[32m2025-01-23 11:08:50,340 - INFO - Num_constraints-added: 92[0m
+[32m2025-01-23 11:08:50,340 - INFO - Is feasible: 0.47771573066711426 0.5834248110996259[0m
+[32m2025-01-23 11:08:50,340 - INFO - Subsolver: Solve Model: 0.27739882469177246/0.5968918397583488[0m
+[32m2025-01-23 11:08:50,340 - INFO - Subsolver: Create Model: 0.18734002113342285/0.4031081602416512[0m
+[34m2025-01-23 11:08:50,347 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:50,347 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:50,347 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,348 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:50,348 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 4}, T(ergotherapy_b): {P(patient0_o): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {P(patient1_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1}, T(massage): {}}[0m
+[34m2025-01-23 11:08:50,354 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,355 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:50,355 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:50,355 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:50,356 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:50,356 - INFO - forbidden_vars: ([{7:3,12:1},{0:4,17:1},{1:1,7:3,17:1},{7:3,17:1,20:1}])[0m
+[32m2025-01-23 11:08:50,356 - INFO - False[0m
+[34m2025-01-23 11:08:50,433 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:50,433 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:50,433 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,433 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:50,433 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 4}, T(ergotherapy_b): {P(patient0_o): 1, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1}, T(massage): {}}[0m
+[34m2025-01-23 11:08:50,441 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,441 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:50,441 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:50,442 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:50,442 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:50,442 - INFO - forbidden_vars: ([{1:1,7:3},{0:4,17:1},{1:1,7:3,17:1},{7:3,17:1,20:1}])[0m
+[32m2025-01-23 11:08:50,442 - INFO - False[0m
+[34m2025-01-23 11:08:50,525 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:50,525 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:50,525 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,525 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:50,525 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 3}, T(ergotherapy_b): {P(patient0_o): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient1_o): 1}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {P(patient1_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1}, T(massage): {}}[0m
+[34m2025-01-23 11:08:50,533 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,534 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:50,534 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:50,534 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:50,535 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:50,535 - INFO - forbidden_vars: ([{7:3,12:1},{0:3,5:1,17:1},{1:1,7:3,17:1},{7:3,17:1,20:1}])[0m
+[32m2025-01-23 11:08:50,535 - INFO - False[0m
+[34m2025-01-23 11:08:50,542 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:50,542 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:50,542 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,542 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:50,542 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 3}, T(ergotherapy_b): {P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 2, P(patient0_o): 2, P(patient1_o): 2}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:50,549 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,549 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:50,550 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:50,550 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:50,550 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:50,551 - INFO - forbidden_vars: ([{1:1,7:3},{0:3,17:2},{7:3,17:2},{7:3,17:2}])[0m
+[32m2025-01-23 11:08:50,551 - INFO - False[0m
+[34m2025-01-23 11:08:50,597 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:50,597 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:50,598 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,598 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:50,598 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 3}, T(ergotherapy_b): {P(patient0_o): 1, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient1_o): 1}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1}, T(massage): {}}[0m
+[34m2025-01-23 11:08:50,605 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,605 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:50,606 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:50,606 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:50,606 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:50,607 - INFO - forbidden_vars: ([{1:1,7:3},{0:3,5:1,17:1},{1:1,7:3,17:1},{7:3,17:1,20:1}])[0m
+[32m2025-01-23 11:08:50,607 - INFO - False[0m
+[32m2025-01-23 11:08:50,607 - INFO - Number of cuts added: 37 (bad=0, good=37)[0m
+[32m2025-01-23 11:08:50,607 - INFO - Return infeasible: 37[0m
+[32m2025-01-23 11:08:50,607 - INFO - Return feasible: 6[0m
+[32m2025-01-23 11:08:50,607 - INFO - Unnecessary comps: (0 / 37)[0m
+[32m2025-01-23 11:08:50,607 - INFO - Calls to is_day_infeasible: cp_solver=40/ total=43 stored=3[0m
+[32m2025-01-23 11:08:50,607 - INFO - Num_constraints-added: 107[0m
+[32m2025-01-23 11:08:50,607 - INFO - Is feasible: 0.5167598724365234 0.5751467488635438[0m
+[32m2025-01-23 11:08:50,607 - INFO - Subsolver: Solve Model: 0.2873516082763672/0.5725907636934774[0m
+[32m2025-01-23 11:08:50,607 - INFO - Subsolver: Create Model: 0.2144930362701416/0.42740923630652256[0m
+[34m2025-01-23 11:08:50,669 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:50,669 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:50,670 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,670 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:50,670 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient1_o): 4}, T(ergotherapy_b): {P(patient0_o): 1, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient1_o): 1}, T(physiotherapy_d): {P(patient0_o): 1}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1}, T(massage): {}}[0m
+[34m2025-01-23 11:08:50,677 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,677 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:50,678 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:50,678 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:50,678 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:50,679 - INFO - forbidden_vars: ([{1:1,7:3},{0:1,7:3,20:1},{0:4,5:1},{1:1,6:1,7:3}])[0m
+[32m2025-01-23 11:08:50,679 - INFO - False[0m
+[34m2025-01-23 11:08:50,786 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:50,786 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:50,786 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,787 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:50,787 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 4}, T(ergotherapy_b): {}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient0_o): 1}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {P(patient1_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1}, T(massage): {}}[0m
+[34m2025-01-23 11:08:50,795 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,795 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:50,796 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:50,796 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:50,796 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:50,797 - INFO - forbidden_vars: ([{7:3,12:1},{0:4,17:1},{5:1,7:3,17:1},{7:3,17:1,20:1}])[0m
+[32m2025-01-23 11:08:50,797 - INFO - False[0m
+[34m2025-01-23 11:08:50,804 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:50,804 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:50,804 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,804 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:50,804 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 4}, T(ergotherapy_b): {P(patient0_o): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {P(patient0_c): 1, P(patient1_p): 1}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:50,811 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,811 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:50,812 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:50,812 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:50,812 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:50,813 - INFO - forbidden_vars: ([{7:3,9:1},{0:4,17:1},{1:1,7:3,17:1},{7:3,9:1,17:1}])[0m
+[32m2025-01-23 11:08:50,813 - INFO - False[0m
+[34m2025-01-23 11:08:50,911 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:50,912 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:50,912 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,912 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:50,912 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient1_o): 3}, T(ergotherapy_b): {}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient1_o): 1}, T(physiotherapy_d): {P(patient0_o): 1}, T(watergymnastics): {P(patient0_c): 3, P(patient0_o): 3, P(patient1_p): 3}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {P(patient1_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_o): 1}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1}, T(massage): {}}[0m
+[34m2025-01-23 11:08:50,918 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,918 - DEBUG - Infeasible day 1[0m
+[32m2025-01-23 11:08:50,919 - INFO - d_prime: 1 d: 1[0m
+[32m2025-01-23 11:08:50,919 - INFO - d_prime: 3 d: 1[0m
+[32m2025-01-23 11:08:50,919 - INFO - d_prime: 5 d: 1[0m
+[32m2025-01-23 11:08:50,920 - INFO - forbidden_vars: ([{7:3,12:1},{0:3,5:1,17:1},{6:1,7:3,17:1},{7:3,17:1,20:1}])[0m
+[32m2025-01-23 11:08:50,920 - INFO - False[0m
+[34m2025-01-23 11:08:50,926 - DEBUG - Last day infeasible: 1[0m
+[34m2025-01-23 11:08:50,926 - DEBUG - Checking day 1[0m
+[34m2025-01-23 11:08:50,926 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,926 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:50,926 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient1_o): 4}, T(ergotherapy_b): {P(patient0_o): 1, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {P(patient0_o): 1}, T(physiotherapy_c): {P(patient1_o): 1}, T(physiotherapy_d): {P(patient0_o): 1}, T(watergymnastics): {P(patient0_c): 2, P(patient0_o): 2, P(patient1_p): 2}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {P(patient1_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1}, T(massage): {P(patient0_c): 1}}[0m
+[34m2025-01-23 11:08:50,944 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,945 - DEBUG - Checking day 0[0m
+[34m2025-01-23 11:08:50,945 - DEBUG - Checking day 2[0m
+[34m2025-01-23 11:08:50,945 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,945 - DEBUG - SUBSOLVER DAY:2[0m
+[34m2025-01-23 11:08:50,945 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1}, T(ergotherapy_b): {}, T(ergotherapy_c): {}, T(physiotherapy_a): {P(patient0_c): 1}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {P(patient0_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {P(patient0_c): 1, P(patient0_o): 1, P(patient0_p): 1}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {P(patient0_o): 3, P(patient1_o): 4, P(patient0_p): 2, P(patient1_p): 3}}[0m
+[34m2025-01-23 11:08:50,979 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,979 - DEBUG - Checking day 3[0m
+[34m2025-01-23 11:08:50,979 - DEBUG - Checking day 4[0m
+[34m2025-01-23 11:08:50,979 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:50,979 - DEBUG - SUBSOLVER DAY:4[0m
+[34m2025-01-23 11:08:50,979 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient1_c): 1, P(patient1_o): 1, P(patient2_o): 1}, T(ergotherapy_b): {P(patient0_c): 1, P(patient1_c): 2, P(patient0_o): 1, P(patient2_o): 1, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {P(patient0_c): 1, P(patient1_c): 1}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {P(patient0_o): 1, P(patient1_o): 1, P(patient2_o): 1, P(patient0_p): 2, P(patient1_p): 1}, T(yoga): {}, T(psychotherapy_single): {P(patient0_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1, P(patient2_o): 2}, T(massage): {}}[0m
+[34m2025-01-23 11:08:51,015 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:51,015 - DEBUG - Checking day 5[0m
+[34m2025-01-23 11:08:51,015 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:51,015 - DEBUG - SUBSOLVER DAY:5[0m
+[34m2025-01-23 11:08:51,015 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient0_o): 1}, T(ergotherapy_b): {P(patient1_o): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient2_o): 1}, T(physiotherapy_d): {P(patient2_o): 1}, T(watergymnastics): {}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {P(patient0_o): 1, P(patient2_o): 1}, T(yoga): {P(patient0_c): 3, P(patient1_c): 3, P(patient0_o): 2, P(patient1_o): 4, P(patient2_o): 1, P(patient0_p): 1, P(patient1_p): 4}, T(psychotherapy_single): {P(patient0_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {P(patient0_c): 1, P(patient1_c): 1, P(patient0_o): 1}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient2_o): 1}, T(massage): {}}[0m
+[34m2025-01-23 11:08:51,052 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:51,052 - DEBUG - Checking day 6[0m
+[34m2025-01-23 11:08:51,052 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-23 11:08:51,052 - DEBUG - SUBSOLVER DAY:6[0m
+[34m2025-01-23 11:08:51,052 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {}, T(ergotherapy_b): {}, T(ergotherapy_c): {P(patient0_p): 1, P(patient1_p): 1, P(patient2_p): 1}, T(physiotherapy_a): {}, T(physiotherapy_b): {P(patient2_o): 1}, T(physiotherapy_c): {}, T(physiotherapy_d): {P(patient0_o): 3, P(patient1_o): 2}, T(watergymnastics): {P(patient0_c): 1, P(patient0_p): 1, P(patient2_p): 1}, T(hydrotherapy): {P(patient1_c): 1}, T(nordic_walking): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_p): 1}, T(fitness_training): {P(patient1_o): 3}, T(yoga): {P(patient2_o): 1, P(patient0_p): 1, P(patient1_p): 1}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1, P(patient0_o): 1}, T(massage): {P(patient0_c): 2, P(patient1_c): 3, P(patient2_o): 3, P(patient1_p): 1, P(patient2_p): 2}}[0m
+[34m2025-01-23 11:08:51,148 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[32m2025-01-23 11:08:51,148 - INFO - Number of cuts added: 41 (bad=0, good=41)[0m
+[32m2025-01-23 11:08:51,148 - INFO - Return infeasible: 41[0m
+[32m2025-01-23 11:08:51,148 - INFO - Return feasible: 13[0m
+[32m2025-01-23 11:08:51,148 - INFO - Unnecessary comps: (0 / 41)[0m
+[32m2025-01-23 11:08:51,148 - INFO - Calls to is_day_infeasible: cp_solver=49/ total=54 stored=5[0m
+[32m2025-01-23 11:08:51,148 - INFO - Num_constraints-added: 119[0m
+[32m2025-01-23 11:08:51,148 - INFO - Is feasible: 0.7692348957061768 0.6463773853209814[0m
+[32m2025-01-23 11:08:51,148 - INFO - Subsolver: Solve Model: 0.4673044681549072/0.6228209796062852[0m
+[32m2025-01-23 11:08:51,148 - INFO - Subsolver: Create Model: 0.28299856185913086/0.37717902039371476[0m
+*   70    31              10    1520.0000000 1520.00000  0.00%  74.0    7s
+
+Cutting planes:
+  Gomory: 3
+  Lift-and-project: 5
+  Clique: 2
+  MIR: 13
+  StrongCG: 1
+  Zero half: 14
+  RLT: 42
+  Lazy constraints: 119
+
+Explored 75 nodes (39391 simplex iterations) in 7.08 seconds (10.76 work units)
+Thread count was 8 (of 96 available processors)
+
+Solution count 1: 1520 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.520000000000e+03, best bound 1.520000000000e+03, gap 0.0000%
+
+User-callback calls 2431, time in user-callback 1.21 sec
+Set parameter DegenMoves to value 0
+[34m2025-01-23 11:08:51,157 - DEBUG - Finished optimization[0m
+[34m2025-01-23 11:08:51,157 - DEBUG - Subsolver stats:[0m
+[32m2025-01-23 11:08:51,157 - INFO - Number of cuts added: 41 (bad=0, good=41)[0m
+[32m2025-01-23 11:08:51,157 - INFO - Return infeasible: 41[0m
+[32m2025-01-23 11:08:51,157 - INFO - Return feasible: 13[0m
+[32m2025-01-23 11:08:51,157 - INFO - Unnecessary comps: (0 / 41)[0m
+[32m2025-01-23 11:08:51,157 - INFO - Calls to is_day_infeasible: cp_solver=49/ total=54 stored=5[0m
+[32m2025-01-23 11:08:51,157 - INFO - Num_constraints-added: 119[0m
+[32m2025-01-23 11:08:51,157 - INFO - Is feasible: 0.7692348957061768 0.6463773853209814[0m
+[32m2025-01-23 11:08:51,157 - INFO - Subsolver: Solve Model: 0.4673044681549072/0.6228209796062852[0m
+[32m2025-01-23 11:08:51,157 - INFO - Subsolver: Create Model: 0.28299856185913086/0.37717902039371476[0m
+[32m2025-01-23 11:08:51,157 - INFO - Optimal solution found.[0m
+[34m2025-01-23 11:08:51,157 - DEBUG - Sub Objectives:[0m
+[34m2025-01-23 11:08:51,157 - DEBUG - (SOLVER):Minimize Delay: 0.0[0m
+[34m2025-01-23 11:08:51,158 - DEBUG - (SOLVER):Minimize Missing Treatments: 1520.0[0m
+[32m2025-01-23 11:08:51,158 - INFO - All cuts [defaultdict(<class 'dict'>, {P(patient0_c): {T(ergotherapy_a): 1, T(ergotherapy_b): 1, T(hydrotherapy): 3}, P(patient0_o): {T(physiotherapy_c): 5}, P(patient1_o): {T(physiotherapy_c): 5}, P(patient1_p): {T(psychotherapy_single): 4}}), defaultdict(<class 'dict'>, {P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient1_o): {T(physiotherapy_c): 1, T(hydrotherapy): 1, T(smoking_cessation): 1, T(general_psychological_support): 2}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1, T(general_psychological_support): 1}, P(patient0_o): {T(watergymnastics): 3, T(smoking_cessation): 1, T(general_psychological_support): 1}}), defaultdict(<class 'dict'>, {P(patient0_p): {T(ergotherapy_c): 1, T(yoga): 1}, P(patient1_p): {T(ergotherapy_c): 1, T(nordic_walking): 1, T(yoga): 1, T(massage): 1}, P(patient2_p): {T(ergotherapy_c): 1, T(watergymnastics): 1, T(massage): 2}, P(patient2_o): {T(physiotherapy_b): 1, T(physiotherapy_d): 1, T(yoga): 1, T(massage): 2}, P(patient0_o): {T(physiotherapy_d): 3, T(nordic_walking): 1, T(general_psychological_support): 1}, P(patient1_o): {T(physiotherapy_d): 1, T(fitness_training): 4}, P(patient0_c): {T(watergymnastics): 1, T(general_psychological_support): 1, T(massage): 3}, P(patient1_c): {T(watergymnastics): 1, T(massage): 3}}), defaultdict(<class 'dict'>, {P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient1_o): {T(physiotherapy_c): 1, T(hydrotherapy): 1, T(smoking_cessation): 1, T(general_psychological_support): 2}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_o): {T(watergymnastics): 3, T(smoking_cessation): 1, T(general_psychological_support): 1}}), defaultdict(<class 'dict'>, {P(patient0_c): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_o): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_o): {T(ergotherapy_a): 3, T(hydrotherapy): 1, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}}), defaultdict(<class 'dict'>, {P(patient0_c): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_o): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_o): {T(ergotherapy_a): 3, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}}), defaultdict(<class 'dict'>, {P(patient0_c): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_o): {T(ergotherapy_a): 3, T(hydrotherapy): 1, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_o): {T(watergymnastics): 3, T(smoking_cessation): 1}}), defaultdict(<class 'dict'>, {P(patient0_c): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_o): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_o): {T(ergotherapy_a): 3, T(hydrotherapy): 1, T(smoking_cessation): 1}, P(patient1_p): {T(watergymnastics): 3}}), defaultdict(<class 'dict'>, {P(patient0_c): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_o): {T(ergotherapy_a): 3, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_o): {T(watergymnastics): 3, T(smoking_cessation): 1}}), defaultdict(<class 'dict'>, {P(patient0_c): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_o): {T(ergotherapy_a): 3, T(hydrotherapy): 1, T(smoking_cessation): 1}, P(patient0_o): {T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_p): {T(watergymnastics): 3}}), defaultdict(<class 'dict'>, {P(patient0_c): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_o): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_o): {T(ergotherapy_a): 3, T(smoking_cessation): 1}, P(patient1_p): {T(watergymnastics): 3}}), defaultdict(<class 'dict'>, {P(patient0_c): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_o): {T(ergotherapy_a): 3, T(smoking_cessation): 1}, P(patient0_o): {T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_p): {T(watergymnastics): 3}}), defaultdict(<class 'dict'>, {P(patient0_c): {T(ergotherapy_a): 1, T(watergymnastics): 3}, P(patient0_o): {T(ergotherapy_a): 1, T(watergymnastics): 3}, P(patient1_o): {T(ergotherapy_a): 3, T(hydrotherapy): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}}), defaultdict(<class 'dict'>, {P(patient0_c): {T(ergotherapy_a): 1, T(watergymnastics): 3}, P(patient1_o): {T(ergotherapy_a): 3, T(hydrotherapy): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_o): {T(watergymnastics): 3}}), defaultdict(<class 'dict'>, {P(patient0_c): {T(ergotherapy_a): 1, T(watergymnastics): 3}, P(patient0_o): {T(ergotherapy_a): 1, T(watergymnastics): 3}, P(patient1_o): {T(ergotherapy_a): 3, T(hydrotherapy): 1}, P(patient1_p): {T(watergymnastics): 3}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 3, T(ergotherapy_b): 1, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_o): {T(physiotherapy_d): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1, T(general_psychological_support): 1}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 3, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_o): {T(physiotherapy_d): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1, T(general_psychological_support): 1}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 3, T(ergotherapy_b): 1, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_c): {T(physiotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_o): {T(physiotherapy_d): 1, T(watergymnastics): 3, T(smoking_cessation): 1}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 3, T(ergotherapy_b): 1, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_o): {T(physiotherapy_d): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 3, T(ergotherapy_b): 1, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_c): {T(physiotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_o): {T(watergymnastics): 3, T(smoking_cessation): 1}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 3, T(ergotherapy_b): 1, T(smoking_cessation): 1}, P(patient0_o): {T(physiotherapy_d): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1, T(general_psychological_support): 1}, P(patient1_p): {T(watergymnastics): 3}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 3, T(ergotherapy_b): 1, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1, T(general_psychological_support): 1}, P(patient0_o): {T(watergymnastics): 3, T(smoking_cessation): 1}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 3, T(ergotherapy_b): 1, T(smoking_cessation): 1}, P(patient0_c): {T(physiotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_o): {T(physiotherapy_d): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_p): {T(watergymnastics): 3}}), defaultdict(<class 'dict'>, {P(patient0_c): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_o): {T(ergotherapy_a): 2, T(ergotherapy_b): 1, T(physiotherapy_c): 1, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_o): {T(physiotherapy_d): 1, T(watergymnastics): 3, T(smoking_cessation): 1}}), defaultdict(<class 'dict'>, {P(patient0_o): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_o): {T(ergotherapy_a): 3, T(physiotherapy_d): 1, T(smoking_cessation): 1}, P(patient0_c): {T(ergotherapy_b): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 3, T(physiotherapy_d): 1, T(smoking_cessation): 1}, P(patient0_c): {T(ergotherapy_b): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_o): {T(ergotherapy_b): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 3, T(physiotherapy_d): 1, T(smoking_cessation): 1}, P(patient0_c): {T(ergotherapy_b): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_o): {T(watergymnastics): 3, T(smoking_cessation): 1}}), defaultdict(<class 'dict'>, {P(patient0_o): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_o): {T(ergotherapy_a): 3, T(physiotherapy_d): 1, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1}}), defaultdict(<class 'dict'>, {P(patient0_o): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_o): {T(ergotherapy_a): 3, T(physiotherapy_d): 1, T(smoking_cessation): 1}, P(patient0_c): {T(ergotherapy_b): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_p): {T(watergymnastics): 3}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 4, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_o): {T(physiotherapy_d): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 4, T(smoking_cessation): 1}, P(patient0_o): {T(physiotherapy_d): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1, T(general_psychological_support): 1}, P(patient1_p): {T(watergymnastics): 3, T(psychotherapy_single): 1}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 4, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_o): {T(physiotherapy_c): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1, T(general_psychological_support): 1}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 4, T(smoking_cessation): 1}, P(patient0_o): {T(ergotherapy_b): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1, T(general_psychological_support): 1}, P(patient1_p): {T(watergymnastics): 3, T(psychotherapy_single): 1}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 4, T(smoking_cessation): 1}, P(patient0_o): {T(ergotherapy_b): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1, T(general_psychological_support): 1}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 3, T(physiotherapy_c): 1, T(smoking_cessation): 1}, P(patient0_o): {T(ergotherapy_b): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1, T(general_psychological_support): 1}, P(patient1_p): {T(watergymnastics): 3, T(psychotherapy_single): 1}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 3, T(smoking_cessation): 2}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 2}, P(patient0_o): {T(watergymnastics): 3, T(smoking_cessation): 2}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 3, T(physiotherapy_c): 1, T(smoking_cessation): 1}, P(patient0_o): {T(ergotherapy_b): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1, T(general_psychological_support): 1}}), defaultdict(<class 'dict'>, {P(patient0_c): {T(ergotherapy_a): 1, T(watergymnastics): 3, T(general_psychological_support): 1}, P(patient1_o): {T(ergotherapy_a): 4, T(physiotherapy_c): 1}, P(patient0_o): {T(ergotherapy_b): 1, T(physiotherapy_d): 1, T(watergymnastics): 3}, P(patient1_p): {T(ergotherapy_b): 1, T(watergymnastics): 3}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 4, T(smoking_cessation): 1}, P(patient0_o): {T(physiotherapy_c): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1, T(general_psychological_support): 1}, P(patient1_p): {T(watergymnastics): 3, T(psychotherapy_single): 1}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 4, T(smoking_cessation): 1}, P(patient0_o): {T(ergotherapy_b): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_c): {T(watergymnastics): 3, T(nordic_walking): 1, T(smoking_cessation): 1}, P(patient1_p): {T(watergymnastics): 3, T(nordic_walking): 1}}), defaultdict(<class 'dict'>, {P(patient1_o): {T(ergotherapy_a): 3, T(physiotherapy_c): 1, T(smoking_cessation): 1}, P(patient0_o): {T(physiotherapy_d): 1, T(watergymnastics): 3, T(smoking_cessation): 1}, P(patient0_c): {T(watergymnastics): 3, T(smoking_cessation): 1, T(general_psychological_support): 1}, P(patient1_p): {T(watergymnastics): 3, T(psychotherapy_single): 1}})][0m
+[32m2025-01-23 11:08:51,158 - INFO - All cuts ['([{12:4},{0:1,1:1,8:3},{5:5},{5:5}])', '([{1:1,7:3},{5:1,8:1,17:1,20:2},{7:3,17:1,20:1},{7:3,17:1,20:1}])', '([{2:1,11:1},{2:1,9:1,11:1,21:1},{2:1,7:1,21:2},{7:1,21:3},{4:1,6:1,11:1,21:2},{6:3,9:1,20:1},{6:1,10:4},{7:1,20:1,21:3}])', '([{1:1,7:3},{7:3,17:1},{5:1,8:1,17:1,20:2},{7:3,17:1,20:1}])', '([{1:1,7:3},{0:1,7:3,17:1},{0:1,7:3,17:1},{0:3,8:1,17:1}])', '([{0:3,17:1},{1:1,7:3},{0:1,7:3,17:1},{0:1,7:3,17:1}])', '([{1:1,7:3},{7:3,17:1},{0:1,7:3,17:1},{0:3,8:1,17:1}])', '([{7:3},{0:1,7:3,17:1},{0:1,7:3,17:1},{0:3,8:1,17:1}])', '([{0:3,17:1},{1:1,7:3},{7:3,17:1},{0:1,7:3,17:1}])', '([{7:3},{7:3,17:1},{0:1,7:3,17:1},{0:3,8:1,17:1}])', '([{7:3},{0:3,17:1},{0:1,7:3,17:1},{0:1,7:3,17:1}])', '([{7:3},{0:3,17:1},{7:3,17:1},{0:1,7:3,17:1}])', '([{0:1,7:3},{0:1,7:3},{0:3,8:1},{1:1,7:3}])', '([{7:3},{0:1,7:3},{0:3,8:1},{1:1,7:3}])', '([{7:3},{0:1,7:3},{0:1,7:3},{0:3,8:1}])', '([{1:1,7:3},{0:3,1:1,17:1},{6:1,7:3,17:1},{7:3,17:1,20:1}])', '([{0:3,17:1},{1:1,7:3},{6:1,7:3,17:1},{7:3,17:1,20:1}])', '([{1:1,7:3},{0:3,1:1,17:1},{3:1,7:3,17:1},{6:1,7:3,17:1}])', '([{1:1,7:3},{7:3,17:1},{0:3,1:1,17:1},{6:1,7:3,17:1}])', '([{1:1,7:3},{7:3,17:1},{0:3,1:1,17:1},{3:1,7:3,17:1}])', '([{7:3},{0:3,1:1,17:1},{6:1,7:3,17:1},{7:3,17:1,20:1}])', '([{1:1,7:3},{7:3,17:1},{0:3,1:1,17:1},{7:3,17:1,20:1}])', '([{7:3},{0:3,1:1,17:1},{3:1,7:3,17:1},{6:1,7:3,17:1}])', '([{1:1,7:3},{0:1,7:3,17:1},{0:2,1:1,5:1,17:1},{6:1,7:3,17:1}])', '([{1:1,7:3},{0:1,7:3,17:1},{0:3,6:1,17:1},{1:1,7:3,17:1}])', '([{1:1,7:3},{0:3,6:1,17:1},{1:1,7:3,17:1},{1:1,7:3,17:1}])', '([{1:1,7:3},{7:3,17:1},{0:3,6:1,17:1},{1:1,7:3,17:1}])', '([{1:1,7:3},{7:3,17:1},{0:1,7:3,17:1},{0:3,6:1,17:1}])', '([{7:3},{0:1,7:3,17:1},{0:3,6:1,17:1},{1:1,7:3,17:1}])', '([{1:1,7:3},{7:3,17:1},{0:4,17:1},{6:1,7:3,17:1}])', '([{7:3,12:1},{0:4,17:1},{6:1,7:3,17:1},{7:3,17:1,20:1}])', '([{1:1,7:3},{0:4,17:1},{5:1,7:3,17:1},{7:3,17:1,20:1}])', '([{7:3,12:1},{0:4,17:1},{1:1,7:3,17:1},{7:3,17:1,20:1}])', '([{1:1,7:3},{0:4,17:1},{1:1,7:3,17:1},{7:3,17:1,20:1}])', '([{7:3,12:1},{0:3,5:1,17:1},{1:1,7:3,17:1},{7:3,17:1,20:1}])', '([{1:1,7:3},{0:3,17:2},{7:3,17:2},{7:3,17:2}])', '([{1:1,7:3},{0:3,5:1,17:1},{1:1,7:3,17:1},{7:3,17:1,20:1}])', '([{1:1,7:3},{0:1,7:3,20:1},{0:4,5:1},{1:1,6:1,7:3}])', '([{7:3,12:1},{0:4,17:1},{5:1,7:3,17:1},{7:3,17:1,20:1}])', '([{7:3,9:1},{0:4,17:1},{1:1,7:3,17:1},{7:3,9:1,17:1}])', '([{7:3,12:1},{0:3,5:1,17:1},{6:1,7:3,17:1},{7:3,17:1,20:1}])'][0m
+[34m2025-01-23 11:08:51,181 - DEBUG - SUBSOLVER DAY:0[0m
+[34m2025-01-23 11:08:51,181 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient0_o): 1}, T(ergotherapy_b): {P(patient0_c): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient0_o): 4, P(patient1_o): 5}, T(physiotherapy_d): {}, T(watergymnastics): {}, T(hydrotherapy): {P(patient0_c): 3}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {P(patient1_p): 4}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {}}[0m
+[34m2025-01-23 11:08:51,198 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-23 11:08:51,199 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient1_o): 4}, T(ergotherapy_b): {P(patient0_o): 1, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {P(patient0_o): 1}, T(physiotherapy_c): {P(patient1_o): 1}, T(physiotherapy_d): {P(patient0_o): 1}, T(watergymnastics): {P(patient0_c): 2, P(patient0_o): 2, P(patient1_p): 2}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {P(patient1_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1}, T(massage): {P(patient0_c): 1}}[0m
+[34m2025-01-23 11:08:51,229 - DEBUG - SUBSOLVER DAY:2[0m
+[34m2025-01-23 11:08:51,229 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1}, T(ergotherapy_b): {}, T(ergotherapy_c): {}, T(physiotherapy_a): {P(patient0_c): 1}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {P(patient0_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {P(patient0_c): 1, P(patient0_o): 1, P(patient0_p): 1}, T(cardiological_health_seminar): {}, T(general_psychological_support): {}, T(massage): {P(patient0_o): 3, P(patient1_o): 4, P(patient0_p): 2, P(patient1_p): 3}}[0m
+[34m2025-01-23 11:08:51,255 - DEBUG - SUBSOLVER DAY:3[0m
+[34m2025-01-23 11:08:51,255 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {}, T(ergotherapy_b): {P(patient0_c): 2, P(patient0_o): 1, P(patient0_p): 2, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient1_o): 1}, T(physiotherapy_d): {}, T(watergymnastics): {}, T(hydrotherapy): {P(patient0_o): 1, P(patient1_o): 1}, T(nordic_walking): {}, T(fitness_training): {}, T(yoga): {}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient1_c): 4}, T(massage): {P(patient0_p): 2, P(patient1_p): 1}}[0m
+[34m2025-01-23 11:08:51,274 - DEBUG - SUBSOLVER DAY:4[0m
+[34m2025-01-23 11:08:51,274 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient1_c): 1, P(patient1_o): 1, P(patient2_o): 1}, T(ergotherapy_b): {P(patient0_c): 1, P(patient1_c): 2, P(patient0_o): 1, P(patient2_o): 1, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {P(patient0_c): 1, P(patient1_c): 1}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {P(patient0_o): 1, P(patient1_o): 1, P(patient2_o): 1, P(patient0_p): 2, P(patient1_p): 1}, T(yoga): {}, T(psychotherapy_single): {P(patient0_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1, P(patient2_o): 2}, T(massage): {}}[0m
+[34m2025-01-23 11:08:51,307 - DEBUG - SUBSOLVER DAY:5[0m
+[34m2025-01-23 11:08:51,307 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient0_o): 1}, T(ergotherapy_b): {P(patient1_o): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient2_o): 1}, T(physiotherapy_d): {P(patient2_o): 1}, T(watergymnastics): {}, T(hydrotherapy): {}, T(nordic_walking): {}, T(fitness_training): {P(patient0_o): 1, P(patient2_o): 1}, T(yoga): {P(patient0_c): 3, P(patient1_c): 3, P(patient0_o): 2, P(patient1_o): 4, P(patient2_o): 1, P(patient0_p): 1, P(patient1_p): 4}, T(psychotherapy_single): {P(patient0_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {P(patient0_c): 1, P(patient1_c): 1, P(patient0_o): 1}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient2_o): 1}, T(massage): {}}[0m
+[34m2025-01-23 11:08:51,338 - DEBUG - SUBSOLVER DAY:6[0m
+[34m2025-01-23 11:08:51,339 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {}, T(ergotherapy_b): {}, T(ergotherapy_c): {P(patient0_p): 1, P(patient1_p): 1, P(patient2_p): 1}, T(physiotherapy_a): {}, T(physiotherapy_b): {P(patient2_o): 1}, T(physiotherapy_c): {}, T(physiotherapy_d): {P(patient0_o): 3, P(patient1_o): 2}, T(watergymnastics): {P(patient0_c): 1, P(patient0_p): 1, P(patient2_p): 1}, T(hydrotherapy): {P(patient1_c): 1}, T(nordic_walking): {P(patient0_c): 1, P(patient0_o): 1, P(patient1_p): 1}, T(fitness_training): {P(patient1_o): 3}, T(yoga): {P(patient2_o): 1, P(patient0_p): 1, P(patient1_p): 1}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1, P(patient0_o): 1}, T(massage): {P(patient0_c): 2, P(patient1_c): 3, P(patient2_o): 3, P(patient1_p): 1, P(patient2_p): 2}}[0m
+[34m2025-01-23 11:08:51,408 - DEBUG - Patient 0 is admitted at day 0.[0m
+[34m2025-01-23 11:08:51,408 - DEBUG - Patient 1 is admitted at day 3.[0m
+[34m2025-01-23 11:08:51,408 - DEBUG - Patient 2 is admitted at day 0.[0m
+[34m2025-01-23 11:08:51,408 - DEBUG - Patient 3 is admitted at day 0.[0m
+[34m2025-01-23 11:08:51,408 - DEBUG - Patient 4 is admitted at day 4.[0m
+[34m2025-01-23 11:08:51,408 - DEBUG - Patient 5 is admitted at day 10.[0m
+[34m2025-01-23 11:08:51,408 - DEBUG - Patient 6 is admitted at day 14.[0m
+[34m2025-01-23 11:08:51,408 - DEBUG - Patient 7 is admitted at day 2.[0m
+[34m2025-01-23 11:08:51,408 - DEBUG - Patient 8 is admitted at day 0.[0m
+[34m2025-01-23 11:08:51,408 - DEBUG - Patient 9 is admitted at day 6.[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [0] have treatment 0 starting at day 0, hour 8.0 using resources [1, 7].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [2] have treatment 0 starting at day 0, hour 8.0 using resources [3, 6].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [0] have treatment 1 starting at day 0, hour 10.25 using resources [3, 5, 11].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [3] have treatment 5 starting at day 0, hour 8.0 using resources [2, 8].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [3] have treatment 5 starting at day 0, hour 8.75 using resources [2, 8].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [3] have treatment 5 starting at day 0, hour 9.5 using resources [2, 8].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [3] have treatment 5 starting at day 0, hour 10.25 using resources [2, 8].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [3] have treatment 5 starting at day 0, hour 11.0 using resources [2, 8].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [2] have treatment 5 starting at day 0, hour 13.0 using resources [2, 8].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [2] have treatment 5 starting at day 0, hour 13.75 using resources [2, 8].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [2] have treatment 5 starting at day 0, hour 14.5 using resources [2, 8].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [2] have treatment 5 starting at day 0, hour 15.25 using resources [1, 8].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [0] have treatment 8 starting at day 0, hour 8.75 using resources [0, 16].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [0] have treatment 8 starting at day 0, hour 9.25 using resources [0, 16].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [0] have treatment 8 starting at day 0, hour 9.75 using resources [0, 16].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [8] have treatment 12 starting at day 0, hour 8.75 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [8] have treatment 12 starting at day 0, hour 9.5 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [8] have treatment 12 starting at day 0, hour 11.25 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [8] have treatment 12 starting at day 0, hour 13.0 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [0, 3] have treatment 0 starting at day 1, hour 8.0 using resources [1, 7].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [3] have treatment 0 starting at day 1, hour 13.0 using resources [0, 5].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [3] have treatment 0 starting at day 1, hour 14.5 using resources [0, 5].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [3] have treatment 0 starting at day 1, hour 15.25 using resources [0, 5].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [2] have treatment 1 starting at day 1, hour 8.0 using resources [0, 5, 11].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [8] have treatment 1 starting at day 1, hour 9.25 using resources [0, 6, 10].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [2] have treatment 4 starting at day 1, hour 11.75 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [3] have treatment 5 starting at day 1, hour 9.75 using resources [2, 8].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [2] have treatment 6 starting at day 1, hour 10.5 using resources [2, 8].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [0, 2, 8] have treatment 7 starting at day 1, hour 13.0 using resources [4, 9].[0m
+[34m2025-01-23 11:08:51,409 - DEBUG - Patients [0, 2, 8] have treatment 7 starting at day 1, hour 14.25 using resources [4, 9].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [8] have treatment 12 starting at day 1, hour 11.0 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [0] have treatment 20 starting at day 1, hour 10.25 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [0] have treatment 21 starting at day 1, hour 9.25 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [0] have treatment 0 starting at day 2, hour 8.0 using resources [1, 7].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [0] have treatment 3 starting at day 2, hour 10.5 using resources [1, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [7] have treatment 12 starting at day 2, hour 8.0 using resources [3, 6].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [0, 2, 7] have treatment 18 starting at day 2, hour 8.75 using resources [0, 7].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [8] have treatment 21 starting at day 2, hour 8.0 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [8] have treatment 21 starting at day 2, hour 8.5 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [8] have treatment 21 starting at day 2, hour 9.0 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [7] have treatment 21 starting at day 2, hour 9.5 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [7] have treatment 21 starting at day 2, hour 10.0 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [3] have treatment 21 starting at day 2, hour 10.5 using resources [2, 6].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [3] have treatment 21 starting at day 2, hour 11.0 using resources [2, 7].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [3] have treatment 21 starting at day 2, hour 11.5 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [3] have treatment 21 starting at day 2, hour 13.0 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [2] have treatment 21 starting at day 2, hour 13.5 using resources [2, 7].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [2] have treatment 21 starting at day 2, hour 14.5 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [2] have treatment 21 starting at day 2, hour 15.0 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [0, 2, 7, 8] have treatment 1 starting at day 3, hour 8.5 using resources [1, 7, 11].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [0, 7] have treatment 1 starting at day 3, hour 13.0 using resources [0, 5, 11].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [3] have treatment 5 starting at day 3, hour 9.25 using resources [2, 8].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [3] have treatment 8 starting at day 3, hour 8.0 using resources [0, 16].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [2] have treatment 8 starting at day 3, hour 9.5 using resources [0, 16].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [1] have treatment 20 starting at day 3, hour 8.0 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [1] have treatment 20 starting at day 3, hour 8.75 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [1] have treatment 20 starting at day 3, hour 10.25 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [1] have treatment 20 starting at day 3, hour 11.0 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [7] have treatment 21 starting at day 3, hour 8.0 using resources [2, 7].[0m
+[34m2025-01-23 11:08:51,410 - DEBUG - Patients [7] have treatment 21 starting at day 3, hour 14.5 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [8] have treatment 21 starting at day 3, hour 15.0 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [0, 1, 3, 4] have treatment 0 starting at day 4, hour 8.75 using resources [1, 7].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [0, 1, 2, 4, 8] have treatment 1 starting at day 4, hour 9.5 using resources [0, 7, 11].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [1] have treatment 1 starting at day 4, hour 10.5 using resources [0, 5, 11].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [0] have treatment 3 starting at day 4, hour 14.5 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [1] have treatment 3 starting at day 4, hour 15.25 using resources [1, 5].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [7] have treatment 10 starting at day 4, hour 8.0 using resources [2, 15].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [8] have treatment 10 starting at day 4, hour 8.75 using resources [2, 12].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [7] have treatment 10 starting at day 4, hour 9.5 using resources [2, 15].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [4] have treatment 10 starting at day 4, hour 10.5 using resources [1, 12].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [3] have treatment 10 starting at day 4, hour 11.25 using resources [1, 12].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [2] have treatment 10 starting at day 4, hour 13.0 using resources [1, 13].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [7] have treatment 12 starting at day 4, hour 8.75 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [0] have treatment 20 starting at day 4, hour 8.0 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [4] have treatment 20 starting at day 4, hour 13.0 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [4] have treatment 20 starting at day 4, hour 13.75 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [0] have treatment 0 starting at day 5, hour 8.0 using resources [1, 7].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [2] have treatment 0 starting at day 5, hour 11.0 using resources [0, 5].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [3] have treatment 1 starting at day 5, hour 10.0 using resources [0, 5, 11].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [4] have treatment 5 starting at day 5, hour 10.25 using resources [2, 8].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [4] have treatment 6 starting at day 5, hour 11.0 using resources [2, 8].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [4] have treatment 10 starting at day 5, hour 9.5 using resources [2, 15].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [2] have treatment 10 starting at day 5, hour 13.0 using resources [2, 14].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [2, 3, 4, 7, 8] have treatment 11 starting at day 5, hour 8.0 using resources [0, 8].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [0, 1, 2, 3, 8] have treatment 11 starting at day 5, hour 9.25 using resources [0, 8].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [0, 1, 3, 8] have treatment 11 starting at day 5, hour 13.0 using resources [0, 8].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [0, 1, 3, 8] have treatment 11 starting at day 5, hour 14.5 using resources [0, 8].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [7] have treatment 12 starting at day 5, hour 13.0 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [0, 1, 2] have treatment 18 starting at day 5, hour 15.25 using resources [0, 7].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [4] have treatment 20 starting at day 5, hour 8.75 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,411 - DEBUG - Patients [7, 8, 9] have treatment 2 starting at day 6, hour 10.5 using resources [4, 7].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [4] have treatment 4 starting at day 6, hour 11.75 using resources [1, 5].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [2] have treatment 6 starting at day 6, hour 9.5 using resources [1, 8].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [3] have treatment 6 starting at day 6, hour 10.25 using resources [1, 8].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [2] have treatment 6 starting at day 6, hour 11.0 using resources [1, 8].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [2] have treatment 6 starting at day 6, hour 13.0 using resources [1, 8].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [3] have treatment 6 starting at day 6, hour 15.25 using resources [1, 8].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [0, 7, 9] have treatment 7 starting at day 6, hour 13.0 using resources [4, 9].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [1] have treatment 8 starting at day 6, hour 9.5 using resources [0, 16].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [0, 2, 8] have treatment 9 starting at day 6, hour 8.25 using resources [0].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [3] have treatment 10 starting at day 6, hour 8.0 using resources [1, 15].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [3] have treatment 10 starting at day 6, hour 8.75 using resources [1, 13].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [3] have treatment 10 starting at day 6, hour 11.0 using resources [2, 15].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [4, 7, 8] have treatment 11 starting at day 6, hour 14.5 using resources [0, 8].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [0] have treatment 20 starting at day 6, hour 10.5 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [2] have treatment 20 starting at day 6, hour 15.0 using resources [3, 5].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [9] have treatment 21 starting at day 6, hour 8.0 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [4] have treatment 21 starting at day 6, hour 8.5 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [9] have treatment 21 starting at day 6, hour 9.0 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [8] have treatment 21 starting at day 6, hour 9.5 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [4] have treatment 21 starting at day 6, hour 10.0 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [4] have treatment 21 starting at day 6, hour 10.5 using resources [2, 6].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [1] have treatment 21 starting at day 6, hour 13.0 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [1] have treatment 21 starting at day 6, hour 13.5 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [1] have treatment 21 starting at day 6, hour 14.5 using resources [2, 5].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [0] have treatment 21 starting at day 6, hour 15.0 using resources [2, 7].[0m
+[34m2025-01-23 11:08:51,412 - DEBUG - Patients [0] have treatment 21 starting at day 6, hour 15.5 using resources [2, 7].[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource utilization factors:[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 0: 0.41[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 1: 0.35[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 2: 0.64[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 3: 0.38[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 4: 0.13[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 5: 0.61[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 6: 0.06[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 7: 0.18[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 8: 0.32[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 9: 0.07[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 10: 0.02[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 11: 0.12[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 12: 0.04[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 13: 0.03[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 14: 0.01[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 15: 0.07[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Resource 16: 0.05[0m
+[34m2025-01-23 11:08:52,128 - DEBUG - Average utilization factor: 0.20[0m
+[34m2025-01-23 11:08:52,129 - DEBUG - Schedule Hash: 7043785c6424ffc500dc29157606c324[0m
+[34m2025-01-23 11:08:52,129 - DEBUG - Patients Arrival Hash: 808c0783e170a213c719ced98ad499a1[0m
+[34m2025-01-23 11:08:52,129 - DEBUG - Solver Hash: 41133d213a55a930cd88476ef52372e1[0m
+[34m2025-01-23 11:08:52,129 - DEBUG - Solution Hash: 4808284566b60ffd62851ff6a4287d17[0m
+[34m2025-01-23 11:08:52,129 - DEBUG - Checking solution value.[0m
+[34m2025-01-23 11:08:52,129 - DEBUG - Solvers objective function value: 1520.0[0m
+[34m2025-01-23 11:08:52,130 - DEBUG - (VERIFIER):Treatment value: 0[0m
+[34m2025-01-23 11:08:52,130 - DEBUG - (VERIFIER):Delay value: 0[0m
+[34m2025-01-23 11:08:52,130 - DEBUG - (VERIFIER):Missing treatment value: 1520[0m
+[34m2025-01-23 11:08:52,130 - DEBUG - Correct objective function value: 1520[0m
+[34m2025-01-23 11:08:52,130 - DEBUG - Solution is valid.[0m
+[34m2025-01-23 11:08:52,130 - DEBUG - All solvers accepted the solution.[0m
+[32m2025-01-23 11:08:52,130 - INFO - Time to find solution: 8.083s with value 1520.000000[0m
+[32m2025-01-23 11:08:52,130 - INFO - Extract solution time: 0.972s[0m
+[32m2025-01-23 11:08:52,130 - INFO - Total Time: 9.0s[0m

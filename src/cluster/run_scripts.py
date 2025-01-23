@@ -13,7 +13,7 @@ USERNAME = "ir803925"
 # 0. Define all parameters
 params_all = {
     "$RUNTIME": "01:00:00",
-    "$PARTITION": "c23ml",  # "c23mm",
+    "$PARTITION": "c23mm",  # "c23mm",
     "$OUTPUT_FOLDER": f"/work/{USERNAME}/Kobra/output",
     "$SCRIPT_FOLDER": f"/home/{USERNAME}/Kobra/rehabiliation-admission-scheduling",
     "$REPETITION": 1,
@@ -180,11 +180,30 @@ all_files_output = [
     if os.path.isfile(os.path.join(output_path, f))
 ]
 
+# Start the jobs
+result = subprocess.run(
+    ["squeue", "--me", "--noheader", "-o '%.100j'"], stdout=subprocess.PIPE
+)
+squeue_output = result.stdout.decode("utf-8").split("\n")
+squeue_output = list(filter(len, (map(lambda x: x.strip("\",' "), squeue_output))))
+
+current_jobs = len(squeue_output)  # subtract 1 for the header line
+print(f"Currently there are {current_jobs} jobs running or waiting for execution.")
 # Get the starting hash from the output files
-hashes = set()
+
+hashes_already_run = set()
 for output_file in all_files_output:
     hash = output_file.name.split("_")[2]
-    hashes.add(hash)
+    hashes_already_run.add(hash)
+
+hashes_currently_running = set()
+for line in squeue_output:
+    hash = line.strip().split("_")[2]
+    if hash not in hashes_already_run:
+        hashes_currently_running.add(hash)
+print(
+    f"We found output for {len(hashes_already_run)} jobs, and {len(hashes_currently_running)} jobs are currently pending."
+)
 
 to_run_combis = []
 assert os.path.isdir(params_all["$OUTPUT_FOLDER"])
@@ -192,6 +211,11 @@ assert os.path.isdir(params_all["$SCRIPT_FOLDER"])
 found_existing = 0
 core_hours_required = 0
 exists_name = []
+seen_hashes = set()
+print(
+    f"Check a total of {len(list(product(all_solver_combis, params_multiple, instance_files)))} combinations consisting of {len(all_solver_combis)} solver combinations, {len(params_multiple)} cluster parameters and {len(instance_files)} instances"
+)
+
 for solver_combi, params_combi, instance_file in product(
     all_solver_combis, params_multiple, instance_files
 ):
@@ -208,6 +232,10 @@ for solver_combi, params_combi, instance_file in product(
     )
     hash_combi_str = str(hash_combi_str + instance_file).encode()
     hash = str(hashlib.md5(hash_combi_str).hexdigest())[:10]
+    if hash in seen_hashes:
+        print(f"ERROR: Hash is duplicate: {hash}")
+        exit(1)
+    seen_hashes.add(hash)
     params_combi_copy = copy(params_combi)
     for key in params_all:
         params_combi_copy[key] = params_all[key]
@@ -222,10 +250,12 @@ for solver_combi, params_combi, instance_file in product(
         + "MB"
     )
 
-    if hash in hashes:
+    if hash in hashes_already_run:
         print(".", end="")
         found_existing += 1
         exists_name.append((solver_combi, params_combi_copy, instance_file, hash))
+    elif hash in hashes_currently_running:
+        print("o", end="")
     else:
         print("x", end="")
         to_run_combis.append((solver_combi, params_combi_copy, instance_file, hash))
@@ -239,7 +269,7 @@ for solver_combi, params_combi, instance_file in product(
             )
 
 print("")
-print(f"Alreay exists {found_existing} combinations.")
+print(f"For {found_existing} combinations, there already exists output.")
 for name in enumerate(exists_name):
     print(name[0], name[1])
 
@@ -281,11 +311,7 @@ for combi in to_run_combis:
         f.write(template_copy)
 
 print("Finished creating scripts. Now starting the slurm jobs.")
-# Get the number of currently submitted jobs
-result = subprocess.run(["squeue", "-u", os.getlogin()], stdout=subprocess.PIPE)
-current_jobs = (
-    len(result.stdout.decode("utf-8").strip().split("\n")) - 1
-)  # subtract 1 for the header line
+
 
 # Define the maximum number of jobs you can run at the same time
 max_jobs = 100
@@ -310,16 +336,12 @@ sleep(1)
 # Shuffle the scripts so that the first k jobs are as diverse as possible
 shuffle(to_run_scripts)
 count = 0
-# Start the jobs
-result = subprocess.run(["squeue", "--me", "-o '%.100j'"], stdout=subprocess.PIPE)
-squeue_output = result.stdout.decode("utf-8")
+
 
 for i, script in enumerate(to_run_scripts):
     name_of_script = str(script).split("/")[-1].split("_")[0]
-    if name_of_script in squeue_output:
-        print(f"Job {i} {script} has already been submitted.")
-        continue
     print(f"Submitting job {i} {script}.")
+
     subprocess.run(["sbatch", script])
 
     sleep(0.2)
