@@ -24,9 +24,9 @@
       "request": "launch",
       "module": "src",
       "args": [
-        "LBBDSolver",
+        "MIPSolver3",
         "{}",
-        "data/testinstance_files/double_resources.txt"
+        "data/comp_study_004/instance_p20_t15_high.txt"
       ]
     },
     {
@@ -46,6 +46,12 @@
       "type": "debugpy",
       "request": "launch",
       "module": "src.cluster.extract_data"
+    },
+    {
+      "name": "Python Debugger: Create Mod Instances",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "src.instance_generation.modify_instances"
     },
     {
       "name": "Python Debugger: Show Table",

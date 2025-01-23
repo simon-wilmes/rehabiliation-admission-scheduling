@@ -79,6 +79,7 @@ for inst in all_inst_solv_par_rep:
                     )
 data = dict(data)
 cuts_added_solv = defaultdict(int)
+"""
 avg_subsolver = []
 avg_cuts = 0
 for inst in all_inst_solv_par_rep:
@@ -123,6 +124,7 @@ for inst in all_inst_solv_par_rep:
 
 print("Avg Subsolver", sum(avg_subsolver) / len(avg_subsolver))
 print("Avg. Cuts", avg_cuts / len(avg_subsolver))
+"""
 for inst in all_inst_solv_par_rep:
     if data[inst] != 9:
         continue
@@ -175,12 +177,11 @@ for key in avg_runtime:
 parameters = {param for instance in all_inst_solv_par_rep.values() for param in instance.keys()}  # type: ignore
 parameters = sorted(list(parameters))
 algorithms = {
-    alg
-    for instance in all_inst_solv_par_rep.values()
-    for param in instance.values()  # type: ignore
-    for alg in param.keys()
+    solver
+    for instance in all_inst_solv_par_rep.values()  # type: ignore
+    for solver in instance.keys()  # type: ignore
 }
-algorithms.remove("MIPSolver3")
+
 
 param_markers = {
     param: marker for param, marker in zip(parameters, ["o", "s", "^", "D", "P"])

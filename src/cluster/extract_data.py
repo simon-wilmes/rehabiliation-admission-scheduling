@@ -22,19 +22,36 @@ replace_words = {
     r"\_short\_timeframe": r"\_c",
 }
 
+remove_runs = {'{"break_symmetry": true}'}
+
+remove_runs_contains = {
+    '"substitute_x_pmdt": true',
+    '"break_symmetry": true, "subsol',
+    '"add_constraints_to_symmetric_days": false, "b',
+    '"subsolver.restrict_obj_func_to_1": false',
+    '"use_lazy_constraints": false',
+}
+
+
+output_dir = (
+    Path(os.path.abspath(os.path.dirname(__file__))).parent.parent
+    / "output"
+    / "rev_run_4"
+)
+
 
 def remove_keys_with_name(data, key_to_remove, contains=False):
     if isinstance(data, dict):
         # Use dictionary comprehension to filter out the key
         return {
-            key: remove_keys_with_name(value, key_to_remove)
+            key: remove_keys_with_name(value, key_to_remove, contains)
             for key, value in data.items()
             if (not contains and key != key_to_remove)
-            or (contains and key_to_remove not in key)
+            or (contains and key_to_remove not in str(key))
         }
     elif isinstance(data, list):
         # Recursively process list elements
-        return [remove_keys_with_name(item, key_to_remove) for item in data]
+        return [remove_keys_with_name(item, key_to_remove, contains) for item in data]
     return data
 
 
@@ -55,25 +72,8 @@ def set_clipboard(text):
 
 def main():
 
-    output_dir = (
-        Path(os.path.abspath(os.path.dirname(__file__))).parent.parent
-        / "output"
-        / "rev_run_1"
-    )
-
     unwanted_keys = {}
-    """{'use_lazy_constraints': True}",
-        "CPSolver",
-        "{'break_symmetry': True, 'break_symmetry_strong': True}",
-        "{'break_symmetry': True, 'break_symmetry_strong': False}",
-        "{'break_symmetry': False, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubsolver2'}",
-        "{'break_symmetry': True, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubsolver2'}",
-        "{'break_symmetry': True, 'add_constraints_to_symmetrc_days': True, 'subsolver_cls': 'CPSubsolver2'}",
-        "{'break_symmetry': False, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubsolver'}",
-        "{'break_symmetry': True, 'add_constraints_to_symmetrc_days': False, 'subsolver_cls': 'CPSubsolver'}",
-        "{'break_symmetry': True, 'add_constraints_to_symmetrc_days': True, 'subsolver_cls': 'CPSubsolver'}",
-    }
-    """
+
     def test_timeout(err_file_str):
         timeout_regex = "DUE TO TIME LIMIT"
         timeout_match = re.search(timeout_regex, err_file_str)
@@ -87,6 +87,29 @@ def main():
         if memory_match:
             return True
         return False
+
+    def extract_utilization(out_file_str):
+        utilization_regex = r"Average utilization factor: (\d+(\.\d+)?)"
+        utilization_match = re.findall(utilization_regex, out_file_str)
+
+        all_util_regex = r"Resource (\d+): (\d+(\.\d+)?)"
+        all_util_match = re.findall(all_util_regex, out_file_str)
+
+        if utilization_match:
+            # find min and max utilization and median
+            util_list = [float(x[1]) for x in all_util_match]
+            util_per_res = {int(x[0]): float(x[1]) for x in all_util_match}
+            min_util = min(util_list)
+            max_util = max(util_list)
+            median_util = sorted(util_list)[len(util_list) // 2]
+            return {
+                "average_utilization": float(utilization_match[-1][0]),
+                "min_util": min_util,
+                "max_util": max_util,
+                "median_util": median_util,
+                "util_per_res": util_per_res,
+            }
+        return {}
 
     def rec_dd():
         return defaultdict(rec_dd)
@@ -173,6 +196,9 @@ def main():
                 case _:
                     raise ValueError(f"Solver {name_match} not recognized")
 
+        util_data = extract_utilization(out_file_str)
+        data.update(util_data)  # type: ignore
+
         instance_file_name = instance_match.split("/")[-1]
 
         instance_file_name = r"\_".join(instance_file_name.split("_")[:-1]).replace(
@@ -184,7 +210,6 @@ def main():
 
         if name_match == "CPSolver":
             return
-
 
         if name_match == "LBBDSolver":
             params = params_match["subsolver_cls"]
@@ -227,6 +252,17 @@ def main():
     all_inst_solv_par_rep = recursive_defaultdict_to_dict(all_inst_solv_par_rep)
 
     # Remove unwanted data
+    for value in remove_runs:
+        all_solv_par_inst_rep = remove_keys_with_name(all_solv_par_inst_rep, value)
+        all_inst_solv_par_rep = remove_keys_with_name(all_inst_solv_par_rep, value)
+
+    for value in remove_runs_contains:
+        all_solv_par_inst_rep = remove_keys_with_name(
+            all_solv_par_inst_rep, value, contains=True
+        )
+        all_inst_solv_par_rep = remove_keys_with_name(
+            all_inst_solv_par_rep, value, contains=True
+        )
 
     def check_if_solved(d):
         if isinstance(d, dict):
