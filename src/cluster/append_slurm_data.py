@@ -62,9 +62,7 @@ def process_output_files(output_folder):
                 print(f"Failed to retrieve stats for {file_name}.")
 
 
-output_folder = (
-    "/home/ir803925/Kobra/rehabiliation-admission-scheduling/output/rev_run_1"
-)
+output_folder = "/home/ir803925/Kobra/rehabiliation-admission-scheduling/output/study_3"
 if os.path.isdir(output_folder):
     process_output_files(output_folder)
 else:

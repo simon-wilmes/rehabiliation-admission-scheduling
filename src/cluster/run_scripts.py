@@ -91,8 +91,9 @@ print(f"Currently there are {current_jobs} jobs running or waiting for execution
 
 hashes_already_run = set()
 for output_file in all_files_output:
-    hash = output_file.name.split("_")[2]
-    hashes_already_run.add(hash)
+    if output_file.name.endswith(".out"):
+        hash = output_file.name.split("_")[2]
+        hashes_already_run.add(hash)
 
 hashes_currently_running = set()
 for line in squeue_output:
@@ -167,16 +168,16 @@ for solver_combi, params_combi, instance_file in product(
             )
 
 print("")
-print(f"For {found_existing} combinations, there already exists output.")
-for name in enumerate(exists_name):
-    print(name[0], name[1])
+
 
 print(f"Need to run {len(to_run_combis)} combinations.")
 print(f"Using {core_hours_required:.1f} core hours.")
 if len(sys.argv) < 2 or sys.argv[1] != "-y":
     input("Press Enter to continue...")
     pass
-
+print(f"For {found_existing} combinations, there already exists output.")
+for name in enumerate(exists_name):
+    print(name[0], name[1])
 to_run_scripts = []
 # 5. Create the slurm scripts
 for combi in to_run_combis:
