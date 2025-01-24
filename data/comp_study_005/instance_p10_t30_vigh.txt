@@ -1,0 +1,125 @@
+[INSTANCE]
+num_beds: 10
+workday_start: 8 # uhr
+workday_end: 16 # uhr
+day_start:0
+# rolling_windows_days is a list of days at which to start a rolling window check
+
+conflict_groups: []
+# conflict groups is a list of sets where each set represents a single conflict group
+horizon_length: 7
+
+even_scheduling_upper: 1.1
+even_scheduling_width: 5
+
+time_slot_length: Duration(hours=0, minutes=30)
+
+
+daily_scheduling_upper: 1.3
+daily_scheduling_lower: 0.8
+
+[DATA: RESOURCE_GROUPS]: rgid, name
+# "rgid" is of type int (must be unique)
+# "name" is of type str
+0; therapists
+1; physiotherapists
+2; psychotherapists
+3; massage_therapist
+4; lifeguards
+5; rooms
+6; sport_room
+7; swimming_pool
+8; rooms_with_beamer
+9; arts_crafts_materials
+10; fitness_machines
+11; hydrotherapy_bath
+
+[DATA: RESOURCES]: rid, rgid, name, unavailable_time_slots
+# "rid" is of type int (must be unique)
+# "rgid" is of type int: refers to the rgid of a resource_group
+# "name" is of type str
+# "unavailable_time_slots" is of type: list[tuple[DayHour, DayHour, int | None]]
+# where the syntax is the first entry says the start date, 
+# the second entry is the end date of the unavailability 
+# and the last entry is the interval of days of repetition, none if only once
+
+#staff:
+
+0; [0];  therapist0; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=14), DayHour(day=1, hour=14, minutes=30), 1), (DayHour(day=1, hour=9), DayHour(day=1, hour=9, minutes=15), 2), (DayHour(day=0, hour=16), DayHour(day=0, hour=17), 2)] 
+1; [0,1];  therapist2; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=16), DayHour(day=1, hour=16, minutes=30), 1), (DayHour(day=1, hour=9, minutes=30), DayHour(day=1, hour=10, minutes=15), 2), (DayHour(day=0, hour=14), DayHour(day=0, hour=15), 2)] 
+2; [0,1,3];  therapist3; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1), (DayHour(day=1, hour=14, minutes= 0), DayHour(day=1, hour=14, minutes=30), 1),(DayHour(day=1, hour= 9, minutes= 0), DayHour(day=1, hour= 9, minutes=15), 2),(DayHour(day=1, hour=16, minutes= 0), DayHour(day=1, hour=16, minutes=30), 1)]
+3; [0,2];  therapist4; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=16, minutes= 0), DayHour(day=1, hour=16, minutes=30), 1), (DayHour(day=1, hour= 9, minutes=30), DayHour(day=1, hour=10, minutes=15), 1),(DayHour(day=0, hour=14, minutes=30), DayHour(day=0, hour=15, minutes= 0), 2)]
+4; [0,4]; therapist6; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=11, minutes= 0), DayHour(day=1, hour=11, minutes=30), 1),(DayHour(day=0, hour=16, minutes= 0), DayHour(day=0, hour=17, minutes= 0), 2),(DayHour(day=0, hour= 8, minutes=45), DayHour(day=0, hour=10, minutes=30), 1)]
+
+#rooms:
+5; [5];  room0; []
+6; [5];  room1; []
+7; [5,8];  room2; []
+8; [6]; sport_room; []
+9; [7]; swimming_pool; []
+
+#materials:
+10; [9];  pottery_equipment; []
+11; [10];  fitness_machine0; []
+12; [11];  hydrotherapy_bath; []
+
+
+[DATA: TREATMENTS]: tid, min_participants, max_participants, name, duration, resources
+# "tid" is of type int (must be unique)
+# "num_participants" is of type int
+# "name" is of type str
+# "duration" is of type Duration
+# "resources" is of type dict[RGID, tuple[number_of_resources, requires_loyalty]]
+
+0; 1; 5; ergotherapy_a; Duration(hours=0, minutes=45); {0:1,5:1}
+1; 1; 8; ergotherapy_b; Duration(hours=0, minutes=60); {0:1,5:1,9:1}
+2; 3; 10; ergotherapy_c; Duration(hours=0, minutes=30); {0:1,5:1}
+3; 1; 10; physiotherapy_a; Duration(hours=0, minutes=45); {1:1,5:1}
+4; 1; 1; physiotherapy_b; Duration(hours=0, minutes=15); {1:1,5:1}
+5; 1; 1; physiotherapy_c; Duration(hours=0, minutes=45); {1:1,6:1}
+6; 1; 1; physiotherapy_d; Duration(hours=0, minutes=45); {1:1,6:1}
+7; 3; 10; watergymnastics; Duration(hours=1, minutes=15); {4:1,7:1}
+8; 1; 1; hydrotherapy; Duration(hours=0, minutes=30); {0:1,11:1}
+9; 2; 10; nordic_walking; Duration(hours=1, minutes=15); {0:1}
+10; 1; 1; fitness_training; Duration(hours=0, minutes=45); {1:1,10:1}
+11; 1; 5; yoga; Duration(hours=0, minutes=45); {0:1,6:1}
+12; 1; 1; psychotherapy_single; Duration(hours=0, minutes=45); {2:1,5:1}
+13; 3; 6; psychotherapy_group_a; Duration(hours=1, minutes=00); {2:1,5:1}
+14; 3; 6; psychotherapy_group_b; Duration(hours=1, minutes=00); {2:1,5:1}
+15; 3; 6; psychotherapy_group_c; Duration(hours=1, minutes=00); {2:1,5:1}
+16; 3; 6; psychotherapy_group_d; Duration(hours=1, minutes=00); {2:1,5:1}
+17; 3; 10; smoking_cessation; Duration(hours=0, minutes=30); {0:1,8:1}
+18; 3; 10; nutritional_advice; Duration(hours=0, minutes=45); {0:1,8:1}
+19; 3; 5; cardiological_health_seminar; Duration(hours=0, minutes=45); {0:1,8:1}
+20; 1; 1; general_psychological_support; Duration(hours=0, minutes=45); {2:1,5:1}
+21; 1; 1; massage; Duration(hours=0, minutes=30); {3:1,5:1}
+
+
+
+[DATA: PATIENTS]: pid, name, treatments, length_of_stay, earliest_admission_date, admitted_before_date, already_admitted_date, already_scheduled_treatments
+
+# "pid" is of type int (must be unique)
+# "name" is of type string (patient's name)
+# "treatments" is a dictionary where keys are treatment IDs (int) and values are number of treatments required
+# "length_of_stay" is of type int (total length of stay in days)
+# "earliest_admission_date" is of type DayHour (earliest possible admission date)
+# "admitted_before_date" is of type DayHour (latest possible admission date)
+# "already_admitted" is of type bool and is true if the patient has been admitted in the past and therefore should be admitted in the model on the first day
+# "already_resource_loyal" is a dictionary where the keys are (tuples) of treatment TID and RGID and values is a the list of RID that are loyal, this means that the list must have length of required resources of RGID for treatment TID
+# "already_scheduled_treatments" is a list of tuples where each tuple contains a treatment ID (int) and the number of times it was already scheduled in the past
+
+# Cardiological patients:
+0; patient0_c; {0: 24, 1: 12, 3: 36, 7: 12, 8: 9, 9: 9, 11: 12, 17: 12, 18: 15, 19: 15, 20: 9, 21: 12}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+1; patient1_c; {0: 21, 1: 18, 3: 30, 7: 15, 8: 6, 9: 6, 11: 18, 18: 15, 19: 15, 20: 12, 21: 9}; 18; DayHour(day=3, hour=0, minutes=0); DayHour(day=6, hour=0, minutes=0); False; []
+
+# Orthopedic patients:
+2; patient0_o; {0: 12, 1: 9, 4: 9, 5: 30, 6: 30, 7: 12, 8: 6, 9: 9, 10: 12, 11: 6, 17: 12, 18: 9, 20: 6, 21: 12}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+3; patient1_o; {0: 15, 1: 6, 5: 36, 6: 33, 8: 9, 10: 18, 11: 12, 17: 12, 18: 9, 20: 6, 21: 12}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+4; patient2_o; {0: 6, 1: 18, 4: 9, 5: 33, 6: 24, 9: 12, 10: 18, 11: 12, 18: 9, 20: 15, 21: 12}; 18; DayHour(day=4, hour=0, minutes=0); DayHour(day=5, hour=0, minutes=0); False; []
+5; patient3_o; {1: 9, 4: 12, 5: 30, 6: 27, 7: 9, 8: 6, 9: 12, 11: 9, 18: 9, 20: 18, 21: 15}; 18; DayHour(day=1, hour=0, minutes=0); DayHour(day=2, hour=0, minutes=0); False; []
+6; patient4_o; {0: 12, 1: 12, 4: 9, 5: 36, 6: 30, 7: 15, 8: 12, 9: 12, 10: 24, 18: 9, 20: 3, 21: 9}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+
+# Psychosomatic patients:
+7; patient0_p; {1: 18, 2: 18, 7: 9, 9: 12, 10: 9, 11: 12, 12: 24, 13: 15, 17: 12, 18: 9, 21: 12}; 18; DayHour(day=2, hour=0, minutes=0); DayHour(day=4, hour=0, minutes=0); False; []
+8; patient1_p; {1: 15, 2: 18, 7: 12, 9: 6, 10: 15, 11: 15, 12: 24, 13: 15, 21: 18}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+9; patient2_p; {1: 21, 2: 21, 7: 9, 9: 9, 11: 18, 12: 27, 13: 15, 18: 9, 21: 9}; 18; DayHour(day=4, hour=0, minutes=0); DayHour(day=6, hour=0, minutes=0); False; []

@@ -1,0 +1,184 @@
+[INSTANCE]
+num_beds: 50
+workday_start: 8 # uhr
+workday_end: 16 # uhr
+day_start:0
+# rolling_windows_days is a list of days at which to start a rolling window check
+
+conflict_groups: []
+# conflict groups is a list of sets where each set represents a single conflict group
+horizon_length: 7
+
+even_scheduling_upper: 1.1
+even_scheduling_width: 5
+
+time_slot_length: Duration(hours=0, minutes=5)
+
+
+daily_scheduling_upper: 1.3
+daily_scheduling_lower: 0.8
+
+[DATA: RESOURCE_GROUPS]: rgid, name
+# "rgid" is of type int (must be unique)
+# "name" is of type str
+0; therapists
+1; physiotherapists
+2; psychotherapists
+3; massage_therapist
+4; lifeguards
+5; rooms
+6; sport_room
+7; swimming_pool
+8; rooms_with_beamer
+9; arts_crafts_materials
+10; fitness_machines
+11; hydrotherapy_bath
+
+[DATA: RESOURCES]: rid, rgid, name, unavailable_time_slots
+# "rid" is of type int (must be unique)
+# "rgid" is of type int: refers to the rgid of a resource_group
+# "name" is of type str
+# "unavailable_time_slots" is of type: list[tuple[DayHour, DayHour, int | None]]
+# where the syntax is the first entry says the start date, 
+# the second entry is the end date of the unavailability 
+# and the last entry is the interval of days of repetition, none if only once
+
+#staff:
+0; [0];  therapist0; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=14), DayHour(day=1, hour=14, minutes=30), 1), (DayHour(day=1, hour=9), DayHour(day=1, hour=9, minutes=15), 2), (DayHour(day=0, hour=16), DayHour(day=0, hour=17), 2)] 
+1; [0];  therapist1; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=14), DayHour(day=1, hour=14, minutes=30), 1), (DayHour(day=1, hour=9), DayHour(day=1, hour=9, minutes=15), 2), (DayHour(day=0, hour=16), DayHour(day=0, hour=17), 2)] 
+2; [0,1];  therapist2; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=16), DayHour(day=1, hour=16, minutes=30), 1), (DayHour(day=1, hour=9, minutes=30), DayHour(day=1, hour=10, minutes=15), 2), (DayHour(day=0, hour=14), DayHour(day=0, hour=15), 2)] 
+3; [0,1];  therapist3; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=16), DayHour(day=1, hour=16, minutes=30), 1), (DayHour(day=1, hour=9, minutes=30), DayHour(day=1, hour=10, minutes=15), 2), (DayHour(day=0, hour=14), DayHour(day=0, hour=15), 2)] 
+4; [0,1];  therapist4; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=16), DayHour(day=1, hour=16, minutes=30), 1), (DayHour(day=1, hour=9, minutes=30), DayHour(day=1, hour=10, minutes=15), 2), (DayHour(day=0, hour=14), DayHour(day=0, hour=15), 2)] 
+5; [0,1,3];  therapist5; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1), (DayHour(day=1, hour=14, minutes= 0), DayHour(day=1, hour=14, minutes=30), 1),(DayHour(day=1, hour= 9, minutes= 0), DayHour(day=1, hour= 9, minutes=15), 2),(DayHour(day=1, hour=16, minutes= 0), DayHour(day=1, hour=16, minutes=30), 1)]
+6; [0,1,3];  therapist6; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1), (DayHour(day=1, hour=14, minutes= 0), DayHour(day=1, hour=14, minutes=30), 1),(DayHour(day=1, hour= 9, minutes= 0), DayHour(day=1, hour= 9, minutes=15), 2),(DayHour(day=1, hour=16, minutes= 0), DayHour(day=1, hour=16, minutes=30), 1)]
+7; [0,2];  therapist7; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=16, minutes= 0), DayHour(day=1, hour=16, minutes=30), 1), (DayHour(day=1, hour= 9, minutes=30), DayHour(day=1, hour=10, minutes=15), 1),(DayHour(day=0, hour=14, minutes=30), DayHour(day=0, hour=15, minutes= 0), 2)]
+8; [0,2];  therapist8; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=16, minutes= 0), DayHour(day=1, hour=16, minutes=30), 1), (DayHour(day=1, hour= 9, minutes=30), DayHour(day=1, hour=10, minutes=15), 1),(DayHour(day=0, hour=14, minutes=30), DayHour(day=0, hour=15, minutes= 0), 2)]
+9; [0,2];  therapist9; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=16, minutes= 0), DayHour(day=1, hour=16, minutes=30), 1), (DayHour(day=1, hour= 9, minutes=30), DayHour(day=1, hour=10, minutes=15), 1),(DayHour(day=0, hour=14, minutes=30), DayHour(day=0, hour=15, minutes= 0), 2)]
+10; [0,2];  therapist10; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=16, minutes= 0), DayHour(day=1, hour=16, minutes=30), 1), (DayHour(day=1, hour= 9, minutes=30), DayHour(day=1, hour=10, minutes=15), 1),(DayHour(day=0, hour=14, minutes=30), DayHour(day=0, hour=15, minutes= 0), 2)]
+11; [0,4]; therapist11; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=11, minutes= 0), DayHour(day=1, hour=11, minutes=30), 1),(DayHour(day=0, hour=16, minutes= 0), DayHour(day=0, hour=17, minutes= 0), 2),(DayHour(day=0, hour= 8, minutes=45), DayHour(day=0, hour=10, minutes=30), 1)]
+12; [0,4]; therapist12; [(DayHour(day=0, hour=12), DayHour(day=0, hour=13), 1),(DayHour(day=1, hour=11, minutes= 0), DayHour(day=1, hour=11, minutes=30), 1),(DayHour(day=0, hour=16, minutes= 0), DayHour(day=0, hour=17, minutes= 0), 2),(DayHour(day=0, hour= 8, minutes=45), DayHour(day=0, hour=10, minutes=30), 1)]
+
+
+#rooms:
+13; [5];  room0; []
+14; [5];  room1; []
+15; [5];  room2; []
+16; [5];  room3; []
+17; [5];  room4; []
+18; [5,8];  room3; []
+19; [5,8];  room3; []
+20; [6]; sport_room0; []
+21; [6]; sport_room1; []
+22; [6]; sport_room1; []
+23; [7]; swimming_pool; []
+
+#materials:
+24; [9];  pottery_equipment; []
+25; [9];  canvases; []
+26; [10];  fitness_machine0; []
+27; [10];  fitness_machine1; []
+28; [11];  hydrotherapy_bath0; []
+29; [11];  hydrotherapy_bath1; []
+
+
+
+[DATA: TREATMENTS]: tid, min_participants, max_participants, name, duration, resources
+# "tid" is of type int (must be unique)
+# "num_participants" is of type int
+# "name" is of type str
+# "duration" is of type Duration
+# "resources" is of type dict[RGID, tuple[number_of_resources, requires_loyalty]]
+
+0; 1; 5; ergotherapy_a; Duration(hours=0, minutes=45); {0:1,5:1}
+1; 1; 8; ergotherapy_b; Duration(hours=0, minutes=60); {0:1,5:1,9:1}
+2; 3; 10; ergotherapy_c; Duration(hours=0, minutes=30); {0:1,5:1}
+3; 1; 10; physiotherapy_a; Duration(hours=0, minutes=45); {1:1,5:1}
+4; 1; 1; physiotherapy_b; Duration(hours=0, minutes=15); {1:1,5:1}
+5; 1; 1; physiotherapy_c; Duration(hours=0, minutes=45); {1:1,6:1}
+6; 1; 1; physiotherapy_d; Duration(hours=0, minutes=45); {1:1,6:1}
+7; 3; 10; watergymnastics; Duration(hours=1, minutes=15); {4:1,7:1}
+8; 1; 1; hydrotherapy; Duration(hours=0, minutes=30); {0:1,11:1}
+9; 2; 10; nordic_walking; Duration(hours=1, minutes=15); {0:1}
+10; 1; 1; fitness_training; Duration(hours=0, minutes=45); {1:1,10:1}
+11; 1; 5; yoga; Duration(hours=0, minutes=45); {0:1,6:1}
+12; 1; 1; psychotherapy_single; Duration(hours=0, minutes=45); {2:1,5:1}
+13; 3; 6; psychotherapy_group_a; Duration(hours=1, minutes=00); {2:1,5:1}
+14; 3; 6; psychotherapy_group_b; Duration(hours=1, minutes=00); {2:1,5:1}
+15; 3; 6; psychotherapy_group_c; Duration(hours=1, minutes=00); {2:1,5:1}
+16; 3; 6; psychotherapy_group_d; Duration(hours=1, minutes=00); {2:1,5:1}
+17; 3; 10; smoking_cessation; Duration(hours=0, minutes=30); {0:1,8:1}
+18; 3; 10; nutritional_advice; Duration(hours=0, minutes=45); {0:1,8:1}
+19; 3; 5; cardiological_health_seminar; Duration(hours=0, minutes=45); {0:1,8:1}
+20; 1; 1; general_psychological_support; Duration(hours=0, minutes=45); {2:1,5:1}
+21; 1; 1; massage; Duration(hours=0, minutes=30); {3:1,5:1}
+
+
+
+[DATA: PATIENTS]: pid, name, treatments, length_of_stay, earliest_admission_date, admitted_before_date, already_admitted_date, already_scheduled_treatments
+
+# "pid" is of type int (must be unique)
+# "name" is of type string (patient's name)
+# "treatments" is a dictionary where keys are treatment IDs (int) and values are number of treatments required
+# "length_of_stay" is of type int (total length of stay in days)
+# "earliest_admission_date" is of type DayHour (earliest possible admission date)
+# "admitted_before_date" is of type DayHour (latest possible admission date)
+# "already_admitted" is of type bool and is true if the patient has been admitted in the past and therefore should be admitted in the model on the first day
+# "already_resource_loyal" is a dictionary where the keys are (tuples) of treatment TID and RGID and values is a the list of RID that are loyal, this means that the list must have length of required resources of RGID for treatment TID
+# "already_scheduled_treatments" is a list of tuples where each tuple contains a treatment ID (int) and the number of times it was already scheduled in the past
+
+# Cardiological patients:
+0; patient0_c; {0:8, 1:4, 3:12, 7:4, 8:3, 9:3, 11:4, 17:4, 18:5, 19:5, 20:3, 21:4}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+1; patient1_c; {0:7, 1:6, 3:10, 7:5, 8:2, 9:2, 11:6, 18:5, 19:5, 20:4, 21:3}; 18; DayHour(day=3, hour=0, minutes=0); DayHour(day=6, hour=0, minutes=0); False; []
+2; patient2_c; {0:9, 1:5, 3:12, 7:6, 8:2, 11:2, 18:5, 19:5, 20:4, 21:4}; 18; DayHour(day=2, hour=0, minutes=0); DayHour(day=3, hour=0, minutes=0); False; []
+3; patient3_c; {0:9, 1:5, 3:12, 7:5, 8:3, 9:4, 11:4, 17:4, 18:5, 19:5, 20:3, 21:4}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+4; patient4_c; {0:7, 1:3, 3:10, 7:6, 8:4, 9:3, 18:5, 19:5, 20:4, 21:4}; 18; DayHour(day=2, hour=0, minutes=0); DayHour(day=4, hour=0, minutes=0); False; []
+5; patient5_c; {0:8, 1:6, 3:13, 7:4, 8:3, 9:3, 11:4, 18:5, 19:5, 20:5, 21:3}; 18; DayHour(day=4, hour=0, minutes=0); DayHour(day=5, hour=0, minutes=0); False; []
+6; patient6_c; {0:7, 1:3, 3:10, 7:6, 8:4, 9:3, 18:5, 19:5, 20:4, 21:4}; 18; DayHour(day=2, hour=0, minutes=0); DayHour(day=4, hour=0, minutes=0); False; []
+7; patient7_c; {0:8, 1:4, 3:12, 7:4, 8:3, 9:3, 11:4, 17:4, 18:5, 19:5, 20:3, 21:4}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+8; patient8_c; {0:9, 1:5, 3:12, 7:5, 8:3, 9:4, 11:4, 17:4, 18:5, 19:5, 20:3, 21:4}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+9; patient9_c; {0:7, 1:6, 3:10, 7:5, 8:2, 9:2, 11:6, 18:5, 19:5, 20:4, 21:3}; 18; DayHour(day=3, hour=0, minutes=0); DayHour(day=6, hour=0, minutes=0); False; []
+
+# Orthopedic patients:
+10; patient0_o; {0:4, 1:3, 4:3, 5:10, 6:10, 7:4, 8:2, 9:3, 10:4, 11:2, 17:4, 18:3, 20:2, 21:4}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+11; patient1_o; {0:5, 1:2, 5:12, 6:11, 8:3, 10:6, 11:4, 17:4, 18:3, 20:2, 21:4}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+12; patient2_o; {0:2, 1:6, 4:3, 5:11, 6:8, 9:4, 10:6, 11:4, 18:3, 20:5, 21:4}; 18; DayHour(day=1, hour=0, minutes=0); DayHour(day=2, hour=0, minutes=0); False; []
+13; patient3_o; {1:3, 4:4, 5:10, 6:9, 7:3, 8:2, 9:4, 11:3, 18:3, 20:6, 21:5}; 18; DayHour(day=1, hour=0, minutes=0); DayHour(day=3, hour=0, minutes=0); False; []
+14; patient4_o; {0:4, 1:4, 4:3, 5:12, 6:10, 7:5, 8:4, 9:4, 10:8, 18:3, 20:1, 21:3}; 18; DayHour(day=2, hour=0, minutes=0); DayHour(day=4, hour=0, minutes=0); False; []
+15; patient5_o; {0:5, 1:6, 4:4, 5:10, 6:9, 7:5, 8:2, 9:4, 10:5, 11:4, 17:4, 18:3, 20:2, 21:4}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+16; patient6_o; {0:4, 1:3, 4:3, 5:12, 6:10, 7:4, 8:3, 9:4, 10:6, 11:2, 18:3, 20:2, 21:4}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=2, hour=0, minutes=0); False; []
+17; patient7_o; {0:3, 1:4, 4:3, 5:11, 6:10, 7:3, 8:2, 9:3, 10:5, 11:3, 18:3, 20:5, 21:5}; 18; DayHour(day=1, hour=0, minutes=0); DayHour(day=3, hour=0, minutes=0); False; []
+18; patient8_o; {0:3, 1:2, 4:5, 5:12, 6:10, 8:2, 9:3, 10:4, 11:2, 18:3, 20:3, 21:4}; 18; DayHour(day=4, hour=0, minutes=0); DayHour(day=7, hour=0, minutes=0); False; []
+19; patient9_o; {0:4, 1:3, 4:3, 5:10, 6:12, 7:4, 8:3, 9:2, 10:3, 11:4, 18:3, 20:4, 21:3}; 18; DayHour(day=5, hour=0, minutes=0); DayHour(day=6, hour=0, minutes=0); False; []
+20; patient10_o; {0:2, 1:6, 4:3, 5:11, 6:8, 9:4, 10:6, 11:4, 18:3, 20:5, 21:4}; 18; DayHour(day=4, hour=0, minutes=0); DayHour(day=5, hour=0, minutes=0); False; []
+21; patient11_o; {1:3, 4:4, 5:10, 6:9, 7:3, 8:2, 9:4, 11:3, 18:3, 20:6, 21:5}; 18; DayHour(day=2, hour=0, minutes=0); DayHour(day=3, hour=0, minutes=0); False; []
+22; patient12_o; {0:4, 1:4, 4:3, 5:12, 6:10, 7:5, 8:4, 9:4, 10:8, 18:3, 20:1, 21:3}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+23; patient13_o; {0:5, 1:6, 4:4, 5:10, 6:9, 7:5, 8:2, 9:4, 10:5, 11:4, 17:4, 18:3, 20:2, 21:4}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+24; patient14_o; {0:4, 1:3, 4:3, 5:12, 6:10, 7:4, 8:3, 9:4, 10:6, 11:2, 18:3, 20:2, 21:4}; 18; DayHour(day=2, hour=0, minutes=0); DayHour(day=3, hour=0, minutes=0); False; []
+25; patient15_o; {0:4, 1:3, 4:3, 5:10, 6:12, 7:4, 8:3, 9:2, 10:3, 11:4, 18:3, 20:4, 21:3}; 18; DayHour(day=1, hour=0, minutes=0); DayHour(day=2, hour=0, minutes=0); False; []
+26; patient16_o; {0:2, 1:6, 4:3, 5:11, 6:8, 9:4, 10:6, 11:4, 18:3, 20:5, 21:4}; 18; DayHour(day=3, hour=0, minutes=0); DayHour(day=4, hour=0, minutes=0); False; []
+27; patient17_o; {1:3, 4:4, 5:10, 6:9, 7:3, 8:2, 9:4, 11:3, 18:3, 20:6, 21:5}; 18; DayHour(day=1, hour=0, minutes=0); DayHour(day=3, hour=0, minutes=0); False; []
+28; patient18_o; {0:4, 1:3, 4:3, 5:10, 6:10, 7:4, 8:2, 9:3, 10:4, 11:2, 17:4, 18:3, 20:2, 21:4}; 18; DayHour(day=4, hour=0, minutes=0); DayHour(day=6, hour=0, minutes=0); False; []
+29; patient19_o; {0:5, 1:2, 5:12, 6:11, 8:3, 10:6, 11:4, 17:4, 18:3, 20:2, 21:4}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+30; patient20_o; {0:4, 1:3, 4:3, 5:12, 6:10, 7:4, 8:3, 9:4, 10:6, 11:2, 18:3, 20:2, 21:4}; 18; DayHour(day=2, hour=0, minutes=0); DayHour(day=3, hour=0, minutes=0); False; []
+31; patient21_o; {0:4, 1:3, 4:3, 5:10, 6:12, 7:4, 8:3, 9:2, 10:3, 11:4, 18:3, 20:4, 21:3}; 18; DayHour(day=1, hour=0, minutes=0); DayHour(day=2, hour=0, minutes=0); False; []
+32; patient22_o; {0:5, 1:6, 4:4, 5:10, 6:9, 7:5, 8:2, 9:4, 10:5, 11:4, 17:4, 18:3, 20:2, 21:4}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+33; patient23_o; {0:5, 1:2, 5:12, 6:11, 8:3, 10:6, 11:4, 17:4, 18:3, 20:2, 21:4}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+34; patient24_o; {0:2, 1:6, 4:3, 5:11, 6:8, 9:4, 10:6, 11:4, 18:3, 20:5, 21:4}; 18; DayHour(day=1, hour=0, minutes=0); DayHour(day=2, hour=0, minutes=0); False; []
+
+
+# Psychosomatic patients:
+35; patient0_p; {1:6, 2:6, 7:3, 9:4, 10:3, 11:4, 12:8, 13:5, 17:4, 18:3, 21:4}; 18; DayHour(day=2, hour=0, minutes=0); DayHour(day=4, hour=0, minutes=0); False; []
+36; patient1_p; {1:5, 2:6, 7:4, 9:2, 10:5, 11:5, 12:8, 13:5, 21:6}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+37; patient2_p; {1:7, 2:7, 7:3, 9:3, 11:6, 12:9, 13:5, 18:3, 21:3}; 18; DayHour(day=6, hour=0, minutes=0); DayHour(day=7, hour=0, minutes=0); False; []
+38; patient3_p; {1:5, 2:6, 7:4, 9:3, 10:4, 11:4, 12:8, 14:5, 18:3, 21:5}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+39; patient4_p; {1:7, 2:5, 7:5, 9:4, 10:3, 11:5, 12:9, 14:5, 18:4, 21:4}; 18; DayHour(day=3, hour=0, minutes=0); DayHour(day=5, hour=0, minutes=0); False; []
+40; patient5_p; {1:6, 2:6, 7:3, 9:4, 10:2, 11:3, 12:8, 14:5, 18:3, 21:6}; 18; DayHour(day=2, hour=0, minutes=0); DayHour(day=3, hour=0, minutes=0); False; []
+41; patient6_p; {1:5, 2:6, 7:4, 9:2, 10:5, 11:5, 12:8, 15:5, 21:6}; 18; DayHour(day=1, hour=0, minutes=0); DayHour(day=2, hour=0, minutes=0); False; []
+42; patient7_p; {1:7, 2:7, 7:3, 9:3, 11:6, 12:9, 15:5, 18:3, 21:3}; 18; DayHour(day=3, hour=0, minutes=0); DayHour(day=5, hour=0, minutes=0); False; []
+43; patient8_p; {1:5, 2:6, 7:4, 9:3, 10:4, 11:4, 12:8, 15:5, 18:3, 21:5}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=1, hour=0, minutes=0); False; []
+44; patient9_p; {1:7, 2:5, 7:5, 9:4, 10:3, 11:5, 12:9, 16:5, 18:4, 21:4}; 18; DayHour(day=3, hour=0, minutes=0); DayHour(day=5, hour=0, minutes=0); False; []
+45; patient10_p; {1:6, 2:6, 7:3, 9:4, 10:2, 11:3, 12:8, 16:5, 18:3, 21:6}; 18; DayHour(day=0, hour=0, minutes=0); DayHour(day=2, hour=0, minutes=0); False; []
+46; patient11_p; {1:6, 2:6, 7:3, 9:4, 10:3, 11:4, 12:8, 16:5, 17:4, 18:3, 21:4}; 18; DayHour(day=2, hour=0, minutes=0); DayHour(day=4, hour=0, minutes=0); False; []
+47; patient12_p; {1:7, 2:5, 7:5, 9:4, 10:3, 11:5, 12:9, 16:5, 18:4, 21:4}; 18; DayHour(day=3, hour=0, minutes=0); DayHour(day=5, hour=0, minutes=0); False; []
+48; patient13_p; {1:7, 2:7, 7:3, 9:3, 11:6, 12:9, 13:5, 18:3, 21:3}; 18; DayHour(day=6, hour=0, minutes=0); DayHour(day=7, hour=0, minutes=0); False; []
+49; patient14_p; {1:6, 2:6, 7:3, 9:4, 10:2, 11:3, 12:8, 14:5, 18:3, 21:6}; 18; DayHour(day=2, hour=0, minutes=0); DayHour(day=3, hour=0, minutes=0); False; []

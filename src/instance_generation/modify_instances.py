@@ -21,7 +21,7 @@ def replace_dict_fact(match, factor):
 
 
 input_dir = "data/comp_study_003"
-output_dir = "data/comp_study_004"
+output_dir = "data/comp_study_005"
 
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
@@ -35,7 +35,7 @@ for file in os.listdir(output_dir):
 pattern = re.compile(r"\{((?:\d+:\s*\d+,\s*)*\d+:\s*\d+)\}")
 
 
-def create_time_slot_copy(filename):
+def create_time_slot_copy(filename, data):
     for key, time_slot_length in {"t30": 30, "t05": 5}.items():
         modified_data = copy(data)
         mod_file_name = filename.replace("t15", key)
@@ -58,7 +58,7 @@ for filename in os.listdir(input_dir):
 
         # Copy original file to new directory
         shutil.copy(file_path, os.path.join(output_dir, filename))
-        create_time_slot_copy(filename)
+        create_time_slot_copy(filename, data)
 
         # Modify the number of treatments
         for key, factor in {"medium": 1.5, "high": 2.0, "vigh": 3.0}.items():
@@ -81,7 +81,7 @@ for filename in os.listdir(input_dir):
                 new_file.write(modified_data)
 
             if "p50" not in filename and "p60" not in filename:
-                create_time_slot_copy(mod_file_name)
+                create_time_slot_copy(mod_file_name, modified_data)
 
 
 # Count the number of .txt files in the output directory

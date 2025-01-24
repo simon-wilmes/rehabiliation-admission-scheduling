@@ -36,7 +36,7 @@ remove_runs_contains = {
 output_dir = (
     Path(os.path.abspath(os.path.dirname(__file__))).parent.parent
     / "output"
-    / "rev_run_4"
+    / "study_2"
 )
 
 
@@ -107,7 +107,7 @@ def main():
                 "min_util": min_util,
                 "max_util": max_util,
                 "median_util": median_util,
-                "util_per_res": util_per_res,
+                # "util_per_res": util_per_res,
             }
         return {}
 
@@ -201,12 +201,8 @@ def main():
 
         instance_file_name = instance_match.split("/")[-1]
 
-        instance_file_name = r"\_".join(instance_file_name.split("_")[:-1]).replace(
-            r"instance\_", r"inst\_"
-        )
         time_slot_length = int(instance_match.split("/")[-1].split("_")[2][1:])
-        for word in replace_words:
-            instance_file_name = instance_file_name.replace(word, replace_words[word])
+
 
         if name_match == "CPSolver":
             return
