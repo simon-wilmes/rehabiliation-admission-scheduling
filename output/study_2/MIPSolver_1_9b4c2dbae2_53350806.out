@@ -1,0 +1,545 @@
+0.JOB_NAME: MIPSolver_1_9b4c2dbae2
+1.SOLVER: MIPSolver
+2.PARAMS: {'use_lazy_constraints': True, 'substitute_x_pmdt': False}
+3.INSTANCE: /home/ir803925/Kobra/rehabiliation-admission-scheduling/data/comp_study_004/instance_p60_t15_vigh.txt
+4.REPETITION: 1
+5.CPU_CORES: 8
+Current directory: /home/ir803925/Kobra/rehabiliation-admission-scheduling
+[34m2025-01-24 00:40:01,834 - DEBUG - Solver: <class 'src.solvers.mip.MIPSolver'>[0m
+[34m2025-01-24 00:40:01,834 - DEBUG - Args: {'use_lazy_constraints': True, 'substitute_x_pmdt': False}[0m
+[34m2025-01-24 00:40:01,834 - DEBUG - File path /home/ir803925/Kobra/rehabiliation-admission-scheduling/data/comp_study_004/instance_p60_t15_vigh.txt[0m
+[34m2025-01-24 00:40:01,835 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-24 00:40:01,835 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-24 00:40:01,835 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-24 00:40:01,835 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-24 00:40:01,835 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-24 00:40:01,835 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-24 00:40:01,835 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-24 00:40:01,835 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-24 00:40:01,835 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-24 00:40:01,836 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-24 00:40:01,836 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-24 00:40:01,836 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-24 00:40:01,836 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-24 00:40:01,836 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-24 00:40:01,836 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-24 00:40:01,836 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-24 00:40:01,836 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-24 00:40:01,836 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-24 00:40:01,836 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-24 00:40:01,836 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-24 00:40:01,836 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-24 00:40:01,836 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-24 00:40:01,836 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-24 00:40:01,836 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,837 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,837 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,837 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,837 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,837 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,837 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,837 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,837 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,838 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,838 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,838 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,838 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,838 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,838 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,838 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,838 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,838 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,838 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,838 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,839 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,839 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,839 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,839 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,839 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,839 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,839 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,839 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,839 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,839 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,839 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,839 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,839 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,840 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-24 00:40:01,840 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,841 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,841 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,841 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,841 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,841 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,841 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,841 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,841 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,841 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,841 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,841 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,841 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,841 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,842 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,842 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,842 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,842 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,842 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,842 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,842 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,842 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-24 00:40:01,842 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,842 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,843 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,843 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,843 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,843 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,843 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,843 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,843 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,843 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,843 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,844 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,844 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,844 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,844 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,844 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,844 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,844 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,844 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,844 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,844 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,845 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,845 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,845 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,845 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,845 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,845 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,845 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,845 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,845 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,846 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,846 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,846 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,846 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,846 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,846 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,846 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,846 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,846 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,846 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,847 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,847 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,847 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,847 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,847 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,847 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,847 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,847 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,847 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,848 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,848 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,848 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,848 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,848 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,848 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,848 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,848 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,848 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,848 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,849 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-24 00:40:01,849 - DEBUG - Instance data:[0m
+[34m2025-01-24 00:40:01,849 - DEBUG - 0[0m
+[34m2025-01-24 00:40:01,850 - DEBUG - New Resource Group:frozenset({RG(therapists)})[0m
+[34m2025-01-24 00:40:02,030 - DEBUG - 1[0m
+[34m2025-01-24 00:40:02,030 - DEBUG - 2[0m
+[34m2025-01-24 00:40:02,030 - DEBUG - New Resource Group:frozenset({RG(physiotherapists)})[0m
+[34m2025-01-24 00:40:02,030 - DEBUG - New Resource Group:frozenset({RG(therapists), RG(physiotherapists)})[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - 3[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - 4[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - 5[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - New Resource Group:frozenset({RG(massage_therapist)})[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - New Resource Group:frozenset({RG(therapists), RG(massage_therapist)})[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - New Resource Group:frozenset({RG(physiotherapists), RG(massage_therapist)})[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - New Resource Group:frozenset({RG(therapists), RG(physiotherapists), RG(massage_therapist)})[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - 6[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - 7[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - 8[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - New Resource Group:frozenset({RG(psychotherapists)})[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - New Resource Group:frozenset({RG(therapists), RG(psychotherapists)})[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - 9[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - 10[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - 11[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - 12[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - 13[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - New Resource Group:frozenset({RG(lifeguards)})[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - New Resource Group:frozenset({RG(lifeguards), RG(therapists)})[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - 14[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - 15[0m
+[34m2025-01-24 00:40:02,031 - DEBUG - New Resource Group:frozenset({RG(rooms)})[0m
+[34m2025-01-24 00:40:02,060 - DEBUG - 16[0m
+[34m2025-01-24 00:40:02,060 - DEBUG - 17[0m
+[34m2025-01-24 00:40:02,060 - DEBUG - 18[0m
+[34m2025-01-24 00:40:02,060 - DEBUG - 19[0m
+[34m2025-01-24 00:40:02,060 - DEBUG - 20[0m
+[34m2025-01-24 00:40:02,060 - DEBUG - New Resource Group:frozenset({RG(rooms_with_beamer)})[0m
+[34m2025-01-24 00:40:02,060 - DEBUG - New Resource Group:frozenset({RG(rooms), RG(rooms_with_beamer)})[0m
+[34m2025-01-24 00:40:02,060 - DEBUG - 21[0m
+[34m2025-01-24 00:40:02,060 - DEBUG - 22[0m
+[34m2025-01-24 00:40:02,060 - DEBUG - New Resource Group:frozenset({RG(sport_room)})[0m
+[34m2025-01-24 00:40:02,077 - DEBUG - 23[0m
+[34m2025-01-24 00:40:02,077 - DEBUG - 24[0m
+[34m2025-01-24 00:40:02,077 - DEBUG - 25[0m
+[34m2025-01-24 00:40:02,077 - DEBUG - 26[0m
+[34m2025-01-24 00:40:02,077 - DEBUG - New Resource Group:frozenset({RG(swimming_pool)})[0m
+[34m2025-01-24 00:40:02,082 - DEBUG - 27[0m
+[34m2025-01-24 00:40:02,082 - DEBUG - New Resource Group:frozenset({RG(arts_crafts_materials)})[0m
+[34m2025-01-24 00:40:02,090 - DEBUG - 28[0m
+[34m2025-01-24 00:40:02,090 - DEBUG - 29[0m
+[34m2025-01-24 00:40:02,090 - DEBUG - New Resource Group:frozenset({RG(fitness_machines)})[0m
+[34m2025-01-24 00:40:02,103 - DEBUG - 30[0m
+[34m2025-01-24 00:40:02,103 - DEBUG - 31[0m
+[34m2025-01-24 00:40:02,103 - DEBUG - 32[0m
+[34m2025-01-24 00:40:02,103 - DEBUG - New Resource Group:frozenset({RG(hydrotherapy_bath)})[0m
+[34m2025-01-24 00:40:02,111 - DEBUG - 33[0m
+[34m2025-01-24 00:40:02,111 - DEBUG - Number of patients: 60[0m
+[34m2025-01-24 00:40:02,111 - DEBUG - Number of beds: 60[0m
+[34m2025-01-24 00:40:02,111 - DEBUG - Average number of treatments per patient: 164.3[0m
+[34m2025-01-24 00:40:02,111 - DEBUG - Average number of treatment per stayed day: 9.127777777777778[0m
+[34m2025-01-24 00:40:02,111 - DEBUG - Number of treatments: 9858[0m
+[34m2025-01-24 00:40:02,111 - DEBUG - Number of resources: 34[0m
+[34m2025-01-24 00:40:02,111 - DEBUG - Number of resource groups: 12[0m
+[34m2025-01-24 00:40:02,112 - DEBUG - Number of resource hours needed per all treatment by RG(therapists): 235.54999999999944[0m
+[34m2025-01-24 00:40:02,112 - DEBUG - Number of resource hours needed per all treatment by RG(rooms): 535.9083333333335[0m
+[34m2025-01-24 00:40:02,112 - DEBUG - Number of resource hours needed per all treatment by RG(arts_crafts_materials): 41.27083333333334[0m
+[34m2025-01-24 00:40:02,112 - DEBUG - Number of resource hours needed per all treatment by RG(physiotherapists): 748.1541666666666[0m
+[34m2025-01-24 00:40:02,112 - DEBUG - Number of resource hours needed per all treatment by RG(lifeguards): 31.208333333333332[0m
+[34m2025-01-24 00:40:02,112 - DEBUG - Number of resource hours needed per all treatment by RG(swimming_pool): 31.208333333333332[0m
+[34m2025-01-24 00:40:02,112 - DEBUG - Number of resource hours needed per all treatment by RG(hydrotherapy_bath): 58.33333333333333[0m
+[34m2025-01-24 00:40:02,112 - DEBUG - Number of resource hours needed per all treatment by RG(sport_room): 579.0749999999999[0m
+[34m2025-01-24 00:40:02,112 - DEBUG - Number of resource hours needed per all treatment by RG(rooms_with_beamer): 31.908333333333317[0m
+[34m2025-01-24 00:40:02,112 - DEBUG - Number of resource hours needed per all treatment by RG(psychotherapists): 273.0000000000001[0m
+[34m2025-01-24 00:40:02,112 - DEBUG - Number of resource hours needed per all treatment by RG(massage_therapist): 142.91666666666663[0m
+[34m2025-01-24 00:40:02,112 - DEBUG - Number of resource hours needed per all treatment by RG(fitness_machines): 167.125[0m
+[32m2025-01-24 00:40:02,112 - INFO - {'solver': 'MIPSolver', 'args': {'use_lazy_constraints': True, 'substitute_x_pmdt': False, 'log_to_console': True}}[0m
+[34m2025-01-24 00:40:02,112 - DEBUG - Setting options: MIPSolver[0m
+[34m2025-01-24 00:40:02,112 - DEBUG -  ---- use_lazy_constraints to True[0m
+[34m2025-01-24 00:40:02,112 - DEBUG -  ---- substitute_x_pmdt to False[0m
+[34m2025-01-24 00:40:02,112 - DEBUG -  ---- substitute_x_small to False (default)[0m
+[34m2025-01-24 00:40:02,112 - DEBUG - Setting options: Solver[0m
+[34m2025-01-24 00:40:02,112 - DEBUG -  ---- number_of_threads to 8 (default)[0m
+[34m2025-01-24 00:40:02,112 - DEBUG -  ---- treatment_value to 0 (default)[0m
+[34m2025-01-24 00:40:02,112 - DEBUG -  ---- delay_value to 1 (default)[0m
+[34m2025-01-24 00:40:02,112 - DEBUG -  ---- missing_treatment_value to 4 (default)[0m
+[34m2025-01-24 00:40:02,112 - DEBUG -  ---- log_to_console to True[0m
+[34m2025-01-24 00:40:02,112 - DEBUG -  ---- log_to_file to True (default)[0m
+[32m2025-01-24 00:40:02,174 - INFO - Create model: MIPSolver[0m
+Set parameter TSPort to value 50039
+Set parameter TokenServer to value "license.itc.rwth-aachen.de"
+Set parameter Threads to value 8
+Set parameter LazyConstraints to value 1
+[34m2025-01-24 00:40:13,370 - DEBUG - Variables created.[0m
+[34m2025-01-24 00:40:31,742 - DEBUG - Constraint (p1) created.[0m
+[34m2025-01-24 00:40:32,848 - DEBUG - Constraint (when_admitted) created.[0m
+[34m2025-01-24 00:40:33,673 - DEBUG - Constraint (p3) created.[0m
+[34m2025-01-24 00:40:33,673 - DEBUG - Constraint (p4) created.[0m
+[34m2025-01-24 00:40:33,674 - DEBUG - Constraint (p7) created.[0m
+[34m2025-01-24 00:40:34,146 - DEBUG - Constraint (r3) created.[0m
+[34m2025-01-24 00:40:37,417 - DEBUG - Constraint (r4) created.[0m
+[34m2025-01-24 00:40:42,640 - DEBUG - Constraint (a1) created.[0m
+[34m2025-01-24 00:40:42,854 - DEBUG - Constraint (a4) created.[0m
+[34m2025-01-24 00:40:42,907 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,908 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,909 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,910 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,911 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,911 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,912 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,913 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,914 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,915 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,916 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,917 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,918 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,919 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,920 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,921 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,922 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,923 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,925 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,926 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,927 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,928 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,928 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,928 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,929 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,931 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,932 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,933 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,934 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,935 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,936 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,937 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,938 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,939 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,940 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,942 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,943 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,944 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,945 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,945 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,947 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,948 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,949 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,950 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,951 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,951 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,953 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,953 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,954 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,955 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,956 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,957 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,957 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,959 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,960 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,960 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,960 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,961 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,962 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,963 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,964 - DEBUG - Constraint (a5) created.[0m
+[34m2025-01-24 00:40:42,964 - DEBUG - Constraint (already_admitted) created.[0m
+[32m2025-01-24 00:40:47,607 - INFO - Time to create model: 45.433[0m
+[32m2025-01-24 00:40:47,608 - INFO - Solving model: MIPSolver[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 8 threads
+
+Optimize a model with 2287296 rows, 1951045 columns and 10836471 nonzeros
+Model fingerprint: 0x3d7fc9d9
+Variable types: 2 continuous, 1951043 integer (1951043 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 4e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 4e+04]
+Presolve removed 1443643 rows and 864330 columns (presolve time = 5s) ...
+Presolve removed 1461588 rows and 867514 columns (presolve time = 10s) ...
+Presolve removed 1463940 rows and 866162 columns
+Presolve time: 13.82s
+Presolved: 823356 rows, 1084883 columns, 4495658 nonzeros
+Variable types: 0 continuous, 1084883 integer (1081766 binary)
+Root relaxation presolved: 823056 rows, 1085183 columns, 4424145 nonzeros
+
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Ordering time: 6.15s
+
+Barrier statistics:
+ Dense cols : 2
+ AA' NZ     : 9.211e+06
+ Factor NZ  : 7.397e+07 (roughly 1.1 GB of memory)
+ Factor Ops : 2.767e+10 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -9.12600406e+07 -4.00038708e+06  2.85e+06 1.08e+00  1.99e+03    31s
+   1  -8.17198632e+07 -4.03765825e+06  2.55e+06 5.06e+00  1.79e+03    32s
+   2  -6.64642236e+07 -4.06831802e+06  2.08e+06 5.27e+00  1.50e+03    32s
+   3  -5.62091496e+07 -4.14165576e+06  1.77e+06 4.23e+00  1.29e+03    33s
+   4  -4.71815519e+07 -4.30062317e+06  1.48e+06 3.16e+00  1.09e+03    34s
+   5  -2.62105707e+07 -4.35587421e+06  8.25e+05 3.11e+00  6.15e+02    35s
+   6  -1.72819204e+07 -4.83031197e+06  5.45e+05 8.65e-01  4.12e+02    36s
+   7  -2.11005161e+06 -4.87735177e+06  6.74e+04 5.00e-12  5.34e+01    37s
+   8  -1.17958066e+06 -4.30994468e+06  3.81e+04 1.41e-10  3.01e+01    37s
+   9  -8.67804450e+05 -4.25640605e+06  2.83e+04 1.31e-10  2.28e+01    38s
+  10  -5.91827161e+05 -3.70364345e+06  1.96e+04 1.17e-10  1.58e+01    39s
+  11  -4.31446547e+05 -3.36067685e+06  1.45e+04 1.01e-10  1.19e+01    39s
+  12  -3.30703150e+05 -3.08957948e+06  1.14e+04 7.69e-11  9.34e+00    40s
+  13  -2.28254101e+05 -2.61177218e+06  8.14e+03 4.81e-11  6.74e+00    40s
+  14  -1.78677834e+05 -2.25465308e+06  6.58e+03 3.57e-11  5.42e+00    41s
+  15  -1.21041307e+05 -1.88940249e+06  4.76e+03 2.65e-11  3.98e+00    42s
+  16  -8.03624587e+04 -1.65188859e+06  3.48e+03 2.23e-11  3.02e+00    43s
+  17  -5.90119556e+04 -1.36381379e+06  2.80e+03 1.70e-11  2.41e+00    44s
+  18  -3.77465535e+04 -1.15406161e+06  2.13e+03 1.36e-11  1.86e+00    45s
+  19  -1.88264186e+04 -8.26374481e+05  1.53e+03 8.75e-12  1.30e+00    46s
+  20  -7.21748557e+03 -8.13420532e+05  1.15e+03 8.58e-12  1.08e+00    46s
+  21   4.94098072e+03 -6.09800082e+05  7.64e+02 5.94e-12  7.41e-01    47s
+  22   1.52068215e+04 -4.38924702e+05  4.30e+02 3.99e-12  4.62e-01    48s
+  23   1.86440729e+04 -2.32142095e+05  3.18e+02 1.84e-12  2.78e-01    49s
+  24   2.47451865e+04 -1.43603603e+05  1.18e+02 1.07e-12  1.38e-01    50s
+  25   2.64467534e+04 -9.46092285e+04  5.78e+01 7.14e-13  8.52e-02    51s
+  26   2.71914133e+04 -4.38752953e+04  2.92e+01 3.81e-13  4.62e-02    51s
+  27   2.72867558e+04 -1.65404406e+04  2.19e+01 2.20e-13  2.83e-02    52s
+  28   2.73092938e+04 -2.86167330e+03  1.58e+01 1.44e-13  1.90e-02    52s
+  29   2.72425369e+04  5.17007790e+03  1.20e+01 1.01e-13  1.36e-02    53s
+  30   2.71765589e+04  1.32551875e+04  9.67e+00 6.01e-14  8.56e-03    54s
+  31   2.70536360e+04  1.75988657e+04  7.07e+00 3.88e-14  5.70e-03    54s
+  32   2.69607878e+04  2.04148846e+04  5.52e+00 2.56e-14  3.91e-03    55s
+  33   2.68543678e+04  2.30108691e+04  4.05e+00 1.38e-14  2.28e-03    56s
+  34   2.67385190e+04  2.38423145e+04  3.01e+00 1.00e-14  1.70e-03    57s
+  35   2.66552836e+04  2.45698537e+04  2.45e+00 7.11e-15  1.22e-03    58s
+  36   2.66009503e+04  2.50067249e+04  2.16e+00 7.11e-15  9.41e-04    59s
+  37   2.65337688e+04  2.52890735e+04  1.83e+00 1.07e-14  7.37e-04    60s
+  38   2.64559843e+04  2.55392586e+04  1.48e+00 9.69e-15  5.45e-04    61s
+  39   2.63921625e+04  2.56566484e+04  1.22e+00 5.33e-15  4.37e-04    62s
+  40   2.63205530e+04  2.57919395e+04  9.51e-01 6.69e-15  3.16e-04    62s
+  41   2.62782829e+04  2.58772806e+04  7.87e-01 1.24e-14  2.42e-04    63s
+  42   2.62252163e+04  2.59300314e+04  5.86e-01 5.33e-15  1.78e-04    64s
+  43   2.62028822e+04  2.59598864e+04  5.00e-01 1.07e-14  1.47e-04    65s
+  44   2.61849845e+04  2.59829749e+04  4.29e-01 5.33e-15  1.22e-04    66s
+  45   2.61637555e+04  2.60036451e+04  3.45e-01 3.55e-15  9.71e-05    67s
+  46   2.61605015e+04  2.60076125e+04  3.31e-01 9.21e-15  9.27e-05    67s
+  47   2.61573454e+04  2.60129407e+04  3.18e-01 8.88e-15  8.77e-05    68s
+  48   2.61522714e+04  2.60278625e+04  2.96e-01 9.77e-15  7.62e-05    69s
+  49   2.61300280e+04  2.60359974e+04  1.97e-01 1.24e-14  5.66e-05    70s
+  50   2.61188788e+04  2.60421415e+04  1.52e-01 1.51e-14  4.59e-05    71s
+  51   2.61144212e+04  2.60534920e+04  1.34e-01 3.02e-14  3.68e-05    71s
+  52   2.61114219e+04  2.60590750e+04  1.22e-01 4.00e-14  3.18e-05    72s
+  53   2.61090054e+04  2.60615278e+04  1.13e-01 4.44e-14  2.89e-05    73s
+  54   2.61080710e+04  2.60637105e+04  1.09e-01 4.53e-14  2.71e-05    74s
+  55   2.61009426e+04  2.60657647e+04  7.76e-02 5.24e-14  2.12e-05    75s
+  56   2.60988061e+04  2.60698994e+04  6.80e-02 6.22e-14  1.75e-05    76s
+  57   2.60971732e+04  2.60709281e+04  6.19e-02 6.31e-14  1.59e-05    77s
+  58   2.60935329e+04  2.60730926e+04  4.75e-02 6.04e-14  1.24e-05    77s
+  59   2.60907281e+04  2.60747841e+04  3.57e-02 6.04e-14  9.61e-06    78s
+  60   2.60897963e+04  2.60762304e+04  3.24e-02 5.95e-14  8.23e-06    79s
+  61   2.60881575e+04  2.60775487e+04  2.56e-02 4.71e-14  6.44e-06    80s
+  62   2.60870022e+04  2.60788008e+04  2.08e-02 3.20e-14  5.01e-06    81s
+  63   2.60855605e+04  2.60797352e+04  1.50e-02 3.64e-14  3.57e-06    82s
+  64   2.60853429e+04  2.60800560e+04  1.43e-02 2.40e-14  3.26e-06    83s
+  65   2.60843392e+04  2.60805557e+04  1.03e-02 2.04e-14  2.33e-06    84s
+  66   2.60837791e+04  2.60809333e+04  8.02e-03 1.69e-14  1.76e-06    85s
+  67   2.60827918e+04  2.60811517e+04  4.12e-03 2.93e-14  1.00e-06    85s
+  68   2.60826687e+04  2.60813320e+04  3.69e-03 2.31e-14  8.25e-07    86s
+  69   2.60823607e+04  2.60814405e+04  2.53e-03 2.31e-14  5.68e-07    87s
+  70   2.60821408e+04  2.60814952e+04  1.66e-03 1.51e-14  3.95e-07    88s
+  71   2.60820792e+04  2.60815686e+04  1.44e-03 2.31e-14  3.16e-07    89s
+  72   2.60819347e+04  2.60816040e+04  8.77e-04 1.78e-14  2.03e-07    90s
+  73   2.60818908e+04  2.60816239e+04  7.09e-04 1.42e-14  1.64e-07    90s
+  74   2.60818803e+04  2.60816385e+04  6.75e-04 2.66e-14  1.49e-07    91s
+  75   2.60818083e+04  2.60816581e+04  3.96e-04 6.48e-14  9.21e-08    92s
+  76   2.60817773e+04  2.60816735e+04  2.78e-04 8.49e-15  6.38e-08    93s
+  77   2.60817544e+04  2.60816803e+04  1.92e-04 9.69e-15  4.54e-08    94s
+  78   2.60817392e+04  2.60816927e+04  1.35e-04 7.11e-15  2.89e-08    95s
+  79   2.60817088e+04  2.60816955e+04  2.34e-05 7.11e-15  7.81e-09    96s
+  80   2.60817068e+04  2.60816966e+04  1.62e-05 1.42e-14  5.93e-09    96s
+  81   2.60817060e+04  2.60816985e+04  1.30e-05 1.42e-14  4.36e-09    97s
+  82   2.60817047e+04  2.60816987e+04  8.52e-06 1.42e-14  3.46e-09    97s
+  83   2.60817039e+04  2.60817009e+04  5.66e-06 1.78e-14  1.74e-09    98s
+  84   2.60817033e+04  2.60817021e+04  3.54e-06 9.77e-15  7.13e-10    99s
+  85   2.60817032e+04  2.60817021e+04  3.37e-06 8.88e-15  6.98e-10    99s
+  86   2.60817027e+04  2.60817022e+04  1.53e-06 1.42e-14  3.10e-10   100s
+  87   2.60817026e+04  2.60817022e+04  1.13e-06 1.42e-14  2.37e-10   101s
+  88   2.60817023e+04  2.60817022e+04  4.05e-07 1.33e-14  9.10e-11   102s
+  89   2.60817023e+04  2.60817022e+04  3.51e-07 1.42e-14  9.10e-11   103s
+  90   2.60817023e+04  2.60817022e+04  5.87e-07 6.89e-13  9.02e-11   103s
+  91   2.60817023e+04  2.60817022e+04  5.79e-07 6.76e-13  8.87e-11   104s
+
+Barrier solved model in 91 iterations and 104.13 seconds (126.36 work units)
+Optimal objective 2.60817023e+04
+
+
+Root crossover log...
+
+  353745 DPushes remaining with DInf 1.3357605e-03               105s
+   32988 DPushes remaining with DInf 0.0000000e+00               111s
+    5654 DPushes remaining with DInf 0.0000000e+00               115s
+       0 DPushes remaining with DInf 0.0000000e+00               117s
+
+  137024 PPushes remaining with PInf 1.4729525e+00               117s
+  100046 PPushes remaining with PInf 1.0260161e+00               123s
+   88634 PPushes remaining with PInf 1.0039114e+00               128s
+   80559 PPushes remaining with PInf 9.9034919e-01               132s
+   74992 PPushes remaining with PInf 9.8535379e-01               136s
+   67706 PPushes remaining with PInf 9.6864394e-01               141s
+   60609 PPushes remaining with PInf 1.0123503e+00               145s
+   11702 PPushes remaining with PInf 3.7878891e-01               150s
+    7899 PPushes remaining with PInf 1.2748803e-01               155s
+Warning: 1 variables dropped from basis
+
+Restart crossover...
+
+
+  323088 DPushes remaining with DInf 5.5552345e+00               158s
+   20949 DPushes remaining with DInf 1.8508242e+00               165s
+    6895 DPushes remaining with DInf 1.1970603e+00               167s
+      87 DPushes remaining with DInf 4.1217185e-01               170s
+
+  137260 PPushes remaining with PInf 4.7764179e-01               170s
+  102670 PPushes remaining with PInf 7.8021582e-02               178s
+   91314 PPushes remaining with PInf 6.8073294e-02               184s
+   83280 PPushes remaining with PInf 6.7874127e-02               190s
+   77489 PPushes remaining with PInf 6.7632660e-02               195s
+   73109 PPushes remaining with PInf 6.7376647e-02               198s
+   69902 PPushes remaining with PInf 6.4198823e-02               201s
+   64745 PPushes remaining with PInf 6.2601806e-02               206s
+   60152 PPushes remaining with PInf 6.0144308e-02               210s
+   22544 PPushes remaining with PInf 5.0334856e-02               215s
+   11123 PPushes remaining with PInf 2.7844233e-02               220s
+    7814 PPushes remaining with PInf 2.0459864e-02               225s
+Warning: 2 variables dropped from basis
+    5413 PPushes remaining with PInf 1.5155521e-02               230s
+    3160 PPushes remaining with PInf 1.1098374e-02               235s
+     982 PPushes remaining with PInf 5.8947065e-03               242s
+     222 PPushes remaining with PInf 0.0000000e+00               245s
+       0 PPushes remaining with PInf 0.0000000e+00               246s
+
+  Push phase complete: Pinf 0.0000000e+00, Dinf 3.2501787e+02    246s
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+  272609    2.6081702e+04   0.000000e+00   3.250179e+02    247s
+  272927    2.6081702e+04   0.000000e+00   2.678565e-02    251s
+  273112    2.6081702e+04   0.000000e+00   0.000000e+00    255s
+Waiting for other threads to finish...         319s
+Waiting for other threads to finish...         382s
+Waiting for other threads to finish...         446s
+Concurrent spin time: 212.60s (can be avoided by choosing Method=3)
+
+Solved with barrier
+  273112    2.6081702e+04   0.000000e+00   0.000000e+00    468s
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root crossover log...
+
+  778955 variables added to crossover basis                      470s
+
+   43790 DPushes remaining with DInf 0.0000000e+00               474s
+    4645 DPushes remaining with DInf 0.0000000e+00               480s
+    1370 DPushes remaining with DInf 3.9446618e-05               481s
+       0 DPushes remaining with DInf 0.0000000e+00               485s
+
+   43173 PPushes remaining with PInf 0.0000000e+00               485s
+   24920 PPushes remaining with PInf 0.0000000e+00               499s
+   18332 PPushes remaining with PInf 0.0000000e+00               506s
+   14570 PPushes remaining with PInf 0.0000000e+00               511s
+   11476 PPushes remaining with PInf 0.0000000e+00               516s
+    6733 PPushes remaining with PInf 0.0000000e+00               520s
+    3435 PPushes remaining with PInf 0.0000000e+00               525s
+    1101 PPushes remaining with PInf 0.0000000e+00               530s
+       0 PPushes remaining with PInf 0.0000000e+00               535s
+
+  Push phase complete: Pinf 0.0000000e+00, Dinf 6.0782886e-10    535s
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+  346421    2.6081702e+04   0.000000e+00   0.000000e+00    537s
+  346421    2.6081702e+04   0.000000e+00   0.000000e+00    538s
+
+Root relaxation: objective 2.608170e+04, 346421 iterations, 518.17 seconds (676.83 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 26081.7022    0 80002          - 26081.7022      -     - 3268s

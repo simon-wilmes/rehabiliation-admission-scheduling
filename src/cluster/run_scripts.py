@@ -29,7 +29,7 @@ SCRIPTS_FOLDER = f"/work/{USERNAME}/Kobra/scripts"
 
 # 1. Find all the instance files for the computational_study
 INSTANCE_FOLDER_PATH = (
-    f"/home/{USERNAME}/Kobra/rehabiliation-admission-scheduling/data/comp_study_003"
+    f"/home/{USERNAME}/Kobra/rehabiliation-admission-scheduling/data/comp_study_004"
 )
 
 # Get all instance files
