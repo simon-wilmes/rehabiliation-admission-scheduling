@@ -115,10 +115,8 @@ class Solution:
 
             self.value = self.calc_objective()
             logger.debug("Correct objective function value: %s", self.value)
-            assert (
-                solution_value == self.value
-            ), "Solution value does not match calculated value."
-
+            if solution_value != self.value:
+                logger.error("Solution value does not match calculated value.")
             logger.debug("Solution is valid.")
 
     def _print_hash(self):

@@ -13,6 +13,7 @@ from src.time import DayHour
 from pprint import pprint as pp
 from collections import defaultdict
 from time import time
+from time import sleep
 
 
 class Solver(ABC):
@@ -85,6 +86,11 @@ class Solver(ABC):
             )
 
             self.total_time = round(time() - self.time_create_model_start, 3)
+
+            if (
+                self.total_time < 10 * 60
+            ):  # 10 min: sleep for memory to be recorded, not sure if it workds
+                sleep(10 * 60)
         else:
             logger.info(
                 "Time to show infeasibility: %ss", round(self.time_solve_model, 3)
