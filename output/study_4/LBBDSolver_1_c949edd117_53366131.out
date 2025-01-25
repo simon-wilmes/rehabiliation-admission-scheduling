@@ -1,0 +1,791 @@
+0.JOB_NAME: LBBDSolver_1_c949edd117
+1.SOLVER: LBBDSolver
+2.PARAMS: {'break_symmetry': False, 'add_constraints_to_symmetric_days': True, 'subsolver.restrict_obj_func_to_1': True, 'subsolver_cls': 'MIPSubsolver'}
+3.INSTANCE: /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_004/instance_p20_t05_medium.txt
+4.REPETITION: 1
+5.CPU_CORES: 8
+Current directory: /home/wx350715/Kobra/rehabiliation-admission-scheduling
+[34m2025-01-25 12:45:02,045 - DEBUG - Solver: <class 'src.solvers.benders.LBBDSolver'>[0m
+[34m2025-01-25 12:45:02,045 - DEBUG - Args: {'break_symmetry': False, 'add_constraints_to_symmetric_days': True, 'subsolver.restrict_obj_func_to_1': True, 'subsolver_cls': <class 'src.solvers.subsolvers.mip_subsolver.MIPSubsolver'>}[0m
+[34m2025-01-25 12:45:02,045 - DEBUG - File path /home/wx350715/Kobra/rehabiliation-admission-scheduling/data/comp_study_004/instance_p20_t05_medium.txt[0m
+[34m2025-01-25 12:45:02,064 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-25 12:45:02,064 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-25 12:45:02,064 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-25 12:45:02,064 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-25 12:45:02,064 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD INSTANCE DATA[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD RESOURCE_GROUPS[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,065 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,066 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,066 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,066 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,066 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,066 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,066 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,066 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,066 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,066 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,066 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,066 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,066 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,067 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,067 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,067 - DEBUG - ADD RESOURCES[0m
+[34m2025-01-25 12:45:02,067 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,067 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,067 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,067 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,067 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,067 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,067 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,067 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,067 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,067 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,068 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,068 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,069 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,069 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,069 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,069 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,069 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,069 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,069 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,069 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,069 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,069 - DEBUG - ADD TREATMENTS[0m
+[34m2025-01-25 12:45:02,070 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,070 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,070 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,070 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,070 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,070 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,070 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,070 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,070 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,070 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,071 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,071 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,071 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,071 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,071 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,071 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,071 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,071 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,071 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,071 - DEBUG - ADD PATIENTS[0m
+[34m2025-01-25 12:45:02,071 - DEBUG - Instance data:[0m
+[34m2025-01-25 12:45:02,072 - DEBUG - 0[0m
+[34m2025-01-25 12:45:02,072 - DEBUG - New Resource Group:frozenset({RG(therapists)})[0m
+[34m2025-01-25 12:45:02,147 - DEBUG - 1[0m
+[34m2025-01-25 12:45:02,147 - DEBUG - New Resource Group:frozenset({RG(physiotherapists)})[0m
+[34m2025-01-25 12:45:02,147 - DEBUG - New Resource Group:frozenset({RG(therapists), RG(physiotherapists)})[0m
+[34m2025-01-25 12:45:02,147 - DEBUG - 2[0m
+[34m2025-01-25 12:45:02,147 - DEBUG - New Resource Group:frozenset({RG(massage_therapist)})[0m
+[34m2025-01-25 12:45:02,147 - DEBUG - New Resource Group:frozenset({RG(therapists), RG(massage_therapist)})[0m
+[34m2025-01-25 12:45:02,147 - DEBUG - New Resource Group:frozenset({RG(massage_therapist), RG(physiotherapists)})[0m
+[34m2025-01-25 12:45:02,147 - DEBUG - New Resource Group:frozenset({RG(therapists), RG(massage_therapist), RG(physiotherapists)})[0m
+[34m2025-01-25 12:45:02,147 - DEBUG - 3[0m
+[34m2025-01-25 12:45:02,147 - DEBUG - 4[0m
+[34m2025-01-25 12:45:02,147 - DEBUG - New Resource Group:frozenset({RG(psychotherapists)})[0m
+[34m2025-01-25 12:45:02,148 - DEBUG - New Resource Group:frozenset({RG(therapists), RG(psychotherapists)})[0m
+[34m2025-01-25 12:45:02,148 - DEBUG - 5[0m
+[34m2025-01-25 12:45:02,148 - DEBUG - 6[0m
+[34m2025-01-25 12:45:02,148 - DEBUG - New Resource Group:frozenset({RG(lifeguards)})[0m
+[34m2025-01-25 12:45:02,148 - DEBUG - New Resource Group:frozenset({RG(therapists), RG(lifeguards)})[0m
+[34m2025-01-25 12:45:02,148 - DEBUG - 7[0m
+[34m2025-01-25 12:45:02,148 - DEBUG - New Resource Group:frozenset({RG(rooms)})[0m
+[34m2025-01-25 12:45:02,163 - DEBUG - 8[0m
+[34m2025-01-25 12:45:02,163 - DEBUG - 9[0m
+[34m2025-01-25 12:45:02,163 - DEBUG - 10[0m
+[34m2025-01-25 12:45:02,163 - DEBUG - New Resource Group:frozenset({RG(rooms_with_beamer)})[0m
+[34m2025-01-25 12:45:02,163 - DEBUG - New Resource Group:frozenset({RG(rooms), RG(rooms_with_beamer)})[0m
+[34m2025-01-25 12:45:02,163 - DEBUG - 11[0m
+[34m2025-01-25 12:45:02,163 - DEBUG - New Resource Group:frozenset({RG(sport_room)})[0m
+[34m2025-01-25 12:45:02,170 - DEBUG - 12[0m
+[34m2025-01-25 12:45:02,170 - DEBUG - 13[0m
+[34m2025-01-25 12:45:02,170 - DEBUG - New Resource Group:frozenset({RG(swimming_pool)})[0m
+[34m2025-01-25 12:45:02,174 - DEBUG - 14[0m
+[34m2025-01-25 12:45:02,174 - DEBUG - New Resource Group:frozenset({RG(arts_crafts_materials)})[0m
+[34m2025-01-25 12:45:02,178 - DEBUG - 15[0m
+[34m2025-01-25 12:45:02,178 - DEBUG - New Resource Group:frozenset({RG(fitness_machines)})[0m
+[34m2025-01-25 12:45:02,181 - DEBUG - 16[0m
+[34m2025-01-25 12:45:02,181 - DEBUG - New Resource Group:frozenset({RG(hydrotherapy_bath)})[0m
+[34m2025-01-25 12:45:02,185 - DEBUG - Number of patients: 20[0m
+[34m2025-01-25 12:45:02,185 - DEBUG - Number of beds: 20[0m
+[34m2025-01-25 12:45:02,185 - DEBUG - Average number of treatments per patient: 84.8[0m
+[34m2025-01-25 12:45:02,185 - DEBUG - Average number of treatment per stayed day: 4.711111111111111[0m
+[34m2025-01-25 12:45:02,185 - DEBUG - Number of treatments: 1696[0m
+[34m2025-01-25 12:45:02,185 - DEBUG - Number of resources: 17[0m
+[34m2025-01-25 12:45:02,185 - DEBUG - Number of resource groups: 12[0m
+[34m2025-01-25 12:45:02,185 - DEBUG - Number of resource hours needed per all treatment by RG(therapists): 41.12500000000001[0m
+[34m2025-01-25 12:45:02,185 - DEBUG - Number of resource hours needed per all treatment by RG(rooms): 91.71944444444445[0m
+[34m2025-01-25 12:45:02,185 - DEBUG - Number of resource hours needed per all treatment by RG(arts_crafts_materials): 6.805555555555556[0m
+[34m2025-01-25 12:45:02,185 - DEBUG - Number of resource hours needed per all treatment by RG(physiotherapists): 127.82777777777775[0m
+[34m2025-01-25 12:45:02,185 - DEBUG - Number of resource hours needed per all treatment by RG(lifeguards): 5.347222222222221[0m
+[34m2025-01-25 12:45:02,185 - DEBUG - Number of resource hours needed per all treatment by RG(swimming_pool): 5.347222222222221[0m
+[34m2025-01-25 12:45:02,186 - DEBUG - Number of resource hours needed per all treatment by RG(hydrotherapy_bath): 10.694444444444445[0m
+[34m2025-01-25 12:45:02,186 - DEBUG - Number of resource hours needed per all treatment by RG(sport_room): 98.35[0m
+[34m2025-01-25 12:45:02,186 - DEBUG - Number of resource hours needed per all treatment by RG(rooms_with_beamer): 5.716666666666664[0m
+[34m2025-01-25 12:45:02,186 - DEBUG - Number of resource hours needed per all treatment by RG(psychotherapists): 46.277777777777786[0m
+[34m2025-01-25 12:45:02,186 - DEBUG - Number of resource hours needed per all treatment by RG(massage_therapist): 24.88888888888889[0m
+[34m2025-01-25 12:45:02,186 - DEBUG - Number of resource hours needed per all treatment by RG(fitness_machines): 28.874999999999996[0m
+[32m2025-01-25 12:45:02,186 - INFO - {'solver': 'LBBDSolver', 'args': {'use_helper_constraints': True, 'break_symmetry': False, 'add_constraints_to_symmetric_days': True, 'subsolver.restrict_obj_func_to_1': True, 'subsolver_cls': <class 'src.solvers.subsolvers.mip_subsolver.MIPSubsolver'>, 'log_to_console': True}}[0m
+[34m2025-01-25 12:45:02,186 - DEBUG - Setting options: LBBDSolver[0m
+[34m2025-01-25 12:45:02,186 - DEBUG -  ---- break_symmetry to False[0m
+[34m2025-01-25 12:45:02,186 - DEBUG -  ---- subsolver_cls to <class 'src.solvers.subsolvers.mip_subsolver.MIPSubsolver'>[0m
+[34m2025-01-25 12:45:02,186 - DEBUG -  ---- use_helper_constraints to True[0m
+[34m2025-01-25 12:45:02,186 - DEBUG -  ---- add_constraints_to_symmetric_days to True[0m
+[34m2025-01-25 12:45:02,186 - DEBUG - Setting options: Solver[0m
+[34m2025-01-25 12:45:02,186 - DEBUG -  ---- number_of_threads to 8 (default)[0m
+[34m2025-01-25 12:45:02,186 - DEBUG -  ---- treatment_value to 0 (default)[0m
+[34m2025-01-25 12:45:02,186 - DEBUG -  ---- delay_value to 1 (default)[0m
+[34m2025-01-25 12:45:02,186 - DEBUG -  ---- missing_treatment_value to 4 (default)[0m
+[34m2025-01-25 12:45:02,186 - DEBUG -  ---- log_to_console to True[0m
+[34m2025-01-25 12:45:02,186 - DEBUG -  ---- log_to_file to True (default)[0m
+[34m2025-01-25 12:45:02,261 - DEBUG - Setting options: MIPSubsolver[0m
+[34m2025-01-25 12:45:02,262 - DEBUG -  ---- restrict_obj_func_to_1 to True[0m
+[34m2025-01-25 12:45:02,262 - DEBUG - Setting Subsolver options: SubSolver[0m
+[34m2025-01-25 12:45:02,262 - DEBUG -  ---- use_day_symmetry to True (default)[0m
+[32m2025-01-25 12:45:02,321 - INFO - Create model: LBBDSolver[0m
+Set parameter TSPort to value 50039
+Set parameter TokenServer to value "license.itc.rwth-aachen.de"
+Set parameter Threads to value 8
+Set parameter LazyConstraints to value 1
+[34m2025-01-25 12:45:02,880 - DEBUG - Variables created.[0m
+[34m2025-01-25 12:45:04,683 - DEBUG - Constraint (not too many treatments) created.[0m
+[34m2025-01-25 12:45:05,942 - DEBUG - Constraint (no_treatments_outside admittance) created.[0m
+[34m2025-01-25 12:45:05,942 - DEBUG - Constraint (bed_usage) created.[0m
+[34m2025-01-25 12:45:05,943 - DEBUG - Constraint (must be admitted) created.[0m
+[34m2025-01-25 12:45:06,104 - DEBUG - Constraint (e_w_ub) created.[0m
+[34m2025-01-25 12:45:06,156 - DEBUG - Constraint (day_ub) created.[0m
+[34m2025-01-25 12:45:06,207 - DEBUG - Constraint (Day always) created.[0m
+[34m2025-01-25 12:45:06,207 - DEBUG - Constraint (already_admitted) created.[0m
+[32m2025-01-25 12:45:08,174 - INFO - Time to create model: 5.852[0m
+[32m2025-01-25 12:45:08,174 - INFO - Solving model: LBBDSolver[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 8 threads
+
+Optimize a model with 353719 rows, 156612 columns and 2756701 nonzeros
+Model fingerprint: 0x7ab7e3c7
+Variable types: 3 continuous, 156609 integer (156609 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 4e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 7e+03]
+Presolve removed 311337 rows and 1854 columns
+Presolve time: 2.48s
+Presolved: 42382 rows, 154758 columns, 1553374 nonzeros
+Variable types: 1 continuous, 154757 integer (154734 binary)
+Root relaxation presolved: 42212 rows, 154788 columns, 1413858 nonzeros
+
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Ordering time: 0.01s
+
+Barrier statistics:
+ Dense cols : 10
+ AA' NZ     : 1.103e+05
+ Factor NZ  : 2.810e+05 (roughly 11 MB of memory)
+ Factor Ops : 2.861e+07 (less than 1 second per iteration)
+ Threads    : 6
+
+                  Objective                Residual
+Iter       Primal          Dual         Primal    Dual     Compl     Time
+   0  -8.73665943e+06 -2.08243917e+04  1.12e+05 1.03e+00  3.28e+02     4s
+   1  -5.05109417e+06 -2.96219310e+04  6.47e+04 1.77e+00  1.90e+02     4s
+   2  -9.99258243e+05 -3.16101481e+04  1.29e+04 2.90e-01  3.87e+01     4s
+   3  -1.35731702e+05 -2.37097690e+04  1.79e+03 1.98e-03  5.88e+00     4s
+   4  -3.85924603e+04 -1.23194531e+04  5.47e+02 6.01e-04  1.89e+00     4s
+   5  -3.75072373e+03 -5.08838242e+03  1.02e+02 1.67e-04  5.15e-01     4s
+   6   3.90387749e+02 -9.74474464e+02  4.95e+01 5.95e-05  2.54e-01     4s
+   7   3.48641442e+03  1.87051696e+03  9.97e+00 2.43e-05  8.75e-02     4s
+   8   4.21397620e+03  3.54206184e+03  6.60e-01 1.09e-05  2.29e-02     4s
+   9   4.26406711e+03  4.25777659e+03  4.03e-03 8.97e-06  2.05e-04     4s
+
+Barrier performed 9 iterations in 4.39 seconds (13.45 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 0.02s
+
+Solved with primal simplex
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root relaxation: objective 4.264000e+03, 18373 iterations, 0.54 seconds (0.88 work units)
+Total elapsed time = 5.59s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 4264.00000    0   27          - 4264.00000      -     -    7s
+[34m2025-01-25 12:45:17,646 - DEBUG - Checking day 0[0m
+[34m2025-01-25 12:45:17,646 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-25 12:45:17,646 - DEBUG - SUBSOLVER DAY:0[0m
+[34m2025-01-25 12:45:17,646 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient3_c): 1}, T(ergotherapy_b): {P(patient1_o): 2, P(patient5_o): 1, P(patient1_p): 1, P(patient3_p): 4}, T(ergotherapy_c): {}, T(physiotherapy_a): {P(patient0_c): 2}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient0_o): 2, P(patient4_o): 6}, T(physiotherapy_d): {P(patient6_o): 2}, T(watergymnastics): {}, T(hydrotherapy): {}, T(nordic_walking): {P(patient3_c): 3, P(patient4_o): 1, P(patient5_o): 1, P(patient6_o): 1}, T(fitness_training): {P(patient6_o): 4}, T(yoga): {P(patient0_c): 1, P(patient5_o): 1}, T(psychotherapy_single): {P(patient1_p): 5, P(patient3_p): 2}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {P(patient0_c): 4, P(patient3_c): 4, P(patient0_o): 4, P(patient1_o): 5, P(patient5_o): 4}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_o): 1, P(patient5_o): 1}, T(massage): {}}[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 32 threads
+
+Optimize a model with 626 rows, 4628 columns and 5412 nonzeros
+Model fingerprint: 0x7f001214
+Model has 2328 quadratic constraints
+Variable types: 0 continuous, 4628 integer (4628 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  QMatrix range    [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 6e+00]
+  QRHS range       [1e+00, 1e+00]
+Presolve removed 289 rows and 104 columns
+Presolve time: 0.33s
+Presolved: 42671 rows, 43381 columns, 521385 nonzeros
+Variable types: 0 continuous, 43381 integer (43381 binary)
+Deterministic concurrent LP optimizer: primal and dual simplex
+Showing first log only...
+
+Concurrent spin time: 0.00s
+
+Solved with dual simplex
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root relaxation: objective 0.000000e+00, 771 iterations, 0.12 seconds (0.18 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00000    0  506          -    0.00000      -     -    1s
+     0     0    0.00000    0  951          -    0.00000      -     -    2s
+     0     0    0.00000    0  975          -    0.00000      -     -    5s
+     0     0    0.00000    0 1142          -    0.00000      -     -   11s
+     0     0    0.00000    0 1233          -    0.00000      -     -   14s
+     0     0    0.00000    0  961          -    0.00000      -     -   29s
+     0     0    0.00000    0 1096          -    0.00000      -     -   31s
+     0     0    0.00000    0  919          -    0.00000      -     -   50s
+     0     0    0.00000    0  823          -    0.00000      -     -   52s
+     0     2    0.00000    0  821          -    0.00000      -     -   57s
+     7    14    0.00000    3  666          -    0.00000      -  1843   61s
+    29    48    0.00000    5  592          -    0.00000      -  2134   66s
+    89    98 infeasible    7               -    0.00000      -  1203   71s
+   153   142    0.00000    8  570          -    0.00000      -   905   76s
+   185   174    0.00000    8  550          -    0.00000      -   840   80s
+   265   237    0.00000   10  504          -    0.00000      -   744   85s
+   362   337    0.00000   11  744          -    0.00000      -   696   94s
+   446   463 infeasible   12               -    0.00000      -   705  103s
+   610   675    0.00000   14  528          -    0.00000      -   705  114s
+   862  1125    0.00000   18  476          -    0.00000      -   814  133s
+  1382  1975    0.00000   30  559          -    0.00000      -   828  168s
+  2324  4281    0.00000   63  421          -    0.00000      -   798  236s
+H 3955  4279                       1.0000000    0.00000   100%   784  236s
+  5137  4110    0.00000   58 12517    1.00000    0.00000   100%   775  241s
+  5141  4113    0.00000   29  739    1.00000    0.00000   100%   774  247s
+  5142  4113    0.00000   64  592    1.00000    0.00000   100%   774  254s
+  5143  4114    0.00000   41  886    1.00000    0.00000   100%   774  257s
+  5144  4115    0.00000   54  789    1.00000    0.00000   100%   774  264s
+  5145  4115    0.00000   39 1009    1.00000    0.00000   100%   773  269s
+H 5145  3909                       0.0000000    0.00000  0.00%   773  289s
+
+Cutting planes:
+  Gomory: 1
+  Lift-and-project: 27
+  MIR: 421
+  Flow cover: 225
+  Zero half: 27
+  RLT: 1695
+  BQP: 184
+
+Explored 5145 nodes (4219312 simplex iterations) in 289.77 seconds (401.69 work units)
+Thread count was 32 (of 96 available processors)
+
+Solution count 2: 0 1 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0000%
+[34m2025-01-25 12:50:09,890 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-25 12:50:09,890 - DEBUG - Checking day 1[0m
+[34m2025-01-25 12:50:09,890 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-25 12:50:09,890 - DEBUG - SUBSOLVER DAY:1[0m
+[34m2025-01-25 12:50:09,890 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient4_o): 1}, T(ergotherapy_b): {P(patient3_c): 4, P(patient4_o): 1, P(patient6_o): 2, P(patient7_o): 5, P(patient3_p): 4}, T(ergotherapy_c): {}, T(physiotherapy_a): {P(patient0_c): 1}, T(physiotherapy_b): {P(patient0_o): 1, P(patient5_o): 1, P(patient6_o): 1}, T(physiotherapy_c): {P(patient0_o): 2, P(patient4_o): 1, P(patient5_o): 1}, T(physiotherapy_d): {P(patient4_o): 2, P(patient5_o): 3, P(patient6_o): 1, P(patient7_o): 1}, T(watergymnastics): {}, T(hydrotherapy): {P(patient0_c): 2, P(patient3_c): 1, P(patient1_o): 3, P(patient5_o): 1, P(patient6_o): 1}, T(nordic_walking): {}, T(fitness_training): {P(patient1_o): 3}, T(yoga): {P(patient0_c): 1, P(patient0_o): 3, P(patient3_p): 1}, T(psychotherapy_single): {P(patient1_p): 4, P(patient3_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient3_c): 1, P(patient4_o): 2, P(patient5_o): 1}, T(massage): {P(patient0_c): 3, P(patient3_c): 2, P(patient0_o): 1, P(patient1_o): 1, P(patient5_o): 1, P(patient6_o): 2, P(patient7_o): 1, P(patient1_p): 2}}[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 32 threads
+
+Optimize a model with 791 rows, 6418 columns and 7897 nonzeros
+Model fingerprint: 0xf03ad22a
+Model has 2522 quadratic constraints
+Variable types: 0 continuous, 6418 integer (6418 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  QMatrix range    [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+00]
+  QRHS range       [1e+00, 1e+00]
+Presolve removed 349 rows and 104 columns
+Presolve time: 0.43s
+Presolved: 67123 rows, 69680 columns, 722519 nonzeros
+Variable types: 0 continuous, 69680 integer (69680 binary)
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier performed 0 iterations in 1.47 seconds (2.33 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 0.00s
+
+Solved with dual simplex
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root relaxation: objective 0.000000e+00, 1220 iterations, 0.22 seconds (0.31 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00000    0  735          -    0.00000      -     -    2s
+     0     0    0.00000    0 1142          -    0.00000      -     -    3s
+     0     0    0.00000    0 1176          -    0.00000      -     -    6s
+     0     0    0.00000    0 1256          -    0.00000      -     -   10s
+     0     0    0.00000    0 1298          -    0.00000      -     -   13s
+     0     0    0.00000    0 1398          -    0.00000      -     -   21s
+     0     0    0.00000    0 1501          -    0.00000      -     -   24s
+     0     0    0.00000    0 1529          -    0.00000      -     -   33s
+     0     0    0.00000    0 1526          -    0.00000      -     -   37s
+     0     0    0.00000    0 1277          -    0.00000      -     -   47s
+     0     0    0.00000    0 1691          -    0.00000      -     -   51s
+     0     0    0.00000    0 1594          -    0.00000      -     -   60s
+     0     0    0.00000    0 1115          -    0.00000      -     -   80s
+     0     0    0.00000    0 1248          -    0.00000      -     -   83s
+     0     0    0.00000    0 1158          -    0.00000      -     -   98s
+     0     0    0.00000    0 1223          -    0.00000      -     -  104s
+     0     0    0.00000    0  990          -    0.00000      -     -  135s
+     0     0    0.00000    0 1289          -    0.00000      -     -  146s
+     0     0    0.00000    0  878          -    0.00000      -     -  176s
+     0     0    0.00000    0  840          -    0.00000      -     -  176s
+     0     0    0.00000    0  833          -    0.00000      -     -  176s
+     0     0    0.00000    0 1050          -    0.00000      -     -  184s
+     0     0    0.00000    0 1067          -    0.00000      -     -  184s
+     0     0    0.00000    0 1125          -    0.00000      -     -  223s
+     0     0    0.00000    0 1098          -    0.00000      -     -  224s
+     0     0    0.00000    0  769          -    0.00000      -     -  236s
+     0     0    0.00000    0  703          -    0.00000      -     -  251s
+     0     0    0.00000    0  860          -    0.00000      -     -  252s
+     0     0    0.00000    0 1239          -    0.00000      -     -  257s
+     0     0    0.00000    0  692          -    0.00000      -     -  268s
+     0     0    0.00000    0  959          -    0.00000      -     -  271s
+     0     0    0.00000    0  937          -    0.00000      -     -  285s
+     0     0    0.00000    0 1191          -    0.00000      -     -  291s
+     0     0    0.00000    0  650          -    0.00000      -     -  311s
+     0     0    0.00000    0  649          -    0.00000      -     -  313s
+     0     2    0.00000    0  649          -    0.00000      -     -  324s
+     1     5    0.00000    1  574          -    0.00000      -  9624  325s
+     7    16    0.00000    3  798          -    0.00000      -  4860  335s
+    15    32    0.00000    4  901          -    0.00000      -  6617  353s
+    31    64    0.00000    5  819          -    0.00000      - 10714  359s
+    63    96    0.00000    6  804          -    0.00000      -  7127  375s
+   127   160    0.00000    8  795          -    0.00000      -  5026  380s
+   191   224    0.00000    9  797          -    0.00000      -  3622  437s
+   223   273    0.00000   10  729          -    0.00000      -  3248  440s
+   329   474    0.00000   11  762          -    0.00000      -  2508  451s
+   477   908    0.00000   13  644          -    0.00000      -  2027  468s
+   915  1940    0.00000   20  634          -    0.00000      -  1551  506s
+  1979  3960    0.00000   39  581          -    0.00000      -  1256  581s
+  4225  5316    0.00000   86  423          -    0.00000      -  1151  660s
+* 4457  3203             108       0.0000000    0.00000  0.00%  1167  660s
+
+Cutting planes:
+  Lift-and-project: 1
+  Cover: 1
+  Implied bound: 25
+  Clique: 8
+  MIR: 1792
+  Zero half: 35
+  RLT: 3279
+  BQP: 907
+
+Explored 6058 nodes (7735216 simplex iterations) in 660.13 seconds (1061.84 work units)
+Thread count was 32 (of 96 available processors)
+
+Solution count 1: 0 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 0.000000000000e+00, best bound 0.000000000000e+00, gap 0.0000%
+[34m2025-01-25 13:01:13,386 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-25 13:01:13,387 - DEBUG - Checking day 2[0m
+[34m2025-01-25 13:01:13,387 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-25 13:01:13,387 - DEBUG - SUBSOLVER DAY:2[0m
+[34m2025-01-25 13:01:13,387 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {}, T(ergotherapy_b): {P(patient0_c): 2, P(patient4_c): 2, P(patient2_o): 3, P(patient4_o): 1, P(patient6_o): 1, P(patient0_p): 1, P(patient1_p): 4, P(patient4_p): 5}, T(ergotherapy_c): {}, T(physiotherapy_a): {P(patient0_c): 1}, T(physiotherapy_b): {P(patient7_o): 1}, T(physiotherapy_c): {P(patient0_o): 2, P(patient1_o): 3, P(patient4_o): 1, P(patient5_o): 1, P(patient6_o): 2}, T(physiotherapy_d): {P(patient4_o): 2, P(patient5_o): 5, P(patient6_o): 2}, T(watergymnastics): {}, T(hydrotherapy): {P(patient4_c): 1, P(patient0_o): 1, P(patient7_o): 1}, T(nordic_walking): {}, T(fitness_training): {P(patient0_p): 1}, T(yoga): {P(patient3_c): 3}, T(psychotherapy_single): {P(patient3_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {P(patient3_c): 3, P(patient4_c): 3, P(patient1_o): 2, P(patient2_o): 1, P(patient4_o): 2, P(patient0_p): 2, P(patient3_p): 2, P(patient4_p): 1}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient6_o): 1, P(patient7_o): 3}, T(massage): {P(patient0_c): 1, P(patient0_o): 1, P(patient4_o): 1}}[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 32 threads
+
+Optimize a model with 639 rows, 4921 columns and 6052 nonzeros
+Model fingerprint: 0xf006d99a
+Model has 2910 quadratic constraints
+Variable types: 0 continuous, 4921 integer (4921 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  QMatrix range    [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+00]
+  QRHS range       [1e+00, 1e+00]
+Presolve removed 307 rows and 92 columns
+Presolve time: 0.38s
+Presolved: 52012 rows, 52272 columns, 616288 nonzeros
+Variable types: 0 continuous, 52272 integer (52272 binary)
+Deterministic concurrent LP optimizer: primal and dual simplex
+Showing first log only...
+
+Concurrent spin time: 0.00s
+
+Solved with dual simplex
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root relaxation: objective 0.000000e+00, 855 iterations, 0.12 seconds (0.20 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00000    0  623          -    0.00000      -     -    1s
+     0     0    0.00000    0 1026          -    0.00000      -     -    3s
+     0     0 infeasible    0               - infeasible      -     -    3s
+
+Cutting planes:
+  Gomory: 4
+  Implied bound: 1
+  Clique: 15
+  MIR: 579
+  Zero half: 27
+  RLT: 612
+  BQP: 612
+
+Explored 1 nodes (10650 simplex iterations) in 3.89 seconds (5.28 work units)
+Thread count was 32 (of 96 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+[34m2025-01-25 13:01:20,076 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-25 13:01:20,076 - DEBUG - Infeasible day 2[0m
+[32m2025-01-25 13:01:20,078 - INFO - d_prime: 2 d: 2[0m
+[32m2025-01-25 13:01:20,080 - INFO - d_prime: 4 d: 2[0m
+[32m2025-01-25 13:01:20,081 - INFO - d_prime: 6 d: 2[0m
+[32m2025-01-25 13:01:20,083 - INFO - forbidden_vars: ([{12:1,18:2},{1:2,3:1,21:1},{1:3,18:1},{1:1,10:1,18:2},{1:4},{5:2,8:1,21:1},{4:1,8:1,20:3},{5:3,18:2},{1:2,8:1,18:3},{1:1,5:2,6:2,20:1},{1:5,18:1},{5:1,6:5},{11:3,18:3},{1:1,5:1,6:2,18:2,21:1}])[0m
+[32m2025-01-25 13:01:20,083 - INFO - False[0m
+[34m2025-01-25 13:01:20,083 - DEBUG - Checking day 3[0m
+[34m2025-01-25 13:01:20,083 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-25 13:01:20,083 - DEBUG - SUBSOLVER DAY:3[0m
+[34m2025-01-25 13:01:20,083 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient0_c): 1, P(patient1_c): 4, P(patient1_o): 2, P(patient4_o): 1}, T(ergotherapy_b): {P(patient0_c): 1, P(patient1_c): 2, P(patient4_c): 1, P(patient2_o): 1, P(patient3_o): 4, P(patient0_p): 2, P(patient2_p): 5, P(patient4_p): 5}, T(ergotherapy_c): {}, T(physiotherapy_a): {P(patient0_c): 1}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient0_o): 1, P(patient2_o): 1, P(patient4_o): 1, P(patient5_o): 1, P(patient6_o): 2, P(patient7_o): 1}, T(physiotherapy_d): {P(patient0_o): 2, P(patient2_o): 3, P(patient3_o): 1, P(patient5_o): 2, P(patient7_o): 2}, T(watergymnastics): {}, T(hydrotherapy): {P(patient3_c): 2, P(patient1_o): 1, P(patient4_o): 1, P(patient5_o): 1, P(patient6_o): 1, P(patient7_o): 1}, T(nordic_walking): {}, T(fitness_training): {P(patient3_p): 1}, T(yoga): {P(patient1_c): 1, P(patient1_p): 2}, T(psychotherapy_single): {P(patient0_p): 3, P(patient1_p): 1}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {P(patient0_c): 1, P(patient4_c): 1, P(patient3_o): 1, P(patient4_o): 1, P(patient7_o): 1, P(patient0_p): 1, P(patient3_p): 2, P(patient4_p): 1}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 1, P(patient4_c): 4, P(patient0_o): 1, P(patient6_o): 1, P(patient7_o): 1}, T(massage): {P(patient3_c): 2, P(patient0_o): 2, P(patient2_o): 1, P(patient5_o): 1, P(patient6_o): 1, P(patient7_o): 1}}[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 32 threads
+
+Optimize a model with 925 rows, 7075 columns and 8922 nonzeros
+Model fingerprint: 0x5ea7f4c0
+Model has 3201 quadratic constraints
+Variable types: 0 continuous, 7075 integer (7075 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  QMatrix range    [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+00]
+  QRHS range       [1e+00, 1e+00]
+Presolve removed 448 rows and 100 columns
+Presolve time: 0.54s
+Presolved: 80754 rows, 83436 columns, 922783 nonzeros
+Variable types: 0 continuous, 83436 integer (83436 binary)
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Ordering time: 0.01s
+
+Barrier performed 0 iterations in 2.54 seconds (2.99 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 0.01s
+
+Solved with dual simplex
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root relaxation: objective 0.000000e+00, 1432 iterations, 0.29 seconds (0.45 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00000    0  812          -    0.00000      -     -    3s
+     0     0    0.00000    0 1394          -    0.00000      -     -    4s
+     0     0    0.00000    0 1560          -    0.00000      -     -    7s
+     0     0    0.00000    0 1591          -    0.00000      -     -   14s
+     0     0    0.00000    0 1610          -    0.00000      -     -   17s
+     0     0    0.00000    0 1617          -    0.00000      -     -   26s
+     0     0    0.00000    0 1777          -    0.00000      -     -   33s
+     0     0    0.00000    0 1750          -    0.00000      -     -   47s
+     0     0    0.00000    0 1748          -    0.00000      -     -   51s
+     0     0    0.00000    0 1742          -    0.00000      -     -   51s
+     0     0    0.00000    0 1746          -    0.00000      -     -   51s
+     0     0    0.00000    0  977          -    0.00000      -     -   65s
+     0     0    0.00000    0 1381          -    0.00000      -     -   67s
+     0     0    0.00000    0 1559          -    0.00000      -     -   77s
+     0     0    0.00000    0 1584          -    0.00000      -     -   87s
+     0     0    0.00000    0 1743          -    0.00000      -     -  103s
+     0     0 1.000e+100    0 1622          - infeasible      -     -  125s
+
+Cutting planes:
+  Gomory: 1
+  Lift-and-project: 1
+  Implied bound: 5
+  Clique: 67
+  MIR: 1176
+  Zero half: 130
+  RLT: 1737
+  BQP: 1044
+
+Explored 1 nodes (199154 simplex iterations) in 125.66 seconds (257.16 work units)
+Thread count was 32 (of 96 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+[34m2025-01-25 13:03:29,854 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-25 13:03:29,854 - DEBUG - Infeasible day 3[0m
+[32m2025-01-25 13:03:29,856 - INFO - d_prime: 3 d: 3[0m
+[32m2025-01-25 13:03:29,858 - INFO - d_prime: 5 d: 3[0m
+[32m2025-01-25 13:03:29,860 - INFO - forbidden_vars: ([{0:2,8:1},{10:1,18:2},{11:2,12:1},{0:1,5:1,8:1,18:1},{8:2,21:2},{0:1,1:1,3:1,18:1,20:1},{1:5},{5:1,6:2,8:1,21:1},{5:2,8:1,20:1,21:1},{1:1,18:1,20:4},{1:1,5:1,6:3,21:1},{1:4,6:1,18:1},{1:2,12:3,18:1},{1:5,18:1},{5:1,6:2,20:1,21:2},{0:4,1:2,11:1},{5:1,6:2,8:1,18:1,20:1,21:1}])[0m
+[32m2025-01-25 13:03:29,860 - INFO - False[0m
+[34m2025-01-25 13:03:29,860 - DEBUG - Checking day 4[0m
+[34m2025-01-25 13:03:29,860 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-25 13:03:29,860 - DEBUG - SUBSOLVER DAY:4[0m
+[34m2025-01-25 13:03:29,860 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient9_o): 1}, T(ergotherapy_b): {P(patient0_c): 1, P(patient3_c): 2, P(patient6_o): 1, P(patient0_p): 2, P(patient2_p): 1, P(patient5_p): 4}, T(ergotherapy_c): {P(patient1_p): 2, P(patient2_p): 2, P(patient3_p): 1, P(patient5_p): 1}, T(physiotherapy_a): {}, T(physiotherapy_b): {}, T(physiotherapy_c): {P(patient2_o): 1}, T(physiotherapy_d): {P(patient4_o): 1}, T(watergymnastics): {P(patient0_c): 2, P(patient3_c): 2, P(patient4_c): 2, P(patient3_o): 1, P(patient7_o): 1, P(patient1_p): 1, P(patient5_p): 1}, T(hydrotherapy): {P(patient1_c): 1, P(patient0_o): 1, P(patient1_o): 1, P(patient6_o): 1, P(patient9_o): 1}, T(nordic_walking): {P(patient0_o): 1, P(patient5_o): 1}, T(fitness_training): {P(patient1_o): 1, P(patient4_o): 1, P(patient9_o): 4}, T(yoga): {P(patient1_c): 1, P(patient1_o): 3, P(patient2_o): 3, P(patient3_o): 4, P(patient5_o): 1, P(patient7_o): 5, P(patient2_p): 2, P(patient4_p): 6}, T(psychotherapy_single): {P(patient0_p): 4, P(patient3_p): 4}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 2, P(patient1_c): 4, P(patient3_o): 1}, T(massage): {P(patient1_c): 1, P(patient4_c): 3, P(patient0_o): 2, P(patient2_o): 2, P(patient4_o): 2, P(patient5_o): 3, P(patient6_o): 2, P(patient7_o): 1, P(patient9_o): 1, P(patient2_p): 1}}[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 32 threads
+
+Optimize a model with 1062 rows, 8603 columns and 11141 nonzeros
+Model fingerprint: 0xc9346ec1
+Model has 3492 quadratic constraints
+Variable types: 0 continuous, 8603 integer (8603 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  QMatrix range    [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 6e+00]
+  QRHS range       [1e+00, 1e+00]
+Presolve removed 412 rows and 126 columns
+Presolve time: 0.70s
+Presolved: 103012 rows, 106807 columns, 1154215 nonzeros
+Variable types: 0 continuous, 106807 integer (106807 binary)
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier performed 0 iterations in 2.64 seconds (3.45 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 0.00s
+
+Solved with dual simplex
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root relaxation: objective 0.000000e+00, 1233 iterations, 0.26 seconds (0.37 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00000    0  619          -    0.00000      -     -    3s
+     0     0    0.00000    0  625          -    0.00000      -     -    3s
+     0     0    0.00000    0 1225          -    0.00000      -     -    4s
+     0     0    0.00000    0 1351          -    0.00000      -     -    5s
+     0     0    0.00000    0 1348          -    0.00000      -     -    5s
+     0     0 infeasible    0               - infeasible      -     -    7s
+
+Cutting planes:
+  Gomory: 9
+  Implied bound: 32
+  Clique: 56
+  MIR: 156
+  Zero half: 46
+  RLT: 574
+  BQP: 85
+
+Explored 1 nodes (14874 simplex iterations) in 7.20 seconds (10.60 work units)
+Thread count was 32 (of 96 available processors)
+
+Solution count 0
+
+Model is infeasible
+Best objective -, best bound -, gap -
+[34m2025-01-25 13:03:42,161 - DEBUG - ---------- END SUBSYSTEM ---------[0m
+[34m2025-01-25 13:03:42,161 - DEBUG - Infeasible day 4[0m
+[32m2025-01-25 13:03:42,163 - INFO - d_prime: 4 d: 4[0m
+[32m2025-01-25 13:03:42,165 - INFO - d_prime: 6 d: 4[0m
+[32m2025-01-25 13:03:42,167 - INFO - forbidden_vars: ([{2:2,7:1},{1:2,7:2},{1:1,8:1,21:2},{6:1,10:1,21:2},{8:1,9:1,21:2},{1:1,7:2,20:2},{2:1,12:4},{7:2,21:3},{8:1,10:1,11:3},{9:1,11:1,21:3},{1:2,12:4},{1:1,2:2,11:2,21:1},{1:4,2:1,7:1},{5:1,11:3,21:2},{7:1,11:4,20:1},{11:6},{0:1,8:1,10:4,21:1},{7:1,11:5,21:1},{8:1,11:1,20:4,21:1}])[0m
+[32m2025-01-25 13:03:42,167 - INFO - False[0m
+[34m2025-01-25 13:03:42,167 - DEBUG - Checking day 5[0m
+[34m2025-01-25 13:03:42,167 - DEBUG - ---------- SOLVE SUBSYSTEM ---------[0m
+[34m2025-01-25 13:03:42,167 - DEBUG - SUBSOLVER DAY:5[0m
+[34m2025-01-25 13:03:42,167 - DEBUG - SUBSOLVER PATIENTS:{T(ergotherapy_a): {P(patient2_o): 1}, T(ergotherapy_b): {P(patient0_c): 1, P(patient4_o): 4, P(patient7_o): 1, P(patient1_p): 1}, T(ergotherapy_c): {}, T(physiotherapy_a): {P(patient3_c): 1, P(patient4_c): 2}, T(physiotherapy_b): {}, T(physiotherapy_c): {}, T(physiotherapy_d): {}, T(watergymnastics): {}, T(hydrotherapy): {P(patient0_c): 3, P(patient3_o): 1, P(patient7_o): 1}, T(nordic_walking): {P(patient0_c): 1, P(patient1_c): 1, P(patient3_c): 1, P(patient4_o): 1, P(patient5_p): 2}, T(fitness_training): {P(patient0_o): 2, P(patient2_o): 1, P(patient7_o): 1}, T(yoga): {P(patient5_o): 2, P(patient6_o): 1, P(patient9_o): 4, P(patient1_p): 5, P(patient2_p): 6, P(patient3_p): 5, P(patient5_p): 3}, T(psychotherapy_single): {}, T(psychotherapy_group_a): {}, T(psychotherapy_group_b): {}, T(psychotherapy_group_c): {}, T(psychotherapy_group_d): {}, T(smoking_cessation): {}, T(nutritional_advice): {P(patient1_c): 1, P(patient3_c): 5, P(patient4_c): 3, P(patient0_o): 5, P(patient1_o): 2, P(patient2_o): 4, P(patient3_o): 4, P(patient4_o): 2, P(patient5_o): 5, P(patient6_o): 5, P(patient0_p): 2, P(patient3_p): 1, P(patient4_p): 4}, T(cardiological_health_seminar): {}, T(general_psychological_support): {P(patient0_c): 2, P(patient1_c): 1, P(patient3_c): 1, P(patient5_o): 1, P(patient7_o): 1, P(patient9_o): 2}, T(massage): {P(patient1_c): 3, P(patient1_o): 5, P(patient3_o): 1, P(patient6_o): 1, P(patient9_o): 1, P(patient0_p): 1, P(patient5_p): 1}}[0m
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (linux64)
+
+CPU model: Intel(R) Xeon(R) Platinum 8468, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 96 physical cores, 96 logical processors, using up to 32 threads
+
+Optimize a model with 1095 rows, 7922 columns and 10347 nonzeros
+Model fingerprint: 0x0c5c46fd
+Model has 3395 quadratic constraints
+Variable types: 0 continuous, 7922 integer (7922 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+01]
+  QMatrix range    [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 6e+00]
+  QRHS range       [1e+00, 1e+00]
+Presolve removed 381 rows and 103 columns
+Presolve time: 0.61s
+Presolved: 100349 rows, 104059 columns, 1150421 nonzeros
+Variable types: 0 continuous, 104059 integer (104059 binary)
+Deterministic concurrent LP optimizer: primal simplex, dual simplex, and barrier
+Showing barrier log only...
+
+Root barrier log...
+
+Ordering time: 0.00s
+
+Barrier performed 0 iterations in 2.07 seconds (3.20 work units)
+Barrier solve interrupted - model solved by another algorithm
+
+Concurrent spin time: 0.00s
+
+Solved with dual simplex
+
+Use crossover to convert LP symmetric solution to basic solution...
+
+Root relaxation: objective 0.000000e+00, 1431 iterations, 0.21 seconds (0.34 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00000    0  614          -    0.00000      -     -    2s
+     0     0    0.00000    0 1240          -    0.00000      -     -    3s
+     0     0    0.00000    0 1275          -    0.00000      -     -    6s
+     0     0    0.00000    0 1491          -    0.00000      -     -   10s
+     0     0    0.00000    0 1578          -    0.00000      -     -   12s
+     0     0    0.00000    0 1695          -    0.00000      -     -   20s
+     0     0    0.00000    0 1657          -    0.00000      -     -   25s
+     0     0    0.00000    0 1815          -    0.00000      -     -   37s
+     0     0    0.00000    0 1815          -    0.00000      -     -   40s
+     0     2    0.00000    0 1815          -    0.00000      -     -   53s
+     1     5    0.00000    1 1751          -    0.00000      - 13113   56s
+     3     6    0.00000    2 1377          -    0.00000      -  6792   61s
+    13    10    0.00000    4 1145          -    0.00000      -  3868   68s
+    31    22 infeasible    6               -    0.00000      -  2490   71s
+    69    54    0.00000    8 1140          -    0.00000      -  1285   75s
+   165   113    0.00000   11 1133          -    0.00000      -   731   81s
+   240   160    0.00000   13 1192          -    0.00000      -   579   85s
+   359   240 infeasible   15               -    0.00000      -   473   91s
+   485   387    0.00000   16 1167          -    0.00000      -   417   98s
+   600   525    0.00000   19 1151          -    0.00000      -   392  113s
+   788   828    0.00000   24 1132          -    0.00000      -   402  128s
+  1199  1370 infeasible   28               -    0.00000      -   369  150s
+  1873  2283    0.00000   38 1089          -    0.00000      -   366  187s
+  3006  3279    0.00000   51 1003          -    0.00000      -   386  241s
+  4323  4339 infeasible   70               -    0.00000      -   462  301s
+  5756  5140 infeasible   88               -    0.00000      -   538  366s
+  6969  5141    0.00000   63 28186          -    0.00000      -   720  379s
+  6971  5142    0.00000  121 1023          -    0.00000      -   720  382s
+  6972  5143    0.00000   38 1382          -    0.00000      -   719  386s
+  6973  5144    0.00000   46 1608          -    0.00000      -   719  399s
+  6974  5144    0.00000   61 1609          -    0.00000      -   719  417s
+  6975  5145    0.00000   89 1696          -    0.00000      -   719  425s
+  6976  5146    1.00000   94 1817          -    0.00000      -   719  444s
+  6977  5146    0.00000   82 1896          -    0.00000      -   719  467s
+  6978  5147    0.00000   30 1318          -    0.00000      -   719  503s
+  6979  5148    0.00000   10 1677          -    0.00000      -   719  516s
+  6980  5148    0.00000   58 2011          -    0.00000      -   719  547s
+  6981  5149    0.00000   56 2379          -    0.00000      -   719  589s
+  6982  5150    0.00000   93 2358          -    0.00000      -   718  638s
+  6983  5150    0.00000   87 2288          -    0.00000      -   718  694s
+  6984  5151    0.00000  109 2250          -    0.00000      -   718  744s
+  6985  5152    1.00000  130 2392          -    0.00000      -   718  798s
+  6986  5152    0.00000   70 2291          -    0.00000      -   718  850s
+  6987  5153    0.00000   36 2319          -    0.00000      -   718  903s
+  6988  5154    0.00000  146 2210          -    0.00000      -   718  957s
+  6989  5154    0.00000   99 2210          -    0.00000      -   718  972s
+  6990  5155    0.00000   28 2210          -    0.00000      -   718 1085s
+  6991  5159    0.00000   11 1094          -    0.00000      -   793 1126s
+  6993  5162    0.00000   12 1141          -    0.00000      -   796 1134s
+  6997  5169    0.00000   13 1099          -    0.00000      -   800 1137s
+  7021  5201    0.00000   15 1107          -    0.00000      -   800 1146s
+  7049  5223    0.00000   16 1101          -    0.00000      -   798 1150s
+  7081  5245    0.00000   17 1092          -    0.00000      -   797 1160s
+  7113  5266    0.00000   17 1076          -    0.00000      -   795 1166s
+  7145  5287    0.00000   18 1088          -    0.00000      -   793 1204s
+  7177  5326    0.00000   18 1098          -    0.00000      -   792 1208s
+  7226  5352    0.00000   19 1089          -    0.00000      -   790 1210s
+  7269  5434    0.00000   19 1074          -    0.00000      -   789 1216s
+  7365  5664    0.00000   21 1090          -    0.00000      -   788 1226s
+  7629  6375    0.00000   23 1080          -    0.00000      -   780 1253s
+  8443  7879    0.00000   27 1053          -    0.00000      -   752 1306s
+ 10275  7465    0.00000   39  989          -    0.00000      -   704 1550s
+ 10483  8709    0.00000   42  979          -    0.00000      -   701 1621s
+ 11962  9852    0.00000   53  880          -    0.00000      -   681 1690s
+ 14019 10053    0.00000   72  709          -    0.00000      -   680 1767s
+ 15326 10185    0.00000   86  638          -    0.00000      -   724 1850s
+ 16372 10250    0.00000  109  572          -    0.00000      -   785 1938s
+ 17390 10342    0.00000  129  523          -    0.00000      -   832 2031s
+ 18520 10447    0.00000  141  664          -    0.00000      -   887 2174s
+ 19539 11178    0.00000  156  407          -    0.00000      -   960 2324s
+ 22524 10886    0.00000  222  379          -    0.00000      -  1037 2473s
+
+SLURM STATS:
+JobID     MaxRSS    Elapsed      State 
+------------------------------------------------------------ ---------- ---------- ---------- 
+                                                    53366131              01:00:26    TIMEOUT 
+                                              53366131.batch  13241656K   01:00:28  CANCELLED 
+                                             53366131.extern          0   01:00:27  COMPLETED

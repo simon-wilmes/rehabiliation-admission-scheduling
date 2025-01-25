@@ -8,7 +8,9 @@ import sys
 import hashlib
 import subprocess
 
-USERNAME = "ir803925"
+USERNAME = "wx350715"
+
+# TODO :HANDLE BETTER HASH FOR UNWANTED KEYS
 
 # 0. Define all parameters
 params_all = {
@@ -129,7 +131,8 @@ for solver_combi, params_combi, instance_file in product(
             key=lambda x: x[0],
         )
     )
-    hash_combi_str = str(hash_combi_str + instance_file).encode()
+    instance_file_hash = instance_file.replace(USERNAME, "ir803925")
+    hash_combi_str = str(hash_combi_str + instance_file_hash).encode()
     hash = str(hashlib.md5(hash_combi_str).hexdigest())[:10]
     if hash in seen_hashes:
         print(f"ERROR: Hash is duplicate: {hash}")
