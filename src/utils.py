@@ -1,7 +1,7 @@
 from typing import TypeVar, Dict, Any
 import os
 from datetime import datetime
-from itertools import product
+from itertools import product, combinations
 import sys
 import io
 
@@ -36,6 +36,7 @@ import os
 import sys
 import threading
 import time
+from collections import defaultdict
 
 
 class OutputGrabber(object):
@@ -135,3 +136,104 @@ def generate_combis(solver, allowed_keys):
         combination_dict = dict(zip(keys, combo))
         combinations.append(combination_dict)
     return combinations
+
+
+def calculate_similarity_scores(sim_list: list[list[dict]]):
+    out_list1 = defaultdict(int)
+    out_list2 = defaultdict(int)
+    for list1, list2 in combinations(sim_list, r=2):
+        changes, num_changes = calculate_dict_changes(list1, list2)
+        out_list1[changes] += 1
+        out_list2[num_changes] += 1
+    return out_list1, out_list2
+
+
+def calculate_dict_changes(set1, set2):
+    """
+    Calculate minimum changes needed to make two sets of dictionaries identical.
+
+    Args:
+        set1: List[Dict[int, int]] - First set of dictionaries
+        set2: List[Dict[int, int]] - Second set of dictionaries
+
+    Returns:
+        tuple(int, int) - (total changes needed, number of dictionaries that need changes)
+    """
+    # Convert dictionaries to frozenset of items for hashability
+    frozen_set1 = {frozenset(d.items()) for d in set1}
+    frozen_set2 = {frozenset(d.items()) for d in set2}
+
+    # Find common dictionaries
+    common = frozen_set1 & frozen_set2
+
+    # Remove common dictionaries
+    remaining1 = frozen_set1 - common
+    remaining2 = frozen_set2 - common
+
+    # Convert back to list of dicts for easier processing
+    rem1 = [dict(d) for d in remaining1]
+    rem2 = [dict(d) for d in remaining2]
+
+    # If sets are unequal size, pad smaller one with empty dicts
+    while len(rem1) < len(rem2):
+        rem1.append({})
+    while len(rem2) < len(rem1):
+        rem2.append({})
+
+    if not rem1 and not rem2:
+        return 0, 0
+
+    # Calculate distances between all remaining dictionaries
+    distances = []
+    for i, dict1 in enumerate(rem1):
+        for j, dict2 in enumerate(rem2):
+            # Calculate changes needed between these dictionaries
+            changes = calculate_dict_distance(dict1, dict2)
+            distances.append((changes, i, j))
+
+    # Sort by number of changes needed
+    distances.sort()
+
+    # Match dictionaries greedily
+    used1 = set()
+    used2 = set()
+    total_changes = 0
+    pairs = []
+
+    for changes, i, j in distances:
+        if i not in used1 and j not in used2:
+            used1.add(i)
+            used2.add(j)
+            total_changes += changes
+            pairs.append((i, j))
+
+            if len(used1) == len(rem1):
+                break
+
+    return total_changes, len(pairs)
+
+
+def calculate_dict_distance(dict1, dict2):
+    """
+    Calculate minimum changes needed to transform dict1 into dict2.
+
+    Args:
+        dict1: Dict[int, int] - First dictionary
+        dict2: Dict[int, int] - Second dictionary
+
+    Returns:
+        int - Number of changes needed
+    """
+    changes = 0
+
+    # Count keys that need to be added or changed
+    for key, value in dict2.items():
+        if key not in dict1 or dict1[key] != value:
+            changes += 1
+
+    # Count keys that need to be removed
+    for key in dict1:
+        if key not in dict2:
+            changes += 1
+
+    return changes

@@ -42,10 +42,10 @@
       "module": "src.instance_generation.create_solvable_instances"
     },
     {
-      "name": "Python Debugger: Extract Data",
+      "name": "Python Debugger: Instance Table",
       "type": "debugpy",
       "request": "launch",
-      "module": "src.cluster.extract_data"
+      "module": "src.cluster.generate_instance_table"
     },
     {
       "name": "Python Debugger: Create Mod Instances",
@@ -58,6 +58,12 @@
       "type": "debugpy",
       "request": "launch",
       "module": "src.cluster.create_runtime_plot"
+    },
+    {
+      "name": "Python Debugger: LBBD Values",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "src.cluster.calculate_lbbd_values"
     },
     {
       "name": "Python Debugger: Attach",
