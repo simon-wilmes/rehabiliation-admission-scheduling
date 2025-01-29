@@ -4,7 +4,7 @@ Die Python Version die wir genutzt haben war 3.10.4. Die benötigten requirement
 ```
 python -m src "SOLVER" "{}" "INSTANCE_PATH"
 ```
-wo SOLVER den folgenden Wert haben kann: "LBBDSolver", "LBBDSolver_MIPSubsolver", "MIPSolver" und "MIPSolver3", wobei MIPSolver3, das IP-EGA ist.
+wo SOLVER den folgenden Wert haben kann: "LBBDSolver", "MIPSolver" und "MIPSolver3", wobei MIPSolver3, das IP-EGA ist.
 
 Um den subsolver auszuwählen, muss der zweite Parameter ersetzt werden mit:
 ```
